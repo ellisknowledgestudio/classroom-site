@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Fractions Practice for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive fractions practice for ages 7-11. Build fractions, explore the fraction wall, find equivalent fractions and compare sizes.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/math/fractions/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--fill:#5B8DEF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+.bar{display:flex;height:56px;border:3px solid var(--ink);border-radius:10px;overflow:hidden;cursor:pointer;user-select:none}
+.bar div{flex:1;border-right:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;transition:background .15s}
+.bar div:last-child{border-right:0}
+.bar div.f{background:var(--fill)}
+.frac{display:inline-flex;flex-direction:column;align-items:center;font:800 34px "Baloo 2",sans-serif;line-height:1;vertical-align:middle}
+.frac span:first-child{border-bottom:4px solid currentColor;padding:0 6px}
+.big{font-size:20px;font-weight:700}
+.wall .bar{height:38px;cursor:default;margin-bottom:4px;border-width:2px}
+.wall .bar div{background:var(--navy);font-size:12px}
+.wall .bar div.hl{background:var(--gold);color:var(--navy)}
+input[type=number]{width:70px;font:800 22px "Baloo 2",sans-serif;text-align:center;border-radius:10px;border:2px solid var(--muted);padding:4px;background:var(--navy);color:var(--ink)}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.choice{min-width:110px;padding:14px;font-size:26px}
+.score{color:var(--gold);font-weight:700}
+.stepper button{width:40px;height:40px;border-radius:50%;border:0;background:var(--gold);color:var(--navy);font:800 22px "Baloo 2";cursor:pointer}
+.shop{margin:24px 0;text-align:center}
+@media print{body{background:#fff;color:#000}.tabs,.crumbs,.shop,.btn{display:none}.panel{display:block;background:#fff}}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/math/">Math</a> › Fraction Factory</nav>
+  <h1>Fraction Factory 🍕</h1>
+  <p class="lead">Build fractions, explore the fraction wall, spot equivalent fractions and find out which is bigger. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-p="build">Build</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="wall">Fraction Wall</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="equiv">Equivalent</button>
+    <button class="tab" role="tab" aria-selected="false" data-p="compare">Compare</button>
+  </div>
+
+  <section class="panel on" id="build">
+    <h2>Build a fraction</h2>
+    <p>Choose how many equal parts, then tap the parts to shade them.</p>
+    <div class="row stepper">
+      <span class="big">Parts:</span>
+      <button id="dMinus" aria-label="fewer parts">−</button>
+      <span class="big" id="dVal">4</span>
+      <button id="dPlus" aria-label="more parts">+</button>
+    </div>
+    <div class="bar" id="buildBar"></div>
+    <div class="row">
+      <span class="frac" id="buildFrac"><span>0</span><span>4</span></span>
+      <span class="big" id="buildWords">0 out of 4 equal parts shaded</span>
+    </div>
+  </section>
+
+  <section class="panel" id="wall">
+    <h2>The fraction wall</h2>
+    <p>Every row is the same whole, cut into different numbers of equal parts. Tap a row to highlight one part and see what lines up with it.</p>
+    <div class="wall" id="wallBox"></div>
+    <p class="big" id="wallMsg">Tap a row to start.</p>
+  </section>
+
+  <section class="panel" id="equiv">
+    <h2>Equivalent fractions</h2>
+    <p>Fill in the missing number so both fractions are the same size. <span class="score" id="eqScore">Score: 0 / 0</span></p>
+    <div class="row">
+      <span class="frac"><span id="eqA">1</span><span id="eqB">2</span></span>
+      <span class="big">=</span>
+      <span class="frac"><span id="eqTop">?</span><span id="eqBot">?</span></span>
+    </div>
+    <div class="bar" id="eqBarL" style="cursor:default"></div>
+    <div style="height:8px"></div>
+    <div class="bar" id="eqBarR" style="cursor:default"></div>
+    <div class="row">
+      <input type="number" id="eqIn" min="0" aria-label="missing number">
+      <button class="btn" id="eqCheck">Check</button>
+      <button class="btn ghost" id="eqNext">Next</button>
+    </div>
+    <div class="fb" id="eqFb"></div>
+  </section>
+
+  <section class="panel" id="compare">
+    <h2>Which is bigger?</h2>
+    <p>Tap the bigger fraction. If they are the same size, tap "Same". <span class="score" id="cpScore">Score: 0 / 0</span></p>
+    <div class="row">
+      <button class="btn choice" id="cpL"></button>
+      <button class="btn ghost choice" id="cpS" style="font-size:18px">Same</button>
+      <button class="btn choice" id="cpR"></button>
+    </div>
+    <div id="cpBars" style="display:none">
+      <div class="bar" id="cpBarL" style="cursor:default"></div>
+      <div style="height:8px"></div>
+      <div class="bar" id="cpBarR" style="cursor:default"></div>
+    </div>
+    <div class="fb" id="cpFb"></div>
+    <button class="btn ghost" id="cpNext">Next</button>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function gcd(a,b){return b?gcd(b,a%b):a;}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function pick(arr){return arr[rnd(0,arr.length-1)];}
+  function drawBar(el,n,d,labels){
+    el.innerHTML="";
+    for(var i=0;i<d;i++){
+      var c=document.createElement("div");
+      if(i<n)c.className="f";
+      if(labels)c.textContent="1/"+d;
+      el.appendChild(c);
+    }
+  }
+
+  /* tabs */
+  var tabs=document.querySelectorAll(".tab");
+  for(var t=0;t<tabs.length;t++){
+    tabs[t].addEventListener("click",function(){
+      for(var k=0;k<tabs.length;k++){tabs[k].setAttribute("aria-selected","false");$(tabs[k].dataset.p).classList.remove("on");}
+      this.setAttribute("aria-selected","true");$(this.dataset.p).classList.add("on");
+    });
+  }
+
+  /* build */
+  var bd=4,shaded=[];
+  function renderBuild(){
+    var bar=$("buildBar");bar.innerHTML="";
+    var n=0;
+    for(var i=0;i<bd;i++){
+      var c=document.createElement("div");
+      if(shaded[i]){c.className="f";n++;}
+      c.dataset.i=i;
+      c.addEventListener("click",function(){var j=+this.dataset.i;shaded[j]=!shaded[j];renderBuild();});
+      bar.appendChild(c);
+    }
+    var f=$("buildFrac").children;f[0].textContent=n;f[1].textContent=bd;
+    var w=n+" out of "+bd+" equal parts shaded";
+    var g=gcd(n,bd);
+    if(n===0)w+=" — that's zero!";
+    else if(n===bd)w+=" — that's one whole!";
+    else if(g>1)w+=" — the same as "+(n/g)+"/"+(bd/g);
+    $("buildWords").textContent=w;
+  }
+  $("dMinus").onclick=function(){if(bd>1){bd--;shaded=shaded.slice(0,bd);$("dVal").textContent=bd;renderBuild();}};
+  $("dPlus").onclick=function(){if(bd<12){bd++;$("dVal").textContent=bd;renderBuild();}};
+  renderBuild();
+
+  /* wall */
+  var wallRows=[1,2,3,4,5,6,8,10,12];
+  var wb=$("wallBox");
+  wallRows.forEach(function(d){
+    var b=document.createElement("div");b.className="bar";b.dataset.d=d;b.style.cursor="pointer";
+    for(var i=0;i<d;i++){var c=document.createElement("div");c.textContent=d===1?"1":"1/"+d;b.appendChild(c);}
+    b.addEventListener("click",function(){wallPick(d);});
+    wb.appendChild(b);
+  });
+  function wallPick(d){
+    var matches=[];
+    var bars=wb.querySelectorAll(".bar");
+    for(var r=0;r<bars.length;r++){
+      var rd=+bars[r].dataset.d,cells=bars[r].children;
+      for(var i=0;i<cells.length;i++)cells[i].classList.remove("hl");
+      if(rd%d===0){
+        var k=rd/d;
+        for(var j=0;j<k;j++)cells[j].classList.add("hl");
+        if(rd!==d)matches.push(k+"/"+rd);
+      }
+    }
+    var name=d===1?"1 whole":"1/"+d;
+    $("wallMsg").textContent=matches.length?name+" = "+matches.join(" = "):name+" — no other row on this wall lines up exactly with it.";
+  }
+
+  /* equivalent */
+  var eq={},eqRight=0,eqTot=0,eqDone=false;
+  function newEq(){
+    var d=pick([2,3,4,5,6]),n=rnd(1,d-1),g=gcd(n,d);n/=g;d/=g;
+    var m=rnd(2,Math.max(2,Math.floor(12/d)));
+    if(d*m>12)m=2;
+    eq={n:n,d:d,m:m,hideTop:Math.random()<0.6};
+    $("eqA").textContent=n;$("eqB").textContent=d;
+    $("eqTop").textContent=eq.hideTop?"?":n*m;
+    $("eqBot").textContent=eq.hideTop?d*m:"?";
+    drawBar($("eqBarL"),n,d);
+    $("eqBarR").innerHTML="";
+    $("eqIn").value="";$("eqFb").textContent="";$("eqFb").className="fb";eqDone=false;
+  }
+  $("eqCheck").onclick=function(){
+    var v=parseInt($("eqIn").value,10);if(isNaN(v)||eqDone)return;
+    var ans=eq.hideTop?eq.n*eq.m:eq.d*eq.m;
+    eqTot++;eqDone=true;
+    var fb=$("eqFb");
+    if(v===ans){eqRight++;fb.className="fb ok";fb.textContent="Yes! "+eq.n+"/"+eq.d+" = "+(eq.n*eq.m)+"/"+(eq.d*eq.m)+" — top and bottom were both multiplied by "+eq.m+".";}
+    else{fb.className="fb no";fb.textContent="Not quite. The answer is "+ans+": multiply top and bottom by "+eq.m+".";}
+    $("eqTop").textContent=eq.n*eq.m;$("eqBot").textContent=eq.d*eq.m;
+    drawBar($("eqBarR"),eq.n*eq.m,eq.d*eq.m);
+    $("eqScore").textContent="Score: "+eqRight+" / "+eqTot;
+  };
+  $("eqIn").addEventListener("keydown",function(e){if(e.key==="Enter")$("eqCheck").click();});
+  $("eqNext").onclick=newEq;
+  newEq();
+
+  /* compare */
+  var cp={},cpRight=0,cpTot=0,cpDone=false;
+  function randFrac(){var d=pick([2,3,4,5,6,8,10,12]);return {n:rnd(1,d-1),d:d};}
+  function newCp(){
+    var a=randFrac(),b=randFrac();
+    if(Math.random()<0.2){var k=pick([2,3]);var g=gcd(a.n,a.d);a={n:a.n/g,d:a.d/g};if(a.d*k<=12)b={n:a.n*k,d:a.d*k};}
+    if(a.n===b.n&&a.d===b.d)b=randFrac();
+    cp={a:a,b:b};
+    $("cpL").textContent=a.n+"/"+a.d;$("cpR").textContent=b.n+"/"+b.d;
+    $("cpBars").style.display="none";$("cpFb").textContent="";$("cpFb").className="fb";cpDone=false;
+  }
+  function cpAnswer(choice){
+    if(cpDone)return;cpDone=true;cpTot++;
+    var x=cp.a.n*cp.b.d,y=cp.b.n*cp.a.d;
+    var right=x>y?"L":(y>x?"R":"S");
+    var fb=$("cpFb");
+    var txt=right==="S"?"They are the same size!":(right==="L"?cp.a.n+"/"+cp.a.d:cp.b.n+"/"+cp.b.d)+" is bigger.";
+    if(choice===right){cpRight++;fb.className="fb ok";fb.textContent="Correct! "+txt;}
+    else{fb.className="fb no";fb.textContent="Not this time. "+txt+" Look at the bars.";}
+    drawBar($("cpBarL"),cp.a.n,cp.a.d);drawBar($("cpBarR"),cp.b.n,cp.b.d);
+    $("cpBars").style.display="block";
+    $("cpScore").textContent="Score: "+cpRight+" / "+cpTot;
+  }
+  $("cpL").onclick=function(){cpAnswer("L");};
+  $("cpR").onclick=function(){cpAnswer("R");};
+  $("cpS").onclick=function(){cpAnswer("S");};
+  $("cpNext").onclick=newCp;
+  newCp();
+})();
+</script>
+</body>
+</html>

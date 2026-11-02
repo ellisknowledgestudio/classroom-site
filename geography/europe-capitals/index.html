@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Europe Countries &amp; Capitals Quiz for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive Europe countries and capitals quiz for kids aged 7-13. Learn all 44 European capitals by region, including Eastern Europe, with multiple-choice, type-it and printable worksheet modes.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/geography/europe-capitals/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0F1C3F;--panel:#1A2A55;--panel2:#22356A;--gold:#F4B942;--text:#F5F7FF;--muted:#B9C3E6;--good:#4CD48A;--bad:#FF7A7A}
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--navy);color:var(--text);font-family:'Nunito Sans',Arial,sans-serif;font-size:17px;line-height:1.5}
+  h1,h2,h3{font-family:'Baloo 2',Arial,sans-serif;line-height:1.15;margin:0 0 .4em}
+  a{color:var(--gold)}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  .crumbs{font-size:.9rem;color:var(--muted);margin:4px 0 14px}
+  .crumbs a{color:var(--muted);text-decoration:none}
+  .crumbs a:hover,.crumbs a:focus{color:var(--gold);text-decoration:underline}
+  header.hero{text-align:center;padding:10px 0 6px}
+  header.hero h1{font-size:2rem;color:var(--gold)}
+  header.hero p{color:var(--muted);margin:0 auto;max-width:620px}
+  .card{background:var(--panel);border-radius:20px;padding:18px;margin:16px 0;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .label{font-weight:700;margin-right:4px;color:var(--muted);font-size:.95rem}
+  button{font-family:inherit;font-size:1rem;cursor:pointer;border:none;border-radius:14px;padding:10px 16px;background:var(--panel2);color:var(--text);font-weight:700;transition:transform .08s,background .15s}
+  button:hover{background:#2C4382}
+  button:active{transform:scale(.97)}
+  button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  button.on,.btn-gold{background:var(--gold);color:var(--navy)}
+  button.on:hover,.btn-gold:hover{background:#FFCB5C}
+  button:disabled{opacity:.6;cursor:default;transform:none}
+  .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .tabs button{padding:12px 6px;font-size:.98rem}
+  .tabs .ic{display:block;font-size:1.4rem}
+  .hidden{display:none !important}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:12px}
+  .flip{background:var(--panel2);border-radius:16px;padding:14px;text-align:left;min-height:96px;width:100%}
+  .flip .c{font-family:'Baloo 2',Arial,sans-serif;font-size:1.15rem;display:block}
+  .flip .cap{display:block;color:var(--gold);margin-top:4px;font-size:1.05rem}
+  .flip .tip{display:block;color:var(--muted);font-size:.85rem;margin-top:4px;font-weight:600}
+  .flip .hint{display:block;color:var(--muted);font-size:.85rem;margin-top:4px;font-weight:600}
+  .flag{display:inline-block;width:32px;height:auto;margin-right:8px;vertical-align:-3px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+  .flag-big{display:block;width:96px;margin:0 auto 10px;border-radius:6px}
+  .qbox{text-align:center}
+  .qtop{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--muted);font-weight:700;margin-bottom:8px}
+  .question{font-family:'Baloo 2',Arial,sans-serif;font-size:1.6rem;margin:6px 0 14px}
+  .question .big{color:var(--gold);display:block;font-size:2.1rem}
+  .choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .choices button{padding:16px 10px;font-size:1.1rem;min-height:60px}
+  .choices button.right{background:var(--good);color:var(--navy)}
+  .choices button.wrong{background:var(--bad);color:var(--navy)}
+  .feedback{min-height:1.6em;font-weight:700;margin:12px 0 4px}
+  .feedback.good{color:var(--good)}
+  .feedback.bad{color:var(--bad)}
+  input[type=text]{font-family:inherit;font-size:1.2rem;padding:12px 14px;border-radius:14px;border:2px solid var(--panel2);background:#0B1530;color:var(--text);width:100%;max-width:360px}
+  input[type=text]:focus{outline:none;border-color:var(--gold)}
+  .bar{height:12px;background:#0B1530;border-radius:8px;overflow:hidden;margin:6px 0 12px}
+  .bar span{display:block;height:100%;background:var(--gold);width:0;transition:width .3s}
+  .result{text-align:center}
+  .stars{font-size:2.4rem;letter-spacing:4px}
+  .review{text-align:left;margin:12px auto 0;max-width:460px;padding-left:18px}
+  .review li{margin:3px 0}
+  .shop{text-align:center;background:linear-gradient(135deg,#1A2A55,#2A3F7A);border:2px solid var(--gold)}
+  .shop a.btn{display:inline-block;background:var(--gold);color:var(--navy);text-decoration:none;font-weight:800;padding:12px 20px;border-radius:14px;margin-top:8px}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:10px 0 30px}
+  .sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  #printSheet{display:none}
+  @media (max-width:560px){
+    header.hero h1{font-size:1.6rem}
+    .tabs{grid-template-columns:repeat(2,1fr)}
+    .choices{grid-template-columns:1fr}
+    .question{font-size:1.35rem}
+    .question .big{font-size:1.8rem}
+  }
+  @media print{
+    body{background:#fff;color:#000;font-size:13pt}
+    .noprint{display:none !important}
+    #printSheet{display:block !important;color:#000}
+    #printSheet h2{color:#000;font-size:20pt}
+    #printSheet table{width:100%;border-collapse:collapse;margin-top:8px}
+    #printSheet td,#printSheet th{border:1px solid #444;padding:8px;text-align:left}
+    #printSheet th{background:#eee}
+    #printSheet .line{display:inline-block;min-width:200px;border-bottom:1px solid #000}
+    #printSheet .key{page-break-before:always}
+    #printSheet .small{font-size:10pt;color:#333}
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap noprint">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a> &rsaquo; <a href="/geography/">Geography</a> &rsaquo; <span aria-current="page">Europe Capitals Challenge</span>
+  </nav>
+
+  <header class="hero">
+    <h1>&#127757; Europe Capitals Challenge</h1>
+    <p>Learn the capital city of every country in Europe, one region at a time. Start with the flashcards, then test yourself!</p>
+  </header>
+
+  <section class="card" aria-label="Choose a region">
+    <div class="row" role="group" aria-label="Region">
+      <span class="label">Region:</span>
+      <div id="regions" class="row"></div>
+    </div>
+    <p id="regionInfo" style="margin:10px 0 0;color:var(--muted);font-size:.95rem"></p>
+  </section>
+
+  <section class="card" aria-label="Choose a mode">
+    <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-mode="learn" id="tab-learn" aria-selected="true" class="on"><span class="ic" aria-hidden="true">&#128218;</span>Learn</button>
+      <button role="tab" data-mode="quiz" id="tab-quiz" aria-selected="false"><span class="ic" aria-hidden="true">&#127919;</span>Quiz</button>
+      <button role="tab" data-mode="type" id="tab-type" aria-selected="false"><span class="ic" aria-hidden="true">&#9000;&#65039;</span>Type it</button>
+      <button role="tab" data-mode="print" id="tab-print" aria-selected="false"><span class="ic" aria-hidden="true">&#128424;&#65039;</span>Worksheet</button>
+    </div>
+  </section>
+
+  <!-- LEARN -->
+  <section class="card" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <h2>Flashcards</h2>
+    <p style="margin:0;color:var(--muted)">Tap a card to reveal the capital. Can you guess it first?</p>
+    <div class="row" style="margin-top:10px">
+      <button id="revealAll" type="button">Show all capitals</button>
+      <button id="hideAll" type="button">Hide all</button>
+    </div>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <!-- QUIZ (multiple choice) -->
+  <section class="card hidden" id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz">
+    <div id="quizSetup">
+      <h2>Multiple-choice quiz</h2>
+      <div class="row" role="group" aria-label="Question type">
+        <span class="label">Ask me:</span>
+        <button type="button" class="on" data-dir="c2k" id="dirC2K">Country &rarr; capital</button>
+        <button type="button" data-dir="k2c" id="dirK2C">Capital &rarr; country</button>
+      </div>
+      <div class="row" style="margin-top:10px" role="group" aria-label="Number of questions">
+        <span class="label">Questions:</span>
+        <button type="button" class="on" data-n="10">10</button>
+        <button type="button" data-n="20">20</button>
+        <button type="button" data-n="all">All</button>
+      </div>
+      <p style="margin-top:14px"><button type="button" class="btn-gold" id="startQuiz">Start quiz &#9654;</button></p>
+    </div>
+    <div id="quizPlay" class="qbox hidden">
+      <div class="qtop"><span id="qProg">Question 1 of 10</span><span id="qScore">Score: 0</span><span id="qStreak">Streak: 0 &#128293;</span></div>
+      <div class="bar" aria-hidden="true"><span id="qBar"></span></div>
+      <div class="question" id="qText" aria-live="polite"></div>
+      <div class="choices" id="qChoices"></div>
+      <div class="feedback" id="qFeed" role="status" aria-live="polite"></div>
+      <button type="button" class="btn-gold hidden" id="qNext">Next &#9654;</button>
+    </div>
+    <div id="quizDone" class="result hidden" aria-live="polite"></div>
+  </section>
+
+  <!-- TYPE IT -->
+  <section class="card hidden" id="panel-type" role="tabpanel" aria-labelledby="tab-type">
+    <div id="typeSetup">
+      <h2>Type the capital</h2>
+      <p style="margin:0 0 10px;color:var(--muted)">No choices this time! Spelling help: accents don't matter, so "Chisinau" and "Reykjavik" are fine.</p>
+      <div class="row" role="group" aria-label="Number of questions">
+        <span class="label">Questions:</span>
+        <button type="button" class="on" data-tn="10">10</button>
+        <button type="button" data-tn="20">20</button>
+        <button type="button" data-tn="all">All</button>
+      </div>
+      <p style="margin-top:14px"><button type="button" class="btn-gold" id="startType">Start &#9654;</button></p>
+    </div>
+    <div id="typePlay" class="qbox hidden">
+      <div class="qtop"><span id="tProg">Question 1 of 10</span><span id="tScore">Score: 0</span></div>
+      <div class="bar" aria-hidden="true"><span id="tBar"></span></div>
+      <div class="question" id="tText"></div>
+      <form id="typeForm" autocomplete="off">
+        <label for="tInput" class="sr">Your answer</label>
+        <input type="text" id="tInput" placeholder="Type the capital..." autocapitalize="words" spellcheck="false">
+        <div class="row" style="justify-content:center;margin-top:10px">
+          <button type="submit" class="btn-gold" id="tCheck">Check</button>
+          <button type="button" id="tHint">Hint</button>
+          <button type="button" id="tSkip">Skip</button>
+        </div>
+      </form>
+      <div class="feedback" id="tFeed" role="status" aria-live="polite"></div>
+      <button type="button" class="btn-gold hidden" id="tNext">Next &#9654;</button>
+    </div>
+    <div id="typeDone" class="result hidden" aria-live="polite"></div>
+  </section>
+
+  <!-- PRINT -->
+  <section class="card hidden" id="panel-print" role="tabpanel" aria-labelledby="tab-print">
+    <h2>Printable worksheet</h2>
+    <p style="margin:0 0 10px;color:var(--muted)">Makes a worksheet for the region you picked above, with an answer key on the last page. It prints on white paper.</p>
+    <div class="row" role="group" aria-label="Worksheet type">
+      <span class="label">Pupils write:</span>
+      <button type="button" class="on" data-pw="capital">the capital</button>
+      <button type="button" data-pw="country">the country</button>
+    </div>
+    <p style="margin-top:14px"><button type="button" class="btn-gold" id="printBtn">Print worksheet &#128424;&#65039;</button></p>
+  </section>
+
+  <section class="card shop">
+    <h2>Want more Europe practice?</h2>
+    <p style="margin:0">Our printable geography packs, including the best-selling <strong>Eastern Europe</strong> pack, have maps, fact files and answer keys ready for the classroom.</p>
+    <a class="btn" href="https://ellisknowledgestudio.com/educational-resources">Browse printable packs &rarr;</a>
+  </section>
+
+  <footer>&copy; Ellis Knowledge Studio &middot; Regions follow the United Nations groupings of European countries.</footer>
+</div>
+
+<div id="printSheet" aria-hidden="true"></div>
+
+<script>
+(function(){
+  // f = two-letter country code for the flag image; tip = short helpful note
+  var DATA = [
+    // Eastern Europe (UN)
+    {c:'Belarus',k:'Minsk',r:'Eastern',f:'BY'},
+    {c:'Bulgaria',k:'Sofia',r:'Eastern',f:'BG'},
+    {c:'Czechia',k:'Prague',r:'Eastern',f:'CZ',alt:['Czech Republic'],ka:['Praha'],tip:'Also called the Czech Republic.'},
+    {c:'Hungary',k:'Budapest',r:'Eastern',f:'HU'},
+    {c:'Moldova',k:'Chișinău',r:'Eastern',f:'MD',ka:['Kishinev']},
+    {c:'Poland',k:'Warsaw',r:'Eastern',f:'PL',ka:['Warszawa']},
+    {c:'Romania',k:'Bucharest',r:'Eastern',f:'RO'},
+    {c:'Russia',k:'Moscow',r:'Eastern',f:'RU',tip:'Russia is in Europe and Asia.'},
+    {c:'Slovakia',k:'Bratislava',r:'Eastern',f:'SK'},
+    {c:'Ukraine',k:'Kyiv',r:'Eastern',f:'UA',ka:['Kiev']},
+    // Northern Europe
+    {c:'Denmark',k:'Copenhagen',r:'Northern',f:'DK'},
+    {c:'Estonia',k:'Tallinn',r:'Northern',f:'EE'},
+    {c:'Finland',k:'Helsinki',r:'Northern',f:'FI'},
+    {c:'Iceland',k:'Reykjavík',r:'Northern',f:'IS'},
+    {c:'Ireland',k:'Dublin',r:'Northern',f:'IE'},
+    {c:'Latvia',k:'Riga',r:'Northern',f:'LV'},
+    {c:'Lithuania',k:'Vilnius',r:'Northern',f:'LT'},
+    {c:'Norway',k:'Oslo',r:'Northern',f:'NO'},
+    {c:'Sweden',k:'Stockholm',r:'Northern',f:'SE'},
+    {c:'United Kingdom',k:'London',r:'Northern',f:'GB',alt:['UK','Britain','Great Britain']},
+    // Southern Europe
+    {c:'Albania',k:'Tirana',r:'Southern',f:'AL',ka:['Tirane']},
+    {c:'Andorra',k:'Andorra la Vella',r:'Southern',f:'AD'},
+    {c:'Bosnia and Herzegovina',k:'Sarajevo',r:'Southern',f:'BA',alt:['Bosnia']},
+    {c:'Croatia',k:'Zagreb',r:'Southern',f:'HR'},
+    {c:'Greece',k:'Athens',r:'Southern',f:'GR'},
+    {c:'Italy',k:'Rome',r:'Southern',f:'IT',ka:['Roma']},
+    {c:'Malta',k:'Valletta',r:'Southern',f:'MT'},
+    {c:'Montenegro',k:'Podgorica',r:'Southern',f:'ME'},
+    {c:'North Macedonia',k:'Skopje',r:'Southern',f:'MK',alt:['Macedonia']},
+    {c:'Portugal',k:'Lisbon',r:'Southern',f:'PT',ka:['Lisboa']},
+    {c:'San Marino',k:'San Marino',r:'Southern',f:'SM',tip:'The capital has the same name as the country!'},
+    {c:'Serbia',k:'Belgrade',r:'Southern',f:'RS'},
+    {c:'Slovenia',k:'Ljubljana',r:'Southern',f:'SI'},
+    {c:'Spain',k:'Madrid',r:'Southern',f:'ES'},
+    {c:'Vatican City',k:'Vatican City',r:'Southern',f:'VA',alt:['Vatican','Holy See'],tip:'The smallest country in the world - a city and a country at once.'},
+    // Western Europe
+    {c:'Austria',k:'Vienna',r:'Western',f:'AT',ka:['Wien']},
+    {c:'Belgium',k:'Brussels',r:'Western',f:'BE'},
+    {c:'France',k:'Paris',r:'Western',f:'FR'},
+    {c:'Germany',k:'Berlin',r:'Western',f:'DE'},
+    {c:'Liechtenstein',k:'Vaduz',r:'Western',f:'LI'},
+    {c:'Luxembourg',k:'Luxembourg',r:'Western',f:'LU',ka:['Luxembourg City'],tip:'The capital has the same name as the country!'},
+    {c:'Monaco',k:'Monaco',r:'Western',f:'MC',tip:'A tiny city-state - the capital is Monaco itself.'},
+    {c:'Netherlands',k:'Amsterdam',r:'Western',f:'NL',alt:['The Netherlands','Holland'],tip:'The government meets in The Hague, but Amsterdam is the capital.'},
+    {c:'Switzerland',k:'Bern',r:'Western',f:'CH',ka:['Berne'],tip:'Not Zurich or Geneva - Bern is the capital.'}
+  ];
+
+  var REGIONS = [
+    {id:'Eastern',name:'Eastern',ic:'🌻'},
+    {id:'Northern',name:'Northern',ic:'❄️'},
+    {id:'Southern',name:'Southern',ic:'☀️'},
+    {id:'Western',name:'Western',ic:'🏰'},
+    {id:'All',name:'All of Europe',ic:'🌍'}
+  ];
+
+  var state = {region:'Eastern', mode:'learn', dir:'c2k', n:'10', tn:'10', pw:'capital'};
+
+  function $(id){ return document.getElementById(id); }
+  function el(tag, cls, txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+
+  // Flags are drawn inside the page (no emoji) so they show on every device,
+  // including Windows PCs, which display flag emoji as two letters (e.g. "UA").
+  // Simple flags are drawn as SVG from their colours; flags with crests or
+  // detailed designs are small embedded images made from flag-icons (MIT licence).
+  // National flags themselves are public domain.
+  var SIMPLE = {
+    bg:'h|#FFFFFF,#00966E,#D62612', hu:'h|#CD2A3E,#FFFFFF,#436F4D', pl:'h|#FFFFFF,#DC143C',
+    ru:'h|#FFFFFF,#0039A6,#D52B1E', ua:'h|#0057B7,#FFD700', ee:'h|#0072CE,#000000,#FFFFFF',
+    lt:'h|#FDB913,#006A44,#C1272D', at:'h|#C8102E,#FFFFFF,#C8102E', de:'h|#000000,#DD0000,#FFCE00',
+    lu:'h|#EF3340,#FFFFFF,#00A3E0', mc:'h|#CE1126,#FFFFFF', nl:'h|#AE1C28,#FFFFFF,#21468B',
+    lv:'h|#9E3039,#9E3039,#FFFFFF,#9E3039,#9E3039',
+    ro:'v|#002B7F,#FCD116,#CE1126', ie:'v|#169B62,#FFFFFF,#FF883E', it:'v|#009246,#FFFFFF,#CE2B37',
+    be:'v|#000000,#FDDA24,#EF3340', fr:'v|#002395,#FFFFFF,#ED2939',
+    dk:'x|#C8102E,#FFFFFF', fi:'x|#FFFFFF,#002F6C', se:'x|#006AA7,#FECC00',
+    no:'x|#BA0C2F,#FFFFFF,#00205B', is:'x|#02529C,#FFFFFF,#DC1E35',
+    ch:'ch', cz:'cz', gr:'gr'
+  };
+  var PICS = {
+    by:'UklGRuADAABXRUJQVlA4INQDAABQFQCdASpgAEgAPpFCnkqlo6MhpXzJmLASCWQA1ex3UM7VcQ9tD6ANtLzuemq+gB5Wnsfftd+2' +
+      '9lefefBfwIPWf2DcA+hf6LhB2qO+N2BBgXcDzLf9l5MHhh96ewB/JP7N+sPrxfQHnN+lf2D9mgFGr5zY89+rkJn+T4BUGVbDxmi5' +
+      '/0T5/el5tY3lPleKAe8bY2V5+iFcwgB/vDxknq4FbxzDUiP0IjGqPbhlbCtr6APMAAD+WM2abXimKaz+CHFHbqpcZd7QUjGGYyC8' +
+      'Hi5KP7FQQQBuZkpNNwY1iySY+5Y8KZCuGAMkxAeR6yyIuGc8/yHM66F16hsaxZJhnSrWX1tHaSVe4qqnNBHQHIkMIVJsJJ0/ASkj' +
+      'aDfbu+kdlOJk/65D1Q4XXHCNxdH//+OLJE6h99NG4kAJqLDWpGw2ix5nPcok80r+eH3qFIUwGY0ebdwS057Gs19kmz14lPmC2G/w' +
+      '5zp7PV5uaE80ON/uqCMdeZ6miYQMfneT9ctUtk7X75l8H/+X55XmC+8vnGDyfhm2EewwPxs3xfELuK0evy0NsUgK17sJYbpdz53K' +
+      'ijZB7tQca7svwja4joWHajYzonTYB5oa9UlIUXu30vbIoexsBx3lIcn8aXPXnPSGM/mtDBUu0Y8QhS1nnbwISYdhZ5AqdeITpqHO' +
+      'tk0OKck5Tl+gowJYlrF8nkRLagAkvTV3lCn7/1alPGnzo7tbkW/cglW4Az8/tYZE0pgiwYj69+2K7XcLyobAvh9/CKiUcdkTHIbF' +
+      'O2Y/tGJDn3btlZnsKw4Yxda9S7gaJXfjzcbuRmTQn/CJ5jM/VsueWzL/+jHtJ/pncyGGXuokeYlxh/hUo8ZmkIeGZ+YGpKIV8PrI' +
+      'jiovCVVQnQmhn5duiO1T67C9HJ785Qeb0CD/OxAe1qqt4DWlCYFMUpA279n5WOR8RKjXLGuMzOqekgPtLwPM2TQG5Zhfci4YM89J' +
+      'sNeR+LSfy6lSdaJFgzrGZ3rGgq/vJh/aO/Y8deDLg82BqR0O7msGFrgSZ9CZi8puQemi2LZpOSGk1e8nkqMtfhlQItMmhZrTwWRy' +
+      'Yf9Jxn6QeO6BVAXhfmJ1tfBTY4QMymQVxijuFzZrEtzz+AfaazUFZmDHf4N8f/8OU/4N8f//DA6REvk7VK3Sb58mUr8CEMHeVIV+' +
+      '94uOzmxLIbj/9oi+aGbXcOaaaZTnMBhQmxumbhqzLGPzAxNbiQkDcmp/b1n6SKSKsyPfgH4AD8Ci2pK/8Gh080nOwzzuNGux92Ng' +
+      'aP3/0EdRemplbbr9rBGaUhgE6X0WAAAAAA==',
+    md:'UklGRhQEAABXRUJQVlA4IAgEAAAwFQCdASpgAEgAPpFGmkmlpCKhJnqsALASCWwA0fXh/kv4q6xn0/8cvxm6gvfjwPzOyGe0n8L0' +
+      'stsB5gPJ69WHoAf0b/YdYB6Fv7gemT7HX7b/uV7SzRNmg2GfU1VgfAPPHyln8lKJLtP8iuBIL9iSv7GPtHajb57isQCO9BB6Y/lN' +
+      '8co34HD9Ib2C1NuJfukdH0JOMrPdMf0vGTk9nP7iJxczCu0z+x6wER+p9p5jJqQAAP73WQve5Zuy7sjohfIRc/nSX/MA0YH5y1RG' +
+      'ZnoVpLAW/WbFeDmYNnfhrHSoYKDbuwZzKVro/r6vJEF25IedBAlybFcX0JwVct4EcC4ToaXCcP2yC7Y/gqt0JqCMhe4EO0qTi6IV' +
+      'gWyHbiT+id7XZJBqMPr9/mD2usn5hdXcapg/yfX65xoHdJdNmfY3giiy98EZKGJANPxnYgzjTcZiwPVcxKD6/IEC2M88BjCaxgub' +
+      'upJsXNK5vDlMJHlurJ5seXfA3ZxZLkSnnYmR/dGGrmXvciyiWPiTLw5wD+cryC0ZFGZ4nIAdiCFFc6HKedkQzh3lE8eTvI3EAjbV' +
+      'w2GA/DZ1Sj9/60j4wqQEmTibZY2tehRSVo/t1E5gd/BQMkKe4xW8Qm3fjg8TfzTDi5gSwLiMQpac18d3lyvvwG9Izyd31ke+zVzP' +
+      'jynBaQYmvmOQgNrrYuymv53HYdjwS+4pIRJ46V4vRPcY1gMBtFRWqq+BrnaqkJu6v5BcW8zrOU6+6oHkd2yTFxQmYV3/GYpVosWk' +
+      '2S9FBqlagLJ7jDy1xuKVh9DB506c+HdtFGQLZAIwRdc2lwI3084RMFNaRl8ejewcTVURBLjfM/4G7UfOSznL6qdVfHRjenpVsCSI' +
+      'vy5t+cXyX6xkUMNKmGtZICZeVgC+lrayihCmxu40Mw3BAsoae3bCupE/PYw9GzeCJyBSorxVtLB15lKQUdJaRsIuS5A4I61gRRrI' +
+      'G0jsvFR0lFJ2pfl+biexjrLYIxHsqed+kvBIMN8YIfrK1MHUDrXCVMcmrlRwJx/zWvY/sAJYnNuZTOx3GaaL+Ndt2vLT2HtqskmV' +
+      'nk8xSwVEB8Cpe+JqGllMYuL1RpCDaJaeyQrRKE7wbD+jT7Ifj1gYqywBcSg/wkalu8+VGS4VMwpPR3JGCd2u8RnsO5Di3eJmLhh8' +
+      'YcHoPTl3YMhl55iberCNk3dwPjWd3DyzlduP+l77E4UkPA4uCaA/mn0x22F9SAgDNAo1Ne0ZbNWy3h1kvvzW78aWUyXe5V74fMo8' +
+      'Ur4mU0IRawwDp+LN2Y9vfNTO5YOpOLAwXBWQGAiWihlinXTiV/uCfh6x5vHQpxchUvEJaDHwFY/zqKvGAAGyMD4mz4SB9B5pZ9wA' +
+      'AAA=',
+    sk:'UklGRrACAABXRUJQVlA4IKQCAACwDwCdASpgAEgAPpFEnUqlo6KhpXmaOLASCWYA1MXafqupJ8a/ID8junx4oiDI+PynSA2x/mA/' +
+      'VzJK/2Z9gD9bvTO9kf9xvSAu+Wuu8Emf23Sz1jA9txOBgme+y5PKw6cuA+34QRBWwqsNsKzwH8aPZFel46/ReGLd5CQN1m/UPwVv' +
+      'FZ6cAAD+/KgAbH45///3WAfyzfhfhT/b6zE+M2dlgU2RTi1TE6tqw5N7YWfQTxfR2S/sz2VyncnW+6gkzAm8lEK25i8KaUpZYvlS' +
+      'Jd5DWq6KrBOMN0hGPNIyz8rs5KCj+EXdP2oRg8BTUG1JLfWSXXkIg4a0dJ5Q11HCUEV1MOErER9e5LgHam0vhoGTDd6LV/35PGpq' +
+      'AhV2G6mXy9X1+7Q3qUy0eAlfQDzNRvzgoFyrDThZCeDosy3grprijemxHnEEopuLhqMa9qTPM8i/uAd3g+bUG1g8FEL80bKqEMAX' +
+      'QBs38Hd/DlO0NSSMTNO5Ay9r5jZP32Pu5wabczHpSGsDzmbl6o5IS424CXIzDmK4wEXmsw9exWVH6H/oP78zukirzW87/nIPZPtr' +
+      '65a5xxR7Rv/S5wlgLf/n1PJmJZtDEvz8S7rEsTAs9c1xEm4f2RWn/UBltkCSd+TCSiW7b+3xiOxNH5duXnOBhZI4YbQnTbQbNcqt' +
+      'RNFk68XJsHvb1Wlrrs55Ir67LmDzphWQprfaY5h/3I28tq8pqt3xRkT6n2kszeDg/38VHWUBXaCrNOxPuQHTODi+Eo2bR7tpd/OB' +
+      'LmOdyNcN/oOWtFgR5uArXqDDzAb+0TxKNVB0mveO6SHwYejBlDui7e4CWyL7V+n/0uPgnVGjf0JroQ2Ic3dcawfzWISerWpB6cM9' +
+      'j8k/s4YF9d30YH1nVD1kItgAAAAA',
+    gb:'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' +
+      'wRAqsBq31BdG3RPbS2MqRMty0w4/j1PshcYEAAA=',
+    al:'UklGRjYDAABXRUJQVlA4ICoDAAAwEgCdASpgAEgAPpE+m0oloyIhqJgJ0LASCWgA1TQh+4fjlzcnLEKR8fCP6FtsZ4sHrAeh7/I+' +
+      'oB/duoA9AD9VfTV/bv4Kv3A/b34AP2N//+twQgyuOD2k1ZsJUr1uNeYJikdCNAjIYm/9lAgBeQdaID3f+JNgWHqZG21lkFmEX73M' +
+      '+yLbVriCSv17cXU9jZoIlR/hiC4L6jsAAP7wm0P/8fRW61+z//8fR/H0fx9H+PfvLhnQFQxJJ3GRwmYcRl7FVKHFPxVGeoYoO6Se' +
+      'u9CticJ1/cvBEFF+srbqmliHtZC7giBJsCOlAhBqmbNeQPzn+7Yjez6Z69QNTEtpdyevL1+QcHdCWvGbcoKxcaEoIWBTt/iv7TUd' +
+      'ko3GMqz+8Y0rvabL9EabPPZRe39BTglS6BQ91Eb7+PAy/rDUHUnWd/zZ1apoGG4Yr4eicz0/uwGfe2Zy2ZxfG2Om/M0/YYKi1002' +
+      'YN2smXICu7p14rCopF+6Lt2jP09hV77SnlAnhs81eIze1R37aLFr1+x0zGMqCWTFbT9qgK8AwpPfDrV8B5rPLNWd6cQaBx6pDPqB' +
+      'B3VNTR5zL1RTYj9zQe5fH6dc1cOJUKachyrKGSlkNvZ2td1lfv3BShGnaXP93M5GiqvA9KQEfHCjj0u/S8Luuc61N8mftfzHSJXA' +
+      'j7AioxbbfDym0i25GRafAuH0nsBeZpXWWyWQ51vWP319DD8NohOMjopZAqrPpEQgzXOyJpNjwgINUDo4yNM9DBNx3ReeoHugz1Pq' +
+      'Zpoigu66g+NWxWk+mro/W1JGDRz1kfq/pBvr4MSCd4N7TSLZniwZYTODfhfgAET+krBNVd3muvAIkZ5QKEA4mYknfyIcRsWFHLVU' +
+      'ECGSqUUCd5KKVRyi8wqvvGy15wsU8m2vMxrkRWVTmrazq/lXsDmuwJ+yKZvG16AtntCVyQzuxrzY74K+Y1xdiGseA2pjdgUEnZK1' +
+      's4qB7ZN0+BbAia1GArQHuphqjoVGeA54WtheYWshcSr5AEdlVpgsQ2jda9rGUb1kHJ7heimRutX6u4AQNN/9YEV4v9Ft8myCw3MA' +
+      'AAAAAAA=',
+    ad:'UklGRhACAABXRUJQVlA4IAQCAACwDQCdASpgAEgAPpFGm0olpCIhpFQMALASCWYA0uYTfgGrpdZ/Hf8AOmj5bIkf47EV+YDyOen/' +
+      '6gD0AP2O60b/JPuquFDwLGwZUL6jjrrOY0snCWMDyoavty7yNlfHRzLvwFQhBH5FQU6+iy9aC4frmxze7OQAAP74mVvW/j70e12X' +
+      'q/pda59r79diRFv9WLZ8BsF/qxbPgNTrf/bOm0IQw5vbh4q+LG+UKE5xDusZkiDYw5/GOc+mRz5W/tO+dmI9OKo/vSeQXRwYjkAX' +
+      'm+ibo1dxaCFUc0s0i+XN2LbLkt01eBIc5912Wgr1MvAGLHsWxuYoOBYBHp643rT1Yq7kFgDgGKJcoxN3nuzwio++VdAPnUPSSUxS' +
+      'wUB2zbQIi7C+eNKXkdlE5PfgN4oj4KLzp9eQZJ10ppHbmJ/DaeqDwJNKMCKgqYmaZf5WE1uvDtymV/VuJ7bX+EusQvd27uXW05xm' +
+      'LGxHf2x0uNPCYWn0vz/xajPl0jn33c94XOYDeUQRfwrMAl+NL5mv8ifTepWw85y7PFZsrw5KI95ilU4hD5On505o7u09bQSQ6/cI' +
+      'HlSEqY0d9ErF6LqZTczJL6k7tlBj8iVe91wFBi/LXjL/psRJtm17UIwhGX/8+0U7lHl6qt0NHiVThHMcnY/C8fJn/p+NKkM52EJL' +
+      '26lSEXROcAAAAAA=',
+    ba:'UklGRtIEAABXRUJQVlA4WAoAAAAQAAAAXwAARwAAQUxQSBMAAAABIJO28W+6NdB7i4gJwHjuv4EKAFZQOCCYBAAA8BsAnQEqYABI' +
+      'AD6RQJpJJaOioSq2asiwEglqAJUDq4Ktd4/If8YPknpb90+8mT58/H63pL+YB+mfSA8wH6X9Tn0AP1u///rAexd6Bvllexx+2/oc' +
+      '6uAvr+QfjF5o99jzn7SZwT69fd+EHaT/x/5L8AQYEqbbAPWz6En+55O/qn2BP5P/V+sV6QA2duzbu9P2IPZK84ecsQkUDj2T5VEw' +
+      'Sv0N/DO6kcNykar2Hkr12oeakuaaZnDGPpa7UN2HhPkLkqf1sVZgrVI2JBH0HbAG2yZHqZ+UipaJlb6FEGtwryBQhyyeFQCLgAD+' +
+      '/vTdURNB1IHkDhnnaQdUvozswi+wyPevap8X+l7Ed/nWvgfSO7TL6j9/w+4RIGnYIeMfwr22o+/3GELrOUdp03sH//ONZVHr/ViT' +
+      'tun5XSgQme03JPdKT3fAe3IhJjIEilMPZa7kb8dHHo24Rg4di5O4z4+diDptTsnJQ23o0D/S5/lkHxXWUAZyfIDgAbhbuuj58ou4' +
+      'rHh5mcbSd6spLWBJKfwrkfIDidgh/7tWnvoq7y94B3+uQKuD2H8utmJdtUxT9DzRaLErNaHhKRYa338xUvExrMPRi5fyG1L2ceZY' +
+      'K/FvD/7tp5ze/lQjf85vfyoX/hYacPtaPGqZysyKF5yK2qWOMCKZ7lXVpRQw1Ir19jX9qOYeYPlof5TkoauHn65+Nfx6zamM032p' +
+      'FyV0VgT+mmMbgkF9vMHKdGHjcrZ6pbHgCsd8m4k4e6msaHp/yJc/2NRdiPZ4nftPQT50NHsEGEjjLCMrMUHAcx0AZPD2rkUXpbnL' +
+      'ijby/oLTX935EKpxhfSFDLkQRK5n0hfb8pw6HkaRgTLdYve4PpTbeQNUEXRQqpYqXiYxrWcbeAGO15/+EQinPdC8+w2Vi+nDcwb/' +
+      'xSoQgE13GMwMVZugvljrxymTDRzsGI3a812rH0yM8Jvcw6iOUevBvE4a2fT7F5tZOCX4kSjz+gYzwpRGCfC+LtAX01bcsnxHEXdq' +
+      'A+/pOIwyfnLrP9d4Qd/FWLH9pAtIOn/kOESDb65w3eUT/RM9wPn/nOnJqWATBuekidDYFYt0V9qDW/sHokWiAUh2gyrmASWpxJM3' +
+      'WtejWQktdBEgKbDiGanZLRhJrnnUJupuwfT8o5JHaJgtpCy4JQRQY0250XcxggBp7NqZEOhE6j+KJmBxnYqlfU6dK/mMBp3Bz0Yd' +
+      'N1hL3uUifOBy7seeRbv0aGWMGbkcmBA3Rle6Tmn35wT5B9KaLCNZr5ifX35tCmgyw6NUv+QpZtP4C81dHnnFw6rOPM0SjzRv/3BY' +
+      'zzrFy6rzSv23Oi5T3yQfpnlruCqGINA/iYG5e/gzvl63mUWVRwoqdEL0m/VC1onw1MXLBBEeO0M75LUpEt0TwwpqpEbmVSZt0PKZ' +
+      'wRs1/m34QCr5sef1wfS6jYGKk//CnRfhM/rvy4IKrd1AJowTJPwUZFlzbPz3sbKdpfjHPcD4BHOjvpRpX/FKg6Fo5rCTvxOdqso7' +
+      'KQdCswK/2qzB9M96vf4mW3y/3JOAPGOiu76/8CFLjYvnWR61MUmig8AA',
+    hr:'UklGRr4DAABXRUJQVlA4ILIDAAAwFgCdASpgAEgAPpE8mkmloyIhKJgLoLASCWwAzuoNfkv4q7E31X8R/2x6pHk/t5ztlkeM/1Af' +
+      'lX0IukB5gP49/Vf1w7CPoAf0D/DdYB6AHmi/6/2O/2l/bD4Cv2C/+2tmxT/Ya1M77NWBanyoIZp4/fyr/RGEVyFlqDDq3wKiLeKu' +
+      'Ud8KLhrmaqeQtcI1d8+6l67MDrR2Y3f18fo693ic3jDejPH/CjGBwhW6Rfh6puPl4EZcZgXwaQAA/vDD88+vsIDXzsoBfx9ujhfa' +
+      '5gDtlsw4wwxIA02+R3tBk+vO17q6FjeulP56VSCAxXUoOGFWblOJ8ZibfNf5WzODqBf9+i7/rnNIppA6ba6PQseH9fn8263in6Qf' +
+      'UkFB+xLnIyoNYlp+FiQAInZzmH6WhQ9AJSCWrPRuGpqT8z+XcIuuCLvv/cUeMAuloZwcI3Dix69M9ofn8U7X55TUd/+kmAE/Wl6c' +
+      'e9PWt5iXUztKwhWyDISUTpi0ATafOPbiJymT1DmsYQ88K7OtHntoSdmmrKUKaqCoDp2XYRbX80BE+R6hn8MJ/6DgXhedOixRDIK/' +
+      'BtFHTdwMlYS77RI2kgz6riCvinNhKPriFxMLLPRi0i3KadlzL5P7FzNchlkHAoIL3L5cIm+IpK+hOmmn3u8zsRuB8gilHOOp4As5' +
+      'A8JN+xNGEeCKOMcI/Wd6UJtLcaDJ/gjHoNvBvGzUQ2Fq2IfZf8/GuUWQev/ICW6p5/2l54u2S5OAZ4LVksS4AP4zwx5qw0nneytU' +
+      'xxxFby6TFJVkiNU0sy5zN3v67AFeMT9wgsOwCxJ9mS5SvcmzBX38/4+lOvqhorNFvkcE3SJKnfEtTXc3777bwPsE+9SO2SV1Mb7H' +
+      'RjbodURGg+Q9Ohooc4hGpshR35VN7GStZMlhPPH00Fwcfp1ZCfppWH1UA+bdVAizXN/KkJqfQ4aZdDvHuCPj5eHhvSeJP4tlkZRy' +
+      'JXQV/0rUpkfZ57WISuLP1kn8NMhrjRUlCvh0a33kBlC0Ty059s2ZZx8reh9oK4nF5XdsDoc/nFOYHfH/M28f/mpy+B+XaWRdoDv9' +
+      'mXCKv6+1DptJo8mrRIQrXYwCRB6e0o+JsQwY/ycPgj79koRs3AYY06m79qRMzKH9tbKWv+i7+evUQbMO2MXfkYHvcDz/+PUa1SPu' +
+      'CUXPsWev5UWexXMP3uv2lDeiYTiI29jzW0wIx9z36HeK/38zD8i7v3dJxN15SXJmY++ZM1zWY0ff2uknNjQAAAAA',
+    mt:'UklGRogBAABXRUJQVlA4IHwBAADQCQCdASpgAEgAPpFGnUulo6KhoSrAsBIJZQDWXqTEgNsxdgDXikOS2T20j40E5w2y9MQI+Mry' +
+      '209iYyKe2Q+Kxsw9RjyJY5/rChZolApZ5W6pXNoXpAAA/vq3KbkeWCSQobwFfwPT5pdekKZCetlz1/nFHIAcZhFE77+S2PdeUC/9' +
+      'Rk5aAWxxf/+0s//Us//Us/xUseUm5O7SG0zkEVaw4lAlhAqn4SGRPs7lYNcV7tL9ndjnuSNyg3xv+sGJLuHrrILX5tBfD9vHd+OI' +
+      'OuSnwPUc29APtuNZlNdjBPxmfgmuOpB1dI9kvj5S45ec2G2vqgXgrMhR7z6LpVy0WXMoLwlX9jyDZFAiXBx3oIUYFn4i6fTT4hbu' +
+      'eHAGJy+GWW4ThdULDfbp9TTUFbr4ri2mgI1Oz4CzY0hel6RbrTUCazA5B4xbgEfXzVt/N9NB4vRZf+IzXKhXVonTNMb2y33UJe0Q' +
+      'TJ2w1sqaPfyI9Q8DOH15b0DBuKwAAAAAAA==',
+    me:'UklGRpoDAABXRUJQVlA4II4DAACwEwCdASpgAEgAPpE8mEglo6IhJnqvoLASCWwAzjXmfoHWuIB+MHQOc4Sxnk3KfOJ2zXmO84j0' +
+      'XebN/gOtM9ADwjvhT/xuTG24VAjgVx2qB7lpIvq4h5E/M1EgH2+gmM1DKzjXOIKdWhmtHRuzvNLcZlaqFVdexoCzY8G/imd4Jp2H' +
+      't/soPvNkV0LD/Q2yrN7xOG7k1Uyq4YGTMGJre2MwgfCVFh2AAP75KTGgGGmKV4JFZB/ndu/aRZ/VPTnzpb80R3Tczqh/8f5+Jeh7' +
+      '+RpppfBv9kB2CRni8J9ejea3L3ei9m5sKEMibGCFjLoPfSdwsVpTbAA1DR3UluLn83tikkb8ul8mRj+780UELm1mFuWXgPLFJTlx' +
+      'k3SkimmmWaI5vNLjFj8KJ1YRHIY52Ntf28D1khWTydk88jgDjbGJdf0U3bX+MrgH05lqeaa94FcVdLISh6qop+k+iZm2ln5XebG5' +
+      'YgUfxBOdoBSDA7hCuBJaj1ohyS7vBQClPyBzh0zpbPX/Wv+GGxLJKG2dzK5oik0cOJx2YncPWsxa56Q9OAQzJFy7u6GrqHwerSt3' +
+      'on/3OybyKQM/fWVX0j+jf9qXCvEEuLvgQ2Ao8l4bvg5vj1uvsBrLyWSViuYCZnGnTtnyZwd86krAWuoSoQ0WeJi8KBZRuGjb8VJa' +
+      '3mErSPfLgbUdj96AWz8O3qiAVlPm9pZcqfYdq8mwwLMHcZIHVsPmRKgAgKMSeOhXa8IvsOn6qXKjWy30Vn5lH0uefvR+jeSrwbn4' +
+      'lCTfn789HlPYrwoUoeN/N11e8tSNrdLJZYP0iEs1jsZ+ytvmN9kpwf5uOQL7bGmve+Jp7cqdMIZ+WZGKsn+Mvq4GGnrAH/cTN3IT' +
+      'GzfA/U5pr8ZcjmliSNoBnOjDy4igo9DWFLIF8xg9qOb2d8o6s4aXlfCiEVtCPWahAIPeg1KrnrBHfceXTn+2H3oelz4fMvCGhxy7' +
+      '8ohARkX0rEeYmBBFZ8TKCLoGfxI0PARWOzpDRroIMX4A83qdcH2+rExJyEIphS3xpoDB0suPX9rW1n3QHrcFkDYKkEJ7r0XPG3p4' +
+      'QyC9GQbQl9NOlZAweWSO+m8vo/Nof/K/e+l0VLEn+8BcQRV9mSjQARnT9eGuEJNuXPh9HOrZcU+WV1B/irerft1K3vpSF7J7c6gH' +
+      'nXhEpvSdWcL6m1BfvnvK6t+8E/Hj5+m/i9mAEAAA',
+    mk:'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' +
+      'pzTcbAGSsWgAAA==',
+    pt:'UklGRjwDAABXRUJQVlA4WAoAAAAQAAAAXwAARwAAQUxQSB4AAAABMNO2DX9a7XCt/5S3U0RMQI4q9P3FeIv3nx88FR9WUDgg+AIA' +
+      'AHARAJ0BKmAASAA+kUKbSqWjoiGnltm4sBIJZgDUTe87H+0/jNyrZs/9B9x3ur9QG2A/ZX1Aebz/M/8B7APQA6QD9gPYA/U30v/Y' +
+      'w/vH+s/ZD2naX59sqUBwNnB3sLUEzqRaRTZRrQeO9Kh2S6qvfZKxWIOpC/c+OCeRnxG0xk7vzWckONMILN5YlN9U3EIolcNtCAAA' +
+      '/vQYt/eISuc4H/yCmrizax1CueMd5wSEDiaB/74SfikfXk/9bjvtf+u1Uj2PSH/xRG+GSIEBUU5GgFiKg4HgAOFJb4RpssVZkGbP' +
+      't7uL4oBCmZ7WYxzDK+3VKWw2TDSy7FxXv5uOxBVf7EJzxU2f66EU4wKlXSI7Q1Sw83l6hIicxzhc2gTDkmeXmHMDlbXlg1mhvzb+' +
+      'DYt3S5piHNDsLgGUJ3RQVMXPCZM/J89oax3RAP0h2jaXH2t/WYM8+41NH3JCq6KkGoMY8yj5WEyIUHJfq/5uJozxfl1M6Ls0VGfB' +
+      'IDFRnQo4yGrQFMEeI++vi9vFKzN44NFdjImXtLpGSpWH9K6yPFSxfmY04bhKDdUpb1bQFcdO7QVXOAFxkziarfs6kNTo29i9fWcA' +
+      '1+trJPYajC28H1lnmINjRphN9BlS64nAP0X/yvbdl+CUwbLEiNtcR2NWKx2F3yWtBjewf3XirxEKx35Pq9ESM67gD3t7kW95Y59C' +
+      'Mdt8KAAIoLZsu5ylRcukRAK4ke0/wafLvrtaQhKFn1qPId6mYmbaJiaVnQj8cx6U1nrWS29wgxYxPA9aU/4ekCLF84poEFTCXqWO' +
+      'M6oRWIWX2HefTh+YyC/OadsYuHLpKm7p+Kv8WlMPLR6AVv3nWFhD9Mg89TtMEDt2+4qrmU6lYXgrJzWfsbV2Jzp7u7JNL6di4lW7' +
+      'WhbQKpNs8VPt/gBueKXBL0Bpo9RbHH5pP6Sf1I3FXZn8k5CHm9bwPSa8ERjt1bIV5rxtLXWY6fH1Yj4SQHQj6VOh5/jpzuFriiNC' +
+      'DI4CE7aNJQAAAAA=',
+    sm:'UklGRmYDAABXRUJQVlA4IFoDAAAwEwCdASpgAEgAPpFCm0olo6IhpnqrALASCWgA0yIBfquqW9m/HLmveNDLbr4xbf3f2AbZDzAf' +
+      'sV+wHvVegDeDvQA/UD0zPYy/u3nVatxshwLnXDbzinCBpWZoXj91BSnvARRAmufiCBeqwBcl07AItacAm2p/XaZYdDDBw0VOW7qy' +
+      'v7p/SEkC5bvWMsjin0EkMAGyGVU6H2dR2wL846FYQEAA/vshlxnG+xXOKJMVjyLYPXn3/w0aKxzsxC9NgJnyD5m9YB6nHarhHS7w' +
+      'u5OtMTnqGl0fnWH5d2Mrri2MSxcysjdDotS1z23xoPqBmjnYXXhKsXxOWI2QZaMUIM9wW0fIXKm9VUndY+M15BWIR6UY637VPMoU' +
+      'ekD1uWTWPyNiHkCDTCKA1DX6by1U0mwS8lU3SF4s89hYF6FeeBfOSYT81H8zWR3cHPxKNHGsVnUg0tztwf+CjkTiGgFGZLGzNPfg' +
+      'tV+JXdmmwqhDndNSMH+1vCdGiWXJuY3KX1rpJzb8y2QYznpxgxaY1H+4d2SOTjxY1/IAlUuTX+2jOTf2qT5Ov9vYLDxbIC6MxNvb' +
+      '6EejzjktiVscNUPMZqW92Bg813SqT3IwqZKqYUnBA8x7lfb89E3au4Baomrw3J52aUVfzNtUX1P9AD/QnTwXxKcmc9m7URPMBHVK' +
+      'UDGUWSPhwXqNdeb3UKHtjvwfdUEv2gaEsxR55OvxY1WkklDty8Ex4nKA0AueSyDPFsTXGtKhkJRk8PrqqxASfIl3LffwJqumCpLk' +
+      '6RoY8kwOuFnj2DxrzfhvlL1rsuodHAUV2mU2vGjwr368/iUdEmF1Ey3g0U3ndPCUzOQrPZF6Aop6Rse4zBiSIUgMd6I2yQuOshVh' +
+      'Askc+3c4kRftOs23tF3WcFPJvQRcyYXtgC7dsVLgU8AXCsIMujj9ZptGJu77SNhXxS67emZnq0J0YLzj5ea1Hs6Qhkfei7MvOOSL' +
+      '9uTRXrweawz41/0JfRqGv1QArm1v8rOQ84uTtQz+jHA+v0U+TG+v6LkkZ4XtD1o3+yRI3lnnXFS6WRV8eX45fo0snurZ1IooNMp9' +
+      '74pEFAJ24peoitDaksvGk3NG16S7qHyj1a6UKa0Fp24gVSkMFmqrR8yQv1ByLLuzAAAAAAA=',
+    rs:'UklGRhwDAABXRUJQVlA4IBADAAAwEACdASpgAEgAPpFEmkmlpCIhJngMALASCWYAzbRCexfLNzunS3sh6ANsnuJd5I9ADpYp8dyz' +
+      '+po3VVY5ucmxIHgDGS88z1b7A5eQ27Yq7iaxv01w/1LllPFZCc05oUFWX7TF6PteyzmcTlkzSzi2RQp6hNLNlKbAHOzpBXKI8S13' +
+      '+MsdApXF8KAA/u0HL/FP5qN//q0PA91A85qFcLZGjMGtJvHjR7eqy774w/bBIsIJe3YFNo1xy7PGg4a1ea1uZyuXC/Y4RNu+HNX/' +
+      '5NJwAvn1QkJmhUkabbmaagKZkxGg6IPAn65F1jCa+5D80PexOdKO0mMaS42YRNSwEt9ab//1D47rKeCa//3nz91MsIlUX1YVQJz+' +
+      'xcJnGvpkGlMLSX0moEE4wR6aaXfAd39L1Z9CCflIG0ZSmonNDp/25RqBYmMX+pv+3iNIoRQVMNjACTZkoVxnP49dwe47LnQ46zEU' +
+      'WvJ4ffjyn50Bg2BEP1dC7K/Veguc1SkZr/IWjpZLnZfMbuulWhtYOxCR/YuS+wWVPXeTl+YCum3X7xW6XueTh2i7wWSA3QqJb3B+' +
+      'B/v7TjPzXV/ds//9QwTD6TLKq1fNB3P0q0LMLx1GQge8qL8Bu3UJx8AIf7fL1ipAVbw7HBugK9TiBunumXwnX3+UwtvE0y9yjQQN' +
+      'LWkwHxzyzYW7SXqRmZviefszzVnw3OA4pRN8HnCXki+J2muNjEIdBo6nhZ04CVT/BgDbtRA5jalLG7kh392To4UB1K0YEptdNJJw' +
+      'Y7AVZvmpELrHwB7dC5e+cFtZ1H2+0d6Hd98s4rmrOwQv6wQzzCTey760E1oVQnyrUznGB/ec+fI72RreBrdkzPgKKOTUTmDoAony' +
+      'PumaBM13hZUf4AeIsnoB30e69q8Aux9Q57+n4msQnaKeAx9Bb4ubHYvgx+ALNAFrU+ZFWH0Wnyzh+WKt++YKrbA1a2GHejqDlalc' +
+      'gbv210VQbTLQCFMsO1LC4HjnyVARxD/s0N1IuEhILqRYbpX3f+Q0vSk5KwNA4JnW4KAAAAAA',
+    si:'UklGRhwCAABXRUJQVlA4WAoAAAAQAAAAXwAARwAAQUxQSBYAAAABUNC2DcOfdEtg/0bEBFB6nD/e/xkKVlA4IOABAAAwDACdASpg' +
+      'AEgAPpE+m0sloyIhpXM7gLASCWQA0iXAOfBibVGNtLuIvPA6gD+AeoB4IHwbeUdmgBfXNCsOViqYCfoo/DxWTzGNMud6m6PBOqBT' +
+      'u214Af0OMN7t5+8A3Nd7hVf7QyXPhqaCAP713FD6B9nboxd3kqB5eovqKyO3vH/OjCqGOExZkDNn0ZcSdTwewFtXJAaLD8HSdD/8' +
+      'XzOWYmiT+t3XIZ/VGNlVQfbh7eV2w0Y9VWn/jkV+drsEItPq2s5vRB7nR1JeDR+VqtH+DNbvkr/72aupBQH1OZe7/mIf//ZWNA5D' +
+      '9ZimwtpL/Vsyzuc+08s57xmg5NVsZa8Lyy8128/h261TwlsbdOWv2T9Hak59CHVuDMfkj3fwwooIslutvjWt9ixz8Lrd0ZtS4tvZ' +
+      'CKkQ3dVyChjsiakAVShFVzc7/pgZRixKxRZDquxj2/A74tYx0HupEE5f5vvpdKO/Qe7lXxJJh+lAMusEWTB64SexgWYKfPMq7Djn' +
+      'ygc2sppNfs7qWywT8HRx0iQ+ThDTIxQynNNoxqG3mJXZQ3HvEXxuu8qTYymU6JJcXw52MZXJYuf1ht2jJ6MAQ/tIv4Rb3d7cM//3' +
+      'sF/3YL/uwXvJK7OANNV417i01xgAAAA=',
+    es:'UklGRjICAABXRUJQVlA4ICYCAAAQDgCdASpgAEgAPpE+nEqloyKhpnVbALASCWQA01QkeV/kR+N3TR8wyVc4PUjtgPMB+lH7R+8p' +
+      '6AN4W3lT/Jo8DaUOISw/jfWbfL+hoZmFKuvPEnMUTTRgWzHAv5Ti2P9SJn8ZEP9g/aaOCB/Y5NJNJNe3S+I6n2aAAP7yIl/zPaWv' +
+      'f/9WfZJlNZQHLc4/e054ARVObYUKo2iWwoVQoXsLKjJr2+57wvE740r9q6F4wpZarEI8DtrwLIH7F13XzxrPMNhKH14hemX9UP4t' +
+      'Fdz+YOZ5oIkbkHkYp6pja1CwpYieP9nxQuH/E/HtFM9SUOh/jHkpjKRXyUz/KIQJQ9zRjDwtTpTO09m1Q3N7NQLfnCDv6NiWzc7j' +
+      'eLHBM2b+F8/EZx6CJI7bDlTi0Rf0mj1u4GTWiOOC8axk/WacZVH1efFNM9Ow07JXP1usqF6n7f+eiyskunRvQ7koFvJP5iqKeeYK' +
+      'Xtq37+5s0cCcTvmdY5K97OXJ+LKFXm9zmFhkhL7hHH2DhLNG9cddJc25uJI6NxLfV9EwVmowyA1etFv0L8//gt3InmGB6nk2TXZB' +
+      '6J2i27vZAbTDwQnVT/2VcP+cX3vlvP+QB5oKxkpWGcmYIeNL3OXqct/1tQir+lhFyWq73jFf8K+imYwELrJmjfyDMocHgAV3zQOW' +
+      'd8h+d+mbJrSIl839OUcOytNckV8y7u99HcieSrF/XO+GEkF9qAGsfgDeAAAA',
+    va:'UklGRiwCAABXRUJQVlA4ICACAAAwCwCdASpgAEgAPpFGnUslo6KhoiqQsBIJQBpwMEkw2192NbycvwVoPiNpG6QKc4/tvGtqBjdF' +
+      'aOW83LEQ5g9PnRaEbnF98kgJt0vl14d45U10le6DpLblpMlvUncG3mYtYAD+9Nm//998P/774f/33w/zi/+HPtj97LJC4cX20rBZ' +
+      'PNbgJlc07OrZY1l3zwgff4IcDQYV4ApquokHQhf7zfbik8l6rIYikLZ+J/b2EGDapEzO6JIARBWecXha9/xn94C1JGRmLgRSCu4f' +
+      'MNVyneYBtyHuNeyiAEYhMRVis4fzNPENPQ/M4VNh551oRax/56/x3DMeCE9J3t6ePiIJFuTKgAM7KArq+G20i/VOywz42HmYnen5' +
+      'c6RcHP3nVy2feynK4pWvmvE51P+NcHdmqDhbjRyKcd+gpkmd9hVwlpYqa/NsI2WLcMVsJ8On/vAJNmNgtatiaLfEidTa9Ec10KD3' +
+      'cm2ARPlWauiXMJB/1AQFR4udgzptdIt53vn48NH8/zkf55/11LL4F3NRHcqXZkJUjHEsjotweC6s9BEJwHUysusOVwEhsZx5TLyE' +
+      'DKEZ5NTjyUGN9BYf1Z+m/x8ibFNO5ItzQjCs/mDf5gckb2OXBm2E0FKWbxGI9z9iKnAczqK9PtYmKVQIktgmAKJurhypQ68f/XVW' +
+      'lYgEpxgyy5V/kYwsR9giQBwLcsp4zrritQ4H2Ngil+QUY9DwAAAA',
+    li:'UklGRrYBAABXRUJQVlA4IKoBAADQCgCdASpgAEgAPpFInUslpKKho1VaqLASCUAanwG/SeOW3c8K/7NiAPO60yXeUEaCEA5QzOgc' +
+      'r+BBGIawMOmIJAtaQIuORyN2yv9af6EFF+EhbWubGy7JpGcBTGbAAAD++uYbtbm///JT7ytdmXJcNf/rR/4l7tqVqTjOsWPvg97d' +
+      '8flJBFvzNFKRXyVze0KeVZ61vH5Vk2MAL4W3uNfJTk9RcVxO63dYuuqw1WX4QQ6+oqgsC/Z8LTQPSOftj+LnzCp9ytL7wsZFEktE' +
+      '1+UTK0Vsmbont0T37AX+QJzzfzoPnnh9IwVo3+kJNPbVU1mnV/x7p6T6UdzWOQ0nzohkv0d/nl/ptKj4F2V+4K3bfSXkNPfhemJS' +
+      'F2Afw+bEkEyv1tHXWl3TJDPtehxar9z2xR4my4+Zhv+f/82u6RQ5QH+MZbha9Dv6el7DxPC7YN/+RUqiH3s77uAlA3mWbPHfPluO' +
+      'fnHcn/l9MsDDdH/3X/n537cxP8GAAcAu36Ql3Sf6kQA1e/k1ymv/XbxNnfwQsB8TZ38EP/ZWOdLZEASewApZpAC2AAAAAAA='
+  };
+
+  function rect(x,y,w,h,fill){ return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'"/>'; }
+
+  function flagSVG(code){
+    var spec = SIMPLE[code]; if (!spec) return '';
+    var W = 120, H = 90, b = '', i, cols, parts = spec.split('|');
+    if (parts[0]==='h' || parts[0]==='v'){
+      cols = parts[1].split(',');
+      for (i=0;i<cols.length;i++){
+        if (parts[0]==='h') b += rect(0, H*i/cols.length, W, H/cols.length+0.5, cols[i]);
+        else b += rect(W*i/cols.length, 0, W/cols.length+0.5, H, cols[i]);
+      }
+    } else if (parts[0]==='x'){
+      // Nordic cross: field, cross, optional inner cross
+      cols = parts[1].split(',');
+      b += rect(0,0,W,H,cols[0]);
+      if (cols.length===2){ b += rect(33,0,15,H,cols[1]) + rect(0,37.5,W,15,cols[1]); }
+      else { b += rect(30,0,22,H,cols[1]) + rect(0,34,W,22,cols[1]) + rect(35,0,12,H,cols[2]) + rect(0,39,W,12,cols[2]); }
+    } else if (spec==='ch'){
+      b += rect(0,0,W,H,'#DA291C') + rect(51,21,18,48,'#FFFFFF') + rect(36,36,48,18,'#FFFFFF');
+    } else if (spec==='cz'){
+      b += rect(0,0,W,45,'#FFFFFF') + rect(0,45,W,45,'#D7141A') + '<path d="M0 0L60 45L0 90Z" fill="#11457E"/>';
+    } else if (spec==='gr'){
+      for (i=0;i<9;i++) b += rect(0, i*10, W, 10.5, i%2 ? '#FFFFFF' : '#0D5EAF');
+      b += rect(0,0,50,50,'#0D5EAF') + rect(20,0,10,50,'#FFFFFF') + rect(0,20,50,10,'#FFFFFF');
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 90" width="120" height="90">' + b + '</svg>';
+  }
+
+  function flagImg(code, size){
+    var c = code.toLowerCase();
+    var img = document.createElement('img');
+    img.className = size === 'big' ? 'flag flag-big' : 'flag';
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    img.setAttribute('width', '96');
+    img.setAttribute('height', '72');
+    if (PICS[c]) img.src = 'data:image/webp;base64,' + PICS[c];
+    else if (SIMPLE[c]) img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(flagSVG(c));
+    else img.style.display = 'none';
+    img.onerror = function(){ img.style.display = 'none'; };
+    return img;
+  }
+
+  var CH = String.fromCharCode;
+  var ACCENTS = new RegExp('[' + CH(0x300) + '-' + CH(0x36f) + ']', 'g');
+  var S_CEDILLA = new RegExp('[' + CH(0x219) + CH(0x15f) + ']', 'g');
+  var T_CEDILLA = new RegExp('[' + CH(0x21b) + CH(0x163) + ']', 'g');
+
+  function norm(s){
+    s = String(s || '').toLowerCase();
+    if (s.normalize) s = s.normalize('NFD').replace(ACCENTS,'');
+    s = s.replace(S_CEDILLA,'s').replace(T_CEDILLA,'t');
+    s = s.replace(/[^a-z ]/g,' ').replace(/\s+/g,' ').replace(/^ | $/g,'');
+    s = s.replace(/^the /,'');
+    return s;
+  }
+
+  function capitalOK(item, ans){
+    var a = norm(ans);
+    if (!a) return false;
+    var list = [item.k].concat(item.ka || []);
+    for (var i=0;i<list.length;i++){ if (norm(list[i]) === a) return true; }
+    return false;
+  }
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  }
+
+  function pool(){
+    if (state.region === 'All') return DATA.slice();
+    var out=[]; for (var i=0;i<DATA.length;i++){ if (DATA[i].r===state.region) out.push(DATA[i]); }
+    return out;
+  }
+
+  function regionName(){
+    for (var i=0;i<REGIONS.length;i++) if (REGIONS[i].id===state.region) return REGIONS[i].id==='All' ? 'Europe' : REGIONS[i].name + ' Europe';
+    return 'Europe';
+  }
+
+  // ---------- region buttons ----------
+  function buildRegions(){
+    var box = $('regions'); box.innerHTML='';
+    for (var i=0;i<REGIONS.length;i++){
+      (function(r){
+        var b = el('button', r.id===state.region ? 'on' : '', r.ic + ' ' + r.name);
+        b.type='button';
+        b.setAttribute('aria-pressed', r.id===state.region ? 'true' : 'false');
+        b.setAttribute('data-region', r.id);
+        b.onclick = function(){ state.region=r.id; buildRegions(); refresh(); };
+        box.appendChild(b);
+      })(REGIONS[i]);
+    }
+    $('regionInfo').textContent = regionName() + ': ' + pool().length + ' countries to learn.';
+  }
+
+  // ---------- tabs ----------
+  var MODES=['learn','quiz','type','print'];
+  function setMode(m){
+    state.mode=m;
+    for (var i=0;i<MODES.length;i++){
+      var on = MODES[i]===m;
+      var t=$('tab-'+MODES[i]);
+      t.className = on ? 'on' : '';
+      t.setAttribute('aria-selected', on ? 'true':'false');
+      $('panel-'+MODES[i]).className = 'card' + (on ? '' : ' hidden');
+    }
+  }
+  function refresh(){
+    buildCards();
+    resetQuiz();
+    resetType();
+  }
+
+  // ---------- learn ----------
+  function buildCards(){
+    var box=$('cards'); box.innerHTML='';
+    var p = pool().slice().sort(function(a,b){ return a.c < b.c ? -1 : 1; });
+    for (var i=0;i<p.length;i++){
+      (function(item){
+        var b = el('button','flip'); b.type='button';
+        b.setAttribute('aria-expanded','false');
+        var top = el('span','c');
+        top.appendChild(flagImg(item.f)); top.appendChild(document.createTextNode(item.c));
+        b.appendChild(top);
+        var hint = el('span','hint','Tap to reveal');
+        var cap = el('span','cap hidden','🏛️ ' + item.k);
+        b.appendChild(hint); b.appendChild(cap);
+        if (item.tip){ var tp = el('span','tip hidden', item.tip); b.appendChild(tp); }
+        b.setAttribute('aria-label', item.c + ', tap to reveal capital');
+        b.onclick = function(){ toggleCard(b, item, b.getAttribute('aria-expanded')!=='true'); };
+        box.appendChild(b);
+      })(p[i]);
+    }
+  }
+  function toggleCard(b, item, show){
+    b.setAttribute('aria-expanded', show ? 'true':'false');
+    var kids=b.childNodes;
+    for (var i=0;i<kids.length;i++){
+      var k=kids[i];
+      if (k.className && k.className.indexOf('hint')===0) k.className = 'hint' + (show ? ' hidden':'');
+      if (k.className && k.className.indexOf('cap')===0) k.className = 'cap' + (show ? '':' hidden');
+      if (k.className && k.className.indexOf('tip')===0) k.className = 'tip' + (show ? '':' hidden');
+    }
+    b.setAttribute('aria-label', show ? (item.c + ': capital is ' + item.k) : (item.c + ', tap to reveal capital'));
+  }
+  function allCards(show){
+    var cs=$('cards').getElementsByTagName('button');
+    var p = pool().slice().sort(function(a,b){ return a.c < b.c ? -1 : 1; });
+    for (var i=0;i<cs.length;i++) toggleCard(cs[i], p[i], show);
+  }
+
+  // ---------- option groups ----------
+  function group(attr, key){
+    var bs=document.querySelectorAll('[data-'+attr+']');
+    for (var i=0;i<bs.length;i++){
+      (function(b){
+        b.setAttribute('aria-pressed', b.className.indexOf('on')>-1 ? 'true':'false');
+        b.onclick=function(){
+          state[key]=b.getAttribute('data-'+attr);
+          for (var j=0;j<bs.length;j++){ bs[j].className = bs[j]===b ? 'on' : ''; bs[j].setAttribute('aria-pressed', bs[j]===b ? 'true':'false'); }
+        };
+      })(bs[i]);
+    }
+  }
+
+  function count(v, max){ if (v==='all') return max; var n=parseInt(v,10); return n>max ? max : n; }
+
+  function starsFor(score,total){
+    var pct = total ? score/total : 0;
+    if (pct>=0.9) return {s:'⭐⭐⭐', m:'Capital champion! Brilliant work!'};
+    if (pct>=0.6) return {s:'⭐⭐', m:'Great going! A bit more practice and you\'ll have them all.'};
+    if (pct>0) return {s:'⭐', m:'Good start! Try the flashcards, then have another go.'};
+    return {s:'🌱', m:'Everyone starts somewhere. Use the flashcards and try again!'};
+  }
+
+  function showResult(boxId, score, total, missed, againFn){
+    var box=$(boxId); box.innerHTML='';
+    var st=starsFor(score,total);
+    var s=el('div','stars',st.s); s.setAttribute('aria-hidden','true'); box.appendChild(s);
+    box.appendChild(el('h2',null,'You scored ' + score + ' out of ' + total));
+    box.appendChild(el('p',null,st.m));
+    if (missed.length){
+      box.appendChild(el('p',null,'Ones to practise:'));
+      var ul=el('ul','review');
+      for (var i=0;i<missed.length;i++) ul.appendChild(el('li',null, missed[i].c + ' → ' + missed[i].k));
+      box.appendChild(ul);
+    }
+    var row=el('div','row'); row.style.justifyContent='center'; row.style.marginTop='14px';
+    var again=el('button','btn-gold','Play again'); again.type='button'; again.onclick=againFn;
+    var learn=el('button',null,'Back to flashcards'); learn.type='button'; learn.onclick=function(){ setMode('learn'); };
+    row.appendChild(again); row.appendChild(learn); box.appendChild(row);
+    box.className='result';
+  }
+
+  // ---------- multiple-choice quiz ----------
+  var Q = null;
+  function resetQuiz(){
+    Q=null;
+    $('quizSetup').className=''; $('quizPlay').className='qbox hidden'; $('quizDone').className='result hidden';
+  }
+  function makeQuestion(item, p, dir){
+    // choices drawn from the same region pool first, then all of Europe if needed
+    var others=[], i;
+    var src = shuffle(p.length>=4 ? p : DATA);
+    for (i=0;i<src.length && others.length<3;i++){ if (src[i]!==item) others.push(src[i]); }
+    if (others.length<3){ var more=shuffle(DATA); for (i=0;i<more.length && others.length<3;i++){ if (more[i]!==item && others.indexOf(more[i])<0) others.push(more[i]); } }
+    var opts = shuffle([item].concat(others));
+    var labels=[]; for (i=0;i<opts.length;i++) labels.push(dir==='c2k' ? opts[i].k : opts[i].c);
+    return {item:item, dir:dir, options:labels, answer: dir==='c2k' ? item.k : item.c};
+  }
+  function startQuiz(){
+    var p=pool(); var n=count(state.n,p.length); var items=shuffle(p).slice(0,n);
+    var qs=[]; for (var i=0;i<items.length;i++) qs.push(makeQuestion(items[i], p, state.dir));
+    Q={qs:qs, i:0, score:0, streak:0, best:0, missed:[], answered:false};
+    $('quizSetup').className='hidden'; $('quizDone').className='result hidden'; $('quizPlay').className='qbox';
+    showQ();
+  }
+  function showQ(){
+    var q=Q.qs[Q.i]; Q.answered=false;
+    $('qProg').textContent='Question ' + (Q.i+1) + ' of ' + Q.qs.length;
+    $('qScore').textContent='Score: ' + Q.score;
+    $('qStreak').textContent='Streak: ' + Q.streak + ' 🔥';
+    $('qBar').style.width = Math.round(Q.i/Q.qs.length*100) + '%';
+    var t=$('qText'); t.innerHTML='';
+    if (q.dir==='c2k'){ t.appendChild(flagImg(q.item.f,'big')); t.appendChild(document.createTextNode('What is the capital of')); t.appendChild(el('span','big', q.item.c + '?')); }
+    else { t.appendChild(document.createTextNode('Which country has the capital')); t.appendChild(el('span','big', q.item.k + '?')); }
+    var box=$('qChoices'); box.innerHTML='';
+    for (var i=0;i<q.options.length;i++){
+      (function(lab){
+        var b=el('button',null,lab); b.type='button'; b.setAttribute('data-choice',lab);
+        b.onclick=function(){ answerQ(lab, b); };
+        box.appendChild(b);
+      })(q.options[i]);
+    }
+    $('qFeed').textContent=''; $('qFeed').className='feedback';
+    $('qNext').className='btn-gold hidden';
+    var first=box.getElementsByTagName('button')[0]; if (first && first.focus) first.focus();
+  }
+  function answerQ(lab, btn){
+    if (Q.answered) return; Q.answered=true;
+    var q=Q.qs[Q.i]; var ok = lab===q.answer;
+    var bs=$('qChoices').getElementsByTagName('button');
+    for (var i=0;i<bs.length;i++){
+      bs[i].disabled=true;
+      if (bs[i].getAttribute('data-choice')===q.answer) bs[i].className='right';
+    }
+    var f=$('qFeed');
+    if (ok){ Q.score++; Q.streak++; if (Q.streak>Q.best) Q.best=Q.streak; f.textContent='✅ Correct! ' + q.item.k + ' is the capital of ' + q.item.c + '.'; f.className='feedback good'; }
+    else { btn.className='wrong'; Q.streak=0; Q.missed.push(q.item); f.textContent='❌ Not quite. The capital of ' + q.item.c + ' is ' + q.item.k + '.'; f.className='feedback bad'; }
+    if (q.item.tip) f.textContent += ' ' + q.item.tip;
+    $('qScore').textContent='Score: ' + Q.score;
+    $('qStreak').textContent='Streak: ' + Q.streak + ' 🔥';
+    var nx=$('qNext'); nx.textContent = Q.i+1<Q.qs.length ? 'Next ▶' : 'See my score ▶'; nx.className='btn-gold'; nx.focus();
+  }
+  function nextQ(){
+    if (!Q) return;
+    Q.i++;
+    if (Q.i>=Q.qs.length){
+      $('quizPlay').className='qbox hidden';
+      showResult('quizDone', Q.score, Q.qs.length, Q.missed, startQuiz);
+      if (Q.best>=3){ $('quizDone').insertBefore(el('p',null,'Best streak: ' + Q.best + ' 🔥'), $('quizDone').childNodes[3]); }
+      return;
+    }
+    showQ();
+  }
+
+  // ---------- type it ----------
+  var T=null;
+  function resetType(){
+    T=null;
+    $('typeSetup').className=''; $('typePlay').className='qbox hidden'; $('typeDone').className='result hidden';
+  }
+  function startType(){
+    var p=pool(); var n=count(state.tn,p.length);
+    T={items:shuffle(p).slice(0,n), i:0, score:0, missed:[], answered:false, hints:0};
+    $('typeSetup').className='hidden'; $('typeDone').className='result hidden'; $('typePlay').className='qbox';
+    showT();
+  }
+  function showT(){
+    var it=T.items[T.i]; T.answered=false; T.hints=0;
+    $('tProg').textContent='Question ' + (T.i+1) + ' of ' + T.items.length;
+    $('tScore').textContent='Score: ' + T.score;
+    $('tBar').style.width=Math.round(T.i/T.items.length*100)+'%';
+    var t=$('tText'); t.innerHTML='';
+    t.appendChild(flagImg(it.f,'big'));
+    t.appendChild(document.createTextNode('What is the capital of'));
+    t.appendChild(el('span','big', it.c + '?'));
+    var inp=$('tInput'); inp.value=''; inp.disabled=false; if (inp.focus) inp.focus();
+    $('tCheck').disabled=false; $('tHint').disabled=false; $('tSkip').disabled=false;
+    $('tFeed').textContent=''; $('tFeed').className='feedback';
+    $('tNext').className='btn-gold hidden';
+  }
+  function finishT(ok, msg){
+    T.answered=true;
+    var it=T.items[T.i];
+    $('tInput').disabled=true; $('tCheck').disabled=true; $('tHint').disabled=true; $('tSkip').disabled=true;
+    var f=$('tFeed');
+    if (ok){ T.score++; f.className='feedback good'; }
+    else { T.missed.push(it); f.className='feedback bad'; }
+    f.textContent = msg + (it.tip ? ' ' + it.tip : '');
+    $('tScore').textContent='Score: ' + T.score;
+    var nx=$('tNext'); nx.textContent = T.i+1<T.items.length ? 'Next ▶' : 'See my score ▶'; nx.className='btn-gold'; nx.focus();
+  }
+  function checkT(){
+    if (!T || T.answered) return;
+    var it=T.items[T.i]; var v=$('tInput').value;
+    if (!norm(v)){ $('tFeed').textContent='Type an answer first, or press Hint.'; $('tFeed').className='feedback'; return; }
+    if (capitalOK(it, v)) finishT(true, '✅ Yes! ' + it.k + ' is the capital of ' + it.c + '.');
+    else finishT(false, '❌ Not quite. The capital of ' + it.c + ' is ' + it.k + '.');
+  }
+  function hintT(){
+    if (!T || T.answered) return;
+    var it=T.items[T.i]; T.hints++;
+    var word=it.k; var show=Math.min(word.length, T.hints*2);
+    var s=''; for (var i=0;i<word.length;i++){ var ch=word.charAt(i); s += (i<show || ch===' ') ? ch : '_'; if (i<word.length-1) s+=' '; }
+    $('tFeed').textContent='💡 Hint: ' + s + '  (' + word.replace(/ /g,'').length + ' letters)';
+    $('tFeed').className='feedback';
+    if (show>=word.length) $('tHint').disabled=true;
+  }
+  function skipT(){
+    if (!T || T.answered) return;
+    var it=T.items[T.i];
+    finishT(false, '⏭️ Skipped. The capital of ' + it.c + ' is ' + it.k + '.');
+  }
+  function nextT(){
+    if (!T) return;
+    T.i++;
+    if (T.i>=T.items.length){ $('typePlay').className='qbox hidden'; showResult('typeDone', T.score, T.items.length, T.missed, startType); return; }
+    showT();
+  }
+
+  // ---------- worksheet ----------
+  function buildSheet(){
+    var p=shuffle(pool());
+    var sheet=$('printSheet'); sheet.innerHTML='';
+    var title = regionName() + ': Countries & Capitals';
+    var ask = state.pw==='capital';
+    sheet.appendChild(el('h2',null,title));
+    sheet.appendChild(el('p',null,'Name: ______________________    Date: ______________'));
+    sheet.appendChild(el('p',null, ask ? 'Write the capital city of each country.' : 'Write the country that each capital city belongs to.'));
+    function table(withAnswers){
+      var tb=el('table'); var head=el('tr');
+      head.appendChild(el('th',null,'#')); head.appendChild(el('th',null, ask ? 'Country' : 'Capital city')); head.appendChild(el('th',null, ask ? 'Capital city' : 'Country'));
+      tb.appendChild(head);
+      for (var i=0;i<p.length;i++){
+        var tr=el('tr');
+        tr.appendChild(el('td',null,String(i+1)));
+        tr.appendChild(el('td',null, ask ? p[i].c : p[i].k));
+        var td=el('td');
+        if (withAnswers) td.textContent = ask ? p[i].k : p[i].c; else td.appendChild(el('span','line',' '));
+        tr.appendChild(td); tb.appendChild(tr);
+      }
+      return tb;
+    }
+    sheet.appendChild(table(false));
+    sheet.appendChild(el('p','small','Free tool: classroom.ellisknowledgestudio.com/geography/europe-capitals/'));
+    var key=el('div','key');
+    key.appendChild(el('h2',null,'Answer key: ' + title));
+    key.appendChild(table(true));
+    sheet.appendChild(key);
+    return sheet;
+  }
+  function printSheet(){ buildSheet(); if (window.print) window.print(); }
+
+  // ---------- wire up ----------
+  var tabs=$('tabs').getElementsByTagName('button');
+  for (var i=0;i<tabs.length;i++){ (function(b){ b.onclick=function(){ setMode(b.getAttribute('data-mode')); }; })(tabs[i]); }
+  $('tabs').addEventListener('keydown', function(e){
+    var idx=MODES.indexOf(state.mode);
+    if (e.key==='ArrowRight'){ idx=(idx+1)%MODES.length; } else if (e.key==='ArrowLeft'){ idx=(idx+MODES.length-1)%MODES.length; } else return;
+    setMode(MODES[idx]); $('tab-'+MODES[idx]).focus(); e.preventDefault();
+  });
+  $('revealAll').onclick=function(){ allCards(true); };
+  $('hideAll').onclick=function(){ allCards(false); };
+  group('dir','dir'); group('n','n'); group('tn','tn'); group('pw','pw');
+  $('startQuiz').onclick=startQuiz;
+  $('qNext').onclick=nextQ;
+  $('startType').onclick=startType;
+  $('typeForm').onsubmit=function(e){ e.preventDefault(); if (T && T.answered) nextT(); else checkT(); return false; };
+  $('tHint').onclick=hintT;
+  $('tSkip').onclick=skipT;
+  $('tNext').onclick=nextT;
+  $('printBtn').onclick=printSheet;
+
+  buildRegions();
+  buildCards();
+
+  // exposed for testing only
+  window.__EKS = {DATA:DATA, norm:norm, capitalOK:capitalOK, state:function(){ return {Q:Q,T:T,s:state}; }, buildSheet:buildSheet};
+})();
+</script>
+</body>
+</html>

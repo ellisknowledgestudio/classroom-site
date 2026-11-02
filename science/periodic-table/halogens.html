@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halogens | Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1C3F;
+    --bg-raised: #16234E;
+    --ink: #F7F9FC;
+    --ink-dim: #9FB0DE;
+    --line: #26356b;
+    --gold: #F4B942;
+    --ink-strong: #0A1330;
+
+    --f:  #F5E36B;
+    --cl: #B7D96B;
+    --br: #C4553B;
+    --i:  #9463C7;
+    --at: #6B6F76;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header.top { padding: 28px 0 8px; }
+
+  .crumb { font-size: 14px; color: var(--ink-dim); letter-spacing: 0.01em; }
+  .crumb a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid transparent; }
+  .crumb a:hover { border-bottom-color: var(--ink-dim); }
+
+  h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 700; margin: 6px 0 4px; letter-spacing: -0.01em; }
+
+  .subhead { color: var(--ink-dim); font-size: 17px; max-width: 58ch; margin: 0 0 12px; }
+
+  .state-key {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  .state-key span { display: flex; align-items: center; gap: 6px; }
+  .key-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-dim); }
+  .key-dot.gas { filter: blur(0.5px); opacity: 0.6; }
+  .key-dot.solid { border-radius: 2px; }
+
+  /* ---- State rack ---- */
+  .rack {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(16px, 3.4vw, 34px);
+    padding: 20px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .state-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .shape {
+    width: 54px;
+    height: 54px;
+    background: var(--glow);
+    opacity: 0.3;
+    transition: opacity 0.35s ease, transform 0.2s ease, filter 0.35s ease;
+  }
+
+  /* gas: soft blurred blob */
+  .shape.gas {
+    border-radius: 46% 54% 40% 60% / 55% 45% 55% 45%;
+    filter: blur(3px);
+  }
+  /* liquid: droplet */
+  .shape.liquid {
+    border-radius: 50% 50% 50% 0%;
+    transform: rotate(45deg);
+  }
+  /* solid: crystal */
+  .shape.solid {
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  }
+
+  .state-btn:hover .shape { transform: translateY(-3px); }
+  .state-btn:hover .shape.liquid { transform: translateY(-3px) rotate(45deg); }
+
+  .state-btn[aria-pressed="true"] .shape {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--glow));
+  }
+  .state-btn[aria-pressed="true"] .shape.gas {
+    filter: blur(1.5px) drop-shadow(0 0 12px var(--glow));
+  }
+
+  .state-symbol { font-size: 15px; font-weight: 600; color: var(--ink-dim); transition: color 0.35s ease; }
+  .state-btn[aria-pressed="true"] .state-symbol { color: var(--glow); }
+
+  .state-btn[data-el="f"]  .shape { --glow: var(--f); }
+  .state-btn[data-el="cl"] .shape { --glow: var(--cl); }
+  .state-btn[data-el="br"] .shape { --glow: var(--br); }
+  .state-btn[data-el="i"]  .shape { --glow: var(--i); }
+  .state-btn[data-el="at"] .shape { --glow: var(--at); }
+
+  /* ---- Detail card ---- */
+  .detail {
+    margin-top: 44px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 30px;
+    border-left: 4px solid var(--glow, var(--ink-dim));
+  }
+
+  .detail-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .detail-symbol { font-family: 'Baloo 2', sans-serif; font-size: 40px; font-weight: 800; color: var(--glow, var(--ink)); }
+  .detail-name { font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700; }
+  .detail-meta { color: var(--ink-dim); font-size: 15px; }
+  .detail-fact { margin-top: 14px; font-size: 16px; max-width: 62ch; }
+
+  .stat-row { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
+  .stat-label { font-size: 12px; color: var(--ink-dim); }
+  .stat-value { font-size: 18px; font-weight: 600; }
+
+  /* ---- Callout ---- */
+  .callout {
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    font-size: 15.5px;
+    max-width: 62ch;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ---- Quiz ---- */
+  .quiz-toggle {
+    margin-top: 40px;
+    background: var(--gold);
+    border: none;
+    color: var(--ink-strong);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 14px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .quiz-toggle:hover { opacity: 0.9; }
+
+  .quiz { display: none; margin-top: 24px; }
+  .quiz.open { display: block; }
+
+  .q {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .q-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .q-opts { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .q-opt:hover { border-color: var(--ink-dim); }
+  .q-opt.correct { border-color: #6FCF97; background: #16261E; }
+  .q-opt.wrong { border-color: #E85D5D; background: #2A1818; }
+
+  .score-line { margin-top: 18px; font-size: 16px; color: var(--ink-dim); }
+  .score-line strong { color: var(--ink); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="#">Periodic Table</a> / Halogens</div>
+    <h1>Halogens</h1>
+    <p class="subhead">The only group where you can find a gas, a liquid, and a solid side by side at room temperature. Tap a shape to match each element to its real state and colour.</p>
+  </header>
+
+  <div class="state-key">
+    <span><span class="key-dot gas"></span>Gas</span>
+    <span><span class="key-dot liquid" style="border-radius:50% 50% 50% 0%; transform:rotate(45deg);"></span>Liquid</span>
+    <span><span class="key-dot solid"></span>Solid</span>
+  </div>
+
+  <div class="rack" id="rack">
+    <button class="state-btn" data-el="f" aria-pressed="false">
+      <div class="shape gas"></div>
+      <span class="state-symbol">F</span>
+    </button>
+    <button class="state-btn" data-el="cl" aria-pressed="false">
+      <div class="shape gas"></div>
+      <span class="state-symbol">Cl</span>
+    </button>
+    <button class="state-btn" data-el="br" aria-pressed="false">
+      <div class="shape liquid"></div>
+      <span class="state-symbol">Br</span>
+    </button>
+    <button class="state-btn" data-el="i" aria-pressed="false">
+      <div class="shape solid"></div>
+      <span class="state-symbol">I</span>
+    </button>
+    <button class="state-btn" data-el="at" aria-pressed="false">
+      <div class="shape solid"></div>
+      <span class="state-symbol">At</span>
+    </button>
+  </div>
+
+  <div class="detail" id="detail">
+    <div class="detail-head">
+      <span class="detail-symbol" id="d-symbol">F</span>
+      <span class="detail-name" id="d-name">Fluorine</span>
+      <span class="detail-meta" id="d-meta">Pale yellow gas</span>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-label">Atomic number</div><div class="stat-value" id="d-num">9</div></div>
+      <div><div class="stat-label">Atomic mass</div><div class="stat-value" id="d-mass">19.0</div></div>
+    </div>
+    <p class="detail-fact" id="d-fact">The most reactive element on the entire periodic table — it will even react with glass. In tiny, safe amounts it's added to toothpaste and drinking water to protect teeth.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Why so reactive?</strong> Halogens have seven electrons in their outer shell — just one short of a full set. Grabbing a single electron from another atom completes that shell, so halogens react eagerly with almost anything that will give one up.
+  </div>
+
+  <button class="quiz-toggle" id="quizToggle">Test yourself →</button>
+
+  <div class="quiz" id="quiz">
+    <div class="q" data-answer="1">
+      <div class="q-text">1. Which halogen is the only one that's liquid at room temperature?</div>
+      <div class="q-opts">
+        <button class="q-opt">Chlorine</button>
+        <button class="q-opt">Bromine</button>
+        <button class="q-opt">Iodine</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">2. Which halogen is a solid that gives off a violet vapour?</div>
+      <div class="q-opts">
+        <button class="q-opt">Fluorine</button>
+        <button class="q-opt">Bromine</button>
+        <button class="q-opt">Iodine</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">3. How many electrons does a halogen have in its outer shell?</div>
+      <div class="q-opts">
+        <button class="q-opt">7</button>
+        <button class="q-opt">1</button>
+        <button class="q-opt">8</button>
+      </div>
+    </div>
+    <div class="q" data-answer="1">
+      <div class="q-text">4. Which halogen reacts so strongly it can even attack glass?</div>
+      <div class="q-opts">
+        <button class="q-opt">Chlorine</button>
+        <button class="q-opt">Fluorine</button>
+        <button class="q-opt">Astatine</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">5. Which halogen is the pale yellow-green gas once used to disinfect swimming pools?</div>
+      <div class="q-opts">
+        <button class="q-opt">Fluorine</button>
+        <button class="q-opt">Bromine</button>
+        <button class="q-opt">Chlorine</button>
+      </div>
+    </div>
+    <div class="score-line" id="scoreLine">Score: <strong>0 / 5</strong></div>
+  </div>
+
+  <footer>
+    Part of the Periodic Table series — Ellis Knowledge Studio. More categories: Noble Gases, Alkali Metals, Transition Metals, Metalloids, Non-metals.
+  </footer>
+
+</div>
+
+<script>
+  const data = {
+    f:  { symbol: "F", name: "Fluorine", meta: "Pale yellow gas", num: 9, mass: "19.0",
+      fact: "The most reactive element on the entire periodic table — it will even react with glass. In tiny, safe amounts it's added to toothpaste and drinking water to protect teeth." },
+    cl: { symbol: "Cl", name: "Chlorine", meta: "Yellow-green gas", num: 17, mass: "35.5",
+      fact: "Used to disinfect drinking water and swimming pools, killing off bacteria. On its own the gas is toxic — it was even used as a chemical weapon in the First World War." },
+    br: { symbol: "Br", name: "Bromine", meta: "Reddish-brown liquid", num: 35, mass: "79.9",
+      fact: "One of only two elements that are liquid at room temperature (the other, mercury, is a metal). It gives off an orange-brown vapour with a sharp smell." },
+    i:  { symbol: "I", name: "Iodine", meta: "Grey-black solid, violet vapour", num: 53, mass: "126.9",
+      fact: "A dull grey-black solid that skips the liquid stage entirely and turns straight into a striking purple vapour when heated. Your body needs small amounts of it to make thyroid hormones." },
+    at: { symbol: "At", name: "Astatine", meta: "Extremely rare — colour unconfirmed", num: 85, mass: "210",
+      fact: "So rare and radioactive that less than a gram is thought to exist in the Earth's crust at any one time, decaying away almost as fast as it forms." }
+  };
+
+  const rack = document.getElementById('rack');
+  const buttons = rack.querySelectorAll('.state-btn');
+
+  function selectElement(el) {
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.el === el ? 'true' : 'false'));
+    const d = data[el];
+    document.getElementById('d-symbol').textContent = d.symbol;
+    document.getElementById('d-name').textContent = d.name;
+    document.getElementById('d-meta').textContent = d.meta;
+    document.getElementById('d-num').textContent = d.num;
+    document.getElementById('d-mass').textContent = d.mass;
+    document.getElementById('d-fact').textContent = d.fact;
+    document.getElementById('detail').style.setProperty('--glow', `var(--${el})`);
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => selectElement(b.dataset.el)));
+  selectElement('f');
+
+  const quizToggle = document.getElementById('quizToggle');
+  const quiz = document.getElementById('quiz');
+  quizToggle.addEventListener('click', () => {
+    quiz.classList.toggle('open');
+    quizToggle.textContent = quiz.classList.contains('open') ? 'Hide quiz' : 'Test yourself →';
+  });
+
+  let score = 0;
+  const answered = new Set();
+  document.querySelectorAll('.q').forEach((q, qIndex) => {
+    const correctIndex = parseInt(q.dataset.answer, 10);
+    const opts = q.querySelectorAll('.q-opt');
+    opts.forEach((opt, i) => {
+      opt.addEventListener('click', () => {
+        if (answered.has(qIndex)) return;
+        answered.add(qIndex);
+        opts.forEach((o, j) => {
+          if (j === correctIndex) o.classList.add('correct');
+          else if (j === i) o.classList.add('wrong');
+        });
+        if (i === correctIndex) score++;
+        document.getElementById('scoreLine').innerHTML = `Score: <strong>${score} / 5</strong>`;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

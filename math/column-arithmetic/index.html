@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Column Working-Out Pad · Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF7EC;
+    --rule:#C7DCEC;
+    --margin:#C0453B;
+    --ink:#223046;
+    --pencil:#3B4550;
+    --mustard:#C98A2B;
+    --mustard-bg:#F4E3C4;
+    --good:#3C8D66;
+    --good-bg:#DDEFE4;
+    --bad:#C0453B;
+    --bad-bg:#F7E1DE;
+    --cellsize:2.6em;
+    --cellsize-sm:1.9em;
+    --display-font:'Patrick Hand',cursive;
+    --display-weight:400;
+  }
+  /* Patrick Hand is a Latin-only handwriting font with no proper glyphs for
+     Greek, Chinese, or Japanese, so headings in those languages fall back
+     to a font that actually supports the script instead of rendering
+     broken/malformed characters. */
+  html[lang="el"], html[lang="zh"], html[lang="ja"]{
+    --display-font:'Work Sans',sans-serif;
+    --display-weight:700;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Work Sans',sans-serif;
+    color:var(--ink);
+    background:#E7EEF4;
+    padding:24px 12px 60px;
+  }
+  .book{
+    max-width:920px;
+    margin:0 auto;
+    background:var(--paper);
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(34,48,70,.18);
+    position:relative;
+    padding:34px 26px 26px 66px;
+    overflow:hidden;
+  }
+  .book::before{
+    content:'';
+    position:absolute; left:48px; top:0; bottom:0; width:2px;
+    background:var(--margin); opacity:.55;
+  }
+  .binder-holes{
+    position:absolute; left:14px; top:0; bottom:0; width:16px;
+    background-image:radial-gradient(circle, #cfd8e0 0 5px, transparent 5.5px);
+    background-size:16px 46px;
+    background-position:0 20px;
+    background-repeat:repeat-y;
+    opacity:.8;
+  }
+  .site-nav{font-size:.85em; color:#5A6472; margin-bottom:10px;}
+  .site-nav a{color:#5A6472; text-decoration:underline; text-underline-offset:2px;}
+  .site-nav a:hover{color:var(--mustard);}
+  header.top{margin-bottom:14px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap;}
+  h1{
+    font-family:var(--display-font);
+    font-weight:var(--display-weight);
+    font-size:2.3em;
+    margin:0 0 2px 0;
+    color:var(--ink);
+    line-height:1;
+  }
+  .subtitle{margin:0; color:#5A6472; font-size:.95em; max-width:56ch;}
+  .best-badge{
+    font-size:.8em; color:var(--mustard); font-weight:700;
+    background:var(--mustard-bg); border:1px solid var(--mustard);
+    border-radius:20px; padding:4px 12px; white-space:nowrap; margin-top:4px;
+  }
+  .header-side{display:flex; flex-direction:column; align-items:flex-end; gap:8px;}
+  .lang-field{display:flex; align-items:center; gap:6px; font-size:.85em;}
+  .lang-field label{font-weight:600; color:#5A6472;}
+  .lang-field select{padding:4px 8px; font-size:.95em;}
+
+  .tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .tab-btn{
+    font-family:var(--display-font);
+    font-weight:var(--display-weight);
+    font-size:1.15em;
+    background:#fff;
+    border:2px solid var(--ink);
+    border-bottom-width:4px;
+    border-radius:8px 8px 4px 4px;
+    padding:6px 16px;
+    cursor:pointer;
+    color:var(--ink);
+    transition:transform .12s ease, background .15s ease;
+  }
+  .tab-btn:hover{transform:translateY(-1px);}
+  .tab-btn.active{background:var(--mustard-bg); border-color:var(--mustard);}
+  .locked{opacity:.45; pointer-events:none;}
+
+  details.howto{
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:10px 14px;
+    margin-bottom:14px;
+  }
+  details.howto summary{
+    cursor:pointer; font-weight:600; font-family:var(--display-font); font-size:1.25em;
+  }
+  details.howto ol{margin:10px 0 4px 0; padding-left:22px;}
+  details.howto li{margin-bottom:5px; line-height:1.4;}
+
+  .custom-sum-panel{
+    background:#fff; border:1px solid var(--rule); border-radius:8px;
+    padding:10px 14px; margin-bottom:16px;
+  }
+  .custom-sum-panel summary{cursor:pointer; font-weight:600; font-family:var(--display-font); font-size:1.15em;}
+  .custom-sum-body{margin-top:12px; display:flex; flex-direction:column; gap:8px;}
+  .custom-sum-body label{font-weight:600; color:#5A6472; font-size:.85em;}
+  .custom-sum-fields{display:flex; gap:14px; flex-wrap:wrap;}
+  .custom-num-list{display:flex; gap:8px; flex-wrap:wrap;}
+  .custom-num-input{
+    font-family:'Space Mono',monospace; font-size:1em;
+    border:1px solid #B9C2CC; border-radius:6px; padding:7px 10px; width:8em;
+  }
+  .custom-num-input:focus{outline:2px solid var(--mustard); outline-offset:1px; border-color:var(--mustard);}
+  .custom-sum-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .custom-sum-error{color:var(--bad); font-size:.85em; font-weight:600; min-height:1.2em;}
+
+  .settings-panel{
+    background:#fff;
+    border:1px solid var(--rule);
+    border-radius:8px;
+    padding:14px;
+    margin-bottom:16px;
+    display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;
+  }
+  .settings-group{display:none; flex-wrap:wrap; gap:14px; align-items:flex-end;}
+  .settings-group.active{display:flex;}
+  .field{display:flex; flex-direction:column; gap:3px; font-size:.85em;}
+  .field label{font-weight:600; color:#5A6472;}
+  select, .btn{
+    font-family:'Work Sans',sans-serif;
+    font-size:.95em;
+    padding:6px 10px;
+    border-radius:6px;
+    border:1px solid #B9C2CC;
+    background:#fff;
+    color:var(--ink);
+  }
+  .btn{
+    cursor:pointer;
+    border:2px solid var(--ink);
+    background:var(--ink);
+    color:#fff;
+    font-weight:600;
+    padding:9px 16px;
+    transition:transform .1s ease, box-shadow .15s ease;
+  }
+  .btn:hover:not(:disabled){transform:translateY(-1px); box-shadow:0 3px 0 rgba(34,48,70,.25);}
+  .btn:active:not(:disabled){transform:translateY(0); box-shadow:none;}
+  .btn.secondary{background:#fff; color:var(--ink);}
+  .btn.subtle{background:transparent; color:#5A6472; border-color:#B9C2CC; font-weight:500;}
+  .btn:disabled{opacity:.4; cursor:not-allowed; transform:none; box-shadow:none;}
+  .eraser-icon{
+    width:20px; height:13px; display:inline-block; margin-right:6px;
+    background:linear-gradient(90deg,#EFA9A2 50%,#ECECEC 50%);
+    border:1px solid var(--ink); border-radius:3px; transform:rotate(-8deg) translateY(1px);
+  }
+  select:focus-visible, .btn:focus-visible, .tab-btn:focus-visible, input:focus-visible{
+    outline:3px solid var(--mustard); outline-offset:2px;
+  }
+
+  .problem-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:6px 0 10px 0;}
+  #problemTitle{
+    font-family:var(--display-font);
+    font-weight:var(--display-weight);
+    font-size:1.6em;
+    margin:0;
+  }
+  .streak-badge{
+    font-size:.85em; font-weight:700; color:var(--mustard);
+    background:var(--mustard-bg); padding:3px 10px; border-radius:20px;
+    display:none;
+  }
+  .streak-badge.show{display:inline-block; animation:pop .25s ease;}
+
+  .grid-scroll{overflow-x:auto; padding-bottom:4px; margin-bottom:4px;}
+  #problemArea{margin-bottom:12px;}
+  .step-label{font-weight:600; color:#5A6472; margin:14px 0 6px 0; font-size:.9em;}
+  .block{display:inline-flex; flex-direction:column; align-items:flex-end; margin-bottom:6px; animation:fadeInUp .35s ease;}
+  .grid-row{display:grid; column-gap:2px; align-items:center;}
+  .cell{
+    height:var(--cellsize); min-width:var(--cellsize);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono',monospace; font-size:1.25em;
+  }
+  .cell.fixed{color:var(--ink); font-weight:700;}
+  .cell.op-cell{font-weight:700; color:var(--ink); justify-content:flex-start; font-size:1.25em;}
+  .cell.blank{}
+  .input-cell{
+    border:none; border-bottom:3px solid var(--ink);
+    background:transparent; text-align:center; color:var(--pencil);
+    font-family:'Space Mono',monospace; font-size:1.05em; font-weight:700;
+    padding:0; position:relative;
+  }
+  .input-cell:focus{outline:none; border-bottom-color:var(--mustard); background:rgba(201,138,43,.08);}
+  .input-cell:disabled{cursor:not-allowed; opacity:.65;}
+  .carry-row .cell{height:var(--cellsize-sm); min-width:var(--cellsize-sm);}
+  .carry-row .input-cell{
+    border-bottom:2px solid var(--mustard); color:var(--mustard); font-size:.85em;
+  }
+  .answer-row{border-top:3px solid var(--ink); margin-top:2px; padding-top:4px;}
+  .placeholder-cell{color:#9AA4AF;}
+  .needs-answer{animation:needsAnswer .9s ease; border-bottom-color:var(--bad) !important;}
+  .correct{background:var(--good-bg); border-bottom-color:var(--good) !important; color:var(--good) !important; animation:pop .2s ease;}
+  .incorrect{background:var(--bad-bg); border-bottom-color:var(--bad) !important; color:var(--bad) !important; animation:shake .3s ease;}
+  .carry-row .input-cell.correct::after{
+    content:'\21B0'; position:absolute; top:-14px; left:50%;
+    color:var(--mustard); font-size:1.1em; opacity:0;
+    animation:carryHop .6s ease forwards;
+  }
+
+  .division-block{align-items:flex-start;}
+  .division-quotient{}
+  .division-main{align-items:end;}
+  .divisor-cell{
+    font-family:'Space Mono',monospace; font-weight:700; font-size:1.25em;
+    padding-right:8px; border-right:3px solid var(--ink);
+    display:flex; align-items:center; justify-content:flex-end;
+    height:var(--cellsize);
+  }
+  .bracket-top{border-top:3px solid var(--ink);}
+  .remainder-line{margin:10px 0 4px 2px; font-size:.95em; color:#5A6472;}
+  .remainder-line .input-cell{display:inline-flex; width:1.6em; margin-left:4px;}
+
+  .scratch-section{margin-top:18px;}
+  .scratch-section label{display:block; font-weight:600; color:#5A6472; font-size:.85em; margin-bottom:6px;}
+  textarea#scratchpad{
+    width:100%; min-height:130px; resize:vertical;
+    font-family:'Space Mono',monospace; font-size:1em; color:var(--pencil);
+    border:1px solid var(--rule); border-radius:6px; padding:10px;
+    background:
+      repeating-linear-gradient(#fff 0px, #fff 27px, var(--rule) 28px, #fff 29px),
+      repeating-linear-gradient(90deg, #fff 0px, #fff 27px, var(--rule) 28px, #fff 29px);
+  }
+
+  .controls-bar{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin-top:16px; padding-top:14px; border-top:1px dashed #B9C2CC;
+  }
+  .feedback{font-weight:600;}
+  .feedback.ok{color:var(--good);}
+  .feedback.bad{color:var(--bad);}
+  .progress-info{margin-left:auto; font-size:.9em; color:#5A6472; font-weight:600;}
+
+  .hidden{display:none !important;}
+  #summaryPanel{background:#fff; border:1px solid var(--rule); border-radius:8px; padding:18px; position:relative; overflow:hidden;}
+  #summaryPanel h2{font-family:var(--display-font); font-weight:var(--display-weight); margin-top:0;}
+  #summaryScore{font-size:1.8em; font-weight:700; color:var(--mustard);}
+  #summaryList{list-style:none; padding:0; margin:14px 0;}
+  #summaryList li{padding:6px 8px; border-radius:6px; margin-bottom:4px;}
+  #summaryList li.ok{background:var(--good-bg); color:var(--good);}
+  #summaryList li.bad{background:var(--bad-bg); color:var(--bad);}
+  .confetti-piece{
+    position:absolute; top:-10px; width:8px; height:14px; opacity:.9;
+    animation:confettiFall 1.6s ease-in forwards;
+  }
+
+  @keyframes fadeInUp{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+  @keyframes pop{0%{transform:scale(1);} 40%{transform:scale(1.18);} 100%{transform:scale(1);}}
+  @keyframes shake{0%,100%{transform:translateX(0);} 25%{transform:translateX(-3px);} 75%{transform:translateX(3px);}}
+  @keyframes carryHop{0%{opacity:0; transform:translate(-50%,4px) scale(.7);} 40%{opacity:1; transform:translate(-50%,-6px) scale(1);} 100%{opacity:0; transform:translate(-50%,-14px) scale(.9);}}
+  @keyframes confettiFall{to{transform:translateY(340px) rotate(280deg); opacity:0;}}
+  @keyframes needsAnswer{0%,100%{background:transparent;} 30%,70%{background:var(--bad-bg);}}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  #printArea{display:none;}
+  @media print{
+    body *{visibility:hidden;}
+    #printArea, #printArea *{visibility:visible;}
+    #printArea{display:block; position:absolute; top:0; left:0; width:100%;}
+    .print-problem{break-inside:avoid; margin-bottom:22px; display:flex; gap:10px;}
+    .print-answer-key{page-break-before:always;}
+  }
+
+  @media (max-width:600px){
+    :root{--cellsize:2.15em; --cellsize-sm:1.6em;}
+    .book{padding:26px 14px 22px 40px;}
+    .book::before{left:26px;}
+    .binder-holes{left:6px; width:12px; background-size:12px 40px;}
+    h1{font-size:1.7em;}
+    .subtitle{font-size:.88em;}
+  }
+</style>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "03967f8ff4584d3dad8f98556a0bd13f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="book">
+  <div class="binder-holes"></div>
+  <nav class="site-nav">
+    <a href="/">Classroom</a><span aria-hidden="true"> &rsaquo; </span><a href="/math/">Math Resources</a>
+  </nav>
+  <header class="top">
+    <div>
+      <h1 data-i18n="appTitle">Column Working-Out Pad</h1>
+      <p class="subtitle" data-i18n="appSubtitle">Practice long addition, subtraction, multiplication and division — show your carries, borrows and workings, then get it marked.</p>
+    </div>
+    <div class="header-side">
+      <div class="lang-field">
+        <label for="langSelect" data-i18n="labelLanguage">Language</label>
+        <select id="langSelect">
+          <option value="en">English</option>
+          <option value="el">Ελληνικά</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+          <option value="it">Italiano</option>
+          <option value="zh">中文</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+      <div class="best-badge hidden" id="bestBadge"></div>
+    </div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab-btn" data-op="add" data-i18n="tabAdd">Addition</button>
+    <button class="tab-btn" data-op="sub" data-i18n="tabSub">Subtraction</button>
+    <button class="tab-btn" data-op="mul" data-i18n="tabMul">Multiplication</button>
+    <button class="tab-btn" data-op="div" data-i18n="tabDiv">Division</button>
+  </div>
+
+  <details class="howto" id="howto" open>
+    <summary data-i18n="howtoSummary">How to do this</summary>
+    <ol id="howtoList"></ol>
+  </details>
+
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-group" data-op="add">
+      <div class="field"><label data-i18n="labelDigitsPerNumber">Digits per number</label>
+        <select id="add-digits">
+          <option value="2">2</option><option value="3" selected>3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="labelNumbersToAdd">Numbers to add</label>
+        <select id="add-addends">
+          <option value="2" selected>2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-group" data-op="sub">
+      <div class="field"><label data-i18n="labelDigitsTop">Digits in top number</label>
+        <select id="sub-top-digits">
+          <option value="2">2</option><option value="3" selected>3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="labelDigitsBottom">Digits in bottom number</label>
+        <select id="sub-bottom-digits">
+          <option value="2">2</option><option value="3" selected>3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-group" data-op="mul">
+      <div class="field"><label data-i18n="labelDigitsFirstNumber">Digits in first number</label>
+        <select id="mul-mc">
+          <option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="labelDigitsMultiplier">Digits in multiplier</label>
+        <select id="mul-mr">
+          <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="labelMulMethod">Working method</label>
+        <select id="mul-method">
+          <option value="steps" selected data-i18n="optMulSteps">Show step-by-step</option>
+          <option value="whole" data-i18n="optMulWhole">Whole sum (work it out yourself)</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-group" data-op="div">
+      <div class="field"><label data-i18n="labelDigitsDividend">Digits in dividend</label>
+        <select id="div-dd">
+          <option value="2">2</option><option value="3" selected>3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="labelDigitsDivisor">Digits in divisor</label>
+        <select id="div-dr">
+          <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="labelType">Type</label>
+        <select id="div-exact"><option value="exact" selected data-i18n="optExact">Divides exactly</option><option value="rem" data-i18n="optRem">May leave a remainder</option></select>
+      </div>
+      <div class="field"><label data-i18n="labelMulMethod">Working method</label>
+        <select id="div-method">
+          <option value="whole" selected data-i18n="optMulWhole">Whole sum (work it out yourself)</option>
+          <option value="steps" data-i18n="optMulSteps">Show step-by-step</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button class="btn secondary" id="newBtn" data-i18n="btnNewProblem">New problem</button>
+    </div>
+    <div class="field">
+      <label data-i18n="labelTestLength">Test length</label>
+      <select id="testCount"><option value="5" data-i18n="opt5Questions">5 questions</option><option value="10" selected data-i18n="opt10Questions">10 questions</option><option value="15" data-i18n="opt15Questions">15 questions</option></select>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button class="btn" id="startTestBtn" data-i18n="btnStartTest">Start test</button>
+    </div>
+    <div class="field">
+      <label data-i18n="labelWorksheetSize">Worksheet size</label>
+      <select id="printCount"><option value="6" data-i18n="opt6Problems">6 problems</option><option value="10" selected data-i18n="opt10Problems">10 problems</option><option value="16" data-i18n="opt16Problems">16 problems</option></select>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button class="btn subtle" id="printBtn" data-i18n="btnPrintWorksheet">Print worksheet</button>
+    </div>
+  </div>
+
+  <details class="custom-sum-panel" id="customSumPanel">
+    <summary data-i18n="customSumSummary">Type in your own sum instead</summary>
+    <div class="custom-sum-body" data-op="add" id="customBody-add">
+      <label data-i18n="labelNumbersToAdd">Numbers to add</label>
+      <div class="custom-num-list" id="customAddList">
+        <input type="text" inputmode="numeric" class="custom-num-input" data-i18n-placeholder="customNumPlaceholder" placeholder="Enter a number">
+        <input type="text" inputmode="numeric" class="custom-num-input" data-i18n-placeholder="customNumPlaceholder" placeholder="Enter a number">
+      </div>
+      <div class="custom-sum-row">
+        <button class="btn subtle" id="addAnotherNumBtn" data-i18n="btnAddNumber">+ Add another number</button>
+        <button class="btn" id="useCustomAddBtn" data-i18n="btnUseSum">Use this sum</button>
+      </div>
+      <div class="custom-sum-error" id="customAddError"></div>
+    </div>
+    <div class="custom-sum-body hidden" data-op="sub" id="customBody-sub">
+      <div class="custom-sum-fields">
+        <div class="field"><label data-i18n="labelTopNumber">Top number</label><input type="text" inputmode="numeric" class="custom-num-input" id="customSubTop"></div>
+        <div class="field"><label data-i18n="labelBottomNumber">Bottom number</label><input type="text" inputmode="numeric" class="custom-num-input" id="customSubBottom"></div>
+      </div>
+      <div class="custom-sum-row">
+        <button class="btn" id="useCustomSubBtn" data-i18n="btnUseSum">Use this sum</button>
+      </div>
+      <div class="custom-sum-error" id="customSubError"></div>
+    </div>
+    <div class="custom-sum-body hidden" data-op="mul" id="customBody-mul">
+      <div class="custom-sum-fields">
+        <div class="field"><label data-i18n="labelFirstNumber">First number</label><input type="text" inputmode="numeric" class="custom-num-input" id="customMulA"></div>
+        <div class="field"><label data-i18n="labelSecondNumber">Second number</label><input type="text" inputmode="numeric" class="custom-num-input" id="customMulB"></div>
+      </div>
+      <div class="custom-sum-row">
+        <button class="btn" id="useCustomMulBtn" data-i18n="btnUseSum">Use this sum</button>
+      </div>
+      <div class="custom-sum-error" id="customMulError"></div>
+    </div>
+    <div class="custom-sum-body hidden" data-op="div" id="customBody-div">
+      <div class="custom-sum-fields">
+        <div class="field"><label data-i18n="labelDividendValue">Dividend</label><input type="text" inputmode="numeric" class="custom-num-input" id="customDivA"></div>
+        <div class="field"><label data-i18n="labelDivisorValue">Divisor</label><input type="text" inputmode="numeric" class="custom-num-input" id="customDivB"></div>
+      </div>
+      <div class="custom-sum-row">
+        <button class="btn" id="useCustomDivBtn" data-i18n="btnUseSum">Use this sum</button>
+      </div>
+      <div class="custom-sum-error" id="customDivError"></div>
+    </div>
+  </details>
+
+  <div id="practiceArea">
+    <div class="problem-head">
+      <h2 id="problemTitle"></h2>
+      <span class="streak-badge" id="streakBadge"></span>
+    </div>
+    <div class="grid-scroll"><div id="problemArea"></div></div>
+
+    <div class="scratch-section">
+      <label data-i18n="labelPencilPad">Pencil pad — use this space for any working out</label>
+      <textarea id="scratchpad" spellcheck="false"></textarea>
+    </div>
+
+    <div class="controls-bar" id="controlsBar">
+      <button class="btn eraser" id="eraseBtn"><span class="eraser-icon"></span><span data-i18n="btnErase">Erase</span></button>
+      <button class="btn secondary" id="checkBtn" data-i18n="btnCheckAnswer">Check answer</button>
+      <button class="btn secondary hidden" id="tryAgainBtn" data-i18n="btnTryAgain">Try again</button>
+      <button class="btn" id="nextBtn" data-i18n="btnNewProblem">New problem</button>
+      <button class="btn subtle hidden" id="quitTestBtn" data-i18n="btnQuitTest">Quit test</button>
+      <span class="feedback" id="feedback"></span>
+      <span class="progress-info" id="progressInfo"></span>
+    </div>
+  </div>
+
+  <div id="summaryPanel" class="hidden">
+    <h2 data-i18n="testCompleteTitle">Test complete</h2>
+    <div id="summaryScore"></div>
+    <ol id="summaryList"></ol>
+    <button class="btn secondary" id="backToPracticeBtn" data-i18n="btnBackToPractice">Back to practice</button>
+    <button class="btn" id="retryTestBtn" data-i18n="btnTakeAnotherTest">Take another test</button>
+  </div>
+</div>
+
+<div id="printArea">
+  <h1 id="printTitle"></h1>
+  <div id="printProblems"></div>
+  <div class="print-answer-key">
+    <h2 data-i18n="printAnswerKeyTitle">Answer key</h2>
+    <ol id="printAnswerKey"></ol>
+  </div>
+</div>
+
+<script>
+/* ---------------- helpers ---------------- */
+function randInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function randDigitsNumber(n){
+  if(n<=0) return 0;
+  let first=randInt(1,9);
+  let rest='';
+  for(let i=1;i<n;i++) rest+=randInt(0,9);
+  return parseInt(first+String(rest),10);
+}
+function row(cols, extraClass){
+  const r=document.createElement('div');
+  r.className='grid-row '+(extraClass||'');
+  r.style.gridTemplateColumns=`repeat(${cols}, var(--cellsize))`;
+  return r;
+}
+function fixedCell(ch){
+  const d=document.createElement('div');
+  const blank = (ch===undefined || ch.trim()==='');
+  d.className='cell fixed'+(blank?' blank':'');
+  d.textContent = blank ? '' : ch;
+  return d;
+}
+function blankCell(){
+  const d=document.createElement('div');
+  d.className='cell blank';
+  return d;
+}
+function opCell(sym){
+  const d=document.createElement('div');
+  d.className='cell op-cell';
+  d.textContent=sym||'';
+  return d;
+}
+function editCell(){
+  const inp=document.createElement('input');
+  inp.className='cell input-cell';
+  inp.maxLength=1;
+  inp.setAttribute('inputmode','numeric');
+  inp.setAttribute('autocomplete','off');
+  return inp;
+}
+function makeCheck(input, expected, opts){
+  opts=opts||{};
+  return {input:input, expected:expected, blankZero: !!opts.blankZero, acceptAlt: opts.acceptAlt||[], group: opts.group||'answer'};
+}
+function gradeAll(checks){
+  let allOk=true;
+  checks.forEach(c=>{
+    const val=c.input.value.trim();
+    let ok;
+    if(c.expected===null){ ok = (val===''||val==='0'); }
+    else if(c.blankZero){ ok = (val===''?'0':val)===c.expected; }
+    else { ok = val===c.expected; }
+    if(!ok && val!=='' && c.acceptAlt.indexOf(val)!==-1){ ok=true; }
+    c.input.classList.remove('correct','incorrect');
+    void c.input.offsetWidth;
+    c.input.classList.add(ok?'correct':'incorrect');
+    c.input.disabled=true;
+    if(!ok && c.group==='answer') allOk=false;
+  });
+  return allOk;
+}
+function setupInputNav(inputs){
+  inputs.forEach((inp,idx)=>{
+    inp.addEventListener('input', ()=>{
+      inp.value = inp.value.replace(/[^0-9]/g,'').slice(-1);
+      if(inp.value!==''){
+        const next=inputs[idx+1];
+        if(next) next.focus();
+      }
+    });
+    inp.addEventListener('keydown',(e)=>{
+      if(e.key==='Backspace' && inp.value===''){
+        const prev=inputs[idx-1];
+        if(prev) prev.focus();
+      }
+    });
+  });
+}
+
+/* ---------------- addition ---------------- */
+function addBlock(container, checks, inputs, numbers){
+  const n=Math.max(...numbers.map(x=>x.toString().length));
+  const strs=numbers.map(x=>x.toString().padStart(n,'0'));
+  let carry=0; const digitsOut=new Array(n); const carryIn=new Array(n);
+  for(let col=n-1; col>=0; col--){
+    let sum=carry;
+    for(const s2 of strs) sum+=parseInt(s2[col],10);
+    carryIn[col]=carry;
+    digitsOut[col]=sum%10;
+    carry=Math.floor(sum/10);
+  }
+  const answerDigits = carry>0 ? [carry,...digitsOut] : digitsOut;
+  const trueValue=parseInt(answerDigits.join(''),10);
+  const W=answerDigits.length; const offset=W-n;
+
+  const block=document.createElement('div'); block.className='block';
+
+  const carryRow=row(W+1,'carry-row'); carryRow.appendChild(opCell(''));
+  for(let c=0;c<W;c++){
+    if(c<offset){ carryRow.appendChild(blankCell()); continue; }
+    const localCol=c-offset;
+    const inp=editCell();
+    carryRow.appendChild(inp);
+    checks.push(makeCheck(inp,String(carryIn[localCol]),{blankZero:true, group:'carry'}));
+    inputs.push(inp);
+  }
+  block.appendChild(carryRow);
+
+  numbers.forEach((num,i)=>{
+    const r=row(W+1);
+    r.appendChild(i===numbers.length-1 ? opCell('+') : opCell(''));
+    const str=num.toString().padStart(W,' ');
+    for(let c=0;c<W;c++) r.appendChild(fixedCell(str[c]));
+    block.appendChild(r);
+  });
+
+  const ansRow=row(W+1,'answer-row'); ansRow.appendChild(opCell(''));
+  const trueStr=trueValue.toString().padStart(W,'0');
+  let firstSig=trueStr.search(/[1-9]/); if(firstSig===-1) firstSig=trueStr.length-1;
+  for(let c=0;c<W;c++){
+    const inp=editCell(); ansRow.appendChild(inp);
+    const lenient=c<firstSig;
+    checks.push(makeCheck(inp, trueStr[c], {blankZero:lenient}));
+    inputs.push(inp);
+  }
+  block.appendChild(ansRow);
+  container.appendChild(block);
+  return {trueValue};
+}
+function renderAddition(container, s, checks, inputs){
+  const numbers=[];
+  for(let i=0;i<s.addends;i++) numbers.push(randDigitsNumber(s.digits));
+  const r=addBlock(container, checks, inputs, numbers);
+  return {title: numbers.join(' + ')+' = ?', answer:String(r.trueValue)};
+}
+
+/* ---------------- subtraction ---------------- */
+function subBlock(container, checks, inputs, top, bottom){
+  const n=top.toString().length;
+  const W=n;
+  const topStr=top.toString().padStart(n,'0');
+  const bottomStr=bottom.toString().padStart(n,'0');
+  let borrow=0; const digitsOut=new Array(n); const borrowFlag=new Array(n).fill(0); const incomingBorrow=new Array(n).fill(0);
+  for(let col=n-1; col>=0; col--){
+    incomingBorrow[col]=borrow;
+    let t=parseInt(topStr[col],10)-borrow;
+    const b=parseInt(bottomStr[col],10);
+    if(t<b){ digitsOut[col]=t+10-b; borrow=1; } else { digitsOut[col]=t-b; borrow=0; }
+    borrowFlag[col]=borrow;
+  }
+  const trueValue=parseInt(digitsOut.join(''),10);
+
+  const block=document.createElement('div'); block.className='block';
+
+  /* Two valid UK-classroom conventions for annotating a borrow, both accepted:
+     (a) a simple "1" flag above a column that had to borrow, or
+     (b) the crossed-out reduced digit written above a column that lent 1 to its right neighbour. */
+  const bRow=row(W+1,'carry-row'); bRow.appendChild(opCell(''));
+  for(let c=0;c<W;c++){
+    const inp=editCell(); bRow.appendChild(inp);
+    const flagVal = borrowFlag[c] ? '1' : '0';
+    const reducedVal = String(parseInt(topStr[c],10) - incomingBorrow[c]);
+    checks.push(makeCheck(inp, flagVal, {blankZero:true, acceptAlt:[reducedVal], group:'carry'}));
+    inputs.push(inp);
+  }
+  block.appendChild(bRow);
+
+  const topRow=row(W+1); topRow.appendChild(opCell(''));
+  const topDisp=top.toString().padStart(W,' ');
+  for(let c=0;c<W;c++) topRow.appendChild(fixedCell(topDisp[c]));
+  block.appendChild(topRow);
+
+  const botRow=row(W+1); botRow.appendChild(opCell('\u2212'));
+  const botDisp=bottom.toString().padStart(W,' ');
+  for(let c=0;c<W;c++) botRow.appendChild(fixedCell(botDisp[c]));
+  block.appendChild(botRow);
+
+  const ansRow=row(W+1,'answer-row'); ansRow.appendChild(opCell(''));
+  const trueStr=trueValue.toString().padStart(W,'0');
+  let firstSig=trueStr.search(/[1-9]/); if(firstSig===-1) firstSig=trueStr.length-1;
+  for(let c=0;c<W;c++){
+    const inp=editCell(); ansRow.appendChild(inp);
+    checks.push(makeCheck(inp, trueStr[c], {blankZero:c<firstSig}));
+    inputs.push(inp);
+  }
+  block.appendChild(ansRow);
+  container.appendChild(block);
+  return {trueValue};
+}
+function renderSubtraction(container, s, checks, inputs){
+  let top=randDigitsNumber(s.topDigits);
+  let bottom=randDigitsNumber(s.bottomDigits);
+  if(bottom>top){ const t=top; top=bottom; bottom=t; }
+  const r=subBlock(container, checks, inputs, top, bottom);
+  return {title:`${top} \u2212 ${bottom} = ?`, answer:String(r.trueValue)};
+}
+
+/* ---------------- multiplication ---------------- */
+function multBlock(container, checks, inputs, multiplicand, multiplierDigit, opSymbol, shift){
+  shift = shift||0;
+  const n=multiplicand.toString().length;
+  const topStr=multiplicand.toString().padStart(n,'0');
+  let carry=0; const digitsOut=new Array(n); const carryIn=new Array(n);
+  for(let col=n-1; col>=0; col--){
+    const d=parseInt(topStr[col],10);
+    const prod=d*multiplierDigit+carry;
+    carryIn[col]=carry;
+    digitsOut[col]=prod%10;
+    carry=Math.floor(prod/10);
+  }
+  const answerDigits = carry>0 ? [carry,...digitsOut] : digitsOut;
+  const trueValue=parseInt(answerDigits.join(''),10);
+  const W=answerDigits.length; const offset=W-n;
+  const totalW = W+shift;
+
+  const block=document.createElement('div'); block.className='block';
+
+  const cRow=row(totalW+1,'carry-row'); cRow.appendChild(opCell(''));
+  for(let c=0;c<W;c++){
+    if(c<offset){ cRow.appendChild(blankCell()); continue; }
+    const localCol=c-offset;
+    const inp=editCell(); cRow.appendChild(inp);
+    checks.push(makeCheck(inp, String(carryIn[localCol]), {blankZero:true, group:'carry'}));
+    inputs.push(inp);
+  }
+  for(let i=0;i<shift;i++) cRow.appendChild(blankCell());
+  block.appendChild(cRow);
+
+  const topRow=row(totalW+1); topRow.appendChild(opCell(''));
+  const topDisp=multiplicand.toString().padStart(W,' ');
+  for(let c=0;c<W;c++) topRow.appendChild(fixedCell(topDisp[c]));
+  for(let i=0;i<shift;i++) topRow.appendChild(blankCell());
+  block.appendChild(topRow);
+
+  const mulRow=row(totalW+1); mulRow.appendChild(opCell(opSymbol||'\u00d7'));
+  const mulDisp=String(multiplierDigit).padStart(W,' ');
+  for(let c=0;c<W;c++) mulRow.appendChild(fixedCell(mulDisp[c]));
+  for(let i=0;i<shift;i++) mulRow.appendChild(blankCell());
+  block.appendChild(mulRow);
+
+  const ansRow=row(totalW+1,'answer-row'); ansRow.appendChild(opCell(''));
+  const trueStr=trueValue.toString().padStart(W,'0');
+  let firstSig=trueStr.search(/[1-9]/); if(firstSig===-1) firstSig=trueStr.length-1;
+  for(let c=0;c<W;c++){
+    const inp=editCell(); ansRow.appendChild(inp);
+    checks.push(makeCheck(inp, trueStr[c], {blankZero:c<firstSig}));
+    inputs.push(inp);
+  }
+  for(let i=0;i<shift;i++){
+    const inp=editCell(); inp.classList.add('placeholder-cell'); ansRow.appendChild(inp);
+    checks.push(makeCheck(inp,'0',{blankZero:true}));
+    inputs.push(inp);
+  }
+  block.appendChild(ansRow);
+  container.appendChild(block);
+  return {trueValue};
+}
+function wholeMultBlock(container, checks, inputs, multiplicand, multiplier){
+  const trueValue = multiplicand * multiplier;
+  const trueStr = trueValue.toString();
+  const W = Math.max(multiplicand.toString().length, multiplier.toString().length, trueStr.length);
+
+  const block=document.createElement('div'); block.className='block';
+
+  const topRow=row(W+1); topRow.appendChild(opCell(''));
+  const topDisp=multiplicand.toString().padStart(W,' ');
+  for(let c=0;c<W;c++) topRow.appendChild(fixedCell(topDisp[c]));
+  block.appendChild(topRow);
+
+  const mulRow=row(W+1); mulRow.appendChild(opCell('\u00d7'));
+  const mulDisp=multiplier.toString().padStart(W,' ');
+  for(let c=0;c<W;c++) mulRow.appendChild(fixedCell(mulDisp[c]));
+  block.appendChild(mulRow);
+
+  const ansRow=row(W+1,'answer-row'); ansRow.appendChild(opCell(''));
+  const trueStrPadded=trueValue.toString().padStart(W,'0');
+  let firstSig=trueStrPadded.search(/[1-9]/); if(firstSig===-1) firstSig=trueStrPadded.length-1;
+  for(let c=0;c<W;c++){
+    const inp=editCell(); ansRow.appendChild(inp);
+    checks.push(makeCheck(inp, trueStrPadded[c], {blankZero:c<firstSig}));
+    inputs.push(inp);
+  }
+  block.appendChild(ansRow);
+  container.appendChild(block);
+  return {trueValue};
+}
+function buildMultiplication(container, checks, inputs, multiplicand, multiplier, method){
+  let finalAnswer;
+  const multiplierStr=multiplier.toString();
+  const numDigits=multiplierStr.length;
+  if(method==='whole'){
+    const r=wholeMultBlock(container, checks, inputs, multiplicand, multiplier);
+    finalAnswer=r.trueValue;
+  } else if(numDigits===1){
+    const r=multBlock(container, checks, inputs, multiplicand, multiplier, '\u00d7', 0);
+    finalAnswer=r.trueValue;
+  } else {
+    const partials=[];
+    for(let i=0;i<numDigits;i++){
+      const digit=parseInt(multiplierStr[numDigits-1-i],10);
+      const step=document.createElement('div');
+      const label = i===0 ? stepOnesLabel(i+1, digit) : stepPlaceLabel(i+1, i, digit);
+      step.innerHTML=`<div class="step-label"></div>`;
+      step.querySelector('.step-label').textContent = label;
+      container.appendChild(step);
+      const r=multBlock(step, checks, inputs, multiplicand, digit, '\u00d7', i);
+      partials.push(r.trueValue * Math.pow(10,i));
+    }
+    const finalStep=document.createElement('div');
+    finalStep.innerHTML=`<div class="step-label"></div>`;
+    finalStep.querySelector('.step-label').textContent = stepAddLabel(numDigits+1, numDigits);
+    container.appendChild(finalStep);
+    const rFinal=addBlock(finalStep, checks, inputs, partials);
+    finalAnswer=rFinal.trueValue;
+  }
+  return {finalAnswer};
+}
+function renderMultiplication(container, s, checks, inputs){
+  const multiplicand=randDigitsNumber(s.mcDigits);
+  const multiplier=randDigitsNumber(s.mrDigits);
+  const r=buildMultiplication(container, checks, inputs, multiplicand, multiplier, s.method);
+  return {title:`${multiplicand} \u00d7 ${multiplier} = ?`, answer:String(r.finalAnswer)};
+}
+
+
+/* ---------------- division ---------------- */
+function simulateLongDivision(dividendStr, divisor){
+  let remainder=0;
+  const steps=[];
+  for(let i=0;i<dividendStr.length;i++){
+    const digit=parseInt(dividendStr[i],10);
+    const workingBefore=remainder*10+digit;
+    const qDigit=Math.floor(workingBefore/divisor);
+    const product=qDigit*divisor;
+    const remainderAfter=workingBefore-product;
+    steps.push({digit, workingBefore, qDigit, product, remainderAfter});
+    remainder=remainderAfter;
+  }
+  return {steps, finalRemainder:remainder};
+}
+function divisionStepBlock(container, checks, inputs, workingNumber, product, remainder){
+  const W=Math.max(String(workingNumber).length, String(product).length, 1);
+  const block=document.createElement('div'); block.className='block';
+
+  const topRow=row(W+1); topRow.appendChild(opCell(''));
+  const topDisp=String(workingNumber).padStart(W,' ');
+  for(let c=0;c<W;c++) topRow.appendChild(fixedCell(topDisp[c]));
+  block.appendChild(topRow);
+
+  const prodRow=row(W+1); prodRow.appendChild(opCell('\u2212'));
+  const prodStr=String(product).padStart(W,'0');
+  let prodFirstSig=prodStr.search(/[1-9]/); if(prodFirstSig===-1) prodFirstSig=prodStr.length-1;
+  for(let c=0;c<W;c++){
+    const inp=editCell(); prodRow.appendChild(inp);
+    checks.push(makeCheck(inp, prodStr[c], {blankZero:c<prodFirstSig}));
+    inputs.push(inp);
+  }
+  block.appendChild(prodRow);
+
+  const remRow=row(W+1,'answer-row'); remRow.appendChild(opCell(''));
+  const remStr=String(remainder).padStart(W,'0');
+  let remFirstSig=remStr.search(/[1-9]/); if(remFirstSig===-1) remFirstSig=remStr.length-1;
+  for(let c=0;c<W;c++){
+    const inp=editCell(); remRow.appendChild(inp);
+    checks.push(makeCheck(inp, remStr[c], {blankZero:c<remFirstSig}));
+    inputs.push(inp);
+  }
+  block.appendChild(remRow);
+  container.appendChild(block);
+}
+function buildDivision(container, checks, inputs, dividend, divisor, method){
+  const dividendStr=dividend.toString();
+  const W=dividendStr.length;
+
+  const {steps, finalRemainder}=simulateLongDivision(dividendStr, divisor);
+  const quotientDigitsStr=steps.map(st=>st.qDigit).join('');
+  let qOffset=quotientDigitsStr.search(/[1-9]/); if(qOffset===-1) qOffset=quotientDigitsStr.length-1;
+  const quotient=parseInt(quotientDigitsStr,10);
+  const remainder=finalRemainder;
+
+  const block=document.createElement('div'); block.className='block division-block';
+
+  const qRow=row(W+1,'answer-row division-quotient'); qRow.appendChild(opCell(''));
+  for(let c=0;c<W;c++){
+    const inp=editCell(); qRow.appendChild(inp);
+    if(c<qOffset){ checks.push(makeCheck(inp,null,{})); }
+    else { checks.push(makeCheck(inp, quotientDigitsStr[c], {blankZero:false})); }
+    inputs.push(inp);
+  }
+  block.appendChild(qRow);
+
+  const dRow=row(W+1,'division-main');
+  const divCell=document.createElement('div'); divCell.className='cell divisor-cell'; divCell.textContent=divisor;
+  dRow.appendChild(divCell);
+  for(let c=0;c<W;c++){
+    const cell=fixedCell(dividendStr[c]); cell.classList.add('bracket-top');
+    dRow.appendChild(cell);
+  }
+  block.appendChild(dRow);
+  container.appendChild(block);
+
+  if(method==='steps'){
+    for(let i=qOffset;i<steps.length;i++){
+      const st=steps[i];
+      const stepWrap=document.createElement('div');
+      stepWrap.innerHTML=`<div class="step-label"></div>`;
+      stepWrap.querySelector('.step-label').textContent = divStepLabel(i-qOffset+1, st.workingBefore, divisor);
+      container.appendChild(stepWrap);
+      divisionStepBlock(stepWrap, checks, inputs, st.workingBefore, st.product, st.remainderAfter);
+    }
+  }
+
+  const remWrap=document.createElement('div'); remWrap.className='remainder-line';
+  remWrap.appendChild(document.createTextNode(t('labelRemainder')+' '));
+  const remInput=editCell(); remWrap.appendChild(remInput);
+  checks.push(makeCheck(remInput, String(remainder), {blankZero: remainder===0}));
+  inputs.push(remInput);
+  container.appendChild(remWrap);
+
+  return {quotient, remainder};
+}
+function renderDivision(container, s, checks, inputs){
+  let divisor=randDigitsNumber(s.divisorDigits);
+  if(divisor<2) divisor=2;
+  let dividend;
+  if(s.exact){
+    const qDigits=Math.max(1, s.dividendDigits - s.divisorDigits + 1);
+    const quotient=randDigitsNumber(qDigits);
+    dividend=quotient*divisor;
+  } else {
+    dividend=randDigitsNumber(s.dividendDigits);
+  }
+  const r=buildDivision(container, checks, inputs, dividend, divisor, s.method);
+  return {title:`${dividend} \u00f7 ${divisor} = ?`, answer: r.remainder? `${r.quotient} ${t('labelRemainder')} ${r.remainder}` : String(r.quotient)};
+}
+
+/* ---------------- translations ---------------- */
+const TAB_KEY={add:'tabAdd', sub:'tabSub', mul:'tabMul', div:'tabDiv'};
+const translations = {
+  en: {
+    appTitle:'Column Working-Out Pad',
+    appSubtitle:'Practice long addition, subtraction, multiplication and division \u2014 show your carries, borrows and workings, then get it marked.',
+    tabAdd:'Addition', tabSub:'Subtraction', tabMul:'Multiplication', tabDiv:'Division',
+    howtoSummary:'How to do this',
+    labelDigitsPerNumber:'Digits per number', labelNumbersToAdd:'Numbers to add', labelDigits:'Digits',
+    labelDigitsTop:'Digits in top number', labelDigitsBottom:'Digits in bottom number',
+    labelDigitsFirstNumber:'Digits in first number', labelDigitsMultiplier:'Digits in multiplier',
+    labelMulMethod:'Working method', optMulSteps:'Show step-by-step', optMulWhole:'Whole sum (work it out yourself)',
+    customSumSummary:'Type in your own sum instead', customNumPlaceholder:'Enter a number', btnAddNumber:'+ Add another number', btnUseSum:'Use this sum',
+    labelTopNumber:'Top number', labelBottomNumber:'Bottom number', labelFirstNumber:'First number', labelSecondNumber:'Second number',
+    labelDividendValue:'Dividend', labelDivisorValue:'Divisor',
+    errInvalidNumber:'Please enter whole numbers only (up to 8 digits).', errNeedTwo:'Enter at least two numbers.',
+    errSubOrder:'The top number must be greater than or equal to the bottom number.', errDivisorZero:'The divisor must be at least 1.',
+    labelDigitsDividend:'Digits in dividend', labelDigitsDivisor:'Digits in divisor', labelType:'Type',
+    optExact:'Divides exactly', optRem:'May leave a remainder',
+    btnNewProblem:'New problem', labelTestLength:'Test length',
+    opt5Questions:'5 questions', opt10Questions:'10 questions', opt15Questions:'15 questions',
+    btnStartTest:'Start test', labelWorksheetSize:'Worksheet size',
+    opt6Problems:'6 problems', opt10Problems:'10 problems', opt16Problems:'16 problems',
+    btnPrintWorksheet:'Print worksheet', labelPencilPad:'Pencil pad \u2014 use this space for any working out',
+    btnErase:'Erase', btnCheckAnswer:'Check answer', btnNextQuestion:'Next question', btnQuitTest:'Quit test', btnTryAgain:'Try again',
+    btnBackToPractice:'Back to practice', btnTakeAnotherTest:'Take another test',
+    msgAllCorrect:'All correct \u2014 nice work!', msgNotQuite:'Not quite \u2014 check the highlighted cells.',
+    msgFillAnswer:'Fill in the answer boxes (below the line) before checking \u2014 the small boxes above the numbers are just for carries/borrows.',
+    labelRemainder:'remainder', testCompleteTitle:'Test complete', printAnswerKeyTitle:'Answer key',
+    labelLanguage:'Language', summaryCorrect:'Correct', summaryIncorrect:'Incorrect',
+    howto:{
+      add:['Line the numbers up on the right, ones under ones, tens under tens.','Add the right-hand (ones) column first.','If the total is 10 or more, write the ones digit in the answer and carry the tens digit into the small box above the next column.','Add the next column, including any carried digit, and repeat until every column is done.','If there\u2019s a carry left over after the last column, it becomes a new digit at the front of the answer.'],
+      sub:['Line the numbers up on the right, ones under ones, tens under tens.','Subtract the right-hand column first.','If the top digit is smaller than the bottom digit, borrow 1 from the column to the left and add 10 to the digit you\u2019re subtracting from. In the small box above the column you borrowed from, you can write either a small 1 (to show it lent 1) or cross out and write its new, reduced digit \u2014 both are marked as correct.','Work through each column, using any borrows as you reach them.','The digits left along the bottom, read left to right, are your answer.'],
+      mul:['Write the bigger number on top and the multiplier underneath, lined up on the right.','If the multiplier has one digit: multiply it by each digit of the top number, starting from the right, carrying tens into the box above the next column just like in addition.','If the multiplier has more than one digit: multiply by its ones digit first (Step 1), then its tens digit shifted one place left (Step 2), then its hundreds digit shifted two places left (Step 3), and so on for however many digits it has \u2014 one step per digit. You can write a 0 placeholder for each shift or just leave it blank, both are marked as correct.','Finally, add up all the step rows together to get the answer (the last step).'],
+      div:['Write the number you\u2019re dividing (the dividend) under the bus-stop bracket, and the divisor to the left.','Starting from the left, see how many times the divisor fits into the first digit (or first few digits) without going over.','Write that number above the bus stop \u2014 that\u2019s a digit of your answer (the quotient).','Use the pencil pad below to work out the subtraction and bring down the next digit, just like on paper.','Keep going until you\u2019ve brought down every digit. Whatever is left over at the end is the remainder.']
+    },
+    placeNames:{1:'tens',2:'hundreds',3:'thousands'},
+    stepOnes:(n,d)=>`Step ${n} \u2014 multiply by the ones digit (${d})`,
+    stepPlace:(n,s,d)=>{const p=translations.en.placeNames[s]||('10^'+s); const word=s===1?'place':'places'; return `Step ${n} \u2014 multiply by the ${p} digit (${d}), then shift left ${s} ${word}`;},
+    stepAdd:(n,count)=>`Step ${n} \u2014 add the ${count} rows above`,
+    divStepLabel:(n,working,divisor)=>`Step ${n} — divide ${working} by ${divisor}`,
+    streakInARow:(n)=>`${n} in a row`,
+    progressText:(i,n,s)=>`Question ${i} of ${n} \u00b7 Score ${s}`,
+    bestBadgeText:(op,pct)=>`Your best in ${op}: ${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}: ${score} / ${total} (${pct}%)`,
+    printWorksheetTitle:(op,n)=>`${op} practice \u2014 ${n} problems`
+  },
+  el: {
+    appTitle:'\u03a4\u03b5\u03c4\u03c1\u03ac\u03b4\u03b9\u03bf \u0391\u03c3\u03ba\u03ae\u03c3\u03b5\u03c9\u03bd \u03bc\u03b5 \u03a3\u03c4\u03ae\u03bb\u03b5\u03c2',
+    appSubtitle:'\u0395\u03be\u03b1\u03c3\u03ba\u03ae\u03c3\u03bf\u03c5 \u03c3\u03c4\u03b7\u03bd \u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b7, \u03b1\u03c6\u03b1\u03af\u03c1\u03b5\u03c3\u03b7, \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03b9\u03b1\u03c3\u03bc\u03cc \u03ba\u03b1\u03b9 \u03b4\u03b9\u03b1\u03af\u03c1\u03b5\u03c3\u03b7 \u03bc\u03b5 \u03c3\u03c4\u03ae\u03bb\u03b5\u03c2 \u2014 \u03b4\u03b5\u03af\u03be\u03b5 \u03c4\u03b1 \u03ba\u03c1\u03b1\u03c4\u03bf\u03cd\u03bc\u03b5\u03bd\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03bf\u03c5\u03c2 \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03bc\u03bf\u03cd\u03c2 \u03c3\u03bf\u03c5 \u03ba\u03b1\u03b9 \u03b4\u03b9\u03bf\u03c1\u03b8\u03ce\u03c3\u03bf\u03c5 \u03b1\u03c5\u03c4\u03cc\u03bc\u03b1\u03c4\u03b1.',
+    tabAdd:'\u03a0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b7', tabSub:'\u0391\u03c6\u03b1\u03af\u03c1\u03b5\u03c3\u03b7', tabMul:'\u03a0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03b9\u03b1\u03c3\u03bc\u03cc\u03c2', tabDiv:'\u0394\u03b9\u03b1\u03af\u03c1\u03b5\u03c3\u03b7',
+    howtoSummary:'\u03a0\u03ce\u03c2 \u03b3\u03af\u03bd\u03b5\u03c4\u03b1\u03b9',
+    labelDigitsPerNumber:'\u03a8\u03b7\u03c6\u03af\u03b1 \u03b1\u03bd\u03ac \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc', labelNumbersToAdd:'\u0391\u03c1\u03b9\u03b8\u03bc\u03bf\u03af \u03c0\u03c1\u03bf\u03c2 \u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b7', labelDigits:'\u03a8\u03b7\u03c6\u03af\u03b1',
+    labelDigitsTop:'Ψηφία πάνω αριθμού', labelDigitsBottom:'Ψηφία κάτω αριθμού',
+    labelDigitsFirstNumber:'\u03a8\u03b7\u03c6\u03af\u03b1 \u03c0\u03c1\u03ce\u03c4\u03bf\u03c5 \u03b1\u03c1\u03b9\u03b8\u03bc\u03bf\u03cd', labelDigitsMultiplier:'\u03a8\u03b7\u03c6\u03af\u03b1 \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03b9\u03b1\u03c3\u03c4\u03ae',
+    labelMulMethod:'Μέθοδος εργασίας', optMulSteps:'Εμφάνιση βημάτων', optMulWhole:'Ολόκληρη πράξη (λύσε το μόνος/η σου)',
+    customSumSummary:'Πληκτρολόγησε τη δική σου πράξη', customNumPlaceholder:'Γράψε έναν αριθμό', btnAddNumber:'+ Πρόσθεσε άλλον αριθμό', btnUseSum:'Χρήση αυτής της άσκησης',
+    labelTopNumber:'Πάνω αριθμός', labelBottomNumber:'Κάτω αριθμός', labelFirstNumber:'Πρώτος αριθμός', labelSecondNumber:'Δεύτερος αριθμός',
+    labelDividendValue:'Διαιρετέος', labelDivisorValue:'Διαιρέτης',
+    errInvalidNumber:'Γράψε μόνο ακέραιους αριθμούς (έως 8 ψηφία).', errNeedTwo:'Γράψε τουλάχιστον δύο αριθμούς.',
+    errSubOrder:'Ο πάνω αριθμός πρέπει να είναι μεγαλύτερος ή ίσος από τον κάτω.', errDivisorZero:'Ο διαιρέτης πρέπει να είναι τουλάχιστον 1.',
+    labelDigitsDividend:'\u03a8\u03b7\u03c6\u03af\u03b1 \u03b4\u03b9\u03b1\u03b9\u03c1\u03b5\u03c4\u03ad\u03bf\u03c5', labelDigitsDivisor:'\u03a8\u03b7\u03c6\u03af\u03b1 \u03b4\u03b9\u03b1\u03b9\u03c1\u03ad\u03c4\u03b7', labelType:'\u03a4\u03cd\u03c0\u03bf\u03c2',
+    optExact:'\u0394\u03b9\u03b1\u03b9\u03c1\u03b5\u03af\u03c4\u03b1\u03b9 \u03b1\u03ba\u03c1\u03b9\u03b2\u03ce\u03c2', optRem:'\u039c\u03c0\u03bf\u03c1\u03b5\u03af \u03bd\u03b1 \u03ad\u03c7\u03b5\u03b9 \u03c5\u03c0\u03cc\u03bb\u03bf\u03b9\u03c0\u03bf',
+    btnNewProblem:'\u039d\u03ad\u03b1 \u03ac\u03c3\u03ba\u03b7\u03c3\u03b7', labelTestLength:'\u039c\u03ae\u03ba\u03bf\u03c2 \u03c4\u03b5\u03c3\u03c4',
+    opt5Questions:'5 \u03b5\u03c1\u03c9\u03c4\u03ae\u03c3\u03b5\u03b9\u03c2', opt10Questions:'10 \u03b5\u03c1\u03c9\u03c4\u03ae\u03c3\u03b5\u03b9\u03c2', opt15Questions:'15 \u03b5\u03c1\u03c9\u03c4\u03ae\u03c3\u03b5\u03b9\u03c2',
+    btnStartTest:'\u0388\u03bd\u03b1\u03c1\u03be\u03b7 \u03c4\u03b5\u03c3\u03c4', labelWorksheetSize:'\u039c\u03ad\u03b3\u03b5\u03b8\u03bf\u03c2 \u03c6\u03cd\u03bb\u03bb\u03bf\u03c5 \u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1\u03c2',
+    opt6Problems:'6 \u03b1\u03c3\u03ba\u03ae\u03c3\u03b5\u03b9\u03c2', opt10Problems:'10 \u03b1\u03c3\u03ba\u03ae\u03c3\u03b5\u03b9\u03c2', opt16Problems:'16 \u03b1\u03c3\u03ba\u03ae\u03c3\u03b5\u03b9\u03c2',
+    btnPrintWorksheet:'\u0395\u03ba\u03c4\u03cd\u03c0\u03c9\u03c3\u03b7 \u03c6\u03cd\u03bb\u03bb\u03bf\u03c5', labelPencilPad:'\u03a0\u03c1\u03cc\u03c7\u03b5\u03b9\u03c1\u03bf \u2014 \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b5 \u03b1\u03c5\u03c4\u03cc\u03bd \u03c4\u03bf\u03bd \u03c7\u03ce\u03c1\u03bf \u03b3\u03b9\u03b1 \u03c4\u03bf\u03c5\u03c2 \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03bc\u03bf\u03cd\u03c2 \u03c3\u03bf\u03c5',
+    btnErase:'\u03a3\u03b2\u03ae\u03c3\u03b9\u03bc\u03bf', btnCheckAnswer:'\u0388\u03bb\u03b5\u03b3\u03c7\u03bf\u03c2 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7\u03c2', btnNextQuestion:'\u0395\u03c0\u03cc\u03bc\u03b5\u03bd\u03b7 \u03b5\u03c1\u03ce\u03c4\u03b7\u03c3\u03b7', btnQuitTest:'\u0388\u03be\u03bf\u03b4\u03bf\u03c2 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c4\u03b5\u03c3\u03c4', btnTryAgain:'\u039e\u03b1\u03bd\u03b1\u03c0\u03c1\u03bf\u03c3\u03c0\u03ac\u03b8\u03b7\u03c3\u03b5',
+    btnBackToPractice:'\u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae \u03c3\u03c4\u03b7\u03bd \u03b5\u03be\u03ac\u03c3\u03ba\u03b7\u03c3\u03b7', btnTakeAnotherTest:'\u039d\u03ad\u03bf \u03c4\u03b5\u03c3\u03c4',
+    msgAllCorrect:'\u038c\u03bb\u03b1 \u03c3\u03c9\u03c3\u03c4\u03ac \u2014 \u03bc\u03c0\u03c1\u03ac\u03b2\u03bf!', msgNotQuite:'\u038c\u03c7\u03b9 \u03b1\u03ba\u03c1\u03b9\u03b2\u03ce\u03c2 \u2014 \u03ad\u03bb\u03b5\u03b3\u03be\u03b5 \u03c4\u03b1 \u03c3\u03b7\u03bc\u03b5\u03b9\u03c9\u03bc\u03ad\u03bd\u03b1 \u03ba\u03b5\u03bb\u03b9\u03ac.',
+    msgFillAnswer:'\u03a3\u03c5\u03bc\u03c0\u03bb\u03ae\u03c1\u03c9\u03c3\u03b5 \u03c4\u03b1 \u03ba\u03b5\u03bb\u03b9\u03ac \u03c4\u03b7\u03c2 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7\u03c2 (\u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae) \u03c0\u03c1\u03b9\u03bd \u03c4\u03bf\u03bd \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf \u2014 \u03c4\u03b1 \u03bc\u03b9\u03ba\u03c1\u03ac \u03ba\u03b5\u03bb\u03b9\u03ac \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf\u03c5\u03c2 \u03b1\u03c1\u03b9\u03b8\u03bc\u03bf\u03cd\u03c2 \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b3\u03b9\u03b1 \u03c4\u03b1 \u03ba\u03c1\u03b1\u03c4\u03bf\u03cd\u03bc\u03b5\u03bd\u03b1/\u03b4\u03b1\u03bd\u03b5\u03b9\u03ba\u03ac.',
+    labelRemainder:'\u03c5\u03c0\u03cc\u03bb\u03bf\u03b9\u03c0\u03bf', testCompleteTitle:'\u03a4\u03bf \u03c4\u03b5\u03c3\u03c4 \u03bf\u03bb\u03bf\u03ba\u03bb\u03b7\u03c1\u03ce\u03b8\u03b7\u03ba\u03b5', printAnswerKeyTitle:'\u039b\u03cd\u03c3\u03b5\u03b9\u03c2',
+    labelLanguage:'\u0393\u03bb\u03ce\u03c3\u03c3\u03b1', summaryCorrect:'\u03a3\u03c9\u03c3\u03c4\u03cc', summaryIncorrect:'\u039b\u03ac\u03b8\u03bf\u03c2',
+    howto:{
+      add:['\u0395\u03c5\u03b8\u03c5\u03b3\u03c1\u03ac\u03bc\u03b9\u03c3\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03c1\u03b9\u03b8\u03bc\u03bf\u03cd\u03c2 \u03b4\u03b5\u03be\u03b9\u03ac, \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2, \u03b4\u03b5\u03ba\u03ac\u03b4\u03b5\u03c2 \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03b4\u03b5\u03ba\u03ac\u03b4\u03b5\u03c2.','\u03a0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b5 \u03c0\u03c1\u03ce\u03c4\u03b1 \u03c4\u03b7 \u03b4\u03b5\u03be\u03b9\u03ac \u03c3\u03c4\u03ae\u03bb\u03b7 (\u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2).','\u0391\u03bd \u03c4\u03bf \u03ac\u03b8\u03c1\u03bf\u03b9\u03c3\u03bc\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 10 \u03ae \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03bf, \u03b3\u03c1\u03ac\u03c8\u03b5 \u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03c9\u03bd \u03bc\u03bf\u03bd\u03ac\u03b4\u03c9\u03bd \u03c3\u03c4\u03b7\u03bd \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03ad\u03c6\u03b5\u03c1\u03b5 \u03c4\u03bf \u03ba\u03c1\u03b1\u03c4\u03bf\u03cd\u03bc\u03b5\u03bd\u03bf \u03c3\u03c4\u03bf \u03bc\u03b9\u03ba\u03c1\u03cc \u03ba\u03bf\u03c5\u03c4\u03af \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b5\u03c0\u03cc\u03bc\u03b5\u03bd\u03b7 \u03c3\u03c4\u03ae\u03bb\u03b7.','\u03a0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b5 \u03c4\u03b7\u03bd \u03b5\u03c0\u03cc\u03bc\u03b5\u03bd\u03b7 \u03c3\u03c4\u03ae\u03bb\u03b7, \u03bc\u03b1\u03b6\u03af \u03bc\u03b5 \u03c4\u03c5\u03c7\u03cc\u03bd \u03ba\u03c1\u03b1\u03c4\u03bf\u03cd\u03bc\u03b5\u03bd\u03bf, \u03ba\u03b1\u03b9 \u03c3\u03c5\u03bd\u03ad\u03c7\u03b9\u03c3\u03b5 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03bd\u03b1 \u03c4\u03b5\u03bb\u03b5\u03b9\u03ce\u03c3\u03bf\u03c5\u03bd \u03cc\u03bb\u03b5\u03c2 \u03bf\u03b9 \u03c3\u03c4\u03ae\u03bb\u03b5\u03c2.','\u0391\u03bd \u03bc\u03b5\u03af\u03bd\u03b5\u03b9 \u03ba\u03c1\u03b1\u03c4\u03bf\u03cd\u03bc\u03b5\u03bd\u03bf \u03bc\u03b5\u03c4\u03ac \u03c4\u03b7\u03bd \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03b1 \u03c3\u03c4\u03ae\u03bb\u03b7, \u03b3\u03af\u03bd\u03b5\u03c4\u03b1\u03b9 \u03bd\u03ad\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03ae \u03c4\u03b7\u03c2 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7\u03c2.'],
+      sub:['\u0395\u03c5\u03b8\u03c5\u03b3\u03c1\u03ac\u03bc\u03b9\u03c3\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03c1\u03b9\u03b8\u03bc\u03bf\u03cd\u03c2 \u03b4\u03b5\u03be\u03b9\u03ac, \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2 \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03bc\u03bf\u03bd\u03ac\u03b4\u03b5\u03c2, \u03b4\u03b5\u03ba\u03ac\u03b4\u03b5\u03c2 \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03b4\u03b5\u03ba\u03ac\u03b4\u03b5\u03c2.','\u0391\u03c6\u03b1\u03af\u03c1\u03b5\u03c3\u03b5 \u03c0\u03c1\u03ce\u03c4\u03b1 \u03c4\u03b7 \u03b4\u03b5\u03be\u03b9\u03ac \u03c3\u03c4\u03ae\u03bb\u03b7.','\u0391\u03bd \u03c4\u03bf \u03c0\u03ac\u03bd\u03c9 \u03c8\u03b7\u03c6\u03af\u03bf \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03b9\u03ba\u03c1\u03cc\u03c4\u03b5\u03c1\u03bf \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03ac\u03c4\u03c9, \u03b4\u03b1\u03bd\u03b5\u03af\u03c3\u03bf\u03c5 1 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b1\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ae \u03c3\u03c4\u03ae\u03bb\u03b7 \u03ba\u03b1\u03b9 \u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b5 10 \u03c3\u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c0\u03bf\u03c5 \u03b1\u03c6\u03b1\u03b9\u03c1\u03b5\u03af\u03c2. \u03a3\u03c4\u03bf \u03bc\u03b9\u03ba\u03c1\u03cc \u03ba\u03bf\u03c5\u03c4\u03af \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03c3\u03c4\u03ae\u03bb\u03b7 \u03c0\u03bf\u03c5 \u03b4\u03b1\u03bd\u03b5\u03af\u03c3\u03c4\u03b7\u03ba\u03b5\u03c2, \u03bc\u03c0\u03bf\u03c1\u03b5\u03af\u03c2 \u03bd\u03b1 \u03b3\u03c1\u03ac\u03c8\u03b5\u03b9\u03c2 \u03ad\u03bd\u03b1 \u03bc\u03b9\u03ba\u03c1\u03cc 1 \u03ae \u03bd\u03b1 \u03b4\u03b9\u03b1\u03b3\u03c1\u03ac\u03c8\u03b5\u03b9\u03c2 \u03ba\u03b1\u03b9 \u03bd\u03b1 \u03b3\u03c1\u03ac\u03c8\u03b5\u03b9\u03c2 \u03c4\u03bf \u03bd\u03ad\u03bf, \u03bc\u03b5\u03b9\u03c9\u03bc\u03ad\u03bd\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u2014 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b4\u03cd\u03bf \u03bc\u03b5\u03c4\u03c1\u03ac\u03bd\u03b5 \u03c3\u03c9\u03c3\u03c4\u03ac.','\u03a3\u03c5\u03bd\u03ad\u03c7\u03b9\u03c3\u03b5 \u03c3\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c3\u03c4\u03ae\u03bb\u03b7, \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03c5\u03c7\u03cc\u03bd \u03b4\u03b1\u03bd\u03b5\u03b9\u03ba\u03ac \u03cc\u03c0\u03bf\u03c5 \u03c7\u03c1\u03b5\u03b9\u03ac\u03b6\u03b5\u03c4\u03b1\u03b9.','\u03a4\u03b1 \u03c8\u03b7\u03c6\u03af\u03b1 \u03c0\u03bf\u03c5 \u03bc\u03ad\u03bd\u03bf\u03c5\u03bd \u03ba\u03ac\u03c4\u03c9, \u03b1\u03c0\u03cc \u03b1\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ac \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b4\u03b5\u03be\u03b9\u03ac, \u03b5\u03af\u03bd\u03b1\u03b9 \u03b7 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03ae \u03c3\u03bf\u03c5.'],
+      mul:['\u0393\u03c1\u03ac\u03c8\u03b5 \u03c4\u03bf\u03bd \u03bc\u03b5\u03b3\u03b1\u03bb\u03cd\u03c4\u03b5\u03c1\u03bf \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c0\u03ac\u03bd\u03c9 \u03ba\u03b1\u03b9 \u03c4\u03bf\u03bd \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03b9\u03b1\u03c3\u03c4\u03ae \u03b1\u03c0\u03cc \u03ba\u03ac\u03c4\u03c9, \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2 \u03b4\u03b5\u03be\u03b9\u03ac.','\u0391\u03bd \u03bf \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03b9\u03b1\u03c3\u03c4\u03ae\u03c2 \u03ad\u03c7\u03b5\u03b9 \u03ad\u03bd\u03b1 \u03c8\u03b7\u03c6\u03af\u03bf: \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03af\u03b1\u03c3\u03ad \u03c4\u03bf \u03bc\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03bf\u03c5 \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c1\u03b9\u03b8\u03bc\u03bf\u03cd, \u03be\u03b5\u03ba\u03b9\u03bd\u03ce\u03bd\u03c4\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03b1 \u03b4\u03b5\u03be\u03b9\u03ac, \u03bc\u03b5\u03c4\u03b1\u03c6\u03ad\u03c1\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03b4\u03b5\u03ba\u03ac\u03b4\u03b5\u03c2 \u03c3\u03c4\u03bf \u03ba\u03bf\u03c5\u03c4\u03af \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b5\u03c0\u03cc\u03bc\u03b5\u03bd\u03b7 \u03c3\u03c4\u03ae\u03bb\u03b7, \u03cc\u03c0\u03c9\u03c2 \u03c3\u03c4\u03b7\u03bd \u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b7.','\u0391\u03bd \u03bf \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03b9\u03b1\u03c3\u03c4\u03ae\u03c2 \u03ad\u03c7\u03b5\u03b9 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03b1 \u03c8\u03b7\u03c6\u03af\u03b1: \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03af\u03b1\u03c3\u03b5 \u03c0\u03c1\u03ce\u03c4\u03b1 \u03bc\u03b5 \u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03c9\u03bd \u03bc\u03bf\u03bd\u03ac\u03b4\u03c9\u03bd (\u0392\u03ae\u03bc\u03b1 1), \u03bc\u03b5\u03c4\u03ac \u03bc\u03b5 \u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03c9\u03bd \u03b4\u03b5\u03ba\u03ac\u03b4\u03c9\u03bd \u03bc\u03b5\u03c4\u03b1\u03c4\u03bf\u03c0\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf \u03bc\u03af\u03b1 \u03b8\u03ad\u03c3\u03b7 \u03b1\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ac (\u0392\u03ae\u03bc\u03b1 2), \u03ba\u03b1\u03b9 \u03bf\u03cd\u03c4\u03c9 \u03ba\u03b1\u03b8\u03b5\u03be\u03ae\u03c2 \u2014 \u03ad\u03bd\u03b1 \u03b2\u03ae\u03bc\u03b1 \u03b1\u03bd\u03ac \u03c8\u03b7\u03c6\u03af\u03bf. \u039c\u03c0\u03bf\u03c1\u03b5\u03af\u03c2 \u03bd\u03b1 \u03b3\u03c1\u03ac\u03c8\u03b5\u03b9\u03c2 0 \u03b3\u03b9\u03b1 \u03c4\u03b7 \u03bc\u03b5\u03c4\u03b1\u03c4\u03cc\u03c0\u03b9\u03c3\u03b7 \u03ae \u03bd\u03b1 \u03c4\u03bf \u03b1\u03c6\u03ae\u03c3\u03b5\u03b9\u03c2 \u03ba\u03b5\u03bd\u03cc \u2014 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b4\u03cd\u03bf \u03bc\u03b5\u03c4\u03c1\u03ac\u03bd\u03b5 \u03c3\u03c9\u03c3\u03c4\u03ac.','\u03a4\u03ad\u03bb\u03bf\u03c2, \u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b5 \u03cc\u03bb\u03b5\u03c2 \u03c4\u03b9\u03c2 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ad\u03c2 \u03c4\u03c9\u03bd \u03b2\u03b7\u03bc\u03ac\u03c4\u03c9\u03bd \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b2\u03c1\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03b7 (\u03c4\u03bf \u03c4\u03b5\u03bb\u03b5\u03c5\u03c4\u03b1\u03af\u03bf \u03b2\u03ae\u03bc\u03b1).'],
+      div:['\u0393\u03c1\u03ac\u03c8\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c0\u03bf\u03c5 \u03b4\u03b9\u03b1\u03b9\u03c1\u03b5\u03af\u03c2 (\u03c4\u03bf\u03bd \u03b4\u03b9\u03b1\u03b9\u03c1\u03b5\u03c4\u03ad\u03bf) \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03cd\u03bc\u03b2\u03bf\u03bb\u03bf \u03c4\u03b7\u03c2 \u03b4\u03b9\u03b1\u03af\u03c1\u03b5\u03c3\u03b7\u03c2, \u03ba\u03b1\u03b9 \u03c4\u03bf\u03bd \u03b4\u03b9\u03b1\u03b9\u03c1\u03ad\u03c4\u03b7 \u03b1\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ac.','\u039e\u03b5\u03ba\u03b9\u03bd\u03ce\u03bd\u03c4\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03b1 \u03b1\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ac, \u03b4\u03b5\u03c2 \u03c0\u03cc\u03c3\u03b5\u03c2 \u03c6\u03bf\u03c1\u03ad\u03c2 \u03c7\u03c9\u03c1\u03ac\u03b5\u03b9 \u03bf \u03b4\u03b9\u03b1\u03b9\u03c1\u03ad\u03c4\u03b7\u03c2 \u03c3\u03c4\u03bf \u03c0\u03c1\u03ce\u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf (\u03ae \u03c4\u03b1 \u03c0\u03c1\u03ce\u03c4\u03b1 \u03c8\u03b7\u03c6\u03af\u03b1) \u03c7\u03c9\u03c1\u03af\u03c2 \u03bd\u03b1 \u03c4\u03bf \u03be\u03b5\u03c0\u03b5\u03c1\u03ac\u03c3\u03b5\u03b9.','\u0393\u03c1\u03ac\u03c8\u03b5 \u03b1\u03c5\u03c4\u03cc\u03bd \u03c4\u03bf\u03bd \u03b1\u03c1\u03b9\u03b8\u03bc\u03cc \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03cd\u03bc\u03b2\u03bf\u03bb\u03bf \u2014 \u03b5\u03af\u03bd\u03b1\u03b9 \u03ad\u03bd\u03b1 \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03b7\u03c2 \u03b1\u03c0\u03ac\u03bd\u03c4\u03b7\u03c3\u03ae\u03c2 \u03c3\u03bf\u03c5 (\u03c4\u03bf \u03c0\u03b7\u03bb\u03af\u03ba\u03bf).','\u03a7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b5 \u03c4\u03bf \u03c0\u03c1\u03cc\u03c7\u03b5\u03b9\u03c1\u03bf \u03c0\u03b1\u03c1\u03b1\u03ba\u03ac\u03c4\u03c9 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03ba\u03ac\u03bd\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03b1\u03c6\u03b1\u03af\u03c1\u03b5\u03c3\u03b7 \u03ba\u03b1\u03b9 \u03bd\u03b1 \u03ba\u03b1\u03c4\u03b5\u03b2\u03ac\u03c3\u03b5\u03b9\u03c2 \u03c4\u03bf \u03b5\u03c0\u03cc\u03bc\u03b5\u03bd\u03bf \u03c8\u03b7\u03c6\u03af\u03bf, \u03cc\u03c0\u03c9\u03c2 \u03c3\u03c4\u03bf \u03c7\u03b1\u03c1\u03c4\u03af.','\u03a3\u03c5\u03bd\u03ad\u03c7\u03b9\u03c3\u03b5 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03bd\u03b1 \u03ba\u03b1\u03c4\u03b5\u03b2\u03ac\u03c3\u03b5\u03b9\u03c2 \u03cc\u03bb\u03b1 \u03c4\u03b1 \u03c8\u03b7\u03c6\u03af\u03b1. \u038c,\u03c4\u03b9 \u03b1\u03c0\u03bf\u03bc\u03b5\u03af\u03bd\u03b5\u03b9 \u03c3\u03c4\u03bf \u03c4\u03ad\u03bb\u03bf\u03c2 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c4\u03bf \u03c5\u03c0\u03cc\u03bb\u03bf\u03b9\u03c0\u03bf.']
+    },
+    placeNames:{1:'\u03b4\u03b5\u03ba\u03ac\u03b4\u03c9\u03bd',2:'\u03b5\u03ba\u03b1\u03c4\u03bf\u03bd\u03c4\u03ac\u03b4\u03c9\u03bd',3:'\u03c7\u03b9\u03bb\u03b9\u03ac\u03b4\u03c9\u03bd'},
+    stepOnes:(n,d)=>`\u0392\u03ae\u03bc\u03b1 ${n} \u2014 \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03af\u03b1\u03c3\u03b5 \u03bc\u03b5 \u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03c9\u03bd \u03bc\u03bf\u03bd\u03ac\u03b4\u03c9\u03bd (${d})`,
+    stepPlace:(n,s,d)=>{const p=translations.el.placeNames[s]||('10^'+s); const word=s===1?'\u03b8\u03ad\u03c3\u03b7':'\u03b8\u03ad\u03c3\u03b5\u03b9\u03c2'; return `\u0392\u03ae\u03bc\u03b1 ${n} \u2014 \u03c0\u03bf\u03bb\u03bb\u03b1\u03c0\u03bb\u03b1\u03c3\u03af\u03b1\u03c3\u03b5 \u03bc\u03b5 \u03c4\u03bf \u03c8\u03b7\u03c6\u03af\u03bf \u03c4\u03c9\u03bd ${p} (${d}), \u03bc\u03b5\u03c4\u03ac \u03bc\u03b5\u03c4\u03b1\u03c4\u03cc\u03c0\u03b9\u03c3\u03b5 ${s} ${word} \u03b1\u03c1\u03b9\u03c3\u03c4\u03b5\u03c1\u03ac`;},
+    stepAdd:(n,count)=>`\u0392\u03ae\u03bc\u03b1 ${n} \u2014 \u03c0\u03c1\u03cc\u03c3\u03b8\u03b5\u03c3\u03b5 \u03c4\u03b9\u03c2 ${count} \u03c0\u03b1\u03c1\u03b1\u03c0\u03ac\u03bd\u03c9 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ad\u03c2`,
+    divStepLabel:(n,working,divisor)=>`Βήμα ${n} — διαίρεσε το ${working} με το ${divisor}`,
+    streakInARow:(n)=>`${n} \u03c3\u03c4\u03b7 \u03c3\u03b5\u03b9\u03c1\u03ac`,
+    progressText:(i,n,s)=>`\u0395\u03c1\u03ce\u03c4\u03b7\u03c3\u03b7 ${i} \u03b1\u03c0\u03cc ${n} \u00b7 \u0392\u03b1\u03b8\u03bc\u03bf\u03bb\u03bf\u03b3\u03af\u03b1 ${s}`,
+    bestBadgeText:(op,pct)=>`\u03a4\u03bf \u03ba\u03b1\u03bb\u03cd\u03c4\u03b5\u03c1\u03cc \u03c3\u03bf\u03c5 \u03c3\u03c4\u03b7\u03bd ${op}: ${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}: ${score} / ${total} (${pct}%)`,
+    printWorksheetTitle:(op,n)=>`\u0395\u03be\u03ac\u03c3\u03ba\u03b7\u03c3\u03b7 ${op} \u2014 ${n} \u03b1\u03c3\u03ba\u03ae\u03c3\u03b5\u03b9\u03c2`
+  },
+  fr: {
+    appTitle:"Cahier de Calculs en Colonnes",
+    appSubtitle:"Entra\u00eene-toi \u00e0 l'addition, la soustraction, la multiplication et la division en colonnes \u2014 montre tes retenues et ton raisonnement, puis fais corriger automatiquement.",
+    tabAdd:'Addition', tabSub:'Soustraction', tabMul:'Multiplication', tabDiv:'Division',
+    howtoSummary:'Comment faire',
+    labelDigitsPerNumber:'Chiffres par nombre', labelNumbersToAdd:'Nombres \u00e0 additionner', labelDigits:'Chiffres',
+    labelDigitsTop:'Chiffres du nombre du haut', labelDigitsBottom:'Chiffres du nombre du bas',
+    labelDigitsFirstNumber:'Chiffres du premier nombre', labelDigitsMultiplier:'Chiffres du multiplicateur',
+    labelMulMethod:'Méthode de travail', optMulSteps:'Afficher les étapes', optMulWhole:'Calcul complet (à toi de le résoudre)',
+    customSumSummary:'Saisis ton propre calcul', customNumPlaceholder:'Saisis un nombre', btnAddNumber:'+ Ajouter un nombre', btnUseSum:'Utiliser ce calcul',
+    labelTopNumber:'Nombre du haut', labelBottomNumber:'Nombre du bas', labelFirstNumber:'Premier nombre', labelSecondNumber:'Deuxième nombre',
+    labelDividendValue:'Dividende', labelDivisorValue:'Diviseur',
+    errInvalidNumber:'Saisis uniquement des nombres entiers (8 chiffres maximum).', errNeedTwo:'Saisis au moins deux nombres.',
+    errSubOrder:'Le nombre du haut doit être supérieur ou égal à celui du bas.', errDivisorZero:'Le diviseur doit être au moins 1.',
+    labelDigitsDividend:'Chiffres du dividende', labelDigitsDivisor:'Chiffres du diviseur', labelType:'Type',
+    optExact:'Division exacte', optRem:'Peut laisser un reste',
+    btnNewProblem:'Nouvel exercice', labelTestLength:'Longueur du test',
+    opt5Questions:'5 questions', opt10Questions:'10 questions', opt15Questions:'15 questions',
+    btnStartTest:'Commencer le test', labelWorksheetSize:'Taille de la fiche',
+    opt6Problems:'6 exercices', opt10Problems:'10 exercices', opt16Problems:'16 exercices',
+    btnPrintWorksheet:'Imprimer la fiche', labelPencilPad:"Brouillon \u2014 utilise cet espace pour tes calculs",
+    btnErase:'Effacer', btnCheckAnswer:'V\u00e9rifier la r\u00e9ponse', btnNextQuestion:'Question suivante', btnQuitTest:'Quitter le test', btnTryAgain:'R\u00e9essayer',
+    btnBackToPractice:"Retour \u00e0 l'entra\u00eenement", btnTakeAnotherTest:'Refaire un test',
+    msgAllCorrect:'Tout est correct \u2014 bravo\u00a0!', msgNotQuite:'Pas tout \u00e0 fait \u2014 v\u00e9rifie les cases surlign\u00e9es.',
+    msgFillAnswer:"Remplis les cases de la r\u00e9ponse (sous la ligne) avant de v\u00e9rifier \u2014 les petites cases au-dessus des nombres servent uniquement aux retenues.",
+    labelRemainder:'reste', testCompleteTitle:'Test termin\u00e9', printAnswerKeyTitle:'Corrig\u00e9',
+    labelLanguage:'Langue', summaryCorrect:'Correct', summaryIncorrect:'Incorrect',
+    howto:{
+      add:['Aligne les nombres \u00e0 droite, unit\u00e9s sous unit\u00e9s, dizaines sous dizaines.',"Additionne d'abord la colonne de droite (les unit\u00e9s).",'Si le total est 10 ou plus, \u00e9cris le chiffre des unit\u00e9s dans la r\u00e9ponse et reporte la dizaine dans la petite case au-dessus de la colonne suivante.','Additionne la colonne suivante, en incluant toute retenue, et continue jusqu\u2019\u00e0 la fin.','S\u2019il reste une retenue apr\u00e8s la derni\u00e8re colonne, elle devient un nouveau chiffre au d\u00e9but de la r\u00e9ponse.'],
+      sub:['Aligne les nombres \u00e0 droite, unit\u00e9s sous unit\u00e9s, dizaines sous dizaines.',"Soustrais d'abord la colonne de droite.",'Si le chiffre du haut est plus petit que celui du bas, emprunte 1 \u00e0 la colonne de gauche et ajoute 10 au chiffre que tu soustrais. Dans la petite case au-dessus de la colonne emprunt\u00e9e, tu peux \u00e9crire soit un petit 1, soit barrer et \u00e9crire son nouveau chiffre r\u00e9duit \u2014 les deux sont accept\u00e9s.','Continue colonne par colonne, en utilisant les emprunts au fur et \u00e0 mesure.','Les chiffres restants en bas, lus de gauche \u00e0 droite, forment ta r\u00e9ponse.'],
+      mul:['\u00c9cris le plus grand nombre en haut et le multiplicateur en dessous, align\u00e9s \u00e0 droite.','Si le multiplicateur a un chiffre\u00a0: multiplie-le par chaque chiffre du nombre du haut, en partant de la droite, en reportant les dizaines dans la case au-dessus de la colonne suivante, comme pour l\u2019addition.','Si le multiplicateur a plusieurs chiffres\u00a0: multiplie d\u2019abord par son chiffre des unit\u00e9s (\u00c9tape 1), puis par celui des dizaines d\u00e9cal\u00e9 d\u2019une place vers la gauche (\u00c9tape 2), puis celui des centaines d\u00e9cal\u00e9 de deux places (\u00c9tape 3), et ainsi de suite \u2014 une \u00e9tape par chiffre. Tu peux \u00e9crire un 0 pour chaque d\u00e9calage ou le laisser vide, les deux sont accept\u00e9s.','Enfin, additionne toutes les lignes des \u00e9tapes pour obtenir la r\u00e9ponse (la derni\u00e8re \u00e9tape).'],
+      div:['\u00c9cris le nombre \u00e0 diviser (le dividende) sous la potence, et le diviseur \u00e0 gauche.','En partant de la gauche, regarde combien de fois le diviseur entre dans le premier chiffre (ou les premiers chiffres) sans d\u00e9passer.','\u00c9cris ce nombre au-dessus de la potence \u2014 c\u2019est un chiffre de ta r\u00e9ponse (le quotient).','Utilise le brouillon ci-dessous pour faire la soustraction et abaisser le chiffre suivant, comme sur papier.','Continue jusqu\u2019\u00e0 avoir abaiss\u00e9 tous les chiffres. Ce qui reste \u00e0 la fin est le reste.']
+    },
+    placeNames:{1:'dizaines',2:'centaines',3:'milliers'},
+    stepOnes:(n,d)=>`\u00c9tape ${n} \u2014 multiplie par le chiffre des unit\u00e9s (${d})`,
+    stepPlace:(n,s,d)=>{const p=translations.fr.placeNames[s]||('10^'+s); const word=s===1?'position':'positions'; return `\u00c9tape ${n} \u2014 multiplie par le chiffre des ${p} (${d}), puis d\u00e9cale de ${s} ${word} vers la gauche`;},
+    stepAdd:(n,count)=>`\u00c9tape ${n} \u2014 additionne les ${count} lignes ci-dessus`,
+    divStepLabel:(n,working,divisor)=>`Étape ${n} — divise ${working} par ${divisor}`,
+    streakInARow:(n)=>`${n} d'affil\u00e9e`,
+    progressText:(i,n,s)=>`Question ${i} sur ${n} \u00b7 Score ${s}`,
+    bestBadgeText:(op,pct)=>`Ton meilleur score en ${op}\u00a0: ${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}\u00a0: ${score} / ${total} (${pct}%)`,
+    printWorksheetTitle:(op,n)=>`Exercices de ${op} \u2014 ${n} exercices`
+  },
+  de: {
+    appTitle:'Rechenblock f\u00fcr Spaltenrechnen',
+    appSubtitle:'\u00dcbe schriftliche Addition, Subtraktion, Multiplikation und Division \u2014 zeige \u00dcbertr\u00e4ge und Rechenwege, dann automatisch pr\u00fcfen lassen.',
+    tabAdd:'Addition', tabSub:'Subtraktion', tabMul:'Multiplikation', tabDiv:'Division',
+    howtoSummary:"So geht's",
+    labelDigitsPerNumber:'Stellen pro Zahl', labelNumbersToAdd:'Anzahl der Summanden', labelDigits:'Stellen',
+    labelDigitsTop:'Stellen der oberen Zahl', labelDigitsBottom:'Stellen der unteren Zahl',
+    labelDigitsFirstNumber:'Stellen der ersten Zahl', labelDigitsMultiplier:'Stellen des Multiplikators',
+    labelMulMethod:'Rechenmethode', optMulSteps:'Schritte anzeigen', optMulWhole:'Ganze Aufgabe (selbst lösen)',
+    customSumSummary:'Eigene Aufgabe eingeben', customNumPlaceholder:'Zahl eingeben', btnAddNumber:'+ Weitere Zahl hinzufügen', btnUseSum:'Diese Aufgabe verwenden',
+    labelTopNumber:'Obere Zahl', labelBottomNumber:'Untere Zahl', labelFirstNumber:'Erste Zahl', labelSecondNumber:'Zweite Zahl',
+    labelDividendValue:'Dividend', labelDivisorValue:'Divisor',
+    errInvalidNumber:'Bitte nur ganze Zahlen eingeben (maximal 8 Stellen).', errNeedTwo:'Gib mindestens zwei Zahlen ein.',
+    errSubOrder:'Die obere Zahl muss größer oder gleich der unteren sein.', errDivisorZero:'Der Divisor muss mindestens 1 sein.',
+    labelDigitsDividend:'Stellen des Dividenden', labelDigitsDivisor:'Stellen des Divisors', labelType:'Art',
+    optExact:'Geht genau auf', optRem:'Kann einen Rest haben',
+    btnNewProblem:'Neue Aufgabe', labelTestLength:'Testl\u00e4nge',
+    opt5Questions:'5 Aufgaben', opt10Questions:'10 Aufgaben', opt15Questions:'15 Aufgaben',
+    btnStartTest:'Test starten', labelWorksheetSize:'Arbeitsblattgr\u00f6\u00dfe',
+    opt6Problems:'6 Aufgaben', opt10Problems:'10 Aufgaben', opt16Problems:'16 Aufgaben',
+    btnPrintWorksheet:'Arbeitsblatt drucken', labelPencilPad:'Schmierzettel \u2014 nutze diesen Platz f\u00fcr deinen Rechenweg',
+    btnErase:'L\u00f6schen', btnCheckAnswer:'Antwort pr\u00fcfen', btnNextQuestion:'N\u00e4chste Aufgabe', btnQuitTest:'Test beenden', btnTryAgain:'Nochmal versuchen',
+    btnBackToPractice:'Zur\u00fcck zum \u00dcben', btnTakeAnotherTest:'Neuen Test starten',
+    msgAllCorrect:'Alles richtig \u2014 gut gemacht!', msgNotQuite:'Nicht ganz \u2014 sieh dir die markierten Felder an.',
+    msgFillAnswer:'F\u00fclle zuerst die Antwortfelder aus (unter dem Strich) \u2014 die kleinen Felder \u00fcber den Zahlen sind nur f\u00fcr \u00dcbertr\u00e4ge.',
+    labelRemainder:'Rest', testCompleteTitle:'Test abgeschlossen', printAnswerKeyTitle:'L\u00f6sungen',
+    labelLanguage:'Sprache', summaryCorrect:'Richtig', summaryIncorrect:'Falsch',
+    howto:{
+      add:['Schreibe die Zahlen rechtsb\u00fcndig untereinander, Einer unter Einer, Zehner unter Zehner.','Addiere zuerst die rechte Spalte (die Einer).','Ist die Summe 10 oder mehr, schreibe die Einerziffer in die Antwort und trage die Zehnerziffer als \u00dcbertrag in das kleine K\u00e4stchen \u00fcber der n\u00e4chsten Spalte ein.','Addiere die n\u00e4chste Spalte samt \u00dcbertrag und mache so weiter, bis alle Spalten fertig sind.','Bleibt nach der letzten Spalte ein \u00dcbertrag \u00fcbrig, wird er zur neuen ersten Ziffer der Antwort.'],
+      sub:['Schreibe die Zahlen rechtsb\u00fcndig untereinander, Einer unter Einer, Zehner unter Zehner.','Subtrahiere zuerst die rechte Spalte.','Ist die obere Ziffer kleiner als die untere, leihe dir 1 von der Spalte links und addiere 10 zur Ziffer, von der du abziehst. In das kleine K\u00e4stchen \u00fcber der Spalte, von der du geliehen hast, kannst du entweder eine kleine 1 schreiben oder die Ziffer durchstreichen und die neue, verringerte Ziffer notieren \u2014 beides z\u00e4hlt als richtig.','Arbeite dich Spalte f\u00fcr Spalte weiter, mit den \u00dcbertr\u00e4gen, sobald du sie brauchst.','Die Ziffern unten, von links nach rechts gelesen, sind deine Antwort.'],
+      mul:['Schreibe die gr\u00f6\u00dfere Zahl oben und den Multiplikator darunter, rechtsb\u00fcndig.','Hat der Multiplikator eine Stelle: multipliziere sie mit jeder Ziffer der oberen Zahl, beginnend von rechts, und trage Zehner als \u00dcbertrag in das K\u00e4stchen \u00fcber der n\u00e4chsten Spalte ein, genau wie bei der Addition.','Hat der Multiplikator mehrere Stellen: multipliziere zuerst mit der Einerziffer (Schritt 1), dann mit der Zehnerziffer, eine Stelle nach links verschoben (Schritt 2), dann mit der Hunderterziffer, zwei Stellen verschoben (Schritt 3), und so weiter \u2014 ein Schritt pro Stelle. Du kannst f\u00fcr jede Verschiebung eine 0 schreiben oder das Feld leer lassen, beides z\u00e4hlt als richtig.','Zum Schluss addierst du alle Zeilen der Schritte, um die Antwort zu erhalten (der letzte Schritt).'],
+      div:['Schreibe die Zahl, die du teilst (den Dividenden), unter den Divisionshaken, und den Divisor links davon.','Pr\u00fcfe von links, wie oft der Divisor in die erste Ziffer (oder die ersten Ziffern) passt, ohne sie zu \u00fcberschreiten.','Schreibe diese Zahl \u00fcber den Haken \u2014 das ist eine Ziffer deiner Antwort (des Quotienten).','Nutze den Schmierzettel unten, um die Subtraktion durchzuf\u00fchren und die n\u00e4chste Ziffer herunterzuholen, genau wie auf Papier.','Mache so weiter, bis du jede Ziffer heruntergeholt hast. Was am Ende \u00fcbrig bleibt, ist der Rest.']
+    },
+    placeNames:{1:'Zehner',2:'Hunderter',3:'Tausender'},
+    stepOnes:(n,d)=>`Schritt ${n} \u2014 multipliziere mit der Einerziffer (${d})`,
+    stepPlace:(n,s,d)=>{const p=translations.de.placeNames[s]||('10^'+s); const word=s===1?'Stelle':'Stellen'; return `Schritt ${n} \u2014 multipliziere mit der ${p}ziffer (${d}) und verschiebe dann ${s} ${word} nach links`;},
+    stepAdd:(n,count)=>`Schritt ${n} \u2014 addiere die ${count} Zeilen oben`,
+    divStepLabel:(n,working,divisor)=>`Schritt ${n} — teile ${working} durch ${divisor}`,
+    streakInARow:(n)=>`${n} in Folge`,
+    progressText:(i,n,s)=>`Aufgabe ${i} von ${n} \u00b7 Punkte ${s}`,
+    bestBadgeText:(op,pct)=>`Deine Bestleistung bei ${op}: ${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}: ${score} / ${total} (${pct}%)`,
+    printWorksheetTitle:(op,n)=>`${op} \u00fcben \u2014 ${n} Aufgaben`
+  },
+  es: {
+    appTitle:'Cuaderno de C\u00e1lculo en Columnas',
+    appSubtitle:'Practica la suma, resta, multiplicaci\u00f3n y divisi\u00f3n en columnas \u2014 muestra tus llevadas y tu razonamiento, y corr\u00edgelo autom\u00e1ticamente.',
+    tabAdd:'Suma', tabSub:'Resta', tabMul:'Multiplicaci\u00f3n', tabDiv:'Divisi\u00f3n',
+    howtoSummary:'C\u00f3mo hacerlo',
+    labelDigitsPerNumber:'Cifras por n\u00famero', labelNumbersToAdd:'N\u00fameros a sumar', labelDigits:'Cifras',
+    labelDigitsTop:'Cifras del número de arriba', labelDigitsBottom:'Cifras del número de abajo',
+    labelDigitsFirstNumber:'Cifras del primer n\u00famero', labelDigitsMultiplier:'Cifras del multiplicador',
+    labelMulMethod:'Método de trabajo', optMulSteps:'Mostrar los pasos', optMulWhole:'Cálculo completo (resuélvelo tú)',
+    customSumSummary:'Escribe tu propia operación', customNumPlaceholder:'Escribe un número', btnAddNumber:'+ Añadir otro número', btnUseSum:'Usar esta operación',
+    labelTopNumber:'Número de arriba', labelBottomNumber:'Número de abajo', labelFirstNumber:'Primer número', labelSecondNumber:'Segundo número',
+    labelDividendValue:'Dividendo', labelDivisorValue:'Divisor',
+    errInvalidNumber:'Escribe solo números enteros (máximo 8 cifras).', errNeedTwo:'Escribe al menos dos números.',
+    errSubOrder:'El número de arriba debe ser mayor o igual que el de abajo.', errDivisorZero:'El divisor debe ser al menos 1.',
+    labelDigitsDividend:'Cifras del dividendo', labelDigitsDivisor:'Cifras del divisor', labelType:'Tipo',
+    optExact:'Divisi\u00f3n exacta', optRem:'Puede tener resto',
+    btnNewProblem:'Nuevo ejercicio', labelTestLength:'Duraci\u00f3n del test',
+    opt5Questions:'5 preguntas', opt10Questions:'10 preguntas', opt15Questions:'15 preguntas',
+    btnStartTest:'Empezar test', labelWorksheetSize:'Tama\u00f1o de la ficha',
+    opt6Problems:'6 ejercicios', opt10Problems:'10 ejercicios', opt16Problems:'16 ejercicios',
+    btnPrintWorksheet:'Imprimir ficha', labelPencilPad:'Borrador \u2014 usa este espacio para tus c\u00e1lculos',
+    btnErase:'Borrar', btnCheckAnswer:'Comprobar respuesta', btnNextQuestion:'Siguiente pregunta', btnQuitTest:'Salir del test', btnTryAgain:'Int\u00e9ntalo de nuevo',
+    btnBackToPractice:'Volver a practicar', btnTakeAnotherTest:'Hacer otro test',
+    msgAllCorrect:'Todo correcto \u2014 \u00a1muy bien!', msgNotQuite:'No del todo \u2014 revisa las casillas marcadas.',
+    msgFillAnswer:'Rellena las casillas de la respuesta (debajo de la l\u00ednea) antes de comprobar \u2014 las casillas peque\u00f1as encima de los n\u00fameros son solo para las llevadas.',
+    labelRemainder:'resto', testCompleteTitle:'Test completado', printAnswerKeyTitle:'Soluciones',
+    labelLanguage:'Idioma', summaryCorrect:'Correcto', summaryIncorrect:'Incorrecto',
+    howto:{
+      add:['Alinea los n\u00fameros a la derecha, unidades bajo unidades, decenas bajo decenas.','Suma primero la columna de la derecha (las unidades).','Si el total es 10 o m\u00e1s, escribe la cifra de las unidades en la respuesta y lleva la decena a la casilla peque\u00f1a encima de la siguiente columna.','Suma la siguiente columna, incluyendo cualquier llevada, y contin\u00faa hasta terminar todas las columnas.','Si queda una llevada despu\u00e9s de la \u00faltima columna, se convierte en una nueva cifra al principio de la respuesta.'],
+      sub:['Alinea los n\u00fameros a la derecha, unidades bajo unidades, decenas bajo decenas.','Resta primero la columna de la derecha.','Si la cifra de arriba es menor que la de abajo, pide prestado 1 a la columna de la izquierda y suma 10 a la cifra que est\u00e1s restando. En la casilla peque\u00f1a encima de la columna a la que pediste prestado, puedes escribir un peque\u00f1o 1 o tachar y escribir la nueva cifra reducida \u2014 ambas se consideran correctas.','Contin\u00faa columna por columna, usando los pr\u00e9stamos seg\u00fan los necesites.','Las cifras que quedan abajo, le\u00eddas de izquierda a derecha, son tu respuesta.'],
+      mul:['Escribe el n\u00famero m\u00e1s grande arriba y el multiplicador debajo, alineados a la derecha.','Si el multiplicador tiene una cifra: multipl\u00edcala por cada cifra del n\u00famero de arriba, empezando por la derecha, llevando las decenas a la casilla encima de la siguiente columna, igual que en la suma.','Si el multiplicador tiene varias cifras: multiplica primero por su cifra de las unidades (Paso 1), luego por la de las decenas desplazada un lugar a la izquierda (Paso 2), luego por la de las centenas desplazada dos lugares (Paso 3), y as\u00ed sucesivamente \u2014 un paso por cifra. Puedes escribir un 0 como marcador de cada desplazamiento o dejarlo en blanco, ambas opciones son correctas.','Por \u00faltimo, suma todas las filas de los pasos para obtener la respuesta (el \u00faltimo paso).'],
+      div:['Escribe el n\u00famero que est\u00e1s dividiendo (el dividendo) bajo la casita de dividir, y el divisor a la izquierda.','Empezando por la izquierda, mira cu\u00e1ntas veces cabe el divisor en la primera cifra (o primeras cifras) sin pasarse.','Escribe ese n\u00famero encima de la casita \u2014 es una cifra de tu respuesta (el cociente).','Usa el borrador de abajo para hacer la resta y bajar la siguiente cifra, igual que en papel.','Contin\u00faa hasta bajar todas las cifras. Lo que quede al final es el resto.']
+    },
+    placeNames:{1:'decenas',2:'centenas',3:'millares'},
+    stepOnes:(n,d)=>`Paso ${n} \u2014 multiplica por la cifra de las unidades (${d})`,
+    stepPlace:(n,s,d)=>{const p=translations.es.placeNames[s]||('10^'+s); const word=s===1?'posici\u00f3n':'posiciones'; return `Paso ${n} \u2014 multiplica por la cifra de las ${p} (${d}), y desplaza ${s} ${word} a la izquierda`;},
+    stepAdd:(n,count)=>`Paso ${n} \u2014 suma las ${count} filas de arriba`,
+    divStepLabel:(n,working,divisor)=>`Paso ${n} — divide ${working} entre ${divisor}`,
+    streakInARow:(n)=>`${n} seguidas`,
+    progressText:(i,n,s)=>`Pregunta ${i} de ${n} \u00b7 Puntuaci\u00f3n ${s}`,
+    bestBadgeText:(op,pct)=>`Tu mejor resultado en ${op}: ${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}: ${score} / ${total} (${pct}%)`,
+    printWorksheetTitle:(op,n)=>`Pr\u00e1ctica de ${op} \u2014 ${n} ejercicios`
+  },
+  it: {
+    appTitle:'Quaderno di Calcolo in Colonna',
+    appSubtitle:'Esercitati con addizioni, sottrazioni, moltiplicazioni e divisioni in colonna \u2014 mostra i riporti e i calcoli, poi fai correggere automaticamente.',
+    tabAdd:'Addizione', tabSub:'Sottrazione', tabMul:'Moltiplicazione', tabDiv:'Divisione',
+    howtoSummary:'Come si fa',
+    labelDigitsPerNumber:'Cifre per numero', labelNumbersToAdd:'Numeri da sommare', labelDigits:'Cifre',
+    labelDigitsTop:'Cifre del numero sopra', labelDigitsBottom:'Cifre del numero sotto',
+    labelDigitsFirstNumber:'Cifre del primo numero', labelDigitsMultiplier:'Cifre del moltiplicatore',
+    labelMulMethod:'Metodo di lavoro', optMulSteps:'Mostra i passaggi', optMulWhole:'Calcolo completo (risolvilo da solo/a)',
+    customSumSummary:'Inserisci il tuo calcolo', customNumPlaceholder:'Inserisci un numero', btnAddNumber:'+ Aggiungi un altro numero', btnUseSum:'Usa questo calcolo',
+    labelTopNumber:'Numero sopra', labelBottomNumber:'Numero sotto', labelFirstNumber:'Primo numero', labelSecondNumber:'Secondo numero',
+    labelDividendValue:'Dividendo', labelDivisorValue:'Divisore',
+    errInvalidNumber:'Inserisci solo numeri interi (massimo 8 cifre).', errNeedTwo:'Inserisci almeno due numeri.',
+    errSubOrder:'Il numero sopra deve essere maggiore o uguale a quello sotto.', errDivisorZero:'Il divisore deve essere almeno 1.',
+    labelDigitsDividend:'Cifre del dividendo', labelDigitsDivisor:'Cifre del divisore', labelType:'Tipo',
+    optExact:'Divisione esatta', optRem:'Pu\u00f2 avere resto',
+    btnNewProblem:'Nuovo esercizio', labelTestLength:'Lunghezza del test',
+    opt5Questions:'5 domande', opt10Questions:'10 domande', opt15Questions:'15 domande',
+    btnStartTest:'Inizia il test', labelWorksheetSize:'Dimensione della scheda',
+    opt6Problems:'6 esercizi', opt10Problems:'10 esercizi', opt16Problems:'16 esercizi',
+    btnPrintWorksheet:'Stampa scheda', labelPencilPad:'Brutta copia \u2014 usa questo spazio per i calcoli',
+    btnErase:'Cancella', btnCheckAnswer:'Controlla risposta', btnNextQuestion:'Domanda successiva', btnQuitTest:'Esci dal test', btnTryAgain:'Riprova',
+    btnBackToPractice:"Torna all'esercitazione", btnTakeAnotherTest:'Fai un altro test',
+    msgAllCorrect:'Tutto corretto \u2014 ottimo lavoro!', msgNotQuite:'Non proprio \u2014 controlla le celle evidenziate.',
+    msgFillAnswer:'Compila le caselle della risposta (sotto la riga) prima di controllare \u2014 le caselle piccole sopra i numeri servono solo per i riporti.',
+    labelRemainder:'resto', testCompleteTitle:'Test completato', printAnswerKeyTitle:'Soluzioni',
+    labelLanguage:'Lingua', summaryCorrect:'Corretto', summaryIncorrect:'Sbagliato',
+    howto:{
+      add:['Allinea i numeri a destra, unit\u00e0 sotto unit\u00e0, decine sotto decine.','Somma prima la colonna di destra (le unit\u00e0).','Se il totale \u00e8 10 o pi\u00f9, scrivi la cifra delle unit\u00e0 nella risposta e riporta la decina nella casella piccola sopra la colonna successiva.','Somma la colonna successiva, incluso ogni riporto, e continua finch\u00e9 tutte le colonne sono finite.','Se rimane un riporto dopo l\u2019ultima colonna, diventa una nuova cifra all\u2019inizio della risposta.'],
+      sub:['Allinea i numeri a destra, unit\u00e0 sotto unit\u00e0, decine sotto decine.','Sottrai prima la colonna di destra.','Se la cifra sopra \u00e8 pi\u00f9 piccola di quella sotto, prendi in prestito 1 dalla colonna a sinistra e aggiungi 10 alla cifra da cui stai sottraendo. Nella casella piccola sopra la colonna da cui hai preso in prestito, puoi scrivere un piccolo 1 oppure cancellare e scrivere la nuova cifra ridotta \u2014 entrambe sono considerate corrette.','Continua colonna per colonna, usando i prestiti quando servono.','Le cifre rimaste in basso, lette da sinistra a destra, sono la tua risposta.'],
+      mul:['Scrivi il numero pi\u00f9 grande sopra e il moltiplicatore sotto, allineati a destra.','Se il moltiplicatore ha una cifra: moltiplicala per ogni cifra del numero sopra, partendo da destra, riportando le decine nella casella sopra la colonna successiva, come nell\u2019addizione.','Se il moltiplicatore ha pi\u00f9 cifre: moltiplica prima per la cifra delle unit\u00e0 (Passo 1), poi per quella delle decine spostata di un posto a sinistra (Passo 2), poi per quella delle centinaia spostata di due posti (Passo 3), e cos\u00ec via \u2014 un passo per ogni cifra. Puoi scrivere uno 0 come segnaposto per ogni spostamento oppure lasciarlo vuoto, entrambi sono considerati corretti.','Infine, somma tutte le righe dei passaggi per ottenere la risposta (l\u2019ultimo passaggio).'],
+      div:["Scrivi il numero che stai dividendo (il dividendo) sotto la 'casetta' della divisione, e il divisore a sinistra.",'Partendo da sinistra, guarda quante volte il divisore entra nella prima cifra (o nelle prime cifre) senza superarla.','Scrivi quel numero sopra la casetta \u2014 \u00e8 una cifra della tua risposta (il quoziente).','Usa la brutta copia qui sotto per fare la sottrazione e abbassare la cifra successiva, come sulla carta.','Continua finch\u00e9 non hai abbassato tutte le cifre. Quello che resta alla fine \u00e8 il resto.']
+    },
+    placeNames:{1:'decine',2:'centinaia',3:'migliaia'},
+    stepOnes:(n,d)=>`Passo ${n} \u2014 moltiplica per la cifra delle unit\u00e0 (${d})`,
+    stepPlace:(n,s,d)=>{const p=translations.it.placeNames[s]||('10^'+s); const word=s===1?'posizione':'posizioni'; return `Passo ${n} \u2014 moltiplica per la cifra delle ${p} (${d}), poi sposta di ${s} ${word} a sinistra`;},
+    stepAdd:(n,count)=>`Passo ${n} \u2014 somma le ${count} righe sopra`,
+    divStepLabel:(n,working,divisor)=>`Passo ${n} — dividi ${working} per ${divisor}`,
+    streakInARow:(n)=>`${n} di fila`,
+    progressText:(i,n,s)=>`Domanda ${i} di ${n} \u00b7 Punteggio ${s}`,
+    bestBadgeText:(op,pct)=>`Il tuo record in ${op}: ${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}: ${score} / ${total} (${pct}%)`,
+    printWorksheetTitle:(op,n)=>`Esercizi di ${op} \u2014 ${n} esercizi`
+  },
+  zh: {
+    appTitle:'\u7ad6\u5f0f\u8fd0\u7b97\u7ec3\u4e60\u672c',
+    appSubtitle:'\u7ec3\u4e60\u7ad6\u5f0f\u52a0\u6cd5\u3001\u51cf\u6cd5\u3001\u4e58\u6cd5\u548c\u9664\u6cd5\u2014\u2014\u5199\u51fa\u8fdb\u4f4d\u3001\u9000\u4f4d\u548c\u6f14\u7b97\u8fc7\u7a0b\uff0c\u7136\u540e\u81ea\u52a8\u6279\u6539\u3002',
+    tabAdd:'\u52a0\u6cd5', tabSub:'\u51cf\u6cd5', tabMul:'\u4e58\u6cd5', tabDiv:'\u9664\u6cd5',
+    howtoSummary:'\u600e\u4e48\u505a',
+    labelDigitsPerNumber:'\u6bcf\u4e2a\u6570\u7684\u4f4d\u6570', labelNumbersToAdd:'\u76f8\u52a0\u7684\u6570\u5b57\u4e2a\u6570', labelDigits:'\u4f4d\u6570',
+    labelDigitsTop:'上面数字的位数', labelDigitsBottom:'下面数字的位数',
+    labelDigitsFirstNumber:'\u7b2c\u4e00\u4e2a\u6570\u7684\u4f4d\u6570', labelDigitsMultiplier:'\u4e58\u6570\u7684\u4f4d\u6570',
+    labelMulMethod:'解题方式', optMulSteps:'显示分步过程', optMulWhole:'整体运算（自己算）',
+    customSumSummary:'输入你自己的算式', customNumPlaceholder:'输入一个数字', btnAddNumber:'+ 添加另一个数字', btnUseSum:'使用这个算式',
+    labelTopNumber:'上面的数字', labelBottomNumber:'下面的数字', labelFirstNumber:'第一个数字', labelSecondNumber:'第二个数字',
+    labelDividendValue:'被除数', labelDivisorValue:'除数',
+    errInvalidNumber:'请只输入整数（最多8位）。', errNeedTwo:'请至少输入两个数字。',
+    errSubOrder:'上面的数字必须大于或等于下面的数字。', errDivisorZero:'除数至少为1。',
+    labelDigitsDividend:'\u88ab\u9664\u6570\u7684\u4f4d\u6570', labelDigitsDivisor:'\u9664\u6570\u7684\u4f4d\u6570', labelType:'\u7c7b\u578b',
+    optExact:'\u6574\u9664', optRem:'\u53ef\u80fd\u6709\u4f59\u6570',
+    btnNewProblem:'\u65b0\u9898\u76ee', labelTestLength:'\u6d4b\u9a8c\u9898\u6570',
+    opt5Questions:'5 \u9898', opt10Questions:'10 \u9898', opt15Questions:'15 \u9898',
+    btnStartTest:'\u5f00\u59cb\u6d4b\u9a8c', labelWorksheetSize:'\u7ec3\u4e60\u9898\u6570\u91cf',
+    opt6Problems:'6 \u9898', opt10Problems:'10 \u9898', opt16Problems:'16 \u9898',
+    btnPrintWorksheet:'\u6253\u5370\u7ec3\u4e60\u9898', labelPencilPad:'\u8349\u7a3f\u533a \u2014 \u5728\u8fd9\u91cc\u5199\u51fa\u4f60\u7684\u6f14\u7b97\u8fc7\u7a0b',
+    btnErase:'\u6e05\u9664', btnCheckAnswer:'\u68c0\u67e5\u7b54\u6848', btnNextQuestion:'\u4e0b\u4e00\u9898', btnQuitTest:'\u9000\u51fa\u6d4b\u9a8c', btnTryAgain:'\u518d\u8bd5\u4e00\u6b21',
+    btnBackToPractice:'\u8fd4\u56de\u7ec3\u4e60', btnTakeAnotherTest:'\u518d\u6d4b\u4e00\u6b21',
+    msgAllCorrect:'\u5168\u90e8\u6b63\u786e\u2014\u2014\u592a\u68d2\u4e86\uff01', msgNotQuite:'\u8fd8\u4e0d\u592a\u5bf9\u2014\u2014\u8bf7\u68c0\u67e5\u6807\u51fa\u7684\u683c\u5b50\u3002',
+    msgFillAnswer:'\u8bf7\u5148\u586b\u5199\u7b54\u6848\u683c\uff08\u6a2a\u7ebf\u4e0b\u65b9\uff09\u518d\u68c0\u67e5\u2014\u2014\u6570\u5b57\u4e0a\u65b9\u7684\u5c0f\u683c\u5b50\u53ea\u662f\u7528\u6765\u5199\u8fdb\u4f4d/\u9000\u4f4d\u7684\u3002',
+    labelRemainder:'\u4f59\u6570', testCompleteTitle:'\u6d4b\u9a8c\u5b8c\u6210', printAnswerKeyTitle:'\u7b54\u6848',
+    labelLanguage:'\u8bed\u8a00', summaryCorrect:'\u6b63\u786e', summaryIncorrect:'\u9519\u8bef',
+    howto:{
+      add:['\u628a\u6570\u5b57\u9760\u53f3\u5bf9\u9f50\uff0c\u4e2a\u4f4d\u5bf9\u4e2a\u4f4d\uff0c\u5341\u4f4d\u5bf9\u5341\u4f4d\u3002','\u5148\u7b97\u6700\u53f3\u8fb9\u4e00\u5217\uff08\u4e2a\u4f4d\uff09\u3002','\u5982\u679c\u8fd9\u4e00\u5217\u7684\u548c\u662f10\u6216\u4ee5\u4e0a\uff0c\u628a\u4e2a\u4f4d\u6570\u5b57\u5199\u5728\u7b54\u6848\u91cc\uff0c\u5e76\u628a\u5341\u4f4d\u6570\u5b57\u8fdb\u4f4d\u5230\u4e0b\u4e00\u5217\u4e0a\u65b9\u7684\u5c0f\u683c\u5b50\u91cc\u3002','\u7ee7\u7eed\u7b97\u4e0b\u4e00\u5217\uff0c\u628a\u8fdb\u4f4d\u4e5f\u52a0\u8fdb\u53bb\uff0c\u76f4\u5230\u6240\u6709\u5217\u90fd\u7b97\u5b8c\u3002','\u5982\u679c\u6700\u540e\u4e00\u5217\u7b97\u5b8c\u8fd8\u6709\u8fdb\u4f4d\uff0c\u5b83\u5c31\u6210\u4e3a\u7b54\u6848\u6700\u524d\u9762\u7684\u65b0\u6570\u5b57\u3002'],
+      sub:['\u628a\u6570\u5b57\u9760\u53f3\u5bf9\u9f50\uff0c\u4e2a\u4f4d\u5bf9\u4e2a\u4f4d\uff0c\u5341\u4f4d\u5bf9\u5341\u4f4d\u3002','\u5148\u7b97\u6700\u53f3\u8fb9\u4e00\u5217\u3002','\u5982\u679c\u4e0a\u9762\u7684\u6570\u5b57\u6bd4\u4e0b\u9762\u7684\u5c0f\uff0c\u5c31\u5411\u5de6\u8fb9\u4e00\u5217\u501f1\uff0c\u5e76\u5728\u88ab\u51cf\u6570\u4e0a\u52a010\u3002\u5728\u88ab\u501f\u90a3\u4e00\u5217\u4e0a\u65b9\u7684\u5c0f\u683c\u5b50\u91cc\uff0c\u4f60\u53ef\u4ee5\u5199\u4e00\u4e2a\u5c0f\u5c0f\u76841\uff08\u8868\u793a\u5b83\u501f\u51fa\u4e861\uff09\uff0c\u4e5f\u53ef\u4ee5\u5212\u6389\u5e76\u5199\u51fa\u51cf\u5c11\u540e\u7684\u65b0\u6570\u5b57\u2014\u2014\u4e24\u79cd\u5199\u6cd5\u90fd\u7b97\u5bf9\u3002','\u9010\u5217\u5f80\u5de6\u7b97\uff0c\u9047\u5230\u9700\u8981\u501f\u4f4d\u65f6\u5c31\u501f\u3002','\u6700\u4e0b\u9762\u5269\u4e0b\u7684\u6570\u5b57\uff0c\u4ece\u5de6\u5230\u53f3\u8bfb\u51fa\u6765\uff0c\u5c31\u662f\u7b54\u6848\u3002'],
+      mul:['\u628a\u8f83\u5927\u7684\u6570\u5199\u5728\u4e0a\u9762\uff0c\u4e58\u6570\u5199\u5728\u4e0b\u9762\uff0c\u9760\u53f3\u5bf9\u9f50\u3002','\u5982\u679c\u4e58\u6570\u53ea\u6709\u4e00\u4f4d\uff1a\u4ece\u53f3\u8fb9\u5f00\u59cb\uff0c\u7528\u5b83\u4e58\u4e0a\u9762\u6570\u5b57\u7684\u6bcf\u4e00\u4f4d\uff0c\u5341\u4f4d\u8fdb\u4f4d\u5230\u4e0b\u4e00\u5217\u4e0a\u65b9\u7684\u5c0f\u683c\u5b50\u91cc\uff0c\u65b9\u6cd5\u548c\u52a0\u6cd5\u4e00\u6837\u3002','\u5982\u679c\u4e58\u6570\u6709\u591a\u4f4d\uff1a\u5148\u4e58\u4e2a\u4f4d\u6570\u5b57\uff08\u7b2c1\u6b65\uff09\uff0c\u518d\u4e58\u5341\u4f4d\u6570\u5b57\u5e76\u5411\u5de6\u79fb\u4e00\u4f4d\uff08\u7b2c2\u6b65\uff09\uff0c\u518d\u4e58\u767e\u4f4d\u6570\u5b57\u5e76\u5411\u5de6\u79fb\u4e24\u4f4d\uff08\u7b2c3\u6b65\uff09\uff0c\u4f9d\u6b64\u7c7b\u63a8\u2014\u2014\u6bcf\u4e00\u4f4d\u4e00\u4e2a\u6b65\u9aa4\u3002\u6bcf\u6b21\u5de6\u79fb\u65f6\u53ef\u4ee5\u5199\u96f6\u5360\u4f4d\uff0c\u4e5f\u53ef\u4ee5\u7559\u7a7a\uff0c\u4e24\u79cd\u90fd\u7b97\u5bf9\u3002','\u6700\u540e\uff0c\u628a\u6240\u6709\u6b65\u9aa4\u7684\u7ed3\u679c\u52a0\u8d77\u6765\u5f97\u5230\u7b54\u6848\uff08\u6700\u540e\u4e00\u6b65\uff09\u3002'],
+      div:['\u628a\u88ab\u9664\u6570\u5199\u5728\u9664\u53f7\u4e0b\u9762\uff0c\u9664\u6570\u5199\u5728\u5de6\u8fb9\u3002','\u4ece\u5de6\u8fb9\u5f00\u59cb\uff0c\u770b\u9664\u6570\u80fd\u4e0d\u8d85\u8fc7\u5730\u6574\u9664\u7b2c\u4e00\u4f4d\uff08\u6216\u524d\u51e0\u4f4d\uff09\u591a\u5c11\u6b21\u3002','\u628a\u8fd9\u4e2a\u6570\u5199\u5728\u9664\u53f7\u4e0a\u65b9\u2014\u2014\u8fd9\u5c31\u662f\u7b54\u6848\uff08\u5546\uff09\u7684\u4e00\u4f4d\u6570\u5b57\u3002','\u7528\u4e0b\u9762\u7684\u8349\u7a3f\u533a\u505a\u51cf\u6cd5\uff0c\u5e76\u628a\u4e0b\u4e00\u4f4d\u6570\u5b57\u79fb\u4e0b\u6765\uff0c\u5c31\u50cf\u5728\u7eb8\u4e0a\u4e00\u6837\u3002','\u4e00\u76f4\u505a\u5230\u628a\u6240\u6709\u6570\u5b57\u90fd\u79fb\u4e0b\u6765\u4e3a\u6b62\u3002\u6700\u540e\u5269\u4e0b\u7684\u5c31\u662f\u4f59\u6570\u3002']
+    },
+    placeNames:{1:'\u5341\u4f4d',2:'\u767e\u4f4d',3:'\u5343\u4f4d'},
+    stepOnes:(n,d)=>`\u7b2c${n}\u6b65\u2014\u2014\u4e58\u4e2a\u4f4d\u6570\u5b57\uff08${d}\uff09`,
+    stepPlace:(n,s,d)=>{const p=translations.zh.placeNames[s]||('10^'+s); return `\u7b2c${n}\u6b65\u2014\u2014\u4e58${p}\u6570\u5b57\uff08${d}\uff09\uff0c\u7136\u540e\u5411\u5de6\u79fb${s}\u4f4d`;},
+    stepAdd:(n,count)=>`\u7b2c${n}\u6b65\u2014\u2014\u628a\u4e0a\u9762${count}\u884c\u52a0\u8d77\u6765`,
+    divStepLabel:(n,working,divisor)=>`第${n}步 — 用${divisor}去除${working}`,
+    streakInARow:(n)=>`\u8fde\u7eed${n}\u9898\u6b63\u786e`,
+    progressText:(i,n,s)=>`\u7b2c${i}\u9898\uff0c\u5171 ${n} \u9898 \u00b7 \u5f97\u5206 ${s}`,
+    bestBadgeText:(op,pct)=>`\u4f60\u5728${op}\u7684\u6700\u597d\u6210\u7ee9\uff1a${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}\uff1a${score} / ${total}\uff08${pct}%\uff09`,
+    printWorksheetTitle:(op,n)=>`${op}\u7ec3\u4e60 \u2014 ${n} \u9898`
+  },
+  ja: {
+    appTitle:'\u3072\u3063\u7b97\u308c\u3093\u3057\u3085\u3046\u30ce\u30fc\u30c8',
+    appSubtitle:'\u305f\u3057\u7b97\u30fb\u3072\u304d\u7b97\u30fb\u304b\u3051\u7b97\u30fb\u308f\u308a\u7b97\u306e\u3072\u3063\u7b97\u3092\u7df4\u7fd2\u3057\u3088\u3046\u3002\u304f\u308a\u4e0a\u304c\u308a\u30fb\u304f\u308a\u4e0b\u304c\u308a\u3068\u8a08\u7b97\u904e\u7a0b\u3092\u66f8\u3044\u3066\u3001\u81ea\u52d5\u63a1\u70b9\u3067\u78ba\u8a8d\u3067\u304d\u307e\u3059\u3002',
+    tabAdd:'\u305f\u3057\u7b97', tabSub:'\u3072\u304d\u7b97', tabMul:'\u304b\u3051\u7b97', tabDiv:'\u308f\u308a\u7b97',
+    howtoSummary:'\u3084\u308a\u65b9',
+    labelDigitsPerNumber:'1\u3064\u306e\u6570\u306e\u3051\u305f\u6570', labelNumbersToAdd:'\u305f\u3059\u6570\u306e\u500b\u6570', labelDigits:'\u3051\u305f\u6570',
+    labelDigitsTop:'上の数のけた数', labelDigitsBottom:'下の数のけた数',
+    labelDigitsFirstNumber:'\u6700\u521d\u306e\u6570\u306e\u3051\u305f\u6570', labelDigitsMultiplier:'\u304b\u3051\u308b\u6570\u306e\u3051\u305f\u6570',
+    labelMulMethod:'解き方', optMulSteps:'ステップを表示', optMulWhole:'通しで計算（自分で解こう）',
+    customSumSummary:'自分で問題を入力する', customNumPlaceholder:'数字を入力してね', btnAddNumber:'+ 数字をもう1つ追加', btnUseSum:'この問題を使う',
+    labelTopNumber:'上の数', labelBottomNumber:'下の数', labelFirstNumber:'1つ目の数', labelSecondNumber:'2つ目の数',
+    labelDividendValue:'わられる数', labelDivisorValue:'わる数',
+    errInvalidNumber:'整数だけを入力してね（8けたまで）。', errNeedTwo:'数字を2つ以上入力してね。',
+    errSubOrder:'上の数は下の数より大きいか同じにしてね。', errDivisorZero:'わる数は1以上にしてね。',
+    labelDigitsDividend:'\u308f\u3089\u308c\u308b\u6570\u306e\u3051\u305f\u6570', labelDigitsDivisor:'\u308f\u308b\u6570\u306e\u3051\u305f\u6570', labelType:'\u30bf\u30a4\u30d7',
+    optExact:'\u308f\u308a\u5207\u308c\u308b', optRem:'\u3042\u307e\u308a\u304c\u51fa\u308b\u3053\u3068\u3082\u3042\u308b',
+    btnNewProblem:'\u65b0\u3057\u3044\u554f\u984c', labelTestLength:'\u30c6\u30b9\u30c8\u306e\u554f\u984c\u6570',
+    opt5Questions:'5\u554f', opt10Questions:'10\u554f', opt15Questions:'15\u554f',
+    btnStartTest:'\u30c6\u30b9\u30c8\u958b\u59cb', labelWorksheetSize:'\u30d7\u30ea\u30f3\u30c8\u306e\u554f\u984c\u6570',
+    opt6Problems:'6\u554f', opt10Problems:'10\u554f', opt16Problems:'16\u554f',
+    btnPrintWorksheet:'\u30d7\u30ea\u30f3\u30c8\u3092\u5370\u5237', labelPencilPad:'\u3051\u3044\u3055\u3093\u7528\u7d19 \u2014 \u3053\u3053\u306b\u8a08\u7b97\u904e\u7a0b\u3092\u66f8\u3053\u3046',
+    btnErase:'\u6d88\u3059', btnCheckAnswer:'\u7b54\u3048\u3092\u78ba\u8a8d', btnNextQuestion:'\u6b21\u306e\u554f\u984c', btnQuitTest:'\u30c6\u30b9\u30c8\u3092\u3084\u3081\u308b', btnTryAgain:'\u3082\u3046\u4e00\u5ea6\u3084\u308b',
+    btnBackToPractice:'\u7df4\u7fd2\u306b\u3082\u3069\u308b', btnTakeAnotherTest:'\u3082\u3046\u4e00\u5ea6\u30c6\u30b9\u30c8\u3059\u308b',
+    msgAllCorrect:'\u5168\u554f\u6b63\u89e3 \u2014 \u3088\u304f\u3067\u304d\u307e\u3057\u305f\uff01', msgNotQuite:'\u304a\u3057\u3044 \u2014 \u8272\u304c\u3064\u3044\u305f\u30de\u30b9\u3092\u78ba\u8a8d\u3057\u3066\u306d\u3002',
+    msgFillAnswer:'\u78ba\u8a8d\u3059\u308b\u524d\u306b\u3001\u7dda\u306e\u4e0b\u306e\u7b54\u3048\u306e\u30de\u30b9\u3092\u3046\u3081\u3066\u306d \u2014 \u6570\u5b57\u306e\u4e0a\u306e\u5c0f\u3055\u3044\u30de\u30b9\u306f\u304f\u308a\u4e0a\u304c\u308a\u30fb\u304f\u308a\u4e0b\u304c\u308a\u7528\u3060\u3088\u3002',
+    labelRemainder:'\u3042\u307e\u308a', testCompleteTitle:'\u30c6\u30b9\u30c8\u3057\u3085\u3046\u308a\u3087\u3046', printAnswerKeyTitle:'\u7b54\u3048',
+    labelLanguage:'\u8a00\u8a9e', summaryCorrect:'\u6b63\u89e3', summaryIncorrect:'\u4e0d\u6b63\u89e3',
+    howto:{
+      add:['\u6570\u5b57\u3092\u53f3\u306b\u305d\u308d\u3048\u3066\u66f8\u3053\u3046\u3002\u4e00\u306e\u4f4d\u306f\u4e00\u306e\u4f4d\u306e\u4e0b\u306b\u3001\u5341\u306e\u4f4d\u306f\u5341\u306e\u4f4d\u306e\u4e0b\u306b\u3002','\u307e\u305a\u4e00\u756a\u53f3\u306e\u5217\uff08\u4e00\u306e\u4f4d\uff09\u304b\u3089\u8a08\u7b97\u3057\u3088\u3046\u3002','\u5408\u8a08\u304c10\u4ee5\u4e0a\u306b\u306a\u3063\u305f\u3089\u3001\u4e00\u306e\u4f4d\u306e\u6570\u5b57\u3092\u7b54\u3048\u306b\u66f8\u3044\u3066\u3001\u5341\u306e\u4f4d\u306e\u6570\u5b57\u3092\u6b21\u306e\u5217\u306e\u4e0a\u306e\u5c0f\u3055\u3044\u30de\u30b9\u306b\u304f\u308a\u4e0a\u3052\u3088\u3046\u3002','\u6b21\u306e\u5217\u3092\u3001\u304f\u308a\u4e0a\u304c\u3063\u305f\u6570\u5b57\u3082\u305f\u3057\u3066\u8a08\u7b97\u3057\u3001\u6700\u5f8c\u306e\u5217\u307e\u3067\u7d9a\u3051\u3088\u3046\u3002','\u6700\u5f8c\u306e\u5217\u3092\u8a08\u7b97\u3057\u3066\u3082\u304f\u308a\u4e0a\u304c\u308a\u304c\u6b8b\u3063\u305f\u3089\u3001\u305d\u308c\u304c\u7b54\u3048\u306e\u4e00\u756a\u5de6\u306e\u65b0\u3057\u3044\u6570\u5b57\u306b\u306a\u308b\u3088\u3002'],
+      sub:['\u6570\u5b57\u3092\u53f3\u306b\u305d\u308d\u3048\u3066\u66f8\u3053\u3046\u3002\u4e00\u306e\u4f4d\u306f\u4e00\u306e\u4f4d\u306e\u4e0b\u306b\u3001\u5341\u306e\u4f4d\u306f\u5341\u306e\u4f4d\u306e\u4e0b\u306b\u3002','\u307e\u305a\u4e00\u756a\u53f3\u306e\u5217\u304b\u3089\u8a08\u7b97\u3057\u3088\u3046\u3002','\u4e0a\u306e\u6570\u5b57\u304c\u4e0b\u306e\u6570\u5b57\u3088\u308a\u5c0f\u3055\u3044\u3068\u304d\u306f\u3001\u5de6\u306e\u5217\u304b\u30891\u304f\u308a\u4e0b\u3052\u3066\u3001\u5f15\u304b\u308c\u308b\u6570\u5b57\u306b10\u3092\u305f\u3057\u3088\u3046\u3002\u304f\u308a\u4e0b\u3052\u305f\u5217\u306e\u4e0a\u306e\u5c0f\u3055\u3044\u30de\u30b9\u306b\u306f\u3001\u5c0f\u3055\u30441\u3068\u66f8\u3044\u3066\u3082\u3044\u3044\u3057\u3001\u305d\u306e\u6570\u5b57\u3092\u7dda\u3067\u6d88\u3057\u3066\u65b0\u3057\u3044\uff081\u6e1b\u3063\u305f\uff09\u6570\u5b57\u3092\u66f8\u3044\u3066\u3082\u3044\u3044\u3088\u3002\u3069\u3061\u3089\u3082\u6b63\u89e3\u306b\u306a\u308b\u3088\u3002','\u5fc5\u8981\u306a\u3068\u304d\u306b\u304f\u308a\u4e0b\u3052\u306a\u304c\u3089\u3001\u5217\u3054\u3068\u306b\u8a08\u7b97\u3092\u7d9a\u3051\u3088\u3046\u3002','\u4e0b\u306b\u6b8b\u3063\u305f\u6570\u5b57\u3092\u5de6\u304b\u3089\u53f3\u306b\u8aad\u3080\u3068\u3001\u305d\u308c\u304c\u7b54\u3048\u3060\u3088\u3002'],
+      mul:['\u5927\u304d\u3044\u307b\u3046\u306e\u6570\u3092\u4e0a\u306b\u3001\u304b\u3051\u308b\u6570\u3092\u4e0b\u306b\u3001\u53f3\u306b\u305d\u308d\u3048\u3066\u66f8\u3053\u3046\u3002','\u304b\u3051\u308b\u6570\u304c1\u3051\u305f\u306e\u3068\u304d\u306f\u3001\u53f3\u304b\u3089\u9806\u306b\u4e0a\u306e\u6570\u5b57\u306e\u5404\u3051\u305f\u306b\u304b\u3051\u3066\u3001\u5341\u306e\u4f4d\u3092\u6b21\u306e\u5217\u306e\u4e0a\u306e\u5c0f\u3055\u3044\u30de\u30b9\u306b\u304f\u308a\u4e0a\u3052\u3088\u3046\u3002\u305f\u3057\u7b97\u306e\u3068\u304d\u3068\u540c\u3058\u3060\u3088\u3002','\u304b\u3051\u308b\u6570\u304c2\u3051\u305f\u4ee5\u4e0a\u306e\u3068\u304d\u306f\u3001\u307e\u305a\u4e00\u306e\u4f4d\u306e\u6570\u5b57\u3092\u304b\u3051\u3066\uff081\u3060\u3093\u3081\uff09\u3001\u6b21\u306b\u5341\u306e\u4f4d\u306e\u6570\u5b57\u3092\u5de6\u306b1\u3051\u305f\u305a\u3089\u3057\u3066\u304b\u3051\u3066\uff082\u3060\u3093\u3081\uff09\u3001\u6b21\u306b\u767e\u306e\u4f4d\u306e\u6570\u5b57\u3092\u5de6\u306b2\u3051\u305f\u305a\u3089\u3057\u3066\u304b\u3051\u3066\uff083\u3060\u3093\u3081\uff09\u2026\u3068\u3044\u3046\u3088\u3046\u306b\u3001\u3051\u305f\u306e\u6570\u3060\u3051\u8a08\u7b97\u3059\u308b\u3088\u3002\u305a\u3089\u3057\u305f\u5206\u306f0\u3092\u66f8\u3044\u3066\u3082\u3044\u3044\u3057\u3001\u7a7a\u3089\u3093\u306e\u307e\u307e\u3067\u3082\u6b63\u89e3\u306b\u306a\u308b\u3088\u3002','\u6700\u5f8c\u306b\u3001\u3059\u3079\u3066\u306e\u6bb5\u3092\u5168\u90e8\u305f\u3057\u7b97\u3059\u308b\u3068\u7b54\u3048\u306b\u306a\u308b\u3088\uff08\u6700\u5f8c\u306e\u30b9\u30c6\u30c3\u30d7\uff09\u3002'],
+      div:['\u308f\u3089\u308c\u308b\u6570\uff08\u5272\u3089\u308c\u308b\u6570\uff09\u3092\u7b46\u7b97\u306e\u8a18\u53f7\u306e\u4e0b\u306b\u3001\u308f\u308b\u6570\u3092\u5de6\u306b\u66f8\u3053\u3046\u3002','\u5de6\u304b\u3089\u898b\u3066\u3001\u308f\u308b\u6570\u304c\u6700\u521d\u306e\u6570\u5b57\uff08\u307e\u305f\u306f\u6700\u521d\u306e\u6570\u3051\u305f\uff09\u306b\u4f55\u56de\u5165\u308b\u304b\u3001\u3053\u3048\u306a\u3044\u7bc4\u56f2\u3067\u8003\u3048\u3088\u3046\u3002','\u305d\u306e\u6570\u3092\u8a18\u53f7\u306e\u4e0a\u306b\u66f8\u3053\u3046\u3002\u305d\u308c\u304c\u7b54\u3048\uff08\u5546\uff09\u306e1\u3051\u305f\u3060\u3088\u3002','\u4e0b\u306e\u3051\u3044\u3055\u3093\u7528\u7d19\u3092\u4f7f\u3063\u3066\u5f15\u304d\u7b97\u3092\u3057\u3066\u3001\u6b21\u306e\u6570\u5b57\u3092\u304a\u308d\u305d\u3046\u3002\u7d19\u306e\u4e0a\u3067\u3084\u308b\u306e\u3068\u540c\u3058\u3060\u3088\u3002','\u3059\u3079\u3066\u306e\u6570\u5b57\u3092\u304a\u308d\u3057\u7d42\u308f\u308b\u307e\u3067\u7d9a\u3051\u3088\u3046\u3002\u6700\u5f8c\u306b\u6b8b\u3063\u305f\u6570\u304c\u3042\u307e\u308a\u3060\u3088\u3002']
+    },
+    placeNames:{1:'\u5341\u306e\u4f4d',2:'\u767e\u306e\u4f4d',3:'\u5343\u306e\u4f4d'},
+    stepOnes:(n,d)=>`${n}\u3060\u3093\u3081 \u2014 \u4e00\u306e\u4f4d\u306e\u6570\u5b57\uff08${d}\uff09\u3092\u304b\u3051\u3088\u3046`,
+    stepPlace:(n,s,d)=>{const p=translations.ja.placeNames[s]||('10^'+s); return `${n}\u3060\u3093\u3081 \u2014 ${p}\u306e\u6570\u5b57\uff08${d}\uff09\u3092\u304b\u3051\u3066\u3001\u5de6\u306b${s}\u3051\u305f\u305a\u3089\u305d\u3046`;},
+    stepAdd:(n,count)=>`${n}\u3060\u3093\u3081 \u2014 \u4e0a\u306e${count}\u3060\u3093\u3092\u305f\u3057\u7b97\u3057\u3088\u3046`,
+    divStepLabel:(n,working,divisor)=>`${n}だんめ — ${working}を${divisor}でわろう`,
+    streakInARow:(n)=>`${n}\u554f\u9023\u7d9a\u6b63\u89e3`,
+    progressText:(i,n,s)=>`${n}\u554f\u4e2d${i}\u554f\u76ee \u00b7 \u5f97\u70b9 ${s}`,
+    bestBadgeText:(op,pct)=>`${op}\u306e\u30d9\u30b9\u30c8\u30b9\u30b3\u30a2\uff1a${pct}%`,
+    summaryScoreLine:(op,score,total,pct)=>`${op}\uff1a${score} / ${total}\uff08${pct}%\uff09`,
+    printWorksheetTitle:(op,n)=>`${op}\u306e\u308c\u3093\u3057\u3085\u3046 \u2014 ${n}\u554f`
+  }
+};
+function opName(op){ return t(TAB_KEY[op]); }
+function stepOnesLabel(n,d){ const lang=state.lang||'en'; const fn=(translations[lang]&&translations[lang].stepOnes)||translations.en.stepOnes; return fn(n,d); }
+function stepPlaceLabel(n,s,d){ const lang=state.lang||'en'; const fn=(translations[lang]&&translations[lang].stepPlace)||translations.en.stepPlace; return fn(n,s,d); }
+function stepAddLabel(n,count){ const lang=state.lang||'en'; const fn=(translations[lang]&&translations[lang].stepAdd)||translations.en.stepAdd; return fn(n,count); }
+function divStepLabel(n,working,divisor){ const lang=state.lang||'en'; const fn=(translations[lang]&&translations[lang].divStepLabel)||translations.en.divStepLabel; return fn(n,working,divisor); }
+function howtoSteps(op){ const lang=state.lang||'en'; return (translations[lang]&&translations[lang].howto&&translations[lang].howto[op]) || translations.en.howto[op]; }
+function t(key){
+  const lang=(typeof state!=='undefined'&&state.lang) ? state.lang : 'en';
+  const v=(translations[lang]&&translations[lang][key]!==undefined) ? translations[lang][key] : translations.en[key];
+  return v;
+}
+
+
+const settings = {
+  add:{digits:3, addends:2},
+  sub:{topDigits:3, bottomDigits:3},
+  mul:{mcDigits:2, mrDigits:1, method:'steps'},
+  div:{dividendDigits:3, divisorDigits:1, exact:true, method:'whole'}
+};
+const settingFieldMap = {
+  'add-digits':['add','digits'], 'add-addends':['add','addends'],
+  'sub-top-digits':['sub','topDigits'], 'sub-bottom-digits':['sub','bottomDigits'],
+  'mul-mc':['mul','mcDigits'], 'mul-mr':['mul','mrDigits'], 'mul-method':['mul','method'],
+  'div-dd':['div','dividendDigits'], 'div-dr':['div','divisorDigits'], 'div-method':['div','method']
+};
+
+const state = { op:'add', mode:'practice', lang:'en', testTotal:10, testIndex:0, testScore:0, testResults:[], current:null, streak:0 };
+
+function storageGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+function storageSet(key,val){ try{ localStorage.setItem(key,val); }catch(e){} }
+
+function readSettingsFromUI(){
+  settings.add.digits=parseInt(document.getElementById('add-digits').value,10);
+  settings.add.addends=parseInt(document.getElementById('add-addends').value,10);
+  settings.sub.topDigits=parseInt(document.getElementById('sub-top-digits').value,10);
+  settings.sub.bottomDigits=parseInt(document.getElementById('sub-bottom-digits').value,10);
+  settings.mul.mcDigits=parseInt(document.getElementById('mul-mc').value,10);
+  settings.mul.mrDigits=parseInt(document.getElementById('mul-mr').value,10);
+  settings.mul.method=document.getElementById('mul-method').value;
+  settings.div.dividendDigits=parseInt(document.getElementById('div-dd').value,10);
+  settings.div.divisorDigits=parseInt(document.getElementById('div-dr').value,10);
+  settings.div.exact = document.getElementById('div-exact').value==='exact';
+  settings.div.method = document.getElementById('div-method').value;
+  storageSet('cwp-settings', JSON.stringify(settings));
+  storageSet('cwp-lastop', state.op);
+}
+
+function loadSavedSettings(){
+  const raw=storageGet('cwp-settings');
+  if(raw){
+    try{
+      const saved=JSON.parse(raw);
+      Object.keys(settingFieldMap).forEach(id=>{
+        const [op,key]=settingFieldMap[id];
+        if(saved[op] && saved[op][key]!==undefined){
+          const el=document.getElementById(id);
+          const val=String(saved[op][key]);
+          if(el && Array.from(el.options).some(o=>o.value===val)) el.value=val;
+        }
+      });
+      if(saved.div && saved.div.exact!==undefined){
+        document.getElementById('div-exact').value = saved.div.exact ? 'exact':'rem';
+      }
+    }catch(e){}
+  }
+}
+
+function updateBestBadge(){
+  const best=storageGet('cwp-best-'+state.op);
+  const badge=document.getElementById('bestBadge');
+  if(best){
+    badge.textContent=translations[state.lang||'en'].bestBadgeText(opName(state.op), best);
+    badge.classList.remove('hidden');
+  } else {
+    badge.classList.add('hidden');
+  }
+}
+
+function setLocked(locked){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('locked', locked));
+  document.getElementById('settingsPanel').querySelectorAll('select, button').forEach(el=>{
+    if(el.id!=='startTestBtn') el.disabled = locked;
+  });
+  document.getElementById('startTestBtn').disabled = locked;
+  document.getElementById('langSelect').disabled = locked;
+  document.getElementById('quitTestBtn').classList.toggle('hidden', !locked);
+  document.getElementById('customSumPanel').classList.toggle('locked', locked);
+  document.getElementById('customSumPanel').querySelectorAll('input, button').forEach(el=>{ el.disabled = locked; });
+}
+
+function applyLanguage(lang){
+  state.lang = lang;
+  document.documentElement.lang = lang;
+  storageSet('cwp-lang', lang);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    const txt = t(key);
+    if(txt!==undefined) el.textContent = txt;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-placeholder');
+    const txt = t(key);
+    if(txt!==undefined) el.placeholder = txt;
+  });
+  const list=document.getElementById('howtoList');
+  list.innerHTML='';
+  howtoSteps(state.op).forEach(step=>{ const li=document.createElement('li'); li.textContent=step; list.appendChild(li); });
+  document.getElementById('feedback').textContent='';
+  document.getElementById('feedback').className='feedback';
+}
+
+function switchOp(op, focus=true){
+  state.op=op;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.op===op));
+  document.querySelectorAll('.settings-group').forEach(g=>g.classList.toggle('active', g.dataset.op===op));
+  document.querySelectorAll('.custom-sum-body').forEach(g=>g.classList.toggle('hidden', g.dataset.op!==op));
+  const list=document.getElementById('howtoList');
+  list.innerHTML='';
+  howtoSteps(op).forEach(step=>{ const li=document.createElement('li'); li.textContent=step; list.appendChild(li); });
+  updateBestBadge();
+  newProblem(focus);
+}
+
+function finalizeProblem(checks, inputs, result, focus){
+  state.current={checks, inputs, title:result.title, checked:false};
+  document.getElementById('problemTitle').textContent=result.title;
+  setupInputNav(inputs);
+  document.getElementById('feedback').textContent='';
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('checkBtn').disabled=false;
+  document.getElementById('eraseBtn').disabled=false;
+  document.getElementById('tryAgainBtn').classList.add('hidden');
+  document.getElementById('nextBtn').textContent = state.mode==='test' ? t('btnNextQuestion') : t('btnNewProblem');
+  document.getElementById('nextBtn').disabled = state.mode==='test';
+  updateProgressUI();
+  if(focus){
+    const firstAnswer = checks.find(c=>c.group==='answer');
+    if(firstAnswer) firstAnswer.input.focus();
+    else if(inputs.length) inputs[0].focus();
+  }
+}
+function newProblem(focus=true){
+  readSettingsFromUI();
+  const container=document.getElementById('problemArea');
+  container.innerHTML='';
+  document.getElementById('scratchpad').value='';
+  const checks=[]; const inputs=[];
+  let result;
+  if(state.op==='add') result=renderAddition(container, settings.add, checks, inputs);
+  else if(state.op==='sub') result=renderSubtraction(container, settings.sub, checks, inputs);
+  else if(state.op==='mul') result=renderMultiplication(container, settings.mul, checks, inputs);
+  else if(state.op==='div') result=renderDivision(container, settings.div, checks, inputs);
+  finalizeProblem(checks, inputs, result, focus);
+}
+
+/* ---------------- custom (user-entered) sums ---------------- */
+const MAX_CUSTOM_DIGITS=8;
+function validNumStr(raw){ return /^\d+$/.test(raw) && raw.length<=MAX_CUSTOM_DIGITS; }
+function startCustomProblem(buildFn){
+  const container=document.getElementById('problemArea');
+  container.innerHTML='';
+  document.getElementById('scratchpad').value='';
+  const checks=[]; const inputs=[];
+  const result=buildFn(container, checks, inputs);
+  finalizeProblem(checks, inputs, result, true);
+}
+function useCustomAddition(){
+  const errEl=document.getElementById('customAddError'); errEl.textContent='';
+  const raws=Array.from(document.querySelectorAll('#customAddList .custom-num-input')).map(el=>el.value.trim()).filter(v=>v!=='');
+  for(const raw of raws){ if(!validNumStr(raw)){ errEl.textContent=t('errInvalidNumber'); return; } }
+  if(raws.length<2){ errEl.textContent=t('errNeedTwo'); return; }
+  const numbers=raws.map(r=>parseInt(r,10));
+  startCustomProblem((container,checks,inputs)=>{
+    const r=addBlock(container, checks, inputs, numbers);
+    return {title:numbers.join(' + ')+' = ?', answer:String(r.trueValue)};
+  });
+}
+function useCustomSubtraction(){
+  const errEl=document.getElementById('customSubError'); errEl.textContent='';
+  const topRaw=document.getElementById('customSubTop').value.trim();
+  const bottomRaw=document.getElementById('customSubBottom').value.trim();
+  if(!validNumStr(topRaw) || !validNumStr(bottomRaw)){ errEl.textContent=t('errInvalidNumber'); return; }
+  const top=parseInt(topRaw,10), bottom=parseInt(bottomRaw,10);
+  if(top<bottom){ errEl.textContent=t('errSubOrder'); return; }
+  startCustomProblem((container,checks,inputs)=>{
+    const r=subBlock(container, checks, inputs, top, bottom);
+    return {title:`${top} \u2212 ${bottom} = ?`, answer:String(r.trueValue)};
+  });
+}
+function useCustomMultiplication(){
+  const errEl=document.getElementById('customMulError'); errEl.textContent='';
+  const aRaw=document.getElementById('customMulA').value.trim();
+  const bRaw=document.getElementById('customMulB').value.trim();
+  if(!validNumStr(aRaw) || !validNumStr(bRaw)){ errEl.textContent=t('errInvalidNumber'); return; }
+  const a=parseInt(aRaw,10), b=parseInt(bRaw,10);
+  readSettingsFromUI();
+  startCustomProblem((container,checks,inputs)=>{
+    const r=buildMultiplication(container, checks, inputs, a, b, settings.mul.method);
+    return {title:`${a} \u00d7 ${b} = ?`, answer:String(r.finalAnswer)};
+  });
+}
+function useCustomDivision(){
+  const errEl=document.getElementById('customDivError'); errEl.textContent='';
+  const aRaw=document.getElementById('customDivA').value.trim();
+  const bRaw=document.getElementById('customDivB').value.trim();
+  if(!validNumStr(aRaw) || !validNumStr(bRaw)){ errEl.textContent=t('errInvalidNumber'); return; }
+  const dividend=parseInt(aRaw,10), divisor=parseInt(bRaw,10);
+  if(divisor<1){ errEl.textContent=t('errDivisorZero'); return; }
+  readSettingsFromUI();
+  startCustomProblem((container,checks,inputs)=>{
+    const r=buildDivision(container, checks, inputs, dividend, divisor, settings.div.method);
+    return {title:`${dividend} \u00f7 ${divisor} = ?`, answer: r.remainder? `${r.quotient} ${t('labelRemainder')} ${r.remainder}` : String(r.quotient)};
+  });
+}
+function addAnotherNumberInput(){
+  const list=document.getElementById('customAddList');
+  if(list.children.length>=6) return;
+  const inp=document.createElement('input');
+  inp.type='text'; inp.setAttribute('inputmode','numeric'); inp.className='custom-num-input';
+  inp.placeholder=t('customNumPlaceholder');
+  list.appendChild(inp);
+}
+
+function eraseInputs(){
+  if(!state.current || state.current.checked) return;
+  state.current.inputs.forEach(inp=>{ inp.value=''; inp.classList.remove('correct','incorrect'); });
+  document.getElementById('scratchpad').value='';
+}
+
+function retryProblem(){
+  if(!state.current || !state.current.checked) return;
+  state.current.checks.forEach(c=>{
+    if(!c.input.classList.contains('correct')){
+      c.input.value='';
+      c.input.classList.remove('correct','incorrect');
+      c.input.disabled=false;
+    }
+  });
+  state.current.checked=false;
+  document.getElementById('checkBtn').disabled=false;
+  document.getElementById('eraseBtn').disabled=false;
+  document.getElementById('tryAgainBtn').classList.add('hidden');
+  document.getElementById('feedback').textContent='';
+  document.getElementById('feedback').className='feedback';
+  const firstWrong = state.current.checks.find(c=>!c.input.disabled);
+  if(firstWrong) firstWrong.input.focus();
+}
+
+function updateStreakBadge(){
+  const el=document.getElementById('streakBadge');
+  if(state.streak>=2){
+    el.textContent = `\ud83d\udd25 ${translations[state.lang||'en'].streakInARow(state.streak)}`;
+    el.classList.add('show');
+  } else {
+    el.classList.remove('show');
+  }
+}
+
+function checkAnswer(){
+  if(!state.current || state.current.checked) return;
+  const answerChecks = state.current.checks.filter(c=>c.group==='answer');
+  const attempted = answerChecks.some(c=>c.input.value.trim()!=='');
+  if(!attempted){
+    const fb=document.getElementById('feedback');
+    fb.textContent = t('msgFillAnswer');
+    fb.className='feedback bad';
+    answerChecks.forEach(c=>{
+      c.input.classList.add('needs-answer');
+      setTimeout(()=>c.input.classList.remove('needs-answer'), 900);
+    });
+    if(answerChecks.length) answerChecks[0].input.focus();
+    return;
+  }
+  const allOk=gradeAll(state.current.checks);
+  state.current.checked=true;
+  document.getElementById('checkBtn').disabled=true;
+  document.getElementById('eraseBtn').disabled=true;
+  document.getElementById('nextBtn').disabled=false;
+  document.getElementById('tryAgainBtn').classList.toggle('hidden', allOk || state.mode==='test');
+  const fb=document.getElementById('feedback');
+  fb.textContent = allOk ? t('msgAllCorrect') : t('msgNotQuite');
+  fb.className='feedback '+(allOk?'ok':'bad');
+  state.streak = allOk ? state.streak+1 : 0;
+  updateStreakBadge();
+  if(state.mode==='test'){
+    state.testResults.push({title:state.current.title, correct:allOk});
+    if(allOk) state.testScore++;
+  }
+  updateProgressUI();
+}
+
+function nextProblem(){
+  if(state.mode==='test'){
+    state.testIndex++;
+    if(state.testIndex>=state.testTotal){ showSummary(); return; }
+  }
+  newProblem();
+}
+
+function updateProgressUI(){
+  const el=document.getElementById('progressInfo');
+  if(state.mode==='test'){
+    el.textContent=translations[state.lang||'en'].progressText(state.testIndex+1, state.testTotal, state.testScore);
+  } else {
+    el.textContent='';
+  }
+}
+
+function startTest(){
+  state.mode='test';
+  state.testTotal=parseInt(document.getElementById('testCount').value,10);
+  state.testIndex=0;
+  state.testScore=0;
+  state.testResults=[];
+  state.streak=0;
+  document.getElementById('summaryPanel').classList.add('hidden');
+  document.getElementById('practiceArea').classList.remove('hidden');
+  setLocked(true);
+  newProblem();
+}
+
+function launchConfetti(container){
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors=['#C98A2B','#223046','#3C8D66','#C0453B'];
+  for(let i=0;i<24;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.left=(Math.random()*100)+'%';
+    p.style.background=colors[i%colors.length];
+    p.style.animationDelay=(Math.random()*.4)+'s';
+    p.style.transform=`rotate(${Math.random()*360}deg)`;
+    container.appendChild(p);
+    setTimeout(()=>p.remove(), 2200);
+  }
+}
+
+function showSummary(){
+  document.getElementById('practiceArea').classList.add('hidden');
+  setLocked(false);
+  const panel=document.getElementById('summaryPanel');
+  panel.classList.remove('hidden');
+  const pct=Math.round(100*state.testScore/state.testTotal);
+  document.getElementById('summaryScore').textContent=translations[state.lang||'en'].summaryScoreLine(opName(state.op), state.testScore, state.testTotal, pct);
+  const list=document.getElementById('summaryList'); list.innerHTML='';
+  state.testResults.forEach((r,i)=>{
+    const li=document.createElement('li');
+    li.textContent=`${i+1}. ${r.title} \u2014 ${r.correct? t('summaryCorrect') : t('summaryIncorrect')}`;
+    li.className=r.correct?'ok':'bad';
+    list.appendChild(li);
+  });
+  const prevBest=parseInt(storageGet('cwp-best-'+state.op)||'0',10);
+  if(pct>prevBest){ storageSet('cwp-best-'+state.op, String(pct)); }
+  updateBestBadge();
+  if(pct===100){ launchConfetti(panel); }
+}
+
+function quitTest(){
+  state.mode='practice';
+  setLocked(false);
+  newProblem();
+}
+
+function backToPractice(){
+  state.mode='practice';
+  document.getElementById('summaryPanel').classList.add('hidden');
+  document.getElementById('practiceArea').classList.remove('hidden');
+  newProblem();
+}
+
+function printWorksheet(){
+  readSettingsFromUI();
+  const n=parseInt(document.getElementById('printCount').value,10);
+  document.getElementById('printTitle').textContent = translations[state.lang||'en'].printWorksheetTitle(opName(state.op), n);
+  const container=document.getElementById('printProblems');
+  container.innerHTML='';
+  const keyList=document.getElementById('printAnswerKey');
+  keyList.innerHTML='';
+  for(let i=0;i<n;i++){
+    const wrap=document.createElement('div'); wrap.className='print-problem';
+    const num=document.createElement('div'); num.style.fontWeight='700'; num.style.minWidth='2em'; num.textContent=(i+1)+'.';
+    wrap.appendChild(num);
+    const inner=document.createElement('div');
+    const checks=[]; const inputs=[]; let result;
+    if(state.op==='add') result=renderAddition(inner, settings.add, checks, inputs);
+    else if(state.op==='sub') result=renderSubtraction(inner, settings.sub, checks, inputs);
+    else if(state.op==='mul') result=renderMultiplication(inner, settings.mul, checks, inputs);
+    else if(state.op==='div') result=renderDivision(inner, settings.div, checks, inputs);
+    inputs.forEach(inp=>{ inp.value=''; inp.disabled=true; });
+    wrap.appendChild(inner);
+    container.appendChild(wrap);
+    const keyItem=document.createElement('li');
+    keyItem.textContent=`${result.title.replace(' = ?','')} = ${result.answer}`;
+    keyList.appendChild(keyItem);
+  }
+  window.print();
+}
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const btn=e.target.closest('.tab-btn');
+  if(!btn || state.mode==='test') return;
+  switchOp(btn.dataset.op, false);
+});
+document.getElementById('newBtn').addEventListener('click', ()=>{ if(state.mode==='test') return; newProblem(); });
+document.getElementById('startTestBtn').addEventListener('click', startTest);
+document.getElementById('eraseBtn').addEventListener('click', eraseInputs);
+document.getElementById('tryAgainBtn').addEventListener('click', retryProblem);
+document.getElementById('addAnotherNumBtn').addEventListener('click', addAnotherNumberInput);
+document.getElementById('useCustomAddBtn').addEventListener('click', useCustomAddition);
+document.getElementById('useCustomSubBtn').addEventListener('click', useCustomSubtraction);
+document.getElementById('useCustomMulBtn').addEventListener('click', useCustomMultiplication);
+document.getElementById('useCustomDivBtn').addEventListener('click', useCustomDivision);
+document.getElementById('checkBtn').addEventListener('click', checkAnswer);
+document.getElementById('nextBtn').addEventListener('click', nextProblem);
+document.getElementById('quitTestBtn').addEventListener('click', quitTest);
+document.getElementById('backToPracticeBtn').addEventListener('click', backToPractice);
+document.getElementById('retryTestBtn').addEventListener('click', startTest);
+document.getElementById('printBtn').addEventListener('click', printWorksheet);
+Object.keys(settingFieldMap).forEach(id=>{
+  document.getElementById(id).addEventListener('change', ()=>{ if(state.mode==='practice') newProblem(false); });
+});
+document.getElementById('div-exact').addEventListener('change', ()=>{ if(state.mode==='practice') newProblem(false); });
+document.getElementById('langSelect').addEventListener('change', function(){
+  applyLanguage(this.value);
+  updateBestBadge();
+  if(state.mode==='practice') newProblem(false);
+});
+
+document.addEventListener('keydown', e=>{
+  if(e.target.tagName==='TEXTAREA') return;
+  if(e.key==='Enter'){
+    e.preventDefault();
+    if(state.current && !state.current.checked) checkAnswer();
+    else if(document.getElementById('nextBtn').disabled===false) nextProblem();
+  } else if(e.key==='Escape'){
+    eraseInputs();
+  }
+});
+
+loadSavedSettings();
+const supportedLangs = ['en','el','fr','de','es','it','zh','ja'];
+let initialLang = storageGet('cwp-lang');
+if(!initialLang){
+  const browserLang = (navigator.language||'en').slice(0,2).toLowerCase();
+  initialLang = supportedLangs.indexOf(browserLang)!==-1 ? browserLang : 'en';
+}
+document.getElementById('langSelect').value = initialLang;
+applyLanguage(initialLang);
+const savedOp = storageGet('cwp-lastop') || 'add';
+switchOp(savedOp, false);
+</script>
+</body>
+</html>

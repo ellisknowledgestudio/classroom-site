@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metalloids | Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1C3F;
+    --bg-raised: #16234E;
+    --ink: #F7F9FC;
+    --ink-dim: #9FB0DE;
+    --line: #26356b;
+    --gold: #F4B942;
+    --ink-strong: #0A1330;
+
+    --b:  #5C5148;
+    --si: #55707E;
+    --ge: #8B9096;
+    --as: #6E7378;
+    --sb: #99A0AC;
+    --te: #A99C8C;
+
+    --b-l:  #8A7A6A;
+    --si-l: #7FA3B5;
+    --ge-l: #C4C8CC;
+    --as-l: #9EA3A8;
+    --sb-l: #D3D7DE;
+    --te-l: #D6C7B2;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header.top { padding: 28px 0 8px; }
+
+  .crumb { font-size: 14px; color: var(--ink-dim); letter-spacing: 0.01em; }
+  .crumb a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid transparent; }
+  .crumb a:hover { border-bottom-color: var(--ink-dim); }
+
+  h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 700; margin: 6px 0 4px; letter-spacing: -0.01em; }
+
+  .subhead { color: var(--ink-dim); font-size: 17px; max-width: 58ch; margin: 0 0 40px; }
+
+  /* ---- Shard rack ---- */
+  .rack {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(14px, 3vw, 28px);
+    padding: 20px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .shard-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .shard {
+    width: 52px;
+    height: 58px;
+    background: linear-gradient(140deg, var(--glow) 0%, var(--glow-l) 46%, var(--glow) 62%, var(--glow) 100%);
+    opacity: 0.4;
+    clip-path: polygon(38% 0%, 100% 22%, 86% 68%, 100% 100%, 46% 82%, 0% 100%, 14% 48%, 0% 18%);
+    transition: opacity 0.35s ease, transform 0.2s ease, filter 0.35s ease;
+  }
+
+  .shard-btn:hover .shard { transform: translateY(-3px) rotate(-2deg); }
+
+  .shard-btn[aria-pressed="true"] .shard {
+    opacity: 1;
+    filter: drop-shadow(0 4px 14px var(--glow));
+  }
+
+  .shard-symbol { font-size: 15px; font-weight: 600; color: var(--ink-dim); transition: color 0.35s ease; }
+  .shard-btn[aria-pressed="true"] .shard-symbol { color: var(--glow); }
+
+  .shard-btn[data-el="b"]  .shard { --glow: var(--b);  --glow-l: var(--b-l); }
+  .shard-btn[data-el="si"] .shard { --glow: var(--si); --glow-l: var(--si-l); }
+  .shard-btn[data-el="ge"] .shard { --glow: var(--ge); --glow-l: var(--ge-l); }
+  .shard-btn[data-el="as"] .shard { --glow: var(--as); --glow-l: var(--as-l); }
+  .shard-btn[data-el="sb"] .shard { --glow: var(--sb); --glow-l: var(--sb-l); }
+  .shard-btn[data-el="te"] .shard { --glow: var(--te); --glow-l: var(--te-l); }
+
+  /* ---- Detail card ---- */
+  .detail {
+    margin-top: 44px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 30px;
+    border-left: 4px solid var(--glow, var(--ink-dim));
+  }
+
+  .detail-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .detail-symbol { font-family: 'Baloo 2', sans-serif; font-size: 40px; font-weight: 800; color: var(--glow, var(--ink)); }
+  .detail-name { font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700; }
+  .detail-meta { color: var(--ink-dim); font-size: 15px; }
+  .detail-fact { margin-top: 14px; font-size: 16px; max-width: 62ch; }
+
+  .stat-row { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
+  .stat-label { font-size: 12px; color: var(--ink-dim); }
+  .stat-value { font-size: 18px; font-weight: 600; }
+
+  .tag {
+    margin-top: 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-strong);
+    background: var(--gold);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* ---- Callout ---- */
+  .callout {
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    font-size: 15.5px;
+    max-width: 62ch;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ---- Quiz ---- */
+  .quiz-toggle {
+    margin-top: 40px;
+    background: var(--gold);
+    border: none;
+    color: var(--ink-strong);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 14px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .quiz-toggle:hover { opacity: 0.9; }
+
+  .quiz { display: none; margin-top: 24px; }
+  .quiz.open { display: block; }
+
+  .q {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .q-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .q-opts { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .q-opt:hover { border-color: var(--ink-dim); }
+  .q-opt.correct { border-color: #6FCF97; background: #16261E; }
+  .q-opt.wrong { border-color: #E85D5D; background: #2A1818; }
+
+  .score-line { margin-top: 18px; font-size: 16px; color: var(--ink-dim); }
+  .score-line strong { color: var(--ink); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="#">Periodic Table</a> / Metalloids</div>
+    <h1>Metalloids</h1>
+    <p class="subhead">Neither fully metal nor fully non-metal — they sit on the "staircase" line of the table, shiny but brittle, and that in-between nature is exactly what makes computer chips possible. Tap a shard to explore each one.</p>
+  </header>
+
+  <div class="rack" id="rack">
+    <button class="shard-btn" data-el="b" aria-pressed="false">
+      <div class="shard"></div>
+      <span class="shard-symbol">B</span>
+    </button>
+    <button class="shard-btn" data-el="si" aria-pressed="false">
+      <div class="shard"></div>
+      <span class="shard-symbol">Si</span>
+    </button>
+    <button class="shard-btn" data-el="ge" aria-pressed="false">
+      <div class="shard"></div>
+      <span class="shard-symbol">Ge</span>
+    </button>
+    <button class="shard-btn" data-el="as" aria-pressed="false">
+      <div class="shard"></div>
+      <span class="shard-symbol">As</span>
+    </button>
+    <button class="shard-btn" data-el="sb" aria-pressed="false">
+      <div class="shard"></div>
+      <span class="shard-symbol">Sb</span>
+    </button>
+    <button class="shard-btn" data-el="te" aria-pressed="false">
+      <div class="shard"></div>
+      <span class="shard-symbol">Te</span>
+    </button>
+  </div>
+
+  <div class="detail" id="detail">
+    <div class="detail-head">
+      <span class="detail-symbol" id="d-symbol">B</span>
+      <span class="detail-name" id="d-name">Boron</span>
+      <span class="detail-meta" id="d-meta">Hard, dark, brittle solid</span>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-label">Atomic number</div><div class="stat-value" id="d-num">5</div></div>
+      <div><div class="stat-label">Atomic mass</div><div class="stat-value" id="d-mass">10.8</div></div>
+    </div>
+    <p class="detail-fact" id="d-fact">Added to ordinary glass to make it far more resistant to heat, creating borosilicate glass — the kind used in oven-safe dishes like Pyrex. It's also used in fibreglass and laundry detergents.</p>
+    <span class="tag" id="d-tag"></span>
+  </div>
+
+  <div class="callout">
+    <strong>Why do they matter so much?</strong> Metalloids conduct electricity, but not as freely as metals — which makes them semiconductors. Engineers can switch that conductivity on and off, which is the basic trick behind every transistor. Without metalloids like silicon, there would be no computer chips, phones, or solar panels.
+  </div>
+
+  <button class="quiz-toggle" id="quizToggle">Test yourself →</button>
+
+  <div class="quiz" id="quiz">
+    <div class="q" data-answer="1">
+      <div class="q-text">1. Which metalloid is the basis of almost every computer chip?</div>
+      <div class="q-opts">
+        <button class="q-opt">Boron</button>
+        <button class="q-opt">Silicon</button>
+        <button class="q-opt">Tellurium</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">2. What is a material called if it conducts electricity, but not as well as a metal?</div>
+      <div class="q-opts">
+        <button class="q-opt">A semiconductor</button>
+        <button class="q-opt">An insulator</button>
+        <button class="q-opt">A superconductor</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">3. Which metalloid is added to glass to make it heat-resistant, as in oven-safe dishes?</div>
+      <div class="q-opts">
+        <button class="q-opt">Arsenic</button>
+        <button class="q-opt">Germanium</button>
+        <button class="q-opt">Boron</button>
+      </div>
+    </div>
+    <div class="q" data-answer="1">
+      <div class="q-text">4. Which metalloid is used in fibre-optic cables and night-vision lenses?</div>
+      <div class="q-opts">
+        <button class="q-opt">Antimony</button>
+        <button class="q-opt">Germanium</button>
+        <button class="q-opt">Boron</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">5. Where do metalloids sit on the periodic table?</div>
+      <div class="q-opts">
+        <button class="q-opt">On the staircase line between metals and non-metals</button>
+        <button class="q-opt">Only in the very first column</button>
+        <button class="q-opt">Only in the last column</button>
+      </div>
+    </div>
+    <div class="score-line" id="scoreLine">Score: <strong>0 / 5</strong></div>
+  </div>
+
+  <footer>
+    Part of the Periodic Table series — Ellis Knowledge Studio. More categories: Noble Gases, Alkali Metals, Halogens, Transition Metals, Non-metals.
+  </footer>
+
+</div>
+
+<script>
+  const data = {
+    b:  { symbol: "B", name: "Boron", meta: "Hard, dark, brittle solid", num: 5, mass: "10.8",
+      fact: "Added to ordinary glass to make it far more resistant to heat, creating borosilicate glass — the kind used in oven-safe dishes like Pyrex. It's also used in fibreglass and laundry detergents.",
+      tag: "Heat-resistant glass" },
+    si: { symbol: "Si", name: "Silicon", meta: "Shiny blue-grey solid", num: 14, mass: "28.1",
+      fact: "The second most abundant element in Earth's crust after oxygen, found in ordinary sand. Purified and refined, it becomes the semiconductor at the heart of nearly every computer chip and solar panel on the planet.",
+      tag: "Powers computer chips" },
+    ge: { symbol: "Ge", name: "Germanium", meta: "Greyish-white, shiny solid", num: 32, mass: "72.6",
+      fact: "Lets infrared light pass through it while blocking visible light, which is why it's used in the lenses of night-vision equipment and thermal cameras, as well as fibre-optic cables.",
+      tag: "Infrared lenses" },
+    as: { symbol: "As", name: "Arsenic", meta: "Grey, metallic-looking solid", num: 33, mass: "74.9",
+      fact: "Highly toxic in many of its compounds, which is why it has a long, dark history as a poison. In small controlled amounts today, it's used inside certain semiconductors and LEDs.",
+      tag: "Toxic in compounds" },
+    sb: { symbol: "Sb", name: "Antimony", meta: "Silvery, brittle solid", num: 51, mass: "121.8",
+      fact: "Mixed with lead to make it harder and more durable, which is exactly what's needed inside car batteries. It's also used in flame-retardant materials to help stop fires from spreading.",
+      tag: "Hardens lead alloys" },
+    te: { symbol: "Te", name: "Tellurium", meta: "Silvery-white solid", num: 52, mass: "127.6",
+      fact: "Used to strengthen steel and copper, and increasingly in solar panels. Even tiny amounts breathed in can give a person's breath a lingering garlic-like smell.",
+      tag: "Used in solar panels" }
+  };
+
+  const rack = document.getElementById('rack');
+  const buttons = rack.querySelectorAll('.shard-btn');
+
+  function selectElement(el) {
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.el === el ? 'true' : 'false'));
+    const d = data[el];
+    document.getElementById('d-symbol').textContent = d.symbol;
+    document.getElementById('d-name').textContent = d.name;
+    document.getElementById('d-meta').textContent = d.meta;
+    document.getElementById('d-num').textContent = d.num;
+    document.getElementById('d-mass').textContent = d.mass;
+    document.getElementById('d-fact').textContent = d.fact;
+    document.getElementById('d-tag').textContent = d.tag;
+    document.getElementById('detail').style.setProperty('--glow', `var(--${el})`);
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => selectElement(b.dataset.el)));
+  selectElement('b');
+
+  const quizToggle = document.getElementById('quizToggle');
+  const quiz = document.getElementById('quiz');
+  quizToggle.addEventListener('click', () => {
+    quiz.classList.toggle('open');
+    quizToggle.textContent = quiz.classList.contains('open') ? 'Hide quiz' : 'Test yourself →';
+  });
+
+  let score = 0;
+  const answered = new Set();
+  document.querySelectorAll('.q').forEach((q, qIndex) => {
+    const correctIndex = parseInt(q.dataset.answer, 10);
+    const opts = q.querySelectorAll('.q-opt');
+    opts.forEach((opt, i) => {
+      opt.addEventListener('click', () => {
+        if (answered.has(qIndex)) return;
+        answered.add(qIndex);
+        opts.forEach((o, j) => {
+          if (j === correctIndex) o.classList.add('correct');
+          else if (j === i) o.classList.add('wrong');
+        });
+        if (i === correctIndex) score++;
+        document.getElementById('scoreLine').innerHTML = `Score: <strong>${score} / 5</strong>`;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

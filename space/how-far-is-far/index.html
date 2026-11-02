@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Far Is Far — A Journey Out of Earth</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  @property --hue {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 208;
+  }
+
+  :root{
+    --void: #05060c;
+    --panel: #0c0f1e;
+    --ink: #edecf5;
+    --ink-dim: #838aa6;
+    --ember: #e7b24c;
+    --ice: #6fb8e0;
+    --violet: #9c7fe0;
+    --hue: 208;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--void);
+    color:var(--ink);
+    font-family:'Fraunces', serif;
+    overflow-x:hidden;
+    transition:--hue 1.4s ease-out;
+  }
+
+  ::selection{ background:var(--ember); color:var(--void); }
+
+  /* ---------- backdrop ---------- */
+  #glow{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(circle at 50% 28%, hsl(calc(var(--hue) * 1deg) 75% 58% / 0.22), transparent 55%),
+      var(--void);
+    transition:--hue 1.4s ease-out;
+  }
+  canvas#stars{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  /* ---------- hud ---------- */
+  .hud{
+    position:fixed; top:0; left:0; right:0; z-index:20;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px clamp(18px,4vw,44px);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.04em; color:var(--ink-dim);
+    pointer-events:none;
+  }
+  .hud span{ color:var(--ink); }
+  .hud-right{ display:flex; align-items:center; gap:14px; pointer-events:none; }
+  .mode-toggle{
+    pointer-events:auto; cursor:pointer;
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.03em;
+    color:var(--ink); background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18); border-radius:100px;
+    padding:6px 13px; transition:background .25s, border-color .25s;
+  }
+  .mode-toggle:hover{ background:rgba(255,255,255,.12); }
+
+  .readout-compare{ display:none; }
+  body.compare-mode .readout-real{ display:none; }
+  body.compare-mode .readout-compare{ display:inline; }
+
+  /* ---------- rail ---------- */
+  .rail-wrap{
+    position:fixed; left:0; right:0; bottom:0; z-index:30;
+    padding:14px clamp(16px,4vw,40px) 18px;
+    background:linear-gradient(to top, rgba(5,6,12,.92), rgba(5,6,12,0));
+  }
+  .rail-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-dim);
+    margin-bottom:8px; display:flex; justify-content:space-between;
+  }
+  .rail-label b{ color:var(--ink); font-weight:500; }
+  .rail{
+    position:relative; height:26px; cursor:pointer;
+  }
+  .rail-track{
+    position:absolute; top:50%; left:0; right:0; height:1px;
+    background:rgba(255,255,255,.16); transform:translateY(-50%);
+  }
+  .rail-tick{
+    position:absolute; top:50%; width:2px; height:8px; background:rgba(255,255,255,.28);
+    transform:translate(-50%,-50%); border-radius:1px;
+  }
+  .rail-thumb{
+    position:absolute; top:50%; width:11px; height:11px; border-radius:50%;
+    background:hsl(calc(var(--hue) * 1deg) 80% 68%);
+    box-shadow:0 0 14px 3px hsl(calc(var(--hue) * 1deg) 80% 60% / .7);
+    transform:translate(-50%,-50%); transition:left .5s cubic-bezier(.3,.7,.3,1), background .6s, box-shadow .6s;
+  }
+
+  /* ---------- sections ---------- */
+  main{ position:relative; z-index:10; }
+  section.stage{
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding:120px clamp(20px,6vw,60px) 140px;
+  }
+  .stage-inner{
+    width:100%; max-width:640px;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+  }
+
+  .visual{
+    position:relative; width:min(74vw,300px); height:min(74vw,300px);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:36px;
+  }
+  .ring{
+    position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.08);
+  }
+  .halo{
+    border-radius:50%;
+    background:radial-gradient(circle at 38% 32%,
+      hsl(calc(var(--hue) * 1deg) 85% 72% / .9),
+      hsl(calc(var(--hue) * 1deg) 70% 45% / .35) 60%,
+      transparent 75%);
+    box-shadow:0 0 60px hsl(calc(var(--hue) * 1deg) 70% 50% / .35);
+    transition:width 1.1s cubic-bezier(.2,.7,.2,1), height 1.1s cubic-bezier(.2,.7,.2,1), background 1.2s, box-shadow 1.2s;
+  }
+  .core{
+    position:absolute; width:9px; height:9px; border-radius:50%;
+    background:var(--ink); box-shadow:0 0 10px 2px rgba(255,255,255,.8);
+  }
+
+  .kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    color:var(--ink-dim); margin-bottom:10px;
+  }
+  .kicker b{ color:var(--ink); font-weight:500; }
+
+  h2{
+    font-weight:340; font-size:clamp(34px,7vw,56px); line-height:1.05;
+    letter-spacing:-.01em; margin-bottom:14px;
+  }
+
+  .readout{
+    font-family:'IBM Plex Mono', monospace; font-size:clamp(15px,2.4vw,18px);
+    color:hsl(calc(var(--hue) * 1deg) 70% 72%);
+    margin-bottom:22px; letter-spacing:.02em;
+  }
+
+  .tag{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px;
+    color:var(--ink-dim); border:1px solid rgba(255,255,255,.15);
+    border-radius:100px; padding:4px 12px; margin-bottom:22px;
+  }
+
+  p.blurb{
+    font-size:17px; line-height:1.65; color:var(--ink); font-weight:300;
+    max-width:56ch;
+  }
+  p.blurb em{ color:var(--ink); font-style:normal; border-bottom:1px solid hsl(calc(var(--hue)*1deg) 70% 60% / .5); }
+
+  .intro{ padding-top:0; }
+  .intro .stage-inner{ max-width:680px; }
+  .intro h1{
+    font-weight:300; font-size:clamp(40px,9vw,80px); line-height:1.02; letter-spacing:-.015em;
+    margin-bottom:18px;
+  }
+  .intro p{ font-size:18px; color:var(--ink-dim); font-weight:300; max-width:52ch; margin:0 auto 30px; }
+  .intro .hint{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-dim);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.5;} 50%{opacity:1;} }
+
+  footer{
+    position:relative; z-index:10; text-align:center; padding:80px 24px 160px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-dim);
+  }
+  footer a{ color:var(--ink); }
+
+  @media (max-width:640px){
+    .rail-label{ font-size:10px; }
+    section.stage{ padding:100px 20px 130px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .intro .hint{ animation:none; }
+  }
+</style>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "03967f8ff4584d3dad8f98556a0bd13f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+
+<div id="glow"></div>
+<canvas id="stars"></canvas>
+
+<div class="hud">
+  <div>EARTH &nbsp;→&nbsp; <span id="hud-current">the edge of what we can see</span></div>
+  <div class="hud-right">
+    <button id="mode-toggle" class="mode-toggle" type="button">everyday scale</button>
+    <span><span id="hud-count">01</span> / 18</span>
+  </div>
+</div>
+
+<main id="journey"></main>
+
+<footer>
+  a journey of roughly 46.5 billion light-years, told in eighteen stops · Ellis Knowledge Studio
+</footer>
+
+<div class="rail-wrap">
+  <div class="rail-label"><span>home</span><b id="rail-current-label">Earth</b><span>the observable edge</span></div>
+  <div class="rail" id="rail">
+    <div class="rail-track"></div>
+    <div class="rail-thumb" id="rail-thumb"></div>
+  </div>
+</div>
+
+<script>
+const STAGES = [
+  {
+    name:"Earth", tag:"Home", hue:208, km:0,
+    kicker:"You are here",
+    readout:"distance from home: none — this is home",
+    compare:"driving nonstop at motorway speed around Earth's own equator would take about 15 days without stopping",
+    blurb:"Every stage of this journey is measured from this exact spot. Before you go anywhere, it's worth remembering how strange it is to stand still on a rock spinning through space at over 1,600 km/h."
+  },
+  {
+    name:"The Moon", tag:"Natural satellite", hue:206, km:384400,
+    kicker:"1.3 light-seconds away",
+    readout:"384,400 km — a beam of light takes 1.3 seconds to cross this",
+    compare:"line up all eight planets side by side and they'd almost exactly span the gap between Earth and the Moon",
+    blurb:"When Apollo astronauts spoke to Mission Control, their words took over a second to arrive. Every planet you'll ever see with the naked eye, and everything beyond, lies further than this."
+  },
+  {
+    name:"The Sun", tag:"Our star", hue:42, km:149600000,
+    kicker:"8.3 light-minutes away",
+    readout:"149.6 million km — one astronomical unit (1 AU)",
+    compare:"shrink Earth to a pea and the Sun becomes a beach ball roughly 150 metres away — one and a half football pitches",
+    blurb:"The sunlight warming your skin right now left the Sun eight minutes ago. From here on, distances are measured outward from the Sun itself — Earth swings around it too fast to be a fixed marker."
+  },
+  {
+    name:"Mercury", tag:"Rocky world", hue:36, km:57900000,
+    kicker:"3.2 light-minutes from the Sun",
+    readout:"57.9 million km from the Sun",
+    compare:"on the pea-and-beach-ball scale, Mercury is a peppercorn sitting about 58 metres from the Sun",
+    blurb:"The closest planet to our star, and one of the strangest — its days are longer than its years. A place of extremes: 430°C in sunlight, −180°C in shadow."
+  },
+  {
+    name:"Venus", tag:"Rocky world", hue:38, km:108200000,
+    kicker:"6.0 light-minutes from the Sun",
+    readout:"108.2 million km from the Sun",
+    compare:"on the same scale, Venus is a blueberry about 109 metres out — roughly the length of a football pitch",
+    blurb:"Earth's near-twin in size, but a runaway greenhouse has made its surface hot enough to melt lead, under a sky of sulfuric acid cloud."
+  },
+  {
+    name:"Mars", tag:"Rocky world", hue:26, km:227900000,
+    kicker:"12.7 light-minutes from the Sun",
+    readout:"227.9 million km from the Sun",
+    compare:"on the same scale, Mars sits about 228 metres out — roughly two football pitches end to end",
+    blurb:"Home to the largest volcano and the deepest canyon in the solar system. It's also the most distant place a human being might one day stand and look back at Earth as just another star."
+  },
+  {
+    name:"Jupiter", tag:"Gas giant", hue:44, km:778500000,
+    kicker:"43.2 light-minutes from the Sun",
+    readout:"778.5 million km from the Sun",
+    compare:"on the same scale, Jupiter is a grapefruit about 780 metres from the Sun — under a ten-minute walk",
+    blurb:"So large that every other planet in the solar system could fit inside it — with room to spare. Its Great Red Spot is a storm wider than Earth, and it has raged for at least 190 years."
+  },
+  {
+    name:"Saturn", tag:"Gas giant", hue:48, km:1434000000,
+    kicker:"1.33 light-hours from the Sun",
+    readout:"1.43 billion km from the Sun",
+    compare:"on the same scale, Saturn is an orange about 1.4 km from the Sun — roughly a 20-minute walk",
+    blurb:"Its rings are made of billions of chunks of ice and rock, some as small as a grain of sugar, some as large as a house — spread across a disc thinner, proportionally, than a sheet of paper."
+  },
+  {
+    name:"Uranus", tag:"Ice giant", hue:186, km:2871000000,
+    kicker:"2.66 light-hours from the Sun",
+    readout:"2.87 billion km from the Sun",
+    compare:"on the same scale, Uranus sits about 2.9 km from the Sun — further than most people walk in a day",
+    blurb:"Tipped almost completely on its side, it rolls around the Sun like a ball rather than spinning like a top — likely the result of an ancient, colossal collision."
+  },
+  {
+    name:"Neptune", tag:"Ice giant", hue:212, km:4495000000,
+    kicker:"4.16 light-hours from the Sun",
+    readout:"4.50 billion km from the Sun",
+    compare:"on the same scale, Neptune sits about 4.5 km out — roughly an hour's walk from the Sun",
+    blurb:"The windiest place we know of: supersonic storms reach 2,100 km/h. Sunlight this far out is so faint that Neptune's 'daytime' looks like Earth's twilight."
+  },
+  {
+    name:"The Kuiper Belt", tag:"Icy debris field", hue:222, km:5900000000,
+    kicker:"5.5 light-hours from the Sun",
+    readout:"~5.9 billion km — Pluto's neighborhood",
+    compare:"on the same scale, the Kuiper Belt begins about 6 km out — a brisk hour's cycle from the Sun",
+    blurb:"A frozen ring of leftover comets, dwarf planets, and rubble from the solar system's construction, stretching far beyond Neptune. Pluto is just one resident among many."
+  },
+  {
+    name:"Voyager 1", tag:"Farthest human object", hue:236, km:24000000000,
+    kicker:"~22 light-hours from the Sun",
+    readout:"~24 billion km — and still transmitting",
+    compare:"on the same scale, Voyager 1 is about 24 km out — roughly the distance from central London to Heathrow Airport",
+    blurb:"Launched in 1977, it's the most distant human-made object in existence. It has already crossed into interstellar space, carrying a golden record of Earth's sounds for whoever might find it."
+  },
+  {
+    name:"The Oort Cloud", tag:"Cometary shell", hue:252, km:9500000000000,
+    kicker:"about 1.6 years for light to cross it",
+    readout:"~9.5 trillion km at its outer edge",
+    compare:"on the same scale, the Oort Cloud's outer edge is about 9,500 km out — similar to a nonstop flight from London to Tokyo",
+    blurb:"A vast, dim shell of icy debris thought to surround the entire solar system like a bubble. Long-period comets are thrown from here, on journeys inward that can take millions of years."
+  },
+  {
+    name:"Proxima Centauri", tag:"Nearest star", hue:264, km:40100000000000,
+    kicker:"4.24 light-years away",
+    readout:"about 40 trillion km — our closest stellar neighbor",
+    compare:"on the same scale, even our nearest star is about 40,000 km away — a full loop of planet Earth, and then a little further still",
+    blurb:"The nearest star beyond our Sun, and it's still so far that our fastest spacecraft would take over 70,000 years to reach it. <em>Every star you've ever seen in the night sky is farther than this.</em>"
+  },
+  {
+    name:"The Galactic Center", tag:"Heart of the Milky Way", hue:270, km:246000000000000000,
+    kicker:"26,000 light-years away",
+    readout:"a supermassive black hole, four million times the Sun's mass",
+    compare:"shrink the whole Milky Way to a dinner plate 30 cm wide, and our Sun — with Earth and everything on it — becomes smaller than a single atom, sitting about halfway out toward the rim",
+    blurb:"Our Sun is one of an estimated 100–400 billion stars orbiting this center, itself embedded in a spiral disc roughly 100,000 light-years across. We're out in the quiet suburbs."
+  },
+  {
+    name:"Andromeda", tag:"Neighboring galaxy", hue:276, km:23650000000000000000,
+    kicker:"2.5 million light-years away",
+    readout:"the most distant thing visible to the naked eye",
+    compare:"on that dinner-plate scale, Andromeda is another 30cm plate sitting about 7.5 metres away — roughly the width of a living room",
+    blurb:"When you look at Andromeda, you're seeing light that left before modern humans existed. It's on a slow collision course with the Milky Way — due to merge in about 4.5 billion years."
+  },
+  {
+    name:"The Laniakea Supercluster", tag:"Our home supercluster", hue:282, km:4730000000000000000000,
+    kicker:"~500 million light-years across",
+    readout:"home to roughly 100,000 galaxies, including our own",
+    compare:"on the dinner-plate scale, Laniakea — 100,000 galaxy-plates — forms a sphere about 1.5 km across, roughly the size of a small town",
+    blurb:"'Laniakea' means 'immense heaven' in Hawaiian. It's not really a fixed place but a flow — a vast basin of galaxies all drifting toward a common gravitational center."
+  },
+  {
+    name:"The Observable Universe", tag:"The edge of what light can reach us from", hue:288, km:439900000000000000000000,
+    kicker:"46.5 billion light-years away",
+    readout:"the horizon beyond which no light has had time to arrive",
+    compare:"on the same dinner-plate scale, the entire observable universe is about 280 km across — roughly the distance from London to Paris, all of it filled with galaxy-plates",
+    blurb:"This isn't the edge of the universe — it's the edge of what we can, even in principle, ever see. Beyond it, space keeps going. We simply ran out of time for its light to reach us."
+  }
+];
+
+const journey = document.getElementById('journey');
+const railEl = document.getElementById('rail');
+const thumb = document.getElementById('rail-thumb');
+
+const MIN_LOG = 5, MAX_LOG = 23.7;
+function posForKm(km){
+  if(km <= 0) return 1.5;
+  const l = Math.log10(km);
+  return Math.min(99, Math.max(1.5, ((l - MIN_LOG) / (MAX_LOG - MIN_LOG)) * 97 + 2));
+}
+function radiusForKm(km){
+  const r = 16 + 13 * Math.log10(km + 1);
+  return Math.min(168, Math.max(16, r));
+}
+
+STAGES.forEach((s, i) => {
+  const section = document.createElement('section');
+  section.className = 'stage' + (i === 0 ? ' intro' : '');
+  section.id = 'stage-' + i;
+  section.dataset.index = i;
+  section.dataset.hue = s.hue;
+
+  const r = radiusForKm(s.km);
+
+  if(i === 0){
+    section.innerHTML = `
+      <div class="stage-inner">
+        <h1>How far<br>is far?</h1>
+        <p>Scroll — or drag the line at the bottom of the screen — to travel outward from where you're sitting right now, all the way to the edge of the observable universe.</p>
+        <div class="hint">↓ begin</div>
+      </div>`;
+  } else {
+    section.innerHTML = `
+      <div class="stage-inner">
+        <div class="visual">
+          <div class="ring" style="width:${Math.min(r*2+60,320)}px;height:${Math.min(r*2+60,320)}px;"></div>
+          <div class="halo" style="width:${r*2}px;height:${r*2}px;"></div>
+          <div class="core"></div>
+        </div>
+        <div class="kicker">${s.kicker}</div>
+        <h2>${s.name}</h2>
+        <div class="readout">
+          <span class="readout-real">${s.readout}</span>
+          <span class="readout-compare">${s.compare}</span>
+        </div>
+        <div class="tag">${s.tag}</div>
+        <p class="blurb">${s.blurb}</p>
+      </div>`;
+  }
+  journey.appendChild(section);
+});
+
+// build rail ticks
+STAGES.forEach((s, i) => {
+  const tick = document.createElement('div');
+  tick.className = 'rail-tick';
+  tick.style.left = posForKm(s.km) + '%';
+  tick.title = s.name;
+  tick.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.getElementById('stage-' + i).scrollIntoView({behavior:'smooth'});
+  });
+  railEl.appendChild(tick);
+});
+
+const hudCurrent = document.getElementById('hud-current');
+const hudCount = document.getElementById('hud-count');
+const railLabel = document.getElementById('rail-current-label');
+
+function setActive(i){
+  const s = STAGES[i];
+  document.documentElement.style.setProperty('--hue', s.hue);
+  thumb.style.left = posForKm(s.km) + '%';
+  hudCurrent.textContent = s.name;
+  hudCount.textContent = String(i+1).padStart(2,'0');
+  railLabel.textContent = s.name;
+}
+
+const sections = Array.from(document.querySelectorAll('section.stage'));
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      setActive(parseInt(entry.target.dataset.index));
+    }
+  });
+}, { threshold: 0.55 });
+sections.forEach(sec => observer.observe(sec));
+setActive(0);
+
+// drag on rail
+let dragging = false;
+function jumpToPercent(pct){
+  let closest = 0, closestDist = Infinity;
+  STAGES.forEach((s,i) => {
+    const d = Math.abs(posForKm(s.km) - pct);
+    if(d < closestDist){ closestDist = d; closest = i; }
+  });
+  document.getElementById('stage-' + closest).scrollIntoView({behavior:'smooth'});
+}
+function pctFromEvent(e){
+  const rect = railEl.getBoundingClientRect();
+  const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+  return Math.min(100, Math.max(0, (x / rect.width) * 100));
+}
+railEl.addEventListener('mousedown', e => { dragging = true; jumpToPercent(pctFromEvent(e)); });
+window.addEventListener('mousemove', e => { if(dragging) jumpToPercent(pctFromEvent(e)); });
+window.addEventListener('mouseup', () => dragging = false);
+railEl.addEventListener('touchstart', e => { dragging = true; jumpToPercent(pctFromEvent(e)); });
+window.addEventListener('touchmove', e => { if(dragging) jumpToPercent(pctFromEvent(e)); });
+window.addEventListener('touchend', () => dragging = false);
+
+// scale mode toggle
+const modeToggle = document.getElementById('mode-toggle');
+modeToggle.addEventListener('click', () => {
+  const on = document.body.classList.toggle('compare-mode');
+  modeToggle.textContent = on ? 'real numbers' : 'everyday scale';
+});
+
+// starfield
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const count = Math.floor((canvas.width * canvas.height) / 6000);
+  stars = Array.from({length: count}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.3 + 0.2,
+    phase: Math.random() * Math.PI * 2,
+    speed: Math.random() * 0.02 + 0.006
+  }));
+}
+window.addEventListener('resize', resize);
+resize();
+
+let t = 0;
+function draw(){
+  t += 1;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#fff';
+  stars.forEach(st => {
+    const alpha = 0.35 + 0.5 * Math.abs(Math.sin(st.phase + t * st.speed));
+    ctx.globalAlpha = alpha;
+    ctx.beginPath();
+    ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>

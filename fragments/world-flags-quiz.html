@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Explorer Quiz — Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1C3F;
+    --navy-deep:#0A1330;
+    --coral:#E85D6C;
+    --gold:#F4B942;
+    --white:#F7F9FC;
+    --green:#4CAF83;
+    --panel:#16234E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;
+    background:linear-gradient(180deg, var(--navy-deep), var(--navy) 60%, #17265a 100%);
+    font-family:'Nunito Sans', sans-serif;color:var(--white);
+    display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .wrap{width:100%;max-width:640px;}
+  .eyebrow{
+    font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;
+    color:var(--coral);text-align:center;margin-bottom:6px;
+  }
+  h1{
+    font-family:'Baloo 2', sans-serif;font-weight:800;font-size:clamp(26px,5vw,40px);
+    text-align:center;margin:0 0 4px;
+  }
+  .sub{text-align:center;color:#C7D2EE;font-weight:600;margin-bottom:20px;font-size:15px;}
+
+  .progress-wrap{max-width:520px;margin:0 auto 20px;height:8px;background:#22305e;border-radius:8px;overflow:hidden;}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--coral),var(--gold));transition:width .4s ease;}
+
+  .card{
+    background:var(--panel);border:1px solid #26356b;border-radius:20px;
+    padding:28px 24px;box-shadow:0 20px 50px rgba(0,0,0,.35);text-align:center;
+  }
+  .score-row{
+    display:flex;justify-content:space-between;font-size:13px;font-weight:700;
+    color:#9FB0DE;margin-bottom:10px;
+  }
+  .score-row span.hi{color:var(--gold);}
+
+  .flag{margin:6px auto 10px;line-height:1;width:140px;height:94px;border-radius:8px;overflow:hidden;border:2px solid #2C3B72;background:#0F1A3D;}
+  .flag img{width:100%;height:100%;object-fit:cover;display:block;}
+  .prompt{font-weight:700;color:#C7D2EE;margin-bottom:16px;font-size:15px;}
+
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;}
+  @media (max-width:420px){ .options{grid-template-columns:1fr;} }
+  .opt{
+    background:#1B2A56;border:2px solid #2C3B72;color:var(--white);
+    font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:15px;
+    padding:12px 10px;border-radius:12px;cursor:pointer;transition:.15s;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:var(--navy-deep);}
+  .opt.wrong{background:var(--coral);border-color:var(--coral);color:var(--navy-deep);}
+  .opt[disabled]{cursor:default;}
+
+  .feedback{min-height:22px;font-weight:800;font-size:15px;margin:10px 0 2px;}
+  .feedback.correct{color:var(--green);}
+  .feedback.wrong{color:var(--coral);}
+
+  .finish h2{font-family:'Baloo 2', sans-serif;font-size:28px;margin:6px 0 4px;}
+  .finish p{color:#C7D2EE;font-weight:600;margin:0 0 18px;}
+  .cta{
+    display:inline-block;background:var(--gold);color:var(--navy-deep);font-weight:800;
+    text-decoration:none;padding:12px 22px;border-radius:12px;font-size:15px;margin-top:6px;
+  }
+  .again{
+    display:inline-block;margin-top:12px;background:none;border:2px solid #2C3B72;
+    color:var(--white);font-weight:700;padding:9px 18px;border-radius:12px;cursor:pointer;
+  }
+  .hidden{display:none !important;}
+  .footer-note{text-align:center;color:#7C8AC0;font-size:12px;margin-top:16px;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Ellis Knowledge Studio</div>
+  <h1>World Explorer 🌍</h1>
+  <div class="sub">Which country does this flag belong to?</div>
+
+  <div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="card">
+    <div id="quizScreen">
+      <div class="score-row">
+        <span>Question <span id="qNum">1</span> / <span id="qTotal">10</span></span>
+        <span class="hi">Score: <span id="scoreNum">0</span></span>
+      </div>
+      <div class="flag"><img id="flagImg" src="" alt="Flag"></div>
+      <div class="prompt">Which country is this?</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div id="finishScreen" class="finish hidden">
+      <h2 id="finishTitle">Explorer Badge Earned! 🏅</h2>
+      <p id="finishScore">You scored 8 / 10</p>
+      <a class="cta" href="https://ellisknowledgestudio.com/world-in-maps" target="_top">Explore printable world maps →</a>
+      <br>
+      <button class="again" id="againBtn">Play again</button>
+    </div>
+  </div>
+  <div class="footer-note">Free quiz from Ellis Knowledge Studio · Printable map packs available in the shop</div>
+</div>
+
+<script>
+(function(){
+  var countries = [
+    {code:"fr", name:"France"},
+    {code:"jp", name:"Japan"},
+    {code:"br", name:"Brazil"},
+    {code:"eg", name:"Egypt"},
+    {code:"ca", name:"Canada"},
+    {code:"au", name:"Australia"},
+    {code:"in", name:"India"},
+    {code:"de", name:"Germany"},
+    {code:"mx", name:"Mexico"},
+    {code:"za", name:"South Africa"},
+    {code:"it", name:"Italy"},
+    {code:"ke", name:"Kenya"},
+    {code:"cn", name:"China"},
+    {code:"gr", name:"Greece"},
+    {code:"ar", name:"Argentina"},
+    {code:"no", name:"Norway"},
+    {code:"th", name:"Thailand"},
+    {code:"es", name:"Spain"},
+    {code:"nz", name:"New Zealand"},
+    {code:"tr", name:"Turkey"}
+  ];
+
+  var quizLength = 10;
+  var questions = [];
+  var current = 0;
+  var score = 0;
+  var locked = false;
+
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function buildQuestions(){
+    var pool = shuffle(countries).slice(0, quizLength);
+    return pool.map(function(c){
+      var distractors = shuffle(countries.filter(function(x){ return x.name !== c.name; })).slice(0,3);
+      var opts = shuffle([c].concat(distractors));
+      return {code:c.code, answer:c.name, options: opts.map(function(o){return o.name;})};
+    });
+  }
+
+  function updateProgress(){
+    var pct = questions.length ? Math.round((current / questions.length) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  function showQuestion(){
+    locked = false;
+    var q = questions[current];
+    document.getElementById('qNum').textContent = current + 1;
+    document.getElementById('qTotal').textContent = questions.length;
+    document.getElementById('scoreNum').textContent = score;
+    document.getElementById('flagImg').src = 'https://flagcdn.com/w320/' + q.code + '.png';
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('feedback').className = 'feedback';
+
+    var optsWrap = document.getElementById('options');
+    optsWrap.innerHTML = '';
+    q.options.forEach(function(name){
+      var btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = name;
+      btn.addEventListener('click', function(){ selectAnswer(name, q.answer, btn); });
+      optsWrap.appendChild(btn);
+    });
+    updateProgress();
+  }
+
+  function selectAnswer(chosen, correctAnswer, btn){
+    if (locked) return;
+    locked = true;
+    var fb = document.getElementById('feedback');
+    var allBtns = document.querySelectorAll('#options .opt');
+    allBtns.forEach(function(b){
+      b.disabled = true;
+      if (b.textContent === correctAnswer) b.classList.add('correct');
+    });
+    if (chosen === correctAnswer){
+      score++;
+      fb.textContent = 'Correct! 🌟';
+      fb.className = 'feedback correct';
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = 'It was ' + correctAnswer;
+      fb.className = 'feedback wrong';
+    }
+    document.getElementById('scoreNum').textContent = score;
+    current++;
+    setTimeout(function(){
+      if (current >= questions.length){ finish(); } else { showQuestion(); }
+    }, 900);
+  }
+
+  function finish(){
+    document.getElementById('quizScreen').classList.add('hidden');
+    document.getElementById('finishScreen').classList.remove('hidden');
+    document.getElementById('progressFill').style.width = '100%';
+    var pct = Math.round((score / questions.length) * 100);
+    var title = document.getElementById('finishTitle');
+    if (pct === 100){ title.textContent = 'World Champion! 🏆'; }
+    else if (pct >= 70){ title.textContent = 'Explorer Badge Earned! 🏅'; }
+    else { title.textContent = 'Quiz Complete! 🌍'; }
+    document.getElementById('finishScore').textContent = 'You scored ' + score + ' / ' + questions.length;
+  }
+
+  document.getElementById('againBtn').addEventListener('click', function(){
+    document.getElementById('finishScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    current = 0; score = 0;
+    questions = buildQuestions();
+    showQuestion();
+  });
+
+  questions = buildQuestions();
+  showQuestion();
+})();
+</script>
+</body>
+</html>

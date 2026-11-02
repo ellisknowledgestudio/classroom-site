@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classroom — Free Interactive Learning Tools | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive learning tools for kids — math, science, geography, and more from Ellis Knowledge Studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1C3F; --navy-deep:#0A1330; --gold:#F4B942; --white:#F7F9FC; --panel:#16234E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;
+    background:
+      radial-gradient(1px 1px at 10% 20%, #ffffff90 50%, transparent 51%),
+      radial-gradient(1px 1px at 80% 10%, #ffffff70 50%, transparent 51%),
+      radial-gradient(2px 2px at 30% 70%, #ffffff60 50%, transparent 51%),
+      radial-gradient(1px 1px at 60% 85%, #ffffff80 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 60%, #ffffff60 50%, transparent 51%),
+      linear-gradient(180deg, var(--navy-deep), var(--navy) 60%, #17265a 100%);
+    font-family:'Nunito Sans', sans-serif;color:var(--white);
+    padding:32px 20px 60px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+  .eyebrow{
+    font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;
+    color:var(--gold);text-align:center;margin-bottom:8px;
+  }
+  h1{
+    font-family:'Baloo 2', sans-serif;font-weight:800;font-size:clamp(32px,6vw,52px);
+    text-align:center;margin:0 0 10px;
+  }
+  .sub{
+    text-align:center;color:#C7D2EE;font-weight:600;margin:0 auto 40px;
+    max-width:520px;font-size:16px;line-height:1.5;
+  }
+
+  h2.section-title{
+    font-family:'Baloo 2', sans-serif;font-size:20px;color:var(--gold);
+    margin:0 0 16px;text-align:center;
+  }
+
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;margin-bottom:48px;
+  }
+  .card{
+    background:var(--panel);border:1px solid #26356b;border-radius:18px;
+    padding:24px 20px;text-decoration:none;color:var(--white);
+    transition:.15s;display:block;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--gold);}
+  .card .icon{font-size:34px;margin-bottom:10px;display:block;}
+  .card h3{margin:0 0 6px;font-family:'Baloo 2',sans-serif;font-size:20px;color:var(--gold);}
+  .card p{margin:0;font-size:13px;color:#C7D2EE;line-height:1.4;}
+
+  .soon-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;
+  }
+  .soon-card{
+    background:#121d42;border:1px dashed #2C3B72;border-radius:14px;
+    padding:16px;text-align:center;opacity:.75;
+  }
+  .soon-card h4{margin:0 0 4px;font-family:'Baloo 2',sans-serif;font-size:15px;}
+  .soon-card p{margin:0;font-size:12px;color:#8C9BD1;}
+  .soon-card .badge{
+    display:inline-block;margin-top:8px;font-size:10px;font-weight:800;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--navy-deep);
+    background:var(--gold);padding:3px 8px;border-radius:999px;
+  }
+
+  .footer-note{
+    text-align:center;color:#7C8AC0;font-size:12px;margin-top:20px;font-weight:600;
+  }
+  .footer-note a{color:var(--gold);text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Ellis Knowledge Studio</div>
+  <h1>Welcome to the Classroom 🚀</h1>
+  <p class="sub">Free interactive tools and games to help kids explore, practice, and learn — with printable worksheet packs for more in the shop.</p>
+
+  <h2 class="section-title">Explore a subject</h2>
+  <div class="grid">
+    {{CATEGORY_CARDS}}
+  </div>
+
+  <h2 class="section-title">Coming soon</h2>
+  <div class="soon-grid">
+    {{SOON_CARDS}}
+  </div>
+
+  <div class="footer-note">
+    Looking for printable resources? <a href="https://ellisknowledgestudio.com/educational-resources">Visit the shop →</a>
+  </div>
+</div>
+</body>
+</html>

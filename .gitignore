@@ -1,0 +1,3 @@
+# contains a shared secret: stays on Hostinger only, never in git
+api/lead.php
+*.backup-*.html

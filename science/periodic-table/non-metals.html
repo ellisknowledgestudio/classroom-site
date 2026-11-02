@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Non-metals | Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1C3F;
+    --bg-raised: #16234E;
+    --ink: #F7F9FC;
+    --ink-dim: #9FB0DE;
+    --line: #26356b;
+    --gold: #F4B942;
+    --ink-strong: #0A1330;
+
+    --h:  #DCE8F0;
+    --c:  #8A8D93;
+    --n:  #CBD6E2;
+    --o:  #7FC4E0;
+    --p:  #7FE0A0;
+    --s:  #F0D23E;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header.top { padding: 28px 0 8px; }
+
+  .crumb { font-size: 14px; color: var(--ink-dim); letter-spacing: 0.01em; }
+  .crumb a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid transparent; }
+  .crumb a:hover { border-bottom-color: var(--ink-dim); }
+
+  h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 700; margin: 6px 0 4px; letter-spacing: -0.01em; }
+
+  .subhead { color: var(--ink-dim); font-size: 17px; max-width: 58ch; margin: 0 0 12px; }
+
+  .chnops {
+    font-size: 13px;
+    color: var(--ink-dim);
+    margin-bottom: 30px;
+    letter-spacing: 0.02em;
+  }
+  .chnops b { color: var(--ink); }
+
+  /* ---- Rack ---- */
+  .rack {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(14px, 3vw, 28px);
+    padding: 20px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .el-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .form {
+    width: 48px;
+    height: 56px;
+    background: var(--glow);
+    opacity: 0.32;
+    transition: opacity 0.35s ease, transform 0.2s ease, filter 0.35s ease;
+  }
+
+  /* gas: soft blurred wisp — H, N, O */
+  .form.gas {
+    border-radius: 48% 52% 42% 58% / 56% 44% 56% 44%;
+    filter: blur(3px);
+  }
+
+  /* solid: faceted crystal — C, P, S */
+  .form.solid {
+    clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 18% 100%, 0% 35%);
+  }
+
+  .el-btn:hover .form { transform: translateY(-3px); }
+
+  .el-btn[aria-pressed="true"] .form {
+    opacity: 1;
+    filter: drop-shadow(0 0 12px var(--glow));
+  }
+  .el-btn[aria-pressed="true"] .form.gas {
+    filter: blur(1.5px) drop-shadow(0 0 12px var(--glow));
+  }
+
+  /* phosphorus: gentle phosphorescent pulse when selected */
+  @keyframes glow-pulse {
+    0%, 100% { filter: drop-shadow(0 0 8px var(--glow)); }
+    50% { filter: drop-shadow(0 0 20px var(--glow)); }
+  }
+  .el-btn[data-el="p"][aria-pressed="true"] .form {
+    animation: glow-pulse 2.2s ease-in-out infinite;
+  }
+
+  .el-symbol { font-size: 15px; font-weight: 600; color: var(--ink-dim); transition: color 0.35s ease; }
+  .el-btn[aria-pressed="true"] .el-symbol { color: var(--glow); }
+
+  .el-btn[data-el="h"] .form { --glow: var(--h); }
+  .el-btn[data-el="c"] .form { --glow: var(--c); }
+  .el-btn[data-el="n"] .form { --glow: var(--n); }
+  .el-btn[data-el="o"] .form { --glow: var(--o); }
+  .el-btn[data-el="p"] .form { --glow: var(--p); }
+  .el-btn[data-el="s"] .form { --glow: var(--s); }
+
+  /* ---- Detail card ---- */
+  .detail {
+    margin-top: 44px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 30px;
+    border-left: 4px solid var(--glow, var(--ink-dim));
+  }
+
+  .detail-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .detail-symbol { font-family: 'Baloo 2', sans-serif; font-size: 40px; font-weight: 800; color: var(--glow, var(--ink)); }
+  .detail-name { font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700; }
+  .detail-meta { color: var(--ink-dim); font-size: 15px; }
+  .detail-fact { margin-top: 14px; font-size: 16px; max-width: 62ch; }
+
+  .stat-row { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
+  .stat-label { font-size: 12px; color: var(--ink-dim); }
+  .stat-value { font-size: 18px; font-weight: 600; }
+
+  .tag {
+    margin-top: 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-strong);
+    background: var(--gold);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* ---- Callout ---- */
+  .callout {
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    font-size: 15.5px;
+    max-width: 62ch;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ---- Quiz ---- */
+  .quiz-toggle {
+    margin-top: 40px;
+    background: var(--gold);
+    border: none;
+    color: var(--ink-strong);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 14px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .quiz-toggle:hover { opacity: 0.9; }
+
+  .quiz { display: none; margin-top: 24px; }
+  .quiz.open { display: block; }
+
+  .q {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .q-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .q-opts { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .q-opt:hover { border-color: var(--ink-dim); }
+  .q-opt.correct { border-color: #6FCF97; background: #16261E; }
+  .q-opt.wrong { border-color: #E85D5D; background: #2A1818; }
+
+  .score-line { margin-top: 18px; font-size: 16px; color: var(--ink-dim); }
+  .score-line strong { color: var(--ink); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="#">Periodic Table</a> / Non-metals</div>
+    <h1>Non-metals</h1>
+    <p class="subhead">Six elements so essential to life that biologists use them as a shortcut: CHNOPS. Tap one to see its real form — three are invisible gases, three are solids you could hold in your hand.</p>
+  </header>
+
+  <div class="chnops"><b>C</b>arbon · <b>H</b>ydrogen · <b>N</b>itrogen · <b>O</b>xygen · <b>P</b>hosphorus · <b>S</b>ulfur — the building blocks of every living thing</div>
+
+  <div class="rack" id="rack">
+    <button class="el-btn" data-el="h" aria-pressed="false">
+      <div class="form gas"></div>
+      <span class="el-symbol">H</span>
+    </button>
+    <button class="el-btn" data-el="c" aria-pressed="false">
+      <div class="form solid"></div>
+      <span class="el-symbol">C</span>
+    </button>
+    <button class="el-btn" data-el="n" aria-pressed="false">
+      <div class="form gas"></div>
+      <span class="el-symbol">N</span>
+    </button>
+    <button class="el-btn" data-el="o" aria-pressed="false">
+      <div class="form gas"></div>
+      <span class="el-symbol">O</span>
+    </button>
+    <button class="el-btn" data-el="p" aria-pressed="false">
+      <div class="form solid"></div>
+      <span class="el-symbol">P</span>
+    </button>
+    <button class="el-btn" data-el="s" aria-pressed="false">
+      <div class="form solid"></div>
+      <span class="el-symbol">S</span>
+    </button>
+  </div>
+
+  <div class="detail" id="detail">
+    <div class="detail-head">
+      <span class="detail-symbol" id="d-symbol">H</span>
+      <span class="detail-name" id="d-name">Hydrogen</span>
+      <span class="detail-meta" id="d-meta">Colourless gas</span>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-label">Atomic number</div><div class="stat-value" id="d-num">1</div></div>
+      <div><div class="stat-label">Atomic mass</div><div class="stat-value" id="d-mass">1.0</div></div>
+    </div>
+    <p class="detail-fact" id="d-fact">The lightest and most abundant element in the universe — it makes up most of the Sun and every other star. It burns with a flame so pale blue it's almost invisible.</p>
+    <span class="tag" id="d-tag"></span>
+  </div>
+
+  <div class="callout">
+    <strong>Why CHNOPS?</strong> Together, these six elements make up almost all the mass of every living thing on Earth. Carbon and hydrogen form the backbone of every biological molecule; nitrogen and phosphorus build DNA and proteins; oxygen keeps it all running. Learn this order and you've learned the chemistry of life itself.
+  </div>
+
+  <button class="quiz-toggle" id="quizToggle">Test yourself →</button>
+
+  <div class="quiz" id="quiz">
+    <div class="q" data-answer="2">
+      <div class="q-text">1. What does the biology shortcut "CHNOPS" stand for?</div>
+      <div class="q-opts">
+        <button class="q-opt">Chlorine, Helium, Neon, Oxygen, Phosphorus, Sodium</button>
+        <button class="q-opt">Copper, Hydrogen, Nickel, Oxygen, Platinum, Silver</button>
+        <button class="q-opt">Carbon, Hydrogen, Nitrogen, Oxygen, Phosphorus, Sulfur</button>
+      </div>
+    </div>
+    <div class="q" data-answer="1">
+      <div class="q-text">2. Which gas makes up about 78% of the air we breathe?</div>
+      <div class="q-opts">
+        <button class="q-opt">Oxygen</button>
+        <button class="q-opt">Nitrogen</button>
+        <button class="q-opt">Hydrogen</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">3. Which element glows faintly green in the dark in one of its forms?</div>
+      <div class="q-opts">
+        <button class="q-opt">Phosphorus</button>
+        <button class="q-opt">Sulfur</button>
+        <button class="q-opt">Carbon</button>
+      </div>
+    </div>
+    <div class="q" data-answer="1">
+      <div class="q-text">4. Which element can appear as either dark graphite or clear diamond, depending on how its atoms are arranged?</div>
+      <div class="q-opts">
+        <button class="q-opt">Sulfur</button>
+        <button class="q-opt">Carbon</button>
+        <button class="q-opt">Nitrogen</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">5. Which bright yellow non-metal is behind the "rotten egg" smell in many of its compounds?</div>
+      <div class="q-opts">
+        <button class="q-opt">Phosphorus</button>
+        <button class="q-opt">Oxygen</button>
+        <button class="q-opt">Sulfur</button>
+      </div>
+    </div>
+    <div class="score-line" id="scoreLine">Score: <strong>0 / 5</strong></div>
+  </div>
+
+  <footer>
+    Part of the Periodic Table series — Ellis Knowledge Studio. More categories: Noble Gases, Alkali Metals, Halogens, Transition Metals, Metalloids.
+  </footer>
+
+</div>
+
+<script>
+  const data = {
+    h: { symbol: "H", name: "Hydrogen", meta: "Colourless gas", num: 1, mass: "1.0",
+      fact: "The lightest and most abundant element in the universe — it makes up most of the Sun and every other star. It burns with a flame so pale blue it's almost invisible.",
+      tag: "Most abundant in the universe" },
+    c: { symbol: "C", name: "Carbon", meta: "Black graphite (also forms clear diamond)", num: 6, mass: "12.0",
+      fact: "The same element can look completely different depending on how its atoms are arranged: soft black graphite in a pencil, or one of the hardest natural materials on Earth as diamond. It's the backbone of every molecule in your body.",
+      tag: "Basis of all known life" },
+    n: { symbol: "N", name: "Nitrogen", meta: "Colourless gas", num: 7, mass: "14.0",
+      fact: "Makes up about 78% of the air around you, yet it's so unreactive as a gas that plants can't use it directly from the air — it has to be converted first. Cooled into a liquid, it boils at a bone-chilling -196°C.",
+      tag: "78% of the atmosphere" },
+    o: { symbol: "O", name: "Oxygen", meta: "Colourless gas, pale blue as a liquid", num: 8, mass: "16.0",
+      fact: "About 21% of the air you breathe, essential for both breathing and burning. Cooled into a liquid, it turns a faint pale blue — one of the few elements with a visible colour in liquid form.",
+      tag: "Essential for combustion" },
+    p: { symbol: "P", name: "Phosphorus", meta: "White form glows faintly green in the dark", num: 15, mass: "31.0",
+      fact: "White phosphorus is so reactive it can catch fire just from contact with air, so it's stored underwater — and it glows faintly green in the dark, which is where its name comes from (Greek for \"light-bringer\"). Red phosphorus, a calmer form, is used on matchbox strike strips.",
+      tag: "Name means \"light-bringer\"" },
+    s: { symbol: "S", name: "Sulfur", meta: "Bright yellow crystalline solid", num: 16, mass: "32.1",
+      fact: "A bright yellow solid best known for the \"rotten egg\" smell of many of its compounds. It's heated with rubber in a process called vulcanisation, which makes tyres far stronger and more elastic.",
+      tag: "Strengthens rubber" }
+  };
+
+  const rack = document.getElementById('rack');
+  const buttons = rack.querySelectorAll('.el-btn');
+
+  function selectElement(el) {
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.el === el ? 'true' : 'false'));
+    const d = data[el];
+    document.getElementById('d-symbol').textContent = d.symbol;
+    document.getElementById('d-name').textContent = d.name;
+    document.getElementById('d-meta').textContent = d.meta;
+    document.getElementById('d-num').textContent = d.num;
+    document.getElementById('d-mass').textContent = d.mass;
+    document.getElementById('d-fact').textContent = d.fact;
+    document.getElementById('d-tag').textContent = d.tag;
+    document.getElementById('detail').style.setProperty('--glow', `var(--${el})`);
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => selectElement(b.dataset.el)));
+  selectElement('h');
+
+  const quizToggle = document.getElementById('quizToggle');
+  const quiz = document.getElementById('quiz');
+  quizToggle.addEventListener('click', () => {
+    quiz.classList.toggle('open');
+    quizToggle.textContent = quiz.classList.contains('open') ? 'Hide quiz' : 'Test yourself →';
+  });
+
+  let score = 0;
+  const answered = new Set();
+  document.querySelectorAll('.q').forEach((q, qIndex) => {
+    const correctIndex = parseInt(q.dataset.answer, 10);
+    const opts = q.querySelectorAll('.q-opt');
+    opts.forEach((opt, i) => {
+      opt.addEventListener('click', () => {
+        if (answered.has(qIndex)) return;
+        answered.add(qIndex);
+        opts.forEach((o, j) => {
+          if (j === correctIndex) o.classList.add('correct');
+          else if (j === i) o.classList.add('wrong');
+        });
+        if (i === correctIndex) score++;
+        document.getElementById('scoreLine').innerHTML = `Score: <strong>${score} / 5</strong>`;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

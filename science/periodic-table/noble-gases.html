@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noble Gases | Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1C3F;
+    --bg-raised: #16234E;
+    --ink: #F7F9FC;
+    --ink-dim: #9FB0DE;
+    --line: #26356b;
+    --gold: #F4B942;
+    --ink-strong: #0A1330;
+
+    --he: #FFB980;
+    --ne: #FF5C4D;
+    --ar: #B98CFF;
+    --kr: #9FEDD3;
+    --xe: #5CA8FF;
+    --rn: #E8709E;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  header.top {
+    padding: 28px 0 8px;
+  }
+
+  .crumb {
+    font-size: 14px;
+    color: var(--ink-dim);
+    letter-spacing: 0.01em;
+  }
+  .crumb a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid transparent; }
+  .crumb a:hover { border-bottom-color: var(--ink-dim); }
+
+  h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(34px, 6vw, 52px);
+    font-weight: 800;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .subhead {
+    color: var(--ink-dim);
+    font-size: 17px;
+    max-width: 56ch;
+    margin: 0 0 40px;
+  }
+
+  /* ---- Tube rack ---- */
+  .rack {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(10px, 2.6vw, 22px);
+    padding: 20px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .tube-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .tube {
+    width: 34px;
+    height: 150px;
+    border-radius: 17px;
+    background: linear-gradient(180deg, transparent 0%, var(--glow) 65%, var(--glow) 100%);
+    background-color: #1D2029;
+    border: 1px solid var(--line);
+    position: relative;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    transition: box-shadow 0.35s ease, transform 0.2s ease, border-color 0.35s ease;
+  }
+
+  .tube::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 17px;
+    background: var(--glow);
+    opacity: 0.16;
+    transition: opacity 0.35s ease;
+  }
+
+  .tube-btn:hover .tube { transform: translateY(-3px); }
+
+  .tube-btn[aria-pressed="true"] .tube {
+    border-color: var(--glow);
+    box-shadow: 0 0 24px 4px var(--glow);
+  }
+  .tube-btn[aria-pressed="true"] .tube::after { opacity: 0.55; }
+
+  .tube-symbol {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-dim);
+    transition: color 0.35s ease;
+  }
+  .tube-btn[aria-pressed="true"] .tube-symbol { color: var(--glow); }
+
+  /* per-element glow var */
+  .tube-btn[data-el="he"] .tube { --glow: var(--he); }
+  .tube-btn[data-el="ne"] .tube { --glow: var(--ne); }
+  .tube-btn[data-el="ar"] .tube { --glow: var(--ar); }
+  .tube-btn[data-el="kr"] .tube { --glow: var(--kr); }
+  .tube-btn[data-el="xe"] .tube { --glow: var(--xe); }
+  .tube-btn[data-el="rn"] .tube { --glow: var(--rn); }
+
+  /* ---- Detail card ---- */
+  .detail {
+    margin-top: 44px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 30px;
+    border-left: 4px solid var(--glow, var(--ink-dim));
+  }
+
+  .detail-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .detail-symbol {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--glow, var(--ink));
+  }
+  .detail-name { font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700; }
+  .detail-meta { color: var(--ink-dim); font-size: 15px; }
+
+  .detail-fact {
+    margin-top: 14px;
+    font-size: 16px;
+    max-width: 62ch;
+  }
+
+  .stat-row {
+    display: flex;
+    gap: 28px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .stat-label { font-size: 12px; color: var(--ink-dim); }
+  .stat-value { font-size: 18px; font-weight: 600; }
+
+  /* ---- Callout ---- */
+  .callout {
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    font-size: 15.5px;
+    max-width: 62ch;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ---- Quiz ---- */
+  .quiz-toggle {
+    margin-top: 40px;
+    background: var(--gold);
+    border: none;
+    color: var(--ink-strong);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 14px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .quiz-toggle:hover { opacity: 0.9; }
+
+  .quiz {
+    display: none;
+    margin-top: 24px;
+  }
+  .quiz.open { display: block; }
+
+  .q {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .q-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .q-opts { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .q-opt:hover { border-color: var(--ink-dim); }
+  .q-opt.correct { border-color: #6FCF97; background: #16261E; }
+  .q-opt.wrong { border-color: #E85D5D; background: #2A1818; }
+
+  .score-line {
+    margin-top: 18px;
+    font-size: 16px;
+    color: var(--ink-dim);
+  }
+  .score-line strong { color: var(--ink); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="#">Periodic Table</a> / Noble Gases</div>
+    <h1>Noble gases</h1>
+    <p class="subhead">Six elements that almost never react — tap a tube to see it light up the way it really does in a discharge lamp, and learn what makes it unique.</p>
+  </header>
+
+  <div class="rack" id="rack">
+    <button class="tube-btn" data-el="he" aria-pressed="false">
+      <div class="tube"></div>
+      <span class="tube-symbol">He</span>
+    </button>
+    <button class="tube-btn" data-el="ne" aria-pressed="false">
+      <div class="tube"></div>
+      <span class="tube-symbol">Ne</span>
+    </button>
+    <button class="tube-btn" data-el="ar" aria-pressed="false">
+      <div class="tube"></div>
+      <span class="tube-symbol">Ar</span>
+    </button>
+    <button class="tube-btn" data-el="kr" aria-pressed="false">
+      <div class="tube"></div>
+      <span class="tube-symbol">Kr</span>
+    </button>
+    <button class="tube-btn" data-el="xe" aria-pressed="false">
+      <div class="tube"></div>
+      <span class="tube-symbol">Xe</span>
+    </button>
+    <button class="tube-btn" data-el="rn" aria-pressed="false">
+      <div class="tube"></div>
+      <span class="tube-symbol">Rn</span>
+    </button>
+  </div>
+
+  <div class="detail" id="detail">
+    <div class="detail-head">
+      <span class="detail-symbol" id="d-symbol">He</span>
+      <span class="detail-name" id="d-name">Helium</span>
+      <span class="detail-meta" id="d-meta">Glows peachy-orange in a tube</span>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-label">Atomic number</div><div class="stat-value" id="d-num">2</div></div>
+      <div><div class="stat-label">Atomic mass</div><div class="stat-value" id="d-mass">4.0</div></div>
+    </div>
+    <p class="detail-fact" id="d-fact">Lighter than air, which is why it's used to fill balloons and airships — and why breathing it makes your voice sound squeaky (don't try this, it's not safe in large amounts).</p>
+  </div>
+
+  <div class="callout">
+    <strong>Why don't they react?</strong> Every noble gas already has a full outer shell of electrons. Atoms bond with each other to fill up empty space in that outer shell — noble gases have no empty space to fill, so they mostly keep to themselves.
+  </div>
+
+  <button class="quiz-toggle" id="quizToggle">Test yourself →</button>
+
+  <div class="quiz" id="quiz">
+    <div class="q" data-answer="1">
+      <div class="q-text">1. Which noble gas is used to fill party balloons?</div>
+      <div class="q-opts">
+        <button class="q-opt">Neon</button>
+        <button class="q-opt">Helium</button>
+        <button class="q-opt">Argon</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">2. Which gas glows red-orange in signs?</div>
+      <div class="q-opts">
+        <button class="q-opt">Neon</button>
+        <button class="q-opt">Xenon</button>
+        <button class="q-opt">Radon</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">3. Which gas is often used inside regular lightbulbs to stop the filament burning out?</div>
+      <div class="q-opts">
+        <button class="q-opt">Krypton</button>
+        <button class="q-opt">Helium</button>
+        <button class="q-opt">Argon</button>
+      </div>
+    </div>
+    <div class="q" data-answer="1">
+      <div class="q-text">4. What do all noble gases have in common?</div>
+      <div class="q-opts">
+        <button class="q-opt">They are all liquids at room temperature</button>
+        <button class="q-opt">They all have a full outer electron shell</button>
+        <button class="q-opt">They are all radioactive</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">5. Which noble gas is radioactive and can seep from rock into basements?</div>
+      <div class="q-opts">
+        <button class="q-opt">Radon</button>
+        <button class="q-opt">Krypton</button>
+        <button class="q-opt">Xenon</button>
+      </div>
+    </div>
+    <div class="score-line" id="scoreLine">Score: <strong>0 / 5</strong></div>
+  </div>
+
+  <footer>
+    Part of the Periodic Table series — Ellis Knowledge Studio. More categories: Alkali Metals, Transition Metals, Metalloids, Non-metals, Halogens.
+  </footer>
+
+</div>
+
+<script>
+  const data = {
+    he: { symbol: "He", name: "Helium", meta: "Glows peachy-orange in a tube", num: 2, mass: "4.0",
+      fact: "Lighter than air, which is why it's used to fill balloons and airships — and why breathing it makes your voice sound squeaky (don't try this, it's not safe in large amounts)." },
+    ne: { symbol: "Ne", name: "Neon", meta: "Glows red-orange in a tube", num: 10, mass: "20.2",
+      fact: "The gas behind classic \"neon\" signs. Almost every other coloured sign you see is actually a different gas — pure neon only glows red-orange." },
+    ar: { symbol: "Ar", name: "Argon", meta: "Glows violet-lavender in a tube", num: 18, mass: "39.9",
+      fact: "Fills the space inside regular lightbulbs. Because it doesn't react, it stops the hot metal filament from burning out too fast." },
+    kr: { symbol: "Kr", name: "Krypton", meta: "Glows pale green-white in a tube", num: 36, mass: "83.8",
+      fact: "Used in some high-speed camera flashes and specialty lighting. Named from the Greek word for \"hidden\" — it's rare in the air around us." },
+    xe: { symbol: "Xe", name: "Xenon", meta: "Glows blue in a tube", num: 54, mass: "131.3",
+      fact: "Gives some car headlights their bright white-blue light, and is also used to power the engines on some spacecraft." },
+    rn: { symbol: "Rn", name: "Radon", meta: "Colourless — this glow shows where it sits, not how it looks", num: 86, mass: "222",
+      fact: "The only noble gas that's radioactive. It can seep up from rock and soil into basements, which is why some homes are tested for it." }
+  };
+
+  const rack = document.getElementById('rack');
+  const buttons = rack.querySelectorAll('.tube-btn');
+
+  function selectElement(el) {
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.el === el ? 'true' : 'false'));
+    const d = data[el];
+    document.getElementById('d-symbol').textContent = d.symbol;
+    document.getElementById('d-name').textContent = d.name;
+    document.getElementById('d-meta').textContent = d.meta;
+    document.getElementById('d-num').textContent = d.num;
+    document.getElementById('d-mass').textContent = d.mass;
+    document.getElementById('d-fact').textContent = d.fact;
+    document.getElementById('detail').style.setProperty('--glow', `var(--${el})`);
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => selectElement(b.dataset.el)));
+  selectElement('he');
+
+  // Quiz
+  const quizToggle = document.getElementById('quizToggle');
+  const quiz = document.getElementById('quiz');
+  quizToggle.addEventListener('click', () => {
+    quiz.classList.toggle('open');
+    quizToggle.textContent = quiz.classList.contains('open') ? 'Hide quiz' : 'Test yourself →';
+  });
+
+  let score = 0;
+  const answered = new Set();
+  document.querySelectorAll('.q').forEach((q, qIndex) => {
+    const correctIndex = parseInt(q.dataset.answer, 10);
+    const opts = q.querySelectorAll('.q-opt');
+    opts.forEach((opt, i) => {
+      opt.addEventListener('click', () => {
+        if (answered.has(qIndex)) return;
+        answered.add(qIndex);
+        opts.forEach((o, j) => {
+          if (j === correctIndex) o.classList.add('correct');
+          else if (j === i) o.classList.add('wrong');
+        });
+        if (i === correctIndex) score++;
+        document.getElementById('scoreLine').innerHTML = `Score: <strong>${score} / 5</strong>`;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

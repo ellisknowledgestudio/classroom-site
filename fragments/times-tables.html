@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Times Tables Launchpad — Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1C3F;
+    --navy-deep:#0A1330;
+    --blue:#3E92CC;
+    --gold:#F4B942;
+    --white:#F7F9FC;
+    --green:#4CAF83;
+    --coral:#E85D6C;
+    --panel:#16234E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(1px 1px at 10% 20%, #ffffff90 50%, transparent 51%),
+      radial-gradient(1px 1px at 80% 10%, #ffffff70 50%, transparent 51%),
+      radial-gradient(2px 2px at 30% 70%, #ffffff60 50%, transparent 51%),
+      radial-gradient(1px 1px at 60% 85%, #ffffff80 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 60%, #ffffff60 50%, transparent 51%),
+      radial-gradient(1px 1px at 45% 35%, #ffffff70 50%, transparent 51%),
+      linear-gradient(180deg, var(--navy-deep), var(--navy) 60%, #17265a 100%);
+    font-family:'Nunito Sans', sans-serif;
+    color:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .wrap{
+    width:100%;
+    max-width:720px;
+  }
+  .eyebrow{
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:6px;
+  }
+  h1{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:clamp(28px,5vw,42px);
+    text-align:center;
+    margin:0 0 4px;
+    letter-spacing:.01em;
+  }
+  .sub{
+    text-align:center;
+    color:#C7D2EE;
+    font-weight:600;
+    margin-bottom:22px;
+    font-size:15px;
+  }
+
+  /* Rocket track */
+  .track-wrap{
+    position:relative;
+    height:64px;
+    margin:0 auto 22px;
+    max-width:640px;
+  }
+  .track-line{
+    position:absolute;
+    top:50%;
+    left:24px;
+    right:24px;
+    height:6px;
+    border-radius:6px;
+    background:#22305e;
+    transform:translateY(-50%);
+    overflow:hidden;
+  }
+  .track-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--blue),var(--gold));
+    transition:width .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .planet{
+    position:absolute;
+    right:6px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:30px;
+  }
+  .rocket{
+    position:absolute;
+    top:50%;
+    left:24px;
+    transform:translate(-50%,-50%);
+    font-size:28px;
+    transition:left .5s cubic-bezier(.34,1.56,.64,1);
+    filter:drop-shadow(0 0 6px rgba(244,185,66,.6));
+  }
+
+  .card{
+    background:var(--panel);
+    border:1px solid #26356b;
+    border-radius:20px;
+    padding:28px 24px 24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+
+  .setup-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-bottom:18px;
+  }
+  .chip{
+    border:2px solid #2C3B72;
+    background:#1B2A56;
+    color:var(--white);
+    font-family:'Nunito Sans',sans-serif;
+    font-weight:700;
+    font-size:14px;
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.15s;
+  }
+  .chip:hover{border-color:var(--blue);}
+  .chip.active{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:var(--navy-deep);
+  }
+
+  .question-zone{
+    text-align:center;
+  }
+  .score-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    font-weight:700;
+    color:#9FB0DE;
+    margin-bottom:8px;
+    letter-spacing:.03em;
+  }
+  .score-row span.hi{color:var(--gold);}
+
+  .sum{
+    font-family:'Baloo 2', sans-serif;
+    font-size:clamp(40px,10vw,56px);
+    font-weight:800;
+    margin:10px 0 20px;
+    letter-spacing:.02em;
+  }
+  form.answer-form{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  input#answer{
+    width:120px;
+    font-family:'Baloo 2', sans-serif;
+    font-size:26px;
+    font-weight:700;
+    text-align:center;
+    border-radius:12px;
+    border:2px solid #2C3B72;
+    background:#0F1A3D;
+    color:var(--white);
+    padding:10px 8px;
+    outline:none;
+  }
+  input#answer:focus{border-color:var(--blue);}
+  button.go{
+    font-family:'Nunito Sans',sans-serif;
+    font-weight:800;
+    font-size:16px;
+    background:var(--blue);
+    color:var(--navy-deep);
+    border:none;
+    border-radius:12px;
+    padding:0 22px;
+    cursor:pointer;
+    transition:.15s;
+  }
+  button.go:hover{background:#5aa8dd;}
+
+  .feedback{
+    min-height:26px;
+    font-weight:800;
+    font-size:16px;
+    margin-bottom:8px;
+  }
+  .feedback.correct{color:var(--green);}
+  .feedback.wrong{color:var(--coral);}
+
+  .finish{
+    text-align:center;
+  }
+  .finish h2{
+    font-family:'Baloo 2', sans-serif;
+    font-size:28px;
+    margin:6px 0 4px;
+  }
+  .finish p{color:#C7D2EE;font-weight:600;margin:0 0 18px;}
+  .cta{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-weight:800;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:12px;
+    font-size:15px;
+    margin-top:6px;
+  }
+  .again{
+    display:inline-block;
+    margin-top:12px;
+    background:none;
+    border:2px solid #2C3B72;
+    color:var(--white);
+    font-weight:700;
+    padding:9px 18px;
+    border-radius:12px;
+    cursor:pointer;
+  }
+
+  .footer-note{
+    text-align:center;
+    color:#7C8AC0;
+    font-size:12px;
+    margin-top:16px;
+    font-weight:600;
+  }
+  .hidden{display:none !important;}
+
+  @media (prefers-reduced-motion: reduce){
+    .track-fill, .rocket{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Ellis Knowledge Studio</div>
+  <h1>Times Tables Launchpad 🚀</h1>
+  <div class="sub">Answer sums to launch your rocket to the planet!</div>
+
+  <div class="track-wrap">
+    <div class="track-line"><div class="track-fill" id="trackFill"></div></div>
+    <div class="rocket" id="rocket">🚀</div>
+    <div class="planet">🪐</div>
+  </div>
+
+  <div class="card">
+
+    <div id="setupScreen">
+      <div class="sub" style="margin-bottom:10px;">Pick a times table to practice:</div>
+      <div class="setup-row" id="tableChips"></div>
+      <div class="sub" style="margin-bottom:10px;">How many questions?</div>
+      <div class="setup-row" id="lengthChips">
+        <button class="chip" data-len="5">5</button>
+        <button class="chip active" data-len="10">10</button>
+        <button class="chip" data-len="15">15</button>
+      </div>
+      <div style="text-align:center;">
+        <button class="cta" id="startBtn" style="border:none;cursor:pointer;">Start Mission</button>
+      </div>
+    </div>
+
+    <div id="quizScreen" class="question-zone hidden">
+      <div class="score-row">
+        <span>Question <span id="qNum">1</span> / <span id="qTotal">10</span></span>
+        <span class="hi">Score: <span id="scoreNum">0</span></span>
+      </div>
+      <div class="sum" id="sumText">7 × 6</div>
+      <form class="answer-form" id="answerForm">
+        <input type="number" id="answer" autocomplete="off" inputmode="numeric" placeholder="?">
+        <button type="submit" class="go">Launch</button>
+      </form>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <div id="finishScreen" class="finish hidden">
+      <h2 id="finishTitle">Mission Complete! 🎉</h2>
+      <p id="finishScore">You scored 8 / 10</p>
+      <a class="cta" href="https://ellisknowledgestudio.com/educational-resources" target="_top">Get printable times tables worksheets →</a>
+      <br>
+      <button class="again" id="againBtn">Try another table</button>
+    </div>
+
+  </div>
+  <div class="footer-note">Free practice from Ellis Knowledge Studio · Printable packs available in the shop</div>
+</div>
+
+<script>
+(function(){
+  var selectedTable = 6;
+  var quizLength = 10;
+  var questions = [];
+  var current = 0;
+  var score = 0;
+
+  var tableChipsEl = document.getElementById('tableChips');
+  for (var t = 1; t <= 12; t++){
+    var b = document.createElement('button');
+    b.className = 'chip' + (t === selectedTable ? ' active' : '');
+    b.textContent = t + '×';
+    b.dataset.table = t;
+    b.addEventListener('click', function(){
+      document.querySelectorAll('#tableChips .chip').forEach(function(c){c.classList.remove('active');});
+      this.classList.add('active');
+      selectedTable = parseInt(this.dataset.table, 10);
+    });
+    tableChipsEl.appendChild(b);
+  }
+
+  document.querySelectorAll('#lengthChips .chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      document.querySelectorAll('#lengthChips .chip').forEach(function(x){x.classList.remove('active');});
+      this.classList.add('active');
+      quizLength = parseInt(this.dataset.len, 10);
+    });
+  });
+
+  function shuffle(arr){
+    for (var i = arr.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function buildQuestions(){
+    var pool = [];
+    for (var m = 1; m <= 12; m++){ pool.push(m); }
+    shuffle(pool);
+    var picks = [];
+    for (var i = 0; i < quizLength; i++){
+      picks.push(pool[i % pool.length]);
+    }
+    shuffle(picks);
+    return picks.map(function(m){ return {a: selectedTable, b: m, answer: selectedTable * m}; });
+  }
+
+  function updateTrack(){
+    var pct = questions.length ? Math.round((current / questions.length) * 100) : 0;
+    document.getElementById('trackFill').style.width = pct + '%';
+    document.getElementById('rocket').style.left = 'calc(24px + ' + pct + '% * 0.9)';
+  }
+
+  function showQuestion(){
+    var q = questions[current];
+    document.getElementById('qNum').textContent = current + 1;
+    document.getElementById('qTotal').textContent = questions.length;
+    document.getElementById('scoreNum').textContent = score;
+    document.getElementById('sumText').textContent = q.a + ' × ' + q.b;
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('feedback').className = 'feedback';
+    var ans = document.getElementById('answer');
+    ans.value = '';
+    ans.focus();
+    updateTrack();
+  }
+
+  document.getElementById('startBtn').addEventListener('click', function(){
+    questions = buildQuestions();
+    current = 0;
+    score = 0;
+    document.getElementById('setupScreen').classList.add('hidden');
+    document.getElementById('finishScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    showQuestion();
+  });
+
+  document.getElementById('answerForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var val = parseInt(document.getElementById('answer').value, 10);
+    var q = questions[current];
+    var fb = document.getElementById('feedback');
+    if (val === q.answer){
+      score++;
+      fb.textContent = 'Correct! 🌟';
+      fb.className = 'feedback correct';
+    } else {
+      fb.textContent = 'Not quite — it was ' + q.answer;
+      fb.className = 'feedback wrong';
+    }
+    document.getElementById('scoreNum').textContent = score;
+    current++;
+    updateTrack();
+    setTimeout(function(){
+      if (current >= questions.length){
+        finish();
+      } else {
+        showQuestion();
+      }
+    }, 900);
+  });
+
+  function finish(){
+    document.getElementById('quizScreen').classList.add('hidden');
+    document.getElementById('finishScreen').classList.remove('hidden');
+    var pct = Math.round((score / questions.length) * 100);
+    var title = document.getElementById('finishTitle');
+    if (pct === 100){ title.textContent = 'Perfect Landing! 🏆'; }
+    else if (pct >= 70){ title.textContent = 'Great Flight! 🎉'; }
+    else { title.textContent = 'Mission Complete! 🚀'; }
+    document.getElementById('finishScore').textContent = 'You scored ' + score + ' / ' + questions.length;
+  }
+
+  document.getElementById('againBtn').addEventListener('click', function(){
+    document.getElementById('finishScreen').classList.add('hidden');
+    document.getElementById('setupScreen').classList.remove('hidden');
+    document.getElementById('trackFill').style.width = '0%';
+    document.getElementById('rocket').style.left = '24px';
+  });
+
+})();
+</script>
+</body>
+</html>

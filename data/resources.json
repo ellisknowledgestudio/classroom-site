@@ -1,0 +1,67 @@
+[
+  {
+    "slug": "times-tables",
+    "category": "math",
+    "category_label": "Math",
+    "title": "Times Tables Launchpad",
+    "seo_title": "Free Times Tables Practice for Kids | Ellis Knowledge Studio",
+    "meta_description": "Free interactive times tables practice for ages 8-11. Pick a table, answer sums, launch your rocket.",
+    "age_range": "8-11",
+    "fragment": "times-tables.html",
+    "cta_text": "Browse resources in the shop",
+    "cta_link": "https://ellisknowledgestudio.com/educational-resources",
+    "status": "published"
+  },
+  {
+    "slug": "periodic-table",
+    "category": "science",
+    "category_label": "Science",
+    "title": "Element Explorer",
+    "seo_title": "Interactive Periodic Table for Kids | Ellis Knowledge Studio",
+    "meta_description": "Tap elements to learn fun facts. A kid-friendly interactive periodic table for ages 8-11.",
+    "age_range": "8-11",
+    "fragment": "element-explorer.html",
+    "cta_text": "Browse resources in the shop",
+    "cta_link": "https://ellisknowledgestudio.com/educational-resources",
+    "status": "published"
+  },
+  {
+    "slug": "world-flags-quiz",
+    "category": "geography",
+    "category_label": "Geography",
+    "title": "World Explorer Quiz",
+    "seo_title": "Guess the Flag Quiz for Kids | Ellis Knowledge Studio",
+    "meta_description": "Free flag-guessing geography quiz for kids. 20 countries, multiple choice, instant feedback.",
+    "age_range": "8-11",
+    "fragment": "world-flags-quiz.html",
+    "cta_text": "Browse resources in the shop",
+    "cta_link": "https://ellisknowledgestudio.com/educational-resources",
+    "status": "published"
+  },
+  {
+    "slug": "world-weather-data",
+    "category": "geography",
+    "category_label": "Geography",
+    "title": "World Weather Explorer",
+    "seo_title": "Live World Weather Data for Kids | Ellis Knowledge Studio",
+    "meta_description": "Explore real weather data from cities around the world \u2014 a hands-on geography and data reference tool.",
+    "age_range": "8-14",
+    "fragment": "world-weather-data.html",
+    "cta_text": "Browse resources in the shop",
+    "cta_link": "https://ellisknowledgestudio.com/educational-resources",
+    "status": "draft"
+  },
+  {
+    "slug": "analysis-board",
+    "category": "chess",
+    "category_label": "Chess",
+    "title": "Chess Analysis Board",
+    "seo_title": "Free Online Chess Analysis Board | Ellis Knowledge Studio",
+    "meta_description": "Set up positions and explore chess lines on a free interactive analysis board.",
+    "age_range": "All ages",
+    "fragment": "analysis-board.html",
+    "cta_text": "Browse resources in the shop",
+    "cta_link": "https://ellisknowledgestudio.com/educational-resources",
+    "status": "draft"
+  }
+]

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Explorer Quiz — Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1C3F;
+    --navy-deep:#0A1330;
+    --coral:#E85D6C;
+    --gold:#F4B942;
+    --white:#F7F9FC;
+    --green:#4CAF83;
+    --panel:#16234E;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;
+    background:linear-gradient(180deg, var(--navy-deep), var(--navy) 60%, #17265a 100%);
+    font-family:'Nunito Sans', sans-serif;color:var(--white);
+    display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .wrap{width:100%;max-width:640px;}
+  .eyebrow{
+    font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;
+    color:var(--coral);text-align:center;margin-bottom:6px;
+  }
+  h1{
+    font-family:'Baloo 2', sans-serif;font-weight:800;font-size:clamp(26px,5vw,40px);
+    text-align:center;margin:0 0 4px;
+  }
+  .sub{text-align:center;color:#C7D2EE;font-weight:600;margin-bottom:20px;font-size:15px;}
+
+  .progress-wrap{max-width:520px;margin:0 auto 20px;height:8px;background:#22305e;border-radius:8px;overflow:hidden;}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--coral),var(--gold));transition:width .4s ease;}
+
+  .card{
+    background:var(--panel);border:1px solid #26356b;border-radius:20px;
+    padding:28px 24px;box-shadow:0 20px 50px rgba(0,0,0,.35);text-align:center;
+  }
+  .score-row{
+    display:flex;justify-content:space-between;font-size:13px;font-weight:700;
+    color:#9FB0DE;margin-bottom:10px;
+  }
+  .score-row span.hi{color:var(--gold);}
+
+  .flag{margin:6px auto 10px;line-height:1;width:140px;height:94px;border-radius:8px;overflow:hidden;border:2px solid #2C3B72;background:#0F1A3D;}
+  .flag img{width:100%;height:100%;object-fit:cover;display:block;}
+  .prompt{font-weight:700;color:#C7D2EE;margin-bottom:16px;font-size:15px;}
+
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px;}
+  @media (max-width:420px){ .options{grid-template-columns:1fr;} }
+  .opt{
+    background:#1B2A56;border:2px solid #2C3B72;color:var(--white);
+    font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:15px;
+    padding:12px 10px;border-radius:12px;cursor:pointer;transition:.15s;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.correct{background:var(--green);border-color:var(--green);color:var(--navy-deep);}
+  .opt.wrong{background:var(--coral);border-color:var(--coral);color:var(--navy-deep);}
+  .opt[disabled]{cursor:default;}
+
+  .feedback{min-height:22px;font-weight:800;font-size:15px;margin:10px 0 2px;}
+  .feedback.correct{color:var(--green);}
+  .feedback.wrong{color:var(--coral);}
+
+  .finish h2{font-family:'Baloo 2', sans-serif;font-size:28px;margin:6px 0 4px;}
+  .finish p{color:#C7D2EE;font-weight:600;margin:0 0 18px;}
+  .cta{
+    display:inline-block;background:var(--gold);color:var(--navy-deep);font-weight:800;
+    text-decoration:none;padding:12px 22px;border-radius:12px;font-size:15px;margin-top:6px;
+  }
+  .again{
+    display:inline-block;margin-top:12px;background:none;border:2px solid #2C3B72;
+    color:var(--white);font-weight:700;padding:9px 18px;border-radius:12px;cursor:pointer;
+  }
+  .hidden{display:none !important;}
+  .footer-note{text-align:center;color:#7C8AC0;font-size:12px;margin-top:16px;font-weight:600;}
+
+  /* --- Setup screen --- */
+  .setup-group{margin-bottom:18px;text-align:left;}
+  .setup-label{font-weight:800;font-size:13px;color:#9FB0DE;margin-bottom:8px;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{
+    background:#1B2A56;border:2px solid #2C3B72;color:var(--white);
+    font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:14px;
+    padding:9px 14px;border-radius:999px;cursor:pointer;transition:.15s;
+  }
+  .pill:hover{border-color:var(--gold);}
+  .pill.active{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);}
+  .diff-easy.active{background:var(--green);border-color:var(--green);}
+  .diff-medium.active{background:var(--gold);border-color:var(--gold);}
+  .diff-hard.active{background:var(--coral);border-color:var(--coral);}
+  .start-btn{
+    display:block;width:100%;background:var(--gold);color:var(--navy-deep);font-weight:800;
+    border:none;padding:14px;border-radius:12px;font-size:16px;cursor:pointer;margin-top:8px;
+    font-family:'Nunito Sans',sans-serif;
+  }
+  .start-btn:hover{filter:brightness(1.05);}
+  .pool-note{font-size:12px;color:#7C8AC0;font-weight:600;margin-top:10px;text-align:center;}
+  .change-btn{
+    background:none;border:none;color:#9FB0DE;font-weight:700;font-size:12px;
+    cursor:pointer;text-decoration:underline;padding:0;margin-left:8px;
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Ellis Knowledge Studio</div>
+  <h1>World Explorer 🌍</h1>
+  <div class="sub" id="subHeading">Which country does this flag belong to?</div>
+
+  <div class="progress-wrap hidden" id="progressWrap"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="card">
+
+    <!-- SETUP SCREEN -->
+    <div id="setupScreen">
+      <div class="setup-group">
+        <div class="setup-label">Choose a region</div>
+        <div class="pill-row" id="continentRow"></div>
+      </div>
+      <div class="setup-group">
+        <div class="setup-label">Choose a difficulty</div>
+        <div class="pill-row" id="difficultyRow">
+          <button class="pill diff-easy" data-diff="easy">Easy</button>
+          <button class="pill diff-medium" data-diff="medium">Medium</button>
+          <button class="pill diff-hard" data-diff="hard">Hard</button>
+          <button class="pill diff-mixed" data-diff="mixed">Mixed</button>
+        </div>
+      </div>
+      <button class="start-btn" id="startBtn">Start Quiz</button>
+      <div class="pool-note" id="poolNote"></div>
+    </div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quizScreen" class="hidden">
+      <div class="score-row">
+        <span>Question <span id="qNum">1</span> / <span id="qTotal">10</span></span>
+        <span class="hi">Score: <span id="scoreNum">0</span></span>
+      </div>
+      <div class="flag"><img id="flagImg" src="" alt="Flag"></div>
+      <div class="prompt">Which country is this?</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+
+    <!-- FINISH SCREEN -->
+    <div id="finishScreen" class="finish hidden">
+      <h2 id="finishTitle">Explorer Badge Earned! 🏅</h2>
+      <p id="finishScore">You scored 8 / 10</p>
+      <a class="cta" href="https://ellisknowledgestudio.com/world-in-maps" target="_top">Explore printable world maps →</a>
+      <br>
+      <button class="again" id="againBtn">Play again</button>
+      <button class="again" id="changeSetupBtn">Change region / difficulty</button>
+    </div>
+
+  </div>
+  <div class="footer-note">Free quiz from Ellis Knowledge Studio · Printable map packs available in the shop</div>
+</div>
+
+<script>
+(function(){
+
+  // ---------------------------------------------------------------
+  // DATA: every country tagged with continent + difficulty tier.
+  // Difficulty is a rough "how recognizable is this flag" rating.
+  // ---------------------------------------------------------------
+  var countries = [
+    // EUROPE
+    {code:"fr",name:"France",continent:"Europe",difficulty:"easy"},
+    {code:"de",name:"Germany",continent:"Europe",difficulty:"easy"},
+    {code:"it",name:"Italy",continent:"Europe",difficulty:"easy"},
+    {code:"es",name:"Spain",continent:"Europe",difficulty:"easy"},
+    {code:"gb",name:"United Kingdom",continent:"Europe",difficulty:"easy"},
+    {code:"gr",name:"Greece",continent:"Europe",difficulty:"easy"},
+    {code:"no",name:"Norway",continent:"Europe",difficulty:"easy"},
+    {code:"se",name:"Sweden",continent:"Europe",difficulty:"easy"},
+    {code:"ch",name:"Switzerland",continent:"Europe",difficulty:"easy"},
+    {code:"nl",name:"Netherlands",continent:"Europe",difficulty:"easy"},
+    {code:"pl",name:"Poland",continent:"Europe",difficulty:"medium"},
+    {code:"pt",name:"Portugal",continent:"Europe",difficulty:"medium"},
+    {code:"ie",name:"Ireland",continent:"Europe",difficulty:"medium"},
+    {code:"fi",name:"Finland",continent:"Europe",difficulty:"medium"},
+    {code:"dk",name:"Denmark",continent:"Europe",difficulty:"medium"},
+    {code:"at",name:"Austria",continent:"Europe",difficulty:"medium"},
+    {code:"be",name:"Belgium",continent:"Europe",difficulty:"medium"},
+    {code:"is",name:"Iceland",continent:"Europe",difficulty:"medium"},
+    {code:"ua",name:"Ukraine",continent:"Europe",difficulty:"medium"},
+    {code:"hr",name:"Croatia",continent:"Europe",difficulty:"medium"},
+    {code:"si",name:"Slovenia",continent:"Europe",difficulty:"hard"},
+    {code:"sk",name:"Slovakia",continent:"Europe",difficulty:"hard"},
+    {code:"ee",name:"Estonia",continent:"Europe",difficulty:"hard"},
+    {code:"lv",name:"Latvia",continent:"Europe",difficulty:"hard"},
+    {code:"lt",name:"Lithuania",continent:"Europe",difficulty:"hard"},
+    {code:"ro",name:"Romania",continent:"Europe",difficulty:"hard"},
+    {code:"bg",name:"Bulgaria",continent:"Europe",difficulty:"hard"},
+    {code:"hu",name:"Hungary",continent:"Europe",difficulty:"hard"},
+    {code:"rs",name:"Serbia",continent:"Europe",difficulty:"hard"},
+    {code:"md",name:"Moldova",continent:"Europe",difficulty:"hard"},
+    {code:"al",name:"Albania",continent:"Europe",difficulty:"hard"},
+    {code:"mk",name:"North Macedonia",continent:"Europe",difficulty:"hard"},
+    {code:"me",name:"Montenegro",continent:"Europe",difficulty:"hard"},
+    {code:"ba",name:"Bosnia and Herzegovina",continent:"Europe",difficulty:"hard"},
+    {code:"lu",name:"Luxembourg",continent:"Europe",difficulty:"hard"},
+    {code:"mt",name:"Malta",continent:"Europe",difficulty:"hard"},
+    {code:"cy",name:"Cyprus",continent:"Europe",difficulty:"hard"},
+    {code:"mc",name:"Monaco",continent:"Europe",difficulty:"hard"},
+    {code:"sm",name:"San Marino",continent:"Europe",difficulty:"hard"},
+    {code:"li",name:"Liechtenstein",continent:"Europe",difficulty:"hard"},
+
+    // ASIA
+    {code:"jp",name:"Japan",continent:"Asia",difficulty:"easy"},
+    {code:"cn",name:"China",continent:"Asia",difficulty:"easy"},
+    {code:"in",name:"India",continent:"Asia",difficulty:"easy"},
+    {code:"kr",name:"South Korea",continent:"Asia",difficulty:"easy"},
+    {code:"tr",name:"Turkey",continent:"Asia",difficulty:"easy"},
+    {code:"th",name:"Thailand",continent:"Asia",difficulty:"easy"},
+    {code:"il",name:"Israel",continent:"Asia",difficulty:"easy"},
+    {code:"sa",name:"Saudi Arabia",continent:"Asia",difficulty:"easy"},
+    {code:"id",name:"Indonesia",continent:"Asia",difficulty:"easy"},
+    {code:"vn",name:"Vietnam",continent:"Asia",difficulty:"easy"},
+    {code:"ph",name:"Philippines",continent:"Asia",difficulty:"medium"},
+    {code:"pk",name:"Pakistan",continent:"Asia",difficulty:"medium"},
+    {code:"my",name:"Malaysia",continent:"Asia",difficulty:"medium"},
+    {code:"sg",name:"Singapore",continent:"Asia",difficulty:"medium"},
+    {code:"ir",name:"Iran",continent:"Asia",difficulty:"medium"},
+    {code:"iq",name:"Iraq",continent:"Asia",difficulty:"medium"},
+    {code:"ae",name:"United Arab Emirates",continent:"Asia",difficulty:"medium"},
+    {code:"np",name:"Nepal",continent:"Asia",difficulty:"medium"},
+    {code:"lk",name:"Sri Lanka",continent:"Asia",difficulty:"medium"},
+    {code:"bd",name:"Bangladesh",continent:"Asia",difficulty:"medium"},
+    {code:"mn",name:"Mongolia",continent:"Asia",difficulty:"hard"},
+    {code:"kz",name:"Kazakhstan",continent:"Asia",difficulty:"hard"},
+    {code:"uz",name:"Uzbekistan",continent:"Asia",difficulty:"hard"},
+    {code:"kg",name:"Kyrgyzstan",continent:"Asia",difficulty:"hard"},
+    {code:"tj",name:"Tajikistan",continent:"Asia",difficulty:"hard"},
+    {code:"tm",name:"Turkmenistan",continent:"Asia",difficulty:"hard"},
+    {code:"mm",name:"Myanmar",continent:"Asia",difficulty:"hard"},
+    {code:"kh",name:"Cambodia",continent:"Asia",difficulty:"hard"},
+    {code:"la",name:"Laos",continent:"Asia",difficulty:"hard"},
+    {code:"bt",name:"Bhutan",continent:"Asia",difficulty:"hard"},
+    {code:"bn",name:"Brunei",continent:"Asia",difficulty:"hard"},
+    {code:"ye",name:"Yemen",continent:"Asia",difficulty:"hard"},
+    {code:"om",name:"Oman",continent:"Asia",difficulty:"hard"},
+    {code:"qa",name:"Qatar",continent:"Asia",difficulty:"hard"},
+    {code:"kw",name:"Kuwait",continent:"Asia",difficulty:"hard"},
+    {code:"bh",name:"Bahrain",continent:"Asia",difficulty:"hard"},
+    {code:"jo",name:"Jordan",continent:"Asia",difficulty:"hard"},
+    {code:"lb",name:"Lebanon",continent:"Asia",difficulty:"hard"},
+    {code:"am",name:"Armenia",continent:"Asia",difficulty:"hard"},
+    {code:"az",name:"Azerbaijan",continent:"Asia",difficulty:"hard"},
+    {code:"ge",name:"Georgia",continent:"Asia",difficulty:"hard"},
+
+    // AFRICA
+    {code:"eg",name:"Egypt",continent:"Africa",difficulty:"easy"},
+    {code:"za",name:"South Africa",continent:"Africa",difficulty:"easy"},
+    {code:"ke",name:"Kenya",continent:"Africa",difficulty:"easy"},
+    {code:"ng",name:"Nigeria",continent:"Africa",difficulty:"easy"},
+    {code:"ma",name:"Morocco",continent:"Africa",difficulty:"easy"},
+    {code:"et",name:"Ethiopia",continent:"Africa",difficulty:"easy"},
+    {code:"gh",name:"Ghana",continent:"Africa",difficulty:"easy"},
+    {code:"dz",name:"Algeria",continent:"Africa",difficulty:"easy"},
+    {code:"tn",name:"Tunisia",continent:"Africa",difficulty:"easy"},
+    {code:"tz",name:"Tanzania",continent:"Africa",difficulty:"easy"},
+    {code:"sn",name:"Senegal",continent:"Africa",difficulty:"medium"},
+    {code:"cm",name:"Cameroon",continent:"Africa",difficulty:"medium"},
+    {code:"ug",name:"Uganda",continent:"Africa",difficulty:"medium"},
+    {code:"zw",name:"Zimbabwe",continent:"Africa",difficulty:"medium"},
+    {code:"zm",name:"Zambia",continent:"Africa",difficulty:"medium"},
+    {code:"ci",name:"Ivory Coast",continent:"Africa",difficulty:"medium"},
+    {code:"ml",name:"Mali",continent:"Africa",difficulty:"medium"},
+    {code:"na",name:"Namibia",continent:"Africa",difficulty:"medium"},
+    {code:"bw",name:"Botswana",continent:"Africa",difficulty:"medium"},
+    {code:"rw",name:"Rwanda",continent:"Africa",difficulty:"medium"},
+    {code:"ao",name:"Angola",continent:"Africa",difficulty:"hard"},
+    {code:"mz",name:"Mozambique",continent:"Africa",difficulty:"hard"},
+    {code:"mg",name:"Madagascar",continent:"Africa",difficulty:"hard"},
+    {code:"mw",name:"Malawi",continent:"Africa",difficulty:"hard"},
+    {code:"so",name:"Somalia",continent:"Africa",difficulty:"hard"},
+    {code:"sd",name:"Sudan",continent:"Africa",difficulty:"hard"},
+    {code:"ss",name:"South Sudan",continent:"Africa",difficulty:"hard"},
+    {code:"ly",name:"Libya",continent:"Africa",difficulty:"hard"},
+    {code:"td",name:"Chad",continent:"Africa",difficulty:"hard"},
+    {code:"ne",name:"Niger",continent:"Africa",difficulty:"hard"},
+    {code:"bf",name:"Burkina Faso",continent:"Africa",difficulty:"hard"},
+    {code:"bj",name:"Benin",continent:"Africa",difficulty:"hard"},
+    {code:"tg",name:"Togo",continent:"Africa",difficulty:"hard"},
+    {code:"gn",name:"Guinea",continent:"Africa",difficulty:"hard"},
+    {code:"sl",name:"Sierra Leone",continent:"Africa",difficulty:"hard"},
+    {code:"lr",name:"Liberia",continent:"Africa",difficulty:"hard"},
+    {code:"ga",name:"Gabon",continent:"Africa",difficulty:"hard"},
+    {code:"cg",name:"Congo",continent:"Africa",difficulty:"hard"},
+    {code:"cd",name:"DR Congo",continent:"Africa",difficulty:"hard"},
+    {code:"er",name:"Eritrea",continent:"Africa",difficulty:"hard"},
+    {code:"dj",name:"Djibouti",continent:"Africa",difficulty:"hard"},
+    {code:"bi",name:"Burundi",continent:"Africa",difficulty:"hard"},
+    {code:"ls",name:"Lesotho",continent:"Africa",difficulty:"hard"},
+    {code:"sz",name:"Eswatini",continent:"Africa",difficulty:"hard"},
+    {code:"gm",name:"Gambia",continent:"Africa",difficulty:"hard"},
+    {code:"gw",name:"Guinea-Bissau",continent:"Africa",difficulty:"hard"},
+    {code:"gq",name:"Equatorial Guinea",continent:"Africa",difficulty:"hard"},
+    {code:"mr",name:"Mauritania",continent:"Africa",difficulty:"hard"},
+    {code:"km",name:"Comoros",continent:"Africa",difficulty:"hard"},
+    {code:"cv",name:"Cape Verde",continent:"Africa",difficulty:"hard"},
+    {code:"st",name:"São Tomé and Príncipe",continent:"Africa",difficulty:"hard"},
+    {code:"sc",name:"Seychelles",continent:"Africa",difficulty:"hard"},
+    {code:"mu",name:"Mauritius",continent:"Africa",difficulty:"hard"},
+
+    // NORTH AMERICA (incl. Central America & Caribbean)
+    {code:"us",name:"United States",continent:"North America",difficulty:"easy"},
+    {code:"ca",name:"Canada",continent:"North America",difficulty:"easy"},
+    {code:"mx",name:"Mexico",continent:"North America",difficulty:"easy"},
+    {code:"cu",name:"Cuba",continent:"North America",difficulty:"medium"},
+    {code:"jm",name:"Jamaica",continent:"North America",difficulty:"medium"},
+    {code:"cr",name:"Costa Rica",continent:"North America",difficulty:"medium"},
+    {code:"pa",name:"Panama",continent:"North America",difficulty:"medium"},
+    {code:"gt",name:"Guatemala",continent:"North America",difficulty:"medium"},
+    {code:"bs",name:"Bahamas",continent:"North America",difficulty:"medium"},
+    {code:"do",name:"Dominican Republic",continent:"North America",difficulty:"medium"},
+    {code:"hn",name:"Honduras",continent:"North America",difficulty:"hard"},
+    {code:"ni",name:"Nicaragua",continent:"North America",difficulty:"hard"},
+    {code:"sv",name:"El Salvador",continent:"North America",difficulty:"hard"},
+    {code:"bz",name:"Belize",continent:"North America",difficulty:"hard"},
+    {code:"ht",name:"Haiti",continent:"North America",difficulty:"hard"},
+    {code:"tt",name:"Trinidad and Tobago",continent:"North America",difficulty:"hard"},
+    {code:"bb",name:"Barbados",continent:"North America",difficulty:"hard"},
+    {code:"gd",name:"Grenada",continent:"North America",difficulty:"hard"},
+    {code:"lc",name:"Saint Lucia",continent:"North America",difficulty:"hard"},
+    {code:"ag",name:"Antigua and Barbuda",continent:"North America",difficulty:"hard"},
+    {code:"dm",name:"Dominica",continent:"North America",difficulty:"hard"},
+    {code:"kn",name:"Saint Kitts and Nevis",continent:"North America",difficulty:"hard"},
+    {code:"vc",name:"Saint Vincent and the Grenadines",continent:"North America",difficulty:"hard"},
+
+    // SOUTH AMERICA
+    {code:"br",name:"Brazil",continent:"South America",difficulty:"easy"},
+    {code:"ar",name:"Argentina",continent:"South America",difficulty:"easy"},
+    {code:"co",name:"Colombia",continent:"South America",difficulty:"easy"},
+    {code:"cl",name:"Chile",continent:"South America",difficulty:"medium"},
+    {code:"pe",name:"Peru",continent:"South America",difficulty:"medium"},
+    {code:"ve",name:"Venezuela",continent:"South America",difficulty:"medium"},
+    {code:"ec",name:"Ecuador",continent:"South America",difficulty:"medium"},
+    {code:"bo",name:"Bolivia",continent:"South America",difficulty:"medium"},
+    {code:"py",name:"Paraguay",continent:"South America",difficulty:"hard"},
+    {code:"uy",name:"Uruguay",continent:"South America",difficulty:"hard"},
+    {code:"gy",name:"Guyana",continent:"South America",difficulty:"hard"},
+    {code:"sr",name:"Suriname",continent:"South America",difficulty:"hard"},
+
+    // OCEANIA
+    {code:"au",name:"Australia",continent:"Oceania",difficulty:"easy"},
+    {code:"nz",name:"New Zealand",continent:"Oceania",difficulty:"easy"},
+    {code:"fj",name:"Fiji",continent:"Oceania",difficulty:"medium"},
+    {code:"pg",name:"Papua New Guinea",continent:"Oceania",difficulty:"medium"},
+    {code:"ws",name:"Samoa",continent:"Oceania",difficulty:"medium"},
+    {code:"to",name:"Tonga",continent:"Oceania",difficulty:"hard"},
+    {code:"vu",name:"Vanuatu",continent:"Oceania",difficulty:"hard"},
+    {code:"sb",name:"Solomon Islands",continent:"Oceania",difficulty:"hard"},
+    {code:"ki",name:"Kiribati",continent:"Oceania",difficulty:"hard"},
+    {code:"pw",name:"Palau",continent:"Oceania",difficulty:"hard"},
+    {code:"mh",name:"Marshall Islands",continent:"Oceania",difficulty:"hard"},
+    {code:"fm",name:"Micronesia",continent:"Oceania",difficulty:"hard"},
+    {code:"nr",name:"Nauru",continent:"Oceania",difficulty:"hard"},
+    {code:"tv",name:"Tuvalu",continent:"Oceania",difficulty:"hard"}
+  ];
+
+  var continents = ["Any", "Africa", "Asia", "Europe", "North America", "South America", "Oceania"];
+
+  var quizLength = 10;
+  var questions = [];
+  var current = 0;
+  var score = 0;
+  var locked = false;
+
+  var selectedContinent = "Any";
+  var selectedDifficulty = "easy";
+
+  // ---------------------------------------------------------------
+  // SETUP SCREEN
+  // ---------------------------------------------------------------
+  var continentRow = document.getElementById('continentRow');
+  continents.forEach(function(c){
+    var btn = document.createElement('button');
+    btn.className = 'pill' + (c === selectedContinent ? ' active' : '');
+    btn.textContent = c;
+    btn.dataset.continent = c;
+    btn.addEventListener('click', function(){
+      selectedContinent = c;
+      Array.prototype.forEach.call(continentRow.children, function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      updatePoolNote();
+    });
+    continentRow.appendChild(btn);
+  });
+
+  var difficultyRow = document.getElementById('difficultyRow');
+  Array.prototype.forEach.call(difficultyRow.children, function(btn){
+    if (btn.dataset.diff === selectedDifficulty) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      selectedDifficulty = btn.dataset.diff;
+      Array.prototype.forEach.call(difficultyRow.children, function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      updatePoolNote();
+    });
+  });
+
+  function poolFor(continent, difficulty){
+    return countries.filter(function(c){
+      var continentMatch = (continent === "Any") || (c.continent === continent);
+      var diffMatch = (difficulty === "mixed") || (c.difficulty === difficulty);
+      return continentMatch && diffMatch;
+    });
+  }
+
+  function updatePoolNote(){
+    var pool = poolFor(selectedContinent, selectedDifficulty);
+    var note = document.getElementById('poolNote');
+    if (pool.length < 4){
+      note.textContent = pool.length + ' flags available in this combo — we\'ll pull in nearby countries to fill the quiz.';
+    } else {
+      note.textContent = pool.length + ' flags available for ' + selectedContinent + ' · ' + selectedDifficulty;
+    }
+  }
+  updatePoolNote();
+
+  document.getElementById('startBtn').addEventListener('click', function(){
+    document.getElementById('setupScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.remove('hidden');
+    document.getElementById('subHeading').textContent =
+      (selectedContinent === "Any" ? "World" : selectedContinent) + ' · ' +
+      selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1);
+    current = 0; score = 0;
+    questions = buildQuestions();
+    showQuestion();
+  });
+
+  document.getElementById('changeSetupBtn').addEventListener('click', function(){
+    document.getElementById('finishScreen').classList.add('hidden');
+    document.getElementById('setupScreen').classList.remove('hidden');
+    document.getElementById('progressWrap').classList.add('hidden');
+    document.getElementById('subHeading').textContent = "Which country does this flag belong to?";
+  });
+
+  // ---------------------------------------------------------------
+  // QUIZ LOGIC
+  // ---------------------------------------------------------------
+  function shuffle(arr){
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  // Pick distractors for a given correct answer, widening the pool
+  // (continent+difficulty -> continent -> global) until there are enough.
+  function pickDistractors(correct, primaryPool){
+    var candidates = shuffle(primaryPool.filter(function(c){ return c.name !== correct.name; }));
+    if (candidates.length >= 3) return candidates.slice(0, 3);
+
+    var continentPool = countries.filter(function(c){
+      return c.continent === correct.continent && c.name !== correct.name;
+    });
+    candidates = shuffle(continentPool);
+    if (candidates.length >= 3) return candidates.slice(0, 3);
+
+    var globalPool = countries.filter(function(c){ return c.name !== correct.name; });
+    return shuffle(globalPool).slice(0, 3);
+  }
+
+  function buildQuestions(){
+    var primaryPool = poolFor(selectedContinent, selectedDifficulty);
+    if (primaryPool.length < 1) primaryPool = countries.slice(); // safety net
+
+    var basePool = primaryPool.length >= quizLength ? primaryPool : (function(){
+      // not enough unique countries in the exact combo — widen to continent (any difficulty)
+      var widened = countries.filter(function(c){
+        return (selectedContinent === "Any") || (c.continent === selectedContinent);
+      });
+      return widened.length >= quizLength ? widened : countries.slice();
+    })();
+
+    var pool = shuffle(basePool).slice(0, quizLength);
+
+    return pool.map(function(c){
+      var distractors = pickDistractors(c, primaryPool);
+      var opts = shuffle([c].concat(distractors));
+      return {code:c.code, answer:c.name, options: opts.map(function(o){return o.name;})};
+    });
+  }
+
+  function updateProgress(){
+    var pct = questions.length ? Math.round((current / questions.length) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  function showQuestion(){
+    locked = false;
+    var q = questions[current];
+    document.getElementById('qNum').textContent = current + 1;
+    document.getElementById('qTotal').textContent = questions.length;
+    document.getElementById('scoreNum').textContent = score;
+    document.getElementById('flagImg').src = 'https://flagcdn.com/w320/' + q.code + '.png';
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('feedback').className = 'feedback';
+
+    var optsWrap = document.getElementById('options');
+    optsWrap.innerHTML = '';
+    q.options.forEach(function(name){
+      var btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = name;
+      btn.addEventListener('click', function(){ selectAnswer(name, q.answer, btn); });
+      optsWrap.appendChild(btn);
+    });
+    updateProgress();
+  }
+
+  function selectAnswer(chosen, correctAnswer, btn){
+    if (locked) return;
+    locked = true;
+    var fb = document.getElementById('feedback');
+    var allBtns = document.querySelectorAll('#options .opt');
+    allBtns.forEach(function(b){
+      b.disabled = true;
+      if (b.textContent === correctAnswer) b.classList.add('correct');
+    });
+    if (chosen === correctAnswer){
+      score++;
+      fb.textContent = 'Correct! 🌟';
+      fb.className = 'feedback correct';
+    } else {
+      btn.classList.add('wrong');
+      fb.textContent = 'It was ' + correctAnswer;
+      fb.className = 'feedback wrong';
+    }
+    document.getElementById('scoreNum').textContent = score;
+    current++;
+    setTimeout(function(){
+      if (current >= questions.length){ finish(); } else { showQuestion(); }
+    }, 900);
+  }
+
+  function finish(){
+    document.getElementById('quizScreen').classList.add('hidden');
+    document.getElementById('finishScreen').classList.remove('hidden');
+    document.getElementById('progressFill').style.width = '100%';
+    var pct = Math.round((score / questions.length) * 100);
+    var title = document.getElementById('finishTitle');
+    if (pct === 100){ title.textContent = 'World Champion! 🏆'; }
+    else if (pct >= 70){ title.textContent = 'Explorer Badge Earned! 🏅'; }
+    else { title.textContent = 'Quiz Complete! 🌍'; }
+    document.getElementById('finishScore').textContent = 'You scored ' + score + ' / ' + questions.length;
+  }
+
+  document.getElementById('againBtn').addEventListener('click', function(){
+    document.getElementById('finishScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    current = 0; score = 0;
+    questions = buildQuestions();
+    showQuestion();
+  });
+
+})();
+</script>
+</body>
+</html>

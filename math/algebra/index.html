@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algebra Basics | Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1C3F;
+    --navy-soft:#182a56;
+    --cream:#FBF8F1;
+    --gold:#F4B942;
+    --indigo:#6C5CE7;
+    --indigo-soft:#efeaff;
+    --ink:#1C1C24;
+    --muted:#6b6f85;
+    --line:#e4e1f5;
+    --good:#2a9d67;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--navy);
+    font-family:'Nunito Sans', sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2', sans-serif;
+    margin:0;
+  }
+  .app{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 20px 60px;
+  }
+  header.top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+  }
+  .brand{
+    color:var(--cream);
+  }
+  .brand .kicker{
+    color:var(--gold);
+    font-weight:700;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+  }
+  .brand h1{
+    color:var(--cream);
+    font-size:2rem;
+    font-weight:700;
+    margin-top:2px;
+  }
+  .subtitle{
+    color:#b9c2e0;
+    font-size:0.98rem;
+    max-width:38ch;
+  }
+  .mode-toggle{
+    display:flex;
+    background:var(--navy-soft);
+    border-radius:999px;
+    padding:4px;
+    gap:4px;
+  }
+  .mode-toggle button{
+    border:none;
+    background:transparent;
+    color:#b9c2e0;
+    padding:9px 18px;
+    border-radius:999px;
+    font-family:'Nunito Sans',sans-serif;
+    font-weight:700;
+    font-size:0.9rem;
+    cursor:pointer;
+  }
+  .mode-toggle button.active{
+    background:var(--gold);
+    color:var(--navy);
+  }
+
+  .layout{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:20px;
+  }
+  @media (max-width:760px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  .skills{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .skill-card{
+    background:var(--navy-soft);
+    border:2px solid transparent;
+    border-radius:16px;
+    padding:16px;
+    color:var(--cream);
+    cursor:pointer;
+    text-align:left;
+    font-family:'Nunito Sans', sans-serif;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .skill-card:hover{ transform:translateY(-1px); }
+  .skill-card.active{
+    border-color:var(--indigo);
+    background:linear-gradient(135deg,#1d2c5c,#232f66);
+  }
+  .skill-card .step{
+    font-size:0.72rem;
+    font-weight:800;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .skill-card h3{
+    font-size:1.08rem;
+    margin-top:4px;
+    color:var(--cream);
+  }
+  .skill-card p{
+    margin:6px 0 0;
+    font-size:0.85rem;
+    color:#aeb7d6;
+    line-height:1.4;
+  }
+  .ladder{
+    display:flex;
+    gap:5px;
+    margin-top:10px;
+  }
+  .ladder span{
+    height:5px;
+    flex:1;
+    border-radius:3px;
+    background:#3a4680;
+  }
+  .skill-card[data-level="1"] .ladder span:nth-child(1){background:var(--gold);}
+  .skill-card[data-level="2"] .ladder span:nth-child(-n+2){background:var(--gold);}
+  .skill-card[data-level="3"] .ladder span{background:var(--gold);}
+
+  .panel{
+    background:var(--cream);
+    border-radius:20px;
+    padding:28px;
+    min-height:420px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* PRACTICE MODE */
+  .problem-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .eyebrow{
+    color:var(--indigo);
+    font-weight:800;
+    font-size:0.82rem;
+  }
+  .problem-card{
+    background:white;
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:26px;
+    text-align:center;
+    margin-top:16px;
+  }
+  .problem-card .expr{
+    font-family:'Baloo 2', sans-serif;
+    font-size:2.1rem;
+    color:var(--navy);
+    font-weight:700;
+  }
+  .answer-line{
+    margin-top:18px;
+  }
+  .answer-line label{
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--muted);
+  }
+  .answer-line input{
+    width:100%;
+    margin-top:6px;
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    font-family:'Baloo 2', sans-serif;
+    font-size:1.1rem;
+    color:var(--navy);
+  }
+  .answer-line input:focus{
+    outline:none;
+    border-color:var(--indigo);
+  }
+  .answer-line input.correct{
+    border-color:var(--good);
+    background:#effaf3;
+  }
+  .answer-line input.incorrect{
+    border-color:#e0554f;
+    background:#fdf1f0;
+  }
+  .feedback{
+    margin-top:8px;
+    font-weight:800;
+    font-size:0.92rem;
+    min-height:1.2em;
+  }
+  .feedback.correct{ color:var(--good); }
+  .feedback.incorrect{ color:#c8433c; }
+
+  .workline{
+    margin-top:16px;
+  }
+  .workline label{
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--muted);
+  }
+  .workline textarea{
+    width:100%;
+    margin-top:6px;
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    font-family:'Nunito Sans', sans-serif;
+    font-size:1rem;
+    resize:vertical;
+    min-height:64px;
+  }
+  .workline textarea:focus{
+    outline:none;
+    border-color:var(--indigo);
+  }
+  .actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  button.btn{
+    font-family:'Nunito Sans', sans-serif;
+    font-weight:800;
+    font-size:0.92rem;
+    border-radius:12px;
+    padding:11px 20px;
+    border:none;
+    cursor:pointer;
+  }
+  .btn.primary{
+    background:var(--indigo);
+    color:white;
+  }
+  .btn.primary:hover{ background:#5a4bd6; }
+  .btn.ghost{
+    background:white;
+    border:2px solid var(--line);
+    color:var(--navy);
+  }
+  .btn.ghost:hover{ border-color:var(--indigo); }
+  .solution{
+    margin-top:18px;
+    background:var(--indigo-soft);
+    border-radius:14px;
+    padding:16px 18px;
+    display:none;
+  }
+  .solution.show{ display:block; }
+  .solution .answer{
+    font-family:'Baloo 2', sans-serif;
+    color:var(--navy);
+    font-size:1.2rem;
+    margin-bottom:8px;
+  }
+  .solution ol{
+    margin:0;
+    padding-left:20px;
+    color:var(--ink);
+    line-height:1.7;
+  }
+
+  /* WORKSHEET MODE */
+  .worksheet-controls{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .worksheet-controls select{
+    font-family:'Nunito Sans',sans-serif;
+    font-weight:700;
+    padding:9px 12px;
+    border-radius:10px;
+    border:2px solid var(--line);
+    color:var(--navy);
+  }
+  .sheet{
+    background:white;
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:26px;
+  }
+  .sheet-header{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:2px solid var(--navy);
+    padding-bottom:10px;
+    margin-bottom:16px;
+  }
+  .sheet-header .title{
+    font-family:'Baloo 2', sans-serif;
+    color:var(--navy);
+    font-size:1.3rem;
+  }
+  .sheet-header .fields{
+    font-size:0.85rem;
+    color:var(--muted);
+    text-align:right;
+  }
+  .sheet-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 26px;
+  }
+  @media (max-width:600px){ .sheet-grid{grid-template-columns:1fr;} }
+  .sheet-item{
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+  }
+  .sheet-item .num{
+    font-size:0.78rem;
+    color:var(--indigo);
+    font-weight:800;
+  }
+  .sheet-item .expr{
+    font-family:'Baloo 2', sans-serif;
+    font-size:1.15rem;
+    color:var(--navy);
+    margin-top:4px;
+  }
+  .answer-key{
+    margin-top:22px;
+    padding-top:16px;
+    border-top:2px dashed var(--line);
+    display:none;
+  }
+  .answer-key.show{ display:block; }
+  .answer-key .title{
+    font-weight:800;
+    color:var(--indigo);
+    margin-bottom:8px;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+  .answer-key .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  @media print{
+    body{background:white;}
+    header.top, .layout > .skills, .mode-toggle, .worksheet-controls, .no-print{display:none !important;}
+    .panel{padding:0;}
+    .sheet{border:none;padding:0;}
+    .app{max-width:100%;padding:0;}
+  }
+</style>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "03967f8ff4584d3dad8f98556a0bd13f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="kicker">Ellis Knowledge Studio · Math</div>
+      <h1>Algebra Basics</h1>
+      <div class="subtitle">Simplify expressions and solve equations, one skill at a time.</div>
+    </div>
+    <div class="mode-toggle">
+      <button id="tab-practice" class="active">Practice</button>
+      <button id="tab-worksheet">Build a worksheet</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="skills">
+      <button class="skill-card active" data-level="1" data-skill="simplify">
+        <div class="step">Skill 1</div>
+        <h3>Simplify Expressions</h3>
+        <p>Combine like terms, e.g. 3x + 5x − 2</p>
+        <div class="ladder"><span></span><span></span><span></span></div>
+      </button>
+      <button class="skill-card" data-level="2" data-skill="onestep">
+        <div class="step">Skill 2</div>
+        <h3>One-Step Equations</h3>
+        <p>Solve for x with a single operation.</p>
+        <div class="ladder"><span></span><span></span><span></span></div>
+      </button>
+      <button class="skill-card" data-level="3" data-skill="twostep">
+        <div class="step">Skill 3</div>
+        <h3>Two-Step Equations</h3>
+        <p>Solve for x using two operations.</p>
+        <div class="ladder"><span></span><span></span><span></span></div>
+      </button>
+    </div>
+
+    <div class="panel" id="practice-panel">
+      <div class="problem-head">
+        <div>
+          <div class="eyebrow" id="skill-label">Simplify Expressions</div>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <div class="expr" id="problem-expr">3x + 5x − 2</div>
+      </div>
+
+      <div class="answer-line">
+        <label for="answer-input">Your answer</label>
+        <input type="text" id="answer-input" placeholder="Type your answer here..." autocomplete="off">
+        <div class="feedback" id="feedback"></div>
+      </div>
+
+      <div class="workline">
+        <label for="work">Working space (optional — just for you)</label>
+        <textarea id="work" placeholder="Show your steps here..."></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="check-btn">Check answer</button>
+        <button class="btn ghost" id="solution-btn">Show solution</button>
+        <button class="btn ghost" id="new-btn">New problem</button>
+      </div>
+
+      <div class="solution" id="solution">
+        <div class="answer" id="answer-text"></div>
+        <ol id="steps-list"></ol>
+      </div>
+    </div>
+
+    <div class="panel" id="worksheet-panel" style="display:none;">
+      <div class="worksheet-controls">
+        <select id="ws-skill">
+          <option value="simplify">Simplify Expressions</option>
+          <option value="onestep">One-Step Equations</option>
+          <option value="twostep">Two-Step Equations</option>
+        </select>
+        <select id="ws-count">
+          <option value="6">6 problems</option>
+          <option value="8" selected>8 problems</option>
+          <option value="10">10 problems</option>
+          <option value="12">12 problems</option>
+        </select>
+        <button class="btn primary" id="ws-generate">Generate worksheet</button>
+        <button class="btn ghost" id="ws-key-toggle">Show answer key</button>
+        <button class="btn ghost" id="ws-print">Print / Save as PDF</button>
+      </div>
+
+      <div class="sheet">
+        <div class="sheet-header">
+          <div class="title" id="sheet-title">Simplify Expressions</div>
+          <div class="fields">Name: _______________&nbsp;&nbsp; Date: _______</div>
+        </div>
+        <div class="sheet-grid" id="sheet-grid"></div>
+        <div class="answer-key" id="answer-key">
+          <div class="title">Answer key</div>
+          <div class="grid" id="answer-key-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- helpers ---------- */
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function randNonZero(min,max){ let n; do{ n=randInt(min,max); } while(n===0); return n; }
+function fmtCoeff(n, withPlusSign){
+  if(n===0) return "";
+  let sign = n<0 ? " − " : (withPlusSign ? " + " : "");
+  let val = Math.abs(n);
+  return sign + (val===1 ? "" : val);
+}
+
+/* ---------- generators ---------- */
+function fmtLead(n){
+  const mag = Math.abs(n)===1 ? "" : `${Math.abs(n)}`;
+  return (n<0 ? "−" : "") + mag + "x";
+}
+function fmtTermX(n){
+  const mag = Math.abs(n)===1 ? "" : `${Math.abs(n)}`;
+  return (n<0 ? "− " : "+ ") + mag + "x";
+}
+function fmtConst(n){
+  return (n<0 ? "− " : "+ ") + Math.abs(n);
+}
+function genSimplify(){
+  // a*x + b*x + c  ->  combine like terms
+  const a = randNonZero(-9,9);
+  const b = randNonZero(-9,9);
+  const c = randInt(-8,8);
+  const total = a+b;
+  let expr = `${fmtLead(a)} ${fmtTermX(b)}`;
+  if(c!==0){ expr += ` ${fmtConst(c)}`; }
+  let answer;
+  if(total===0){
+    answer = c===0 ? "0" : `${c}`;
+  } else {
+    answer = fmtLead(total) + (c!==0 ? ` ${fmtConst(c)}` : "");
+  }
+  const steps = [
+    `Group the like terms: (${fmtLead(a)} ${fmtTermX(b)})` + (c!==0?` ${fmtConst(c)}`:""),
+    `Add the x-coefficients: ${a} ${b<0?"− "+Math.abs(b):"+ "+b} = ${total}`,
+    `Answer: ${answer}`
+  ];
+  return { expr, answer, steps };
+}
+
+function genOneStep(){
+  const type = randInt(1,4);
+  let x = randNonZero(-12,12);
+  let expr, steps=[];
+  if(type===1){ // x + a = b
+    const a = randNonZero(-10,10);
+    const b = x+a;
+    expr = `x ${a<0?"− "+Math.abs(a):"+ "+a} = ${b}`;
+    steps = a<0
+      ? [`Add ${Math.abs(a)} to both sides.`, `x = ${b} + ${Math.abs(a)} = ${x}`]
+      : [`Subtract ${a} from both sides.`, `x = ${b} − ${a} = ${x}`];
+  } else if(type===2){ // x - a = b
+    const a = randNonZero(-10,10);
+    const b = x-a;
+    expr = `x ${a<0?"+ "+Math.abs(a):"− "+a} = ${b}`;
+    steps = a<0
+      ? [`Subtract ${Math.abs(a)} from both sides.`, `x = ${b} − ${Math.abs(a)} = ${x}`]
+      : [`Add ${a} to both sides.`, `x = ${b} + ${a} = ${x}`];
+  } else if(type===3){ // a*x = b
+    let a = randNonZero(-9,9);
+    while(a===1){ a = randNonZero(-9,9); }
+    const b = a*x;
+    expr = `${a}x = ${b}`;
+    steps = [`Divide both sides by ${a}.`, `x = ${b} ÷ ${a} = ${x}`];
+  } else { // x ÷ a = b  ->  x = a*b
+    let a = randNonZero(-9,9);
+    while(a===1){ a = randNonZero(-9,9); }
+    const b = randNonZero(-9,9);
+    x = a*b;
+    expr = `x ÷ ${a} = ${b}`;
+    steps = [`Multiply both sides by ${a}.`, `x = ${b} × ${a} = ${x}`];
+  }
+  return { expr, answer: x+"", steps };
+}
+
+function genTwoStep(){
+  const type = randInt(1,3);
+  let x = randNonZero(-10,10);
+  let expr, steps=[];
+  if(type===1){ // a*x + b = c
+    const aa = randNonZero(2,8);
+    const b = randNonZero(-10,10);
+    const c = aa*x+b;
+    expr = `${aa}x ${b<0?"− "+Math.abs(b):"+ "+b} = ${c}`;
+    steps = b<0
+      ? [`Add ${Math.abs(b)} to both sides: ${aa}x = ${c-b}`, `Divide both sides by ${aa}: x = ${(c-b)} ÷ ${aa} = ${x}`]
+      : [`Subtract ${b} from both sides: ${aa}x = ${c-b}`, `Divide both sides by ${aa}: x = ${(c-b)} ÷ ${aa} = ${x}`];
+  } else if(type===2){ // a*x - b = c
+    const aa = randNonZero(2,8);
+    const b = randNonZero(-10,10);
+    const c = aa*x-b;
+    expr = `${aa}x ${b<0?"+ "+Math.abs(b):"− "+b} = ${c}`;
+    steps = b<0
+      ? [`Subtract ${Math.abs(b)} from both sides: ${aa}x = ${c+b}`, `Divide both sides by ${aa}: x = ${(c+b)} ÷ ${aa} = ${x}`]
+      : [`Add ${b} to both sides: ${aa}x = ${c+b}`, `Divide both sides by ${aa}: x = ${(c+b)} ÷ ${aa} = ${x}`];
+  } else { // x ÷ aa + b = c  ->  x = aa*(c-b)
+    const aa = randNonZero(2,8);
+    const q = randNonZero(-10,10); // this is x ÷ aa
+    const b = randInt(-10,10);
+    const c = q+b;
+    x = aa*q;
+    expr = `x ÷ ${aa} ${b<0?"− "+Math.abs(b):"+ "+b} = ${c}`;
+    steps = b<0
+      ? [`Add ${Math.abs(b)} to both sides: x ÷ ${aa} = ${c-b}`, `Multiply both sides by ${aa}: x = ${(c-b)} × ${aa} = ${x}`]
+      : [`Subtract ${b} from both sides: x ÷ ${aa} = ${c-b}`, `Multiply both sides by ${aa}: x = ${(c-b)} × ${aa} = ${x}`];
+  }
+  return { expr, answer: x+"", steps };
+}
+
+const GEN = { simplify: genSimplify, onestep: genOneStep, twostep: genTwoStep };
+const LABELS = { simplify: "Simplify Expressions", onestep: "One-Step Equations", twostep: "Two-Step Equations" };
+
+/* ---------- answer checking ---------- */
+function normalizeAnswer(str){
+  return (str || "")
+    .toString()
+    .trim()
+    .toLowerCase()
+    .replace(/−/g, "-")      // unicode minus -> hyphen
+    .replace(/^x\s*=\s*/, "") // allow "x = 5" or "x=5"
+    .replace(/\s+/g, "");     // ignore all whitespace
+}
+
+/* ---------- practice mode state ---------- */
+let currentSkill = "simplify";
+let currentProblem = GEN[currentSkill]();
+
+function renderProblem(){
+  document.getElementById("skill-label").textContent = LABELS[currentSkill];
+  document.getElementById("problem-expr").textContent = currentSkill==="simplify"
+    ? "Simplify: " + currentProblem.expr
+    : "Solve: " + currentProblem.expr;
+  document.getElementById("work").value = "";
+  const input = document.getElementById("answer-input");
+  input.value = "";
+  input.classList.remove("correct","incorrect");
+  const fb = document.getElementById("feedback");
+  fb.textContent = "";
+  fb.classList.remove("correct","incorrect");
+  document.getElementById("solution").classList.remove("show");
+}
+renderProblem();
+
+document.querySelectorAll(".skill-card").forEach(card=>{
+  card.addEventListener("click", ()=>{
+    document.querySelectorAll(".skill-card").forEach(c=>c.classList.remove("active"));
+    card.classList.add("active");
+    currentSkill = card.dataset.skill;
+    currentProblem = GEN[currentSkill]();
+    renderProblem();
+  });
+});
+
+document.getElementById("new-btn").addEventListener("click", ()=>{
+  currentProblem = GEN[currentSkill]();
+  renderProblem();
+});
+
+function revealSolution(){
+  const sol = document.getElementById("solution");
+  document.getElementById("answer-text").textContent =
+    (currentSkill==="simplify" ? "Simplified form: " : "x = ") + currentProblem.answer;
+  const list = document.getElementById("steps-list");
+  list.innerHTML = "";
+  currentProblem.steps.forEach(s=>{
+    const li = document.createElement("li");
+    li.textContent = s;
+    list.appendChild(li);
+  });
+  sol.classList.add("show");
+}
+
+document.getElementById("check-btn").addEventListener("click", ()=>{
+  const input = document.getElementById("answer-input");
+  const fb = document.getElementById("feedback");
+  input.classList.remove("correct","incorrect");
+  fb.classList.remove("correct","incorrect");
+
+  if(input.value.trim() === ""){
+    fb.textContent = "Type an answer first.";
+    fb.classList.add("incorrect");
+    return;
+  }
+
+  const isCorrect = normalizeAnswer(input.value) === normalizeAnswer(currentProblem.answer);
+  if(isCorrect){
+    input.classList.add("correct");
+    fb.textContent = "🎉 Correct — nice work!";
+    fb.classList.add("correct");
+    revealSolution();
+  } else {
+    input.classList.add("incorrect");
+    fb.textContent = "Not quite — try again, or tap \"Show solution\".";
+    fb.classList.add("incorrect");
+  }
+});
+
+document.getElementById("solution-btn").addEventListener("click", revealSolution);
+
+document.getElementById("answer-input").addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+    document.getElementById("check-btn").click();
+  }
+});
+
+/* ---------- mode tabs ---------- */
+document.getElementById("tab-practice").addEventListener("click", ()=>{
+  document.getElementById("tab-practice").classList.add("active");
+  document.getElementById("tab-worksheet").classList.remove("active");
+  document.getElementById("practice-panel").style.display = "flex";
+  document.getElementById("worksheet-panel").style.display = "none";
+});
+document.getElementById("tab-worksheet").addEventListener("click", ()=>{
+  document.getElementById("tab-worksheet").classList.add("active");
+  document.getElementById("tab-practice").classList.remove("active");
+  document.getElementById("worksheet-panel").style.display = "block";
+  document.getElementById("practice-panel").style.display = "none";
+  buildWorksheet();
+});
+
+/* ---------- worksheet mode ---------- */
+function buildWorksheet(){
+  const skill = document.getElementById("ws-skill").value;
+  const count = parseInt(document.getElementById("ws-count").value,10);
+  document.getElementById("sheet-title").textContent = LABELS[skill] + " — Worksheet";
+  const grid = document.getElementById("sheet-grid");
+  const keyGrid = document.getElementById("answer-key-grid");
+  grid.innerHTML = "";
+  keyGrid.innerHTML = "";
+  for(let i=1;i<=count;i++){
+    const p = GEN[skill]();
+    const item = document.createElement("div");
+    item.className = "sheet-item";
+    item.innerHTML = `<div class="num">${i}</div><div class="expr">${skill==="simplify"?"":""}${p.expr}</div>`;
+    grid.appendChild(item);
+    const key = document.createElement("div");
+    key.textContent = `${i}. ${p.answer}`;
+    keyGrid.appendChild(key);
+  }
+  document.getElementById("answer-key").classList.remove("show");
+  document.getElementById("ws-key-toggle").textContent = "Show answer key";
+}
+
+document.getElementById("ws-generate").addEventListener("click", buildWorksheet);
+document.getElementById("ws-skill").addEventListener("change", buildWorksheet);
+document.getElementById("ws-count").addEventListener("change", buildWorksheet);
+document.getElementById("ws-key-toggle").addEventListener("click", ()=>{
+  const key = document.getElementById("answer-key");
+  key.classList.toggle("show");
+  document.getElementById("ws-key-toggle").textContent = key.classList.contains("show") ? "Hide answer key" : "Show answer key";
+});
+document.getElementById("ws-print").addEventListener("click", ()=> window.print());
+
+buildWorksheet();
+</script>
+</body>
+</html>

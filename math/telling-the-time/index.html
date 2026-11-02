@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Telling the Time Practice for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive telling the time practice for ages 7-11. Read analogue clocks, set the hands, convert 12-hour and 24-hour times, work out how long, and print clock worksheets.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/math/telling-the-time/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--blue:#5B8DEF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.split{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.clockbox{width:min(260px,80vw);flex:0 0 auto}
+.clockbox.small{width:min(170px,40vw)}
+.clockbox svg{width:100%;height:auto;display:block}
+.c-face{fill:#FFFDF6;stroke:var(--gold);stroke-width:6}
+.c-tick{stroke:#0F1C3F;stroke-width:1.5}
+.c-tick.big{stroke-width:3.5}
+.c-num{fill:#0F1C3F;font:800 17px "Baloo 2",sans-serif;text-anchor:middle;dominant-baseline:central}
+.c-hour{stroke:#0F1C3F;stroke-width:7;stroke-linecap:round}
+.c-min{stroke:#2F6BE0;stroke-width:4.5;stroke-linecap:round}
+.c-dot{fill:#0F1C3F}
+.readout{font:800 clamp(30px,8vw,48px) "Baloo 2",sans-serif;line-height:1.1;color:var(--gold)}
+.big{font-size:20px;font-weight:700}
+.muted{color:var(--muted)}
+.target{font:800 clamp(24px,6vw,34px) "Baloo 2",sans-serif;color:var(--gold)}
+.ctrl{display:grid;grid-template-columns:auto auto auto;gap:8px;align-items:center;margin:10px 0}
+.ctrl span{font-weight:700;text-align:center}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+input[type=text],input[type=number]{width:120px;font:800 22px "Baloo 2",sans-serif;text-align:center;border-radius:10px;border:2px solid var(--muted);padding:4px;background:var(--navy);color:var(--ink)}
+select{font:700 15px "Nunito Sans",sans-serif;border-radius:10px;padding:6px 8px;background:var(--navy);color:var(--ink);border:2px solid var(--muted)}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.score{color:var(--gold);font-weight:700}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.ws{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:14px}
+.ws .cell{background:var(--navy);border-radius:12px;padding:10px;text-align:center}
+.ws .cell .clockbox{width:100%}
+.ws .line{border-bottom:2px dashed var(--muted);height:30px;margin-top:6px;font:800 18px "Baloo 2",sans-serif;color:var(--gold)}
+.ws .num{font-weight:700;text-align:left;color:var(--muted)}
+.ws-head{display:none}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:420px){.choices{grid-template-columns:1fr}}
+@media print{
+  body{background:#fff;color:#000}
+  .tabs,.crumbs,.shop,.btn,.noprint,h1,.lead{display:none!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important;background:#fff;color:#000;padding:0}
+  .ws .cell{background:#fff;border:1px solid #999;break-inside:avoid}
+  .ws{grid-template-columns:repeat(3,1fr)}
+  .ws .line{color:#000;border-color:#000}
+  .ws .num{color:#000}
+  .ws .cell .clockbox{width:78%;margin:0 auto}
+  .ws-head{display:block}
+  .c-face{fill:#fff;stroke:#000}
+  .c-min{stroke:#000}
+  .readout,.target,.score{color:#000}
+}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/math/">Math</a> › Clock Lab</nav>
+  <h1>Clock Lab ⏰</h1>
+  <p class="lead">Learn to tell the time: read analogue clocks, set the hands, switch between 12-hour and 24-hour times and work out how long things take. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Clock Lab modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore</button>
+    <button class="tab" role="tab" id="t-read" aria-controls="read" aria-selected="false" tabindex="-1" data-p="read">Read the Clock</button>
+    <button class="tab" role="tab" id="t-set" aria-controls="set" aria-selected="false" tabindex="-1" data-p="set">Set the Clock</button>
+    <button class="tab" role="tab" id="t-h24" aria-controls="h24" aria-selected="false" tabindex="-1" data-p="h24">12 and 24 Hour</button>
+    <button class="tab" role="tab" id="t-dur" aria-controls="dur" aria-selected="false" tabindex="-1" data-p="dur">How Long?</button>
+    <button class="tab" role="tab" id="t-ws" aria-controls="ws" aria-selected="false" tabindex="-1" data-p="ws">Worksheet</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Explore the clock</h2>
+    <p>Move the hands and watch the time change. The short hand shows the <b>hour</b>. The long blue hand shows the <b>minutes</b>.</p>
+    <div class="split">
+      <div class="clockbox" id="exClock"></div>
+      <div>
+        <div class="readout" id="exDigital">3:00</div>
+        <div class="big" id="exWords">three o'clock</div>
+        <div class="muted" id="ex24">24-hour: 03:00 (morning) or 15:00 (afternoon)</div>
+        <div class="ctrl" role="group" aria-label="Move the hands">
+          <button class="btn sm" id="exHm" aria-label="back one hour">− 1 hr</button><span>Hour</span><button class="btn sm" id="exHp" aria-label="forward one hour">+ 1 hr</button>
+          <button class="btn sm" id="exM5m" aria-label="back five minutes">− 5 min</button><span>Minutes</span><button class="btn sm" id="exM5p" aria-label="forward five minutes">+ 5 min</button>
+          <button class="btn sm" id="exM1m" aria-label="back one minute">− 1 min</button><span>&nbsp;</span><button class="btn sm" id="exM1p" aria-label="forward one minute">+ 1 min</button>
+        </div>
+        <button class="btn ghost sm" id="exRand">Surprise me</button>
+      </div>
+    </div>
+    <p class="tip">Tip: when the minute hand passes the 6 (half past), we start counting the minutes <b>to</b> the next hour. Each number on the clock is worth 5 minutes.</p>
+  </section>
+
+  <section class="panel" id="read" role="tabpanel" aria-labelledby="t-read">
+    <h2>What time does the clock show?</h2>
+    <div class="row noprint">
+      <label for="rdLevel" class="big">Level:</label>
+      <select id="rdLevel">
+        <option value="1">1 · o'clock and half past</option>
+        <option value="2">2 · quarter past and quarter to</option>
+        <option value="3" selected>3 · five-minute steps</option>
+        <option value="4">4 · any minute</option>
+      </select>
+      <span class="score" id="rdScore">Score: 0 / 0</span>
+    </div>
+    <div class="split">
+      <div class="clockbox" id="rdClock"></div>
+      <div style="flex:1;min-width:220px">
+        <div class="choices" id="rdChoices"></div>
+        <div class="fb" id="rdFb" aria-live="polite"></div>
+        <button class="btn ghost" id="rdNext">Next clock</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="set" role="tabpanel" aria-labelledby="t-set">
+    <h2>Set the clock</h2>
+    <div class="row noprint">
+      <label for="stLevel" class="big">Level:</label>
+      <select id="stLevel">
+        <option value="1">1 · o'clock and half past</option>
+        <option value="2">2 · quarter past and quarter to</option>
+        <option value="3" selected>3 · five-minute steps</option>
+        <option value="4">4 · any minute</option>
+      </select>
+      <span class="score" id="stScore">Score: 0 / 0</span>
+    </div>
+    <p class="big">Make the clock show: <span class="target" id="stTarget"></span></p>
+    <div class="split">
+      <div class="clockbox" id="stClock"></div>
+      <div>
+        <div class="ctrl" role="group" aria-label="Move the hands">
+          <button class="btn sm" id="stHm" aria-label="back one hour">− 1 hr</button><span>Hour</span><button class="btn sm" id="stHp" aria-label="forward one hour">+ 1 hr</button>
+          <button class="btn sm" id="stM5m" aria-label="back five minutes">− 5 min</button><span>Minutes</span><button class="btn sm" id="stM5p" aria-label="forward five minutes">+ 5 min</button>
+          <button class="btn sm" id="stM1m" aria-label="back one minute">− 1 min</button><span>&nbsp;</span><button class="btn sm" id="stM1p" aria-label="forward one minute">+ 1 min</button>
+        </div>
+        <div class="row">
+          <button class="btn" id="stCheck">Check</button>
+          <button class="btn ghost" id="stNext">Next time</button>
+        </div>
+        <div class="fb" id="stFb" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="h24" role="tabpanel" aria-labelledby="t-h24">
+    <h2>12-hour and 24-hour time</h2>
+    <p class="tip">In 24-hour time the hours keep counting after midday: 1 pm is 13:00, 2 pm is 14:00 … 11 pm is 23:00. Midnight is 00:00. Morning times get a 0 in front: 7:30 am is 07:30.</p>
+    <p><span class="score" id="hScore">Score: 0 / 0</span></p>
+    <p class="big" id="hQ"></p>
+    <div class="row" id="hTypeRow">
+      <input type="text" id="hIn" inputmode="numeric" autocomplete="off" aria-label="your answer in 24-hour time" placeholder="hh:mm">
+      <button class="btn" id="hCheck">Check</button>
+    </div>
+    <div class="choices" id="hChoices"></div>
+    <div class="fb" id="hFb" aria-live="polite"></div>
+    <button class="btn ghost" id="hNext">Next question</button>
+  </section>
+
+  <section class="panel" id="dur" role="tabpanel" aria-labelledby="t-dur">
+    <h2>How long?</h2>
+    <p>Work out how much time passes between two times, or what time it will be later. <span class="score" id="dScore">Score: 0 / 0</span></p>
+    <div class="split">
+      <div style="text-align:center"><div class="clockbox small" id="dClockA"></div><div class="big" id="dLabelA">Start</div></div>
+      <div style="text-align:center" id="dBWrap"><div class="clockbox small" id="dClockB"></div><div class="big" id="dLabelB">End</div></div>
+    </div>
+    <p class="big" id="dQ"></p>
+    <div class="row" id="dTypeRow">
+      <input type="number" id="dIn" min="0" aria-label="number of minutes">
+      <span class="big">minutes</span>
+      <button class="btn" id="dCheck">Check</button>
+    </div>
+    <div class="choices" id="dChoices"></div>
+    <div class="fb" id="dFb" aria-live="polite"></div>
+    <button class="btn ghost" id="dNext">Next question</button>
+  </section>
+
+  <section class="panel" id="ws" role="tabpanel" aria-labelledby="t-ws">
+    <h2>Printable clock worksheet</h2>
+    <div class="ws-head"><b>Name:</b> ______________________ &nbsp; <b>Date:</b> ____________ &nbsp; Write the time under each clock.</div>
+    <div class="row noprint">
+      <label for="wsLevel" class="big">Level:</label>
+      <select id="wsLevel">
+        <option value="1">1 · o'clock and half past</option>
+        <option value="2">2 · quarter past and quarter to</option>
+        <option value="3" selected>3 · five-minute steps</option>
+        <option value="4">4 · any minute</option>
+      </select>
+      <button class="btn" id="wsNew">New worksheet</button>
+      <button class="btn ghost" id="wsKey" aria-pressed="false">Show answers</button>
+      <button class="btn ghost" id="wsPrint">Print</button>
+    </div>
+    <div class="ws" id="wsGrid"></div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  var SVGNS="http://www.w3.org/2000/svg";
+  function $(id){return document.getElementById(id);}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function pick(arr){return arr[rnd(0,arr.length-1)];}
+  function pad(n){return (n<10?"0":"")+n;}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=rnd(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function mod(a,n){return ((a%n)+n)%n;}
+
+  var NUM=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","twenty-one","twenty-two","twenty-three","twenty-four","twenty-five","twenty-six","twenty-seven","twenty-eight","twenty-nine"];
+
+  /* t = minutes after 12:00 on a 12-hour clock (0-719) */
+  function hour12(t){var h=Math.floor(mod(t,720)/60);return h===0?12:h;}
+  function minOf(t){return mod(t,60);}
+  function digital(t){return hour12(t)+":"+pad(minOf(t));}
+  function words(t){
+    var m=minOf(t),h=hour12(t),nh=hour12(t+60);
+    if(m===0)return NUM[h]+" o'clock";
+    if(m===15)return "quarter past "+NUM[h];
+    if(m===30)return "half past "+NUM[h];
+    if(m===45)return "quarter to "+NUM[nh];
+    if(m<30)return NUM[m]+(m%5===0?"":(m===1?" minute":" minutes"))+" past "+NUM[h];
+    var r=60-m;
+    return NUM[r]+(r%5===0?"":(r===1?" minute":" minutes"))+" to "+NUM[nh];
+  }
+  /* d = minutes after midnight (0-1439) */
+  function to24(d){d=mod(d,1440);return pad(Math.floor(d/60))+":"+pad(d%60);}
+  function to12(d){d=mod(d,1440);return digital(d)+(d<720?" am":" pm");}
+  function randTime(level){
+    var h=rnd(0,11),m;
+    if(level===1)m=pick([0,30]);
+    else if(level===2)m=pick([0,15,30,45]);
+    else if(level===3)m=5*rnd(0,11);
+    else m=rnd(0,59);
+    return h*60+m;
+  }
+
+  /* analogue clock drawn as inline SVG */
+  function makeClock(box,label){
+    var svg=document.createElementNS(SVGNS,"svg");
+    svg.setAttribute("viewBox","0 0 200 200");
+    svg.setAttribute("role","img");
+    svg.setAttribute("aria-label",label||"Analogue clock");
+    function el(name,attrs){var e=document.createElementNS(SVGNS,name);for(var k in attrs)e.setAttribute(k,attrs[k]);svg.appendChild(e);return e;}
+    el("circle",{cx:100,cy:100,r:94,"class":"c-face"});
+    for(var i=0;i<60;i++){
+      var a=i*Math.PI/30,big=i%5===0,r1=big?80:85;
+      el("line",{x1:(100+r1*Math.sin(a)).toFixed(2),y1:(100-r1*Math.cos(a)).toFixed(2),x2:(100+89*Math.sin(a)).toFixed(2),y2:(100-89*Math.cos(a)).toFixed(2),"class":big?"c-tick big":"c-tick"});
+    }
+    for(var n=1;n<=12;n++){
+      var b=n*Math.PI/6,tx=el("text",{x:(100+68*Math.sin(b)).toFixed(2),y:(100-68*Math.cos(b)).toFixed(2),"class":"c-num"});
+      tx.textContent=n;
+    }
+    var hh=el("line",{x1:100,y1:100,x2:100,y2:62,"class":"c-hour"});
+    var mh=el("line",{x1:100,y1:100,x2:100,y2:44,"class":"c-min"});
+    el("circle",{cx:100,cy:100,r:6,"class":"c-dot"});
+    box.innerHTML="";box.appendChild(svg);
+    var obj={t:0,svg:svg,hour:hh,minute:mh,label:label};
+    obj.set=function(t){
+      t=mod(t,720);obj.t=t;
+      var m=t%60,ha=(Math.floor(t/60)%12)*30+m*0.5,ma=m*6;
+      hh.setAttribute("transform","rotate("+ha+" 100 100)");
+      mh.setAttribute("transform","rotate("+ma+" 100 100)");
+      if(!label)svg.setAttribute("aria-label","Analogue clock showing "+words(t));
+    };
+    obj.set(0);
+    return obj;
+  }
+
+  /* tabs with arrow-key support */
+  var tabs=document.querySelectorAll(".tab");
+  function showTab(tab){
+    for(var k=0;k<tabs.length;k++){tabs[k].setAttribute("aria-selected","false");tabs[k].setAttribute("tabindex","-1");$(tabs[k].getAttribute("data-p")).className="panel";}
+    tab.setAttribute("aria-selected","true");tab.removeAttribute("tabindex");$(tab.getAttribute("data-p")).className="panel on";
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){showTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=0;for(var q=0;q<tabs.length;q++)if(tabs[q]===this)idx=q;
+      var nx=-1;
+      if(e.key==="ArrowRight")nx=(idx+1)%tabs.length;
+      else if(e.key==="ArrowLeft")nx=(idx-1+tabs.length)%tabs.length;
+      else if(e.key==="Home")nx=0;
+      else if(e.key==="End")nx=tabs.length-1;
+      if(nx>=0){e.preventDefault();showTab(tabs[nx]);tabs[nx].focus();}
+    });
+  }
+
+  function makeChoices(box,items,correctIdx,onPick){
+    box.innerHTML="";
+    var btns=[];
+    for(var i=0;i<items.length;i++){
+      var b=document.createElement("button");
+      b.className="choice";b.type="button";b.textContent=items[i];b.setAttribute("data-i",i);
+      b.addEventListener("click",function(){
+        var me=+this.getAttribute("data-i");
+        for(var j=0;j<btns.length;j++){btns[j].disabled=true;if(j===correctIdx)btns[j].className="choice ok";}
+        if(me!==correctIdx)this.className="choice no";
+        onPick(me===correctIdx);
+      });
+      box.appendChild(b);btns.push(b);
+    }
+  }
+
+  /* ---------- Explore ---------- */
+  var ex=makeClock($("exClock"));
+  var exT=180;
+  function renderEx(){
+    exT=mod(exT,720);ex.set(exT);
+    $("exDigital").textContent=digital(exT);
+    $("exWords").textContent=words(exT);
+    $("ex24").textContent="24-hour: "+to24(exT)+" (morning) or "+to24(exT+720)+" (afternoon/evening)";
+  }
+  $("exHp").onclick=function(){exT+=60;renderEx();};
+  $("exHm").onclick=function(){exT-=60;renderEx();};
+  $("exM5p").onclick=function(){exT+=5;renderEx();};
+  $("exM5m").onclick=function(){exT-=5;renderEx();};
+  $("exM1p").onclick=function(){exT+=1;renderEx();};
+  $("exM1m").onclick=function(){exT-=1;renderEx();};
+  $("exRand").onclick=function(){exT=randTime(4);renderEx();};
+  renderEx();
+
+  /* ---------- Read the clock ---------- */
+  var rd=makeClock($("rdClock"),"Analogue clock: what time does it show?");
+  var rdQ={},rdRight=0,rdTot=0,rdDone=false;
+  function distractors(t,level){
+    var m=minOf(t),h=Math.floor(t/60),out=[];
+    var c=[t+60,t-60,h*60+mod(60-m,60),h*60+mod(m+30,60)];
+    c.push(t+(level>=3?5:15));
+    c.push(t-(level>=3?5:15));
+    if(level===4){c.push(t+1);c.push(t-1);}
+    for(var i=0;i<c.length;i++){var v=mod(c[i],720);if(v!==t&&out.indexOf(v)<0)out.push(v);}
+    return out;
+  }
+  function buildOptions(t,level){
+    var pool=shuffle(distractors(t,level)),opts=[t];
+    for(var i=0;i<pool.length&&opts.length<4;i++)opts.push(pool[i]);
+    while(opts.length<4){var r=randTime(level);if(opts.indexOf(r)<0)opts.push(r);}
+    return shuffle(opts);
+  }
+  function newRead(){
+    var level=+$("rdLevel").value,t=randTime(level);
+    var opts=buildOptions(t,level),asWords=Math.random()<0.5;
+    rdQ={t:t,opts:opts,asWords:asWords};
+    rd.set(t);
+    var labels=[];for(var i=0;i<opts.length;i++)labels.push(asWords?words(opts[i]):digital(opts[i]));
+    rdDone=false;$("rdFb").textContent="";$("rdFb").className="fb";
+    makeChoices($("rdChoices"),labels,opts.indexOf(t),function(ok){
+      if(rdDone)return;rdDone=true;rdTot++;
+      var fb=$("rdFb");
+      if(ok){rdRight++;fb.className="fb ok";fb.textContent="Correct! It is "+digital(t)+", "+words(t)+".";}
+      else{fb.className="fb no";fb.textContent="Not quite. It is "+digital(t)+", "+words(t)+". Check the short hour hand first.";}
+      $("rdScore").textContent="Score: "+rdRight+" / "+rdTot;
+    });
+  }
+  $("rdNext").onclick=newRead;
+  $("rdLevel").onchange=newRead;
+  newRead();
+
+  /* ---------- Set the clock ---------- */
+  var st=makeClock($("stClock"));
+  var stT=0,stGoal=0,stRight=0,stTot=0,stDone=false;
+  function renderSt(){stT=mod(stT,720);st.set(stT);}
+  function newSet(){
+    var level=+$("stLevel").value;
+    stGoal=randTime(level);
+    stT=0;if(stGoal===0)stT=180;renderSt();
+    $("stTarget").textContent=Math.random()<0.5?words(stGoal):digital(stGoal);
+    stDone=false;$("stFb").textContent="";$("stFb").className="fb";
+  }
+  $("stHp").onclick=function(){stT+=60;renderSt();};
+  $("stHm").onclick=function(){stT-=60;renderSt();};
+  $("stM5p").onclick=function(){stT+=5;renderSt();};
+  $("stM5m").onclick=function(){stT-=5;renderSt();};
+  $("stM1p").onclick=function(){stT+=1;renderSt();};
+  $("stM1m").onclick=function(){stT-=1;renderSt();};
+  $("stCheck").onclick=function(){
+    if(stDone)return;
+    var fb=$("stFb");
+    if(stT===stGoal){stDone=true;stRight++;stTot++;fb.className="fb ok";fb.textContent="Brilliant! The clock shows "+digital(stGoal)+", "+words(stGoal)+".";}
+    else{stTot++;stDone=true;fb.className="fb no";fb.textContent="Not yet. Your clock shows "+digital(stT)+". The answer is "+digital(stGoal)+": here it is.";stT=stGoal;renderSt();}
+    $("stScore").textContent="Score: "+stRight+" / "+stTot;
+  };
+  $("stNext").onclick=newSet;
+  $("stLevel").onchange=newSet;
+  newSet();
+
+  /* ---------- 12 and 24 hour ---------- */
+  var hq={},hRight=0,hTot=0,hDone=false;
+  function parse24(s){
+    var digits=String(s).replace(/[^0-9]/g,"");
+    if(digits.length<3||digits.length>4)return -1;
+    var hh=parseInt(digits.slice(0,digits.length-2),10),mm=parseInt(digits.slice(-2),10);
+    if(hh>23||mm>59)return -1;
+    return hh*60+mm;
+  }
+  function hFinish(ok){
+    hDone=true;hTot++;
+    var fb=$("hFb");
+    var ans=hq.dir==="to24"?to24(hq.d):to12(hq.d);
+    if(ok){hRight++;fb.className="fb ok";fb.textContent="Correct! "+to12(hq.d)+" = "+to24(hq.d)+".";}
+    else{fb.className="fb no";fb.textContent="Not quite. The answer is "+ans+". "+(hq.d>=720?"After midday, add 12 to the hour.":"Before midday, the hour stays the same"+(Math.floor(hq.d/60)===0?" (12 midnight is 00).":"."));}
+    $("hScore").textContent="Score: "+hRight+" / "+hTot;
+  }
+  function newH(){
+    var d=rnd(0,287)*5;
+    if(Math.random()<0.15)d=pick([0,720,rnd(0,23)*60]);
+    hq={d:d,dir:Math.random()<0.5?"to24":"to12"};
+    hDone=false;$("hFb").textContent="";$("hFb").className="fb";$("hIn").value="";
+    if(hq.dir==="to24"){
+      $("hQ").textContent="Write "+to12(d)+" in 24-hour time.";
+      $("hTypeRow").style.display="";$("hChoices").style.display="none";$("hChoices").innerHTML="";
+    }else{
+      $("hQ").textContent="Which 12-hour time is "+to24(d)+"?";
+      $("hTypeRow").style.display="none";$("hChoices").style.display="";
+      var opts=[d],c=shuffle([d+720,d-720,d+60,d-60,d+120,d-120]);
+      for(var i=0;i<c.length&&opts.length<4;i++){var v=mod(c[i],1440);if(opts.indexOf(v)<0)opts.push(v);}
+      shuffle(opts);
+      var labels=[];for(var j=0;j<opts.length;j++)labels.push(to12(opts[j]));
+      makeChoices($("hChoices"),labels,opts.indexOf(d),function(ok){if(!hDone)hFinish(ok);});
+    }
+  }
+  $("hCheck").onclick=function(){
+    if(hDone||hq.dir!=="to24")return;
+    var v=parse24($("hIn").value);
+    if(v<0){$("hFb").className="fb no";$("hFb").textContent="Type the time as hours and minutes, like 14:30.";return;}
+    hFinish(v===hq.d);
+  };
+  $("hIn").addEventListener("keydown",function(e){if(e.key==="Enter")$("hCheck").click();});
+  $("hNext").onclick=newH;
+  newH();
+
+  /* ---------- How long? ---------- */
+  var dA=makeClock($("dClockA"),"Start time clock"),dB=makeClock($("dClockB"),"End time clock");
+  var dq={},dRight=0,dTot=0,dDone=false;
+  function lenWords(n){var h=Math.floor(n/60),m=n%60,s=[];if(h)s.push(h+(h===1?" hour":" hours"));if(m)s.push(m+" minutes");return s.join(" ");}
+  function dFinish(ok){
+    dDone=true;dTot++;
+    var fb=$("dFb");
+    var expl="From "+digital(dq.a)+" to "+digital(dq.a+dq.len)+" is "+dq.len+" minutes"+(dq.len>=60?" ("+lenWords(dq.len)+")":"")+".";
+    if(ok){dRight++;fb.className="fb ok";fb.textContent="Correct! "+expl;}
+    else{fb.className="fb no";fb.textContent="Not quite. "+expl+" Try counting on in 5-minute jumps.";}
+    dB.set(dq.a+dq.len);$("dBWrap").style.visibility="visible";$("dLabelB").textContent="End: "+digital(dq.a+dq.len);
+    $("dScore").textContent="Score: "+dRight+" / "+dTot;
+  }
+  function newD(){
+    var a=rnd(0,143)*5,len=pick([5,10,15,20,25,30,35,40,45,50,55,60,75,90,105,120]);
+    dq={a:a,len:len,kind:Math.random()<0.5?"between":"later"};
+    dDone=false;$("dFb").textContent="";$("dFb").className="fb";$("dIn").value="";
+    dA.set(a);$("dLabelA").textContent="Start: "+digital(a);
+    if(dq.kind==="between"){
+      dB.set(a+len);$("dBWrap").style.visibility="visible";$("dLabelB").textContent="End: "+digital(a+len);
+      $("dQ").textContent="How many minutes from "+digital(a)+" to "+digital(a+len)+"?";
+      $("dTypeRow").style.display="";$("dChoices").style.display="none";$("dChoices").innerHTML="";
+    }else{
+      $("dBWrap").style.visibility="hidden";
+      $("dQ").textContent="It is "+digital(a)+". What time will it be in "+lenWords(len)+"?";
+      $("dTypeRow").style.display="none";$("dChoices").style.display="";
+      var end=mod(a+len,720),opts=[end],c=shuffle([end+5,end-5,end+10,end-10,end+60,end-60,a,end+15]);
+      for(var i=0;i<c.length&&opts.length<4;i++){var v=mod(c[i],720);if(opts.indexOf(v)<0)opts.push(v);}
+      shuffle(opts);
+      var labels=[];for(var j=0;j<opts.length;j++)labels.push(digital(opts[j]));
+      makeChoices($("dChoices"),labels,opts.indexOf(end),function(ok){if(!dDone)dFinish(ok);});
+    }
+  }
+  $("dCheck").onclick=function(){
+    if(dDone||dq.kind!=="between")return;
+    var v=parseInt($("dIn").value,10);
+    if(isNaN(v)){$("dFb").className="fb no";$("dFb").textContent="Type a number of minutes.";return;}
+    dFinish(v===dq.len);
+  };
+  $("dIn").addEventListener("keydown",function(e){if(e.key==="Enter")$("dCheck").click();});
+  $("dNext").onclick=newD;
+  newD();
+
+  /* ---------- Worksheet ---------- */
+  var wsTimes=[],wsShow=false;
+  function newWs(){
+    var level=+$("wsLevel").value,grid=$("wsGrid");
+    wsTimes=[];grid.innerHTML="";
+    while(wsTimes.length<12){var t=randTime(level);if(wsTimes.indexOf(t)<0)wsTimes.push(t);}
+    for(var i=0;i<12;i++){
+      var cell=document.createElement("div");cell.className="cell";
+      var num=document.createElement("div");num.className="num";num.textContent=(i+1)+".";
+      var box=document.createElement("div");box.className="clockbox";
+      var line=document.createElement("div");line.className="line";line.setAttribute("data-a",digital(wsTimes[i]));
+      cell.appendChild(num);cell.appendChild(box);cell.appendChild(line);grid.appendChild(cell);
+      makeClock(box,"Worksheet clock "+(i+1)).set(wsTimes[i]);
+    }
+    renderKey();
+  }
+  function renderKey(){
+    var lines=$("wsGrid").querySelectorAll(".line");
+    for(var i=0;i<lines.length;i++)lines[i].textContent=wsShow?lines[i].getAttribute("data-a"):"";
+    $("wsKey").textContent=wsShow?"Hide answers":"Show answers";
+    $("wsKey").setAttribute("aria-pressed",wsShow?"true":"false");
+  }
+  $("wsNew").onclick=newWs;
+  $("wsLevel").onchange=newWs;
+  $("wsKey").onclick=function(){wsShow=!wsShow;renderKey();};
+  $("wsPrint").onclick=function(){window.print();};
+  newWs();
+
+  /* exposed for checking */
+  window.ClockLab={words:words,digital:digital,to24:to24,to12:to12,parse24:parse24,state:function(){return {rd:rdQ,stGoal:stGoal,stT:stT,hq:hq,dq:dq,ws:wsTimes};}};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alkali Metals | Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1C3F;
+    --bg-raised: #16234E;
+    --ink: #F7F9FC;
+    --ink-dim: #9FB0DE;
+    --line: #26356b;
+    --gold: #F4B942;
+    --ink-strong: #0A1330;
+
+    --li: #FF4B4B;
+    --na: #FFC93C;
+    --k:  #C08CFF;
+    --rb: #E85CA0;
+    --cs: #7B7FFF;
+    --fr: #8A8F9A;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header.top { padding: 28px 0 8px; }
+
+  .crumb { font-size: 14px; color: var(--ink-dim); letter-spacing: 0.01em; }
+  .crumb a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid transparent; }
+  .crumb a:hover { border-bottom-color: var(--ink-dim); }
+
+  h1 { font-size: clamp(34px, 6vw, 52px); font-weight: 700; margin: 6px 0 4px; letter-spacing: -0.01em; }
+
+  .subhead { color: var(--ink-dim); font-size: 17px; max-width: 58ch; margin: 0 0 40px; }
+
+  /* ---- Flame rack ---- */
+  .rack {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(14px, 3vw, 30px);
+    padding: 26px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .flame-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .flame {
+    width: 40px;
+    height: 62px;
+    background: var(--glow);
+    opacity: 0.28;
+    border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+    clip-path: path('M20 0 C34 18 34 34 24 44 C30 34 24 26 20 28 C16 26 10 34 16 44 C6 34 6 18 20 0 Z');
+    transition: opacity 0.35s ease, transform 0.2s ease, filter 0.35s ease;
+    filter: blur(0.3px);
+  }
+
+  .flame-btn:hover .flame { transform: translateY(-3px) scale(1.03); }
+
+  .flame-btn[aria-pressed="true"] .flame {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px var(--glow));
+  }
+
+  .flame-symbol { font-size: 15px; font-weight: 600; color: var(--ink-dim); transition: color 0.35s ease; }
+  .flame-btn[aria-pressed="true"] .flame-symbol { color: var(--glow); }
+
+  .flame-btn[data-el="li"] .flame { --glow: var(--li); }
+  .flame-btn[data-el="na"] .flame { --glow: var(--na); }
+  .flame-btn[data-el="k"]  .flame { --glow: var(--k); }
+  .flame-btn[data-el="rb"] .flame { --glow: var(--rb); }
+  .flame-btn[data-el="cs"] .flame { --glow: var(--cs); }
+  .flame-btn[data-el="fr"] .flame { --glow: var(--fr); }
+
+  /* ---- Detail card ---- */
+  .detail {
+    margin-top: 44px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 30px;
+    border-left: 4px solid var(--glow, var(--ink-dim));
+  }
+
+  .detail-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .detail-symbol { font-family: 'Baloo 2', sans-serif; font-size: 40px; font-weight: 800; color: var(--glow, var(--ink)); }
+  .detail-name { font-family: 'Baloo 2', sans-serif; font-size: 24px; font-weight: 700; }
+  .detail-meta { color: var(--ink-dim); font-size: 15px; }
+  .detail-fact { margin-top: 14px; font-size: 16px; max-width: 62ch; }
+
+  .stat-row { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
+  .stat-label { font-size: 12px; color: var(--ink-dim); }
+  .stat-value { font-size: 18px; font-weight: 600; }
+
+  .warn {
+    margin-top: 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--ink-strong);
+    background: var(--gold);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* ---- Callout ---- */
+  .callout {
+    margin-top: 28px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    font-size: 15.5px;
+    max-width: 62ch;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ---- Quiz ---- */
+  .quiz-toggle {
+    margin-top: 40px;
+    background: var(--gold);
+    border: none;
+    color: var(--ink-strong);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    padding: 14px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .quiz-toggle:hover { opacity: 0.9; }
+
+  .quiz { display: none; margin-top: 24px; }
+  .quiz.open { display: block; }
+
+  .q {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+  }
+  .q-text { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .q-opts { display: flex; flex-direction: column; gap: 8px; }
+  .q-opt {
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .q-opt:hover { border-color: var(--ink-dim); }
+  .q-opt.correct { border-color: #6FCF97; background: #16261E; }
+  .q-opt.wrong { border-color: #E85D5D; background: #2A1818; }
+
+  .score-line { margin-top: 18px; font-size: 16px; color: var(--ink-dim); }
+  .score-line strong { color: var(--ink); }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="crumb"><a href="#">Periodic Table</a> / Alkali Metals</div>
+    <h1>Alkali metals</h1>
+    <p class="subhead">Six metals so reactive that some burst into flame on contact with water. Tap a flame to see the exact colour each one burns, and why they behave this way.</p>
+  </header>
+
+  <div class="rack" id="rack">
+    <button class="flame-btn" data-el="li" aria-pressed="false">
+      <div class="flame"></div>
+      <span class="flame-symbol">Li</span>
+    </button>
+    <button class="flame-btn" data-el="na" aria-pressed="false">
+      <div class="flame"></div>
+      <span class="flame-symbol">Na</span>
+    </button>
+    <button class="flame-btn" data-el="k" aria-pressed="false">
+      <div class="flame"></div>
+      <span class="flame-symbol">K</span>
+    </button>
+    <button class="flame-btn" data-el="rb" aria-pressed="false">
+      <div class="flame"></div>
+      <span class="flame-symbol">Rb</span>
+    </button>
+    <button class="flame-btn" data-el="cs" aria-pressed="false">
+      <div class="flame"></div>
+      <span class="flame-symbol">Cs</span>
+    </button>
+    <button class="flame-btn" data-el="fr" aria-pressed="false">
+      <div class="flame"></div>
+      <span class="flame-symbol">Fr</span>
+    </button>
+  </div>
+
+  <div class="detail" id="detail">
+    <div class="detail-head">
+      <span class="detail-symbol" id="d-symbol">Li</span>
+      <span class="detail-name" id="d-name">Lithium</span>
+      <span class="detail-meta" id="d-meta">Burns crimson red</span>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-label">Atomic number</div><div class="stat-value" id="d-num">3</div></div>
+      <div><div class="stat-label">Atomic mass</div><div class="stat-value" id="d-mass">6.9</div></div>
+    </div>
+    <p class="detail-fact" id="d-fact">Soft enough to cut with a butter knife, and light enough to float on water — though it fizzes and gives off gas the moment it touches it. Used in rechargeable batteries.</p>
+    <span class="warn" id="d-warn"></span>
+  </div>
+
+  <div class="callout">
+    <strong>Why so reactive?</strong> Every alkali metal has just one electron in its outer shell, and it's easy to lose. Losing that single electron is all it takes to react — the further down the group you go, the more loosely held that electron is, and the more violent the reaction.
+  </div>
+
+  <button class="quiz-toggle" id="quizToggle">Test yourself →</button>
+
+  <div class="quiz" id="quiz">
+    <div class="q" data-answer="1">
+      <div class="q-text">1. Which alkali metal burns bright yellow-orange and is found in table salt?</div>
+      <div class="q-opts">
+        <button class="q-opt">Lithium</button>
+        <button class="q-opt">Sodium</button>
+        <button class="q-opt">Potassium</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">2. Which alkali metal burns lilac/violet?</div>
+      <div class="q-opts">
+        <button class="q-opt">Rubidium</button>
+        <button class="q-opt">Caesium</button>
+        <button class="q-opt">Potassium</button>
+      </div>
+    </div>
+    <div class="q" data-answer="0">
+      <div class="q-text">3. How many electrons does an alkali metal have in its outer shell?</div>
+      <div class="q-opts">
+        <button class="q-opt">1</button>
+        <button class="q-opt">7</button>
+        <button class="q-opt">8</button>
+      </div>
+    </div>
+    <div class="q" data-answer="1">
+      <div class="q-text">4. Which alkali metal is soft enough to cut with a butter knife?</div>
+      <div class="q-opts">
+        <button class="q-opt">Caesium</button>
+        <button class="q-opt">Lithium</button>
+        <button class="q-opt">Francium</button>
+      </div>
+    </div>
+    <div class="q" data-answer="2">
+      <div class="q-text">5. Why do alkali metals react so easily?</div>
+      <div class="q-opts">
+        <button class="q-opt">They are all gases</button>
+        <button class="q-opt">They have a full outer shell</button>
+        <button class="q-opt">They lose their single outer electron easily</button>
+      </div>
+    </div>
+    <div class="score-line" id="scoreLine">Score: <strong>0 / 5</strong></div>
+  </div>
+
+  <footer>
+    Part of the Periodic Table series — Ellis Knowledge Studio. More categories: Noble Gases, Transition Metals, Metalloids, Non-metals, Halogens.
+  </footer>
+
+</div>
+
+<script>
+  const data = {
+    li: { symbol: "Li", name: "Lithium", meta: "Burns crimson red", num: 3, mass: "6.9",
+      fact: "Soft enough to cut with a butter knife, and light enough to float on water — though it fizzes and gives off gas the moment it touches it. Used in rechargeable batteries.",
+      warn: "Reacts steadily with water" },
+    na: { symbol: "Na", name: "Sodium", meta: "Burns bright yellow-orange", num: 11, mass: "23.0",
+      fact: "The metal inside ordinary table salt (sodium chloride). On its own it's a soft, silvery metal that fizzes across the surface of water and can catch fire.",
+      warn: "Reacts vigorously — can ignite" },
+    k: { symbol: "K", name: "Potassium", meta: "Burns lilac / violet", num: 19, mass: "39.1",
+      fact: "Reacts so fast with water that it usually bursts into flame on the spot, skittering across the surface as it burns. Also essential to how your muscles and nerves work.",
+      warn: "Reacts violently — bursts into flame" },
+    rb: { symbol: "Rb", name: "Rubidium", meta: "Burns reddish-violet", num: 37, mass: "85.5",
+      fact: "Reactive enough that it catches fire just from contact with air, not only water. It's stored under oil to keep it away from both.",
+      warn: "Ignites spontaneously in air" },
+    cs: { symbol: "Cs", name: "Caesium", meta: "Burns blue-violet", num: 55, mass: "132.9",
+      fact: "Almost melts in your hand — its melting point is close to room temperature. Dropped in water, it explodes rather than just fizzing or burning.",
+      warn: "Explodes on contact with water" },
+    fr: { symbol: "Fr", name: "Francium", meta: "Colour unconfirmed — too rare and unstable to observe directly", num: 87, mass: "223",
+      fact: "One of the rarest elements on Earth. It's so radioactive and short-lived that at any moment, only a tiny amount exists in the planet's entire crust.",
+      warn: "Extremely radioactive and unstable" }
+  };
+
+  const rack = document.getElementById('rack');
+  const buttons = rack.querySelectorAll('.flame-btn');
+
+  function selectElement(el) {
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.el === el ? 'true' : 'false'));
+    const d = data[el];
+    document.getElementById('d-symbol').textContent = d.symbol;
+    document.getElementById('d-name').textContent = d.name;
+    document.getElementById('d-meta').textContent = d.meta;
+    document.getElementById('d-num').textContent = d.num;
+    document.getElementById('d-mass').textContent = d.mass;
+    document.getElementById('d-fact').textContent = d.fact;
+    document.getElementById('d-warn').textContent = d.warn;
+    document.getElementById('detail').style.setProperty('--glow', `var(--${el})`);
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => selectElement(b.dataset.el)));
+  selectElement('li');
+
+  const quizToggle = document.getElementById('quizToggle');
+  const quiz = document.getElementById('quiz');
+  quizToggle.addEventListener('click', () => {
+    quiz.classList.toggle('open');
+    quizToggle.textContent = quiz.classList.contains('open') ? 'Hide quiz' : 'Test yourself →';
+  });
+
+  let score = 0;
+  const answered = new Set();
+  document.querySelectorAll('.q').forEach((q, qIndex) => {
+    const correctIndex = parseInt(q.dataset.answer, 10);
+    const opts = q.querySelectorAll('.q-opt');
+    opts.forEach((opt, i) => {
+      opt.addEventListener('click', () => {
+        if (answered.has(qIndex)) return;
+        answered.add(qIndex);
+        opts.forEach((o, j) => {
+          if (j === correctIndex) o.classList.add('correct');
+          else if (j === i) o.classList.add('wrong');
+        });
+        if (i === correctIndex) score++;
+        document.getElementById('scoreLine').innerHTML = `Score: <strong>${score} / 5</strong>`;
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

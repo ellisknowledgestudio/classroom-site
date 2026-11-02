@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Element Explorer — Ellis Knowledge Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1C3F;
+    --navy-deep:#0A1330;
+    --teal:#38B6A6;
+    --gold:#F4B942;
+    --white:#F7F9FC;
+    --panel:#16234E;
+    --c-metal:#3E92CC;
+    --c-nonmetal:#38B6A6;
+    --c-noble:#B98CE0;
+    --c-alkali:#E85D6C;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(180deg, var(--navy-deep), var(--navy) 60%, #17265a 100%);
+    font-family:'Nunito Sans', sans-serif;
+    color:var(--white);
+    padding:24px;
+  }
+  .wrap{max-width:820px;margin:0 auto;}
+  .eyebrow{
+    font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px;
+    color:var(--teal);text-align:center;margin-bottom:6px;
+  }
+  h1{
+    font-family:'Baloo 2', sans-serif;font-weight:800;
+    font-size:clamp(26px,5vw,40px);text-align:center;margin:0 0 4px;
+  }
+  .sub{text-align:center;color:#C7D2EE;font-weight:600;margin-bottom:20px;font-size:15px;}
+
+  .legend{
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:18px;font-size:12px;font-weight:700;
+  }
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .dot{width:12px;height:12px;border-radius:4px;display:inline-block;}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:8px;
+    margin-bottom:22px;
+  }
+  @media (min-width:600px){ .grid{grid-template-columns:repeat(9, 1fr);} }
+
+  .tile{
+    aspect-ratio:1;
+    border-radius:10px;
+    border:2px solid rgba(255,255,255,.15);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:.15s;
+    background:var(--panel);
+  }
+  .tile:hover, .tile:focus-visible{ transform:translateY(-3px); border-color:var(--gold); outline:none;}
+  .tile.selected{ border-color:var(--gold); box-shadow:0 0 0 2px var(--gold); }
+  .tile .num{font-size:9px;opacity:.7;font-weight:700;}
+  .tile .sym{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(16px,3vw,22px);}
+
+  .metal{background:#1c3a63;}
+  .nonmetal{background:#154a44;}
+  .noble{background:#3a2456;}
+  .alkali{background:#5c2230;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid #26356b;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    min-height:150px;
+  }
+  .card .placeholder{
+    text-align:center;color:#8C9BD1;font-weight:600;padding:20px 0;
+  }
+  .card-top{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;}
+  .card-sym{
+    font-family:'Baloo 2',sans-serif;font-weight:800;font-size:44px;color:var(--gold);
+  }
+  .card-name{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:24px;}
+  .card-num{color:#9FB0DE;font-weight:700;font-size:14px;}
+  .card-fact{font-size:15px;line-height:1.5;color:#DCE3F7;margin-top:8px;}
+  .card-cat{
+    display:inline-block;margin-top:10px;font-size:11px;font-weight:800;
+    letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+  }
+
+  .footer-note{
+    text-align:center;color:#7C8AC0;font-size:12px;margin-top:18px;font-weight:600;
+  }
+  .cta{
+    display:block;text-align:center;background:var(--gold);color:var(--navy-deep);
+    font-weight:800;text-decoration:none;padding:12px 22px;border-radius:12px;
+    font-size:15px;margin-top:20px;max-width:320px;margin-left:auto;margin-right:auto;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Ellis Knowledge Studio</div>
+  <h1>Element Explorer 🧪</h1>
+  <div class="sub">Tap an element to discover what it does!</div>
+
+  <div class="legend">
+    <span><i class="dot" style="background:#1c3a63"></i>Metal</span>
+    <span><i class="dot" style="background:#154a44"></i>Non-metal</span>
+    <span><i class="dot" style="background:#3a2456"></i>Noble gas</span>
+    <span><i class="dot" style="background:#5c2230"></i>Reactive metal</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="card" id="card">
+    <div class="placeholder">👆 Tap any element above to learn about it</div>
+  </div>
+
+  <a class="cta" href="https://ellisknowledgestudio.com/educational-resources" target="_top">Get the full Elements worksheet pack →</a>
+  <div class="footer-note">Free tool from Ellis Knowledge Studio · Printable science packs available in the shop</div>
+</div>
+
+<script>
+(function(){
+  var elements = [
+    {n:1,s:"H",name:"Hydrogen",cat:"nonmetal",fact:"The lightest element in the universe — stars are mostly made of it!"},
+    {n:2,s:"He",name:"Helium",cat:"noble",fact:"Makes balloons float and your voice sound squeaky if you breathe it (don't try this!)."},
+    {n:6,s:"C",name:"Carbon",cat:"nonmetal",fact:"Found in every living thing — including you! Also makes diamonds and pencil lead."},
+    {n:7,s:"N",name:"Nitrogen",cat:"nonmetal",fact:"Makes up 78% of the air you're breathing right now."},
+    {n:8,s:"O",name:"Oxygen",cat:"nonmetal",fact:"The gas your body needs to survive — you breathe it in every second."},
+    {n:10,s:"Ne",name:"Neon",cat:"noble",fact:"Glows bright orange-red — it's what lights up neon signs."},
+    {n:11,s:"Na",name:"Sodium",cat:"alkali",fact:"So reactive it explodes in water! Combined with chlorine it becomes table salt."},
+    {n:12,s:"Mg",name:"Magnesium",cat:"metal",fact:"Burns with a dazzling bright white light — used in fireworks and flares."},
+    {n:13,s:"Al",name:"Aluminium",cat:"metal",fact:"Super light and doesn't rust — that's why it's used for planes and drink cans."},
+    {n:14,s:"Si",name:"Silicon",cat:"nonmetal",fact:"The main ingredient in sand and glass — also powers every computer chip."},
+    {n:17,s:"Cl",name:"Chlorine",cat:"nonmetal",fact:"Used to keep swimming pools clean and germ-free."},
+    {n:18,s:"Ar",name:"Argon",cat:"noble",fact:"Fills lightbulbs to stop the metal filament from burning up too fast."},
+    {n:19,s:"K",name:"Potassium",cat:"alkali",fact:"Your body needs it to keep your heart beating properly — bananas are full of it."},
+    {n:20,s:"Ca",name:"Calcium",cat:"metal",fact:"Builds strong bones and teeth — found in milk and cheese."},
+    {n:26,s:"Fe",name:"Iron",cat:"metal",fact:"Used to build bridges and skyscrapers — also travels in your blood carrying oxygen."},
+    {n:29,s:"Cu",name:"Copper",cat:"metal",fact:"An excellent conductor of electricity — most household wires are made of it."},
+    {n:47,s:"Ag",name:"Silver",cat:"metal",fact:"The best conductor of electricity of any metal, and used in jewellery for centuries."},
+    {n:79,s:"Au",name:"Gold",cat:"metal",fact:"So unreactive it never rusts or tarnishes — that's why ancient gold treasure still shines today."},
+    {n:82,s:"Pb",name:"Lead",cat:"metal",fact:"Very heavy and soft — once used in pipes and paint, now known to be toxic."},
+    {n:92,s:"U",name:"Uranium",cat:"metal",fact:"A powerful element used to generate energy in nuclear power plants."}
+  ];
+
+  var catNames = {metal:"Metal", nonmetal:"Non-metal", noble:"Noble Gas", alkali:"Reactive Metal"};
+  var catColors = {metal:"#1c3a63", nonmetal:"#154a44", noble:"#3a2456", alkali:"#5c2230"};
+
+  var grid = document.getElementById('grid');
+  elements.forEach(function(el, idx){
+    var tile = document.createElement('div');
+    tile.className = 'tile ' + el.cat;
+    tile.tabIndex = 0;
+    tile.innerHTML = '<div class="num">' + el.n + '</div><div class="sym">' + el.s + '</div>';
+    tile.addEventListener('click', function(){ selectElement(el, tile); });
+    tile.addEventListener('keypress', function(e){ if(e.key === 'Enter') selectElement(el, tile); });
+    grid.appendChild(tile);
+  });
+
+  function selectElement(el, tile){
+    document.querySelectorAll('.tile').forEach(function(t){ t.classList.remove('selected'); });
+    tile.classList.add('selected');
+    var card = document.getElementById('card');
+    card.innerHTML =
+      '<div class="card-top">' +
+        '<div class="card-sym">' + el.s + '</div>' +
+        '<div><div class="card-name">' + el.name + '</div><div class="card-num">Atomic number ' + el.n + '</div></div>' +
+      '</div>' +
+      '<div class="card-fact">' + el.fact + '</div>' +
+      '<div class="card-cat" style="background:' + catColors[el.cat] + '">' + catNames[el.cat] + '</div>';
+  }
+})();
+</script>
+</body>
+</html>
