@@ -34,4 +34,5 @@ jobs:
             **/.git*
             **/.git*/**
             .github/**
+            tools/**
             README.md
