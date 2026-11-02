@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free States of Matter Interactive for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive states of matter tool for ages 7-11. Heat and cool water to watch the particles, sort solids, liquids and gases, learn melting, freezing, evaporating and condensing, take a quiz and print a worksheet.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/states-of-matter/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--ice:#9ED8FF;--water:#3D8BFF;--steam:#E4ECFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.sbtn:focus-visible,.cbtn:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.big{font-size:20px;font-weight:700}
+.score{color:var(--gold);font-weight:700}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+/* explore */
+.lab{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.beaker{flex:0 0 auto;width:100%;max-width:300px;background:var(--navy);border-radius:16px;padding:10px}
+.beaker svg{display:block;width:100%;height:auto}
+.ctrl{flex:1;min-width:240px}
+.temp{font:800 34px "Baloo 2",sans-serif;color:var(--gold);line-height:1.1}
+.state{display:inline-block;border-radius:999px;padding:2px 14px;font-weight:700;color:var(--navy);background:var(--gold);margin:6px 0}
+input[type=range]{width:100%;accent-color:#F4B942;height:30px}
+.scale-l{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.props{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin:10px 0}
+.prop{background:var(--navy);border-radius:10px;padding:8px 10px;font-size:15px}
+.prop b{display:block;color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+.cmap{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center;margin:12px 0;text-align:center}
+.cbox{background:var(--navy);border-radius:12px;padding:10px 4px;font:800 18px "Baloo 2",sans-serif}
+.arrows{display:flex;flex-direction:column;gap:6px}
+.cbtn{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:10px;padding:4px 8px;font:700 13px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.cbtn.hot{border-color:#FF9F6B}
+.cbtn.cold{border-color:var(--ice)}
+.cbtn[aria-pressed="true"]{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.cinfo{min-height:48px}
+.av{display:none}
+/* sort */
+.item{display:flex;align-items:center;gap:14px;background:var(--navy);border-radius:16px;padding:14px 18px;margin:12px 0}
+.item .em{font-size:52px;line-height:1}
+.item .nm{font:800 clamp(22px,5vw,28px) "Baloo 2",sans-serif;line-height:1.2}
+.sbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.sbtn{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px 6px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:64px}
+.sbtn small{display:block;font:400 12px "Nunito Sans",sans-serif;color:var(--muted)}
+.sbtn.ok{border-color:var(--good);background:#1d4a3a}
+.sbtn.no{border-color:var(--bad);background:#4a1d27}
+.sbtn:disabled{cursor:default}
+/* quiz */
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+/* worksheet */
+.ws-head{display:none}
+.wsbox{background:var(--navy);border-radius:12px;padding:14px;margin-top:12px}
+.bank{display:flex;flex-wrap:wrap;gap:6px 14px;font-weight:700;margin:6px 0}
+.wsl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 20px}
+.wsl div,.wsq{padding:6px 0;border-bottom:1px solid rgba(184,194,224,.25)}
+.ans{display:inline-block;min-width:110px;border-bottom:2px dashed var(--muted);font:800 17px "Baloo 2",sans-serif;color:var(--gold);margin-left:6px;min-height:24px;vertical-align:bottom}
+.draw{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.draw div{text-align:center;font-weight:700}
+.draw span{display:block;height:120px;border:2px solid var(--muted);border-radius:8px;margin-top:4px}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:620px){.wsl{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.cmap{grid-template-columns:1fr;}.arrows{flex-direction:row;justify-content:center;flex-wrap:wrap}.ah{display:none}.av{display:inline}.draw span{height:90px}}
+@media print{
+  body{background:#fff;color:#000}
+  .tabs,.crumbs,.shop,.btn,.noprint,h1,.lead{display:none!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important;background:#fff;color:#000;padding:0}
+  .wsbox{background:#fff;border:1px solid #999;break-inside:avoid}
+  .ans{color:#000;border-color:#000}
+  .draw span{border-color:#000}
+  .ws-head{display:block;margin-bottom:8px}
+  .muted{color:#333}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › States of Matter Lab</nav>
+  <h1>States of Matter Lab 🧊💧♨️</h1>
+  <p class="lead">Everything around us is a solid, a liquid or a gas. Heat and cool water to watch its particles, sort materials, learn the changes of state and test yourself. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="States of Matter Lab modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Particle Lab</button>
+    <button class="tab" role="tab" id="t-sort" aria-controls="sort" aria-selected="false" tabindex="-1" data-p="sort">Sort It</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
+    <button class="tab" role="tab" id="t-ws" aria-controls="ws" aria-selected="false" tabindex="-1" data-p="ws">Worksheet</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Heat it up, cool it down</h2>
+    <p>Move the thermometer to change the temperature of some water. Watch what its tiny particles do.</p>
+    <div class="lab">
+      <div class="beaker"><svg id="box" viewBox="0 0 260 200" role="img" aria-label="Particles of water"></svg></div>
+      <div class="ctrl">
+        <div class="temp" id="tempOut">20 °C</div>
+        <div><span class="state" id="stateOut">Liquid: water</span></div>
+        <label for="tempIn" class="muted">Temperature</label>
+        <input type="range" id="tempIn" min="-30" max="130" step="1" value="20" aria-describedby="stateOut">
+        <div class="scale-l" aria-hidden="true"><span>-30 °C</span><span>0 °C</span><span>100 °C</span><span>130 °C</span></div>
+        <div class="row">
+          <button class="btn sm" id="tIce">❄️ Freezer (-18 °C)</button>
+          <button class="btn sm" id="tRoom">🏠 Room (20 °C)</button>
+          <button class="btn sm" id="tBoil">🔥 Boiling (110 °C)</button>
+        </div>
+        <p id="stateTxt" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="props" id="props"></div>
+
+    <h2>Changes of state</h2>
+    <p>Tap a change to find out about it.</p>
+    <div class="cmap">
+      <div class="cbox">🧊 Solid</div>
+      <div class="arrows">
+        <button class="cbtn hot" data-c="0" aria-pressed="false">Melting <span class="ah">→</span><span class="av">↓</span></button>
+        <button class="cbtn cold" data-c="1" aria-pressed="false"><span class="ah">←</span><span class="av">↑</span> Freezing</button>
+      </div>
+      <div class="cbox">💧 Liquid</div>
+      <div class="arrows">
+        <button class="cbtn hot" data-c="2" aria-pressed="false">Evaporating <span class="ah">→</span><span class="av">↓</span></button>
+        <button class="cbtn cold" data-c="3" aria-pressed="false"><span class="ah">←</span><span class="av">↑</span> Condensing</button>
+      </div>
+      <div class="cbox">♨️ Gas</div>
+    </div>
+    <p class="tip cinfo" id="cInfo" aria-live="polite">Heating makes particles move faster (orange arrows). Cooling slows them down (blue arrows).</p>
+    <p class="tip"><b>The water cycle:</b> the Sun heats water in seas and lakes and it <b>evaporates</b> into water vapour. High in the sky the vapour cools and <b>condenses</b> into tiny drops that make clouds. When the drops get heavy they fall as rain, snow or hail (<b>precipitation</b>), and the water <b>collects</b> in rivers and seas, ready to go round again.</p>
+  </section>
+
+  <section class="panel" id="sort" role="tabpanel" aria-labelledby="t-sort">
+    <h2>Solid, liquid or gas?</h2>
+    <div class="row"><span class="score" id="sScore">Score: 0 / 0</span><span class="muted" id="sNum">Item 1 of 12</span></div>
+    <div class="bar" aria-hidden="true"><i id="sBar"></i></div>
+    <div id="sBox">
+      <div class="item"><span class="em" id="sEm" aria-hidden="true"></span><span class="nm" id="sName"></span></div>
+      <div class="sbtns" role="group" aria-label="Choose solid, liquid or gas">
+        <button class="sbtn" data-s="Solid">Solid<small>key S</small></button>
+        <button class="sbtn" data-s="Liquid">Liquid<small>key L</small></button>
+        <button class="sbtn" data-s="Gas">Gas<small>key G</small></button>
+      </div>
+      <div class="fb" id="sFb" aria-live="polite"></div>
+      <button class="btn ghost" id="sNext">Next item</button>
+    </div>
+    <div id="sEnd" style="display:none">
+      <p class="q" id="sEndText"></p>
+      <button class="btn" id="sAgain">Play again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>States of matter quiz</h2>
+    <div class="row"><span class="score" id="qScore">Score: 0 / 0</span><span class="muted" id="qNum">Question 1 of 10</span></div>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <button class="btn ghost" id="qNext">Next question</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="ws" role="tabpanel" aria-labelledby="t-ws">
+    <h2>Printable states of matter worksheet</h2>
+    <div class="ws-head"><b>Name:</b> ______________________ &nbsp; <b>Date:</b> ____________</div>
+    <div class="row noprint">
+      <button class="btn" id="wsNew">New worksheet</button>
+      <button class="btn ghost" id="wsKey" aria-pressed="false">Show answers</button>
+      <button class="btn ghost" id="wsPrint">Print</button>
+    </div>
+    <div class="wsbox">
+      <h3>A. Is it a solid, a liquid or a gas?</h3>
+      <div class="wsl" id="wsSort"></div>
+    </div>
+    <div class="wsbox">
+      <h3>B. Name the change of state</h3>
+      <div class="bank"><span class="muted">Word bank:</span><span>melting</span><span>freezing</span><span>evaporating</span><span>condensing</span></div>
+      <div id="wsChg"></div>
+    </div>
+    <div class="wsbox">
+      <h3>C. Draw the particles</h3>
+      <p class="muted">Draw circles to show how the particles are arranged in each state.</p>
+      <div class="draw"><div>Solid<span></span></div><div>Liquid<span></span></div><div>Gas<span></span></div></div>
+      <p class="muted" id="wsDrawKey"></p>
+    </div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find printable science packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function pick(arr){return arr[rnd(0,arr.length-1)];}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=rnd(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  /* ---------- Data ---------- */
+  var ITEMS=[
+    {n:"Ice cube",a:"a ",e:"🧊",s:"Solid",why:"An ice cube keeps its own shape. It is frozen water."},
+    {n:"Pencil",a:"a ",e:"✏️",s:"Solid",why:"A pencil keeps its own shape and cannot be poured."},
+    {n:"Key",a:"a ",e:"🔑",s:"Solid",why:"Metal keys are solids: they keep their shape."},
+    {n:"Spoon",a:"a ",e:"🥄",s:"Solid",why:"A spoon keeps its shape, so it is a solid."},
+    {n:"Brick",a:"a ",e:"🧱",s:"Solid",why:"A brick is hard and keeps its shape."},
+    {n:"Sand",e:"🏖️",s:"Solid",why:"Sand can be poured, but each tiny grain keeps its own shape, so sand is a solid."},
+    {n:"Salt",e:"🧂",s:"Solid",why:"Salt is a powder made of tiny solid crystals. Each grain keeps its shape."},
+    {n:"Chocolate bar",a:"a ",e:"🍫",s:"Solid",why:"Chocolate is a solid at room temperature. Warm it up and it melts into a liquid."},
+    {n:"Book",a:"a ",e:"📕",s:"Solid",why:"A book keeps its own shape, so it is a solid."},
+    {n:"Apple",a:"an ",e:"🍎",s:"Solid",why:"An apple keeps its own shape, so it is a solid."},
+    {n:"Water",e:"💧",s:"Liquid",why:"Water flows and takes the shape of its container."},
+    {n:"Milk",e:"🥛",s:"Liquid",why:"Milk can be poured and takes the shape of the glass."},
+    {n:"Honey",e:"🍯",s:"Liquid",why:"Honey flows slowly, but it still pours and takes the shape of its jar, so it is a liquid."},
+    {n:"Orange juice",e:"🍊",s:"Liquid",why:"Juice can be poured and takes the shape of its container."},
+    {n:"Shampoo",e:"🧴",s:"Liquid",why:"Shampoo is thick, but it flows and pours, so it is a liquid."},
+    {n:"Cup of tea",a:"a ",e:"☕",s:"Liquid",why:"Tea is mostly water, so it is a liquid."},
+    {n:"Lemonade",e:"🍋",s:"Liquid",why:"Lemonade pours and takes the shape of the glass. The bubbles in it are a gas!"},
+    {n:"Cooking oil",e:"🍳",s:"Liquid",why:"Oil flows and can be poured, so it is a liquid."},
+    {n:"Air",e:"💨",s:"Gas",why:"Air is a mixture of gases. It spreads out to fill any space."},
+    {n:"Helium in a party balloon",e:"🎈",s:"Gas",why:"Helium is a gas that is lighter than air, so the balloon floats."},
+    {n:"Water vapour (steam)",e:"♨️",s:"Gas",why:"Water vapour is water as a gas. It forms when water evaporates or boils."},
+    {n:"Carbon dioxide (the bubbles in fizzy drinks)",e:"🥤",s:"Gas",why:"The fizz in fizzy drinks is carbon dioxide gas."},
+    {n:"Oxygen (the gas we breathe in)",e:"🌳",s:"Gas",why:"Oxygen is a gas. Plants give it out and we need it to breathe."},
+    {n:"Neon (in glowing signs)",e:"💡",s:"Gas",why:"Neon is a gas that glows when electricity passes through it."}
+  ];
+  var CHANGES=[
+    {n:"Melting",from:"solid",to:"liquid",how:"heating",ex:"An ice lolly melts in the sun. Heat makes the particles vibrate so much that they break out of their pattern and start to slide past each other."},
+    {n:"Freezing",from:"liquid",to:"solid",how:"cooling",ex:"Water in the freezer turns to ice. Cooling slows the particles until they lock into a regular pattern. (Freezing is also called solidifying.)"},
+    {n:"Evaporating",from:"liquid",to:"gas",how:"heating",ex:"Puddles dry up on a sunny day. Particles at the surface escape into the air as a gas. Boiling is very fast evaporating, all through the liquid."},
+    {n:"Condensing",from:"gas",to:"liquid",how:"cooling",ex:"Drops of water appear on a cold bathroom mirror. Water vapour in the air cools down and turns back into liquid water."}
+  ];
+  var EXAMPLES=[
+    {t:"An ice lolly dripping on a hot day",a:"Melting"},
+    {t:"Butter turning runny in a hot pan",a:"Melting"},
+    {t:"Snow turning to slush when the sun comes out",a:"Melting"},
+    {t:"Chocolate going soft and runny in your warm hand",a:"Melting"},
+    {t:"Water turning into ice cubes in the freezer",a:"Freezing"},
+    {t:"A pond turning to ice on a very cold night",a:"Freezing"},
+    {t:"Runny melted chocolate setting hard in a cold fridge",a:"Freezing"},
+    {t:"Hot runny candle wax going hard as it cools",a:"Freezing"},
+    {t:"Puddles drying up on a sunny day",a:"Evaporating"},
+    {t:"Wet washing drying on a washing line",a:"Evaporating"},
+    {t:"The water level in a pan going down as it boils",a:"Evaporating"},
+    {t:"Wet hair drying with a hairdryer",a:"Evaporating"},
+    {t:"Drops of water forming on a cold bathroom mirror after a shower",a:"Condensing"},
+    {t:"Water droplets on the outside of a cold can taken from the fridge",a:"Condensing"},
+    {t:"Dew forming on the grass on a cool morning",a:"Condensing"},
+    {t:"A car window steaming up on a cold day",a:"Condensing"}
+  ];
+  var PROPS=[
+    {t:"keeps its own shape",a:"Solid"},
+    {t:"cannot be poured (unless it is a powder of tiny grains)",a:"Solid"},
+    {t:"has particles packed tightly together in a regular pattern",a:"Solid"},
+    {t:"has particles that only vibrate on the spot",a:"Solid"},
+    {t:"takes the shape of its container but keeps the same volume",a:"Liquid"},
+    {t:"has particles close together that can slide past each other",a:"Liquid"},
+    {t:"pours easily and forms a puddle when spilt",a:"Liquid"},
+    {t:"spreads out to fill any container completely",a:"Gas"},
+    {t:"can be squashed into a smaller space",a:"Gas"},
+    {t:"has particles far apart that zoom about in all directions",a:"Gas"}
+  ];
+  var CYCLE=[
+    {t:"The Sun heats water in the sea and it turns into water vapour.",a:"Evaporation"},
+    {t:"Water vapour cools high in the sky and turns into tiny drops that make clouds.",a:"Condensation"},
+    {t:"Water falls from clouds as rain, snow or hail.",a:"Precipitation"},
+    {t:"Rain water gathers in rivers, lakes and the sea.",a:"Collection"}
+  ];
+  var STATES=["Solid","Liquid","Gas"];
+  var STATE_INFO={
+    Solid:{e:"🧊",shape:"Keeps its own shape",vol:"Stays the same",flow:"Does not flow",part:"Packed tightly in a regular pattern. They vibrate on the spot."},
+    Liquid:{e:"💧",shape:"Takes the shape of its container",vol:"Stays the same",flow:"Flows and can be poured",part:"Close together but jumbled. They slide past each other."},
+    Gas:{e:"♨️",shape:"Spreads out to fill any container",vol:"Changes: a gas can be squashed",flow:"Flows and spreads everywhere",part:"Far apart. They zoom about fast in all directions."}
+  };
+
+  /* ---------- Tabs with arrow-key support ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function showTab(tab){
+    for(var k=0;k<tabs.length;k++){tabs[k].setAttribute("aria-selected","false");tabs[k].setAttribute("tabindex","-1");$(tabs[k].getAttribute("data-p")).className="panel";}
+    tab.setAttribute("aria-selected","true");tab.removeAttribute("tabindex");$(tab.getAttribute("data-p")).className="panel on";
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){showTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=0;for(var q=0;q<tabs.length;q++)if(tabs[q]===this)idx=q;
+      var nx=-1;
+      if(e.key==="ArrowRight")nx=(idx+1)%tabs.length;
+      else if(e.key==="ArrowLeft")nx=(idx-1+tabs.length)%tabs.length;
+      else if(e.key==="Home")nx=0;
+      else if(e.key==="End")nx=tabs.length-1;
+      if(nx>=0){e.preventDefault();showTab(tabs[nx]);tabs[nx].focus();}
+    });
+  }
+
+  /* ---------- Particle lab ---------- */
+  var NS="http://www.w3.org/2000/svg",W=260,H=200,R=8,N=40,MIN=2*R-1;
+  var L=12,RT=W-12,BOT=H-10,LIQTOP=BOT-44;
+  var box=$("box"),dots=[],px=[],py=[],vx=[],vy=[],hx=[],hy=[];
+  var temp=20,mode="";
+  function el(name,attrs){var e=document.createElementNS(NS,name);for(var k in attrs)if(attrs.hasOwnProperty(k))e.setAttribute(k,attrs[k]);return e;}
+  box.appendChild(el("rect",{x:2,y:2,width:W-4,height:H-4,rx:14,fill:"#0B1530"}));
+  var cont=el("path",{d:"M6 6 V"+(H-4)+" H"+(W-6)+" V6",fill:"none",stroke:"#B8C2E0","stroke-width":3,"stroke-linejoin":"round"});
+  box.appendChild(cont);
+  var tint=el("rect",{x:8,y:LIQTOP-R-2,width:W-16,height:BOT-LIQTOP+R+6,fill:"#3D8BFF",opacity:"0"});
+  box.appendChild(tint);
+  for(var d=0;d<N;d++){var c=el("circle",{r:R,cx:W/2,cy:H/2,fill:"#3D8BFF",stroke:"#0F1C3F","stroke-width":1.5});box.appendChild(c);dots.push(c);px.push(0);py.push(0);vx.push(0);vy.push(0);hx.push(0);hy.push(0);}
+  function stateOf(t){return t<=0?"Solid":(t<=100?"Liquid":"Gas");}
+  function layout(m){
+    var i,col,row;
+    if(m==="Solid"){
+      var cols=8,sp=17,x0=(W-(cols-1)*sp)/2;
+      for(i=0;i<N;i++){col=i%cols;row=Math.floor(i/cols);hx[i]=x0+col*sp;hy[i]=BOT-row*sp;px[i]=hx[i];py[i]=hy[i];}
+    }else if(m==="Liquid"){
+      /* rows of 14, 13, 13 particles in a staggered, touching pattern */
+      var sp2=(RT-L)/13;
+      for(i=0;i<N;i++){
+        if(i<14){row=0;col=i;}else if(i<27){row=1;col=i-14;}else{row=2;col=i-27;}
+        px[i]=L+col*sp2+(row===1?sp2/2:0)+(row===2?sp2/2:0);py[i]=BOT-row*17;
+      }
+    }else{
+      for(i=0;i<N;i++){px[i]=L+Math.random()*(RT-L);py[i]=L+Math.random()*(BOT-L);var a=Math.random()*Math.PI*2;vx[i]=Math.cos(a);vy[i]=Math.sin(a);}
+    }
+  }
+  function clash(i,x,y){for(var j=0;j<N;j++){if(j===i)continue;var dx=px[j]-x,dy=py[j]-y;if(dx*dx+dy*dy<MIN*MIN)return true;}return false;}
+  function step(){
+    var i;
+    if(mode==="Solid"){
+      var amp=0.6+(temp+30)/30*1.4;
+      for(i=0;i<N;i++){px[i]=hx[i]+(Math.random()*2-1)*amp;py[i]=hy[i]+(Math.random()*2-1)*amp;}
+    }else if(mode==="Liquid"){
+      var st=1.5+temp/100*3.5;
+      for(var k=0;k<N*2;k++){
+        i=rnd(0,N-1);
+        var nx=px[i]+(Math.random()*2-1)*st,ny=py[i]+(Math.random()*2-1)*st+0.6;
+        if(nx<L)nx=L;if(nx>RT)nx=RT;if(ny>BOT)ny=BOT;if(ny<LIQTOP)ny=LIQTOP;
+        if(!clash(i,nx,ny)){px[i]=nx;py[i]=ny;}
+      }
+    }else{
+      var sp=3+(temp-100)/30*3;
+      for(i=0;i<N;i++){
+        px[i]+=vx[i]*sp;py[i]+=vy[i]*sp;
+        if(px[i]<L){px[i]=L;vx[i]=Math.abs(vx[i]);}
+        if(px[i]>RT){px[i]=RT;vx[i]=-Math.abs(vx[i]);}
+        if(py[i]<L){py[i]=L;vy[i]=Math.abs(vy[i]);}
+        if(py[i]>BOT){py[i]=BOT;vy[i]=-Math.abs(vy[i]);}
+        if(Math.random()<0.03){var a=Math.random()*Math.PI*2;vx[i]=Math.cos(a);vy[i]=Math.sin(a);}
+      }
+    }
+    for(i=0;i<N;i++){dots[i].setAttribute("cx",px[i].toFixed(1));dots[i].setAttribute("cy",py[i].toFixed(1));}
+  }
+  function propHTML(s){
+    var p=STATE_INFO[s];
+    return "<div class=\"prop\"><b>Shape</b>"+p.shape+"</div><div class=\"prop\"><b>Volume</b>"+p.vol+"</div><div class=\"prop\"><b>Flow</b>"+p.flow+"</div><div class=\"prop\"><b>Particles</b>"+p.part+"</div>";
+  }
+  function setTemp(t){
+    t=Math.max(-30,Math.min(130,Math.round(t)));
+    temp=t;$("tempIn").value=t;
+    var s=stateOf(t),name=s==="Solid"?"ice":(s==="Liquid"?"water":"water vapour (steam)");
+    $("tempOut").textContent=(t<0?"minus "+(-t):t)+" °C";
+    $("stateOut").textContent=s+": "+name;
+    var col=s==="Solid"?"#9ED8FF":(s==="Liquid"?"#3D8BFF":"#E4ECFF");
+    for(var i=0;i<N;i++)dots[i].setAttribute("fill",col);
+    tint.setAttribute("opacity",s==="Liquid"?"0.15":"0");
+    var txt;
+    if(t===0)txt="0 °C is the melting point of ice and the freezing point of water. Warm it a little more and the ice melts.";
+    else if(t===100)txt="100 °C is the boiling point of water. Heat it a little more and all the water turns into a gas.";
+    else if(s==="Solid")txt="Below 0 °C water is solid ice. The particles are locked in a pattern and only vibrate. The colder it gets, the less they move.";
+    else if(s==="Liquid")txt="Between 0 °C and 100 °C water is a liquid. The particles touch but slide past each other, so water flows. Some particles at the surface escape as a gas: that is evaporating.";
+    else txt="Above 100 °C water is a gas called water vapour (or steam). The particles are far apart and zoom around, filling the whole container.";
+    $("stateTxt").textContent=txt;
+    $("props").innerHTML=propHTML(s);
+    if(s!==mode){mode=s;layout(s);}
+    step();
+  }
+  $("tempIn").addEventListener("input",function(){setTemp(+this.value);});
+  $("tempIn").addEventListener("change",function(){setTemp(+this.value);});
+  $("tIce").onclick=function(){setTemp(-18);};
+  $("tRoom").onclick=function(){setTemp(20);};
+  $("tBoil").onclick=function(){setTemp(110);};
+  setTemp(20);
+  var timer=setInterval(function(){if(!document.hidden&&$("explore").className.indexOf("on")>=0)step();},50);
+
+  var cbtns=document.querySelectorAll(".cbtn");
+  for(var cb=0;cb<cbtns.length;cb++){
+    cbtns[cb].addEventListener("click",function(){
+      var c=CHANGES[+this.getAttribute("data-c")];
+      for(var k=0;k<cbtns.length;k++)cbtns[k].setAttribute("aria-pressed",cbtns[k]===this?"true":"false");
+      $("cInfo").innerHTML="<b>"+c.n+"</b>: a "+c.from+" turns into a "+c.to+" by "+c.how+". "+c.ex;
+    });
+  }
+
+  /* ---------- Sort it ---------- */
+  var SN=12,sList=[],si=0,sRight=0,sDone=false;
+  var sBtns=document.querySelectorAll(".sbtn");
+  function sRender(){
+    var it=sList[si];sDone=false;
+    $("sEm").textContent=it.e;$("sName").textContent=it.n;
+    $("sNum").textContent="Item "+(si+1)+" of "+SN;
+    $("sFb").textContent="";$("sFb").className="fb";
+    $("sNext").style.display="none";
+    for(var k=0;k<sBtns.length;k++){sBtns[k].disabled=false;sBtns[k].className="sbtn";}
+  }
+  function sPick(s){
+    if(sDone||si>=SN)return;sDone=true;
+    var it=sList[si],ok=s===it.s;
+    for(var k=0;k<sBtns.length;k++){sBtns[k].disabled=true;var bs=sBtns[k].getAttribute("data-s");if(bs===it.s)sBtns[k].className="sbtn ok";else if(bs===s)sBtns[k].className="sbtn no";}
+    if(ok)sRight++;
+    si++;
+    $("sScore").textContent="Score: "+sRight+" / "+si;
+    $("sBar").style.width=(si*100/SN)+"%";
+    $("sFb").className=ok?"fb ok":"fb no";
+    $("sFb").textContent=(ok?"Correct! ":"Not quite. It is a "+it.s.toLowerCase()+". ")+it.why;
+    $("sNext").style.display="";
+    $("sNext").textContent=si>=SN?"See my score":"Next item";
+  }
+  function sStart(){
+    sList=shuffle(ITEMS.slice()).slice(0,SN);si=0;sRight=0;
+    $("sScore").textContent="Score: 0 / 0";$("sBar").style.width="0%";
+    $("sBox").style.display="";$("sEnd").style.display="none";sRender();
+  }
+  for(var sb=0;sb<sBtns.length;sb++)sBtns[sb].addEventListener("click",function(){sPick(this.getAttribute("data-s"));});
+  $("sNext").onclick=function(){
+    if(!sDone)return;
+    if(si>=SN){
+      $("sBox").style.display="none";$("sEnd").style.display="";
+      var msg=sRight===SN?"Perfect sorting! ":sRight>=9?"Brilliant scientist! ":sRight>=6?"Good work! ":"Keep practising! ";
+      $("sEndText").textContent=msg+"You sorted "+sRight+" out of "+SN+" correctly.";
+      $("sAgain").focus();
+    }else sRender();
+  };
+  $("sAgain").onclick=sStart;
+  document.addEventListener("keydown",function(e){
+    if($("sort").className.indexOf("on")<0||e.ctrlKey||e.metaKey||e.altKey)return;
+    var tg=e.target&&e.target.tagName;if(tg==="INPUT"||tg==="SELECT"||tg==="TEXTAREA")return;
+    var k=(e.key||"").toLowerCase();
+    if(k==="s")sPick("Solid");else if(k==="l")sPick("Liquid");else if(k==="g")sPick("Gas");
+  });
+  sStart();
+
+  /* ---------- Quiz question generator ---------- */
+  var CHG=["Melting","Freezing","Evaporating","Condensing"];
+  function makeQ(){
+    var kind=rnd(0,6),q={},x,c,t;
+    if(kind===0){ /* name the change from an everyday example */
+      x=pick(EXAMPLES);q.text="Which change of state is this? "+x.t+".";q.answer=x.a;q.opts=shuffle(CHG.slice());
+      for(var k=0;k<CHANGES.length;k++)if(CHANGES[k].n===x.a)c=CHANGES[k];
+      q.why=c.n+" is when a "+c.from+" turns into a "+c.to+".";
+    }else if(kind===1){ /* name the change from the direction */
+      c=pick(CHANGES);q.text="What do we call it when a "+c.from+" turns into a "+c.to+"?";q.answer=c.n;q.opts=shuffle(CHG.slice());
+      q.why=c.n+" happens when a "+c.from+" is "+(c.how==="heating"?"heated":"cooled")+" and becomes a "+c.to+".";
+    }else if(kind===2){ /* classify a material */
+      x=pick(ITEMS);q.text="Is "+(x.a||"")+lowerFirst(x.n)+" a solid, a liquid or a gas?";
+      q.answer=x.s;q.opts=STATES.slice();q.why=x.why;
+    }else if(kind===3){ /* properties */
+      x=pick(PROPS);q.text="Which state of matter "+x.t+"?";q.answer=x.a;q.opts=STATES.slice();
+      q.why="A "+x.a.toLowerCase()+" "+x.t+".";
+    }else if(kind===4){ /* key temperatures */
+      if(Math.random()<0.5){q.text="At what temperature does pure water freeze into ice?";q.answer="0 °C";q.why="Pure water freezes at 0 °C, and ice melts at 0 °C too.";}
+      else{q.text="At what temperature does pure water boil?";q.answer="100 °C";q.why="Pure water boils at 100 °C (at sea level).";}
+      q.opts=shuffle(["0 °C","100 °C","37 °C","50 °C"]);
+    }else if(kind===5){ /* state of water at a temperature */
+      var band=rnd(0,2);
+      t=band===0?rnd(-25,-1):(band===1?rnd(1,99):rnd(101,130));
+      var tt=t<0?"minus "+(-t):String(t);
+      q.text="Pure water is at "+tt+" °C. What state is it in?";q.answer=stateOf(t);q.opts=STATES.slice();
+      q.why=q.answer==="Solid"?"Below 0 °C water is solid ice.":(q.answer==="Liquid"?"Between 0 °C and 100 °C water is a liquid.":"Above 100 °C water is a gas (water vapour).");
+      q.temp=t;
+    }else{ /* water cycle */
+      x=pick(CYCLE);q.text="Water cycle: “"+x.t+"” What is this stage called?";q.answer=x.a;q.opts=shuffle(["Evaporation","Condensation","Precipitation","Collection"]);
+      q.why="This stage is called "+x.a.toLowerCase()+".";
+    }
+    q.kind=kind;return q;
+  }
+  function lowerFirst(s){return s.charAt(0).toLowerCase()+s.slice(1);}
+
+  /* ---------- Quiz ---------- */
+  var QN=10,qi=0,qRight=0,qCur=null,qDone=false,qLast="";
+  function qRender(){
+    var tries=0;
+    do{qCur=makeQ();tries++;}while(qCur.text===qLast&&tries<20);
+    qLast=qCur.text;qDone=false;
+    $("qText").textContent=qCur.text;
+    $("qFb").textContent="";$("qFb").className="fb";
+    $("qNum").textContent="Question "+(qi+1)+" of "+QN;
+    $("qNext").style.display="none";
+    var box2=$("qChoices");box2.innerHTML="";var btns=[];
+    for(var k=0;k<qCur.opts.length;k++){
+      var b=document.createElement("button");b.type="button";b.className="choice";b.textContent=qCur.opts[k];
+      b.addEventListener("click",function(){qPick(this,btns);});
+      box2.appendChild(b);btns.push(b);
+    }
+  }
+  function qPick(btn,btns){
+    if(qDone)return;qDone=true;
+    var ok=btn.textContent===qCur.answer;
+    for(var k=0;k<btns.length;k++){btns[k].disabled=true;if(btns[k].textContent===qCur.answer)btns[k].className="choice ok";}
+    if(!ok)btn.className="choice no";
+    if(ok)qRight++;
+    qi++;
+    $("qScore").textContent="Score: "+qRight+" / "+qi;
+    $("qBar").style.width=(qi*100/QN)+"%";
+    var fb=$("qFb");fb.className=ok?"fb ok":"fb no";
+    fb.textContent=(ok?"Correct! ":"Not quite. The answer is "+qCur.answer+". ")+qCur.why;
+    $("qNext").style.display="";
+    $("qNext").textContent=qi>=QN?"See my score":"Next question";
+  }
+  function qStart(){qi=0;qRight=0;qLast="";$("qScore").textContent="Score: 0 / 0";$("qBar").style.width="0%";$("qBox").style.display="";$("qEnd").style.display="none";qRender();}
+  $("qNext").onclick=function(){
+    if(!qDone)return;
+    if(qi>=QN){
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Super scientist! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good try! ":"Keep exploring! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus();
+    }else qRender();
+  };
+  $("qAgain").onclick=qStart;
+  qStart();
+
+  /* ---------- Worksheet ---------- */
+  var wsShow=false,wsSortItems=[],wsChgItems=[];
+  function itemsOf(s){var a=[];for(var k=0;k<ITEMS.length;k++)if(ITEMS[k].s===s&&ITEMS[k].n.length<26)a.push(ITEMS[k]);return a;}
+  function newWs(){
+    var pool=shuffle(itemsOf("Solid")).slice(0,3).concat(shuffle(itemsOf("Liquid")).slice(0,3),shuffle(itemsOf("Gas")).slice(0,3));
+    wsSortItems=shuffle(pool);
+    var h="",k;
+    for(k=0;k<wsSortItems.length;k++)h+="<div>"+(k+1)+". "+wsSortItems[k].n+" <span class=\"ans\" data-a=\""+wsSortItems[k].s+"\"></span></div>";
+    $("wsSort").innerHTML=h;
+    /* one or two of each change, 6 in total, no repeats */
+    var byC={},picks=[];
+    for(k=0;k<EXAMPLES.length;k++){(byC[EXAMPLES[k].a]=byC[EXAMPLES[k].a]||[]).push(EXAMPLES[k]);}
+    for(k=0;k<CHG.length;k++){picks.push(shuffle(byC[CHG[k]].slice())[0]);}
+    var rest=[];for(k=0;k<EXAMPLES.length;k++)if(picks.indexOf(EXAMPLES[k])<0)rest.push(EXAMPLES[k]);
+    picks=picks.concat(shuffle(rest).slice(0,2));
+    wsChgItems=shuffle(picks);
+    h="";for(k=0;k<wsChgItems.length;k++)h+="<div class=\"wsq\">"+(k+1)+". "+wsChgItems[k].t+". <span class=\"ans\" data-a=\""+wsChgItems[k].a.toLowerCase()+"\"></span></div>";
+    $("wsChg").innerHTML=h;
+    renderKey();
+  }
+  function renderKey(){
+    var a=document.querySelectorAll("#ws .ans");
+    for(var k=0;k<a.length;k++)a[k].textContent=wsShow?a[k].getAttribute("data-a"):"";
+    $("wsDrawKey").textContent=wsShow?"Answers: solid = circles touching in neat rows; liquid = circles touching but jumbled, filling the bottom; gas = a few circles spread far apart.":"";
+    $("wsKey").textContent=wsShow?"Hide answers":"Show answers";
+    $("wsKey").setAttribute("aria-pressed",wsShow?"true":"false");
+  }
+  $("wsNew").onclick=newWs;
+  $("wsKey").onclick=function(){wsShow=!wsShow;renderKey();};
+  $("wsPrint").onclick=function(){window.print();};
+  newWs();
+
+  /* exposed for checking */
+  window.MatterLab={ITEMS:ITEMS,EXAMPLES:EXAMPLES,PROPS:PROPS,CYCLE:CYCLE,CHANGES:CHANGES,makeQ:makeQ,stateOf:stateOf,setTemp:setTemp,step:step,
+    pos:function(){return {x:px.slice(),y:py.slice(),mode:mode,temp:temp};},
+    state:function(){return {si:si,sRight:sRight,sList:sList,qi:qi,qRight:qRight,qCur:qCur,wsSort:wsSortItems,wsChg:wsChgItems};},
+    stop:function(){clearInterval(timer);}};
+})();
+</script>
+</body>
+</html>
