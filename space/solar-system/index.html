@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Solar System Planets Explorer and Quiz for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive solar system tool for ages 7-11. Explore the 8 planets, compare their real sizes, put them in order from the Sun, take an auto-marked planet quiz and print a worksheet.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/space/solar-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.pl:focus-visible,.choice:focus-visible,.obtn:focus-visible,select:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.big{font-size:20px;font-weight:700}
+.score{color:var(--gold);font-weight:700}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+/* planet strip */
+.strip{display:flex;align-items:center;gap:6px;overflow-x:auto;padding:10px 4px 14px;background:radial-gradient(circle at 0 50%,#FFD36B 0,#F4B942 38px,rgba(244,185,66,.25) 60px,transparent 90px);border-radius:14px}
+.sun{flex:0 0 60px;height:90px}
+.pl{flex:0 0 auto;background:transparent;border:2px solid transparent;border-radius:14px;padding:4px;color:var(--ink);cursor:pointer;text-align:center;font:700 13px "Nunito Sans",sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:110px}
+.pl[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.pl svg{display:block}
+.card{display:flex;flex-wrap:wrap;gap:20px;align-items:center;background:var(--navy);border-radius:16px;padding:16px;margin-top:12px}
+.card .pic{flex:0 0 auto;width:150px}
+.card .pic svg{width:100%;height:auto;display:block}
+.card .info{flex:1;min-width:220px}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:10px 0}
+.fact{background:var(--navy2);border-radius:10px;padding:8px 10px}
+.fact b{display:block;color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+.fun{font-size:17px}
+.tag{display:inline-block;background:var(--gold);color:var(--navy);border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px}
+.scale{display:flex;align-items:flex-end;gap:2px;margin-top:10px;overflow-x:auto;padding-bottom:6px}
+.scale div{text-align:center;font-size:12px;color:var(--muted);white-space:nowrap}
+.swipe{display:none;font-size:14px;color:var(--muted);margin:4px 0 0}
+@media (max-width:700px){.swipe{display:block}}
+.scale svg{display:block;margin:0 auto}
+/* order game */
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.slot{background:var(--navy);border:2px dashed var(--muted);border-radius:12px;min-height:58px;display:flex;align-items:center;justify-content:center;gap:6px;font:800 16px "Baloo 2",sans-serif;padding:4px}
+.slot.full{border-style:solid;border-color:var(--good)}
+.slot .n{color:var(--muted);font-size:13px}
+.obtns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.obtn{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:6px 12px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px}
+.obtn.no{border-color:var(--bad);background:#4a1d27}
+.obtn:disabled{opacity:.25;cursor:default}
+/* quiz */
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+select{font:700 15px "Nunito Sans",sans-serif;border-radius:10px;padding:6px 8px;background:var(--navy);color:var(--ink);border:2px solid var(--muted)}
+/* worksheet */
+.ws-head{display:none}
+.wsbox{background:var(--navy);border-radius:12px;padding:14px;margin-top:12px}
+.bank{display:flex;flex-wrap:wrap;gap:6px 14px;font-weight:700;margin:6px 0}
+.wsl{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px}
+.wsl div,.wsq{padding:6px 0;border-bottom:1px solid rgba(184,194,224,.25)}
+.ans{display:inline-block;min-width:120px;border-bottom:2px dashed var(--muted);font:800 17px "Baloo 2",sans-serif;color:var(--gold);margin-left:6px;min-height:24px;vertical-align:bottom}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.slots{grid-template-columns:repeat(2,1fr)}.wsl{grid-template-columns:1fr}}
+@media print{
+  body{background:#fff;color:#000}
+  .tabs,.crumbs,.shop,.btn,.noprint,h1,.lead{display:none!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important;background:#fff;color:#000;padding:0}
+  .wsbox{background:#fff;border:1px solid #999;break-inside:avoid}
+  .ans{color:#000;border-color:#000}
+  .ws-head{display:block;margin-bottom:8px}
+  .muted{color:#333}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/space/">Space</a> › Planet Explorer</nav>
+  <h1>Planet Explorer 🪐</h1>
+  <p class="lead">Meet the 8 planets of our solar system. Tap a planet for facts, compare real sizes, put the planets in order and test yourself with the quiz. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Planet Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore</button>
+    <button class="tab" role="tab" id="t-order" aria-controls="order" aria-selected="false" tabindex="-1" data-p="order">Put in Order</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Planet Quiz</button>
+    <button class="tab" role="tab" id="t-ws" aria-controls="ws" aria-selected="false" tabindex="-1" data-p="ws">Worksheet</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Explore the planets</h2>
+    <p>The planets are shown in order from the Sun. Tap one to find out about it.</p>
+    <p class="swipe" aria-hidden="true">Swipe sideways to see all 8 planets →</p>
+    <div class="strip" id="strip" role="group" aria-label="Planets in order from the Sun"><div class="sun" aria-hidden="true"></div></div>
+    <div class="card" id="card" aria-live="polite">
+      <div class="pic" id="cardPic"></div>
+      <div class="info">
+        <h3 id="cardName" style="font-size:30px">Earth</h3>
+        <span class="tag" id="cardType">Rocky planet</span> <span class="muted" id="cardPos"></span>
+        <div class="facts" id="cardFacts"></div>
+        <p class="fun" id="cardFun"></p>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn ghost sm" id="scaleBtn" aria-pressed="false" aria-controls="scaleBox">Show real sizes</button>
+    </div>
+    <div id="scaleBox" style="display:none">
+      <p class="muted">These planets are drawn to the same scale, so you can see how big they really are compared with each other. (The distances between them are not to scale: they are far, far apart!)</p>
+      <p class="swipe" aria-hidden="true">Swipe sideways to see all the planets →</p>
+      <div class="scale" id="scale"></div>
+    </div>
+    <p class="tip">Remember the order with: <b>M</b>y <b>V</b>ery <b>E</b>asy <b>M</b>ethod <b>J</b>ust <b>S</b>peeds <b>U</b>p <b>N</b>aming (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune). Pluto used to be called a planet, but since 2006 scientists have called it a <b>dwarf planet</b>.</p>
+  </section>
+
+  <section class="panel" id="order" role="tabpanel" aria-labelledby="t-order">
+    <h2>Put the planets in order</h2>
+    <div class="row noprint">
+      <label for="oMode" class="big">Order:</label>
+      <select id="oMode">
+        <option value="sun">Nearest to the Sun first</option>
+        <option value="size">Biggest first</option>
+      </select>
+      <span class="score" id="oScore">Mistakes: 0</span>
+    </div>
+    <p id="oHelp">Tap the planets in order, starting with the one nearest the Sun.</p>
+    <div class="slots" id="oSlots"></div>
+    <div class="obtns" id="oBtns" role="group" aria-label="Planets to place"></div>
+    <div class="fb" id="oFb" aria-live="polite"></div>
+    <button class="btn ghost" id="oNew">Start again</button>
+  </section>
+
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Planet quiz</h2>
+    <div class="row"><span class="score" id="qScore">Score: 0 / 0</span><span class="muted" id="qNum">Question 1 of 10</span></div>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <button class="btn ghost" id="qNext">Next question</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="ws" role="tabpanel" aria-labelledby="t-ws">
+    <h2>Printable planet worksheet</h2>
+    <div class="ws-head"><b>Name:</b> ______________________ &nbsp; <b>Date:</b> ____________</div>
+    <div class="row noprint">
+      <button class="btn" id="wsNew">New worksheet</button>
+      <button class="btn ghost" id="wsKey" aria-pressed="false">Show answers</button>
+      <button class="btn ghost" id="wsPrint">Print</button>
+    </div>
+    <div class="wsbox">
+      <h3>A. Write the planets in order from the Sun</h3>
+      <div class="bank" id="wsBank"></div>
+      <div class="wsl" id="wsOrder"></div>
+    </div>
+    <div class="wsbox">
+      <h3>B. Which planet am I?</h3>
+      <div id="wsQs"></div>
+    </div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Get the printable Solar System pack in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function pick(arr){return arr[rnd(0,arr.length-1)];}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=rnd(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function fmt(n){var s=String(n),p=s.split("."),x=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");return p.length>1?x+"."+p[1]:x;}
+
+  /* Data: NASA planetary fact sheet (average values). Distances in millions of km, diameters in km, temperatures are average in degrees C. */
+  var P=[
+    {n:"Mercury",type:"Rocky planet",d:4879,dist:57.9,day:"59 Earth days to spin once",year:"88 Earth days",yearShort:"88 days",moons:"0",temp:167,c1:"#D9D4CC",c2:"#7E7770",
+     fun:"Mercury is the smallest planet and the closest to the Sun. It has almost no air, so its nights get colder than minus 170 degrees C.",
+     clue:"I am the smallest planet and the closest to the Sun."},
+    {n:"Venus",type:"Rocky planet",d:12104,dist:108.2,day:"243 Earth days to spin once",year:"225 Earth days",yearShort:"225 days",moons:"0",temp:464,c1:"#FBE3A8",c2:"#C9963F",
+     fun:"Venus is the hottest planet, even though Mercury is closer to the Sun. Its thick clouds trap heat like a blanket. It also spins backwards compared with most planets.",
+     clue:"I am the hottest planet because my thick clouds trap the heat."},
+    {n:"Earth",type:"Rocky planet",d:12756,dist:149.6,day:"24 hours",year:"365 days",yearShort:"365 days",moons:"1",temp:15,c1:"#7FC8FF",c2:"#1F5FAF",land:"#4CAF6A",
+     fun:"Earth is the only planet we know of with living things. About 71% of its surface is covered in water.",
+     clue:"I am the only planet known to have life, and most of me is covered in water."},
+    {n:"Mars",type:"Rocky planet",d:6792,dist:228.0,day:"24 hours 37 minutes",year:"687 Earth days",yearShort:"687 days",moons:"2",temp:-65,c1:"#F09A6B",c2:"#A3401E",
+     fun:"Mars is called the Red Planet because its dust contains rusty iron. It has Olympus Mons, the biggest volcano known in the solar system.",
+     clue:"I am called the Red Planet because of my rusty dust."},
+    {n:"Jupiter",type:"Gas giant",d:142984,dist:778.5,day:"about 10 hours",year:"about 12 Earth years",yearShort:"12 years",moons:"over 90",temp:-110,c1:"#F1D6B0",c2:"#B07A4A",band:"#C98A5A",
+     fun:"Jupiter is the biggest planet. More than 1,000 Earths could fit inside it! Its Great Red Spot is a giant storm that is wider than Earth.",
+     clue:"I am the biggest planet and I have a giant storm called the Great Red Spot."},
+    {n:"Saturn",type:"Gas giant",d:120536,dist:1432.0,day:"about 10.5 hours",year:"about 29 Earth years",yearShort:"29 years",moons:"over 270",temp:-140,c1:"#F6E3B0",c2:"#C8A35E",ring:true,
+     fun:"Saturn has the brightest rings, made of billions of pieces of ice and rock. It has the most known moons of any planet.",
+     clue:"I have bright rings of ice and rock, and more known moons than any other planet."},
+    {n:"Uranus",type:"Ice giant",d:51118,dist:2867.0,day:"about 17 hours",year:"about 84 Earth years",yearShort:"84 years",moons:"over 25",temp:-195,c1:"#C9F1F2",c2:"#5FB6C4",
+     fun:"Uranus is tipped right over, so it rolls around the Sun on its side. It was the first planet found using a telescope, in 1781.",
+     clue:"I am tipped on my side, so I roll around the Sun."},
+    {n:"Neptune",type:"Ice giant",d:49528,dist:4515.0,day:"about 16 hours",year:"about 165 Earth years",yearShort:"165 years",moons:"16",temp:-200,c1:"#8FB2FF",c2:"#2B47B8",
+     fun:"Neptune is the planet farthest from the Sun. It has the fastest winds in the solar system, faster than 2,000 km per hour.",
+     clue:"I am the farthest planet from the Sun and I have the fastest winds."}
+  ];
+  var ORD=["first","second","third","fourth","fifth","sixth","seventh","eighth"];
+  function byName(n){for(var i=0;i<P.length;i++)if(P[i].n===n)return i;return -1;}
+  function sizeOrder(){var a=[0,1,2,3,4,5,6,7];a.sort(function(x,y){return P[y].d-P[x].d;});return a;}
+
+  /* planet pictures drawn as inline SVG */
+  var gid=0;
+  function planetSVG(i,px){
+    var p=P[i],id="g"+(gid++),w=p.ring?px*2.1:px,h=px,cx=w/2,r=px/2-1,s="";
+    s+="<svg xmlns=\"http://www.w3.org/2000/svg\" width=\""+w.toFixed(1)+"\" height=\""+h.toFixed(1)+"\" viewBox=\"0 0 "+w.toFixed(1)+" "+h.toFixed(1)+"\" aria-hidden=\"true\" focusable=\"false\">";
+    s+="<defs><radialGradient id=\""+id+"\" cx=\"35%\" cy=\"35%\" r=\"70%\"><stop offset=\"0\" stop-color=\""+p.c1+"\"/><stop offset=\"1\" stop-color=\""+p.c2+"\"/></radialGradient>";
+    s+="<clipPath id=\""+id+"c\"><circle cx=\""+cx+"\" cy=\""+(h/2)+"\" r=\""+r+"\"/></clipPath></defs>";
+    if(p.ring)s+="<ellipse cx=\""+cx+"\" cy=\""+(h/2)+"\" rx=\""+(w/2-1)+"\" ry=\""+(h*0.16)+"\" fill=\"none\" stroke=\"#E8D7A8\" stroke-width=\""+Math.max(1,h*0.07).toFixed(1)+"\" opacity=\"0.9\"/>";
+    s+="<circle cx=\""+cx+"\" cy=\""+(h/2)+"\" r=\""+r+"\" fill=\"url(#"+id+")\"/>";
+    if(p.band){s+="<g clip-path=\"url(#"+id+"c)\" opacity=\"0.55\"><rect x=\"0\" y=\""+(h*0.32)+"\" width=\""+w+"\" height=\""+(h*0.08)+"\" fill=\""+p.band+"\"/><rect x=\"0\" y=\""+(h*0.55)+"\" width=\""+w+"\" height=\""+(h*0.1)+"\" fill=\""+p.band+"\"/></g>";
+      s+="<ellipse cx=\""+(cx+r*0.3)+"\" cy=\""+(h*0.6)+"\" rx=\""+(r*0.22)+"\" ry=\""+(r*0.12)+"\" fill=\"#B5442B\" opacity=\"0.85\"/>";}
+    if(p.land)s+="<g clip-path=\"url(#"+id+"c)\" fill=\""+p.land+"\"><ellipse cx=\""+(cx-r*0.3)+"\" cy=\""+(h/2-r*0.25)+"\" rx=\""+(r*0.35)+"\" ry=\""+(r*0.22)+"\"/><ellipse cx=\""+(cx+r*0.35)+"\" cy=\""+(h/2+r*0.3)+"\" rx=\""+(r*0.28)+"\" ry=\""+(r*0.2)+"\"/></g>";
+    if(p.ring)s+="<path d=\"M "+(cx-r*0.98)+" "+(h/2)+" A "+(w/2-1)+" "+(h*0.16)+" 0 0 0 "+(cx+r*0.98)+" "+(h/2)+"\" fill=\"none\" stroke=\"#E8D7A8\" stroke-width=\""+Math.max(1,h*0.07).toFixed(1)+"\"/>";
+    s+="</svg>";
+    return s;
+  }
+  /* strip size: gentle scale so small planets stay tappable */
+  function stripPx(i){return Math.round(26+Math.sqrt(P[i].d/142984)*54);}
+
+  /* tabs with arrow-key support */
+  var tabs=document.querySelectorAll(".tab");
+  function showTab(tab){
+    for(var k=0;k<tabs.length;k++){tabs[k].setAttribute("aria-selected","false");tabs[k].setAttribute("tabindex","-1");$(tabs[k].getAttribute("data-p")).className="panel";}
+    tab.setAttribute("aria-selected","true");tab.removeAttribute("tabindex");$(tab.getAttribute("data-p")).className="panel on";
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){showTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=0;for(var q=0;q<tabs.length;q++)if(tabs[q]===this)idx=q;
+      var nx=-1;
+      if(e.key==="ArrowRight")nx=(idx+1)%tabs.length;
+      else if(e.key==="ArrowLeft")nx=(idx-1+tabs.length)%tabs.length;
+      else if(e.key==="Home")nx=0;
+      else if(e.key==="End")nx=tabs.length-1;
+      if(nx>=0){e.preventDefault();showTab(tabs[nx]);tabs[nx].focus();}
+    });
+  }
+
+  /* ---------- Explore ---------- */
+  var strip=$("strip"),plBtns=[],current=2;
+  for(var i=0;i<P.length;i++){
+    var b=document.createElement("button");
+    b.type="button";b.className="pl";b.setAttribute("data-i",i);b.setAttribute("aria-pressed","false");
+    b.setAttribute("aria-label",P[i].n+", planet number "+(i+1)+" from the Sun");
+    b.innerHTML=planetSVG(i,stripPx(i))+"<span>"+P[i].n+"</span>";
+    b.addEventListener("click",function(){showPlanet(+this.getAttribute("data-i"));});
+    strip.appendChild(b);plBtns.push(b);
+  }
+  function factHTML(label,val){return "<div class=\"fact\"><b>"+label+"</b>"+val+"</div>";}
+  function showPlanet(i){
+    current=i;var p=P[i];
+    for(var k=0;k<plBtns.length;k++)plBtns[k].setAttribute("aria-pressed",k===i?"true":"false");
+    $("cardPic").innerHTML=planetSVG(i,p.ring?70:140);
+    $("cardName").textContent=p.n;
+    $("cardType").textContent=p.type;
+    $("cardPos").textContent=" · "+ORD[i]+" planet from the Sun";
+    var t=p.temp>0?"about "+p.temp+" °C":"about minus "+(-p.temp)+" °C";
+    $("cardFacts").innerHTML=
+      factHTML("Width",fmt(p.d)+" km")+
+      factHTML("Distance from Sun",fmt(p.dist)+" million km")+
+      factHTML("One day",p.day)+
+      factHTML("One year",p.year)+
+      factHTML("Moons",p.moons)+
+      factHTML("Average temperature",t);
+    $("cardFun").textContent=p.fun;
+  }
+  showPlanet(2);
+
+  var scaleOn=false;
+  function buildScale(){
+    var box=$("scale"),LAB=56,avail=Math.max(600,Math.min(920,(box.clientWidth||600)))-24,big=0,nSmall=0,k;
+    for(k=0;k<P.length;k++){if(P[k].d>40000)big+=P[k].d*(P[k].ring?2.1:1);else nSmall++;}
+    var unit=(avail-nSmall*LAB)/big,html="";
+    for(k=0;k<P.length;k++){
+      var px=Math.max(2,P[k].d*unit),wd=Math.max(LAB,px*(P[k].ring?2.1:1));
+      html+="<div style=\"flex:0 0 "+wd.toFixed(1)+"px\">"+planetSVG(k,px)+P[k].n+"</div>";
+    }
+    box.innerHTML=html;
+  }
+  $("scaleBtn").onclick=function(){
+    scaleOn=!scaleOn;
+    $("scaleBox").style.display=scaleOn?"":"none";
+    this.textContent=scaleOn?"Hide real sizes":"Show real sizes";
+    this.setAttribute("aria-pressed",scaleOn?"true":"false");
+    if(scaleOn)buildScale();
+  };
+
+  /* ---------- Put in order ---------- */
+  var oTarget=[],oPos=0,oMist=0,oBtnEls=[];
+  function oSequence(){return $("oMode").value==="size"?sizeOrder():[0,1,2,3,4,5,6,7];}
+  function newOrder(){
+    oTarget=oSequence();oPos=0;oMist=0;oBtnEls=[];
+    $("oScore").textContent="Mistakes: 0";
+    $("oHelp").textContent=$("oMode").value==="size"?"Tap the planets in order of size, starting with the biggest.":"Tap the planets in order, starting with the one nearest the Sun.";
+    $("oFb").textContent="";$("oFb").className="fb";
+    var slots=$("oSlots");slots.innerHTML="";
+    for(var s=0;s<8;s++){var d=document.createElement("div");d.className="slot";d.innerHTML="<span class=\"n\">"+(s+1)+"</span>";slots.appendChild(d);}
+    var box=$("oBtns");box.innerHTML="";
+    var mix=shuffle([0,1,2,3,4,5,6,7]);
+    for(var j=0;j<mix.length;j++){
+      var b=document.createElement("button");b.type="button";b.className="obtn";b.setAttribute("data-i",mix[j]);
+      b.innerHTML=planetSVG(mix[j],22)+"<span>"+P[mix[j]].n+"</span>";
+      b.addEventListener("click",function(){oTap(this);});
+      box.appendChild(b);oBtnEls.push(b);
+    }
+  }
+  function oTap(btn){
+    if(oPos>=8||btn.disabled)return;
+    var i=+btn.getAttribute("data-i"),fb=$("oFb");
+    for(var k=0;k<oBtnEls.length;k++)if(!oBtnEls[k].disabled)oBtnEls[k].className="obtn";
+    if(i===oTarget[oPos]){
+      var slot=$("oSlots").children[oPos];
+      slot.className="slot full";slot.innerHTML="<span class=\"n\">"+(oPos+1)+"</span>"+planetSVG(i,22)+"<span>"+P[i].n+"</span>";
+      btn.disabled=true;oPos++;
+      if(oPos===8){fb.className="fb ok";fb.textContent=oMist===0?"Perfect! All 8 planets in order with no mistakes.":"Well done! All 8 planets are in order. You made "+oMist+(oMist===1?" mistake.":" mistakes.");}
+      else{fb.className="fb ok";fb.textContent="Yes! "+P[i].n+" is number "+oPos+".";}
+    }else{
+      oMist++;btn.className="obtn no";
+      $("oScore").textContent="Mistakes: "+oMist;
+      fb.className="fb no";
+      if($("oMode").value==="size")fb.textContent="Not yet. "+P[i].n+" is not the next biggest. Try another planet.";
+      else fb.textContent="Not yet. "+P[i].n+" is the "+ORD[i]+" planet from the Sun. Which one is number "+(oPos+1)+"?";
+    }
+  }
+  $("oNew").onclick=newOrder;
+  $("oMode").onchange=newOrder;
+  newOrder();
+
+  /* ---------- Quiz question generator ---------- */
+  function others(i,k){var a=[];for(var j=0;j<8;j++)if(j!==i)a.push(j);return shuffle(a).slice(0,k);}
+  function planetOpts(ans){var a=shuffle([ans].concat(others(ans,3))),out=[];for(var k=0;k<a.length;k++)out.push(P[a[k]].n);return out;}
+  function makeQ(){
+    var kind=rnd(0,7),i,j,q={};
+    if(kind===0){ /* superlatives */
+      var sup=pick([["closest to the Sun",0],["farthest from the Sun",7],["the biggest planet",4],["the smallest planet",0],["the hottest planet",1],["the planet with the most known moons",5]]);
+      q.text="Which planet is "+sup[0]+"?";q.answer=P[sup[1]].n;q.opts=planetOpts(sup[1]);
+      q.why=P[sup[1]].n+" is "+sup[0]+".";
+    }else if(kind===1){ /* position */
+      i=rnd(0,7);q.text="Which planet is "+ORD[i]+" from the Sun?";q.answer=P[i].n;q.opts=planetOpts(i);
+      q.why="The order is Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.";
+    }else if(kind===2){ /* next planet out */
+      i=rnd(0,6);q.text="Going out from the Sun, which planet comes straight after "+P[i].n+"?";q.answer=P[i+1].n;q.opts=planetOpts(i+1);
+      q.why=P[i+1].n+" comes after "+P[i].n+".";
+    }else if(kind===3){ /* bigger */
+      var pr=others(-1,2);i=pr[0];j=pr[1];var big=P[i].d>P[j].d?i:j;
+      q.text="Which planet is bigger: "+P[i].n+" or "+P[j].n+"?";q.answer=P[big].n;q.opts=[P[i].n,P[j].n];
+      q.why=P[i].n+" is "+fmt(P[i].d)+" km wide and "+P[j].n+" is "+fmt(P[j].d)+" km wide.";
+    }else if(kind===4){ /* farther */
+      var pr2=others(-1,2);i=pr2[0];j=pr2[1];var far=i>j?i:j;
+      q.text="Which planet is farther from the Sun: "+P[i].n+" or "+P[j].n+"?";q.answer=P[far].n;q.opts=[P[i].n,P[j].n];
+      q.why=P[far].n+" is the "+ORD[far]+" planet from the Sun.";
+    }else if(kind===5){ /* year length */
+      i=rnd(0,7);q.text="A year (one trip around the Sun) lasts "+P[i].year+" on which planet?";q.answer=P[i].n;q.opts=planetOpts(i);
+      q.why="It takes "+P[i].n+" "+P[i].year+" to go once around the Sun.";
+    }else if(kind===6){ /* clue */
+      i=rnd(0,7);q.text="Which planet am I? “"+P[i].clue+"”";q.answer=P[i].n;q.opts=planetOpts(i);
+      q.why=P[i].fun;
+    }else{ /* type */
+      i=rnd(0,7);q.text="What kind of planet is "+P[i].n+"?";q.answer=P[i].type;q.opts=shuffle(["Rocky planet","Gas giant","Ice giant"]);
+      q.why="Mercury, Venus, Earth and Mars are rocky. Jupiter and Saturn are gas giants. Uranus and Neptune are ice giants.";
+    }
+    q.kind=kind;
+    return q;
+  }
+
+  /* ---------- Quiz ---------- */
+  var QN=10,qi=0,qRight=0,qCur=null,qDone=false,qLast="";
+  function qRender(){
+    var tries=0;
+    do{qCur=makeQ();tries++;}while(qCur.text===qLast&&tries<20);
+    qLast=qCur.text;qDone=false;
+    $("qText").textContent=qCur.text;
+    $("qFb").textContent="";$("qFb").className="fb";
+    $("qNum").textContent="Question "+(qi+1)+" of "+QN;
+    $("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";var btns=[];
+    for(var k=0;k<qCur.opts.length;k++){
+      var b=document.createElement("button");b.type="button";b.className="choice";b.textContent=qCur.opts[k];
+      b.addEventListener("click",function(){qPick(this,btns);});
+      box.appendChild(b);btns.push(b);
+    }
+  }
+  function qPick(btn,btns){
+    if(qDone)return;qDone=true;
+    var ok=btn.textContent===qCur.answer;
+    for(var k=0;k<btns.length;k++){btns[k].disabled=true;if(btns[k].textContent===qCur.answer)btns[k].className="choice ok";}
+    if(!ok)btn.className="choice no";
+    if(ok)qRight++;
+    qi++;
+    $("qScore").textContent="Score: "+qRight+" / "+qi;
+    $("qBar").style.width=(qi*100/QN)+"%";
+    var fb=$("qFb");fb.className=ok?"fb ok":"fb no";
+    fb.textContent=(ok?"Correct! ":"Not quite. The answer is "+qCur.answer+". ")+qCur.why;
+    $("qNext").style.display="";
+    $("qNext").textContent=qi>=QN?"See my score":"Next question";
+  }
+  function qStart(){qi=0;qRight=0;qLast="";$("qScore").textContent="Score: 0 / 0";$("qBar").style.width="0%";$("qBox").style.display="";$("qEnd").style.display="none";qRender();}
+  $("qNext").onclick=function(){
+    if(!qDone)return;
+    if(qi>=QN){
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Out of this world! ":qRight>=7?"Brilliant space explorer! ":qRight>=4?"Good flying! ":"Keep exploring! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus();
+    }else qRender();
+  };
+  $("qAgain").onclick=qStart;
+  qStart();
+
+  /* ---------- Worksheet ---------- */
+  var wsShow=false,wsItems=[];
+  function newWs(){
+    var bank=shuffle([0,1,2,3,4,5,6,7]),h="",k;
+    for(k=0;k<8;k++)h+="<span>"+P[bank[k]].n+"</span>";
+    $("wsBank").innerHTML="<span class=\"muted\">Word bank:</span>"+h;
+    h="";for(k=0;k<8;k++)h+="<div>"+(k+1)+". <span class=\"ans\" data-a=\""+P[k].n+"\"></span></div>";
+    $("wsOrder").innerHTML=h;
+    var pool=shuffle([0,1,2,3,4,5,6,7]).slice(0,6);wsItems=pool;
+    h="";for(k=0;k<pool.length;k++)h+="<div class=\"wsq\">"+(k+1)+". "+P[pool[k]].clue+" <span class=\"ans\" data-a=\""+P[pool[k]].n+"\"></span></div>";
+    $("wsQs").innerHTML=h;
+    renderKey();
+  }
+  function renderKey(){
+    var a=document.querySelectorAll("#ws .ans");
+    for(var k=0;k<a.length;k++)a[k].textContent=wsShow?a[k].getAttribute("data-a"):"";
+    $("wsKey").textContent=wsShow?"Hide answers":"Show answers";
+    $("wsKey").setAttribute("aria-pressed",wsShow?"true":"false");
+  }
+  $("wsNew").onclick=newWs;
+  $("wsKey").onclick=function(){wsShow=!wsShow;renderKey();};
+  $("wsPrint").onclick=function(){window.print();};
+  newWs();
+
+  /* exposed for checking */
+  window.PlanetExplorer={P:P,makeQ:makeQ,sizeOrder:sizeOrder,state:function(){return {current:current,oTarget:oTarget,oPos:oPos,oMist:oMist,qi:qi,qRight:qRight,qCur:qCur,ws:wsItems};}};
+})();
+</script>
+</body>
+</html>
