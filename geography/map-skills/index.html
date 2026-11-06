@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Compass Points and Grid References Map Skills for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive map skills tool for ages 7-11. Learn the 8 points of the compass, read grid references (A3 and 4-figure) on a treasure-island map, follow directions, take auto-marked quizzes and print a worksheet.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/geography/map-skills/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.sq:focus-visible,.cbtn:focus-visible,select:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.big{font-size:20px;font-weight:700}
+.score{color:var(--gold);font-weight:700}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.two{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start}
+.two>.l{flex:0 1 300px;min-width:0;margin:0 auto}
+.two>.r{flex:1 1 280px;min-width:0}
+/* compass */
+.rose{width:100%;max-width:300px;height:auto;display:block;margin:0 auto}
+.cbtns{display:grid;grid-template-columns:repeat(3,1fr);max-width:300px;gap:8px;margin:12px 0}
+.cbtn{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:8px 4px;font:800 17px "Baloo 2",sans-serif;cursor:pointer}
+.cbtn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.cinfo{background:var(--navy);border-radius:14px;padding:14px;min-height:96px}
+.cinfo h3{color:var(--gold);font-size:26px;margin:0}
+/* map */
+.mapframe{position:relative;padding:0 0 26px 30px;max-width:560px;margin:0 auto}
+.map{position:relative;width:100%;aspect-ratio:8/6;border:3px solid #0F1C3F;border-radius:6px;overflow:hidden;background:#9FD4F0}
+.map svg.bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sqs{position:absolute;inset:0;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(6,1fr)}
+.sq{background:transparent;border:0;margin:0;padding:0;cursor:pointer;font-size:clamp(16px,4.6vw,30px);line-height:1;display:flex;align-items:center;justify-content:center;color:#000}
+button.sq:hover{background:rgba(255,255,255,.25)}
+.sq.hit{box-shadow:inset 0 0 0 4px #F4B942;background:rgba(244,185,66,.35)}
+.sq.ok{box-shadow:inset 0 0 0 4px #1E8E5A;background:rgba(76,195,138,.45)}
+.sq.no{box-shadow:inset 0 0 0 4px #D63A3A;background:rgba(255,107,107,.4)}
+.sq.from{box-shadow:inset 0 0 0 4px #2B47B8;background:rgba(143,178,255,.5)}
+.ax{position:absolute;font:800 14px "Baloo 2",sans-serif;color:var(--ink);line-height:1;white-space:nowrap}
+.ax.b{bottom:4px;transform:translateX(-50%)}
+.ax.s{left:0;width:26px;text-align:right;transform:translateY(-50%)}
+.key{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;color:var(--muted);margin:10px auto 0;max-width:560px}
+.key span{white-space:nowrap}
+/* quiz */
+.q{font:800 clamp(20px,5vw,25px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:10px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:54px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+select{font:700 15px "Nunito Sans",sans-serif;border-radius:10px;padding:6px 8px;background:var(--navy);color:var(--ink);border:2px solid var(--muted);max-width:100%}
+.qmini{width:100%;max-width:220px;height:auto;display:block;margin:0 auto}
+/* worksheet */
+.ws-head{display:none}
+.wsbox{background:var(--navy);border-radius:12px;padding:14px;margin-top:12px}
+.wsl{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px}
+.wsl div{padding:6px 0;border-bottom:1px solid rgba(184,194,224,.25)}
+.ans{display:inline-block;min-width:110px;border-bottom:2px dashed var(--muted);font:800 17px "Baloo 2",sans-serif;color:var(--gold);margin-left:6px;min-height:24px;vertical-align:bottom}
+.wsrose{width:220px;max-width:100%;height:auto;display:block;margin:0 auto}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.wsl{grid-template-columns:1fr}.panel{padding:14px}.mapframe{padding-left:26px}.ax.s{width:22px}}
+@media print{
+  body{background:#fff;color:#000}
+  .tabs,.crumbs,.shop,.btn,.noprint,h1,.lead{display:none!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important;background:#fff;color:#000;padding:0}
+  .wsbox{background:#fff;border:1px solid #999;break-inside:avoid}
+  .ans{color:#000;border-color:#000}
+  .ws-head{display:block;margin-bottom:8px}
+  .muted,.key{color:#333}
+  .ax{color:#000}
+  .map{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wsrose text{fill:#000}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/geography/">Geography</a> › Map Skills Lab</nav>
+  <h1>Map Skills Lab 🧭</h1>
+  <p class="lead">Learn the 8 points of the compass, find places on Treasure Island with grid references and follow directions like a real explorer. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Map Skills Lab modes">
+    <button class="tab" role="tab" id="t-compass" aria-controls="compass" aria-selected="true" data-p="compass">Compass</button>
+    <button class="tab" role="tab" id="t-cquiz" aria-controls="cquiz" aria-selected="false" tabindex="-1" data-p="cquiz">Compass Quiz</button>
+    <button class="tab" role="tab" id="t-grid" aria-controls="grid" aria-selected="false" tabindex="-1" data-p="grid">Grid References</button>
+    <button class="tab" role="tab" id="t-dir" aria-controls="dir" aria-selected="false" tabindex="-1" data-p="dir">Map Directions</button>
+    <button class="tab" role="tab" id="t-ws" aria-controls="ws" aria-selected="false" tabindex="-1" data-p="ws">Worksheet</button>
+  </div>
+
+  <section class="panel on" id="compass" role="tabpanel" aria-labelledby="t-compass">
+    <h2>The 8 points of the compass</h2>
+    <div class="two">
+      <div class="l"><div id="roseBox"></div></div>
+      <div class="r">
+        <p>Tap a direction to learn about it.</p>
+        <div class="cbtns" id="cBtns" role="group" aria-label="Compass directions"></div>
+        <div class="cinfo" id="cInfo" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="tip">Remember the 4 main points going clockwise from the top with: <b>N</b>ever <b>E</b>at <b>S</b>hredded <b>W</b>heat (North, East, South, West). The in-between points join two names, and North or South always comes first: North-East, South-East, South-West, North-West.</p>
+  </section>
+
+  <section class="panel" id="cquiz" role="tabpanel" aria-labelledby="t-cquiz">
+    <h2>Compass quiz</h2>
+    <div class="row"><span class="score" id="cqScore">Score: 0 / 0</span><span class="muted" id="cqNum">Question 1 of 10</span></div>
+    <div class="bar" aria-hidden="true"><i id="cqBar"></i></div>
+    <div id="cqBox">
+      <div id="cqPic"></div>
+      <p class="q" id="cqText"></p>
+      <div class="choices" id="cqChoices"></div>
+      <div class="fb" id="cqFb" aria-live="polite"></div>
+      <button class="btn ghost" id="cqNext">Next question</button>
+    </div>
+    <div id="cqEnd" style="display:none">
+      <p class="q" id="cqEndText"></p>
+      <button class="btn" id="cqAgain">Play again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="grid" role="tabpanel" aria-labelledby="t-grid">
+    <h2>Grid references on Treasure Island</h2>
+    <div class="row noprint">
+      <label for="gLevel" class="big">Level:</label>
+      <select id="gLevel">
+        <option value="L">Letters and numbers (like C4)</option>
+        <option value="F">4-figure grid references (like 1223)</option>
+      </select>
+    </div>
+    <p class="tip" id="gHow"></p>
+    <div class="row"><span class="score" id="gqScore">Score: 0 / 0</span><span class="muted" id="gqNum">Question 1 of 10</span></div>
+    <div class="bar" aria-hidden="true"><i id="gqBar"></i></div>
+    <div id="gqBox">
+      <p class="q" id="gqText"></p>
+      <div id="gMap"></div>
+      <p class="muted" id="gInfo" aria-live="polite">Tip: tap any square on the map to see its grid reference.</p>
+      <div class="choices" id="gqChoices"></div>
+      <div class="fb" id="gqFb" aria-live="polite"></div>
+      <button class="btn ghost" id="gqNext">Next question</button>
+    </div>
+    <div id="gqEnd" style="display:none">
+      <p class="q" id="gqEndText"></p>
+      <button class="btn" id="gqAgain">Play again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="dir" role="tabpanel" aria-labelledby="t-dir">
+    <h2>Map directions</h2>
+    <p>North is at the top of the map. Use the compass points to say which way to go. Going diagonally one square counts as one square.</p>
+    <div class="row"><span class="score" id="dqScore">Score: 0 / 0</span><span class="muted" id="dqNum">Question 1 of 10</span></div>
+    <div class="bar" aria-hidden="true"><i id="dqBar"></i></div>
+    <div id="dqBox">
+      <p class="q" id="dqText"></p>
+      <div id="dMap"></div>
+      <div class="choices" id="dqChoices"></div>
+      <div class="fb" id="dqFb" aria-live="polite"></div>
+      <button class="btn ghost" id="dqNext">Next question</button>
+    </div>
+    <div id="dqEnd" style="display:none">
+      <p class="q" id="dqEndText"></p>
+      <button class="btn" id="dqAgain">Play again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="ws" role="tabpanel" aria-labelledby="t-ws">
+    <h2>Printable map skills worksheet</h2>
+    <div class="ws-head"><b>Name:</b> ______________________ &nbsp; <b>Date:</b> ____________</div>
+    <div class="row noprint">
+      <label for="wsLevel" class="big">Grid references:</label>
+      <select id="wsLevel">
+        <option value="L">Letters and numbers (like C4)</option>
+        <option value="F">4-figure (like 1223)</option>
+      </select>
+    </div>
+    <div class="row noprint">
+      <button class="btn" id="wsNew">New worksheet</button>
+      <button class="btn ghost" id="wsKey" aria-pressed="false">Show answers</button>
+      <button class="btn ghost" id="wsPrint">Print</button>
+    </div>
+    <div class="wsbox"><h3>Treasure Island map</h3><div id="wsMap"></div></div>
+    <div class="wsbox">
+      <h3>A. Label the 8 compass points</h3>
+      <div id="wsRose"></div>
+    </div>
+    <div class="wsbox"><h3>B. What is in each square?</h3><div class="wsl" id="wsA"></div></div>
+    <div class="wsbox"><h3>C. Write the grid reference</h3><div class="wsl" id="wsB"></div></div>
+    <div class="wsbox"><h3>D. Directions (North is at the top)</h3><div id="wsC"></div></div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Get printable geography and map packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function pick(arr){return arr[rnd(0,arr.length-1)];}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=rnd(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  /* ---------- Data ---------- */
+  var DN=["North","North-East","East","South-East","South","South-West","West","North-West"];
+  var DA=["N","NE","E","SE","S","SW","W","NW"];
+  var DINFO=[
+    "North is at the top of most maps. A compass needle points north.",
+    "North-East is halfway between North and East.",
+    "East is where the Sun rises in the morning.",
+    "South-East is halfway between South and East.",
+    "South is opposite North, at the bottom of most maps.",
+    "South-West is halfway between South and West.",
+    "West is where the Sun sets in the evening.",
+    "North-West is halfway between North and West."
+  ];
+  /* step for each direction: dx (east +), dy (north +) */
+  var DX=[0,1,1,1,0,-1,-1,-1],DY=[1,1,0,-1,-1,-1,0,1];
+  var COLS=8,ROWS=6,LET="ABCDEFGH";
+  /* landmarks: c = column from the left (0-7), r = row from the bottom (0-5) */
+  var L=[
+    {n:"Castle",e:"🏰",c:2,r:4},{n:"Forest",e:"🌲",c:1,r:2},{n:"Mountain",e:"⛰️",c:5,r:4},
+    {n:"Farm",e:"🐄",c:3,r:1},{n:"Church",e:"⛪",c:4,r:2},{n:"Beach",e:"🏖️",c:6,r:1},
+    {n:"School",e:"🏫",c:5,r:2},{n:"Bridge",e:"🌉",c:3,r:3},{n:"Treasure",e:"💎",c:6,r:3},
+    {n:"Campsite",e:"🏕️",c:4,r:4},{n:"Orchard",e:"🍎",c:4,r:1},{n:"Harbour",e:"⚓",c:0,r:1},
+    {n:"Boat",e:"⛵",c:7,r:0},{n:"Whale",e:"🐋",c:7,r:4},{n:"Little Island",e:"🏝️",c:0,r:5},
+    {n:"Octopus",e:"🐙",c:2,r:5}
+  ];
+  function at(c,r){for(var i=0;i<L.length;i++)if(L[i].c===c&&L[i].r===r)return i;return -1;}
+  function ref(level,c,r){return level==="F"?String(10+c)+String(20+r):LET.charAt(c)+(r+1);}
+  function the(i){return "the "+L[i].n;}
+  function dirIndex(dx,dy){
+    if(dx===0&&dy===0)return -1;
+    if(!(dx===0||dy===0||Math.abs(dx)===Math.abs(dy)))return -1;
+    var sx=dx>0?1:(dx<0?-1:0),sy=dy>0?1:(dy<0?-1:0);
+    for(var k=0;k<8;k++)if(DX[k]===sx&&DY[k]===sy)return k;
+    return -1;
+  }
+  /* all ordered pairs (from a to b) that lie exactly on one of the 8 compass lines */
+  var PAIRS=[];
+  (function(){for(var a=0;a<L.length;a++)for(var b=0;b<L.length;b++){if(a===b)continue;var dx=L[b].c-L[a].c,dy=L[b].r-L[a].r,d=dirIndex(dx,dy);if(d>=0)PAIRS.push({a:a,b:b,d:d,n:Math.max(Math.abs(dx),Math.abs(dy))});}})();
+
+  /* ---------- Tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function showTab(tab){
+    for(var k=0;k<tabs.length;k++){tabs[k].setAttribute("aria-selected","false");tabs[k].setAttribute("tabindex","-1");$(tabs[k].getAttribute("data-p")).className="panel";}
+    tab.setAttribute("aria-selected","true");tab.removeAttribute("tabindex");$(tab.getAttribute("data-p")).className="panel on";
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){showTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=0;for(var q=0;q<tabs.length;q++)if(tabs[q]===this)idx=q;
+      var nx=-1;
+      if(e.key==="ArrowRight")nx=(idx+1)%tabs.length;
+      else if(e.key==="ArrowLeft")nx=(idx-1+tabs.length)%tabs.length;
+      else if(e.key==="Home")nx=0;
+      else if(e.key==="End")nx=tabs.length-1;
+      if(nx>=0){e.preventDefault();showTab(tabs[nx]);tabs[nx].focus();}
+    });
+  }
+
+  /* ---------- Compass rose (inline SVG) ---------- */
+  /* opts: labels "all" | "N" | "blank"; hi = highlighted direction; arrow = direction for a gold arrow */
+  function roseSVG(opts){
+    var s="<svg class=\""+(opts.cls||"rose")+"\" viewBox=\"-130 -130 260 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\""+(opts.label||"Compass rose")+"\">";
+    s+="<circle r=\"96\" fill=\""+(opts.print?"#fff":"#0F1C3F")+"\" stroke=\""+(opts.print?"#000":"#B8C2E0")+"\" stroke-width=\"3\"/>";
+    s+="<circle r=\"84\" fill=\"none\" stroke=\""+(opts.print?"#999":"#26356b")+"\" stroke-width=\"2\"/>";
+    for(var k=0;k<8;k++){
+      var main=k%2===0,len=main?92:58,w=main?16:11,ang=k*45*Math.PI/180;
+      var tx=Math.sin(ang)*len,ty=-Math.cos(ang)*len,lx=Math.cos(ang)*w,ly=Math.sin(ang)*w;
+      var col=opts.hi===k?"#F4B942":(opts.print?(main?"#555":"#999"):(main?"#F5F7FF":"#7F8DB8"));
+      var dark=opts.hi===k?"#C9902A":(opts.print?(main?"#222":"#666"):(main?"#B8C2E0":"#56638F"));
+      s+="<polygon points=\"0,0 "+tx.toFixed(1)+","+ty.toFixed(1)+" "+lx.toFixed(1)+","+ly.toFixed(1)+"\" fill=\""+col+"\"/>";
+      s+="<polygon points=\"0,0 "+tx.toFixed(1)+","+ty.toFixed(1)+" "+(-lx).toFixed(1)+","+(-ly).toFixed(1)+"\" fill=\""+dark+"\"/>";
+    }
+    s+="<circle r=\"6\" fill=\"#F4B942\"/>";
+    for(var j=0;j<8;j++){
+      var a2=j*45*Math.PI/180,rr=j%2===0?114:108,x=Math.sin(a2)*rr,y=-Math.cos(a2)*rr;
+      var show=opts.labels==="all"||(opts.labels==="N"&&j===0);
+      if(show)s+="<text x=\""+x.toFixed(1)+"\" y=\""+(y+6).toFixed(1)+"\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-weight=\"800\" font-size=\""+(j%2===0?20:15)+"\" fill=\""+(opts.hi===j?"#F4B942":(opts.print?"#000":"#F5F7FF"))+"\">"+DA[j]+"</text>";
+      else if(opts.labels==="blank")s+="<rect x=\""+(x-17).toFixed(1)+"\" y=\""+(y-11).toFixed(1)+"\" width=\"34\" height=\"22\" rx=\"4\" fill=\"#fff\" stroke=\"#000\" stroke-width=\"1.5\"/>";
+    }
+    if(opts.key){
+      for(var m=0;m<8;m++){var a3=m*45*Math.PI/180,r3=m%2===0?114:108;s+="<text x=\""+(Math.sin(a3)*r3).toFixed(1)+"\" y=\""+(-Math.cos(a3)*r3+5).toFixed(1)+"\" text-anchor=\"middle\" font-family=\"Baloo 2, sans-serif\" font-weight=\"800\" font-size=\"14\" fill=\"#C9302C\">"+DA[m]+"</text>";}
+    }
+    if(opts.arrow!==undefined&&opts.arrow!==null){
+      var aa=opts.arrow*45;
+      s+="<g transform=\"rotate("+aa+")\"><line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-70\" stroke=\"#F4B942\" stroke-width=\"9\" stroke-linecap=\"round\"/><polygon points=\"0,-98 -16,-66 16,-66\" fill=\"#F4B942\" stroke=\"#0F1C3F\" stroke-width=\"2\"/></g><circle r=\"8\" fill=\"#F4B942\" stroke=\"#0F1C3F\" stroke-width=\"2\"/>";
+    }
+    return s+"</svg>";
+  }
+
+  /* ---------- Compass explore ---------- */
+  var cBtnEls=[];
+  function showDir(k){
+    for(var i=0;i<cBtnEls.length;i++)cBtnEls[i].setAttribute("aria-pressed",i===k?"true":"false");
+    $("roseBox").innerHTML=roseSVG({labels:"all",hi:k,label:"Compass rose with "+DN[k]+" highlighted"});
+    var opp=DN[(k+4)%8];
+    $("cInfo").innerHTML="<h3>"+DN[k]+" ("+DA[k]+")</h3><p style=\"margin:4px 0\">"+DINFO[k]+"</p><p class=\"muted\" style=\"margin:0\">The opposite of "+DN[k]+" is "+opp+". Turning clockwise, the next point is "+DN[(k+1)%8]+".</p>";
+  }
+  (function(){
+    var order=[7,0,1,6,-1,2,5,4,3],box=$("cBtns");
+    for(var i=0;i<order.length;i++){
+      if(order[i]<0){var mid=document.createElement("span");mid.setAttribute("aria-hidden","true");mid.style.cssText="display:flex;align-items:center;justify-content:center;font-size:24px";mid.textContent="🧭";box.appendChild(mid);continue;}
+      var b=document.createElement("button");b.type="button";b.className="cbtn";b.setAttribute("aria-pressed","false");
+      b.setAttribute("data-k",order[i]);b.setAttribute("aria-label",DN[order[i]]);b.textContent=DA[order[i]];
+      b.addEventListener("click",function(){showDir(+this.getAttribute("data-k"));});
+      box.appendChild(b);
+    }
+    var kids=box.querySelectorAll(".cbtn");for(var j=0;j<8;j++)for(var q=0;q<kids.length;q++)if(+kids[q].getAttribute("data-k")===j)cBtnEls[j]=kids[q];
+  })();
+  showDir(0);
+
+  /* ---------- Map ---------- */
+  var ISLAND="M150,140 C300,80 500,90 640,130 C720,170 725,300 705,380 C690,470 640,525 520,508 C400,492 300,532 200,502 C110,472 92,380 110,300 C122,222 92,170 150,140 Z";
+  function mapBG(){
+    var s="<svg class=\"bg\" viewBox=\"0 0 800 600\" preserveAspectRatio=\"none\" aria-hidden=\"true\" focusable=\"false\">";
+    s+="<rect width=\"800\" height=\"600\" fill=\"#9FD4F0\"/>";
+    s+="<path d=\"M90,560 q20,-8 40,0 M560,60 q20,-8 40,0 M700,540 q20,-8 40,0 M330,575 q20,-8 40,0\" stroke=\"#6FB6DE\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/>";
+    s+="<path d=\""+ISLAND+"\" fill=\"#F2D79B\"/>";
+    s+="<path d=\""+ISLAND+"\" fill=\"#B9DE8C\" transform=\"translate(400,300) scale(0.94) translate(-400,-300)\"/>";
+    s+="<ellipse cx=\"50\" cy=\"50\" rx=\"38\" ry=\"30\" fill=\"#F2D79B\"/><ellipse cx=\"50\" cy=\"50\" rx=\"30\" ry=\"22\" fill=\"#B9DE8C\"/>";
+    s+="<path d=\"M385,118 C370,170 360,220 350,250 C330,300 270,320 240,360 C210,400 170,430 128,462\" stroke=\"#6FB6DE\" stroke-width=\"14\" fill=\"none\" stroke-linecap=\"round\"/>";
+    s+="<rect x=\"62\" y=\"440\" width=\"50\" height=\"12\" fill=\"#9C6B3C\"/>";
+    for(var x=100;x<800;x+=100)s+="<line x1=\""+x+"\" y1=\"0\" x2=\""+x+"\" y2=\"600\" stroke=\"#0F1C3F\" stroke-opacity=\"0.55\" stroke-width=\"2\"/>";
+    for(var y=100;y<600;y+=100)s+="<line x1=\"0\" y1=\""+y+"\" x2=\"800\" y2=\""+y+"\" stroke=\"#0F1C3F\" stroke-opacity=\"0.55\" stroke-width=\"2\"/>";
+    return s+"</svg>";
+  }
+  /* makeMap(box, level, onTap) -> {setLevel, mark, clear, btn} */
+  function makeMap(box,level,onTap,interactive){
+    var frame=document.createElement("div");frame.className="mapframe";
+    var map=document.createElement("div");map.className="map";map.innerHTML=mapBG();
+    var grid=document.createElement("div");grid.className="sqs";
+    if(interactive)grid.setAttribute("role","group");
+    grid.setAttribute("aria-label","Treasure Island map, 8 squares across and 6 squares up");
+    var btns={};
+    for(var r=ROWS-1;r>=0;r--)for(var c=0;c<COLS;c++){
+      var i=at(c,r),el=document.createElement(interactive?"button":"div");
+      el.className="sq";
+      if(interactive){el.type="button";el.setAttribute("data-c",c);el.setAttribute("data-r",r);
+        el.addEventListener("click",function(){onTap(+this.getAttribute("data-c"),+this.getAttribute("data-r"));});}
+      if(i>=0){el.innerHTML="<span aria-hidden=\"true\">"+L[i].e+"</span>";}
+      grid.appendChild(el);btns[c+","+r]=el;
+    }
+    map.appendChild(grid);frame.appendChild(map);
+    var axes=document.createElement("div");frame.appendChild(axes);
+    var key=document.createElement("div");key.className="key";
+    var kh="";for(var k=0;k<L.length;k++)kh+="<span><span aria-hidden=\"true\">"+L[k].e+"</span> "+L[k].n+"</span>";
+    key.innerHTML=kh;
+    box.innerHTML="";box.appendChild(frame);box.appendChild(key);
+    var lvl=level;
+    function labelSquares(){
+      for(var rr=0;rr<ROWS;rr++)for(var cc=0;cc<COLS;cc++){
+        var ii=at(cc,rr),b=btns[cc+","+rr];
+        if(interactive)b.setAttribute("aria-label",(ii>=0?L[ii].n:"Empty square")+", square "+ref(lvl,cc,rr));
+      }
+    }
+    function drawAxes(){
+      var h="",k2;
+      if(lvl==="F"){
+        for(k2=0;k2<=COLS;k2++)h+="<span class=\"ax b\" style=\"left:calc(30px + (100% - 30px) * "+(k2/COLS).toFixed(4)+")\">"+(10+k2)+"</span>";
+        for(k2=0;k2<=ROWS;k2++)h+="<span class=\"ax s\" style=\"top:calc((100% - 26px) * "+(1-k2/ROWS).toFixed(4)+")\">"+(20+k2)+"</span>";
+      }else{
+        for(k2=0;k2<COLS;k2++)h+="<span class=\"ax b\" style=\"left:calc(30px + (100% - 30px) * "+((k2+0.5)/COLS).toFixed(4)+")\">"+LET.charAt(k2)+"</span>";
+        for(k2=0;k2<ROWS;k2++)h+="<span class=\"ax s\" style=\"top:calc((100% - 26px) * "+(1-(k2+0.5)/ROWS).toFixed(4)+")\">"+(k2+1)+"</span>";
+      }
+      axes.innerHTML=h;
+    }
+    drawAxes();labelSquares();
+    return {
+      setLevel:function(v){lvl=v;drawAxes();labelSquares();},
+      mark:function(c,r,cls){var b=btns[c+","+r];if(b)b.className="sq "+cls;},
+      clear:function(){for(var k3 in btns)if(btns.hasOwnProperty(k3))btns[k3].className="sq";},
+      btn:function(c,r){return btns[c+","+r];}
+    };
+  }
+
+  /* ---------- Generic 10-question quiz ---------- */
+  var QN=10;
+  function Quiz(px,gen,hooks){
+    var self=this;
+    this.i=0;this.right=0;this.cur=null;this.done=false;this.seen={};
+    this.gen=gen;this.px=px;this.hooks=hooks||{};
+    $(px+"Next").onclick=function(){self.next();};
+    $(px+"Again").onclick=function(){self.start();};
+  }
+  Quiz.prototype.start=function(){this.i=0;this.right=0;this.seen={};$(this.px+"Box").style.display="";$(this.px+"End").style.display="none";this.render();};
+  Quiz.prototype.render=function(){
+    var px=this.px,q,tries=0,self=this;
+    do{q=this.gen();tries++;}while(this.seen[q.text+"|"+q.answer]&&tries<40);
+    this.seen[q.text+"|"+q.answer]=1;this.cur=q;this.done=false;
+    $(px+"Text").textContent=q.text;
+    $(px+"Fb").textContent="";$(px+"Fb").className="fb";
+    $(px+"Num").textContent="Question "+(this.i+1)+" of "+QN;
+    $(px+"Score").textContent="Score: "+this.right+" / "+this.i;
+    $(px+"Bar").style.width=(this.i/QN*100)+"%";
+    $(px+"Next").style.display="none";
+    var box=$(px+"Choices");box.innerHTML="";var btns=[];
+    for(var k=0;k<(q.opts||[]).length;k++){
+      var b=document.createElement("button");b.type="button";b.className="choice";b.textContent=q.opts[k];
+      b.addEventListener("click",function(){self.pick(this.textContent,this,btns);});
+      box.appendChild(b);btns.push(b);
+    }
+    this.btns=btns;
+    if(this.hooks.show)this.hooks.show(q);
+  };
+  Quiz.prototype.pick=function(val,btn,btns){
+    if(this.done)return;
+    this.done=true;
+    var q=this.cur,ok=val===q.answer,fb=$(this.px+"Fb");
+    btns=btns||this.btns||[];
+    for(var k=0;k<btns.length;k++){btns[k].disabled=true;if(btns[k].textContent===q.answer)btns[k].className="choice ok";}
+    if(btn&&!ok)btn.className="choice no";
+    if(ok){this.right++;fb.className="fb ok";fb.textContent="Correct! "+(q.why||"");}
+    else{fb.className="fb no";fb.textContent=(q.wrong?q.wrong(val):"Not quite. The answer is "+q.answer+". ")+(q.why||"");}
+    this.i++;
+    $(this.px+"Score").textContent="Score: "+this.right+" / "+this.i;
+    $(this.px+"Bar").style.width=(this.i/QN*100)+"%";
+    if(this.hooks.reveal)this.hooks.reveal(q,ok,val);
+    var nx=$(this.px+"Next");nx.style.display="";nx.textContent=this.i>=QN?"See my score":"Next question";
+    return ok;
+  };
+  Quiz.prototype.next=function(){
+    if(!this.done)return;
+    if(this.i>=QN){
+      $(this.px+"Box").style.display="none";$(this.px+"End").style.display="";
+      var r=this.right,msg=r===QN?"Perfect score! You are a map expert! 🏆":(r>=8?"Brilliant work!":(r>=5?"Good effort! Practise a bit more and try again.":"Keep practising, you will get there!"));
+      $(this.px+"EndText").textContent="You scored "+r+" out of "+QN+". "+msg;
+      if(this.hooks.end)this.hooks.end();
+      return;
+    }
+    this.render();
+  };
+  function dirOpts(ans,avoid){
+    var pool=[];for(var k=0;k<8;k++)if(k!==ans)pool.push(k);
+    pool=shuffle(pool);
+    var chosen=[ans];
+    if(avoid!==undefined&&avoid!==ans){chosen.push(avoid);}
+    for(var j=0;j<pool.length&&chosen.length<4;j++)if(chosen.indexOf(pool[j])<0)chosen.push(pool[j]);
+    var out=[];chosen=shuffle(chosen);for(var m=0;m<chosen.length;m++)out.push(DN[chosen[m]]);return out;
+  }
+  function placeOpts(ans){
+    var pool=[];for(var k=0;k<L.length;k++)if(k!==ans)pool.push(k);
+    var a=shuffle([ans].concat(shuffle(pool).slice(0,3))),out=[];
+    for(var m=0;m<a.length;m++)out.push(L[a[m]].n);return out;
+  }
+
+  /* ---------- Compass quiz ---------- */
+  var TURNS=[[2,"a quarter turn","90°"],[4,"a half turn","180°"],[6,"a three-quarter turn","270°"]];
+  function makeCQ(){
+    var kind=rnd(0,3),q={},d=rnd(0,7);
+    if(kind===0){
+      q.text="Which direction is the arrow pointing?";q.arrow=d;q.answer=DN[d];q.opts=dirOpts(d,(d+4)%8);
+      q.why="The arrow points "+DN[d]+".";
+    }else if(kind===1){
+      q.text="What is the opposite direction to "+DN[d]+"?";q.answer=DN[(d+4)%8];q.opts=dirOpts((d+4)%8,d);
+      q.why=DN[d]+" and "+DN[(d+4)%8]+" point in opposite directions.";
+    }else if(kind===2){
+      var t=pick(TURNS),cw=rnd(0,1)===1,words=rnd(0,1)===1?t[1]:t[2];
+      var ans=((d+(cw?t[0]:-t[0]))%8+8)%8;
+      q.text="You are facing "+DN[d]+". You make "+words+" "+(cw?"clockwise":"anticlockwise")+". Which way are you facing now?";
+      if(words===t[2])q.text="You are facing "+DN[d]+". You turn "+t[2]+" "+(cw?"clockwise":"anticlockwise")+". Which way are you facing now?";
+      q.answer=DN[ans];q.opts=dirOpts(ans,((d+(cw?-t[0]:t[0]))%8+8)%8);q.arrow=d;
+      q.why="Each quarter turn (90°) moves you 2 compass points round.";
+    }else{
+      q.text="What does "+DA[d]+" stand for on a compass?";q.answer=DN[d];q.opts=dirOpts(d,(d+4)%8);
+      q.why=DA[d]+" is short for "+DN[d]+".";
+    }
+    q.kind=kind;return q;
+  }
+  var cq=new Quiz("cq",makeCQ,{show:function(q){
+    if(q.kind===0)$("cqPic").innerHTML=roseSVG({cls:"qmini",labels:"N",arrow:q.arrow,label:"Compass with an arrow. Only North is labelled."});
+    else if(q.kind===2)$("cqPic").innerHTML=roseSVG({cls:"qmini",labels:"all",arrow:q.arrow,label:"Compass with an arrow showing the way you are facing: "+DN[q.arrow]});
+    else $("cqPic").innerHTML="";
+  }});
+  cq.start();
+
+  /* ---------- Grid references ---------- */
+  var gLevel="L";
+  var HOW={
+    L:"Read the <b>letter along the bottom</b> first, then the <b>number up the side</b>. The Castle 🏰 is in square <b>C5</b>.",
+    F:"For a 4-figure grid reference, find the <b>bottom-left corner</b> of the square. Read the number <b>along the bottom</b> first, then the number <b>up the side</b>: \"along the corridor, then up the stairs\". The Castle 🏰 is in square <b>1224</b>."
+  };
+  function refOpts(c,r){
+    var ans=ref(gLevel,c,r),set=[ans],cand=[],k;
+    if(gLevel==="F")cand.push(String(20+r)+String(10+c));
+    else if(r<COLS&&c<ROWS)cand.push(LET.charAt(r)+(c+1));
+    var nb=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]];
+    nb=shuffle(nb);
+    for(k=0;k<nb.length;k++){var cc=c+nb[k][0],rr=r+nb[k][1];if(cc>=0&&cc<COLS&&rr>=0&&rr<ROWS)cand.push(ref(gLevel,cc,rr));}
+    for(k=0;k<cand.length&&set.length<4;k++)if(set.indexOf(cand[k])<0)set.push(cand[k]);
+    while(set.length<4){var x=ref(gLevel,rnd(0,COLS-1),rnd(0,ROWS-1));if(set.indexOf(x)<0)set.push(x);}
+    return shuffle(set);
+  }
+  function makeGQ(){
+    var kind=rnd(0,2),q={kind:kind},i;
+    if(kind===0){
+      var c=rnd(0,COLS-1),r=rnd(0,ROWS-1);q.c=c;q.r=r;
+      q.text="Tap square "+ref(gLevel,c,r)+" on the map.";q.answer=ref(gLevel,c,r);q.opts=[];
+      var ii=at(c,r);q.why=ii>=0?"Square "+q.answer+" has the "+L[ii].n+" in it.":"";
+    }else if(kind===1){
+      i=rnd(0,L.length-1);q.c=L[i].c;q.r=L[i].r;
+      q.text="What is in square "+ref(gLevel,q.c,q.r)+"?";q.answer=L[i].n;q.opts=placeOpts(i);
+      q.why="";
+    }else{
+      i=rnd(0,L.length-1);q.c=L[i].c;q.r=L[i].r;
+      q.text="What is the grid reference of the "+L[i].n+" "+L[i].e+"?";q.answer=ref(gLevel,q.c,q.r);q.opts=refOpts(q.c,q.r);
+      q.why=gLevel==="F"?"Along "+(10+q.c)+", then up "+(20+q.r)+".":"Along to "+LET.charAt(q.c)+", then up to "+(q.r+1)+".";
+    }
+    return q;
+  }
+  var gMap=makeMap($("gMap"),gLevel,function(c,r){gTap(c,r);},true);
+  var gq=new Quiz("gq",makeGQ,{
+    show:function(q){gMap.clear();},
+    reveal:function(q,ok,val){gMap.clear();gMap.mark(q.c,q.r,"ok");if(!ok&&q.kind===0&&q.tc!==undefined)gMap.mark(q.tc,q.tr,"no");}
+  });
+  function gTap(c,r){
+    var i=at(c,r),q=gq.cur;
+    $("gInfo").textContent="That is square "+ref(gLevel,c,r)+(i>=0?". It has the "+L[i].n+" in it.":". It is empty.");
+    if(q&&q.kind===0&&!gq.done&&$("gqBox").style.display!=="none"){
+      q.tc=c;q.tr=r;
+      var tapped=ref(gLevel,c,r);
+      q.wrong=function(v){return "Not quite. You tapped "+v+". Square "+q.answer+" is shown in green. ";};
+      gq.pick(tapped,null,[]);
+    }
+  }
+  function setGLevel(v){gLevel=v;$("gHow").innerHTML=HOW[v];gMap.setLevel(v);gMap.clear();$("gInfo").textContent="Tip: tap any square on the map to see its grid reference.";gq.start();}
+  $("gLevel").onchange=function(){setGLevel(this.value);};
+  setGLevel("L");
+
+  /* ---------- Map directions ---------- */
+  function makeDQ(){
+    var p=pick(PAIRS),kind=rnd(0,1),q={kind:kind,a:p.a,b:p.b};
+    if(kind===0){
+      q.text="Which direction is the "+L[p.b].n+" "+L[p.b].e+" from the "+L[p.a].n+" "+L[p.a].e+"?";
+      q.answer=DN[p.d];q.opts=dirOpts(p.d,(p.d+4)%8);
+      q.why="Start at the "+L[p.a].n+" and go "+DN[p.d]+" to reach the "+L[p.b].n+".";
+    }else{
+      q.text="Start at the "+L[p.a].n+" "+L[p.a].e+". Go "+p.n+" square"+(p.n>1?"s":"")+" "+DN[p.d]+". What do you find?";
+      q.answer=L[p.b].n;q.opts=placeOpts(p.b);
+      q.why="";
+    }
+    return q;
+  }
+  var dMap=makeMap($("dMap"),"L",null,false);
+  var dq=new Quiz("dq",makeDQ,{
+    show:function(q){dMap.clear();dMap.mark(L[q.a].c,L[q.a].r,"from");if(q.kind===0)dMap.mark(L[q.b].c,L[q.b].r,"hit");},
+    reveal:function(q){dMap.clear();dMap.mark(L[q.a].c,L[q.a].r,"from");dMap.mark(L[q.b].c,L[q.b].r,"ok");}
+  });
+  dq.start();
+
+  /* ---------- Worksheet ---------- */
+  var wsLevel="L",wsShow=false,wsMap=makeMap($("wsMap"),"L",null,false);
+  function blank(ans){return "<span class=\"ans\" data-a=\""+ans+"\"></span>";}
+  function newWS(){
+    wsLevel=$("wsLevel").value;wsMap.setLevel(wsLevel);
+    $("wsRose").innerHTML=roseSVG({cls:"wsrose",labels:"blank",print:true,key:wsShow,label:"Blank compass rose to label"});
+    var idx=shuffle(L.map(function(x,k){return k;})),A="",B="",k;
+    for(k=0;k<4;k++){var i=idx[k];A+="<div>"+(k+1)+". Square "+ref(wsLevel,L[i].c,L[i].r)+": "+blank(L[i].n)+"</div>";}
+    for(k=4;k<8;k++){var j=idx[k];B+="<div>"+(k-3)+". The "+L[j].n+" <span aria-hidden=\"true\">"+L[j].e+"</span>: "+blank(ref(wsLevel,L[j].c,L[j].r))+"</div>";}
+    $("wsA").innerHTML=A;$("wsB").innerHTML=B;
+    var used={},C="",n=0,tries=0;
+    while(n<4&&tries<500){
+      tries++;var p=pick(PAIRS),key=p.a+"-"+p.b,rev=p.b+"-"+p.a;
+      if(used[key]||used[rev])continue;used[key]=1;n++;
+      if(n%2===1)C+="<div class=\"wsl\" style=\"grid-template-columns:1fr\"><div>"+n+". Which direction is the "+L[p.b].n+" from the "+L[p.a].n+"? "+blank(DN[p.d])+"</div></div>";
+      else C+="<div class=\"wsl\" style=\"grid-template-columns:1fr\"><div>"+n+". Start at the "+L[p.a].n+". Go "+p.n+" square"+(p.n>1?"s":"")+" "+DN[p.d]+". What do you find? "+blank(L[p.b].n)+"</div></div>";
+    }
+    $("wsC").innerHTML=C;
+    fillKey();
+  }
+  function fillKey(){
+    var a=document.querySelectorAll("#ws .ans");
+    for(var k=0;k<a.length;k++)a[k].textContent=wsShow?a[k].getAttribute("data-a"):"";
+    $("wsRose").innerHTML=roseSVG({cls:"wsrose",labels:"blank",print:true,key:wsShow,label:"Blank compass rose to label"});
+    $("wsKey").textContent=wsShow?"Hide answers":"Show answers";
+    $("wsKey").setAttribute("aria-pressed",wsShow?"true":"false");
+  }
+  $("wsNew").onclick=newWS;
+  $("wsLevel").onchange=newWS;
+  $("wsKey").onclick=function(){wsShow=!wsShow;fillKey();};
+  $("wsPrint").onclick=function(){window.print();};
+  newWS();
+
+})();
+</script>
+</body>
+</html>
