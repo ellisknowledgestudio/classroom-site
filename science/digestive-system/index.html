@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Digestive System Diagram for KS3 | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive digestive system diagram for ages 11-14. Tap each organ to learn its job, its enzymes and how it works with the others, follow food from mouth to anus, and see how villi absorb nutrients.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/digestive-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Baloo 2",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Baloo 2",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Nunito Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Baloo 2",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Baloo 2",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* diagram */
+.skin{fill:url(#gBody);stroke:#7E92CC;stroke-width:1.6}
+.feat{fill:none;stroke:#7E92CC;stroke-width:1.6;stroke-linecap:round}
+.diaphragm{fill:none;stroke:#C77B7B;stroke-width:5;stroke-linecap:round;opacity:.42}
+.tr-o{fill:none;stroke:#6E80B4;stroke-width:17}
+.tr-b{fill:none;stroke:#C4D2F0;stroke-width:14}
+.tr-r line{stroke:#8FA2D2;stroke-width:2}
+.note{font:italic 13px "Nunito Sans",sans-serif;fill:#B8C2E0}
+.noteline{stroke:#B8C2E0;stroke-width:1;fill:none}
+.oe-u,.oe-ub,.oe-h,.si-u,.si-ub,.si-h,.ap-u,.ap-ub,.ap-h{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.oe-u{stroke:#8E4A46;stroke-width:16}
+.oe-ub{stroke:#E39A8C;stroke-width:13}
+.oe-h{stroke:#F8CFC3;stroke-width:3.5;opacity:.7;transform:translate(-2.5px,-1px)}
+.si-u{stroke:#9A564D;stroke-width:27}
+.si-ub{stroke:#F0B3A4;stroke-width:24}
+.si-h{stroke:#FDE3DA;stroke-width:6;opacity:.6;transform:translate(-4px,-4.5px)}
+.ap-u{stroke:#7E433B;stroke-width:10}
+.ap-ub{stroke:#CF8B7B;stroke-width:7.5}
+.ap-h{stroke:#F3C6BA;stroke-width:2;opacity:.6;transform:translate(-1.5px,-1.5px)}
+.oe-u{stroke:#8E4A46;stroke-width:16;stroke-linecap:round}
+.oe-o{stroke:#8E4A46;stroke-width:16}
+.oe-ub{stroke:#E39A8C;stroke-width:13;stroke-linecap:round}
+.oe-b{stroke:#E39A8C;stroke-width:13}
+.oe-h{stroke:#F8CFC3;stroke-width:3.5;opacity:.7;transform:translate(-2.5px,-1px)}
+.si-u{stroke:#9A564D;stroke-width:27;stroke-linecap:round}
+.si-o{stroke:#9A564D;stroke-width:27}
+.si-ub{stroke:#F0B3A4;stroke-width:24;stroke-linecap:round}
+.si-b{stroke:#F0B3A4;stroke-width:24}
+.si-h{stroke:#FDE3DA;stroke-width:6;opacity:.6;transform:translate(-4px,-4.5px)}
+.ap-u{stroke:#7E433B;stroke-width:10;stroke-linecap:round}
+.ap-o{stroke:#7E433B;stroke-width:10}
+.ap-ub{stroke:#CF8B7B;stroke-width:7.5;stroke-linecap:round}
+.ap-b{stroke:#CF8B7B;stroke-width:7.5}
+.ap-h{stroke:#F3C6BA;stroke-width:2;opacity:.6;transform:translate(-1.5px,-1.5px)}
+.throat{fill:url(#gThroat);stroke:#3A111B;stroke-width:1.5}
+.tongue{fill:url(#gTongue);stroke:#8E3441;stroke-width:1.5}
+.tongue-hi{fill:none;stroke:#FBC4C8;stroke-width:3;stroke-linecap:round;opacity:.55}
+.palate{fill:none;stroke:#EBAAA5;stroke-width:6;stroke-linecap:round}
+.teeth path{fill:#FFF9EE;stroke:#B9AE98;stroke-width:.9}
+.epi{fill:#F6E7BD;stroke:#A88F52;stroke-width:1.5;transform-box:view-box;transform-origin:282px 272px;transition:transform .45s ease}
+.epi.closed{transform:rotate(82deg)}
+.gland-o circle,.gland-o ellipse{fill:#93592B}
+.gland circle,.gland ellipse{fill:url(#gGland)}
+.liver{fill:url(#gLiver);stroke:#4A1A17;stroke-width:1.8}
+.liver-line{fill:none;stroke:#4A1A17;stroke-width:1.6;opacity:.65}
+.liver-hi{fill:none;stroke:#E09A82;stroke-width:6;stroke-linecap:round;opacity:.3}
+.bile-o{fill:none;stroke:#2F5A28;stroke-width:6.5;stroke-linecap:round}
+.bile{fill:none;stroke:#7DBB5C;stroke-width:3.5;stroke-linecap:round}
+.panc{fill:url(#gPanc);stroke:#9A6E30;stroke-width:1.5;stroke-linejoin:round}
+.panc-c path{fill:none;stroke:#A87B3A;stroke-width:1.2;opacity:.5;stroke-linecap:round}
+.pduct{fill:none;stroke:#C4923F;stroke-width:2.5;stroke-linecap:round}
+.gall{fill:url(#gGall);stroke:#2C5626;stroke-width:1.6}
+.gall-hi{fill:none;stroke:#D8F2C4;stroke-width:2.5;stroke-linecap:round;opacity:.6}
+.stomach{fill:url(#gStom);stroke:#8E4046;stroke-width:1.8}
+.rugae{fill:none;stroke:#B0575E;stroke-width:1.7;opacity:.42;stroke-linecap:round}
+.st-hi{fill:none;stroke:#FFE9E2;stroke-width:6;stroke-linecap:round;opacity:.4}
+.col{stroke:#7E433B;stroke-width:1.3}
+.taenia{fill:none;stroke:#F6CFC3;stroke-width:5;opacity:.25;stroke-linecap:round}
+.rect-o{fill:none;stroke:#7A3838;stroke-width:27;stroke-linecap:round}
+.rect-b{fill:none;stroke:#C97268;stroke-width:24;stroke-linecap:round}
+.rect-h{fill:none;stroke:#EDB3A8;stroke-width:5;stroke-linecap:round;opacity:.5;transform:translate(-5px,0)}
+.anus{fill:#6A2E30;stroke:#3F1A1C;stroke-width:1.5}
+.hit{fill:transparent}
+.organ{cursor:pointer;transition:opacity .25s;outline-offset:0}
+.organ:focus{outline:none}
+.organ:focus-visible{outline:none;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 2px #fff)}
+.ducts{transition:opacity .25s;pointer-events:none}
+#fig.sel .organ,#fig.sel .ducts,#fig.sel .trachea,#fig.sel .note,#fig.sel .noteline{opacity:.26}
+#fig.sel .organ.on,#fig.sel .ducts.on{opacity:1}
+#fig.sel .organ.on{filter:drop-shadow(0 0 5px rgba(244,185,66,.9))}
+@media (hover:hover){.organ:hover{filter:brightness(1.13)}#fig.sel .organ.on:hover{filter:drop-shadow(0 0 5px rgba(244,185,66,.9))}}
+.pin{cursor:pointer;transition:opacity .25s}
+.pinb circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+.pinb text{font:800 13px "Baloo 2",sans-serif;fill:#0F1C3F}
+.lead{stroke:#F4B942;stroke-width:1.4;fill:none;vector-effect:non-scaling-stroke}
+.leaddot{fill:#F4B942}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins{display:none}
+.jp{fill:none;stroke:none}
+#bolus{fill:#C98A3C;stroke:#FFF3D0;stroke-width:2;display:none;pointer-events:none}
+#fig.journey #bolus{display:block}
+.drop{display:none;pointer-events:none;stroke:#0F1C3F;stroke-width:1}
+#fig.secrete .drop{display:block}
+.bile-d{fill:#A8EC7C}
+.panc-d{fill:#FFE08A}
+/* villus */
+.brush{fill:none;stroke:#F7C6B8;stroke-width:7;stroke-dasharray:1.6 2.6}
+.epi-o{fill:url(#gEpi);stroke:#A8655A;stroke-width:1.5}
+.core{fill:#FBEDE4;stroke:#A8655A;stroke-width:1.2}
+.cellw path{stroke:#A8655A;stroke-width:1;fill:none}
+.nuc circle{fill:#7A4BA0}
+.lact-o{stroke:#8FA03E;stroke-width:16;stroke-linecap:round;fill:none}
+.lact{stroke:#E3EDA6;stroke-width:12;stroke-linecap:round;fill:none}
+.cap-o{fill:none;stroke:#5B2B4E;stroke-width:9}
+.cap{fill:none;stroke:url(#gCap);stroke-width:6.5}
+.cap.dimc{stroke:#B77FA6}
+.capx{fill:none;stroke:#9B59C6;stroke-width:3;opacity:.85}
+.vside{opacity:.5}
+.vwall{fill:#6E3F4A}
+.art{fill:none;stroke:#E5484D;stroke-width:8}
+.vein{fill:none;stroke:#3D8BFF;stroke-width:8}
+.lymph{fill:none;stroke:#C8DC6A;stroke-width:8}
+.vt{font:700 17px "Nunito Sans",sans-serif;fill:#F5F7FF}
+.vt.sm{font-size:15px}
+.arr{fill:none;stroke:#F4B942;stroke-width:3}
+.arr2{stroke:#C8DC6A}
+@media (prefers-reduced-motion:reduce){.organ,.pin,.ducts,.epi{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › Digestive System Explorer</nav>
+  <h1>Digestive System Explorer</h1>
+  <p class="lead">Your digestive system breaks food down into molecules small enough to pass into your blood. Tap any organ to see what it does and how it works with the others, then follow a meal from mouth to anus. Ages 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Digestive System Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the organs</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Food journey</button>
+    <button class="tab" role="tab" id="t-enz" aria-controls="enz" aria-selected="false" tabindex="-1" data-p="enz">Enzymes and villi</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Organs"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Zoom">
+            <button class="seg" data-v="whole" aria-pressed="true">Whole</button>
+            <button class="seg" data-v="head" aria-pressed="false">Head</button>
+            <button class="seg" data-v="gut" aria-pressed="false">Abdomen</button>
+            <button class="seg r" id="pinBtn" aria-pressed="true">Numbers</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="0 0 600 1070" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Diagram of the human digestive system. Each organ is a button."><defs><linearGradient id="gBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34467F"/><stop offset=".5" stop-color="#3F5290"/><stop offset="1" stop-color="#2F4078"/></linearGradient><linearGradient id="gFadeB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="mBody" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="1070"><rect width="600" height="1070" fill="#fff"/><rect x="30" y="520" width="100" height="170" fill="url(#gFadeB)"/><rect x="30" y="690" width="100" height="90" fill="#000"/><rect x="481" y="520" width="100" height="170" fill="url(#gFadeB)"/><rect x="481" y="690" width="100" height="90" fill="#000"/><rect x="0" y="1005" width="600" height="65" fill="url(#gFadeB)"/></mask><linearGradient id="gTrach" gradientUnits="userSpaceOnUse" x1="0" y1="370" x2="0" y2="450"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="mTrach" maskUnits="userSpaceOnUse" x="250" y="260" width="80" height="210"><rect x="250" y="260" width="80" height="210" fill="url(#gTrach)"/></mask><radialGradient id="gStom" cx=".36" cy=".30" r=".85"><stop offset="0" stop-color="#F9C3B8"/><stop offset=".55" stop-color="#E88F8A"/><stop offset="1" stop-color="#B65B62"/></radialGradient><radialGradient id="gLiver" cx=".4" cy=".28" r=".9"><stop offset="0" stop-color="#B5604A"/><stop offset=".55" stop-color="#8A3A2E"/><stop offset="1" stop-color="#5A211D"/></radialGradient><radialGradient id="gGall" cx=".36" cy=".30" r=".85"><stop offset="0" stop-color="#9BD27A"/><stop offset=".55" stop-color="#5E9E47"/><stop offset="1" stop-color="#35662E"/></radialGradient><radialGradient id="gPanc" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#FBE3A6"/><stop offset=".55" stop-color="#EBC273"/><stop offset="1" stop-color="#B98A43"/></radialGradient><radialGradient id="gColon" cx=".42" cy=".36" r=".72"><stop offset="0" stop-color="#E7A999"/><stop offset=".55" stop-color="#C87E6E"/><stop offset="1" stop-color="#8E4E45"/></radialGradient><radialGradient id="gRect" cx=".36" cy=".30" r=".85"><stop offset="0" stop-color="#E09A8C"/><stop offset=".55" stop-color="#C06A62"/><stop offset="1" stop-color="#8A4040"/></radialGradient><radialGradient id="gTongue" cx=".4" cy=".2" r=".9"><stop offset="0" stop-color="#F6A1A8"/><stop offset=".55" stop-color="#E06C7C"/><stop offset="1" stop-color="#A8404F"/></radialGradient><radialGradient id="gGland" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#FAD3A0"/><stop offset=".55" stop-color="#EFA869"/><stop offset="1" stop-color="#B9763E"/></radialGradient><radialGradient id="gThroat" cx=".5" cy=".4" r=".8"><stop offset="0" stop-color="#9A3C48"/><stop offset=".55" stop-color="#6E2532"/><stop offset="1" stop-color="#431622"/></radialGradient></defs><g class="body" mask="url(#mBody)"><path class="skin" d="M262 345C267.5 337.3 259.2 325.8 258 318C256.8 310.2 258 304.2 255 298C252 291.8 245.8 285.3 240 281C234.2 276.7 225.7 274.8 220 272C214.3 269.2 209.5 267.7 206 264C202.5 260.3 199.7 254 199 250C198.3 246 202.3 243 202 240C201.7 237 196.8 234.5 197 232C197.2 229.5 201 227 203 225C205 223 209 221.8 209 220C209 218.2 205.2 216.2 203 214C200.8 211.8 196.8 209.5 196 207C195.2 204.5 196.7 201.2 198 199C199.3 196.8 204.8 195.5 204 194C203.2 192.5 197.2 192.3 193 190C188.8 187.7 180.5 184 179 180C177.5 176 181 171.3 184 166C187 160.7 193.7 153.7 197 148C200.3 142.3 203.2 137 204 132C204.8 127 201.7 124.2 202 118C202.3 111.8 202.7 103.3 206 95C209.3 86.7 213.8 76 222 68C230.2 60 242 52 255 47C268 42 285 37.5 300 38C315 38.5 332.3 42.7 345 50C357.7 57.3 368.5 68.7 376 82C383.5 95.3 388.2 113.7 390 130C391.8 146.3 389.7 164.2 387 180C384.3 195.8 378 211.3 374 225C370 238.7 365.3 249.5 363 262C360.7 274.5 359.8 287.8 360 300C360.2 312.2 359.8 324.7 364 335C368.2 345.3 370.7 353.8 385 362C399.3 370.2 430 377.3 450 384C470 390.7 492 392.7 505 402C518 411.3 522.8 420.3 528 440C533.2 459.7 533.2 486.7 536 520C538.8 553.3 542.3 603.3 545 640C547.7 676.7 555.2 722 552 740C548.8 758 534.7 748 526 748C517.3 748 505.3 758 500 740C494.7 722 496.7 673.3 494 640C491.3 606.7 486.7 562.3 484 540C481.3 517.7 479.3 506 478 506C476.7 506 477 521 476 540C475 559 474.2 593.3 472 620C469.8 646.7 463.3 675 463 700C462.7 725 466.8 746.7 470 770C473.2 793.3 479.3 811.7 482 840C484.7 868.3 485 900.8 486 940C487 979.2 515.7 1052.5 488 1075C460.3 1097.5 350.5 1080.8 320 1075C289.5 1069.2 310 1040 305 1040C300 1040 320.5 1069.2 290 1075C259.5 1080.8 149.7 1097.5 122 1075C94.3 1052.5 123 979.2 124 940C125 900.8 125.3 868.3 128 840C130.7 811.7 136.8 793.3 140 770C143.2 746.7 147.3 725 147 700C146.7 675 140.2 646.7 138 620C135.8 593.3 135 559 134 540C133 521 133.3 506 132 506C130.7 506 128.7 517.7 126 540C123.3 562.3 118.7 606.7 116 640C113.3 673.3 115.3 722 110 740C104.7 758 92.7 748 84 748C75.3 748 61.2 758 58 740C54.8 722 62.3 676.7 65 640C67.7 603.3 71.2 553.3 74 520C76.8 486.7 76.8 459.7 82 440C87.2 420.3 92 411.3 105 402C118 392.7 140 390.3 160 384C180 377.7 208 370.5 225 364C242 357.5 256.5 352.7 262 345Z"/><path class="feat" d="M207 129q8 -6 17 -1M209 131q7 3 13 0"/><path class="feat" d="M331 152c13 -9 25 4 20 21c-3 11 -8 20 -15 20c-6 0 -5 -9 -2 -14M338 160c6 -2 8 4 6 10"/><path class="feat" d="M187 182q5 3 9 1"/></g><path class="diaphragm" d="M140 590C143.3 581.7 150 554 160 540C170 526 185.8 513.3 200 506C214.2 498.7 230 495.7 245 496C260 496.3 278.5 504 290 508C301.5 512 304.8 519.7 314 520C323.2 520.3 332.3 513.3 345 510C357.7 506.7 375.5 499.7 390 500C404.5 500.3 420.3 504.5 432 512C443.7 519.5 453 532 460 545C467 558 471.7 582.5 474 590"/><g class="trachea" mask="url(#mTrach)"><path class="tr-o" d="M285 278C284.8 283.3 284.2 298.8 284 310C283.8 321.2 283.5 332.5 284 345C284.5 357.5 285.8 371.7 287 385C288.2 398.3 289.8 413.3 291 425C292.2 436.7 293.5 450 294 455"/><path class="tr-b" d="M285 278C284.8 283.3 284.2 298.8 284 310C283.8 321.2 283.5 332.5 284 345C284.5 357.5 285.8 371.7 287 385C288.2 398.3 289.8 413.3 291 425C292.2 436.7 293.5 450 294 455"/><g class="tr-r"><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(284.8 284) rotate(2.1)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(284.5 293) rotate(2)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(284.2 302) rotate(1.6)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(284 311) rotate(0.9)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(283.8 320) rotate(0.9)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(283.7 329) rotate(0.2)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(283.8 338) rotate(-0.9)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(284.1 347) rotate(-2.8)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(284.6 356) rotate(-3.8)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(285.3 364.9) rotate(-4.6)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(286 373.9) rotate(-5)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(286.8 382.9) rotate(-5)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(287.6 391.8) rotate(-5.4)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(288.5 400.8) rotate(-5.8)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(289.4 409.7) rotate(-5.9)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(290.4 418.7) rotate(-5.9)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(291.3 427.6) rotate(-5.7)"/><line x1="-7.5" y1="0" x2="7.5" y2="0" transform="translate(292.2 436.6) rotate(-5.7)"/></g></g><text class="note" x="246" y="394" text-anchor="end">windpipe</text><path class="noteline" d="M249 390L276 386"/><g class="organ " data-o="oesophagus" tabindex="0" role="button" aria-label="Oesophagus"><path class="oe-u" d="M300 276C300.2 281.7 300.7 297.7 301 310C301.3 322.3 301.3 335 302 350C302.7 365 303.7 383.3 305 400C306.3 416.7 308.5 433.3 310 450C311.5 466.7 312.7 483.7 314 500C315.3 516.3 317.3 540 318 548"/><path class="oe-ub" d="M300 276C300.2 281.7 300.7 297.7 301 310C301.3 322.3 301.3 335 302 350C302.7 365 303.7 383.3 305 400C306.3 416.7 308.5 433.3 310 450C311.5 466.7 312.7 483.7 314 500C315.3 516.3 317.3 540 318 548"/><path class="oe-h" d="M300 276C300.2 281.7 300.7 297.7 301 310C301.3 322.3 301.3 335 302 350C302.7 365 303.7 383.3 305 400C306.3 416.7 308.5 433.3 310 450C311.5 466.7 312.7 483.7 314 500C315.3 516.3 317.3 540 318 548"/></g><g class="organ " data-o="mouth" tabindex="0" role="button" aria-label="Mouth, teeth and tongue"><path class="throat" d="M207 217C208.2 214.2 208.5 210.2 214 208C219.5 205.8 231 204.7 240 204C249 203.3 260 203.5 268 204C276 204.5 282.7 207.7 288 207C293.3 206.3 297.2 197.5 300 200C302.8 202.5 304 213.7 305 222C306 230.3 306 241.7 306 250C306 258.3 306.3 267 305 272C303.7 277 301.2 278.8 298 280C294.8 281.2 289.2 280.7 286 279C282.8 277.3 280.5 273.8 279 270C277.5 266.2 279.8 258.2 277 256C274.2 253.8 268.2 257.2 262 257C255.8 256.8 247 256.5 240 255C233 253.5 224.8 251.5 220 248C215.2 244.5 213.2 237.8 211 234C208.8 230.2 207.7 227.8 207 225C206.3 222.2 205.8 219.8 207 217Z"/><g class="teeth"><path d="M209.8 238h6.5v-6q0 -3 -3.2 -3q-3.2 0 -3.2 3z"/><path d="M217.8 238.9h6.5v-6q0 -3 -3.2 -3q-3.2 0 -3.2 3z"/><path d="M226.8 239.8h6.5v-6q0 -3 -3.2 -3q-3.2 0 -3.2 3z"/><path d="M235.2 240.7h9.5v-4q0 -3 -4.8 -3q-4.8 0 -4.8 3z"/><path d="M246.2 241.6h9.5v-4q0 -3 -4.8 -3q-4.8 0 -4.8 3z"/><path d="M257.2 242.5h9.5v-4q0 -3 -4.8 -3q-4.8 0 -4.8 3z"/></g><path class="tongue" d="M215 228C217 225 221.2 222.8 226 221C230.8 219.2 238 217.3 244 217C250 216.7 256.8 217.2 262 219C267.2 220.8 272.2 223.8 275 228C277.8 232.2 278.8 239.3 279 244C279.2 248.7 278.8 253.8 276 256C273.2 258.2 268 257.2 262 257C256 256.8 246.7 256.3 240 255C233.3 253.7 226.3 251.7 222 249C217.7 246.3 215.2 242.5 214 239C212.8 235.5 213 231 215 228Z"/><path class="tongue-hi" d="M224 226q20 -8 44 0"/><path class="palate" d="M210 206C213 205.5 221.3 203.7 228 203C234.7 202.3 243 202 250 202C257 202 264.5 202 270 203C275.5 204 279.7 205.8 283 208C286.3 210.2 289 213.3 290 216C291 218.7 289.2 222.7 289 224"/><g class="teeth"><path d="M207.5 207h7v7q0 3 -3.5 3q-3.5 0 -3.5 -3z"/><path d="M216.5 206.5h7v6q0 3 -3.5 3q-3.5 0 -3.5 -3z"/><path d="M225.5 206h7v6q0 3 -3.5 3q-3.5 0 -3.5 -3z"/><path d="M234.2 205.5h9.5v4.5q0 3 -4.8 3q-4.8 0 -4.8 -3z"/><path d="M245.2 205h9.5v4.5q0 3 -4.8 3q-4.8 0 -4.8 -3z"/><path d="M256.2 204.5h9.5v4.5q0 3 -4.8 3q-4.8 0 -4.8 -3z"/></g></g><g class="organ " data-o="epiglottis" tabindex="0" role="button" aria-label="Epiglottis"><circle class="hit" cx="284" cy="262" r="15"/><path class="epi" id="epi" d="M279 272C277.7 270.3 276.7 265.5 277 262C277.3 258.5 279.3 253.2 281 251C282.7 248.8 285.8 247.8 287 249C288.2 250.2 288.3 254.2 288 258C287.7 261.8 286.5 269.7 285 272C283.5 274.3 280.3 273.7 279 272Z"/></g><g class="organ " data-o="saliva" tabindex="0" role="button" aria-label="Salivary glands"><g class="gland-o"><circle cx="334.8" cy="214" r="11.4"/><circle cx="332.5" cy="225.5" r="11.4"/><circle cx="326.7" cy="231.6" r="11.4"/><circle cx="320.1" cy="229.5" r="11.4"/><circle cx="315.7" cy="220.1" r="11.4"/><circle cx="315.7" cy="207.9" r="11.4"/><circle cx="320.1" cy="198.5" r="11.4"/><circle cx="326.7" cy="196.4" r="11.4"/><circle cx="332.5" cy="202.5" r="11.4"/><ellipse cx="325" cy="214" rx="12.9" ry="18.5"/></g><g class="gland"><circle cx="334.1" cy="214" r="10.5"/><circle cx="332" cy="225" r="10.5"/><circle cx="326.6" cy="230.8" r="10.5"/><circle cx="320.5" cy="228.8" r="10.5"/><circle cx="316.5" cy="219.8" r="10.5"/><circle cx="316.5" cy="208.2" r="10.5"/><circle cx="320.5" cy="199.2" r="10.5"/><circle cx="326.6" cy="197.2" r="10.5"/><circle cx="332" cy="203" r="10.5"/><ellipse cx="325" cy="214" rx="11.9" ry="17.5"/></g><g class="gland-o"><circle cx="267.4" cy="272.2" r="5.8"/><circle cx="260.7" cy="273" r="5.8"/><circle cx="254.6" cy="271.4" r="5.8"/><circle cx="252" cy="268.2" r="5.8"/><circle cx="254" cy="265" r="5.8"/><circle cx="259.8" cy="263.1" r="5.8"/><circle cx="266.6" cy="263.5" r="5.8"/><circle cx="271.3" cy="266.1" r="5.8"/><circle cx="271.6" cy="269.5" r="5.8"/><ellipse cx="262" cy="268" rx="10.1" ry="6.6"/></g><g class="gland"><circle cx="267" cy="271.6" r="5"/><circle cx="260.8" cy="272.2" r="5"/><circle cx="255.2" cy="270.9" r="5"/><circle cx="252.7" cy="268.2" r="5"/><circle cx="254.6" cy="265.4" r="5"/><circle cx="260" cy="263.8" r="5"/><circle cx="266.3" cy="264.2" r="5"/><circle cx="270.6" cy="266.3" r="5"/><circle cx="270.9" cy="269.3" r="5"/><ellipse cx="262" cy="268" rx="9.1" ry="5.6"/></g><g class="gland-o"><circle cx="232.9" cy="265.6" r="4.6"/><circle cx="228" cy="263.7" r="4.6"/><circle cx="227.4" cy="261" r="4.6"/><circle cx="231.2" cy="258.8" r="4.6"/><circle cx="237.8" cy="258.1" r="4.6"/><circle cx="244" cy="259.2" r="4.6"/><circle cx="246.9" cy="261.6" r="4.6"/><circle cx="245.2" cy="264.2" r="4.6"/><circle cx="239.6" cy="265.8" r="4.6"/><ellipse cx="237" cy="262" rx="9.4" ry="5.2"/></g><g class="gland"><circle cx="233.2" cy="264.9" r="3.7"/><circle cx="228.7" cy="263.4" r="3.7"/><circle cx="228.1" cy="261.2" r="3.7"/><circle cx="231.7" cy="259.4" r="3.7"/><circle cx="237.7" cy="258.8" r="3.7"/><circle cx="243.5" cy="259.7" r="3.7"/><circle cx="246.2" cy="261.7" r="3.7"/><circle cx="244.6" cy="263.8" r="3.7"/><circle cx="239.4" cy="265.1" r="3.7"/><ellipse cx="237" cy="262" rx="8.4" ry="4.2"/></g></g><g class="organ " data-o="liver" tabindex="0" role="button" aria-label="Liver"><path class="liver" d="M156 592C157.3 579.3 157.3 560 164 548C170.7 536 182.5 526.7 196 520C209.5 513.3 230 508.7 245 508C260 507.3 275.8 511.7 286 516C296.2 520.3 303.7 526.7 306 534C308.3 541.3 304 550.7 300 560C296 569.3 288.3 580.3 282 590C275.7 599.7 269.7 608.7 262 618C254.3 627.3 246.3 638.3 236 646C225.7 653.7 211 662.7 200 664C189 665.3 177.3 660.7 170 654C162.7 647.3 158.3 634.3 156 624C153.7 613.7 154.7 604.7 156 592Z"/><path class="liver-line" d="M262 512C258 545 262 585 280 596"/><path class="liver-hi" d="M178 556C196 532 232 522 262 524"/></g><g class="ducts"><path class="bile-o" d="M276 606C272 622 268 640 266 660C264 682 263 700 264 716"/><path class="bile" id="bilePath" d="M276 606C272 622 268 640 266 660C264 682 263 700 264 716"/><path class="bile-o" d="M258 624C262 632 266 640 268 646"/><path class="bile" d="M258 624C262 632 266 640 268 646"/></g><g class="organ " data-o="pancreas" tabindex="0" role="button" aria-label="Pancreas"><path class="panc" d="M289.2 699.2L291.9 696.9L295 696.8L298.3 698.8L301.5 700.6L304.4 700.1L307.1 697.8L309.7 695.8L312.7 696L315.9 697.9L319.1 699.2L321.8 698.3L324.4 696L327.1 694.3L330.2 694.7L333.6 696.3L336.9 697.2L339.8 696.1L342.5 693.9L345.5 692.6L348.7 693.2L352.1 694.7L355.3 695.4L358.3 694.3L361 692.4L364 691.5L367.2 692.3L370.4 693.8L373.5 694.2L376.4 693L379.1 691.4L382.1 690.8L385.2 691.7L388.4 692.9L391.5 693L394.4 691.8L397.2 690.5L400.2 690.1L403.3 691L406.5 691.9L409.5 691.9L412.4 690.8L415.3 689.7L418.3 689.5L429 697.1L420.4 705.4L417.6 706.9L414.8 708.5L411.8 709.2L408.8 708.8L405.7 708.4L402.8 709.2L400 711.1L397.2 712.7L394.2 713.1L391.1 712.5L388.1 712.1L385.2 713.2L382.4 715.2L379.6 716.9L376.6 717.1L373.5 716.2L370.4 715.9L367.6 717.2L364.9 719.5L362.1 721.1L359.2 721L356 719.9L353.1 719.7L350.4 721.4L347.9 724L345.3 725.6L342.3 725.3L339 724.2L336 724.3L333.4 726.4L330.9 729.2L328 730.7L324.7 730L321.3 728.8L318.1 729.1L315.4 731.5L312.8 734.3L309.8 735.4L306.6 734.3L303.3 732.8L300.3 733.3L297.7 736L295.2 738.9L287.4 736.4L280.7 733.3L275.7 727.8L273.2 720.8L273.6 713.4L276.7 706.7L282.2 701.7Z"/><g class="panc-c"><path d="M0 -11.1 q3.5 11.1 0 22.3" transform="translate(303.9 716.2) rotate(-8.5)"/><path d="M0 -10.5 q-3.5 10.5 0 21" transform="translate(315.7 714.4) rotate(-9.3)"/><path d="M0 -9.9 q3.5 9.9 0 19.8" transform="translate(327.5 712.2) rotate(-11.1)"/><path d="M0 -9.2 q-3.5 9.2 0 18.5" transform="translate(339.3 709.9) rotate(-10.9)"/><path d="M0 -8.6 q3.5 8.6 0 17.2" transform="translate(351.1 707.8) rotate(-9.2)"/><path d="M0 -8 q-3.5 8 0 15.9" transform="translate(363 706) rotate(-8.1)"/><path d="M0 -7.3 q3.5 7.3 0 14.7" transform="translate(374.9 704.4) rotate(-7.7)"/><path d="M0 -6.7 q-3.5 6.7 0 13.4" transform="translate(386.8 702.8) rotate(-7.9)"/><path d="M0 -6.1 q3.5 6.1 0 12.1" transform="translate(398.7 701.1) rotate(-7.7)"/><path d="M0 -5.4 q-3.5 5.4 0 10.9" transform="translate(410.5 699.5) rotate(-7.6)"/></g><path class="pduct" id="pancPath" d="M418 699C412.5 699.7 396.3 701.5 385 703C373.7 704.5 361.7 706.2 350 708C338.3 709.8 325.3 712.3 315 714C304.7 715.7 296.2 717.3 288 718C279.8 718.7 269.7 718 266 718"/></g><g class="organ " data-o="gallbladder" tabindex="0" role="button" aria-label="Gallbladder"><circle class="hit" cx="250" cy="640" r="20"/><path class="gall" d="M259 621C261.3 621.8 263.2 628.5 263 633C262.8 637.5 260.7 644 258 648C255.3 652 250.3 656.3 247 657C243.7 657.7 239.2 654.8 238 652C236.8 649.2 238.2 644 240 640C241.8 636 245.8 631.2 249 628C252.2 624.8 256.7 620.2 259 621Z"/><path class="gall-hi" d="M246 634q-4 8 -2 14"/></g><g class="organ " data-o="stomach" tabindex="0" role="button" aria-label="Stomach"><path class="stomach" d="M323 545C328.3 539.2 336.2 531.3 345 527C353.8 522.7 366.2 518.3 376 519C385.8 519.7 396 524.2 404 531C412 537.8 419.5 548.5 424 560C428.5 571.5 431.5 586.7 431 600C430.5 613.3 426.8 628.7 421 640C415.2 651.3 405.8 660.8 396 668C386.2 675.2 373 679.8 362 683C351 686.2 339 687 330 687C321 687 313.7 685.5 308 683C302.3 680.5 297.3 675.8 296 672C294.7 668.2 296.8 663.5 300 660C303.2 656.5 310.7 656 315 651C319.3 646 324.7 638.8 326 630C327.3 621.2 325.2 609.3 323 598C320.8 586.7 313 570.8 313 562C313 553.2 317.7 550.8 323 545Z"/><path class="rugae" d="M346 548C372 548 398 566 404 600M340 574C366 578 384 598 384 626M336 606C356 612 366 630 360 650M404 640C392 660 366 668 338 668"/><path class="st-hi" d="M352 534C376 530 398 540 410 560"/></g><g class="organ " data-o="small" tabindex="0" role="button" aria-label="Small intestine"><path class="si-u" d="M299 671C295.3 671.3 283.7 670.5 277 673C270.3 675.5 263.2 679.5 259 686C254.8 692.5 252.2 703 252 712C251.8 721 253.7 732.5 258 740C262.3 747.5 270.3 752.8 278 757C285.7 761.2 295 762.5 304 765C313 767.5 318.3 769.5 332 772C345.7 774.5 377.3 775.3 386 780C394.7 784.7 388 795.2 384 800C380 804.8 370 808.5 362 809C354 809.5 344.7 803 336 803C327.3 803 318.7 809 310 809C301.3 809 292.7 802.8 284 803C275.3 803.2 266.5 809.7 258 810C249.5 810.3 240 804.5 233 805C226 805.5 219.8 809.3 216 813C212.2 816.7 209.5 822.7 210 827C210.5 831.3 213.5 836.8 219 839C224.5 841.2 234.8 841 243 840C251.2 839 259.5 833.2 268 833C276.5 832.8 285.3 839 294 839C302.7 839 311.3 832.8 320 833C328.7 833.2 337.3 839.7 346 840C354.7 840.3 364.5 834.8 372 835C379.5 835.2 386.5 837.7 391 841C395.5 844.3 399 850.7 399 855C399 859.3 396.2 864.8 391 867C385.8 869.2 376.2 869 368 868C359.8 867 350.7 861.2 342 861C333.3 860.8 324.7 867 316 867C307.3 867 298.7 860.8 290 861C281.3 861.2 272.5 867.5 264 868C255.5 868.5 246.2 863.7 239 864C231.8 864.3 225.5 866.8 221 870C216.5 873.2 212.2 878.8 212 883C211.8 887.2 214.7 892.8 220 895C225.3 897.2 235.7 897 244 896C252.3 895 261.3 889.2 270 889C278.7 888.8 287.3 895 296 895C304.7 895 313.3 888.8 322 889C330.7 889.2 339.7 895.5 348 896C356.3 896.5 365 891.7 372 892C379 892.3 385.8 894.8 390 898C394.2 901.2 397.3 907 397 911C396.7 915 393.2 920 388 922C382.8 924 373.7 923.8 366 923C358.3 922.2 350.3 917 342 917C333.7 917 324.7 923 316 923C307.3 923 298.7 917 290 917C281.3 917 272.2 922.7 264 923C255.8 923.3 247.8 920.8 241 919C234.2 917.2 229 914.2 223 912C217 909.8 208 907 205 906"/><path class="si-ub" d="M299 671C295.3 671.3 283.7 670.5 277 673C270.3 675.5 263.2 679.5 259 686C254.8 692.5 252.2 703 252 712C251.8 721 253.7 732.5 258 740C262.3 747.5 270.3 752.8 278 757C285.7 761.2 295 762.5 304 765C313 767.5 318.3 769.5 332 772C345.7 774.5 377.3 775.3 386 780C394.7 784.7 388 795.2 384 800C380 804.8 370 808.5 362 809C354 809.5 344.7 803 336 803C327.3 803 318.7 809 310 809C301.3 809 292.7 802.8 284 803C275.3 803.2 266.5 809.7 258 810C249.5 810.3 240 804.5 233 805C226 805.5 219.8 809.3 216 813C212.2 816.7 209.5 822.7 210 827C210.5 831.3 213.5 836.8 219 839C224.5 841.2 234.8 841 243 840C251.2 839 259.5 833.2 268 833C276.5 832.8 285.3 839 294 839C302.7 839 311.3 832.8 320 833C328.7 833.2 337.3 839.7 346 840C354.7 840.3 364.5 834.8 372 835C379.5 835.2 386.5 837.7 391 841C395.5 844.3 399 850.7 399 855C399 859.3 396.2 864.8 391 867C385.8 869.2 376.2 869 368 868C359.8 867 350.7 861.2 342 861C333.3 860.8 324.7 867 316 867C307.3 867 298.7 860.8 290 861C281.3 861.2 272.5 867.5 264 868C255.5 868.5 246.2 863.7 239 864C231.8 864.3 225.5 866.8 221 870C216.5 873.2 212.2 878.8 212 883C211.8 887.2 214.7 892.8 220 895C225.3 897.2 235.7 897 244 896C252.3 895 261.3 889.2 270 889C278.7 888.8 287.3 895 296 895C304.7 895 313.3 888.8 322 889C330.7 889.2 339.7 895.5 348 896C356.3 896.5 365 891.7 372 892C379 892.3 385.8 894.8 390 898C394.2 901.2 397.3 907 397 911C396.7 915 393.2 920 388 922C382.8 924 373.7 923.8 366 923C358.3 922.2 350.3 917 342 917C333.7 917 324.7 923 316 923C307.3 923 298.7 917 290 917C281.3 917 272.2 922.7 264 923C255.8 923.3 247.8 920.8 241 919C234.2 917.2 229 914.2 223 912C217 909.8 208 907 205 906"/><path class="si-h" d="M299 671C295.3 671.3 283.7 670.5 277 673C270.3 675.5 263.2 679.5 259 686C254.8 692.5 252.2 703 252 712C251.8 721 253.7 732.5 258 740C262.3 747.5 270.3 752.8 278 757C285.7 761.2 295 762.5 304 765C313 767.5 318.3 769.5 332 772C345.7 774.5 377.3 775.3 386 780C394.7 784.7 388 795.2 384 800C380 804.8 370 808.5 362 809C354 809.5 344.7 803 336 803C327.3 803 318.7 809 310 809C301.3 809 292.7 802.8 284 803C275.3 803.2 266.5 809.7 258 810C249.5 810.3 240 804.5 233 805C226 805.5 219.8 809.3 216 813C212.2 816.7 209.5 822.7 210 827C210.5 831.3 213.5 836.8 219 839C224.5 841.2 234.8 841 243 840C251.2 839 259.5 833.2 268 833C276.5 832.8 285.3 839 294 839C302.7 839 311.3 832.8 320 833C328.7 833.2 337.3 839.7 346 840C354.7 840.3 364.5 834.8 372 835C379.5 835.2 386.5 837.7 391 841C395.5 844.3 399 850.7 399 855C399 859.3 396.2 864.8 391 867C385.8 869.2 376.2 869 368 868C359.8 867 350.7 861.2 342 861C333.3 860.8 324.7 867 316 867C307.3 867 298.7 860.8 290 861C281.3 861.2 272.5 867.5 264 868C255.5 868.5 246.2 863.7 239 864C231.8 864.3 225.5 866.8 221 870C216.5 873.2 212.2 878.8 212 883C211.8 887.2 214.7 892.8 220 895C225.3 897.2 235.7 897 244 896C252.3 895 261.3 889.2 270 889C278.7 888.8 287.3 895 296 895C304.7 895 313.3 888.8 322 889C330.7 889.2 339.7 895.5 348 896C356.3 896.5 365 891.7 372 892C379 892.3 385.8 894.8 390 898C394.2 901.2 397.3 907 397 911C396.7 915 393.2 920 388 922C382.8 924 373.7 923.8 366 923C358.3 922.2 350.3 917 342 917C333.7 917 324.7 923 316 923C307.3 923 298.7 917 290 917C281.3 917 272.2 922.7 264 923C255.8 923.3 247.8 920.8 241 919C234.2 917.2 229 914.2 223 912C217 909.8 208 907 205 906"/></g><g class="organ " data-o="large" tabindex="0" role="button" aria-label="Large intestine"><path class="ap-u" d="M186 938C187.7 940.7 192 949.3 196 954C200 958.7 206 964.7 210 966C214 967.3 218.3 962.7 220 962"/><path class="ap-ub" d="M186 938C187.7 940.7 192 949.3 196 954C200 958.7 206 964.7 210 966C214 967.3 218.3 962.7 220 962"/><path class="ap-h" d="M186 938C187.7 940.7 192 949.3 196 954C200 958.7 206 964.7 210 966C214 967.3 218.3 962.7 220 962"/><ellipse class="col" fill="url(#gColon)" cx="181" cy="916" rx="11.5" ry="19.5" transform="rotate(-95.1 181 916)"/><ellipse class="col" fill="url(#gColon)" cx="179.4" cy="900.6" rx="11.5" ry="19.5" transform="rotate(-95.4 179.4 900.6)"/><ellipse class="col" fill="url(#gColon)" cx="178.2" cy="885.1" rx="11.5" ry="19.5" transform="rotate(-93.4 178.2 885.1)"/><ellipse class="col" fill="url(#gColon)" cx="177.8" cy="869.6" rx="11.5" ry="19.5" transform="rotate(-90.8 177.8 869.6)"/><ellipse class="col" fill="url(#gColon)" cx="177.7" cy="854.1" rx="11.5" ry="19.5" transform="rotate(-89.9 177.7 854.1)"/><ellipse class="col" fill="url(#gColon)" cx="177.8" cy="838.6" rx="11.5" ry="19.5" transform="rotate(-89.1 177.8 838.6)"/><ellipse class="col" fill="url(#gColon)" cx="178.1" cy="823.1" rx="11.5" ry="19.5" transform="rotate(-88.9 178.1 823.1)"/><ellipse class="col" fill="url(#gColon)" cx="178.6" cy="807.6" rx="11.5" ry="19.5" transform="rotate(-87.4 178.6 807.6)"/><ellipse class="col" fill="url(#gColon)" cx="180" cy="792.2" rx="11.5" ry="19.5" transform="rotate(-81.7 180 792.2)"/><ellipse class="col" fill="url(#gColon)" cx="183" cy="777" rx="11.5" ry="19.5" transform="rotate(-74.6 183 777)"/><ellipse class="col" fill="url(#gColon)" cx="190" cy="763.4" rx="11.5" ry="19.5" transform="rotate(-50.9 190 763.4)"/><ellipse class="col" fill="url(#gColon)" cx="202.6" cy="754.7" rx="11.5" ry="19.5" transform="rotate(-16.3 202.6 754.7)"/><ellipse class="col" fill="url(#gColon)" cx="217.9" cy="755.2" rx="11.5" ry="19.5" transform="rotate(12.2 217.9 755.2)"/><ellipse class="col" fill="url(#gColon)" cx="232.8" cy="759.4" rx="11.5" ry="19.5" transform="rotate(16.7 232.8 759.4)"/><ellipse class="col" fill="url(#gColon)" cx="247.8" cy="763.5" rx="11.5" ry="19.5" transform="rotate(12.2 247.8 763.5)"/><ellipse class="col" fill="url(#gColon)" cx="262.9" cy="766.9" rx="11.5" ry="19.5" transform="rotate(13.4 262.9 766.9)"/><ellipse class="col" fill="url(#gColon)" cx="278" cy="770.4" rx="11.5" ry="19.5" transform="rotate(11.8 278 770.4)"/><ellipse class="col" fill="url(#gColon)" cx="293.2" cy="773.1" rx="11.5" ry="19.5" transform="rotate(7.2 293.2 773.1)"/><ellipse class="col" fill="url(#gColon)" cx="308.7" cy="774" rx="11.5" ry="19.5" transform="rotate(-0.6 308.7 774)"/><ellipse class="col" fill="url(#gColon)" cx="324.2" cy="772.8" rx="11.5" ry="19.5" transform="rotate(-7.4 324.2 772.8)"/><ellipse class="col" fill="url(#gColon)" cx="339.5" cy="770.4" rx="11.5" ry="19.5" transform="rotate(-10.8 339.5 770.4)"/><ellipse class="col" fill="url(#gColon)" cx="354.6" cy="767.2" rx="11.5" ry="19.5" transform="rotate(-12.4 354.6 767.2)"/><ellipse class="col" fill="url(#gColon)" cx="369.6" cy="763.4" rx="11.5" ry="19.5" transform="rotate(-17.6 369.6 763.4)"/><ellipse class="col" fill="url(#gColon)" cx="384.3" cy="758.2" rx="11.5" ry="19.5" transform="rotate(-20.3 384.3 758.2)"/><ellipse class="col" fill="url(#gColon)" cx="398.9" cy="753.3" rx="11.5" ry="19.5" transform="rotate(-14.7 398.9 753.3)"/><ellipse class="col" fill="url(#gColon)" cx="414.3" cy="751.8" rx="11.5" ry="19.5" transform="rotate(6.3 414.3 751.8)"/><ellipse class="col" fill="url(#gColon)" cx="427.7" cy="758.8" rx="11.5" ry="19.5" transform="rotate(46.4 427.7 758.8)"/><ellipse class="col" fill="url(#gColon)" cx="434.4" cy="772.6" rx="11.5" ry="19.5" transform="rotate(77 434.4 772.6)"/><ellipse class="col" fill="url(#gColon)" cx="436.5" cy="787.9" rx="11.5" ry="19.5" transform="rotate(86.7 436.5 787.9)"/><ellipse class="col" fill="url(#gColon)" cx="436.7" cy="803.4" rx="11.5" ry="19.5" transform="rotate(90.9 436.7 803.4)"/><ellipse class="col" fill="url(#gColon)" cx="436.3" cy="818.9" rx="11.5" ry="19.5" transform="rotate(91.8 436.3 818.9)"/><ellipse class="col" fill="url(#gColon)" cx="435.9" cy="834.4" rx="11.5" ry="19.5" transform="rotate(91.1 435.9 834.4)"/><ellipse class="col" fill="url(#gColon)" cx="435.6" cy="849.9" rx="11.5" ry="19.5" transform="rotate(91.4 435.6 849.9)"/><ellipse class="col" fill="url(#gColon)" cx="435.1" cy="865.4" rx="11.5" ry="19.5" transform="rotate(92.9 435.1 865.4)"/><ellipse class="col" fill="url(#gColon)" cx="433.9" cy="880.8" rx="11.5" ry="19.5" transform="rotate(96 433.9 880.8)"/><ellipse class="col" fill="url(#gColon)" cx="432" cy="896.2" rx="11.5" ry="19.5" transform="rotate(98.7 432 896.2)"/><ellipse class="col" fill="url(#gColon)" cx="428.9" cy="911.4" rx="11.5" ry="19.5" transform="rotate(104.8 428.9 911.4)"/><ellipse class="col" fill="url(#gColon)" cx="424.1" cy="926.1" rx="11.5" ry="19.5" transform="rotate(111.3 424.1 926.1)"/><ellipse class="col" fill="url(#gColon)" cx="417" cy="939.9" rx="11.5" ry="19.5" transform="rotate(125.3 417 939.9)"/><ellipse class="col" fill="url(#gColon)" cx="406.2" cy="950.9" rx="11.5" ry="19.5" transform="rotate(143.4 406.2 950.9)"/><ellipse class="col" fill="url(#gColon)" cx="392.7" cy="958.4" rx="11.5" ry="19.5" transform="rotate(158.1 392.7 958.4)"/><ellipse class="col" fill="url(#gColon)" cx="377.6" cy="961.2" rx="11.5" ry="19.5" transform="rotate(-173.3 377.6 961.2)"/><ellipse class="col" fill="url(#gColon)" cx="362.5" cy="958" rx="11.5" ry="19.5" transform="rotate(-167.9 362.5 958)"/><ellipse class="col" fill="url(#gColon)" cx="347.2" cy="958" rx="11.5" ry="19.5" transform="rotate(166.1 347.2 958)"/><ellipse class="col" fill="url(#gColon)" cx="333.2" cy="964.4" rx="11.5" ry="19.5" transform="rotate(145.9 333.2 964.4)"/><ellipse class="col" fill="url(#gColon)" cx="322.9" cy="975.9" rx="11.5" ry="19.5" transform="rotate(122.3 322.9 975.9)"/><ellipse class="col" fill="url(#gColon)" cx="181" cy="922" rx="22" ry="20"/><path class="taenia" d="M181 916C180.5 910 178.5 894.3 178 880C177.5 865.7 177.7 844.7 178 830C178.3 815.3 178.3 802.7 180 792C181.7 781.3 183.3 772.3 188 766C192.7 759.7 197.7 754.3 208 754C218.3 753.7 233.8 760.7 250 764C266.2 767.3 286.7 773.7 305 774C323.3 774.3 343.3 769.7 360 766C376.7 762.3 393.8 753.3 405 752C416.2 750.7 421.8 753 427 758C432.2 763 434.5 770 436 782C437.5 794 436.3 813.7 436 830C435.7 846.3 435.5 865.3 434 880C432.5 894.7 430.7 907 427 918C423.3 929 419.2 938.8 412 946C404.8 953.2 393.8 959.2 384 961C374.2 962.8 361.8 956.2 353 957C344.2 957.8 336.8 961.5 331 966C325.2 970.5 320.2 981 318 984"/></g><g class="organ " data-o="rectum" tabindex="0" role="button" aria-label="Rectum and anus"><path class="rect-o" d="M318 984C316.7 987 312 995.7 310 1002C308 1008.3 306.8 1015.7 306 1022C305.2 1028.3 305.2 1037 305 1040"/><path class="rect-b" d="M318 984C316.7 987 312 995.7 310 1002C308 1008.3 306.8 1015.7 306 1022C305.2 1028.3 305.2 1037 305 1040"/><path class="rect-h" d="M312 992C308 1004 306 1014 305 1024"/><ellipse class="anus" cx="305" cy="1043" rx="9" ry="5.5"/></g><g id="jl" aria-hidden="true"><path class="jp" id="jp0" d="M196 219C199 219 207.3 220 214 219C220.7 218 228.7 214 236 213C243.3 212 254.3 213 258 213"/><path class="jp" id="jp1" d="M258 213C261.7 213.2 273.7 211.8 280 214C286.3 216.2 292.7 219.7 296 226C299.3 232.3 299.3 243.7 300 252C300.7 260.3 300 272 300 276"/><path class="jp" id="jp2" d="M300 276C300.2 281.7 300.7 297.7 301 310C301.3 322.3 301.3 335 302 350C302.7 365 303.7 383.3 305 400C306.3 416.7 308.5 433.3 310 450C311.5 466.7 312.7 483.7 314 500C315.3 516.3 317.3 540 318 548"/><path class="jp" id="jp3" d="M318 548C320.3 551 325 562 332 566C339 570 350 568 360 572C370 576 385.7 580.3 392 590C398.3 599.7 401.3 619 398 630C394.7 641 380.7 654.3 372 656C363.3 657.7 348.7 648 346 640C343.3 632 349.7 612.7 356 608C362.3 603.3 379 606.7 384 612C389 617.3 390.7 631.3 386 640C381.3 648.7 366.7 659 356 664C345.3 669 331.5 669.3 322 670C312.5 670.7 302.8 668.3 299 668"/><path class="jp" id="jp4" d="M299 671C295.3 671.3 283.7 670.5 277 673C270.3 675.5 263.2 679.5 259 686C254.8 692.5 252.2 703 252 712C251.8 721 253.7 732.5 258 740C262.3 747.5 270.3 752.8 278 757C285.7 761.2 295 762.5 304 765C313 767.5 322.3 770.5 332 772C341.7 773.5 353 772.7 362 774C371 775.3 382 779 386 780"/><path class="jp" id="jp5" d="M386 780C385.7 783.3 388 795.2 384 800C380 804.8 370 808.5 362 809C354 809.5 344.7 803 336 803C327.3 803 318.7 809 310 809C301.3 809 292.7 802.8 284 803C275.3 803.2 266.5 809.7 258 810C249.5 810.3 240 804.5 233 805C226 805.5 219.8 809.3 216 813C212.2 816.7 209.5 822.7 210 827C210.5 831.3 213.5 836.8 219 839C224.5 841.2 234.8 841 243 840C251.2 839 259.5 833.2 268 833C276.5 832.8 285.3 839 294 839C302.7 839 311.3 832.8 320 833C328.7 833.2 337.3 839.7 346 840C354.7 840.3 364.5 834.8 372 835C379.5 835.2 386.5 837.7 391 841C395.5 844.3 399 850.7 399 855C399 859.3 396.2 864.8 391 867C385.8 869.2 376.2 869 368 868C359.8 867 350.7 861.2 342 861C333.3 860.8 324.7 867 316 867C307.3 867 298.7 860.8 290 861C281.3 861.2 272.5 867.5 264 868C255.5 868.5 246.2 863.7 239 864C231.8 864.3 225.5 866.8 221 870C216.5 873.2 212.2 878.8 212 883C211.8 887.2 214.7 892.8 220 895C225.3 897.2 235.7 897 244 896C252.3 895 261.3 889.2 270 889C278.7 888.8 287.3 895 296 895C304.7 895 313.3 888.8 322 889C330.7 889.2 339.7 895.5 348 896C356.3 896.5 365 891.7 372 892C379 892.3 385.8 894.8 390 898C394.2 901.2 397.3 907 397 911C396.7 915 393.2 920 388 922C382.8 924 373.7 923.8 366 923C358.3 922.2 350.3 917 342 917C333.7 917 324.7 923 316 923C307.3 923 298.7 917 290 917C281.3 917 272.2 922.7 264 923C255.8 923.3 247.8 920.8 241 919C234.2 917.2 229 914.2 223 912C217 909.8 208 907 205 906"/><path class="jp" id="jp6" d="M205 906C201.8 907.3 190.5 918.3 186 914C181.5 909.7 179.3 894 178 880C176.7 866 177.7 844.7 178 830C178.3 815.3 178.3 802.7 180 792C181.7 781.3 183.3 772.3 188 766C192.7 759.7 197.7 754.3 208 754C218.3 753.7 233.8 760.7 250 764C266.2 767.3 286.7 773.7 305 774C323.3 774.3 343.3 769.7 360 766C376.7 762.3 393.8 753.3 405 752C416.2 750.7 421.8 753 427 758C432.2 763 434.5 770 436 782C437.5 794 436.3 813.7 436 830C435.7 846.3 435.5 865.3 434 880C432.5 894.7 430.7 907 427 918C423.3 929 419.2 938.8 412 946C404.8 953.2 393.8 959.2 384 961C374.2 962.8 361.8 956.2 353 957C344.2 957.8 336.8 961.5 331 966C325.2 970.5 320.2 981 318 984"/><path class="jp" id="jp7" d="M318 984C316.7 987 312 995.7 310 1002C308 1008.3 306.8 1015.7 306 1022C305.2 1028.3 305.2 1033.3 305 1040C304.8 1046.7 305 1058.3 305 1062"/><circle id="dropB" class="drop bile-d" r="4"/><circle id="dropP" class="drop panc-d" r="4"/><circle id="bolus" r="8"/></g><g id="pins"><g class="pin" data-o="mouth"><path class="lead" d="M160 240L222 232"/><circle class="leaddot" cx="222" cy="232" r="2.6"/><g class="pinb" data-x="160" data-y="240" transform="translate(160 240)"><circle r="12"/><text y="4.6" text-anchor="middle">1</text></g></g><g class="pin" data-o="saliva"><path class="lead" d="M404 250L334 220"/><circle class="leaddot" cx="334" cy="220" r="2.6"/><g class="pinb" data-x="404" data-y="250" transform="translate(404 250)"><circle r="12"/><text y="4.6" text-anchor="middle">2</text></g></g><g class="pin" data-o="epiglottis"><path class="lead" d="M228 300L281 262"/><circle class="leaddot" cx="281" cy="262" r="2.6"/><g class="pinb" data-x="228" data-y="300" transform="translate(228 300)"><circle r="12"/><text y="4.6" text-anchor="middle">3</text></g></g><g class="pin" data-o="oesophagus"><path class="lead" d="M356 440L311 446"/><circle class="leaddot" cx="311" cy="446" r="2.6"/><g class="pinb" data-x="356" data-y="440" transform="translate(356 440)"><circle r="12"/><text y="4.6" text-anchor="middle">4</text></g></g><g class="pin" data-o="stomach"><g class="pinb" data-x="384" data-y="596" transform="translate(384 596)"><circle r="12"/><text y="4.6" text-anchor="middle">5</text></g></g><g class="pin" data-o="liver"><g class="pinb" data-x="222" data-y="578" transform="translate(222 578)"><circle r="12"/><text y="4.6" text-anchor="middle">6</text></g></g><g class="pin" data-o="gallbladder"><path class="lead" d="M208 700L246 652"/><circle class="leaddot" cx="246" cy="652" r="2.6"/><g class="pinb" data-x="208" data-y="700" transform="translate(208 700)"><circle r="12"/><text y="4.6" text-anchor="middle">7</text></g></g><g class="pin" data-o="pancreas"><path class="lead" d="M452 676L412 698"/><circle class="leaddot" cx="412" cy="698" r="2.6"/><g class="pinb" data-x="452" data-y="676" transform="translate(452 676)"><circle r="12"/><text y="4.6" text-anchor="middle">8</text></g></g><g class="pin" data-o="small"><g class="pinb" data-x="306" data-y="846" transform="translate(306 846)"><circle r="12"/><text y="4.6" text-anchor="middle">9</text></g></g><g class="pin" data-o="large"><g class="pinb" data-x="180" data-y="832" transform="translate(180 832)"><circle r="12"/><text y="4.6" text-anchor="middle">10</text></g></g><g class="pin" data-o="rectum"><path class="lead" d="M364 1016L312 1010"/><circle class="leaddot" cx="312" cy="1010" r="2.6"/><g class="pinb" data-x="364" data-y="1016" transform="translate(364 1016)"><circle r="12"/><text y="4.6" text-anchor="middle">11</text></g></g></g></svg></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Back</button>
+            <button class="btn" id="jNext">Next</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Play all</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="enz" role="tabpanel" aria-labelledby="t-enz">
+    <h2>Enzymes: the chemical scissors</h2>
+    <p>Most food molecules are too big to pass through the wall of your small intestine. Enzymes are biological catalysts: proteins that speed up the reactions that break large molecules into small, soluble ones. Each type of enzyme only works on one type of food molecule.</p>
+    <div class="cards">
+      <div class="ecard"><h3>Carbohydrase</h3><div class="eq">Starch <span>→</span> sugars</div><dl><dt>Example</dt><dd>Amylase</dd><dt>Made in</dt><dd>Salivary glands, pancreas, small intestine</dd><dt>Works in</dt><dd>Mouth, small intestine</dd></dl></div>
+      <div class="ecard"><h3>Protease</h3><div class="eq">Proteins <span>→</span> amino acids</div><dl><dt>Example</dt><dd>Pepsin (in the stomach)</dd><dt>Made in</dt><dd>Stomach, pancreas, small intestine</dd><dt>Works in</dt><dd>Stomach, small intestine</dd></dl></div>
+      <div class="ecard"><h3>Lipase</h3><div class="eq">Lipids (fats) <span>→</span> fatty acids + glycerol</div><dl><dt>Made in</dt><dd>Pancreas, small intestine</dd><dt>Works in</dt><dd>Small intestine</dd><dt>Helped by</dt><dd>Bile, which emulsifies the fat first</dd></dl></div>
+      <div class="ecard"><h3>Bile is not an enzyme</h3><div class="eq">Big fat globules <span>→</span> tiny droplets</div><dl><dt>Made in</dt><dd>Liver</dd><dt>Stored in</dt><dd>Gallbladder</dd><dt>Does</dt><dd>Emulsifies fats and neutralises stomach acid</dd></dl></div>
+    </div>
+    <h3>Each enzyme needs the right pH (values are approximate)</h3>
+    <div class="ph">
+      <div><b><i style="background:#7BC96F"></i>pH 7</b>Mouth: about neutral, which suits amylase.</div>
+      <div><b><i style="background:#E5484D"></i>pH 2</b>Stomach: strongly acidic, which suits stomach protease.</div>
+      <div><b><i style="background:#3FA7A0"></i>pH 8</b>Small intestine: slightly alkaline, which suits the enzymes there.</div>
+    </div>
+    <h2 id="villi">Villi: built for absorption</h2>
+    <p>The lining of the small intestine is covered in millions of tiny finger-like villi, each about a millimetre long. They are adapted to absorb digested food quickly.</p>
+    <div class="vgrid">
+      <div class="vbox"><p class="muted" style="margin:2px 6px 6px;font-size:14px">Cut through three villi. The space above them is the inside of the intestine, full of digested food.</p><svg id="vil" viewBox="100 48 400 352" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three villi on the lining of the small intestine. The middle one is cut open to show the blood capillaries and the lacteal inside."><defs><linearGradient id="gCap" gradientUnits="userSpaceOnUse" x1="278" y1="0" x2="322" y2="0"><stop offset="0" stop-color="#E5484D"/><stop offset=".5" stop-color="#9B59C6"/><stop offset="1" stop-color="#3D8BFF"/></linearGradient><linearGradient id="gEpi" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7C6B8"/><stop offset=".5" stop-color="#F2AE9E"/><stop offset="1" stop-color="#D98A7C"/></linearGradient><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#F4B942"/></marker><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#C8DC6A"/></marker></defs><g class="vside"><path class="brush" d="M24 340L24 166A60 60 0 0 1 144 166L144 340"/><path class="epi-o" d="M28 340L28 166A56 56 0 0 1 140 166L140 340Z"/><path class="core" d="M45 340L45 166A39 39 0 0 1 123 166L123 340Z"/><g class="cellw"><path d="M28 326h17M123 326h17"/><path d="M28 307h17M123 307h17"/><path d="M28 288h17M123 288h17"/><path d="M28 269h17M123 269h17"/><path d="M28 250h17M123 250h17"/><path d="M28 231h17M123 231h17"/><path d="M28 212h17M123 212h17"/><path d="M28 193h17M123 193h17"/><path d="M28 174h17M123 174h17"/><path d="M45 166L28 166"/><path d="M47.4 152.7L31.4 146.8"/><path d="M54.1 140.9L41.1 130"/><path d="M64.5 132.2L56 117.5"/><path d="M77.2 127.6L74.3 110.9"/><path d="M90.8 127.6L93.7 110.9"/><path d="M103.5 132.2L112 117.5"/><path d="M113.9 140.9L126.9 130"/><path d="M120.6 152.7L136.6 146.8"/><path d="M123 166L140 166"/></g><g class="nuc"><circle cx="36.5" cy="316" r="3"/><circle cx="131.5" cy="316" r="3"/><circle cx="36.5" cy="297" r="3"/><circle cx="131.5" cy="297" r="3"/><circle cx="36.5" cy="278" r="3"/><circle cx="131.5" cy="278" r="3"/><circle cx="36.5" cy="259" r="3"/><circle cx="131.5" cy="259" r="3"/><circle cx="36.5" cy="240" r="3"/><circle cx="131.5" cy="240" r="3"/><circle cx="36.5" cy="221" r="3"/><circle cx="131.5" cy="221" r="3"/><circle cx="36.5" cy="202" r="3"/><circle cx="131.5" cy="202" r="3"/><circle cx="36.5" cy="183" r="3"/><circle cx="131.5" cy="183" r="3"/><circle cx="37.2" cy="157.8" r="3"/><circle cx="42.9" cy="142.2" r="3"/><circle cx="53.5" cy="129.6" r="3"/><circle cx="67.8" cy="121.4" r="3"/><circle cx="84" cy="118.5" r="3"/><circle cx="100.2" cy="121.4" r="3"/><circle cx="114.5" cy="129.6" r="3"/><circle cx="125.1" cy="142.2" r="3"/><circle cx="130.8" cy="157.8" r="3"/></g><path class="lact dim" d="M84 340L84 160"/><path class="cap dimc" d="M60 340L60 168A24 24 0 0 1 108 168L108 340"/></g><g class="vside"><path class="brush" d="M456 340L456 166A60 60 0 0 1 576 166L576 340"/><path class="epi-o" d="M460 340L460 166A56 56 0 0 1 572 166L572 340Z"/><path class="core" d="M477 340L477 166A39 39 0 0 1 555 166L555 340Z"/><g class="cellw"><path d="M460 326h17M555 326h17"/><path d="M460 307h17M555 307h17"/><path d="M460 288h17M555 288h17"/><path d="M460 269h17M555 269h17"/><path d="M460 250h17M555 250h17"/><path d="M460 231h17M555 231h17"/><path d="M460 212h17M555 212h17"/><path d="M460 193h17M555 193h17"/><path d="M460 174h17M555 174h17"/><path d="M477 166L460 166"/><path d="M479.4 152.7L463.4 146.8"/><path d="M486.1 140.9L473.1 130"/><path d="M496.5 132.2L488 117.5"/><path d="M509.2 127.6L506.3 110.9"/><path d="M522.8 127.6L525.7 110.9"/><path d="M535.5 132.2L544 117.5"/><path d="M545.9 140.9L558.9 130"/><path d="M552.6 152.7L568.6 146.8"/><path d="M555 166L572 166"/></g><g class="nuc"><circle cx="468.5" cy="316" r="3"/><circle cx="563.5" cy="316" r="3"/><circle cx="468.5" cy="297" r="3"/><circle cx="563.5" cy="297" r="3"/><circle cx="468.5" cy="278" r="3"/><circle cx="563.5" cy="278" r="3"/><circle cx="468.5" cy="259" r="3"/><circle cx="563.5" cy="259" r="3"/><circle cx="468.5" cy="240" r="3"/><circle cx="563.5" cy="240" r="3"/><circle cx="468.5" cy="221" r="3"/><circle cx="563.5" cy="221" r="3"/><circle cx="468.5" cy="202" r="3"/><circle cx="563.5" cy="202" r="3"/><circle cx="468.5" cy="183" r="3"/><circle cx="563.5" cy="183" r="3"/><circle cx="469.2" cy="157.8" r="3"/><circle cx="474.9" cy="142.2" r="3"/><circle cx="485.5" cy="129.6" r="3"/><circle cx="499.8" cy="121.4" r="3"/><circle cx="516" cy="118.5" r="3"/><circle cx="532.2" cy="121.4" r="3"/><circle cx="546.5" cy="129.6" r="3"/><circle cx="557.1" cy="142.2" r="3"/><circle cx="562.8" cy="157.8" r="3"/></g><path class="lact dim" d="M516 340L516 160"/><path class="cap dimc" d="M492 340L492 168A24 24 0 0 1 540 168L540 340"/></g><path class="brush" d="M240 340L240 166A60 60 0 0 1 360 166L360 340"/><path class="epi-o" d="M244 340L244 166A56 56 0 0 1 356 166L356 340Z"/><path class="core" d="M261 340L261 166A39 39 0 0 1 339 166L339 340Z"/><g class="cellw"><path d="M244 326h17M339 326h17"/><path d="M244 307h17M339 307h17"/><path d="M244 288h17M339 288h17"/><path d="M244 269h17M339 269h17"/><path d="M244 250h17M339 250h17"/><path d="M244 231h17M339 231h17"/><path d="M244 212h17M339 212h17"/><path d="M244 193h17M339 193h17"/><path d="M244 174h17M339 174h17"/><path d="M261 166L244 166"/><path d="M263.4 152.7L247.4 146.8"/><path d="M270.1 140.9L257.1 130"/><path d="M280.5 132.2L272 117.5"/><path d="M293.2 127.6L290.3 110.9"/><path d="M306.8 127.6L309.7 110.9"/><path d="M319.5 132.2L328 117.5"/><path d="M329.9 140.9L342.9 130"/><path d="M336.6 152.7L352.6 146.8"/><path d="M339 166L356 166"/></g><g class="nuc"><circle cx="252.5" cy="316" r="3"/><circle cx="347.5" cy="316" r="3"/><circle cx="252.5" cy="297" r="3"/><circle cx="347.5" cy="297" r="3"/><circle cx="252.5" cy="278" r="3"/><circle cx="347.5" cy="278" r="3"/><circle cx="252.5" cy="259" r="3"/><circle cx="347.5" cy="259" r="3"/><circle cx="252.5" cy="240" r="3"/><circle cx="347.5" cy="240" r="3"/><circle cx="252.5" cy="221" r="3"/><circle cx="347.5" cy="221" r="3"/><circle cx="252.5" cy="202" r="3"/><circle cx="347.5" cy="202" r="3"/><circle cx="252.5" cy="183" r="3"/><circle cx="347.5" cy="183" r="3"/><circle cx="253.2" cy="157.8" r="3"/><circle cx="258.9" cy="142.2" r="3"/><circle cx="269.5" cy="129.6" r="3"/><circle cx="283.8" cy="121.4" r="3"/><circle cx="300" cy="118.5" r="3"/><circle cx="316.2" cy="121.4" r="3"/><circle cx="330.5" cy="129.6" r="3"/><circle cx="341.1" cy="142.2" r="3"/><circle cx="346.8" cy="157.8" r="3"/></g><path class="lact-o" d="M300 340L300 160"/><path class="lact" d="M300 340L300 160"/><path class="cap-o" d="M276 340L276 168A24 24 0 0 1 324 168L324 340"/><path class="cap" d="M276 340L276 168A24 24 0 0 1 324 168L324 340"/><path class="capx" d="M276 202C292 188 308 216 324 202"/><path class="capx" d="M276 248C292 234 308 262 324 248"/><path class="capx" d="M276 294C292 280 308 308 324 294"/><rect class="vwall" x="0" y="340" width="600" height="60"/><path class="art" d="M0 372H276V338"/><path class="vein" d="M600 386H324V338"/><path class="lymph" d="M300 338V400"/><text class="vt sm" x="110" y="362">blood in</text><text class="vt sm" x="490" y="376" text-anchor="end">blood out, to the liver</text><path class="arr" marker-end="url(#ah)" d="M150 204C190 204 232 208 270 216"/><path class="arr arr2" marker-end="url(#ah2)" d="M150 262C200 262 250 262 292 262"/><text class="vt sm" x="192" y="176" text-anchor="middle">glucose,</text><text class="vt sm" x="192" y="194" text-anchor="middle">amino acids</text><text class="vt sm" x="192" y="284" text-anchor="middle">fatty acids,</text><text class="vt sm" x="192" y="302" text-anchor="middle">glycerol</text><path class="lead" d="M404 122L347 128"/><circle class="leaddot" cx="347" cy="128" r="2.6"/><g class="pinb" transform="translate(404 122)"><circle r="13"/><text y="5" text-anchor="middle">1</text></g><path class="lead" d="M404 186L348 198"/><circle class="leaddot" cx="348" cy="198" r="2.6"/><g class="pinb" transform="translate(404 186)"><circle r="13"/><text y="5" text-anchor="middle">2</text></g><path class="lead" d="M404 250L325 254"/><circle class="leaddot" cx="325" cy="254" r="2.6"/><g class="pinb" transform="translate(404 250)"><circle r="13"/><text y="5" text-anchor="middle">3</text></g><path class="lead" d="M404 312L305 312"/><circle class="leaddot" cx="305" cy="312" r="2.6"/><g class="pinb" transform="translate(404 312)"><circle r="13"/><text y="5" text-anchor="middle">4</text></g></svg></div>
+      <ol class="vlist">
+        <li><span class="num">1</span><span><b>Microvilli.</b> The surface of each cell is folded into even tinier projections, adding more surface area again.</span></li>
+        <li><span class="num">2</span><span><b>A wall one cell thick.</b> Molecules only have a very short distance to travel to reach the blood.</span></li>
+        <li><span class="num">3</span><span><b>Blood capillaries.</b> A dense network carries glucose and amino acids away as fast as they arrive, so more keeps moving in.</span></li>
+        <li><span class="num">4</span><span><b>Lacteal.</b> A vessel in the centre of the villus that absorbs fatty acids and glycerol.</span></li>
+      </ol>
+    </div>
+    <p class="muted">Together the folds, villi and microvilli give the small intestine an absorbing surface of around 30 square metres, about the floor area of a studio flat.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find printable science packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var fig=$("fig"),figcol=$("figcol");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  var ORGANS=[
+    {id:"mouth",n:1,chip:"Mouth",name:"Mouth, teeth and tongue",kind:"tube",zone:"head",
+     job:"Digestion starts here. Your teeth break food into smaller pieces. Your tongue mixes it with saliva and rolls it into a soft ball called a bolus, ready to swallow.",
+     facts:["Chewing is mechanical digestion. Smaller pieces have a bigger surface area for enzymes to work on.","Incisors cut, canines tear, and premolars and molars crush and grind.","Adults have 32 teeth. Their outer layer, enamel, is the hardest substance in the body."],
+     time:"Up to a minute per mouthful",ph:"About 7 (neutral)",
+     links:[["saliva","Saliva wets the food and starts to digest the starch in it."],["epiglottis","When your tongue pushes the bolus back to swallow, the epiglottis covers the windpipe."]],
+     words:"bolus, mechanical digestion, enamel"},
+    {id:"saliva",n:2,chip:"Salivary glands",name:"Salivary glands",kind:"acc",zone:"head",
+     job:"Three pairs of glands around your mouth make saliva and release it through tiny tubes called ducts. Saliva is mostly water, with mucus to make food slippery and an enzyme to start digestion.",
+     facts:["Saliva contains the enzyme amylase, a carbohydrase. It starts to break starch down into sugars.","This is chemical digestion: large molecules are broken into smaller ones.","Saliva is close to neutral (about pH 7), which suits amylase.","You make roughly a litre of saliva every day."],
+     links:[["mouth","The teeth and tongue mix saliva into the food as you chew."],["stomach","Amylase stops working once the food reaches the acid in the stomach."],["pancreas","The pancreas makes more amylase, which finishes digesting starch in the small intestine."]],
+     words:"saliva, amylase, carbohydrase, chemical digestion"},
+    {id:"epiglottis",n:3,chip:"Epiglottis",name:"Epiglottis",kind:"flap",zone:"head",
+     job:"Your throat is shared by food and air. The epiglottis is a flap of cartilage that folds down over the top of the windpipe (trachea) when you swallow, so food goes down the oesophagus and not into your lungs.",
+     facts:["Swallowing starts as a choice but finishes as an automatic reflex.","You cannot breathe and swallow at the same moment.","If food goes down the wrong way, you cough to clear it out of the windpipe."],
+     links:[["mouth","The tongue pushes the bolus to the back of the mouth to start a swallow."],["oesophagus","With the windpipe covered, the bolus can only go into the oesophagus."]],
+     words:"epiglottis, trachea, reflex"},
+    {id:"oesophagus",n:4,chip:"Oesophagus",name:"Oesophagus (gullet)",kind:"tube",zone:"whole",
+     job:"A muscular tube about 25 cm long that carries food from your throat to your stomach. On the way it passes through the diaphragm, the sheet of muscle under your lungs.",
+     facts:["Food is moved by peristalsis: rings of muscle behind the bolus contract in a wave and squeeze it forward.","It is muscle, not gravity, that moves food. Peristalsis works even if you are upside down.","No digestion happens here.","A ring of muscle at the bottom opens to let food into the stomach, then closes to keep acid in."],
+     time:"About 5 to 10 seconds",
+     links:[["epiglottis","The epiglottis makes sure food enters the oesophagus, not the windpipe."],["stomach","The oesophagus delivers each bolus into the top of the stomach."]],
+     words:"peristalsis, diaphragm, sphincter"},
+    {id:"stomach",n:5,chip:"Stomach",name:"Stomach",kind:"tube",zone:"gut",
+     job:"A stretchy bag of muscle that stores food for a few hours while it churns it and mixes it with gastric juice. Food leaves as a thick liquid called chyme.",
+     facts:["Gastric juice contains hydrochloric acid (about pH 2). The acid kills most microbes in food.","Protease enzymes start to break proteins into shorter chains. Stomach protease, called pepsin, works best in acid.","Three layers of muscle churn the food. That is more mechanical digestion.","A thick layer of mucus protects the stomach lining from its own acid."],
+     time:"About 2 to 4 hours",ph:"About 2 (strongly acidic)",
+     links:[["oesophagus","Food arrives from the oesophagus through a ring of muscle."],["small","A second ring of muscle lets chyme out into the small intestine a little at a time."],["gallbladder","Bile neutralises the stomach acid once the chyme has left."]],
+     words:"gastric juice, hydrochloric acid, protease, chyme"},
+    {id:"liver",n:6,chip:"Liver",name:"Liver",kind:"acc",zone:"gut",
+     job:"Your largest internal organ, weighing about 1.5 kg. Its job in digestion is to make bile, a yellow-green liquid that helps you digest fats.",
+     facts:["Bile is not an enzyme. It emulsifies fats: it breaks big globules into tiny droplets, which gives lipase a much larger surface area to work on.","Bile is alkaline, so it also neutralises the stomach acid in chyme.","Blood carrying absorbed food from the small intestine goes to the liver first. The liver stores spare glucose as glycogen and breaks down harmful substances such as alcohol."],
+     links:[["gallbladder","Bile made in the liver is stored in the gallbladder until it is needed."],["small","Bile flows down the bile duct into the first part of the small intestine. Blood rich in absorbed food flows back to the liver."],["pancreas","Bile and pancreatic juice enter the small intestine at the same place."]],
+     words:"bile, emulsify, neutralise, glycogen"},
+    {id:"gallbladder",n:7,chip:"Gallbladder",name:"Gallbladder",kind:"acc",zone:"gut",
+     job:"A small, pear-shaped bag tucked under the liver. It stores bile and makes it more concentrated, then squeezes it out when fatty food reaches the small intestine.",
+     facts:["It holds about 50 cm³ of bile, roughly an egg cup full.","Bile travels down the bile duct to reach the small intestine.","People can live without a gallbladder. Bile then trickles straight from the liver into the small intestine."],
+     links:[["liver","The liver makes the bile that the gallbladder stores."],["small","Bile is released into the first part of the small intestine, where it emulsifies fats."],["pancreas","The bile duct joins the duct from the pancreas just before the small intestine."]],
+     words:"bile, bile duct, emulsify"},
+    {id:"pancreas",n:8,chip:"Pancreas",name:"Pancreas",kind:"acc",zone:"gut",
+     job:"A leaf-shaped gland that sits behind the stomach. It makes pancreatic juice, which is full of digestive enzymes, and releases it through a duct into the small intestine.",
+     facts:["Pancreatic juice contains all three main types of enzyme: carbohydrase (amylase), protease and lipase.","The juice is alkaline. Together with bile it neutralises stomach acid, because these enzymes work best at about pH 8.","The pancreas also makes the hormone insulin, which controls the amount of glucose in your blood."],
+     links:[["small","Pancreatic juice enters the first part of the small intestine, where its enzymes do their work."],["gallbladder","Its duct joins the bile duct, so bile and pancreatic juice arrive together."],["saliva","Pancreatic amylase carries on the starch digestion that saliva started."]],
+     words:"pancreatic juice, amylase, protease, lipase, insulin"},
+    {id:"small",n:9,chip:"Small intestine",name:"Small intestine",kind:"tube",zone:"gut",
+     job:"A coiled tube about 6 metres long where digestion is finished and nearly all absorption happens. It is called small because it is narrow, not because it is short.",
+     facts:["In its first part, the duodenum, bile and pancreatic juice are added to the chyme.","Enzymes finish the job: carbohydrates become glucose and other simple sugars, proteins become amino acids, and lipids (fats) become fatty acids and glycerol.","These small, soluble molecules pass through the wall of the intestine into the blood. This is absorption.","The lining is folded into millions of finger-like villi, which give it a huge surface area of around 30 square metres.","Each villus has a wall one cell thick and a rich blood supply, so absorption is fast."],
+     time:"About 3 to 6 hours",ph:"About 8 (slightly alkaline)",
+     links:[["stomach","Chyme arrives from the stomach in small squirts."],["liver","Bile from the liver emulsifies fats here. Absorbed food travels in the blood to the liver."],["pancreas","Pancreatic juice supplies amylase, protease and lipase."],["large","What is left, mostly water and fibre, moves on into the large intestine."]],
+     more:"villi",words:"duodenum, absorption, villi, glucose, amino acids, fatty acids, glycerol"},
+    {id:"large",n:10,chip:"Large intestine",name:"Large intestine",kind:"tube",zone:"gut",
+     job:"A wider tube about 1.5 metres long that loops around the small intestine. It absorbs most of the remaining water from the undigested food, turning it into solid faeces.",
+     facts:["By now there is very little left to digest. What remains is mostly fibre, water, dead cells and bacteria.","Trillions of bacteria live here. They break down some of the fibre and make useful vitamins, such as vitamin K.","You cannot digest fibre, but it adds bulk, which helps the muscles of the gut keep everything moving.","The appendix is a small dead-end tube attached to the start of the large intestine."],
+     time:"Usually 1 to 2 days",
+     links:[["small","Watery, undigested food arrives from the small intestine."],["rectum","Faeces are passed on to the rectum to be stored."]],
+     words:"fibre, faeces, bacteria, appendix"},
+    {id:"rectum",n:11,chip:"Rectum and anus",name:"Rectum and anus",kind:"tube",zone:"gut",
+     job:"The rectum is the last part of the large intestine. It stores faeces until you go to the toilet. The anus is the opening at the end, kept closed by rings of muscle.",
+     facts:["Getting rid of undigested food as faeces is called egestion.","Egestion is not the same as excretion. Excretion removes waste made by your own cells, such as carbon dioxide and urea.","The wall of the rectum stretches as it fills, which tells your brain that you need the toilet.","The whole trip from mouth to anus usually takes between one and three days."],
+     links:[["large","Faeces arrive from the large intestine."]],
+     words:"egestion, excretion, sphincter"}
+  ];
+  var KINDS={tube:"Food passes through it",acc:"Accessory organ: food never enters it",flap:"Flap of cartilage"};
+  var BY={},i;
+  for(i=0;i<ORGANS.length;i++)BY[ORGANS[i].id]=ORGANS[i];
+
+  var STEPS=[
+    {t:"In the mouth",on:["mouth","saliva"],view:"head",dur:2600,food:0,
+     sum:"Teeth break the food up and saliva starts to digest starch.",
+     pts:["Mechanical digestion: chewing breaks food into smaller pieces with a bigger surface area.","Chemical digestion: amylase in saliva starts to break starch into sugars.","The tongue rolls the food into a soft ball, the bolus."],
+     time:"Up to a minute",ph:"About 7",lv:[1,0,0]},
+    {t:"Swallowing",on:["epiglottis","mouth"],view:"head",dur:1800,food:0,
+     sum:"The epiglottis folds down over the windpipe so the bolus goes the right way.",
+     pts:["The tongue pushes the bolus to the back of the throat.","Watch the epiglottis fold down to cover the windpipe.","Breathing stops for a moment while you swallow."],
+     time:"About 1 second",ph:"About 7",lv:[1,0,0]},
+    {t:"Down the oesophagus",on:["oesophagus"],view:"whole",dur:3000,food:0,
+     sum:"Waves of muscle contraction, called peristalsis, squeeze the bolus down to the stomach.",
+     pts:["Muscle behind the bolus contracts and muscle ahead of it relaxes.","No digestion happens here.","The oesophagus passes through the diaphragm to reach the stomach."],
+     time:"About 5 to 10 seconds",ph:"About 7",lv:[1,0,0]},
+    {t:"Churned in the stomach",on:["stomach"],view:"gut",dur:5200,food:1,
+     sum:"Acid kills microbes and protease starts to digest protein while muscles churn the food into chyme.",
+     pts:["Hydrochloric acid makes the stomach about pH 2. Amylase from saliva stops working.","Protease starts to break proteins into shorter chains.","Churning mixes everything into a thick liquid called chyme."],
+     time:"About 2 to 4 hours",ph:"About 2",lv:[1,1,0]},
+    {t:"Into the small intestine",on:["small","liver","gallbladder","pancreas"],view:"gut",dur:3600,food:1,secrete:true,
+     sum:"Bile and pancreatic juice pour in. Three organs that food never enters now do vital work.",
+     pts:["Bile, made by the liver and stored in the gallbladder, emulsifies fats into tiny droplets.","Bile and pancreatic juice are alkaline. They neutralise the stomach acid.","Pancreatic juice adds amylase, protease and lipase."],
+     time:"The first 25 cm",ph:"About 8",lv:[2,2,1]},
+    {t:"Digestion finishes, absorption begins",on:["small"],view:"gut",dur:7000,food:1,
+     sum:"Enzymes finish digesting the food and the small molecules pass through the villi into the blood.",
+     pts:["Starch has become glucose, proteins have become amino acids and fats have become fatty acids and glycerol.","Millions of villi give a huge surface area for absorption.","The blood carries the absorbed food to the liver, then around the body."],
+     time:"About 3 to 6 hours",ph:"About 8",lv:[3,3,3]},
+    {t:"Through the large intestine",on:["large"],view:"gut",dur:6500,food:2,
+     sum:"Water is absorbed from what is left, and it slowly becomes solid faeces.",
+     pts:["What remains is mostly fibre, water, dead cells and bacteria.","Bacteria break down some fibre and make vitamins.","Peristalsis keeps it moving. Fibre gives the muscles something to push against."],
+     time:"Usually 1 to 2 days",lv:[3,3,3]},
+    {t:"Out of the body",on:["rectum"],view:"gut",dur:2400,food:2,
+     sum:"Faeces are stored in the rectum, then pushed out through the anus. This is egestion.",
+     pts:["Egestion means getting rid of undigested food.","It is different from excretion, which removes waste made by your cells.","From mouth to anus, the journey takes between one and three days."],
+     time:"Stored until you go to the toilet",lv:[3,3,3]}
+  ];
+  var NUTR=[["Starch","glucose"],["Protein","amino acids"],["Fat","fatty acids + glycerol"]];
+  var LEVEL=["Not started","Started","Well under way","Digested and absorbed"];
+  var FOOD=[["#C98A3C",8],["#E8CF86",7],["#7A4A22",8]];
+
+  /* ---------- zoom ---------- */
+  var VIEWS={whole:[0,0,600,1070],head:[150,22,270,481.5],gut:[130,468,340,606.3]};
+  var cur=VIEWS.whole.slice(),viewName="whole",vRaf=0;
+  var pinbs=fig.querySelectorAll("#pins .pinb");
+  function scalePins(){
+    var r=fig.getBoundingClientRect();
+    if(!r.width||!r.height)return;
+    var s=Math.min(r.width/cur[2],r.height/cur[3]);
+    var k=Math.max(.42,Math.min(2.4,1.05/s));
+    for(var a=0;a<pinbs.length;a++){
+      var p=pinbs[a];
+      p.setAttribute("transform","translate("+p.getAttribute("data-x")+" "+p.getAttribute("data-y")+") scale("+k.toFixed(3)+")");
+    }
+  }
+  function applyView(v){cur=v;fig.setAttribute("viewBox",v[0].toFixed(1)+" "+v[1].toFixed(1)+" "+v[2].toFixed(1)+" "+v[3].toFixed(1));scalePins();}
+  function setView(name,instant){
+    var segs=figcol.querySelectorAll(".seg[data-v]");
+    for(var a=0;a<segs.length;a++)segs[a].setAttribute("aria-pressed",segs[a].getAttribute("data-v")===name?"true":"false");
+    if(name===viewName&&!instant)return;
+    viewName=name;
+    cancelAnimationFrame(vRaf);
+    var from=cur.slice(),to=VIEWS[name],t0=null;
+    if(reduce||instant){applyView(to.slice());return;}
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/480),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,v=[];
+      for(var b=0;b<4;b++)v.push(from[b]+(to[b]-from[b])*e);
+      applyView(v);
+      if(k<1)vRaf=requestAnimationFrame(tick);
+    }
+    vRaf=requestAnimationFrame(tick);
+  }
+  function figScale(){var r=fig.getBoundingClientRect();return r.width?Math.min(r.width/cur[2],r.height/cur[3]):1;}
+  var segBtns=figcol.querySelectorAll(".seg[data-v]");
+  for(i=0;i<segBtns.length;i++)segBtns[i].onclick=function(){setView(this.getAttribute("data-v"));};
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.toggle("nopins");
+    this.setAttribute("aria-pressed",off?"false":"true");
+  };
+  window.addEventListener("resize",scalePins);
+
+  /* ---------- highlight ---------- */
+  var organEls=fig.querySelectorAll(".organ"),pinEls=fig.querySelectorAll(".pin"),ducts=fig.querySelector(".ducts");
+  function light(ids){
+    var a,on;
+    fig.classList.toggle("sel",ids.length>0);
+    for(a=0;a<organEls.length;a++){
+      on=ids.indexOf(organEls[a].getAttribute("data-o"))>=0;
+      organEls[a].classList.toggle("on",on);
+    }
+    for(a=0;a<pinEls.length;a++)pinEls[a].classList.toggle("on",ids.indexOf(pinEls[a].getAttribute("data-o"))>=0);
+    ducts.classList.toggle("on",ids.indexOf("liver")>=0||ids.indexOf("gallbladder")>=0);
+  }
+
+  /* ---------- explore ---------- */
+  var mode="explore",selected=null,info=$("info"),chips=$("chips");
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  (function(){
+    var h="";
+    for(var a=0;a<ORGANS.length;a++)h+="<button class=\"chip\" data-o=\""+ORGANS[a].id+"\" aria-pressed=\"false\"><b>"+ORGANS[a].n+"</b>"+esc(ORGANS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function intro(){
+    return "<h2>Tap an organ</h2>"+
+      "<p>Tap any organ on the diagram, or pick one from the numbered list. Use the Head and Abdomen buttons to zoom in.</p>"+
+      "<div class=\"keybox\">"+
+      "<div><span class=\"kind tube\">Food passes through it</span><br>The gut is one long tube, about 9 metres from mouth to anus. Food is moved along it by muscle.</div>"+
+      "<div><span class=\"kind acc\">Accessory organ</span><br>The salivary glands, liver, gallbladder and pancreas make or store the juices that are added to the food. Food never enters them.</div>"+
+      "<div><b>Mechanical digestion</b> breaks food into smaller pieces. <b>Chemical digestion</b> uses enzymes to break large molecules into small ones.</div>"+
+      "</div>";
+  }
+  function card(o){
+    var h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+KINDS[o.kind]+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.time||o.ph){
+      h+="<div class=\"meta\">";
+      if(o.time)h+="<span><b>Food stays here</b>"+esc(o.time)+"</span>";
+      if(o.ph)h+="<span><b>pH</b>"+esc(o.ph)+"</span>";
+      h+="</div>";
+    }
+    h+="<h3>Key facts</h3><ul>";
+    for(var a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>Works with</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more==="villi")h+="<p><button class=\"btn ghost\" id=\"toVilli\">See the villi close up</button></p>";
+    h+="<p class=\"words\"><b>Key words:</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&cs[a].scrollIntoView&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    var o=BY[id];
+    light([id]);
+    info.innerHTML=card(o);
+    if(o.zone==="head")setView("head");
+    else if(o.zone==="whole")setView("whole");
+    else if(viewName==="head")setView(figScale()<.62?"gut":"whole");
+    else if(viewName==="whole"&&figScale()<.5)setView("gut");
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toVilli"){show("enz");var v=$("villi");if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    var id=t?t.getAttribute("data-o"):null;
+    if(mode==="journey"){
+      if(id){show("explore");select(id,"fig");}
+      return;
+    }
+    if(!id){if(selected)select(null);return;}
+    select(id,"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest(".organ"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+
+  /* ---------- food journey ---------- */
+  var ji=0,jRaf=0,jTimer=0,playing=false,dropRaf=0;
+  var bolus=$("bolus"),epi=$("epi"),dropB=$("dropB"),dropP=$("dropP"),bileP=$("bilePath"),pancP=$("pancPath");
+  (function(){var h="";for(var a=0;a<STEPS.length;a++)h+="<i></i>";$("jDots").innerHTML=h;})();
+  function place(el,path,k){var L=path.getTotalLength(),p=path.getPointAtLength(L*k);el.setAttribute("cx",p.x.toFixed(1));el.setAttribute("cy",p.y.toFixed(1));}
+  function drops(on){
+    cancelAnimationFrame(dropRaf);
+    fig.classList.toggle("secrete",on);
+    if(!on)return;
+    if(reduce){place(dropB,bileP,.6);place(dropP,pancP,.6);return;}
+    var t0=null;
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=((ts-t0)%1500)/1500;
+      place(dropB,bileP,k);place(dropP,pancP,k);
+      dropRaf=requestAnimationFrame(tick);
+    }
+    dropRaf=requestAnimationFrame(tick);
+  }
+  function jRender(){
+    var s=STEPS[ji],a,h;
+    $("jStep").textContent="Step "+(ji+1)+" of "+STEPS.length;
+    $("jTitle").textContent=s.t;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=ji===0;
+    $("jNext").textContent=ji===STEPS.length-1?"Start again":"Next";
+    var d=$("jDots").children;
+    for(a=0;a<d.length;a++)d[a].className=a<ji?"done":(a===ji?"now":"");
+    h="<h3>What is happening</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>Time</b>"+esc(s.time)+"</span>";
+    if(s.ph)h+="<span><b>pH here</b>"+esc(s.ph)+"</span>";
+    h+="</div><h3>How far has digestion got?</h3>";
+    for(a=0;a<NUTR.length;a++){
+      h+="<div class=\"meter\"><span class=\"mname\">"+NUTR[a][0]+" <span class=\"mto\">→ "+NUTR[a][1]+"</span></span><span class=\"mstat\">"+LEVEL[s.lv[a]]+"</span><span class=\"mbar\">";
+      for(var b=1;b<=3;b++)h+="<i"+(s.lv[a]>=b?" class=\"f\"":"")+"></i>";
+      h+="</span></div>";
+    }
+    h+="<p class=\"words\">Tap an organ on the diagram to read more about it.</p>";
+    $("jInfo").innerHTML=h;
+  }
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function jGo(n,animate){
+    jStop();
+    ji=n;
+    var s=STEPS[ji],path=$("jp"+ji);
+    jRender();
+    light(s.on);
+    setView(s.view);
+    epi.classList.toggle("closed",ji===1);
+    drops(!!s.secrete);
+    bolus.setAttribute("fill",FOOD[s.food][0]);
+    bolus.setAttribute("r",FOOD[s.food][1]);
+    bolus.style.fill=FOOD[s.food][0];
+    function done(){
+      if(playing){
+        if(ji<STEPS.length-1)jTimer=setTimeout(function(){jGo(ji+1,true);},reduce?4500:3200);
+        else setPlaying(false);
+      }
+    }
+    if(!animate||reduce){place(bolus,path,animate?1:0);if(animate)done();return;}
+    var t0=null;
+    place(bolus,path,0);
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/s.dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(bolus,path,e);
+      if(k<1)jRaf=requestAnimationFrame(tick);else done();
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?"Pause":"Play all";
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      $(tabs[a].getAttribute("data-p")).classList.toggle("on",on);
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();drops(false);epi.classList.remove("closed");fig.classList.remove("journey");}
+    mode=id;
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+      if(!selected)setView("whole");
+      scalePins();
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+      scalePins();
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  select(null);
+  applyView(VIEWS.whole.slice());
+
+  /* exposed for checking */
+  window.DigestLab={ORGANS:ORGANS,STEPS:STEPS,select:select,show:show,setView:setView,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,view:viewName,step:ji,playing:playing,viewBox:fig.getAttribute("viewBox")};}};
+})();
+</script>
+</body>
+</html>
