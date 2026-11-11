@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Moon Phases Explorer and Quiz for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive Moon phases tool for ages 7-11. Slide through the lunar month to see the Moon change from new to full and back, learn the 8 phase names and take an auto-marked Moon phases quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/space/moon-phases/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.ph:focus-visible,.choice:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.card{display:flex;flex-wrap:wrap;gap:20px;align-items:center;background:var(--navy);border-radius:16px;padding:16px;margin-top:12px}
+.card .pic{flex:0 0 auto;width:170px}
+.card .pic svg{width:100%;height:auto;display:block}
+.card .info{flex:1;min-width:220px}
+.tag{display:inline-block;background:var(--gold);color:var(--navy);border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px}
+input[type=range]{width:100%;accent-color:#F4B942;height:30px}
+.phases{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:14px 0}
+.ph{background:var(--navy);border:2px solid transparent;border-radius:12px;padding:6px 2px;color:var(--ink);cursor:pointer;font:700 12px "Nunito Sans",sans-serif;text-align:center;line-height:1.2}
+.ph svg{width:100%;max-width:56px;height:auto;display:block;margin:0 auto 4px}
+.ph[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.qpic{width:140px;margin:6px 0}
+.qpic svg{width:100%;height:auto;display:block}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:620px){.phases{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/space/">Space</a> › Moon Phases</nav>
+  <h1>Moon Phases 🌙</h1>
+  <p class="lead">Why does the Moon seem to change shape? Slide through a whole month to watch it grow from a new Moon to a full Moon and shrink back again, learn the 8 phase names, then test yourself. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Moon Phases modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Moon Quiz</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Watch a month go by</h2>
+    <p>Move the slider to see how the Moon looks on each night of its cycle, or tap a phase below.</p>
+    <label for="day" class="muted">Day of the Moon's cycle: <b id="dayNum" class="score">0</b></label>
+    <input type="range" id="day" min="0" max="29" step="1" value="0" aria-describedby="phName">
+    <div class="card" aria-live="polite">
+      <div class="pic" id="bigMoon"></div>
+      <div class="info">
+        <h3 id="phName" style="font-size:30px">New Moon</h3>
+        <span class="tag" id="phTag">Waxing</span> <span class="muted" id="phLit"></span>
+        <p id="phText"></p>
+      </div>
+    </div>
+    <div class="phases" id="phases" role="group" aria-label="The 8 phases of the Moon"></div>
+    <p class="tip"><b>Why does it happen?</b> The Moon does not make its own light. The Sun always lights up half of the Moon. As the Moon travels round the Earth, we see different amounts of that sunny half. A full trip from new Moon to new Moon takes about 29½ days. The pictures show the Moon as seen from the Northern Hemisphere (for example the UK and USA). In Australia and other southern countries the Moon looks flipped, left to right.</p>
+  </section>
+
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Moon Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <div class="qpic" id="qPic"></div>
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <button class="btn" id="qNext" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Get the printable Solar System and Space pack in the shop →</a></p>
+</div>
+<script>
+(function(){
+  var CYCLE=29.53;
+  var PHASES=[
+    {n:"New Moon",w:"Start",t:"The Moon is between the Earth and the Sun. Its sunny side faces away from us, so we can hardly see it at all."},
+    {n:"Waxing Crescent",w:"Waxing",t:"A thin curve of light appears on the right. Waxing means the lit part is getting bigger each night."},
+    {n:"First Quarter",w:"Waxing",t:"The right half of the Moon is lit. It is called a quarter because the Moon is a quarter of the way round its trip."},
+    {n:"Waxing Gibbous",w:"Waxing",t:"More than half is lit and it is still growing. Gibbous means bulging."},
+    {n:"Full Moon",w:"Middle",t:"The Earth is between the Sun and the Moon, so we see the whole sunny side. The Moon looks like a bright round circle."},
+    {n:"Waning Gibbous",w:"Waning",t:"More than half is lit, but now it is shrinking. Waning means the lit part is getting smaller each night."},
+    {n:"Third Quarter",w:"Waning",t:"The left half of the Moon is lit. This phase is also called the Last Quarter."},
+    {n:"Waning Crescent",w:"Waning",t:"Only a thin curve of light is left, on the left side. Soon it will be a new Moon again."}
+  ];
+  function $(id){return document.getElementById(id);}
+
+  /* phase index (0-7) for a fraction of the cycle (0 = new, 0.5 = full) */
+  function phaseIndex(f){return Math.round(f*8)%8;}
+  function litPercent(f){return Math.round((1-Math.cos(2*Math.PI*f))/2*100);}
+
+  /* draw the Moon as seen from the Northern Hemisphere */
+  function moonSVG(f,label){
+    var c=50,r=44,s='<svg viewBox="0 0 100 100" role="img" aria-label="'+label+'">';
+    s+='<circle cx="50" cy="50" r="44" fill="#2B3760" stroke="#5A6896" stroke-width="1.5"/>';
+    f=((f%1)+1)%1;
+    var k=Math.cos(2*Math.PI*f), rx=Math.abs(k)*r, lit="#F3EBC8", d;
+    if(f<0.01||f>0.99){d="";}
+    else if(Math.abs(f-0.5)<0.01){d="FULL";}
+    else if(f<0.5){
+      d="M"+c+","+(c-r)+" A"+r+","+r+" 0 0 1 "+c+","+(c+r)+" A"+rx.toFixed(2)+","+r+" 0 0 "+(f<0.25?0:1)+" "+c+","+(c-r)+" Z";
+    } else {
+      d="M"+c+","+(c-r)+" A"+r+","+r+" 0 0 0 "+c+","+(c+r)+" A"+rx.toFixed(2)+","+r+" 0 0 "+(f<0.75?0:1)+" "+c+","+(c-r)+" Z";
+    }
+    if(d==="FULL"){s+='<circle cx="50" cy="50" r="44" fill="'+lit+'"/>';}
+    else if(d){s+='<path d="'+d+'" fill="'+lit+'"/>';}
+    if(d){s+='<g fill="#D9CFA6" opacity=".55"><circle cx="38" cy="36" r="6"/><circle cx="62" cy="58" r="8"/><circle cx="44" cy="70" r="4"/><circle cx="66" cy="30" r="3.5"/></g>';
+      if(d!=="FULL"){ /* hide craters on the dark side by redrawing it */
+        s='<svg viewBox="0 0 100 100" role="img" aria-label="'+label+'"><defs><clipPath id="cl'+Math.round(f*1000)+'"><path d="'+d+'"/></clipPath></defs>'+
+          '<circle cx="50" cy="50" r="44" fill="#2B3760" stroke="#5A6896" stroke-width="1.5"/>'+
+          '<path d="'+d+'" fill="'+lit+'"/>'+
+          '<g fill="#D9CFA6" opacity=".55" clip-path="url(#cl'+Math.round(f*1000)+')"><circle cx="38" cy="36" r="6"/><circle cx="62" cy="58" r="8"/><circle cx="44" cy="70" r="4"/><circle cx="66" cy="30" r="3.5"/></g>';
+      }
+    }
+    return s+'</svg>';
+  }
+
+  /* ---------- explore ---------- */
+  var slider=$("day"), phBtns=[];
+  function showDay(day){
+    var f=day/CYCLE, i=phaseIndex(f), p=PHASES[i];
+    slider.value=day;
+    $("dayNum").textContent=day;
+    $("bigMoon").innerHTML=moonSVG(f,p.n);
+    $("phName").textContent=p.n;
+    $("phTag").textContent=p.w==="Start"?"Start of the cycle":p.w==="Middle"?"Halfway":p.w;
+    $("phLit").textContent="About "+litPercent(f)+"% of the side we see is lit";
+    $("phText").textContent=p.t;
+    for(var j=0;j<phBtns.length;j++){phBtns[j].setAttribute("aria-pressed",j===i?"true":"false");}
+    slider.setAttribute("aria-valuetext","Day "+day+": "+p.n);
+  }
+  var row=$("phases");
+  for(var i=0;i<8;i++){
+    (function(i){
+      var b=document.createElement("button");
+      b.className="ph";b.type="button";b.setAttribute("aria-pressed","false");
+      b.innerHTML=moonSVG(i/8,"")+PHASES[i].n;
+      b.setAttribute("aria-label",PHASES[i].n);
+      b.addEventListener("click",function(){showDay(Math.round(i*CYCLE/8));});
+      row.appendChild(b);phBtns.push(b);
+    })(i);
+  }
+  slider.addEventListener("input",function(){showDay(parseInt(slider.value,10));});
+  showDay(0);
+
+  /* ---------- quiz ---------- */
+  var FACTS=[
+    {q:"How long does the Moon take to go from one new Moon to the next?",a:"About 29½ days",o:["About 7 days","About 365 days","About 1 day"]},
+    {q:"Where does the Moon's light come from?",a:"The Sun",o:["The Moon makes it","The Earth","The stars"]},
+    {q:"What does waxing mean?",a:"The lit part is getting bigger",o:["The lit part is getting smaller","The Moon is spinning faster","The Moon is hidden"]},
+    {q:"What does waning mean?",a:"The lit part is getting smaller",o:["The lit part is getting bigger","The Moon is getting closer","The Moon is full"]},
+    {q:"At full Moon, which is in the middle?",a:"The Earth",o:["The Moon","The Sun","Mars"]},
+    {q:"At new Moon, which is in the middle?",a:"The Moon",o:["The Earth","The Sun","Venus"]},
+    {q:"How many main phases of the Moon are there?",a:"8",o:["4","12","30"]},
+    {q:"What is another name for the Third Quarter Moon?",a:"Last Quarter",o:["New Moon","Half Moon Rising","Blue Moon"]}
+  ];
+  var QN=10, qi=0, qRight=0, cur=null, answered=false;
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function namesExcept(ans,n){var all=[];for(var i=0;i<8;i++){if(PHASES[i].n!==ans){all.push(PHASES[i].n);}}return shuffle(all).slice(0,n);}
+  function makeQuestion(){
+    var type=Math.floor(Math.random()*4), i=Math.floor(Math.random()*8), q;
+    if(type<=1){
+      q={pic:i/8,text:"Which phase of the Moon is this?",ans:PHASES[i].n,opts:namesExcept(PHASES[i].n,3),why:"This is a "+PHASES[i].n+"."};
+    } else if(type===2){
+      var nx=(i+1)%8;
+      q={pic:null,text:"Which phase comes straight after the "+PHASES[i].n+"?",ans:PHASES[nx].n,opts:namesExcept(PHASES[nx].n,3),why:"After the "+PHASES[i].n+" comes the "+PHASES[nx].n+"."};
+    } else {
+      var F=FACTS[Math.floor(Math.random()*FACTS.length)];
+      q={pic:null,text:F.q,ans:F.a,opts:F.o.slice(0),why:"The answer is: "+F.a+"."};
+    }
+    q.opts.push(q.ans);shuffle(q.opts);
+    return q;
+  }
+  function showQ(){
+    answered=false;cur=makeQuestion();
+    $("qPic").innerHTML=cur.pic===null?"":moonSVG(cur.pic,"A Moon picture to name");
+    $("qPic").style.display=cur.pic===null?"none":"";
+    $("qText").textContent=cur.text;
+    $("qFb").textContent="";$("qFb").className="fb";
+    $("qNext").style.display="none";
+    $("qCount").textContent="Question "+(qi+1)+" of "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    var box=$("qChoices");box.innerHTML="";
+    for(var k=0;k<cur.opts.length;k++){
+      (function(opt){
+        var b=document.createElement("button");b.className="choice";b.type="button";b.textContent=opt;
+        b.addEventListener("click",function(){answer(b,opt);});
+        box.appendChild(b);
+      })(cur.opts[k]);
+    }
+  }
+  function answer(btn,opt){
+    if(answered){return;}
+    answered=true;
+    var bs=$("qChoices").getElementsByTagName("button");
+    for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(bs[k].textContent===cur.ans){bs[k].className="choice ok";}}
+    if(opt===cur.ans){qRight++;$("qFb").textContent="Correct! "+cur.why;$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="Not quite. "+cur.why;$("qFb").className="fb no";}
+    $("qScore").textContent="Score: "+qRight;
+    $("qNext").style.display="";$("qNext").focus();
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Over the Moon! ":qRight>=7?"Brilliant Moon watcher! ":qRight>=4?"Good work! ":"Keep looking up! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus();
+    } else {showQ();}
+  });
+  function startQuiz(){qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+  startQuiz();
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__moon={PHASES:PHASES,FACTS:FACTS,phaseIndex:phaseIndex,litPercent:litPercent,makeQuestion:makeQuestion,CYCLE:CYCLE};
+})();
+</script>
+</body>
+</html>
