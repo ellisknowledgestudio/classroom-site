@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Διαδραστική Καρδιά και Κυκλοφορικό Σύστημα για το Γυμνάσιο | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό διάγραμμα της καρδιάς για ηλικίες 11-14. Πάτησε κάθε κοιλότητα, βαλβίδα και αγγείο για να μάθεις τι κάνει, ακολούθησε το αίμα μέσα από την καρδιά, στους πνεύμονες και σε όλο το σώμα, και σύγκρινε αρτηρίες, φλέβες, τριχοειδή και τα συστατικά του αίματος.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/circulatory-system/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/circulatory-system/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/circulatory-system/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/circulatory-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Noto Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Manrope",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Noto Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Manrope",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Noto Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Noto Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Manrope",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Manrope",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Noto Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Manrope",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Manrope",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+.chip{font-size:13.5px}
+/* heart */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+.kind.chamber{background:#F0A696}.kind.valve{background:#F6E7BD}.kind.vessel{background:#9CC3F5}.kind.wall{background:#E9A08F}
+.sw{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:8px;vertical-align:-2px}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke}
+.hit.on{fill:rgba(244,185,66,.26);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.5)}
+.hit:focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.14)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.2)}.hit.on:hover{fill:rgba(244,185,66,.26)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.5)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .h-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .h-dot{fill:#F4B942}
+#fig .h-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins,#fig.journey #pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:#FFF3D0;stroke:#0F1C3F;stroke-width:2.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.abbr{font-size:13px;color:var(--muted);margin:8px 4px 0}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.organ,.pin,.ducts,.epi{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Φυσικές Επιστήμες</a> › Εξερευνητής Κυκλοφορικού Συστήματος</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/circulatory-system/" lang="en" hreflang="en">English</a></div>
+  <h1>Εξερευνητής Κυκλοφορικού Συστήματος</h1>
+  <p class="lead">Η καρδιά σου είναι μια μυώδης αντλία που σπρώχνει το αίμα σε όλο το σώμα. Πάτησε ένα μέρος της καρδιάς για να δεις τι κάνει και πώς συνεργάζεται με τα άλλα, και μετά ακολούθησε το αίμα μέσα από την καρδιά, στους πνεύμονες και πίσω. Ηλικίες 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες του Εξερευνητή Κυκλοφορικού Συστήματος">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε την καρδιά</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Το ταξίδι του αίματος</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Αγγεία και αίμα</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Μέρη της καρδιάς"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Επιλογές διαγράμματος">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Αριθμοί</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="-36 0 716 690" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Διάγραμμα της ανθρώπινης καρδιάς σε τομή, με τις τέσσερις κοιλότητες, τις βαλβίδες και τα μεγάλα αγγεία"><style>
+.h-mus{fill:#E9A08F;stroke:#7A3B3A;stroke-width:5;stroke-linejoin:round}
+.h-u{fill:none;stroke:#7A3B3A;stroke-linecap:butt;stroke-linejoin:round}
+.h-b{fill:none;stroke:#5B8FD6;stroke-linecap:butt;stroke-linejoin:round}
+.h-r{fill:none;stroke:#E0484D;stroke-linecap:butt;stroke-linejoin:round}
+.h-cu{fill:none;stroke:#7A3B3A;stroke-width:6;stroke-linejoin:round}
+.h-cb{fill:#5B8FD6}.h-cr{fill:#E0484D}
+.h-hl{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.28}
+.h-vu{fill:none;stroke:#7A3B3A;stroke-width:9;stroke-linecap:round}
+.h-v{fill:none;stroke:#FFF3D6;stroke-width:5;stroke-linecap:round}
+.h-ch{fill:none;stroke:#FFF3D6;stroke-width:1.6;stroke-linecap:round}
+.h-fl{fill:none;stroke:#fff;stroke-width:3.4;stroke-linecap:round}
+.h-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.h-dot{fill:#0F1C3F}
+.h-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.h-pin text{font:800 16px "Manrope",Arial,sans-serif;fill:#0F1C3F}
+</style><defs><marker id="hfa" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker></defs><path class="h-mus" d="M170 235C110 250 85 330 110 400C135 480 230 570 325 610C365 600 470 520 505 410C525 340 505 265 450 240C400 222 330 228 300 240C260 225 210 222 170 235Z"/><path class="h-u" stroke-width="44" d="M57 200L508 200M290 200L290 392"/><path class="h-b" stroke-width="38" d="M60 200L505 200M290 200L290 395"/><path class="h-u" stroke-width="22" d="M396 80L396 14"/><path class="h-u" stroke-width="22" d="M432 80L432 14"/><path class="h-u" stroke-width="22" d="M468 80L468 14"/><path class="h-u" stroke-width="44" d="M170 22L170 258"/><path class="h-u" stroke-width="40" d="M62 563L62 470C62 400 85 345 133 326"/><path class="h-u" stroke-width="48" d="M340 384L340 175C340 105 390 62 450 62C510 62 548 100 548 150L548 153"/><path class="h-u" stroke-width="26" d="M593 275L486 275M593 305L490 305"/><path class="h-cu" d="M168 366C140 358 124 335 128 305C132 275 160 258 195 258C230 258 256 272 258 300C260 330 250 354 236 366C246 378 262 384 275 384L300 384C308 384 312 392 310 402C304 450 290 500 272 535C266 546 254 546 244 538C196 512 146 458 134 405C131 390 150 376 168 366Z"/><path class="h-cu" d="M388 366C372 352 368 325 372 300C376 270 405 258 435 258C468 258 490 275 492 305C494 335 478 356 455 366C462 380 462 392 458 410C450 470 410 540 345 582C335 588 322 584 320 570C316 510 316 440 322 400C324 390 330 384 345 384C360 384 376 378 388 366Z"/><path class="h-cb" d="M168 366C140 358 124 335 128 305C132 275 160 258 195 258C230 258 256 272 258 300C260 330 250 354 236 366C246 378 262 384 275 384L300 384C308 384 312 392 310 402C304 450 290 500 272 535C266 546 254 546 244 538C196 512 146 458 134 405C131 390 150 376 168 366Z"/><path class="h-cr" d="M388 366C372 352 368 325 372 300C376 270 405 258 435 258C468 258 490 275 492 305C494 335 478 356 455 366C462 380 462 392 458 410C450 470 410 540 345 582C335 588 322 584 320 570C316 510 316 440 322 400C324 390 330 384 345 384C360 384 376 378 388 366Z"/><path class="h-r" stroke-width="16" d="M396 80L396 17"/><path class="h-r" stroke-width="16" d="M432 80L432 17"/><path class="h-r" stroke-width="16" d="M468 80L468 17"/><path class="h-b" stroke-width="38" d="M170 25L170 272"/><path class="h-b" stroke-width="34" d="M62 560L62 470C62 400 85 345 133 326L150 320"/><path class="h-r" stroke-width="42" d="M340 394L340 175C340 105 390 62 450 62C510 62 548 100 548 150"/><path class="h-r" stroke-width="20" d="M590 275L478 275M590 305L484 305"/><path class="h-b" stroke-width="38" d="M290 376L290 397"/><path class="h-hl" d="M160 34L160 236M280 232L280 356M329 240L329 176C329 112 376 74 430 72M74 191L250 191M380 191L498 191"/><path class="h-ch" d="M190 399L186 468M214 399L238 478M410 399L404 478M434 399L436 470"/><path class="h-vu" d="M168 366Q178 388 190 399"/><path class="h-vu" d="M236 366Q226 388 214 399"/><path class="h-vu" d="M388 366Q398 388 410 399"/><path class="h-vu" d="M455 366Q446 388 434 399"/><path class="h-vu" d="M272 371Q281 387 290 372"/><path class="h-vu" d="M290 372Q299 387 308 371"/><path class="h-vu" d="M320 371Q330 387 340 372"/><path class="h-vu" d="M340 372Q350 387 360 371"/><path class="h-v" d="M168 366Q178 388 190 399"/><path class="h-v" d="M236 366Q226 388 214 399"/><path class="h-v" d="M388 366Q398 388 410 399"/><path class="h-v" d="M455 366Q446 388 434 399"/><path class="h-v" d="M272 371Q281 387 290 372"/><path class="h-v" d="M290 372Q299 387 308 371"/><path class="h-v" d="M320 371Q330 387 340 372"/><path class="h-v" d="M340 372Q350 387 360 371"/><path class="h-fl" marker-end="url(#hfa)" d="M170 52L170 150"/><path class="h-fl" marker-end="url(#hfa)" d="M62 548L62 486"/><path class="h-fl" marker-end="url(#hfa)" d="M202 300L202 440"/><path class="h-fl" marker-end="url(#hfa)" d="M226 505C262 488 286 455 289 412"/><path class="h-fl" marker-end="url(#hfa)" d="M246 207L112 207"/><path class="h-fl" marker-end="url(#hfa)" d="M384 207L484 207"/><path class="h-fl" marker-end="url(#hfa)" d="M584 275L512 275"/><path class="h-fl" marker-end="url(#hfa)" d="M584 305L516 305"/><path class="h-fl" marker-end="url(#hfa)" d="M422 300L422 440"/><path class="h-fl" marker-end="url(#hfa)" d="M392 512C362 490 342 455 340 412"/><path class="h-fl" marker-end="url(#hfa)" d="M344 150C352 100 398 72 462 68"/><g id="hits"><path class="hit" d="M311 404L321 404L318 470L320 570L300 586L272 540L292 495L305 445Z" data-o="septum" tabindex="0" role="button" aria-label="Μεσοκοιλιακό διάφραγμα"/><ellipse class="hit" cx="193" cy="312" rx="66" ry="54" data-o="ra" tabindex="0" role="button" aria-label="Δεξιός κόλπος"/><path class="hit" d="M140 392L300 388L310 402C304 450 290 500 272 535C266 546 254 546 244 538C196 512 146 458 134 405Z" data-o="rv" tabindex="0" role="button" aria-label="Δεξιά κοιλία"/><ellipse class="hit" cx="432" cy="312" rx="62" ry="54" data-o="la" tabindex="0" role="button" aria-label="Αριστερός κόλπος"/><path class="hit" d="M322 400L330 386L456 392C452 470 410 540 345 582C335 588 322 584 320 570C316 510 316 440 322 400Z" data-o="lv" tabindex="0" role="button" aria-label="Αριστερή κοιλία"/><path class="hit hitv" stroke-width="44" d="M57 200L508 200M290 200L290 356" data-o="pa" tabindex="0" role="button" aria-label="Πνευμονική αρτηρία"/><path class="hit hitv" stroke-width="44" d="M170 22L170 250M62 563L62 470C62 400 85 345 133 326" data-o="vena" tabindex="0" role="button" aria-label="Κοίλη φλέβα"/><path class="hit hitv" stroke-width="48" d="M340 356L340 175C340 105 390 62 450 62C510 62 548 100 548 153" data-o="aorta" tabindex="0" role="button" aria-label="Αορτή"/><path class="hit hitv" stroke-width="26" d="M593 275L494 275M593 305L496 305" data-o="pv" tabindex="0" role="button" aria-label="Πνευμονικές φλέβες"/><rect class="hit" x="162" y="356" width="80" height="50" rx="10" data-o="tri" tabindex="0" role="button" aria-label="Τριγλώχινα βαλβίδα"/><rect class="hit" x="382" y="356" width="80" height="50" rx="10" data-o="bi" tabindex="0" role="button" aria-label="Διγλώχινα (μιτροειδής) βαλβίδα"/><rect class="hit" x="268" y="358" width="96" height="36" rx="10" data-o="semi" tabindex="0" role="button" aria-label="Μηνοειδείς βαλβίδες"/></g><g id="pins"><g class="pin" data-o="vena"><path class="h-lead" d="M-8 95L158 100"/><circle class="h-dot" cx="158" cy="100" r="3.4"/><path class="h-lead" d="M-8 530L52 530"/><circle class="h-dot" cx="52" cy="530" r="3.4"/><g class="h-pin" transform="translate(-8 95) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g><g class="h-pin" transform="translate(-8 530) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="pin" data-o="ra"><path class="h-lead" d="M-8 265L172 300"/><circle class="h-dot" cx="172" cy="300" r="3.4"/><g class="h-pin" transform="translate(-8 265) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="pin" data-o="tri"><path class="h-lead" d="M-8 345L181 384"/><circle class="h-dot" cx="181" cy="384" r="3.4"/><g class="h-pin" transform="translate(-8 345) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="pin" data-o="rv"><path class="h-lead" d="M118 612L212 492"/><circle class="h-dot" cx="212" cy="492" r="3.4"/><g class="h-pin" transform="translate(118 612) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="pin" data-o="semi"><path class="h-lead" d="M246 112L281 376"/><circle class="h-dot" cx="281" cy="376" r="3.4"/><g class="h-pin" transform="translate(246 112) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="pin" data-o="pa"><path class="h-lead" d="M-8 165L96 198"/><circle class="h-dot" cx="96" cy="198" r="3.4"/><g class="h-pin" transform="translate(-8 165) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">6</text></g></g><g class="pin" data-o="pv"><path class="h-lead" d="M652 255L570 274"/><circle class="h-dot" cx="570" cy="274" r="3.4"/><g class="h-pin" transform="translate(652 255) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">7</text></g></g><g class="pin" data-o="la"><path class="h-lead" d="M652 350L446 326"/><circle class="h-dot" cx="446" cy="326" r="3.4"/><g class="h-pin" transform="translate(652 350) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="pin" data-o="bi"><path class="h-lead" d="M652 425L446 384"/><circle class="h-dot" cx="446" cy="384" r="3.4"/><g class="h-pin" transform="translate(652 425) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">9</text></g></g><g class="pin" data-o="lv"><path class="h-lead" d="M652 505L404 486"/><circle class="h-dot" cx="404" cy="486" r="3.4"/><g class="h-pin" transform="translate(652 505) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">10</text></g></g><g class="pin" data-o="aorta"><path class="h-lead" d="M652 70L528 104"/><circle class="h-dot" cx="528" cy="104" r="3.4"/><g class="h-pin" transform="translate(652 70) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">11</text></g></g><g class="pin" data-o="septum"><path class="h-lead" d="M276 658L302 488"/><circle class="h-dot" cx="302" cy="488" r="3.4"/><g class="h-pin" transform="translate(276 658) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">12</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="10" cx="170" cy="40"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Πίσω</button>
+            <button class="btn" id="jNext">Επόμενο</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Αναπαραγωγή</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2>Διπλή κυκλοφορία</h2>
+    <p>Το αίμα περνά από την καρδιά σου δύο φορές σε κάθε γύρο του σώματος. Γι&#x27; αυτό λέμε ότι έχουμε διπλή κυκλοφορία.</p>
+    <div class="vgrid">
+      <div><div class="light"><svg class="circ" viewBox="0 0 560 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Διάγραμμα της διπλής κυκλοφορίας: από την καρδιά στους πνεύμονες και πίσω, και από την καρδιά στο σώμα και πίσω"><path d="M190 390L130 390L130 205L220 205" fill="none" stroke="#2F568F" stroke-width="18" stroke-linejoin="round"/><path d="M190 390L130 390L130 205L220 205" fill="none" stroke="#5B8FD6" stroke-width="14" stroke-linejoin="round"/><path d="M220 255L170 255L170 55L210 55" fill="none" stroke="#2F568F" stroke-width="18" stroke-linejoin="round"/><path d="M220 255L170 255L170 55L210 55" fill="none" stroke="#5B8FD6" stroke-width="14" stroke-linejoin="round"/><path d="M350 55L390 55L390 205L340 205" fill="none" stroke="#8F2A30" stroke-width="18" stroke-linejoin="round"/><path d="M350 55L390 55L390 205L340 205" fill="none" stroke="#E0484D" stroke-width="14" stroke-linejoin="round"/><path d="M340 255L430 255L430 390L370 390" fill="none" stroke="#8F2A30" stroke-width="18" stroke-linejoin="round"/><path d="M340 255L430 255L430 390L370 390" fill="none" stroke="#E0484D" stroke-width="14" stroke-linejoin="round"/><path transform="translate(130 300) rotate(-90)" d="M-8 -9L9 0L-8 9z" fill="#fff"/><path transform="translate(170 150) rotate(-90)" d="M-8 -9L9 0L-8 9z" fill="#fff"/><path transform="translate(390 130) rotate(90)" d="M-8 -9L9 0L-8 9z" fill="#fff"/><path transform="translate(430 320) rotate(90)" d="M-8 -9L9 0L-8 9z" fill="#fff"/><rect x="205" y="20" width="150" height="70" rx="26" fill="#F9D5CF" stroke="#0F1C3F" stroke-width="2.5"/><rect x="185" y="360" width="190" height="60" rx="16" fill="#EAEEF8" stroke="#0F1C3F" stroke-width="2.5"/><rect x="220" y="180" width="60" height="50" fill="#CFE0F6" stroke="#0F1C3F" stroke-width="2.5"/><text x="250" y="211" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">ΔΚ</text><rect x="280" y="180" width="60" height="50" fill="#F8CFD0" stroke="#0F1C3F" stroke-width="2.5"/><text x="310" y="211" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">ΑΚ</text><rect x="220" y="230" width="60" height="50" fill="#CFE0F6" stroke="#0F1C3F" stroke-width="2.5"/><text x="250" y="261" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">ΔΚοι</text><rect x="280" y="230" width="60" height="50" fill="#F8CFD0" stroke="#0F1C3F" stroke-width="2.5"/><text x="310" y="261" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">ΑΚοι</text><text x="280" y="62" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="17" font-weight="700" fill="#0F1C3F">ΠΝΕΥΜΟΝΕΣ</text><text x="280" y="397" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="17" font-weight="700" fill="#0F1C3F">ΣΩΜΑ</text><text x="280" y="170" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="12" font-weight="700" fill="#0F1C3F">ΚΑΡΔΙΑ</text><text x="128" y="34" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="13.5" fill="#0F1C3F">πνευμονική αρτηρία</text><text x="432" y="34" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="13.5" fill="#0F1C3F">πνευμονικές φλέβες</text><text x="120" y="420" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="13.5" fill="#0F1C3F">κοίλη φλέβα</text><text x="440" y="420" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="13.5" fill="#0F1C3F">αορτή</text><text x="280" y="128" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="12.5" font-style="italic" fill="#44506f">Πνευμονική κυκλοφορία</text><text x="280" y="325" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="12.5" font-style="italic" fill="#44506f">Συστηματική κυκλοφορία</text></svg></div><p class="abbr">ΔΚ δεξιός κόλπος · ΑΚ αριστερός κόλπος · ΔΚοι δεξιά κοιλία · ΑΚοι αριστερή κοιλία</p></div>
+      <div class="cards"><div class="ecard"><h3>Πνευμονική κυκλοφορία</h3><div class="eq">Καρδιά <span>→</span> πνεύμονες <span>→</span> καρδιά</div><dl><dt>Αντλία</dt><dd>Δεξιά κοιλία</dd><dt>Το αίμα παίρνει</dt><dd>Οξυγόνο</dd><dt>Το αίμα διώχνει</dt><dd>Διοξείδιο του άνθρακα</dd></dl></div><div class="ecard"><h3>Συστηματική κυκλοφορία</h3><div class="eq">Καρδιά <span>→</span> σώμα <span>→</span> καρδιά</div><dl><dt>Αντλία</dt><dd>Αριστερή κοιλία</dd><dt>Το αίμα δίνει</dt><dd>Οξυγόνο και γλυκόζη</dd><dt>Το αίμα μαζεύει</dt><dd>Διοξείδιο του άνθρακα και άλλα άχρηστα προϊόντα</dd></dl></div></div>
+    </div>
+    <p class="muted">Στα διαγράμματα το αίμα που είναι φτωχό σε οξυγόνο φαίνεται μπλε. Το πραγματικό αίμα δεν είναι ποτέ μπλε. Είναι σκούρο κόκκινο.</p>
+    <h2 id="vessels">Αιμοφόρα αγγεία: τρία είδη σωλήνων</h2>
+    <p>Το αίμα φεύγει από την καρδιά με τις αρτηρίες, περνά από μικροσκοπικά τριχοειδή σε κάθε όργανο και επιστρέφει στην καρδιά με τις φλέβες.</p>
+    <div class="light"><svg class="ves" viewBox="0 0 620 178" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Εγκάρσιες τομές αρτηρίας, φλέβας και τριχοειδούς αγγείου"><circle cx="105" cy="78" r="68" fill="#E9A08F" stroke="#7A3B3A" stroke-width="4"/><circle cx="105" cy="78" r="50" fill="none" stroke="#7A3B3A" stroke-width="1.5" opacity=".55"/><circle cx="105" cy="78" r="29" fill="#E0484D" stroke="#7A3B3A" stroke-width="3.5"/><ellipse cx="310" cy="78" rx="70" ry="64" fill="#E9A08F" stroke="#7A3B3A" stroke-width="4"/><ellipse cx="310" cy="78" rx="55" ry="48" fill="#5B8FD6" stroke="#7A3B3A" stroke-width="3.5"/><circle cx="515" cy="78" r="27" fill="#F6CBBF" stroke="#7A3B3A" stroke-width="3.5"/><circle cx="515" cy="78" r="19" fill="#E0484D" stroke="#7A3B3A" stroke-width="2"/><path d="M534 78L542 78" stroke="#7A3B3A" stroke-width="2"/><path d="M496 78L488 78" stroke="#7A3B3A" stroke-width="2"/><path d="M515 59L515 51" stroke="#7A3B3A" stroke-width="2"/><path d="M515 97L515 105" stroke="#7A3B3A" stroke-width="2"/><text x="105" y="170" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="17" font-weight="700" fill="#0F1C3F">Αρτηρία</text><text x="310" y="170" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="17" font-weight="700" fill="#0F1C3F">Φλέβα</text><text x="515" y="170" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="17" font-weight="700" fill="#0F1C3F">Τριχοειδές</text><text x="515" y="128" text-anchor="middle" font-family="Noto Sans,Arial,sans-serif" font-size="11" fill="#44506f">(σχεδιασμένο πολύ μεγαλύτερο)</text></svg></div>
+    <div class="cards"><div class="ecard"><h3>Αρτηρία</h3><div class="eq">Μακριά από την καρδιά</div><dl><dt>Τοίχωμα</dt><dd>Παχύ, μυώδες και ελαστικό</dd><dt>Αυλός</dt><dd>Στενός</dd><dt>Πίεση</dt><dd>Υψηλή</dd><dt>Βαλβίδες</dt><dd>Όχι</dd></dl></div><div class="ecard"><h3>Φλέβα</h3><div class="eq">Πίσω στην καρδιά</div><dl><dt>Τοίχωμα</dt><dd>Λεπτό</dd><dt>Αυλός</dt><dd>Φαρδύς</dd><dt>Πίεση</dt><dd>Χαμηλή</dd><dt>Βαλβίδες</dt><dd>Ναι, για να μη γυρίζει το αίμα πίσω</dd></dl></div><div class="ecard"><h3>Τριχοειδές αγγείο</h3><div class="eq">Ανάμεσα σε αρτηρίες και φλέβες</div><dl><dt>Τοίχωμα</dt><dd>Πάχος ενός κυττάρου</dd><dt>Αυλός</dt><dd>Χωρά μόλις ένα ερυθρό αιμοσφαίριο</dd><dt>Ρόλος</dt><dd>Αφήνει το οξυγόνο και τη γλυκόζη να περάσουν στα κύτταρα και τα άχρηστα προϊόντα να μπουν στο αίμα</dd></dl></div></div>
+    <h2>Τι έχει μέσα το αίμα;</h2>
+    <p>Ένας ενήλικας έχει περίπου 5 λίτρα αίμα. Λίγο περισσότερο από το μισό είναι ένα υγρό, το πλάσμα. Το υπόλοιπο είναι κύτταρα και κομμάτια κυττάρων.</p>
+    <div class="light"><svg class="bld" viewBox="0 0 620 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ένα ερυθρό αιμοσφαίριο, ένα λευκό αιμοσφαίριο, αιμοπετάλια και ένας σωλήνας με πλάσμα"><ellipse cx="78" cy="48" rx="46" ry="34" fill="#E0484D" stroke="#8F2A30" stroke-width="3.5"/><ellipse cx="78" cy="48" rx="22" ry="14" fill="#B8343A" opacity=".8"/><path d="M52 36Q78 20 104 36" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".35"/><circle cx="232" cy="48" r="40" fill="#EDE8F8" stroke="#6A5AA0" stroke-width="3.5"/><path d="M212 44a14 14 0 1 1 22-10a13 13 0 1 1 16 18a14 14 0 1 1-24 10a13 13 0 0 1-14-18z" fill="#8672BF" stroke="#5A4A90" stroke-width="2"/><path transform="translate(360 30) rotate(10)" d="M-11 -3Q-6 -9 3 -7Q12 -6 11 2Q9 9 0 7Q-12 8 -11 -3z" fill="#F4B942" stroke="#8F6610" stroke-width="2.2"/><path transform="translate(392 52) rotate(-25)" d="M-11 -3Q-6 -9 3 -7Q12 -6 11 2Q9 9 0 7Q-12 8 -11 -3z" fill="#F4B942" stroke="#8F6610" stroke-width="2.2"/><path transform="translate(366 66) rotate(40)" d="M-11 -3Q-6 -9 3 -7Q12 -6 11 2Q9 9 0 7Q-12 8 -11 -3z" fill="#F4B942" stroke="#8F6610" stroke-width="2.2"/><path transform="translate(414 26) rotate(70)" d="M-11 -3Q-6 -9 3 -7Q12 -6 11 2Q9 9 0 7Q-12 8 -11 -3z" fill="#F4B942" stroke="#8F6610" stroke-width="2.2"/><path transform="translate(420 70) rotate(0)" d="M-11 -3Q-6 -9 3 -7Q12 -6 11 2Q9 9 0 7Q-12 8 -11 -3z" fill="#F4B942" stroke="#8F6610" stroke-width="2.2"/><path d="M508 6L508 66a26 26 0 0 0 52 0L560 6" fill="#fff" stroke="#0F1C3F" stroke-width="3.5" stroke-linejoin="round"/><path d="M510 30L558 30L558 66a24 24 0 0 1-48 0z" fill="#FBE7A1"/><path d="M500 6L568 6" stroke="#0F1C3F" stroke-width="3.5" stroke-linecap="round"/></svg></div>
+    <div class="cards"><div class="ecard"><h3>Ερυθρά αιμοσφαίρια</h3><div class="eq">Μεταφέρουν οξυγόνο</div><dl><dt>Περιέχουν</dt><dd>Αιμοσφαιρίνη, που δεσμεύει το οξυγόνο</dd><dt>Σχήμα</dt><dd>Δίσκος με βαθούλωμα σε κάθε πλευρά</dd><dt>Πυρήνας</dt><dd>Δεν έχουν, έτσι χωρά περισσότερη αιμοσφαιρίνη</dd></dl></div><div class="ecard"><h3>Λευκά αιμοσφαίρια</h3><div class="eq">Πολεμούν τις λοιμώξεις</div><dl><dt>Κάποια</dt><dd>Καταπίνουν και καταστρέφουν παθογόνα μικρόβια</dd><dt>Άλλα</dt><dd>Φτιάχνουν αντισώματα</dd><dt>Πυρήνας</dt><dd>Έχουν</dd></dl></div><div class="ecard"><h3>Αιμοπετάλια</h3><div class="eq">Βοηθούν το αίμα να πήξει</div><dl><dt>Τι είναι</dt><dd>Μικροσκοπικά κομμάτια κυττάρων</dd><dt>Ρόλος</dt><dd>Κλείνουν μια πληγή και βοηθούν να γίνει κρούστα</dd></dl></div><div class="ecard"><h3>Πλάσμα</h3><div class="eq">Το υγρό μέρος</div><dl><dt>Χρώμα</dt><dd>Ανοιχτό κίτρινο</dd><dt>Μεταφέρει</dt><dd>Κύτταρα του αίματος, γλυκόζη, διοξείδιο του άνθρακα, ορμόνες και θερμότητα</dd></dl></div></div>
+    <p class="muted">Σε ηρεμία η καρδιά σου χτυπά περίπου 70 φορές το λεπτό. Αυτό σημαίνει γύρω στους 100.000 χτύπους κάθε μέρα.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Βρες εκτυπώσιμα πακέτα Φυσικών Επιστημών στο κατάστημα →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Μέρη της καρδιάς", "numbers": "Αριθμοί", "view": "Επιλογές διαγράμματος", "tapTitle": "Πάτησε ένα μέρος της καρδιάς", "tapText": "Πάτησε οποιοδήποτε μέρος στο διάγραμμα ή διάλεξε ένα από την αριθμημένη λίστα. Οι αριθμοί ακολουθούν τη διαδρομή του αίματος.", "keyBlue": "Το μπλε", "keyBlueText": "δείχνει αίμα φτωχό σε οξυγόνο. Πηγαίνει προς τους πνεύμονες.", "keyRed": "Το κόκκινο", "keyRedText": "δείχνει αίμα πλούσιο σε οξυγόνο. Πηγαίνει προς το σώμα.", "keySides": "Το δεξιά και το αριστερά φαίνονται ανάποδα.", "keySidesText": "Κοιτάς τον άνθρωπο από μπροστά, γι' αυτό η δεξιά πλευρά της καρδιάς βρίσκεται στα αριστερά της οθόνης.", "kinds": {"chamber": "Κοιλότητα", "valve": "Βαλβίδα", "vessel": "Αιμοφόρο αγγείο", "wall": "Μυϊκό τοίχωμα"}, "blood": "Το αίμα εδώ", "low": "Φτωχό σε οξυγόνο", "rich": "Πλούσιο σε οξυγόνο", "both": "Κρατά τα δύο είδη χωριστά", "facts": "Βασικά στοιχεία", "works": "Συνεργάζεται με", "words": "Λέξεις-κλειδιά:", "toVessels": "Σύγκρινε αρτηρίες, φλέβες και τριχοειδή", "step": "Βήμα", "of": "από", "back": "Πίσω", "next": "Επόμενο", "again": "Από την αρχή", "play": "Αναπαραγωγή", "pause": "Παύση", "happens": "Τι συμβαίνει", "oxygen": "Οξυγόνο στο αίμα", "awayLungs": "Το αίμα βρίσκεται στους πνεύμονες", "awayBody": "Το αίμα ταξιδεύει σε όλο το σώμα"};
+  var PARTS=[{"id": "vena", "n": 1, "chip": "Κοίλη φλέβα", "name": "Κοίλη φλέβα", "kind": "vessel", "blood": "low", "job": "Η κύρια φλέβα του σώματος. Φέρνει αίμα φτωχό σε οξυγόνο από το σώμα πίσω στην καρδιά και το αδειάζει στον δεξιό κόλπο.", "facts": ["Έχει δύο κλάδους. Η άνω κοίλη φλέβα φέρνει αίμα από το κεφάλι και τα χέρια. Η κάτω κοίλη φλέβα φέρνει αίμα από το υπόλοιπο σώμα.", "Είναι η μεγαλύτερη φλέβα του σώματος.", "Το αίμα της έχει δώσει μεγάλο μέρος του οξυγόνου του στα κύτταρα του σώματος και έχει πάρει διοξείδιο του άνθρακα."], "links": [["ra", "Η κοίλη φλέβα αδειάζει στον δεξιό κόλπο."], ["aorta", "Η αορτή έστειλε αυτό το αίμα στο σώμα. Η κοίλη φλέβα το φέρνει πίσω."]], "words": "φλέβα, αίμα φτωχό σε οξυγόνο"}, {"id": "ra", "n": 2, "chip": "Δεξιός κόλπος", "name": "Δεξιός κόλπος", "kind": "chamber", "blood": "low", "job": "Η πάνω κοιλότητα στη δεξιά πλευρά της καρδιάς. Μαζεύει το αίμα από την κοίλη φλέβα και μετά το σπρώχνει κάτω, στη δεξιά κοιλία.", "facts": ["Οι κόλποι είναι οι δύο πάνω κοιλότητες της καρδιάς.", "Το τοίχωμά του είναι λεπτό, γιατί σπρώχνει το αίμα μόνο ως την κοιλία από κάτω.", "Ο χτύπος της καρδιάς ξεκινά από εδώ. Μια ομάδα κυττάρων, ο βηματοδότης, δίνει τον ρυθμό."], "links": [["vena", "Το αίμα φτάνει από το σώμα με την κοίλη φλέβα."], ["tri", "Το αίμα φεύγει μέσα από την τριγλώχινα βαλβίδα."]], "words": "κόλπος, βηματοδότης"}, {"id": "tri", "n": 3, "chip": "Τριγλώχινα βαλβίδα", "name": "Τριγλώχινα βαλβίδα", "kind": "valve", "blood": "low", "job": "Μια πόρτα μονής κατεύθυνσης ανάμεσα στον δεξιό κόλπο και τη δεξιά κοιλία. Αφήνει το αίμα να κατέβει στην κοιλία και δεν το αφήνει να γυρίσει πίσω.", "facts": ["Έχει τρεις γλωχίνες, δηλαδή τρία πτερύγια.", "Όταν η κοιλία συσπάται, η πίεση κλείνει τα πτερύγια.", "Λεπτές χορδές, οι τενόντιες χορδές, εμποδίζουν τα πτερύγια να γυρίσουν ανάποδα.", "Ο πρώτος ήχος του χτύπου της καρδιάς ακούγεται όταν κλείνουν αυτή η βαλβίδα και η διγλώχινα."], "links": [["ra", "Ανοίγει όταν συσπάται ο δεξιός κόλπος."], ["rv", "Κλείνει όταν συσπάται η δεξιά κοιλία."], ["bi", "Η διγλώχινα βαλβίδα κάνει την ίδια δουλειά στην αριστερή πλευρά."]], "words": "βαλβίδα, παλινδρόμηση"}, {"id": "rv", "n": 4, "chip": "Δεξιά κοιλία", "name": "Δεξιά κοιλία", "kind": "chamber", "blood": "low", "job": "Η κάτω κοιλότητα στη δεξιά πλευρά. Στέλνει το αίμα που είναι φτωχό σε οξυγόνο έξω από την καρδιά, προς τους πνεύμονες.", "facts": ["Οι κοιλίες είναι οι δύο κάτω κοιλότητες. Αυτές στέλνουν το αίμα έξω από την καρδιά.", "Το τοίχωμά της είναι πιο λεπτό από της αριστερής κοιλίας, γιατί οι πνεύμονες είναι κοντά και χρειάζεται μικρότερη δύναμη.", "Οι δύο κοιλίες συσπώνται την ίδια στιγμή."], "links": [["tri", "Το αίμα μπαίνει από την τριγλώχινα βαλβίδα."], ["semi", "Μια μηνοειδής βαλβίδα δεν αφήνει το αίμα να γυρίσει πίσω."], ["pa", "Στέλνει το αίμα στην πνευμονική αρτηρία."]], "words": "κοιλία, συστολή"}, {"id": "semi", "n": 5, "chip": "Μηνοειδείς βαλβίδες", "name": "Μηνοειδείς βαλβίδες", "kind": "valve", "blood": "", "job": "Δύο βαλβίδες που φυλάνε τις εξόδους της καρδιάς. Η μία βρίσκεται στην αρχή της πνευμονικής αρτηρίας και η άλλη στην αρχή της αορτής.", "facts": ["Μηνοειδής σημαίνει σε σχήμα μισοφέγγαρου. Τέτοιο σχήμα έχουν τα πτερύγιά τους.", "Ανοίγουν όταν οι κοιλίες συσπώνται και κλείνουν όταν οι κοιλίες χαλαρώνουν.", "Δεν αφήνουν το αίμα να γυρίσει πίσω στις κοιλίες.", "Ο δεύτερος ήχος του χτύπου της καρδιάς ακούγεται όταν κλείνουν αυτές οι βαλβίδες."], "links": [["pa", "Η μία φυλάει την πνευμονική αρτηρία."], ["aorta", "Η άλλη φυλάει την αορτή."], ["tri", "Η τριγλώχινα και η διγλώχινα φυλάνε την είσοδο κάθε κοιλίας."]], "words": "μηνοειδής βαλβίδα, παλινδρόμηση"}, {"id": "pa", "n": 6, "chip": "Πνευμονική αρτηρία", "name": "Πνευμονική αρτηρία", "kind": "vessel", "blood": "low", "job": "Μεταφέρει αίμα φτωχό σε οξυγόνο από τη δεξιά κοιλία στους πνεύμονες. Χωρίζεται σε δύο κλάδους, έναν για κάθε πνεύμονα.", "facts": ["Οι αρτηρίες μεταφέρουν αίμα μακριά από την καρδιά.", "Είναι η μόνη αρτηρία που μεταφέρει αίμα φτωχό σε οξυγόνο.", "Πνευμονικός σημαίνει ότι έχει σχέση με τους πνεύμονες."], "links": [["rv", "Η δεξιά κοιλία στέλνει το αίμα μέσα της."], ["pv", "Οι πνευμονικές φλέβες φέρνουν το αίμα πίσω από τους πνεύμονες, γεμάτο οξυγόνο."]], "words": "αρτηρία, πνευμονικός"}, {"id": "pv", "n": 7, "chip": "Πνευμονικές φλέβες", "name": "Πνευμονικές φλέβες", "kind": "vessel", "blood": "rich", "job": "Μεταφέρουν αίμα πλούσιο σε οξυγόνο από τους πνεύμονες πίσω στην καρδιά και το αδειάζουν στον αριστερό κόλπο.", "facts": ["Οι φλέβες μεταφέρουν αίμα πίσω στην καρδιά.", "Οι πνευμονικές φλέβες είναι οι μόνες φλέβες που μεταφέρουν αίμα πλούσιο σε οξυγόνο.", "Είναι τέσσερις, δύο από κάθε πνεύμονα.", "Στους πνεύμονες το αίμα πήρε οξυγόνο και έδιωξε διοξείδιο του άνθρακα."], "links": [["pa", "Η πνευμονική αρτηρία πήγε αυτό το αίμα στους πνεύμονες."], ["la", "Αδειάζουν στον αριστερό κόλπο."]], "words": "φλέβα, αίμα πλούσιο σε οξυγόνο"}, {"id": "la", "n": 8, "chip": "Αριστερός κόλπος", "name": "Αριστερός κόλπος", "kind": "chamber", "blood": "rich", "job": "Η πάνω κοιλότητα στην αριστερή πλευρά της καρδιάς. Μαζεύει το πλούσιο σε οξυγόνο αίμα από τους πνεύμονες και το σπρώχνει κάτω, στην αριστερή κοιλία.", "facts": ["Όπως ο δεξιός κόλπος, έχει λεπτό τοίχωμα.", "Οι δύο κόλποι συσπώνται μαζί, λίγο πριν από τις κοιλίες."], "links": [["pv", "Το αίμα φτάνει από τους πνεύμονες με τις πνευμονικές φλέβες."], ["bi", "Το αίμα φεύγει μέσα από τη διγλώχινα βαλβίδα."]], "words": "κόλπος"}, {"id": "bi", "n": 9, "chip": "Διγλώχινα βαλβίδα", "name": "Διγλώχινα (μιτροειδής) βαλβίδα", "kind": "valve", "blood": "rich", "job": "Μια πόρτα μονής κατεύθυνσης ανάμεσα στον αριστερό κόλπο και την αριστερή κοιλία. Δεν αφήνει το αίμα να γυρίσει πίσω στον κόλπο.", "facts": ["Έχει δύο γλωχίνες, δηλαδή δύο πτερύγια.", "Λέγεται και μιτροειδής βαλβίδα.", "Συγκρατεί τη μεγαλύτερη πίεση μέσα στην καρδιά, όταν συσπάται η αριστερή κοιλία."], "links": [["la", "Ανοίγει όταν συσπάται ο αριστερός κόλπος."], ["lv", "Κλείνει όταν συσπάται η αριστερή κοιλία."], ["tri", "Η τριγλώχινα βαλβίδα κάνει την ίδια δουλειά στη δεξιά πλευρά."]], "words": "βαλβίδα, μιτροειδής"}, {"id": "lv", "n": 10, "chip": "Αριστερή κοιλία", "name": "Αριστερή κοιλία", "kind": "chamber", "blood": "rich", "job": "Η κάτω κοιλότητα στην αριστερή πλευρά. Στέλνει το πλούσιο σε οξυγόνο αίμα έξω από την καρδιά, σε όλο το σώμα.", "facts": ["Έχει το πιο παχύ και πιο μυώδες τοίχωμα από όλες τις κοιλότητες.", "Πρέπει να σπρώξει το αίμα σε όλο το σώμα, γι' αυτό χρειάζεται να δημιουργήσει μεγάλη πίεση.", "Κάθε συστολή της τη νιώθεις ως σφυγμό.", "Σε ηρεμία χτυπά περίπου 70 φορές το λεπτό."], "links": [["bi", "Το αίμα μπαίνει από τη διγλώχινα βαλβίδα."], ["aorta", "Στέλνει το αίμα στην αορτή."], ["rv", "Η δεξιά κοιλία έχει πιο λεπτό τοίχωμα, γιατί στέλνει αίμα μόνο στους πνεύμονες."]], "words": "κοιλία, πίεση, σφυγμός"}, {"id": "aorta", "n": 11, "chip": "Αορτή", "name": "Αορτή", "kind": "vessel", "blood": "rich", "job": "Η κύρια αρτηρία του σώματος. Μεταφέρει αίμα πλούσιο σε οξυγόνο από την αριστερή κοιλία και διακλαδίζεται για να φτάσει σε κάθε όργανο.", "facts": ["Είναι η μεγαλύτερη αρτηρία του σώματος, περίπου όσο φαρδύ είναι ένα λάστιχο ποτίσματος.", "Το τοίχωμά της είναι παχύ και ελαστικό, για να αντέχει τη μεγάλη πίεση.", "Οι πρώτοι κλάδοι της είναι οι στεφανιαίες αρτηρίες, που τρέφουν τον ίδιο τον μυ της καρδιάς."], "links": [["lv", "Η αριστερή κοιλία στέλνει το αίμα μέσα της."], ["semi", "Μια μηνοειδής βαλβίδα δεν αφήνει το αίμα να γυρίσει πίσω στην καρδιά."], ["vena", "Αφού το αίμα κάνει τον γύρο του σώματος, η κοίλη φλέβα το φέρνει πίσω."]], "more": "vessels", "words": "αρτηρία, στεφανιαίες αρτηρίες"}, {"id": "septum", "n": 12, "chip": "Διάφραγμα", "name": "Μεσοκοιλιακό διάφραγμα", "kind": "wall", "blood": "both", "job": "Το μυϊκό τοίχωμα που χωρίζει την καρδιά σε αριστερή και δεξιά πλευρά.", "facts": ["Κρατά χωριστά το αίμα που είναι πλούσιο σε οξυγόνο από το αίμα που είναι φτωχό σε οξυγόνο.", "Χάρη σε αυτό, η καρδιά δουλεύει σαν δύο αντλίες, η μία δίπλα στην άλλη.", "Η καρδιά είναι φτιαγμένη από καρδιακό μυ, το μυοκάρδιο, που δεν κουράζεται ποτέ."], "links": [["rv", "Η δεξιά κοιλία βρίσκεται από τη μία πλευρά του."], ["lv", "Η αριστερή κοιλία βρίσκεται από την άλλη."]], "words": "μεσοκοιλιακό διάφραγμα, μυοκάρδιο"}];
+  var STEPS=[{"title": "Πίσω από το σώμα", "sum": "Αίμα φτωχό σε οξυγόνο επιστρέφει στην καρδιά με την κοίλη φλέβα.", "on": ["vena"], "ox": "low", "pts": ["Τα κύτταρα του σώματος έχουν πάρει οξυγόνο από αυτό το αίμα.", "Τώρα μεταφέρει διοξείδιο του άνθρακα, ένα άχρηστο αέριο που έφτιαξαν τα κύτταρα.", "Η κοίλη φλέβα αδειάζει στον δεξιό κόλπο."]}, {"title": "Στη δεξιά κοιλία", "sum": "Ο δεξιός κόλπος συσπάται και σπρώχνει το αίμα μέσα από την τριγλώχινα βαλβίδα.", "on": ["ra", "tri", "rv"], "ox": "low", "pts": ["Η τριγλώχινα βαλβίδα ανοίγει για να περάσει το αίμα.", "Η δεξιά κοιλία γεμίζει με αίμα."]}, {"title": "Προς τους πνεύμονες", "sum": "Η δεξιά κοιλία συσπάται και στέλνει το αίμα στην πνευμονική αρτηρία.", "on": ["rv", "semi", "pa"], "ox": "low", "pts": ["Η τριγλώχινα βαλβίδα κλείνει απότομα, για να μη γυρίσει το αίμα στον κόλπο.", "Μια μηνοειδής βαλβίδα ανοίγει για να βγει το αίμα.", "Η πνευμονική αρτηρία μεταφέρει το αίμα στους πνεύμονες."]}, {"title": "Στους πνεύμονες", "sum": "Το αίμα περνά από μικροσκοπικά τριχοειδή αγγεία γύρω από τις κυψελίδες.", "on": ["pa", "pv"], "ox": "gain", "away": "lungs", "pts": ["Το οξυγόνο περνά από τον αέρα στο αίμα.", "Το διοξείδιο του άνθρακα περνά από το αίμα στον αέρα και το βγάζεις με την εκπνοή.", "Το αίμα είναι τώρα πλούσιο σε οξυγόνο."]}, {"title": "Πίσω στην καρδιά", "sum": "Το πλούσιο σε οξυγόνο αίμα επιστρέφει στην καρδιά με τις πνευμονικές φλέβες.", "on": ["pv", "la"], "ox": "rich", "pts": ["Οι πνευμονικές φλέβες αδειάζουν στον αριστερό κόλπο.", "Είναι η δεύτερη φορά που το αίμα μπαίνει στην καρδιά σε αυτό το ταξίδι."]}, {"title": "Στην αριστερή κοιλία", "sum": "Ο αριστερός κόλπος συσπάται και σπρώχνει το αίμα μέσα από τη διγλώχινα βαλβίδα.", "on": ["la", "bi", "lv"], "ox": "rich", "pts": ["Η διγλώχινα βαλβίδα ανοίγει για να περάσει το αίμα.", "Η αριστερή κοιλία γεμίζει με αίμα."]}, {"title": "Προς το σώμα", "sum": "Η αριστερή κοιλία συσπάται δυνατά και στέλνει το αίμα στην αορτή.", "on": ["lv", "semi", "aorta"], "ox": "rich", "pts": ["Η διγλώχινα βαλβίδα κλείνει απότομα.", "Μια μηνοειδής βαλβίδα ανοίγει για να βγει το αίμα.", "Το παχύ τοίχωμα της αριστερής κοιλίας δίνει στο αίμα μεγάλη ώθηση."]}, {"title": "Σε όλο το σώμα", "sum": "Οι αρτηρίες μεταφέρουν το αίμα σε κάθε όργανο. Τα τριχοειδή το φέρνουν κοντά σε κάθε κύτταρο.", "on": ["aorta", "vena"], "ox": "lose", "away": "body", "pts": ["Το οξυγόνο και η γλυκόζη περνούν από το αίμα στα κύτταρα.", "Το διοξείδιο του άνθρακα περνά από τα κύτταρα στο αίμα.", "Οι φλέβες μεταφέρουν το αίμα πίσω προς την καρδιά και το ταξίδι ξεκινά ξανά."]}];
+  var OX={"low": "Λίγο", "rich": "Πολύ", "gain": "Αυξάνεται: το αίμα παίρνει οξυγόνο", "lose": "Μειώνεται: το αίμα δίνει οξυγόνο"},PATHS=["M170 40L170 250L190 300", "M190 300L202 345L202 450", "M215 480C262 488 286 455 289 400L290 200L75 200", "", "M588 275L480 275L432 305", "M432 305L422 345L422 450", "M395 510C362 490 342 455 340 400L340 175C340 105 390 62 450 62C510 62 548 100 548 148", ""],DUR=[1800, 1500, 2600, 0, 1700, 1500, 3000, 0];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    return "<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p>"+
+      "<div class=\"keybox\">"+
+      "<div><i class=\"sw\" style=\"background:#5B8FD6\"></i><b>"+esc(L.keyBlue)+"</b> "+esc(L.keyBlueText)+"</div>"+
+      "<div><i class=\"sw\" style=\"background:#E0484D\"></i><b>"+esc(L.keyRed)+"</b> "+esc(L.keyRedText)+"</div>"+
+      "<div><b>"+esc(L.keySides)+"</b> "+esc(L.keySidesText)+"</div>"+
+      "</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.blood)h+="<div class=\"meta\"><span><b>"+esc(L.blood)+"</b>"+esc(L[o.blood])+"</span></div>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more==="vessels")h+="<p><button class=\"btn ghost\" id=\"toVessels\">"+esc(L.toVessels)+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toVessels"){show("more");var v=$("vessels");if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.oxygen)+"</b>"+esc(OX[s.ox])+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.away){away.textContent=s.away==="lungs"?L.awayLungs:L.awayBody;away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1600);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("pinBtn").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  select(null);
+
+  /* exposed for checking */
+  window.HeartLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
