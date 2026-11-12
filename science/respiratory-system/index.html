@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Lungs and Respiratory System Diagram for KS3 | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive respiratory system diagram for ages 11-14. Tap each part of the breathing system to learn its job, follow a breath of air from the nose to the alveoli, watch the ribs and diaphragm move, and see how gas exchange works.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/respiratory-system/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/respiratory-system/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/respiratory-system/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/respiratory-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Baloo 2",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Baloo 2",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Nunito Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Baloo 2",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Baloo 2",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* lungs */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+#fig .r-skin{fill:#1B2B5C;stroke:#6F84C4}
+#fig .r-face{stroke:#8FA2D8}
+.kind.airway{background:#9CC3F5}.kind.sac{background:#F6B9B1}.kind.organ{background:#F0A696}.kind.bone{background:#F6E7BD}.kind.muscle{background:#E79A93}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round}
+.hit.on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.6)}
+.hit:focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.16)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.25)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .r-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .r-dot{fill:#F4B942}
+#fig .r-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins,#fig.journey #pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:#FFF3D0;stroke:#0F1C3F;stroke-width:2.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;gap:8px;justify-content:center;margin:10px 0 2px}
+#breath{max-width:330px}
+#breath .b-lungs{transform-box:view-box;transform-origin:150px 62px;transition:transform 1.5s ease}
+#breath.in .b-lungs{transform:scale(1.07,1.1)}
+#breath .b-ribs{transition:transform 1.5s ease}
+#breath.in .b-ribs-l{transform:translate(-7px,-9px)}
+#breath.in .b-ribs-r{transform:translate(7px,-9px)}
+#breath .b-dia-in,#breath .b-dia-out{transition:opacity .9s ease}
+#breath .b-dia-in{opacity:0}
+#breath.in .b-dia-in{opacity:1}
+#breath.in .b-dia-out{opacity:0}
+#breath .a-in{display:none}
+#breath.in .a-in{display:block}
+#breath.in .a-out{display:none}
+@media (prefers-reduced-motion:reduce){#breath .b-lungs,#breath .b-ribs,#breath .b-dia-in,#breath .b-dia-out{transition:none}}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.organ,.pin,.ducts,.epi{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › Respiratory System Explorer</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/respiratory-system/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Respiratory System Explorer</h1>
+  <p class="lead">Your respiratory system gets oxygen into your blood and takes carbon dioxide out. Tap any part to see what it does, then follow a breath of air from your nose down to the tiny air sacs in your lungs. Ages 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Respiratory System Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the lungs</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Air journey</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Breathing and gas exchange</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Parts of the breathing system"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Diagram options">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Numbers</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="-52 0 764 672" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Diagram of the human breathing system: nose, mouth, trachea, bronchi, lungs, ribs and diaphragm"><style>
+.r-skin{fill:#EEF1F8;stroke:#8E9AC0;stroke-width:2.5;stroke-linejoin:round}
+.r-face{fill:none;stroke:#8E9AC0;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.r-throat{fill:none;stroke:#CFE0F6;stroke-width:16;stroke-linecap:round;opacity:.75}
+.r-lung{fill:#F4B6AE;stroke:#9E5450;stroke-width:4;stroke-linejoin:round}
+.r-fis{fill:none;stroke:#C98078;stroke-width:2.2;stroke-linecap:round;opacity:.8}
+.r-heart{fill:#E9A08F;stroke:#7A3B3A;stroke-width:2;opacity:.5}
+.r-u{fill:none;stroke:#4F6FA8;stroke-linecap:round;stroke-linejoin:round}
+.r-a{fill:none;stroke:#CFE0F6;stroke-linecap:round;stroke-linejoin:round}
+.r-ring{fill:none;stroke:#7E9AD0;stroke-width:3.2;stroke-linecap:round}
+.r-alv circle{fill:#FBD9D3;stroke:#B8605C;stroke-width:1.3}
+.r-wu{fill:none;stroke:#7A3838;stroke-width:21;stroke-linecap:round}
+.r-w{fill:none;stroke:#C97268;stroke-width:16;stroke-linecap:round}
+.r-rib{fill:#F6E7BD;stroke:#A88F52;stroke-width:2}
+.r-du{fill:none;stroke:#7A3038;stroke-width:19;stroke-linecap:round}
+.r-d{fill:none;stroke:#C0606A;stroke-width:14;stroke-linecap:round}
+.r-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.r-dot{fill:#0F1C3F}
+.r-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.r-pin text{font:800 16px "Baloo 2",Arial,sans-serif;fill:#0F1C3F}
+</style><path class="r-skin" d="M284 150L284 205C284 226 240 236 180 248C112 260 76 292 76 345L86 664L554 664L564 345C564 292 528 260 460 248C400 236 356 226 356 205L356 150Z"/><ellipse class="r-skin" cx="320" cy="95" rx="62" ry="80"/><path class="r-throat" d="M320 108L320 168"/><path class="r-face" d="M292 78q8 -6 16 0M332 78q8 -6 16 0"/><path class="r-face" d="M320 84L313 108Q320 114 327 108"/><path class="r-face" d="M302 138Q320 148 338 138" style="stroke:#B8605C;stroke-width:3.5"/><path class="r-wu" d="M162 285C110 340 100 480 110 605"/><path class="r-wu" d="M478 285C530 340 540 480 530 605"/><path class="r-w" d="M162 285C110 340 100 480 110 605"/><path class="r-w" d="M478 285C530 340 540 480 530 605"/><path class="r-du" d="M106 620C165 556 250 545 320 562C390 545 475 556 534 620"/><path class="r-d" d="M106 620C165 556 250 545 320 562C390 545 475 556 534 620"/><ellipse class="r-rib" cx="156.0" cy="292.0" rx="13.5" ry="9.5" transform="rotate(128 156.0 292.0)"/><ellipse class="r-rib" cx="139.0" cy="319.9" rx="13.5" ry="9.5" transform="rotate(115 139.0 319.9)"/><ellipse class="r-rib" cx="125.9" cy="354.7" rx="13.5" ry="9.5" transform="rotate(107 125.9 354.7)"/><ellipse class="r-rib" cx="116.5" cy="395.1" rx="13.5" ry="9.5" transform="rotate(100 116.5 395.1)"/><ellipse class="r-rib" cx="110.3" cy="439.8" rx="13.5" ry="9.5" transform="rotate(96 110.3 439.8)"/><ellipse class="r-rib" cx="107.1" cy="487.4" rx="13.5" ry="9.5" transform="rotate(92 107.1 487.4)"/><ellipse class="r-rib" cx="106.7" cy="536.6" rx="13.5" ry="9.5" transform="rotate(89 106.7 536.6)"/><ellipse class="r-rib" cx="108.7" cy="586.1" rx="13.5" ry="9.5" transform="rotate(86 108.7 586.1)"/><ellipse class="r-rib" cx="484.0" cy="292.0" rx="13.5" ry="9.5" transform="rotate(52 484.0 292.0)"/><ellipse class="r-rib" cx="501.0" cy="319.9" rx="13.5" ry="9.5" transform="rotate(65 501.0 319.9)"/><ellipse class="r-rib" cx="514.1" cy="354.7" rx="13.5" ry="9.5" transform="rotate(73 514.1 354.7)"/><ellipse class="r-rib" cx="523.5" cy="395.1" rx="13.5" ry="9.5" transform="rotate(80 523.5 395.1)"/><ellipse class="r-rib" cx="529.7" cy="439.8" rx="13.5" ry="9.5" transform="rotate(84 529.7 439.8)"/><ellipse class="r-rib" cx="532.9" cy="487.4" rx="13.5" ry="9.5" transform="rotate(88 532.9 487.4)"/><ellipse class="r-rib" cx="533.3" cy="536.6" rx="13.5" ry="9.5" transform="rotate(91 533.3 536.6)"/><ellipse class="r-rib" cx="531.3" cy="586.1" rx="13.5" ry="9.5" transform="rotate(94 531.3 586.1)"/><path class="r-lung" d="M262 262C215 262 150 330 135 430C126 500 124 560 128 588C175 540 250 528 298 542C300 480 302 400 298 340C296 300 285 268 262 262Z"/><path class="r-lung" d="M378 262C425 262 490 330 505 430C514 500 516 560 512 588C465 540 410 530 372 548C395 525 392 490 352 468C346 420 342 380 342 340C344 300 355 268 378 262Z"/><path class="r-fis" d="M152 392C200 392 250 410 297 440M138 505C190 468 240 466 296 492M488 392C440 400 400 425 352 470"/><path class="r-heart" d="M322 470C300 500 310 545 340 552C370 548 388 515 372 480C360 462 335 458 322 470Z"/><path class="r-u" stroke-width="36" d="M320 172L320 326" style="stroke-linecap:butt"/><path class="r-u" stroke-width="24" d="M320 322C300 350 270 365 245 385"/><path class="r-u" stroke-width="24" d="M320 322C340 350 370 365 395 385"/><path class="r-u" stroke-width="11.9" d="M245.0 385.0L215.6 352.3"/><path class="r-u" stroke-width="9.2" d="M215.6 352.3L187.6 341.6"/><path class="r-u" stroke-width="7.3" d="M187.6 341.6L167.4 343.7"/><path class="r-u" stroke-width="7.3" d="M187.6 341.6L174.0 326.5"/><path class="r-u" stroke-width="9.2" d="M215.6 352.3L207.8 323.4"/><path class="r-u" stroke-width="7.3" d="M207.8 323.4L194.2 308.3"/><path class="r-u" stroke-width="7.3" d="M207.8 323.4L212.0 303.5"/><path class="r-u" stroke-width="11.9" d="M245.0 385.0L203.4 390.8"/><path class="r-u" stroke-width="9.2" d="M203.4 390.8L180.0 407.2"/><path class="r-u" stroke-width="7.3" d="M180.0 407.2L170.9 424.4"/><path class="r-u" stroke-width="7.3" d="M180.0 407.2L160.8 409.9"/><path class="r-u" stroke-width="9.2" d="M203.4 390.8L176.4 381.5"/><path class="r-u" stroke-width="7.3" d="M176.4 381.5L157.2 384.2"/><path class="r-u" stroke-width="7.3" d="M176.4 381.5L162.9 367.6"/><path class="r-u" stroke-width="11.9" d="M245.0 385.0L218.5 427.4"/><path class="r-u" stroke-width="9.2" d="M218.5 427.4L215.5 461.3"/><path class="r-u" stroke-width="7.3" d="M215.5 461.3L224.2 482.7"/><path class="r-u" stroke-width="7.3" d="M215.5 461.3L203.3 480.9"/><path class="r-u" stroke-width="9.2" d="M218.5 427.4L189.4 444.9"/><path class="r-u" stroke-width="7.3" d="M189.4 444.9L177.1 464.5"/><path class="r-u" stroke-width="7.3" d="M189.4 444.9L166.3 446.5"/><path class="r-u" stroke-width="11.9" d="M245.0 385.0L252.2 436.5"/><path class="r-u" stroke-width="9.2" d="M252.2 436.5L272.5 465.5"/><path class="r-u" stroke-width="7.3" d="M272.5 465.5L293.7 476.7"/><path class="r-u" stroke-width="7.3" d="M272.5 465.5L275.9 489.3"/><path class="r-u" stroke-width="9.2" d="M252.2 436.5L240.7 469.9"/><path class="r-u" stroke-width="7.3" d="M240.7 469.9L244.1 493.7"/><path class="r-u" stroke-width="7.3" d="M240.7 469.9L223.4 486.6"/><path class="r-u" stroke-width="11.9" d="M395.0 385.0L424.4 352.3"/><path class="r-u" stroke-width="9.2" d="M424.4 352.3L432.2 323.4"/><path class="r-u" stroke-width="7.3" d="M432.2 323.4L428.0 303.5"/><path class="r-u" stroke-width="7.3" d="M432.2 323.4L445.8 308.3"/><path class="r-u" stroke-width="9.2" d="M424.4 352.3L452.4 341.6"/><path class="r-u" stroke-width="7.3" d="M452.4 341.6L466.0 326.5"/><path class="r-u" stroke-width="7.3" d="M452.4 341.6L472.6 343.7"/><path class="r-u" stroke-width="11.9" d="M395.0 385.0L436.6 390.8"/><path class="r-u" stroke-width="9.2" d="M436.6 390.8L463.6 381.5"/><path class="r-u" stroke-width="7.3" d="M463.6 381.5L477.1 367.6"/><path class="r-u" stroke-width="7.3" d="M463.6 381.5L482.8 384.2"/><path class="r-u" stroke-width="9.2" d="M436.6 390.8L460.0 407.2"/><path class="r-u" stroke-width="7.3" d="M460.0 407.2L479.2 409.9"/><path class="r-u" stroke-width="7.3" d="M460.0 407.2L469.1 424.4"/><path class="r-u" stroke-width="11.9" d="M395.0 385.0L421.5 427.4"/><path class="r-u" stroke-width="9.2" d="M421.5 427.4L450.6 444.9"/><path class="r-u" stroke-width="7.3" d="M450.6 444.9L473.7 446.5"/><path class="r-u" stroke-width="7.3" d="M450.6 444.9L462.9 464.5"/><path class="r-u" stroke-width="9.2" d="M421.5 427.4L424.5 461.3"/><path class="r-u" stroke-width="7.3" d="M424.5 461.3L436.7 480.9"/><path class="r-u" stroke-width="7.3" d="M424.5 461.3L415.8 482.7"/><path class="r-u" stroke-width="11.9" d="M395.0 385.0L388.0 434.5"/><path class="r-u" stroke-width="9.2" d="M388.0 434.5L399.1 466.7"/><path class="r-u" stroke-width="9.2" d="M388.0 434.5L368.5 462.4"/><path class="r-a" stroke-width="18" d="M320 322C300 350 270 365 245 385"/><path class="r-a" stroke-width="18" d="M320 322C340 350 370 365 395 385"/><path class="r-a" stroke-width="30" d="M320 170L320 328" style="stroke-linecap:butt"/><path class="r-a" stroke-width="8.5" d="M245.0 385.0L215.6 352.3"/><path class="r-a" stroke-width="5.8" d="M215.6 352.3L187.6 341.6"/><path class="r-a" stroke-width="3.9" d="M187.6 341.6L167.4 343.7"/><path class="r-a" stroke-width="3.9" d="M187.6 341.6L174.0 326.5"/><path class="r-a" stroke-width="5.8" d="M215.6 352.3L207.8 323.4"/><path class="r-a" stroke-width="3.9" d="M207.8 323.4L194.2 308.3"/><path class="r-a" stroke-width="3.9" d="M207.8 323.4L212.0 303.5"/><path class="r-a" stroke-width="8.5" d="M245.0 385.0L203.4 390.8"/><path class="r-a" stroke-width="5.8" d="M203.4 390.8L180.0 407.2"/><path class="r-a" stroke-width="3.9" d="M180.0 407.2L170.9 424.4"/><path class="r-a" stroke-width="3.9" d="M180.0 407.2L160.8 409.9"/><path class="r-a" stroke-width="5.8" d="M203.4 390.8L176.4 381.5"/><path class="r-a" stroke-width="3.9" d="M176.4 381.5L157.2 384.2"/><path class="r-a" stroke-width="3.9" d="M176.4 381.5L162.9 367.6"/><path class="r-a" stroke-width="8.5" d="M245.0 385.0L218.5 427.4"/><path class="r-a" stroke-width="5.8" d="M218.5 427.4L215.5 461.3"/><path class="r-a" stroke-width="3.9" d="M215.5 461.3L224.2 482.7"/><path class="r-a" stroke-width="3.9" d="M215.5 461.3L203.3 480.9"/><path class="r-a" stroke-width="5.8" d="M218.5 427.4L189.4 444.9"/><path class="r-a" stroke-width="3.9" d="M189.4 444.9L177.1 464.5"/><path class="r-a" stroke-width="3.9" d="M189.4 444.9L166.3 446.5"/><path class="r-a" stroke-width="8.5" d="M245.0 385.0L252.2 436.5"/><path class="r-a" stroke-width="5.8" d="M252.2 436.5L272.5 465.5"/><path class="r-a" stroke-width="3.9" d="M272.5 465.5L293.7 476.7"/><path class="r-a" stroke-width="3.9" d="M272.5 465.5L275.9 489.3"/><path class="r-a" stroke-width="5.8" d="M252.2 436.5L240.7 469.9"/><path class="r-a" stroke-width="3.9" d="M240.7 469.9L244.1 493.7"/><path class="r-a" stroke-width="3.9" d="M240.7 469.9L223.4 486.6"/><path class="r-a" stroke-width="8.5" d="M395.0 385.0L424.4 352.3"/><path class="r-a" stroke-width="5.8" d="M424.4 352.3L432.2 323.4"/><path class="r-a" stroke-width="3.9" d="M432.2 323.4L428.0 303.5"/><path class="r-a" stroke-width="3.9" d="M432.2 323.4L445.8 308.3"/><path class="r-a" stroke-width="5.8" d="M424.4 352.3L452.4 341.6"/><path class="r-a" stroke-width="3.9" d="M452.4 341.6L466.0 326.5"/><path class="r-a" stroke-width="3.9" d="M452.4 341.6L472.6 343.7"/><path class="r-a" stroke-width="8.5" d="M395.0 385.0L436.6 390.8"/><path class="r-a" stroke-width="5.8" d="M436.6 390.8L463.6 381.5"/><path class="r-a" stroke-width="3.9" d="M463.6 381.5L477.1 367.6"/><path class="r-a" stroke-width="3.9" d="M463.6 381.5L482.8 384.2"/><path class="r-a" stroke-width="5.8" d="M436.6 390.8L460.0 407.2"/><path class="r-a" stroke-width="3.9" d="M460.0 407.2L479.2 409.9"/><path class="r-a" stroke-width="3.9" d="M460.0 407.2L469.1 424.4"/><path class="r-a" stroke-width="8.5" d="M395.0 385.0L421.5 427.4"/><path class="r-a" stroke-width="5.8" d="M421.5 427.4L450.6 444.9"/><path class="r-a" stroke-width="3.9" d="M450.6 444.9L473.7 446.5"/><path class="r-a" stroke-width="3.9" d="M450.6 444.9L462.9 464.5"/><path class="r-a" stroke-width="5.8" d="M421.5 427.4L424.5 461.3"/><path class="r-a" stroke-width="3.9" d="M424.5 461.3L436.7 480.9"/><path class="r-a" stroke-width="3.9" d="M424.5 461.3L415.8 482.7"/><path class="r-a" stroke-width="8.5" d="M395.0 385.0L388.0 434.5"/><path class="r-a" stroke-width="5.8" d="M388.0 434.5L399.1 466.7"/><path class="r-a" stroke-width="5.8" d="M388.0 434.5L368.5 462.4"/><path class="r-ring" d="M308 184Q320 189 332 184"/><path class="r-ring" d="M308 198Q320 203 332 198"/><path class="r-ring" d="M308 212Q320 217 332 212"/><path class="r-ring" d="M308 226Q320 231 332 226"/><path class="r-ring" d="M308 240Q320 245 332 240"/><path class="r-ring" d="M308 254Q320 259 332 254"/><path class="r-ring" d="M308 268Q320 273 332 268"/><path class="r-ring" d="M308 282Q320 287 332 282"/><path class="r-ring" d="M308 296Q320 301 332 296"/><path class="r-ring" d="M308 310Q320 315 332 310"/><g class="r-alv"><circle cx="163.4" cy="344.1" r="4.6"/><circle cx="158.0" cy="349.7" r="4.6"/><circle cx="156.9" cy="339.8" r="4.6"/><circle cx="164.6" cy="336.0" r="4.6"/><circle cx="167.2" cy="351.8" r="4.6"/><circle cx="171.3" cy="323.5" r="4.6"/><circle cx="163.6" cy="322.4" r="4.6"/><circle cx="171.0" cy="315.7" r="4.6"/><circle cx="178.6" cy="319.6" r="4.6"/><circle cx="167.4" cy="331.1" r="4.6"/><circle cx="191.5" cy="305.3" r="4.6"/><circle cx="183.8" cy="304.2" r="4.6"/><circle cx="191.2" cy="297.5" r="4.6"/><circle cx="198.8" cy="301.4" r="4.6"/><circle cx="187.6" cy="312.9" r="4.6"/><circle cx="212.9" cy="299.6" r="4.6"/><circle cx="209.2" cy="292.7" r="4.6"/><circle cx="219.0" cy="294.8" r="4.6"/><circle cx="220.3" cy="303.2" r="4.6"/><circle cx="204.4" cy="300.9" r="4.6"/><circle cx="169.0" cy="427.9" r="4.6"/><circle cx="170.6" cy="435.6" r="4.6"/><circle cx="161.8" cy="430.9" r="4.6"/><circle cx="162.9" cy="422.4" r="4.6"/><circle cx="177.5" cy="429.0" r="4.6"/><circle cx="156.8" cy="410.5" r="4.6"/><circle cx="151.6" cy="416.3" r="4.6"/><circle cx="150.2" cy="406.4" r="4.6"/><circle cx="157.7" cy="402.3" r="4.6"/><circle cx="160.9" cy="418.0" r="4.6"/><circle cx="153.2" cy="384.8" r="4.6"/><circle cx="148.0" cy="390.6" r="4.6"/><circle cx="146.6" cy="380.7" r="4.6"/><circle cx="154.1" cy="376.6" r="4.6"/><circle cx="157.3" cy="392.3" r="4.6"/><circle cx="160.1" cy="364.7" r="4.6"/><circle cx="152.4" cy="363.9" r="4.6"/><circle cx="159.6" cy="356.9" r="4.6"/><circle cx="167.3" cy="360.6" r="4.6"/><circle cx="156.5" cy="372.4" r="4.6"/><circle cx="225.7" cy="486.4" r="4.6"/><circle cx="232.6" cy="490.1" r="4.6"/><circle cx="223.3" cy="493.9" r="4.6"/><circle cx="217.5" cy="487.6" r="4.6"/><circle cx="232.0" cy="480.6" r="4.6"/><circle cx="201.2" cy="484.3" r="4.6"/><circle cx="202.2" cy="492.0" r="4.6"/><circle cx="193.7" cy="486.7" r="4.6"/><circle cx="195.4" cy="478.3" r="4.6"/><circle cx="209.5" cy="486.0" r="4.6"/><circle cx="175.0" cy="467.9" r="4.6"/><circle cx="176.0" cy="475.7" r="4.6"/><circle cx="167.6" cy="470.4" r="4.6"/><circle cx="169.3" cy="462.0" r="4.6"/><circle cx="183.4" cy="469.6" r="4.6"/><circle cx="162.3" cy="446.8" r="4.6"/><circle cx="156.7" cy="452.2" r="4.6"/><circle cx="156.0" cy="442.2" r="4.6"/><circle cx="163.7" cy="438.7" r="4.6"/><circle cx="165.9" cy="454.6" r="4.6"/><circle cx="297.3" cy="478.6" r="4.6"/><circle cx="304.9" cy="477.0" r="4.6"/><circle cx="300.2" cy="485.9" r="4.6"/><circle cx="291.8" cy="484.8" r="4.6"/><circle cx="298.4" cy="470.2" r="4.6"/><circle cx="276.4" cy="493.2" r="4.6"/><circle cx="282.2" cy="498.5" r="4.6"/><circle cx="272.3" cy="499.9" r="4.6"/><circle cx="268.2" cy="492.4" r="4.6"/><circle cx="283.9" cy="489.1" r="4.6"/><circle cx="244.6" cy="497.7" r="4.6"/><circle cx="250.4" cy="502.9" r="4.6"/><circle cx="240.5" cy="504.3" r="4.6"/><circle cx="236.4" cy="496.8" r="4.6"/><circle cx="252.1" cy="493.6" r="4.6"/><circle cx="220.6" cy="489.4" r="4.6"/><circle cx="219.7" cy="497.2" r="4.6"/><circle cx="212.8" cy="490.0" r="4.6"/><circle cx="216.4" cy="482.3" r="4.6"/><circle cx="228.3" cy="493.1" r="4.6"/><circle cx="427.1" cy="299.6" r="4.6"/><circle cx="421.0" cy="294.8" r="4.6"/><circle cx="430.8" cy="292.7" r="4.6"/><circle cx="435.4" cy="299.9" r="4.6"/><circle cx="419.9" cy="304.2" r="4.6"/><circle cx="448.5" cy="305.3" r="4.6"/><circle cx="448.8" cy="297.5" r="4.6"/><circle cx="456.2" cy="304.2" r="4.6"/><circle cx="453.1" cy="312.1" r="4.6"/><circle cx="440.5" cy="302.2" r="4.6"/><circle cx="468.7" cy="323.5" r="4.6"/><circle cx="469.0" cy="315.7" r="4.6"/><circle cx="476.4" cy="322.4" r="4.6"/><circle cx="473.3" cy="330.3" r="4.6"/><circle cx="460.7" cy="320.4" r="4.6"/><circle cx="476.6" cy="344.1" r="4.6"/><circle cx="483.1" cy="339.8" r="4.6"/><circle cx="482.0" cy="349.7" r="4.6"/><circle cx="473.8" cy="351.9" r="4.6"/><circle cx="474.4" cy="335.9" r="4.6"/><circle cx="479.9" cy="364.7" r="4.6"/><circle cx="480.4" cy="356.9" r="4.6"/><circle cx="487.6" cy="363.9" r="4.6"/><circle cx="484.2" cy="371.7" r="4.6"/><circle cx="472.0" cy="361.3" r="4.6"/><circle cx="486.8" cy="384.8" r="4.6"/><circle cx="493.4" cy="380.7" r="4.6"/><circle cx="492.0" cy="390.6" r="4.6"/><circle cx="483.7" cy="392.5" r="4.6"/><circle cx="484.9" cy="376.5" r="4.6"/><circle cx="483.2" cy="410.5" r="4.6"/><circle cx="489.8" cy="406.4" r="4.6"/><circle cx="488.4" cy="416.3" r="4.6"/><circle cx="480.1" cy="418.1" r="4.6"/><circle cx="481.3" cy="402.1" r="4.6"/><circle cx="471.0" cy="427.9" r="4.6"/><circle cx="478.2" cy="430.9" r="4.6"/><circle cx="469.4" cy="435.6" r="4.6"/><circle cx="463.0" cy="429.9" r="4.6"/><circle cx="476.6" cy="421.5" r="4.6"/><circle cx="477.7" cy="446.8" r="4.6"/><circle cx="484.0" cy="442.2" r="4.6"/><circle cx="483.3" cy="452.2" r="4.6"/><circle cx="475.1" cy="454.6" r="4.6"/><circle cx="475.3" cy="438.6" r="4.6"/><circle cx="465.0" cy="467.9" r="4.6"/><circle cx="472.4" cy="470.4" r="4.6"/><circle cx="464.0" cy="475.7" r="4.6"/><circle cx="457.2" cy="470.5" r="4.6"/><circle cx="470.2" cy="461.1" r="4.6"/><circle cx="438.8" cy="484.3" r="4.6"/><circle cx="446.3" cy="486.7" r="4.6"/><circle cx="437.8" cy="492.0" r="4.6"/><circle cx="431.0" cy="486.8" r="4.6"/><circle cx="444.0" cy="477.5" r="4.6"/><circle cx="414.3" cy="486.4" r="4.6"/><circle cx="416.7" cy="493.9" r="4.6"/><circle cx="407.4" cy="490.1" r="4.6"/><circle cx="407.6" cy="481.6" r="4.6"/><circle cx="422.8" cy="486.6" r="4.6"/><circle cx="400.4" cy="470.4" r="4.6"/><circle cx="407.1" cy="474.5" r="4.6"/><circle cx="397.6" cy="477.7" r="4.6"/><circle cx="392.2" cy="471.2" r="4.6"/><circle cx="407.0" cy="465.0" r="4.6"/><circle cx="366.2" cy="465.6" r="4.6"/><circle cx="366.9" cy="473.4" r="4.6"/><circle cx="358.7" cy="467.7" r="4.6"/><circle cx="360.8" cy="459.4" r="4.6"/><circle cx="374.5" cy="467.8" r="4.6"/></g><g id="hits"><path class="hit" d="M262 262C215 262 150 330 135 430C126 500 124 560 128 588C175 540 250 528 298 542C300 480 302 400 298 340C296 300 285 268 262 262Z" data-o="lung" tabindex="0" role="button" aria-label="Lung"/><path class="hit" d="M378 262C425 262 490 330 505 430C514 500 516 560 512 588C465 540 410 530 372 548C395 525 392 490 352 468C346 420 342 380 342 340C344 300 355 268 378 262Z" data-o="lung" aria-hidden="true"/><path class="hit hitv" stroke-width="22" d="M162 285C110 340 100 480 110 605" data-o="inter" tabindex="0" role="button" aria-label="Intercostal muscles"/><path class="hit hitv" stroke-width="22" d="M478 285C530 340 540 480 530 605" data-o="inter" aria-hidden="true"/><path class="hit hitv" stroke-width="22" d="M106 620C165 556 250 545 320 562C390 545 475 556 534 620" data-o="diaphragm" tabindex="0" role="button" aria-label="Diaphragm"/><ellipse class="hit" cx="156.0" cy="292.0" rx="14.5" ry="10.5" transform="rotate(128 156.0 292.0)" data-o="ribs" tabindex="0" role="button" aria-label="Ribs"/><ellipse class="hit" cx="139.0" cy="319.9" rx="14.5" ry="10.5" transform="rotate(115 139.0 319.9)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="125.9" cy="354.7" rx="14.5" ry="10.5" transform="rotate(107 125.9 354.7)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="116.5" cy="395.1" rx="14.5" ry="10.5" transform="rotate(100 116.5 395.1)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="110.3" cy="439.8" rx="14.5" ry="10.5" transform="rotate(96 110.3 439.8)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="107.1" cy="487.4" rx="14.5" ry="10.5" transform="rotate(92 107.1 487.4)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="106.7" cy="536.6" rx="14.5" ry="10.5" transform="rotate(89 106.7 536.6)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="108.7" cy="586.1" rx="14.5" ry="10.5" transform="rotate(86 108.7 586.1)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="484.0" cy="292.0" rx="14.5" ry="10.5" transform="rotate(52 484.0 292.0)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="501.0" cy="319.9" rx="14.5" ry="10.5" transform="rotate(65 501.0 319.9)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="514.1" cy="354.7" rx="14.5" ry="10.5" transform="rotate(73 514.1 354.7)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="523.5" cy="395.1" rx="14.5" ry="10.5" transform="rotate(80 523.5 395.1)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="529.7" cy="439.8" rx="14.5" ry="10.5" transform="rotate(84 529.7 439.8)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="532.9" cy="487.4" rx="14.5" ry="10.5" transform="rotate(88 532.9 487.4)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="533.3" cy="536.6" rx="14.5" ry="10.5" transform="rotate(91 533.3 536.6)" data-o="ribs" aria-hidden="true"/><ellipse class="hit" cx="531.3" cy="586.1" rx="14.5" ry="10.5" transform="rotate(94 531.3 586.1)" data-o="ribs" aria-hidden="true"/><path class="hit hitv" stroke-width="13" d="M245.0 385.0L215.6 352.3M215.6 352.3L187.6 341.6M187.6 341.6L167.4 343.7M187.6 341.6L174.0 326.5M215.6 352.3L207.8 323.4M207.8 323.4L194.2 308.3M207.8 323.4L212.0 303.5M245.0 385.0L203.4 390.8M203.4 390.8L180.0 407.2M180.0 407.2L170.9 424.4M180.0 407.2L160.8 409.9M203.4 390.8L176.4 381.5M176.4 381.5L157.2 384.2M176.4 381.5L162.9 367.6M245.0 385.0L218.5 427.4M218.5 427.4L215.5 461.3M215.5 461.3L224.2 482.7M215.5 461.3L203.3 480.9M218.5 427.4L189.4 444.9M189.4 444.9L177.1 464.5M189.4 444.9L166.3 446.5M245.0 385.0L252.2 436.5M252.2 436.5L272.5 465.5M272.5 465.5L293.7 476.7M272.5 465.5L275.9 489.3M252.2 436.5L240.7 469.9M240.7 469.9L244.1 493.7M240.7 469.9L223.4 486.6M395.0 385.0L424.4 352.3M424.4 352.3L432.2 323.4M432.2 323.4L428.0 303.5M432.2 323.4L445.8 308.3M424.4 352.3L452.4 341.6M452.4 341.6L466.0 326.5M452.4 341.6L472.6 343.7M395.0 385.0L436.6 390.8M436.6 390.8L463.6 381.5M463.6 381.5L477.1 367.6M463.6 381.5L482.8 384.2M436.6 390.8L460.0 407.2M460.0 407.2L479.2 409.9M460.0 407.2L469.1 424.4M395.0 385.0L421.5 427.4M421.5 427.4L450.6 444.9M450.6 444.9L473.7 446.5M450.6 444.9L462.9 464.5M421.5 427.4L424.5 461.3M424.5 461.3L436.7 480.9M424.5 461.3L415.8 482.7M395.0 385.0L388.0 434.5M388.0 434.5L399.1 466.7M388.0 434.5L368.5 462.4" data-o="bronchioles" tabindex="0" role="button" aria-label="Bronchioles"/><circle class="hit" cx="163.4" cy="344.1" r="12" data-o="alveoli" tabindex="0" role="button" aria-label="Alveoli (air sacs)"/><circle class="hit" cx="171.3" cy="323.5" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="191.5" cy="305.3" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="212.9" cy="299.6" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="169.0" cy="427.9" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="156.8" cy="410.5" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="153.2" cy="384.8" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="160.1" cy="364.7" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="225.7" cy="486.4" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="201.2" cy="484.3" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="175.0" cy="467.9" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="162.3" cy="446.8" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="297.3" cy="478.6" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="276.4" cy="493.2" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="244.6" cy="497.7" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="220.6" cy="489.4" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="427.1" cy="299.6" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="448.5" cy="305.3" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="468.7" cy="323.5" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="476.6" cy="344.1" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="479.9" cy="364.7" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="486.8" cy="384.8" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="483.2" cy="410.5" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="471.0" cy="427.9" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="477.7" cy="446.8" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="465.0" cy="467.9" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="438.8" cy="484.3" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="414.3" cy="486.4" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="400.4" cy="470.4" r="12" data-o="alveoli" aria-hidden="true"/><circle class="hit" cx="366.2" cy="465.6" r="12" data-o="alveoli" aria-hidden="true"/><path class="hit hitv" stroke-width="25" d="M320 322C300 350 270 365 245 385 M320 322C340 350 370 365 395 385" data-o="bronchus" tabindex="0" role="button" aria-label="Bronchus"/><path class="hit hitv" stroke-width="36" d="M320 172L320 326" style="stroke-linecap:butt" data-o="trachea" tabindex="0" role="button" aria-label="Trachea (windpipe)"/><ellipse class="hit" cx="320" cy="141" rx="24" ry="11" data-o="mouth" tabindex="0" role="button" aria-label="Mouth"/><ellipse class="hit" cx="320" cy="100" rx="15" ry="18" data-o="nose" tabindex="0" role="button" aria-label="Nose"/></g><g id="pins"><g class="pin" data-o="nose"><path class="r-lead" d="M686 70L327.0 106.0"/><circle class="r-dot" cx="327.0" cy="106.0" r="3.4"/><g class="r-pin" transform="translate(686 70) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="pin" data-o="mouth"><path class="r-lead" d="M-28 130L311.0 139.0"/><circle class="r-dot" cx="311.0" cy="139.0" r="3.4"/><g class="r-pin" transform="translate(-28 130) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="pin" data-o="trachea"><path class="r-lead" d="M686 190L331.0 236.0"/><circle class="r-dot" cx="331.0" cy="236.0" r="3.4"/><g class="r-pin" transform="translate(686 190) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="pin" data-o="bronchus"><path class="r-lead" d="M-28 250L276.0 362.0"/><circle class="r-dot" cx="276.0" cy="362.0" r="3.4"/><g class="r-pin" transform="translate(-28 250) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="pin" data-o="bronchioles"><path class="r-lead" d="M-28 370L218.5 427.4"/><circle class="r-dot" cx="218.5" cy="427.4" r="3.4"/><g class="r-pin" transform="translate(-28 370) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="pin" data-o="alveoli"><path class="r-lead" d="M-28 490L169.3 450.5"/><circle class="r-dot" cx="169.3" cy="450.5" r="3.4"/><g class="r-pin" transform="translate(-28 490) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">6</text></g></g><g class="pin" data-o="lung"><path class="r-lead" d="M686 400L468.0 330.0"/><circle class="r-dot" cx="468.0" cy="330.0" r="3.4"/><g class="r-pin" transform="translate(686 400) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">7</text></g></g><g class="pin" data-o="ribs"><path class="r-lead" d="M686 300L514.1 354.7"/><circle class="r-dot" cx="514.1" cy="354.7" r="3.4"/><g class="r-pin" transform="translate(686 300) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="pin" data-o="inter"><path class="r-lead" d="M686 500L531.3 463.6"/><circle class="r-dot" cx="531.3" cy="463.6" r="3.4"/><g class="r-pin" transform="translate(686 500) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">9</text></g></g><g class="pin" data-o="diaphragm"><path class="r-lead" d="M686 640L461.0 571.0"/><circle class="r-dot" cx="461.0" cy="571.0" r="3.4"/><g class="r-pin" transform="translate(686 640) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">10</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="10" cx="372" cy="126"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Back</button>
+            <button class="btn" id="jNext">Next</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Play all</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2>Breathing: moving air in and out</h2>
+    <p>Your lungs have no muscle of their own. The diaphragm and the muscles between your ribs change the size of your chest, and that moves the air.</p>
+    <div class="vgrid">
+      <div><div class="light"><svg class="br" id="breath" viewBox="-8 -34 316 288" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Model of the chest showing the ribs, lungs and diaphragm moving as you breathe"><defs><marker id="bA2F7D4F" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2F7D4F"/></marker><marker id="bAC6282D" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#C6282D"/></marker><marker id="bA4F6FA8" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4F6FA8"/></marker></defs><path d="M150 -4L150 70" stroke="#4F6FA8" stroke-width="20" fill="none"/><path d="M150 -4L150 72" stroke="#CFE0F6" stroke-width="15" fill="none"/><g class="b-lungs"><path d="M140 62C100 60 62 110 58 212C86 198 116 194 140 197Z" fill="#F4B6AE" stroke="#9E5450" stroke-width="3" stroke-linejoin="round"/><path d="M160 62C200 60 238 110 242 212C214 198 184 194 160 197Z" fill="#F4B6AE" stroke="#9E5450" stroke-width="3" stroke-linejoin="round"/></g><g class="b-ribs b-ribs-l"><path d="M142 66C102 54 52 68 38 100" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M142 66C102 54 52 68 38 100" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M142 96C102 84 52 98 38 130" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M142 96C102 84 52 98 38 130" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M142 126C102 114 52 128 38 160" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M142 126C102 114 52 128 38 160" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M142 156C102 144 52 158 38 190" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M142 156C102 144 52 158 38 190" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M142 186C102 174 52 188 38 220" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M142 186C102 174 52 188 38 220" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/></g><g class="b-ribs b-ribs-r"><path d="M158 66C198 54 248 68 262 100" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M158 66C198 54 248 68 262 100" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M158 96C198 84 248 98 262 130" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M158 96C198 84 248 98 262 130" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M158 126C198 114 248 128 262 160" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M158 126C198 114 248 128 262 160" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M158 156C198 144 248 158 262 190" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M158 156C198 144 248 158 262 190" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/><path d="M158 186C198 174 248 188 262 220" fill="none" stroke="#A88F52" stroke-width="10" stroke-linecap="round"/><path d="M158 186C198 174 248 188 262 220" fill="none" stroke="#F6E7BD" stroke-width="6.5" stroke-linecap="round"/></g><path d="M150 58L150 196" stroke="#A88F52" stroke-width="9" stroke-linecap="round"/><path d="M150 58L150 196" stroke="#F6E7BD" stroke-width="5.5" stroke-linecap="round"/><g class="b-dia-out"><path d="M30 236C80 186 220 186 270 236" fill="none" stroke="#7A3038" stroke-width="13" stroke-linecap="round"/><path d="M30 236C80 186 220 186 270 236" fill="none" stroke="#C0606A" stroke-width="9" stroke-linecap="round"/></g><g class="b-dia-in"><path d="M30 236C80 218 220 218 270 236" fill="none" stroke="#7A3038" stroke-width="13" stroke-linecap="round"/><path d="M30 236C80 218 220 218 270 236" fill="none" stroke="#C0606A" stroke-width="9" stroke-linecap="round"/></g><g class="a-in"><path class="" d="M178 -30L178 22" fill="none" stroke="#4F6FA8" stroke-width="5" stroke-linecap="round" marker-end="url(#bA4F6FA8)"/><path class="" d="M34 110L12 84" fill="none" stroke="#2F7D4F" stroke-width="5" stroke-linecap="round" marker-end="url(#bA2F7D4F)"/><path class="" d="M266 110L288 84" fill="none" stroke="#2F7D4F" stroke-width="5" stroke-linecap="round" marker-end="url(#bA2F7D4F)"/><path class="" d="M150 206L150 240" fill="none" stroke="#C6282D" stroke-width="5" stroke-linecap="round" marker-end="url(#bAC6282D)"/></g><g class="a-out"><path class="" d="M178 22L178 -24" fill="none" stroke="#4F6FA8" stroke-width="5" stroke-linecap="round" marker-end="url(#bA4F6FA8)"/><path class="" d="M12 96L34 122" fill="none" stroke="#2F7D4F" stroke-width="5" stroke-linecap="round" marker-end="url(#bA2F7D4F)"/><path class="" d="M288 96L266 122" fill="none" stroke="#2F7D4F" stroke-width="5" stroke-linecap="round" marker-end="url(#bA2F7D4F)"/><path class="" d="M150 244L150 214" fill="none" stroke="#C6282D" stroke-width="5" stroke-linecap="round" marker-end="url(#bAC6282D)"/></g></svg></div><div class="brbtns"><button class="seg" id="bIn" aria-pressed="false">Breathe in</button><button class="seg" id="bOut" aria-pressed="true">Breathe out</button></div></div>
+      <div class="cards"><div class="ecard"><h3>Breathing in</h3><div class="eq">Chest gets bigger <span>→</span> air drawn in</div><dl><dt>Intercostal muscles</dt><dd>Contract</dd><dt>Ribs</dt><dd>Move up and out</dd><dt>Diaphragm</dt><dd>Contracts and flattens</dd><dt>Volume of the chest</dt><dd>Increases</dd><dt>Pressure in the lungs</dt><dd>Decreases</dd></dl></div><div class="ecard"><h3>Breathing out</h3><div class="eq">Chest gets smaller <span>→</span> air pushed out</div><dl><dt>Intercostal muscles</dt><dd>Relax</dd><dt>Ribs</dt><dd>Move down and in</dd><dt>Diaphragm</dt><dd>Relaxes and domes up</dd><dt>Volume of the chest</dt><dd>Decreases</dd><dt>Pressure in the lungs</dt><dd>Increases</dd></dl></div></div>
+    </div>
+    <p class="muted">Air always moves from higher pressure to lower pressure. When your chest gets bigger, the pressure in your lungs falls below the pressure of the air outside, so air is pushed in.</p>
+    <h2 id="vessels">Gas exchange: inside an alveolus</h2>
+    <p>Gases move by diffusion, from where there is more of them to where there is less. Fresh air has more oxygen than the blood arriving at the lungs, so oxygen moves into the blood. That blood has more carbon dioxide than the air, so carbon dioxide moves out.</p>
+    <div class="vgrid">
+      <div class="light"><svg class="alv" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="One alveolus with a blood capillary wrapped around it. Oxygen passes into the blood and carbon dioxide passes out."><defs><linearGradient id="gBl" gradientUnits="userSpaceOnUse" x1="110" y1="0" x2="490" y2="0"><stop offset="0" stop-color="#5B8FD6"/><stop offset=".5" stop-color="#9B6FC0"/><stop offset="1" stop-color="#E0484D"/></linearGradient><marker id="aO" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0 0L10 5L0 10z" fill="#C6282D"/></marker><marker id="aC" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2F568F"/></marker><marker id="aA" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4F6FA8"/></marker></defs><path d="M92 196C110 352 490 352 508 196" fill="none" stroke="#5B2B4E" stroke-width="44"/><path d="M92 196C110 352 490 352 508 196" fill="none" stroke="url(#gBl)" stroke-width="37"/><ellipse cx="99.0" cy="222.4" rx="11" ry="7.5" transform="rotate(67 99.0 222.4)" fill="#8C3A5C" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="132.7" cy="265.1" rx="11" ry="7.5" transform="rotate(39 132.7 265.1)" fill="#8C3A5C" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="186.4" cy="294.3" rx="11" ry="7.5" transform="rotate(20 186.4 294.3)" fill="#8C3A5C" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="252.6" cy="310.0" rx="11" ry="7.5" transform="rotate(7 252.6 310.0)" fill="#8C3A5C" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="323.8" cy="312.3" rx="11" ry="7.5" transform="rotate(-4 323.8 312.3)" fill="#B8343A" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="392.6" cy="301.0" rx="11" ry="7.5" transform="rotate(-15 392.6 301.0)" fill="#B8343A" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="451.3" cy="276.3" rx="11" ry="7.5" transform="rotate(-32 451.3 276.3)" fill="#B8343A" stroke="#7A2228" stroke-width="1.6"/><ellipse cx="492.5" cy="238.1" rx="11" ry="7.5" transform="rotate(-56 492.5 238.1)" fill="#B8343A" stroke="#7A2228" stroke-width="1.6"/><path d="M270 6L270 52A122 122 0 1 0 330 52L330 6" fill="#EEF6FF" stroke="#A8655A" stroke-width="15" stroke-linejoin="round"/><path d="M270 6L270 52A122 122 0 1 0 330 52L330 6" fill="none" stroke="#F8C9C0" stroke-width="11" stroke-linejoin="round"/><path d="M416.5 170.0L427.5 170.0" stroke="#A8655A" stroke-width="1.4"/><path d="M409.5 209.8L419.8 213.6" stroke="#A8655A" stroke-width="1.4"/><path d="M389.2 244.9L397.7 252.0" stroke="#A8655A" stroke-width="1.4"/><path d="M358.2 270.9L363.8 280.4" stroke="#A8655A" stroke-width="1.4"/><path d="M320.2 284.7L322.1 295.6" stroke="#A8655A" stroke-width="1.4"/><path d="M279.8 284.7L277.9 295.6" stroke="#A8655A" stroke-width="1.4"/><path d="M241.8 270.9L236.3 280.4" stroke="#A8655A" stroke-width="1.4"/><path d="M210.8 244.9L202.3 252.0" stroke="#A8655A" stroke-width="1.4"/><path d="M190.5 209.8L180.2 213.6" stroke="#A8655A" stroke-width="1.4"/><path d="M183.5 170.0L172.5 170.0" stroke="#A8655A" stroke-width="1.4"/><path d="M190.5 130.2L180.2 126.4" stroke="#A8655A" stroke-width="1.4"/><path d="M210.8 95.1L202.3 88.0" stroke="#A8655A" stroke-width="1.4"/><path d="M241.7 69.1L236.2 59.6" stroke="#A8655A" stroke-width="1.4"/><path d="M358.2 69.1L363.8 59.6" stroke="#A8655A" stroke-width="1.4"/><path d="M389.2 95.1L397.7 88.0" stroke="#A8655A" stroke-width="1.4"/><path d="M409.5 130.2L419.8 126.4" stroke="#A8655A" stroke-width="1.4"/><path d="M300 22L300 96" fill="none" stroke="#4F6FA8" stroke-width="4" marker-start="url(#aA)" marker-end="url(#aA)"/><path d="M258 196L250 300" fill="none" stroke="#C6282D" stroke-width="5" marker-end="url(#aO)"/><path d="M350 300L342 196" fill="none" stroke="#2F568F" stroke-width="5" marker-end="url(#aC)"/><text x="232" y="232" text-anchor="end" font-family="Nunito Sans,Arial,sans-serif" font-size="21" font-weight="700" fill="#C6282D">O<tspan font-size="14" dy="5">2</tspan></text><text x="364" y="232" font-family="Nunito Sans,Arial,sans-serif" font-size="21" font-weight="700" fill="#2F568F">CO<tspan font-size="14" dy="5">2</tspan></text><path d="M470 62L372 120" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="372" cy="120" r="3.4" fill="#0F1C3F"/><g transform="translate(470 62)"><circle r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="6" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">1</text></g><path d="M110 60L204 96" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="204" cy="96" r="3.4" fill="#0F1C3F"/><g transform="translate(110 60)"><circle r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="6" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">2</text></g><path d="M60 300L138 268" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="138" cy="268" r="3.4" fill="#0F1C3F"/><g transform="translate(60 300)"><circle r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="6" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">3</text></g><path d="M540 320L418 286" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="418" cy="286" r="3.4" fill="#0F1C3F"/><g transform="translate(540 320)"><circle r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="6" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">4</text></g></svg></div>
+      <ol class="vlist"><li><span class="num">1</span><span><b>Alveolus (air sac).</b> Filled with fresh air each time you breathe in.</span></li><li><span class="num">2</span><span><b>A wall one cell thick.</b> Gases only have a very short distance to travel.</span></li><li><span class="num">3</span><span><b>Red blood cells.</b> Pick up the oxygen and carry it away, so more keeps moving in.</span></li><li><span class="num">4</span><span><b>Capillary.</b> A tiny blood vessel wrapped closely around the alveolus.</span></li></ol>
+    </div>
+    <h2>Breathed in and breathed out</h2>
+    <div class="cards"><div class="ecard"><h3>Air you breathe in</h3><div class="eq">More oxygen</div><dl><dt>Oxygen</dt><dd>21%</dd><dt>Carbon dioxide</dt><dd>0.04%</dd><dt>Nitrogen</dt><dd>78%</dd></dl></div><div class="ecard"><h3>Air you breathe out</h3><div class="eq">More carbon dioxide</div><dl><dt>Oxygen</dt><dd>16%</dd><dt>Carbon dioxide</dt><dd>4%</dd><dt>Nitrogen</dt><dd>78%</dd><dt>Also</dt><dd>Warmer, with more water vapour</dd></dl></div><div class="ecard"><h3>Breathing is not respiration</h3><div class="eq">Glucose + oxygen <span>→</span> carbon dioxide + water</div><dl><dt>Breathing</dt><dd>Moves air in and out of the lungs</dd><dt>Respiration</dt><dd>A chemical reaction in every cell that releases energy from glucose</dd></dl></div></div>
+    <p class="muted">At rest you take about 12 to 20 breaths every minute.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find printable science packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Parts of the breathing system", "numbers": "Numbers", "view": "Diagram options", "tapTitle": "Tap a part", "tapText": "Tap any part of the diagram, or pick one from the numbered list.", "key": [["Numbers 1 to 6", "follow the route the air takes, from the nose down to the alveoli."], ["Breathing is not respiration.", "Breathing moves air in and out of the lungs. Respiration is a chemical reaction inside every cell."], ["The pale shape between the lungs", "is the heart. The left lung is a little smaller to make room for it."]], "kinds": {"airway": "Airway", "sac": "Gas exchange", "organ": "Organ", "bone": "Bone", "muscle": "Muscle"}, "facts": "Key facts", "works": "Works with", "words": "Key words:", "toVessels": "See inside an alveolus", "step": "Step", "of": "of", "back": "Back", "next": "Next", "again": "Start again", "play": "Play all", "pause": "Pause", "happens": "What happens", "oxygen": "The air here", "awayLungs": "Oxygen passes into the blood", "awayBody": "", "bIn": "Breathe in", "bOut": "Breathe out"};
+  var PARTS=[{"id": "nose", "n": 1, "chip": "Nose", "name": "Nose", "kind": "airway", "job": "Air usually enters your body through your nose. The space behind it warms the air and adds moisture before it reaches your lungs.", "facts": ["Hairs in the nostrils catch larger bits of dust.", "Sticky mucus traps smaller dust and microbes.", "Warm, damp air is gentler on the delicate lining of the lungs."], "links": [["mouth", "The mouth is a second way in for air."], ["trachea", "From the back of the nose, air passes down the throat to the trachea."]], "words": "mucus, microbes"}, {"id": "mouth", "n": 2, "chip": "Mouth", "name": "Mouth", "kind": "airway", "job": "A second way in for air. You breathe through your mouth when you need more air quickly, for example when you run.", "facts": ["Air breathed in through the mouth is not warmed or filtered as well.", "The nose and mouth both lead to the throat."], "links": [["nose", "The nose is the main way in for air."], ["trachea", "Air from the mouth also goes down the trachea."]], "words": "throat"}, {"id": "trachea", "n": 3, "chip": "Trachea", "name": "Trachea (windpipe)", "kind": "airway", "job": "A tube about 10 to 12 cm long that carries air from your throat down towards your lungs.", "facts": ["Rings of cartilage hold it open, so air can always get through.", "The rings are C-shaped. You can feel them at the front of your neck.", "Its lining makes mucus, which traps dust and microbes.", "Tiny hairs called cilia sweep the mucus up to the throat, where it is swallowed."], "links": [["nose", "Air arrives from the nose and mouth."], ["bronchus", "At the bottom it splits into two bronchi."]], "words": "cartilage, mucus, cilia"}, {"id": "bronchus", "n": 4, "chip": "Bronchus", "name": "Bronchus", "kind": "airway", "job": "The trachea splits into two tubes called bronchi. Each bronchus carries air into one lung.", "facts": ["One bronchus, two bronchi.", "Like the trachea, the bronchi have cartilage, mucus and cilia."], "links": [["trachea", "The bronchi branch from the bottom of the trachea."], ["bronchioles", "Inside the lung, each bronchus divides into bronchioles."]], "words": "bronchus (plural bronchi)"}, {"id": "bronchioles", "n": 5, "chip": "Bronchioles", "name": "Bronchioles", "kind": "airway", "job": "Smaller and smaller tubes that branch from the bronchi, like the twigs of a tree. They carry air deep into the lungs.", "facts": ["The smallest bronchioles are thinner than a hair.", "They have no cartilage. Muscle in their walls can make them wider or narrower.", "In asthma, the bronchioles become narrow, which makes it harder to breathe."], "links": [["bronchus", "They branch from the bronchi."], ["alveoli", "Each one ends in a cluster of alveoli."]], "words": "bronchiole, asthma"}, {"id": "alveoli", "n": 6, "chip": "Alveoli", "name": "Alveoli (air sacs)", "kind": "sac", "job": "Tiny air sacs at the ends of the bronchioles. This is where gas exchange happens: oxygen passes into the blood and carbon dioxide passes out.", "facts": ["One air sac is called an alveolus.", "Each lung has hundreds of millions of them, which gives a huge surface area.", "Their walls are only one cell thick, so gases have a very short distance to travel.", "Each alveolus is wrapped in tiny blood vessels called capillaries."], "links": [["bronchioles", "Air reaches them through the bronchioles."], ["lung", "Millions of alveoli make the lungs light and spongy."]], "more": "vessels", "words": "alveolus, gas exchange, diffusion, capillary"}, {"id": "lung", "n": 7, "chip": "Lung", "name": "Lung", "kind": "organ", "job": "You have two lungs. Each one is a spongy organ made of bronchioles, alveoli and blood vessels.", "facts": ["The right lung has three sections, called lobes. The left lung has two.", "The left lung is a little smaller, to make room for the heart.", "Lungs have no muscle of their own. The ribs and diaphragm do the work of breathing."], "links": [["alveoli", "Most of each lung is made of alveoli."], ["ribs", "The ribs form a cage that protects the lungs."], ["diaphragm", "The lungs sit on top of the diaphragm."]], "words": "lobe"}, {"id": "ribs", "n": 8, "chip": "Ribs", "name": "Ribs", "kind": "bone", "job": "Twelve pairs of curved bones that form a cage around your lungs and heart.", "facts": ["They protect the lungs and heart from knocks.", "When you breathe in, they move up and out, which makes the chest bigger.", "When you breathe out, they move down and in."], "links": [["inter", "The intercostal muscles move the ribs."], ["lung", "The lungs fill the space inside the ribcage."]], "words": "ribcage"}, {"id": "inter", "n": 9, "chip": "Intercostal muscles", "name": "Intercostal muscles", "kind": "muscle", "job": "The muscles between your ribs. When they contract, they pull the ribs up and out.", "facts": ["Intercostal means between the ribs.", "They contract when you breathe in and relax when you breathe out.", "They work together with the diaphragm."], "links": [["ribs", "They are attached to the ribs."], ["diaphragm", "The diaphragm contracts at the same time."]], "words": "contract, relax"}, {"id": "diaphragm", "n": 10, "chip": "Diaphragm", "name": "Diaphragm", "kind": "muscle", "job": "A sheet of muscle under your lungs. It separates your chest from your abdomen and is the main muscle of breathing.", "facts": ["When it relaxes, it is dome-shaped.", "When you breathe in, it contracts and flattens. This makes the chest bigger, so air is drawn in.", "When you breathe out, it relaxes and domes up again.", "Hiccups happen when the diaphragm contracts suddenly."], "links": [["inter", "The intercostal muscles contract at the same time."], ["lung", "As the diaphragm flattens, the lungs fill with air."]], "words": "diaphragm, volume, pressure"}];
+  var STEPS=[{"title": "In through the nose", "sum": "You breathe in, and air enters through your nose or your mouth.", "on": ["nose", "mouth"], "ox": "in", "pts": ["Hairs and mucus in the nose trap dust and microbes.", "The air is warmed and moistened."]}, {"title": "Down the trachea", "sum": "The air passes down your throat and into the trachea.", "on": ["trachea"], "ox": "in", "pts": ["Rings of cartilage hold the trachea open.", "Mucus traps more dust, and cilia sweep it back up to the throat."]}, {"title": "Into a bronchus", "sum": "The trachea splits into two bronchi. One goes to each lung.", "on": ["bronchus"], "ox": "in", "pts": ["Some of the air goes to the left lung and the rest goes to the right.", "The bronchi are also held open by cartilage."]}, {"title": "Through the bronchioles", "sum": "Inside the lung, the tubes branch again and again, getting smaller each time.", "on": ["bronchioles"], "ox": "in", "pts": ["The branching tubes are called bronchioles.", "The air is now deep inside the lung."]}, {"title": "Gas exchange in the alveoli", "sum": "The air reaches the alveoli, tiny air sacs wrapped in blood capillaries.", "on": ["alveoli"], "ox": "ex", "away": "lungs", "pts": ["Oxygen diffuses from the air into the blood.", "Carbon dioxide diffuses from the blood into the air.", "Red blood cells carry the oxygen away to the rest of the body."]}, {"title": "Breathed out", "sum": "You breathe out, and the air goes back the way it came.", "on": ["alveoli", "bronchioles", "bronchus", "trachea", "nose"], "ox": "out", "pts": ["It now has less oxygen and much more carbon dioxide.", "It is also warmer and carries more water vapour.", "A fresh breath brings in more oxygen, and the journey starts again."]}];
+  var OX={"in": "21% oxygen, 0.04% carbon dioxide", "ex": "Losing oxygen, gaining carbon dioxide", "out": "16% oxygen, 4% carbon dioxide"},PATHS=["M372 126L323 108", "M320 108L320 322", "M320.0 322.0L313.7 330.0L306.9 337.4L299.7 344.2L292.2 350.5L284.4 356.5L276.4 362.2L268.4 367.9L260.5 373.5L252.6 379.1L245.0 385.0", "M245.0 385.0L218.5 427.4L189.4 444.9L166.3 446.5", "M166.3 446.5L168.3 448.5", "M166.3 446.5L189.4 444.9L218.5 427.4L245.0 385.0L252.6 379.1L260.5 373.5L268.4 367.9L276.4 362.2L284.4 356.5L292.2 350.5L299.7 344.2L306.9 337.4L313.7 330.0L320.0 322.0L320.0 108.0L372.0 126.0"],DUR=[1100, 2200, 1500, 2200, 600, 4200];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.blood)h+="<div class=\"meta\"><span><b>"+esc(L.blood)+"</b>"+esc(L[o.blood])+"</span></div>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more==="vessels")h+="<p><button class=\"btn ghost\" id=\"toVessels\">"+esc(L.toVessels)+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toVessels"){show("more");var v=$("vessels");if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.oxygen)+"</b>"+esc(OX[s.ox])+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.away){away.textContent=s.away==="lungs"?L.awayLungs:L.awayBody;away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1600);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("pinBtn").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- breathing model ---------- */
+  (function(){
+    var b=$("breath"),bi=$("bIn"),bo=$("bOut");
+    function set(inn){
+      if(inn)b.classList.add("in");else b.classList.remove("in");
+      bi.setAttribute("aria-pressed",inn?"true":"false");
+      bo.setAttribute("aria-pressed",inn?"false":"true");
+    }
+    bi.onclick=function(){set(true);};
+    bo.onclick=function(){set(false);};
+    set(false);
+  })();
+
+  select(null);
+
+  /* exposed for checking */
+  window.RespLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
