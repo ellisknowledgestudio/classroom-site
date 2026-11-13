@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Διαδραστικό Διάγραμμα Νεφρών και Απεκκριτικού Συστήματος για το Γυμνάσιο | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό διάγραμμα του απεκκριτικού συστήματος για ηλικίες 11-14. Πάτησε τους νεφρούς, τους ουρητήρες, την ουροδόχο κύστη και την ουρήθρα για να μάθεις τι κάνει κάθε μέρος, ακολούθησε τη διαδρομή από το αίμα ως τα ούρα και δες πώς οι νεφροί φιλτράρουν το αίμα και ρυθμίζουν το νερό του σώματος.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/excretory-system/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/excretory-system/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/excretory-system/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/excretory-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Noto Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Manrope",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Noto Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Manrope",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Noto Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Noto Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Manrope",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Manrope",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Noto Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Manrope",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Manrope",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* kidneys */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+#fig .k-skin{fill:#1B2B5C;stroke:#6F84C4}
+#fig .k-rib{stroke:#4A5E9A}
+.kind.art{background:#F4A9A6}.kind.vein{background:#9CC3F5}.kind.organ{background:#F0A696}.kind.tube{background:#F6E7BD}.kind.muscle{background:#E79A93}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round}
+.hit.on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.6)}
+.hit:focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.16)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.25)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .k-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .k-dot{fill:#F4B942}
+#fig .k-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins,#fig.journey #pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:#FFF3D0;stroke:#0F1C3F;stroke-width:2.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 2px}
+#wb{max-width:250px}
+#wb .liq{transform-box:fill-box;transform-origin:50% 100%;transition:transform 1.3s ease,fill 1.3s ease;fill:#FBF0B6}
+#wb.low .liq{transform:scaleY(.3);fill:#E2A93B}
+@media (prefers-reduced-motion:reduce){#wb .liq{transition:none}}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+.chip{font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Φυσικές Επιστήμες</a> › Εξερευνητής Απεκκριτικού Συστήματος</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/excretory-system/" lang="en" hreflang="en">English</a></div>
+  <h1>Εξερευνητής Απεκκριτικού Συστήματος</h1>
+  <p class="lead">Οι νεφροί σου καθαρίζουν το αίμα σου. Απομακρύνουν μια άχρηστη ουσία, την ουρία, μαζί με το νερό και τα άλατα που δεν χρειάζεσαι, και φτιάχνουν τα ούρα. Πάτησε ένα μέρος για να δεις τι κάνει, και μετά ακολούθησε τη διαδρομή από το αίμα ως τα ούρα. Ηλικίες 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες του Εξερευνητή Απεκκριτικού Συστήματος">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε τους νεφρούς</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Από το αίμα στα ούρα</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Διήθηση και ισοζύγιο νερού</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Μέρη του απεκκριτικού συστήματος"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Επιλογές διαγράμματος">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Αριθμοί</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="-52 0 764 716" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Διάγραμμα του απεκκριτικού συστήματος του ανθρώπου: νεφροί, ουρητήρες, ουροδόχος κύστη και ουρήθρα, με τα αιμοφόρα αγγεία των νεφρών"><style>
+.k-skin{fill:#EEF1F8;stroke:#8E9AC0;stroke-width:2.5;stroke-linejoin:round}
+.k-rib{fill:none;stroke:#B9C2DC;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 9}
+.k-au{fill:none;stroke:#8F2A30;stroke-linecap:butt;stroke-linejoin:round}
+.k-a{fill:none;stroke:#E0484D;stroke-linecap:butt;stroke-linejoin:round}
+.k-vu{fill:none;stroke:#2F568F;stroke-linecap:butt;stroke-linejoin:round}
+.k-v{fill:none;stroke:#5B8FD6;stroke-linecap:butt;stroke-linejoin:round}
+.k-uu{fill:none;stroke:#A8873A;stroke-linecap:round;stroke-linejoin:round}
+.k-u{fill:none;stroke:#F3D676;stroke-linecap:round;stroke-linejoin:round}
+.k-kid{fill:#C96A5C;stroke:#7A3B3A;stroke-width:3.5;stroke-linejoin:round}
+.k-cor{fill:#E9A796;stroke:#7A3B3A;stroke-width:3.5;stroke-linejoin:round}
+.k-med{fill:#B4544C;stroke:#7A3B3A;stroke-width:1.4;stroke-linejoin:round}
+.k-pel{fill:#F8E6A8;stroke:#A8873A;stroke-width:2;stroke-linejoin:round}
+.k-hl{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.3}
+.k-wall{fill:#EFA9A0;stroke:#7A3038;stroke-width:3.5;stroke-linejoin:round}
+.k-lum{fill:#F3D676;stroke:#B8605C;stroke-width:1.5}
+.k-sph{fill:#C0606A;stroke:#7A3038;stroke-width:2.5;stroke-linejoin:round}
+.k-fl{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round}
+.k-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.k-dot{fill:#0F1C3F}
+.k-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.k-pin text{font:800 16px "Baloo 2",Arial,sans-serif;fill:#0F1C3F}
+</style><defs><marker id="kfa" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker></defs><path class="k-skin" d="M150 0C152 120 186 230 182 330C178 410 136 470 132 560L132 700L528 700L528 560C524 470 482 410 478 330C474 230 508 120 510 0Z"/><path class="k-rib" d="M196 142C238 196 290 168 320 124C350 168 402 196 444 142"/><path class="k-au" stroke-width="15" d="M337 250C300 252 250 266 208 270"/><path class="k-a" stroke-width="10" d="M337 250C300 252 250 266 208 270"/><g opacity=".45"><path class="k-vu" stroke-width="19" d="M303 444C296 505 208 570 180 700"/><path class="k-v" stroke-width="14" d="M303 444C296 505 208 570 180 700"/><path class="k-vu" stroke-width="19" d="M303 444C318 505 398 570 420 700"/><path class="k-v" stroke-width="14" d="M303 444C318 505 398 570 420 700"/><path class="k-au" stroke-width="18" d="M337 440C345 500 428 560 450 700"/><path class="k-a" stroke-width="13" d="M337 440C345 500 428 560 450 700"/><path class="k-au" stroke-width="18" d="M337 440C322 500 236 560 210 700"/><path class="k-a" stroke-width="13" d="M337 440C322 500 236 560 210 700"/></g><path class="k-vu" stroke-width="27" d="M303 0L303 450"/><path class="k-v" stroke-width="22" d="M303 0L303 450"/><path class="k-vu" stroke-width="15" d="M208 286C240 286 270 278 303 276"/><path class="k-v" stroke-width="10" d="M208 286C240 286 270 278 303 276"/><path class="k-au" stroke-width="25" d="M337 0L337 446"/><path class="k-a" stroke-width="20" d="M337 0L337 446"/><path class="k-au" stroke-width="15" d="M337 240C372 240 398 254 432 258"/><path class="k-a" stroke-width="10" d="M337 240C372 240 398 254 432 258"/><path class="k-vu" stroke-width="15" d="M432 274C400 272 360 262 303 262"/><path class="k-v" stroke-width="10" d="M432 274C400 272 360 262 303 262"/><path class="k-uu" stroke-width="12" d="M226 314C240 330 242 348 242 372C242 444 248 505 268 548C274 560 280 567 288 573"/><path class="k-uu" stroke-width="12" d="M414 302C400 318 398 336 398 360C398 436 392 500 372 545C366 558 360 566 352 573"/><path class="k-u" stroke-width="7" d="M226 314C240 330 242 348 242 372C242 444 248 505 268 548C274 560 280 567 288 573"/><path class="k-u" stroke-width="7" d="M414 302C400 318 398 336 398 360C398 436 392 500 372 545C366 558 360 566 352 573"/><path class="k-kid" d="M194.0 208.0 C144.0 200.0 120.0 242.0 122.0 286.0 C124.0 334.0 152.0 364.0 192.0 358.0 C222.0 354.0 232.0 332.0 220.0 312.0 C210.0 298.0 210.0 272.0 220.0 258.0 C234.0 236.0 224.0 212.0 194.0 208.0Z"/><path class="k-hl" d="M152.0 226.0 C134.0 244.0 132.0 274.0 136.0 300.0"/><path class="k-cor" d="M446.0 196.0 C496.0 188.0 520.0 230.0 518.0 274.0 C516.0 322.0 488.0 352.0 448.0 346.0 C418.0 342.0 408.0 320.0 420.0 300.0 C430.0 286.0 430.0 260.0 420.0 246.0 C406.0 224.0 416.0 200.0 446.0 196.0Z"/><path class="k-med" d="M458.0 240.0 L442.0 210.0 Q456.8 204.0 472.0 208.0 Z"/><path class="k-med" d="M467.0 252.0 L483.0 214.0 Q497.2 221.8 503.0 238.0 Z"/><path class="k-med" d="M476.0 274.0 L507.0 250.0 Q512.0 274.0 507.0 298.0 Z"/><path class="k-med" d="M467.0 296.0 L503.0 310.0 Q497.2 325.0 483.0 332.0 Z"/><path class="k-med" d="M458.0 308.0 L472.0 336.0 Q456.8 339.3 442.0 334.0 Z"/><path class="k-pel" d="M422.0 278.0 C434.0 272.0 444.0 254.0 452.0 242.0 C456.0 235.0 465.0 241.0 461.0 248.0 C455.0 258.0 456.0 264.0 464.0 267.0 C472.0 268.0 476.0 270.0 476.0 274.0 C476.0 278.0 472.0 280.0 464.0 281.0 C456.0 284.0 455.0 289.0 461.0 298.0 C465.0 305.0 456.0 311.0 452.0 304.0 C446.0 294.0 438.0 290.0 430.0 291.0 C424.0 292.0 418.0 296.0 412.0 302.0 L406.0 294.0 C412.0 284.0 416.0 280.0 422.0 278.0Z"/><path class="k-wall" d="M320 524C372 524 387 560 377 591C369 613 341 626 320 626C299 626 271 613 263 591C253 560 268 524 320 524Z"/><path class="k-uu" stroke-width="15" stroke-linecap="butt" d="M320 620L320 678"/><path class="k-u" stroke-width="8" stroke-linecap="butt" d="M320 606L320 677"/><path class="k-lum" d="M320 536C360 536 372 562 365 587C359 604 338 614 320 614C302 614 281 604 275 587C268 562 280 536 320 536Z"/><path class="k-u" stroke-width="8" stroke-linecap="butt" d="M320 606L320 630"/><rect class="k-sph" x="296" y="628" width="17" height="19" rx="6"/><rect class="k-sph" x="327" y="628" width="17" height="19" rx="6"/><path class="k-fl" marker-end="url(#kfa)" d="M337 34L337 150"/><path class="k-fl" marker-end="url(#kfa)" d="M303 170L303 44"/><path class="k-fl" marker-end="url(#kfa)" d="M352 240L404 250"/><path class="k-fl" marker-end="url(#kfa)" d="M400 271L346 264"/><path class="k-fl" marker-end="url(#kfa)" d="M398 372L396 452"/><path class="k-fl" marker-end="url(#kfa)" d="M242 384L246 462"/><g id="hits"><path class="hit hitv" stroke-width="24" d="M337 0L337 446" data-o="aorta" tabindex="0" role="button" aria-label="Αορτή"/><path class="hit hitv" stroke-width="24" d="M337 440C345 500 428 560 450 700" data-o="aorta" aria-hidden="true"/><path class="hit hitv" stroke-width="24" d="M337 440C322 500 236 560 210 700" data-o="aorta" aria-hidden="true"/><path class="hit hitv" stroke-width="24" d="M303 0L303 450" data-o="vena" tabindex="0" role="button" aria-label="Κάτω κοίλη φλέβα"/><path class="hit hitv" stroke-width="24" d="M303 444C296 505 208 570 180 700" data-o="vena" aria-hidden="true"/><path class="hit hitv" stroke-width="24" d="M303 444C318 505 398 570 420 700" data-o="vena" aria-hidden="true"/><path class="hit" d="M194.0 208.0 C144.0 200.0 120.0 242.0 122.0 286.0 C124.0 334.0 152.0 364.0 192.0 358.0 C222.0 354.0 232.0 332.0 220.0 312.0 C210.0 298.0 210.0 272.0 220.0 258.0 C234.0 236.0 224.0 212.0 194.0 208.0Z" data-o="kidney" tabindex="0" role="button" aria-label="Νεφρός"/><path class="hit" d="M446.0 196.0 C496.0 188.0 520.0 230.0 518.0 274.0 C516.0 322.0 488.0 352.0 448.0 346.0 C418.0 342.0 408.0 320.0 420.0 300.0 C430.0 286.0 430.0 260.0 420.0 246.0 C406.0 224.0 416.0 200.0 446.0 196.0Z" data-o="kidney" aria-hidden="true"/><path class="hit hitv" stroke-width="22" d="M414 302C400 318 398 336 398 360C398 436 392 500 372 545C366 558 360 566 352 573" data-o="ureter" tabindex="0" role="button" aria-label="Ουρητήρας"/><path class="hit hitv" stroke-width="22" d="M226 314C240 330 242 348 242 372C242 444 248 505 268 548C274 560 280 567 288 573" data-o="ureter" aria-hidden="true"/><path class="hit" d="M320 524C372 524 387 560 377 591C369 613 341 626 320 626C299 626 271 613 263 591C253 560 268 524 320 524Z" data-o="bladder" tabindex="0" role="button" aria-label="Ουροδόχος κύστη"/><path class="hit hitv" stroke-width="18" d="M337 240C372 240 398 254 432 258" data-o="rartery" tabindex="0" role="button" aria-label="Νεφρική αρτηρία"/><path class="hit hitv" stroke-width="18" d="M337 250C300 252 250 266 208 270" data-o="rartery" aria-hidden="true"/><path class="hit hitv" stroke-width="18" d="M432 274C400 272 360 262 303 262" data-o="rvein" tabindex="0" role="button" aria-label="Νεφρική φλέβα"/><path class="hit hitv" stroke-width="18" d="M208 286C240 286 270 278 303 276" data-o="rvein" aria-hidden="true"/><path class="hit hitv" stroke-width="26" d="M320 650L320 682" data-o="urethra" tabindex="0" role="button" aria-label="Ουρήθρα"/><rect class="hit" x="290" y="624" width="60" height="27" rx="9" data-o="sphincter" tabindex="0" role="button" aria-label="Σφιγκτήρας μυς"/></g><g id="pins"><g class="pin" data-o="aorta"><path class="k-lead" d="M686 70L337 70"/><circle class="k-dot" cx="337" cy="70" r="3.4"/><g class="k-pin" transform="translate(686 70) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="pin" data-o="rartery"><path class="k-lead" d="M430 132L388 246"/><circle class="k-dot" cx="388" cy="246" r="3.4"/><g class="k-pin" transform="translate(430 132) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="pin" data-o="kidney"><path class="k-lead" d="M-28 262L150 290"/><circle class="k-dot" cx="150" cy="290" r="3.4"/><g class="k-pin" transform="translate(-28 262) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="pin" data-o="rvein"><path class="k-lead" d="M210 132L258 284"/><circle class="k-dot" cx="258" cy="284" r="3.4"/><g class="k-pin" transform="translate(210 132) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="pin" data-o="vena"><path class="k-lead" d="M-28 70L303 70"/><circle class="k-dot" cx="303" cy="70" r="3.4"/><g class="k-pin" transform="translate(-28 70) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="pin" data-o="ureter"><path class="k-lead" d="M686 440L397 420"/><circle class="k-dot" cx="397" cy="420" r="3.4"/><g class="k-pin" transform="translate(686 440) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">6</text></g></g><g class="pin" data-o="bladder"><path class="k-lead" d="M-28 560L292 570"/><circle class="k-dot" cx="292" cy="570" r="3.4"/><g class="k-pin" transform="translate(-28 560) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">7</text></g></g><g class="pin" data-o="sphincter"><path class="k-lead" d="M686 610L338 637"/><circle class="k-dot" cx="338" cy="637" r="3.4"/><g class="k-pin" transform="translate(686 610) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="pin" data-o="urethra"><path class="k-lead" d="M-28 668L320 664"/><circle class="k-dot" cx="320" cy="664" r="3.4"/><g class="k-pin" transform="translate(-28 668) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">9</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="10" cx="337" cy="40"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Πίσω</button>
+            <button class="btn" id="jNext">Επόμενο</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Αναπαραγωγή</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="vessels">Το εσωτερικό ενός νεφρού</h2>
+    <p>Ο νεφρός έχει τρεις κύριες περιοχές. Το αίμα φτάνει με τη νεφρική αρτηρία, καθαρίζεται και φεύγει με τη νεφρική φλέβα. Τα ούρα που σχηματίζονται φεύγουν από τον ουρητήρα.</p>
+    <div class="vgrid"><div class="light"><svg class="kid" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Νεφρός σε τομή, με τον φλοιό, τον μυελό και τη νεφρική πύελο, τη νεφρική αρτηρία, τη νεφρική φλέβα και τον ουρητήρα"><defs><marker id="kfb" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker></defs><path class="k-au" stroke-width="27" d="M36 128C120 128 190 138 268 150"/><path class="k-a" stroke-width="20" d="M36 128C120 128 190 138 268 150"/><path class="k-vu" stroke-width="27" d="M36 188C120 188 190 186 268 184"/><path class="k-v" stroke-width="20" d="M36 188C120 188 190 186 268 184"/><path class="k-uu" stroke-width="22" d="M250 236C214 250 204 290 204 372"/><path class="k-u" stroke-width="14" d="M250 236C214 250 204 290 204 374"/><g transform="translate(340 186) scale(2.05) translate(-458 -272)" stroke-width="1"><path class="k-cor" style="stroke-width:2" d="M446.0 196.0 C496.0 188.0 520.0 230.0 518.0 274.0 C516.0 322.0 488.0 352.0 448.0 346.0 C418.0 342.0 408.0 320.0 420.0 300.0 C430.0 286.0 430.0 260.0 420.0 246.0 C406.0 224.0 416.0 200.0 446.0 196.0Z"/><path class="k-med" style="stroke-width:1" d="M458.0 240.0 L442.0 210.0 Q456.8 204.0 472.0 208.0 Z"/><path class="k-med" style="stroke-width:1" d="M467.0 252.0 L483.0 214.0 Q497.2 221.8 503.0 238.0 Z"/><path class="k-med" style="stroke-width:1" d="M476.0 274.0 L507.0 250.0 Q512.0 274.0 507.0 298.0 Z"/><path class="k-med" style="stroke-width:1" d="M467.0 296.0 L503.0 310.0 Q497.2 325.0 483.0 332.0 Z"/><path class="k-med" style="stroke-width:1" d="M458.0 308.0 L472.0 336.0 Q456.8 339.3 442.0 334.0 Z"/><path class="k-pel" style="stroke-width:1.2" d="M422.0 278.0 C434.0 272.0 444.0 254.0 452.0 242.0 C456.0 235.0 465.0 241.0 461.0 248.0 C455.0 258.0 456.0 264.0 464.0 267.0 C472.0 268.0 476.0 270.0 476.0 274.0 C476.0 278.0 472.0 280.0 464.0 281.0 C456.0 284.0 455.0 289.0 461.0 298.0 C465.0 305.0 456.0 311.0 452.0 304.0 C446.0 294.0 438.0 290.0 430.0 291.0 C424.0 292.0 418.0 296.0 412.0 302.0 L406.0 294.0 C412.0 284.0 416.0 280.0 422.0 278.0Z"/></g><path class="k-fl" marker-end="url(#kfb)" d="M60 128L150 131"/><path class="k-fl" marker-end="url(#kfb)" d="M160 188L70 188"/><path class="k-fl" marker-end="url(#kfb)" d="M206 300L204 346"/><path d="M520 60L446 104" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="446" cy="104" r="3.2" fill="#0F1C3F"/><g transform="translate(520 60)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">1</text></g><path d="M520 190L404 190" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="404" cy="190" r="3.2" fill="#0F1C3F"/><g transform="translate(520 190)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">2</text></g><path d="M520 320L318 196" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="318" cy="196" r="3.2" fill="#0F1C3F"/><g transform="translate(520 320)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">3</text></g><path d="M110 76L150 126" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="150" cy="126" r="3.2" fill="#0F1C3F"/><g transform="translate(110 76)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">4</text></g><path d="M110 248L150 190" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="150" cy="190" r="3.2" fill="#0F1C3F"/><g transform="translate(110 248)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">5</text></g><path d="M130 330L200 320" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="200" cy="320" r="3.2" fill="#0F1C3F"/><g transform="translate(130 330)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">6</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Φλοιός.</b> Το εξωτερικό στρώμα. Εδώ φιλτράρεται το αίμα.</span></li><li><span class="num">2</span><span><b>Μυελός.</b> Το εσωτερικό στρώμα. Εδώ το νερό γυρίζει στο αίμα.</span></li><li><span class="num">3</span><span><b>Νεφρική πύελος.</b> Ένα χωνί στο κέντρο, όπου μαζεύονται τα ούρα.</span></li><li><span class="num">4</span><span><b>Νεφρική αρτηρία.</b> Φέρνει το αίμα για να καθαριστεί.</span></li><li><span class="num">5</span><span><b>Νεφρική φλέβα.</b> Παίρνει το καθαρισμένο αίμα.</span></li><li><span class="num">6</span><span><b>Ουρητήρας.</b> Μεταφέρει τα ούρα στην ουροδόχο κύστη.</span></li></ol></div>
+    <h2>Διήθηση του αίματος: μέσα σε έναν νεφρώνα</h2>
+    <p>Κάθε νεφρός έχει περίπου ένα εκατομμύριο μικροσκοπικά φίλτρα, τους νεφρώνες. Αυτός είναι ένας νεφρώνας, σχεδιασμένος πολύ μεγαλύτερος από το πραγματικό του μέγεθος.</p>
+    <div class="vgrid"><div class="light"><svg class="neph" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ένας νεφρώνας: ένα κουβάρι τριχοειδών μέσα σε ένα κύπελλο, ένα μακρύ σωληνάριο με ένα τριχοειδές δίπλα του και ένα αθροιστικό σωληνάριο"><defs><linearGradient id="nGr" gradientUnits="userSpaceOnUse" x1="150" y1="150" x2="150" y2="330"><stop offset="0" stop-color="#E0484D"/><stop offset="1" stop-color="#5B8FD6"/></linearGradient><linearGradient id="nGu" gradientUnits="userSpaceOnUse" x1="150" y1="150" x2="150" y2="330"><stop offset="0" stop-color="#8F2A30"/><stop offset="1" stop-color="#2F568F"/></linearGradient><marker id="nfa" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4.4" markerHeight="4.4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker><marker id="nfg" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1F8A54"/></marker><marker id="nfn" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0F1C3F"/></marker></defs><path d="M152 150C150 206 250 168 292 196C340 228 300 330 204 330L30 330" fill="none" stroke="url(#nGu)" stroke-width="17" stroke-linecap="butt" stroke-linejoin="round"/><path d="M152 150C150 206 250 168 292 196C340 228 300 330 204 330L30 330" fill="none" stroke="url(#nGr)" stroke-width="11" stroke-linecap="butt" stroke-linejoin="round"/><path d="M520 44L520 372" fill="none" stroke="#A8873A" stroke-width="30"/><path d="M520 40L520 374" fill="none" stroke="#F3D676" stroke-width="22"/><path d="M196 112C238 112 232 62 268 62C304 62 298 122 334 122L334 286C334 334 398 334 398 286L398 150C398 108 436 122 448 96C460 70 500 74 520 104" fill="none" stroke="#A8873A" stroke-width="20" stroke-linejoin="round"/><path d="M196 112C238 112 232 62 268 62C304 62 298 122 334 122L334 286C334 334 398 334 398 286L398 150C398 108 436 122 448 96C460 70 500 74 522 106" fill="none" stroke="#F8E6A8" stroke-width="13" stroke-linejoin="round"/><path d="M30 70C80 70 100 86 122 100" fill="none" stroke="#8F2A30" stroke-width="19"/><path d="M28 70C80 70 100 86 124 101" fill="none" stroke="#E0484D" stroke-width="13"/><circle cx="150" cy="112" r="50" fill="#F8E6A8" stroke="#A8873A" stroke-width="3.5"/><path d="M190 106L204 106L204 118L190 118Z" fill="#F8E6A8"/><circle cx="150" cy="112" r="31" fill="#E0484D" stroke="#8F2A30" stroke-width="3"/><path d="M128 104C134 90 150 88 152 102C154 116 136 118 140 130M152 92C166 88 174 100 166 110C160 118 150 120 156 134M124 118C130 124 128 132 136 136M170 118C174 126 170 132 164 136" fill="none" stroke="#8F2A30" stroke-width="3" stroke-linecap="round" opacity=".75"/><path d="M40 70L92 78" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" marker-end="url(#nfa)"/><path d="M150 330L62 330" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" marker-end="url(#nfa)"/><path d="M520 190L520 330" fill="none" stroke="#0F1C3F" stroke-width="3" stroke-linecap="round" marker-end="url(#nfn)"/><path d="M176 92L196 80" fill="none" stroke="#0F1C3F" stroke-width="2.6" stroke-linecap="round" marker-end="url(#nfn)"/><path d="M180 126L198 138" fill="none" stroke="#0F1C3F" stroke-width="2.6" stroke-linecap="round" marker-end="url(#nfn)"/><path d="M322 176L302 190" fill="none" stroke="#1F8A54" stroke-width="3" stroke-linecap="round" marker-end="url(#nfg)"/><path d="M322 222L306 238" fill="none" stroke="#1F8A54" stroke-width="3" stroke-linecap="round" marker-end="url(#nfg)"/><path d="M322 268L296 284" fill="none" stroke="#1F8A54" stroke-width="3" stroke-linecap="round" marker-end="url(#nfg)"/><path d="M72 150L122 124" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="122" cy="124" r="3.2" fill="#0F1C3F"/><g transform="translate(72 150)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">1</text></g><path d="M232 24L186 76" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="186" cy="76" r="3.2" fill="#0F1C3F"/><g transform="translate(232 24)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">2</text></g><path d="M250 258L300 236" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="300" cy="236" r="3.2" fill="#0F1C3F"/><g transform="translate(250 258)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">3</text></g><path d="M566 130L534 150" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="534" cy="150" r="3.2" fill="#0F1C3F"/><g transform="translate(566 130)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">4</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Φίλτρο (σπείραμα).</b> Το αίμα πιέζεται μέσα από ένα κουβάρι τριχοειδών. Το νερό, η ουρία, τα άλατα και η γλυκόζη βγαίνουν. Τα κύτταρα του αίματος και οι πρωτεΐνες είναι πολύ μεγάλα, γι&#x27; αυτό μένουν στο αίμα.</span></li><li><span class="num">2</span><span><b>Κάψα.</b> Ένα κύπελλο που μαζεύει το υγρό που φιλτραρίστηκε.</span></li><li><span class="num">3</span><span><b>Ουροφόρο σωληνάριο.</b> Όλη η γλυκόζη, το περισσότερο νερό και μέρος των αλάτων γυρίζουν στο αίμα (πράσινα βέλη). Αυτό λέγεται επαναρρόφηση.</span></li><li><span class="num">4</span><span><b>Αθροιστικό σωληνάριο.</b> Ό,τι μένει είναι τα ούρα: νερό, ουρία και άλατα.</span></li></ol></div>
+    <h2>Τι γίνεται με κάθε ουσία</h2>
+    <div class="cards"><div class="ecard"><h3>Μένουν στο αίμα</h3><div class="eq">Πολύ μεγάλα για να φιλτραριστούν</div><dl><dt>Κύτταρα του αίματος</dt><dd>Μένουν όλα</dd><dt>Πρωτεΐνες</dt><dd>Μένουν όλες</dd></dl></div><div class="ecard"><h3>Φιλτράρονται και γυρίζουν πίσω</h3><div class="eq">Χρήσιμα για το σώμα</div><dl><dt>Γλυκόζη</dt><dd>Όλη</dd><dt>Νερό</dt><dd>Το περισσότερο</dd><dt>Άλατα</dt><dd>Όσα χρειάζεσαι</dd></dl></div><div class="ecard"><h3>Φεύγουν με τα ούρα</h3><div class="eq">Άχρηστα ή περισσότερα από όσα χρειάζεσαι</div><dl><dt>Ουρία</dt><dd>Η περισσότερη</dd><dt>Νερό</dt><dd>Όσο περισσεύει</dd><dt>Άλατα</dt><dd>Όσα περισσεύουν</dd></dl></div></div>
+    <h2>Ισοζύγιο νερού</h2>
+    <p>Οι νεφροί σου κρατούν σταθερή την ποσότητα του νερού στο σώμα σου. Το πετυχαίνουν αλλάζοντας το πόσο νερό γυρίζουν πίσω στο αίμα.</p>
+    <div class="vgrid"><div><div class="light"><svg id="wb" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ένα ποτήρι ζέσεως με ούρα. Η ποσότητα και το χρώμα αλλάζουν όταν διαλέγεις κουμπί."><rect class="liq" x="57" y="37" width="86" height="96" rx="6"/><path d="M54 18L54 126Q54 136 64 136L136 136Q146 136 146 126L146 18" fill="none" stroke="#0F1C3F" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M47 18L153 18" stroke="#0F1C3F" stroke-width="3.4" stroke-linecap="round"/><path d="M146 112L132 112" stroke="#0F1C3F" stroke-width="1.6"/><path d="M146 88L132 88" stroke="#0F1C3F" stroke-width="1.6"/><path d="M146 64L132 64" stroke="#0F1C3F" stroke-width="1.6"/><path d="M146 40L132 40" stroke="#0F1C3F" stroke-width="1.6"/></svg></div><div class="brbtns"><button class="seg" id="wHi" aria-pressed="true">Ήπιες πολύ νερό</button><button class="seg" id="wLo" aria-pressed="false">Λίγο νερό στο σώμα</button></div></div><div class="cards"><div class="ecard"><h3>Αρκετό νερό</h3><div class="eq">Πολλά ανοιχτόχρωμα ούρα</div><dl><dt>Νερό στο αίμα</dt><dd>Περισσότερο από όσο χρειάζεσαι</dd><dt>Νερό που γυρίζουν πίσω οι νεφροί</dt><dd>Λιγότερο</dd><dt>Ποσότητα ούρων</dt><dd>Μεγάλη</dd><dt>Χρώμα ούρων</dt><dd>Ανοιχτό</dd></dl></div><div class="ecard"><h3>Λίγο νερό</h3><div class="eq">Λίγα σκούρα ούρα</div><dl><dt>Γιατί</dt><dd>Ζέστη, άσκηση ή δεν ήπιες αρκετό νερό</dd><dt>Νερό που γυρίζουν πίσω οι νεφροί</dt><dd>Περισσότερο</dd><dt>Ποσότητα ούρων</dt><dd>Μικρή</dd><dt>Χρώμα ούρων</dt><dd>Σκούρο κίτρινο</dd></dl></div></div></div>
+    <p class="muted">Τα σκούρα ούρα δείχνουν ότι πρέπει να πιεις περισσότερο νερό.</p>
+    <h2>Απέκκριση: η αποβολή των άχρηστων ουσιών</h2>
+    <p>Απέκκριση είναι η αποβολή των άχρηστων ουσιών που φτιάχνουν τα κύτταρα του σώματός σου. Δεν την κάνουν μόνο οι νεφροί.</p>
+    <div class="cards"><div class="ecard"><h3>Νεφροί</h3><div class="eq">Ουρία <span>→</span> ούρα</div><dl><dt>Άχρηστη ουσία</dt><dd>Ουρία, με το νερό και τα άλατα που δεν χρειάζεσαι</dd><dt>Από πού</dt><dd>Το ήπαρ φτιάχνει την ουρία από τα αμινοξέα που περισσεύουν</dd></dl></div><div class="ecard"><h3>Πνεύμονες</h3><div class="eq">Διοξείδιο του άνθρακα <span>→</span> εκπνοή</div><dl><dt>Άχρηστη ουσία</dt><dd>Διοξείδιο του άνθρακα</dd><dt>Από πού</dt><dd>Από κάθε κύτταρο, στην κυτταρική αναπνοή</dd></dl></div><div class="ecard"><h3>Δέρμα</h3><div class="eq">Νερό και άλατα <span>→</span> ιδρώτας</div><dl><dt>Άχρηστη ουσία</dt><dd>Νερό και άλατα, με λίγη ουρία</dd><dt>Κύριος ρόλος</dt><dd>Ο ιδρώτας σε δροσίζει</dd></dl></div><div class="ecard"><h3>Η απέκκριση δεν είναι αφόδευση</h3><div class="eq">Τα κόπρανα δεν απεκκρίνονται</div><dl><dt>Απέκκριση</dt><dd>Αποβάλλει άχρηστες ουσίες που έφτιαξαν τα κύτταρά σου</dd><dt>Αφόδευση</dt><dd>Αποβάλλει άπεπτη τροφή που δεν έγινε ποτέ μέρος των κυττάρων σου</dd></dl></div></div>
+    <p class="muted">Φτιάχνεις περίπου 1 ως 2 λίτρα ούρα τη μέρα. Αν οι νεφροί σταματήσουν να λειτουργούν, ένα μηχάνημα αιμοκάθαρσης μπορεί να φιλτράρει το αίμα, ή μπορεί να γίνει μεταμόσχευση νεφρού.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Βρες εκτυπώσιμα πακέτα επιστήμης στο κατάστημα →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Μέρη του απεκκριτικού συστήματος", "numbers": "Αριθμοί", "view": "Επιλογές διαγράμματος", "tapTitle": "Πάτησε ένα μέρος", "tapText": "Πάτησε οποιοδήποτε μέρος στο διάγραμμα ή διάλεξε ένα από την αριθμημένη λίστα.", "key": [["Οι αριθμοί 1 ως 5", "ακολουθούν το αίμα: μπαίνει στον νεφρό για να καθαριστεί και μετά γυρίζει προς την καρδιά."], ["Οι αριθμοί 6 ως 9", "ακολουθούν τα ούρα, από τον νεφρό ως την έξοδο από το σώμα."], ["Ο νεφρός στα δεξιά", "είναι σχεδιασμένος σε τομή, για να δεις το εσωτερικό του."], ["Απεκκριτικό ή ουροποιητικό;", "Οι νεφροί, οι ουρητήρες, η ουροδόχος κύστη και η ουρήθρα λέγονται και ουροποιητικό σύστημα. Είναι το κύριο μέρος του απεκκριτικού συστήματος."]], "kinds": {"art": "Αρτηρία", "vein": "Φλέβα", "organ": "Όργανο", "tube": "Αγωγός ούρων", "muscle": "Μυς"}, "facts": "Βασικά στοιχεία", "works": "Συνεργάζεται με", "words": "Λέξεις-κλειδιά:", "toVessels": "Δες το εσωτερικό ενός νεφρού", "step": "Βήμα", "of": "από", "back": "Πίσω", "next": "Επόμενο", "again": "Από την αρχή", "play": "Αναπαραγωγή", "pause": "Παύση", "happens": "Τι συμβαίνει", "oxygen": "Τι κινείται", "blood": "Μεταφέρει", "c_dirty": "Αίμα που χρειάζεται καθάρισμα", "c_clean": "Καθαρισμένο αίμα", "c_urine": "Ούρα", "away": {"filter": "Τα μικρά μόρια φιλτράρονται από το αίμα", "back": "Η γλυκόζη και το περισσότερο νερό γυρίζουν στο αίμα"}};
+  var PARTS=[{"chip": "Αορτή", "name": "Αορτή", "job": "Η κύρια αρτηρία του σώματος. Μεταφέρει αίμα πλούσιο σε οξυγόνο από την καρδιά προς τα κάτω, μέσα από την κοιλιά.", "facts": ["Από αυτήν ξεκινά μια νεφρική αρτηρία για κάθε νεφρό.", "Το αίμα που μεταφέρει περιέχει ουρία, μια άχρηστη ουσία που φτιάχνει το ήπαρ (συκώτι).", "Σε ηρεμία, περίπου το ένα πέμπτο του αίματος που αντλεί η καρδιά πηγαίνει στους νεφρούς."], "links": [["rartery", "Οι νεφρικές αρτηρίες ξεκινούν από την αορτή."], ["vena", "Η κάτω κοίλη φλέβα βρίσκεται δίπλα της και μεταφέρει αίμα προς την αντίθετη κατεύθυνση."]], "words": "αρτηρία, ουρία", "id": "aorta", "kind": "art", "blood": "c_dirty", "n": 1}, {"chip": "Νεφρική αρτηρία", "name": "Νεφρική αρτηρία", "job": "Μεταφέρει αίμα από την αορτή στον νεφρό για να καθαριστεί. Έχεις δύο, μία για κάθε νεφρό.", "facts": ["Νεφρικός σημαίνει ότι έχει σχέση με τους νεφρούς.", "Το αίμα έχει υψηλή πίεση, και αυτό βοηθά να σπρωχτεί το υγρό μέσα από τα φίλτρα του νεφρού.", "Μέσα στον νεφρό χωρίζεται σε όλο και μικρότερα αγγεία."], "links": [["aorta", "Ξεκινά από την αορτή."], ["kidney", "Φέρνει το αίμα μέσα στον νεφρό."]], "words": "νεφρικός, αρτηρία, πίεση", "id": "rartery", "kind": "art", "blood": "c_dirty", "n": 2}, {"chip": "Νεφρός", "name": "Νεφρός", "job": "Έχεις δύο νεφρούς. Φιλτράρουν το αίμα σου, απομακρύνουν την ουρία και ρυθμίζουν πόσο νερό και αλάτι μένει στο σώμα σου. Το υγρό που φτιάχνουν με τις άχρηστες ουσίες είναι τα ούρα.", "facts": ["Κάθε νεφρός έχει σχήμα φασολιού και μέγεθος περίπου όσο η γροθιά σου.", "Βρίσκονται στο πίσω μέρος της κοιλιάς, ακριβώς κάτω από τις πλευρές, ένας σε κάθε πλευρά της σπονδυλικής στήλης.", "Ο δεξιός νεφρός βρίσκεται λίγο χαμηλότερα από τον αριστερό, επειδή από πάνω του είναι το ήπαρ.", "Κάθε νεφρός περιέχει περίπου ένα εκατομμύριο μικροσκοπικά φίλτρα, τους νεφρώνες.", "Μπορείς να ζήσεις υγιής και με έναν μόνο νεφρό."], "links": [["rartery", "Το αίμα φτάνει με τη νεφρική αρτηρία."], ["rvein", "Το καθαρισμένο αίμα φεύγει με τη νεφρική φλέβα."], ["ureter", "Τα ούρα φεύγουν από τον ουρητήρα."]], "words": "διήθηση, ουρία, νεφρώνας, ούρα", "id": "kidney", "kind": "organ", "more": "vessels", "n": 3}, {"chip": "Νεφρική φλέβα", "name": "Νεφρική φλέβα", "job": "Μεταφέρει το καθαρισμένο αίμα από τον νεφρό στην κάτω κοίλη φλέβα.", "facts": ["Αυτό το αίμα έχει πολύ λιγότερη ουρία από το αίμα που έφτασε.", "Έχει επίσης τη σωστή ποσότητα νερού και αλάτων.", "Τα κύτταρα του νεφρού έχουν χρησιμοποιήσει μέρος του οξυγόνου του, γι' αυτό στα διαγράμματα φαίνεται μπλε."], "links": [["kidney", "Βγάζει το αίμα από τον νεφρό."], ["vena", "Ενώνεται με την κάτω κοίλη φλέβα."]], "words": "νεφρικός, φλέβα", "id": "rvein", "kind": "vein", "blood": "c_clean", "n": 4}, {"chip": "Κάτω κοίλη φλέβα", "name": "Κάτω κοίλη φλέβα", "job": "Η κύρια φλέβα του σώματος. Μεταφέρει το αίμα πίσω, προς τα πάνω, στην καρδιά.", "facts": ["Σε αυτήν καταλήγουν οι δύο νεφρικές φλέβες.", "Το καθαρισμένο αίμα ανακατεύεται με το αίμα που γυρίζει από το υπόλοιπο σώμα.", "Οι νεφροί σου δέχονται πάνω από ένα λίτρο αίμα κάθε λεπτό, έτσι όλο το αίμα σου καθαρίζεται πολλές φορές τη μέρα."], "links": [["rvein", "Οι νεφρικές φλέβες τής φέρνουν καθαρισμένο αίμα."], ["aorta", "Η αορτή βρίσκεται δίπλα της και μεταφέρει αίμα προς την αντίθετη κατεύθυνση."]], "words": "φλέβα", "id": "vena", "kind": "vein", "blood": "c_clean", "n": 5}, {"chip": "Ουρητήρας", "name": "Ουρητήρας", "job": "Ένας στενός σωλήνας που μεταφέρει τα ούρα από τον νεφρό κάτω, στην ουροδόχο κύστη. Έχεις δύο, έναν από κάθε νεφρό.", "facts": ["Κάθε ουρητήρας έχει μήκος περίπου 25 ως 30 εκατοστά.", "Οι μύες στο τοίχωμά του σπρώχνουν τα ούρα με κυματιστές κινήσεις. Αυτές λέγονται περισταλτικές κινήσεις.", "Τα ούρα κατεβαίνουν συνέχεια, όχι μόνο όταν πηγαίνεις στην τουαλέτα."], "links": [["kidney", "Τα ούρα μπαίνουν σε αυτόν από τον νεφρό."], ["bladder", "Αδειάζει στην ουροδόχο κύστη."]], "words": "ουρητήρας, περισταλτικές κινήσεις", "id": "ureter", "kind": "tube", "blood": "c_urine", "n": 6}, {"chip": "Ουροδόχος κύστη", "name": "Ουροδόχος κύστη", "job": "Ένας ελαστικός μυώδης σάκος που αποθηκεύει τα ούρα μέχρι να πας στην τουαλέτα.", "facts": ["Η ουροδόχος κύστη ενός ενήλικα χωρά περίπου μισό λίτρο ούρα.", "Καθώς γεμίζει, το τοίχωμά της τεντώνεται. Νεύρα στο τοίχωμα ειδοποιούν τον εγκέφαλο ότι κοντεύει να γεμίσει.", "Όταν πηγαίνεις στην τουαλέτα, οι μύες του τοιχώματος συσπώνται και σπρώχνουν τα ούρα έξω."], "links": [["ureter", "Τα ούρα φτάνουν από τους δύο ουρητήρες."], ["sphincter", "Ο σφιγκτήρας την κρατά κλειστή."]], "words": "ουροδόχος κύστη, ούρα, σύσπαση", "id": "bladder", "kind": "organ", "blood": "c_urine", "n": 7}, {"chip": "Σφιγκτήρας", "name": "Σφιγκτήρας μυς", "job": "Ένας δακτύλιος από μυ στο κάτω μέρος της ουροδόχου κύστης. Μένει σφιχτά κλειστός για να κρατά μέσα τα ούρα.", "facts": ["Όταν πηγαίνεις στην τουαλέτα, χαλαρώνει και ανοίγει.", "Σφιγκτήρας λέγεται κάθε δακτύλιος από μυ που μπορεί να κλείσει έναν σωλήνα. Έχεις σφιγκτήρες και στο πεπτικό σου σύστημα.", "Τα μικρά παιδιά πρέπει να μάθουν να ελέγχουν αυτόν τον μυ."], "links": [["bladder", "Κλείνει το κάτω μέρος της ουροδόχου κύστης."], ["urethra", "Όταν ανοίγει, τα ούρα περνούν στην ουρήθρα."]], "words": "σφιγκτήρας, χαλάρωση", "id": "sphincter", "kind": "muscle", "n": 8}, {"chip": "Ουρήθρα", "name": "Ουρήθρα", "job": "Ο σωλήνας που μεταφέρει τα ούρα από την ουροδόχο κύστη έξω από το σώμα.", "facts": ["Μην την μπερδεύεις με τους ουρητήρες. Οι ουρητήρες είναι δύο, η ουρήθρα μόνο μία.", "Η αποβολή των ούρων λέγεται ούρηση.", "Είναι το τελευταίο μέρος του ουροποιητικού συστήματος."], "links": [["sphincter", "Ο σφιγκτήρας ανοίγει για να περάσουν τα ούρα."], ["bladder", "Παίρνει τα ούρα από την ουροδόχο κύστη."]], "words": "ουρήθρα, ούρηση", "id": "urethra", "kind": "tube", "blood": "c_urine", "n": 9}];
+  var STEPS=[{"title": "Το αίμα φτάνει", "sum": "Το αίμα από την καρδιά κατεβαίνει στην αορτή και μπαίνει στη νεφρική αρτηρία.", "pts": ["Αυτό το αίμα μεταφέρει ουρία, μια άχρηστη ουσία που φτιάχνεται στο ήπαρ.", "Μπορεί επίσης να έχει περισσότερο νερό ή αλάτι από όσο χρειάζεται το σώμα σου."], "on": ["aorta", "rartery"], "ox": "blood"}, {"title": "Διήθηση στον νεφρό", "sum": "Μέσα στον νεφρό, το αίμα φιλτράρεται από περίπου ένα εκατομμύριο μικροσκοπικούς νεφρώνες.", "pts": ["Το αίμα πιέζεται μέσα από ένα κουβάρι μικροσκοπικών τριχοειδών αγγείων.", "Το νερό, η ουρία, τα άλατα και η γλυκόζη βγαίνουν από το αίμα.", "Τα κύτταρα του αίματος και οι πρωτεΐνες είναι πολύ μεγάλα για να περάσουν, γι' αυτό μένουν στο αίμα."], "on": ["kidney"], "ox": "filt", "away": "filter"}, {"title": "Οι χρήσιμες ουσίες γυρίζουν πίσω", "sum": "Το υγρό που φιλτραρίστηκε κυλά μέσα σε ένα μικροσκοπικό σωληνάριο. Ό,τι είναι χρήσιμο γυρίζει στο αίμα.", "pts": ["Όλη η γλυκόζη γυρίζει πίσω.", "Το περισσότερο νερό γυρίζει πίσω.", "Γυρίζουν πίσω τόσα άλατα όσα χρειάζεται το σώμα σου για να μένει σε ισορροπία.", "Η ουρία μένει στο σωληνάριο."], "on": ["kidney"], "ox": "back", "away": "back"}, {"title": "Το καθαρισμένο αίμα φεύγει", "sum": "Το καθαρισμένο αίμα φεύγει από τον νεφρό με τη νεφρική φλέβα και μπαίνει στην κάτω κοίλη φλέβα.", "pts": ["Τώρα έχει πολύ λιγότερη ουρία.", "Γυρίζει στην καρδιά για να σταλεί ξανά σε όλο το σώμα."], "on": ["rvein", "vena"], "ox": "clean"}, {"title": "Τα ούρα κατεβαίνουν στον ουρητήρα", "sum": "Ό,τι μένει στα σωληνάρια είναι τα ούρα. Μαζεύονται στο κέντρο του νεφρού και περνούν στον ουρητήρα.", "pts": ["Τα ούρα είναι κυρίως νερό, με διαλυμένη ουρία και άλατα.", "Οι μύες στο τοίχωμα του ουρητήρα τα σπρώχνουν προς την ουροδόχο κύστη."], "on": ["ureter"], "ox": "urine"}, {"title": "Αποθήκευση στην ουροδόχο κύστη", "sum": "Τα ούρα στάζουν στην ουροδόχο κύστη, που γεμίζει σιγά σιγά και τεντώνεται.", "pts": ["Ο σφιγκτήρας μένει κλειστός για να κρατά μέσα τα ούρα.", "Όταν η κύστη κοντεύει να γεμίσει, τα νεύρα στέλνουν μήνυμα στον εγκέφαλο."], "on": ["bladder"], "ox": "urine"}, {"title": "Έξω από την ουρήθρα", "sum": "Όταν πηγαίνεις στην τουαλέτα, ο σφιγκτήρας χαλαρώνει και το τοίχωμα της κύστης συσπάται.", "pts": ["Τα ούρα σπρώχνονται έξω μέσα από την ουρήθρα.", "Οι άχρηστες ουσίες έφυγαν από το σώμα σου. Αυτό είναι η απέκκριση."], "on": ["sphincter", "urethra"], "ox": "urine"}];
+  var OX={"blood": "Αίμα που μεταφέρει ουρία", "filt": "Διήθημα: νερό, ουρία, άλατα και γλυκόζη", "back": "Χρήσιμες ουσίες που γυρίζουν στο αίμα", "clean": "Καθαρισμένο αίμα, με πολύ λιγότερη ουρία", "urine": "Ούρα: νερό, ουρία και άλατα"},PATHS=["M337 40L337 240C372 240 398 254 432 258", "M432 258L486 232", "M486 232L498 292", "M432 274C400 272 360 262 303 262L303 40", "M436 290C420 296 404 312 398 360C398 436 392 500 372 545C366 558 360 566 352 573", "M352 573L322 590", "M320 590L320 678"],DUR=[2400, 900, 900, 2800, 3200, 800, 1500];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.blood)h+="<div class=\"meta\"><span><b>"+esc(L.blood)+"</b>"+esc(L[o.blood])+"</span></div>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more==="vessels")h+="<p><button class=\"btn ghost\" id=\"toVessels\">"+esc(L.toVessels)+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toVessels"){show("more");var v=$("vessels");if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.oxygen)+"</b>"+esc(OX[s.ox])+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.away){away.textContent=L.away[s.away];away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1600);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("pinBtn").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- water balance model ---------- */
+  (function(){
+    var b=$("wb"),hi=$("wHi"),lo=$("wLo");
+    function set(low){
+      if(low)b.classList.add("low");else b.classList.remove("low");
+      hi.setAttribute("aria-pressed",low?"false":"true");
+      lo.setAttribute("aria-pressed",low?"true":"false");
+    }
+    hi.onclick=function(){set(false);};
+    lo.onclick=function(){set(true);};
+    set(false);
+  })();
+
+  select(null);
+
+  /* exposed for checking */
+  window.ExcLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
