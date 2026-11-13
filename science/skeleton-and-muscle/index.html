@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Skeleton and Muscles Diagram for KS3 | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive human skeleton diagram for ages 11-14. Tap each bone to learn its name and job, tour the joints from the skull to the knee, and bend an arm to see how the biceps and triceps work as a pair.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/skeleton-and-muscles/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/skeleton-and-muscles/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/skeleton-and-muscles/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/skeleton-and-muscles/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Baloo 2",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Baloo 2",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Nunito Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Baloo 2",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Baloo 2",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* skeleton */
+.figbox{height:auto;padding:6px}
+#fig{height:auto;max-height:min(88vh,860px);margin:0 auto}
+#fig .s-skin{fill:#1B2B5C;stroke:#1B2B5C}
+#fig .s-skino{fill:#1B2B5C;stroke:#6F84C4}
+.kind.protect{background:#9CC3F5}.kind.support{background:#F6E7BD}.kind.arm{background:#8FD3A0}.kind.leg{background:#F0A696}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round;stroke-linejoin:round}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.55)}
+.hit:not(.hitv):focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.16)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.25)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .s-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .s-dot{fill:#F4B942}
+#fig .s-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins,#fig.journey #pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:4.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 2px}
+.asay{text-align:center;margin:8px 0 0;min-height:3em}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › Skeleton and Muscles Explorer</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/skeleton-and-muscles/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Skeleton and Muscles Explorer</h1>
+  <p class="lead">Your skeleton holds you up, protects your organs and lets you move. Tap any bone to see what it does, then tour the joints and find out how muscles pull on bones. Ages 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Skeleton and Muscles Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the skeleton</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Tour of the joints</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Muscles and movement</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Bones of the skeleton"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Diagram options">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Numbers</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="-48 4 696 888" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Diagram of the human skeleton seen from the front, with twelve numbered bones"><style>
+.s-skin{fill:#EEF1F8;stroke:#EEF1F8;stroke-linecap:round}
+.s-skino{fill:#EEF1F8;stroke:#8E9AC0;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.s-o{fill:#7A6540;stroke:#7A6540;stroke-linecap:round;stroke-linejoin:round}
+.s-f{fill:#F7EFD9;stroke:#F7EFD9;stroke-linecap:round;stroke-linejoin:round}
+.s-ol{fill:none;stroke:#7A6540;stroke-linecap:round;stroke-linejoin:round}
+.s-fl{fill:none;stroke:#F7EFD9;stroke-linecap:round;stroke-linejoin:round}
+.s-bo{fill:none;stroke:#5A4A30;stroke-linecap:round}
+.s-bf{fill:none;stroke:#CDBE98;stroke-linecap:round}
+.s-sh{fill:#CDBE98;stroke:#7A6540;stroke-width:1.6;stroke-linejoin:round}
+.s-hole{fill:#5A4A30}
+.s-det{fill:none;stroke:#7A6540;stroke-width:1.3;stroke-linecap:round}
+.s-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.s-dot{fill:#0F1C3F}
+.s-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.s-pin text{font:800 16px "Baloo 2",Arial,sans-serif;fill:#0F1C3F}
+</style><g class="s-skino"><ellipse cx="300" cy="84" rx="52" ry="68"/><path d="M276 130L324 130L324 176L276 176Z"/><path d="M276 158C240 166 204 160 190 176C178 200 216 300 226 352C222 390 198 420 200 462L400 462C402 420 378 390 374 352C384 300 422 200 410 176C396 160 360 166 324 158Z"/><path fill="none" stroke-width="51" d="M400 190L428 340"/><path fill="none" stroke-width="43" d="M428 340L453 478"/><path fill="none" stroke-width="35" d="M453 478L462 540"/><path fill="none" stroke-width="79" d="M368 462L354 650"/><path fill="none" stroke-width="59" d="M354 650L350 836"/><path fill="none" stroke-width="41" d="M350 846L358 872"/><path fill="none" stroke-width="51" d="M200 190L172 340"/><path fill="none" stroke-width="43" d="M172 340L147 478"/><path fill="none" stroke-width="35" d="M147 478L138 540"/><path fill="none" stroke-width="79" d="M232 462L246 650"/><path fill="none" stroke-width="59" d="M246 650L250 836"/><path fill="none" stroke-width="41" d="M250 846L242 872"/></g><g class="s-skin"><ellipse cx="300" cy="84" rx="52" ry="68"/><path d="M276 130L324 130L324 176L276 176Z"/><path d="M276 158C240 166 204 160 190 176C178 200 216 300 226 352C222 390 198 420 200 462L400 462C402 420 378 390 374 352C384 300 422 200 410 176C396 160 360 166 324 158Z"/><path fill="none" stroke-width="46" d="M400 190L428 340"/><path fill="none" stroke-width="38" d="M428 340L453 478"/><path fill="none" stroke-width="30" d="M453 478L462 540"/><path fill="none" stroke-width="74" d="M368 462L354 650"/><path fill="none" stroke-width="54" d="M354 650L350 836"/><path fill="none" stroke-width="36" d="M350 846L358 872"/><path fill="none" stroke-width="46" d="M200 190L172 340"/><path fill="none" stroke-width="38" d="M172 340L147 478"/><path fill="none" stroke-width="30" d="M147 478L138 540"/><path fill="none" stroke-width="74" d="M232 462L246 650"/><path fill="none" stroke-width="54" d="M246 650L250 836"/><path fill="none" stroke-width="36" d="M250 846L242 872"/></g><path class="s-sh" d="M360 178L404 174L406 196L378 268Z"/><path class="s-sh" d="M240 178L196 174L194 196L222 268Z"/><path class="s-bo" stroke-width="7.4" d="M252 198A48 7 0 0 1 348 198"/><path class="s-bo" stroke-width="7.4" d="M240 212.5A60 7 0 0 1 360 212.5"/><path class="s-bo" stroke-width="7.4" d="M231 227A69 7 0 0 1 369 227"/><path class="s-bo" stroke-width="7.4" d="M225 241.5A75 7 0 0 1 375 241.5"/><path class="s-bo" stroke-width="7.4" d="M221 256A79 7 0 0 1 379 256"/><path class="s-bo" stroke-width="7.4" d="M219 270.5A81 7 0 0 1 381 270.5"/><path class="s-bo" stroke-width="7.4" d="M219 285A81 7 0 0 1 381 285"/><path class="s-bo" stroke-width="7.4" d="M221 299.5A79 7 0 0 1 379 299.5"/><path class="s-bo" stroke-width="7.4" d="M225 314A75 7 0 0 1 375 314"/><path class="s-bo" stroke-width="7.4" d="M231 328.5A69 7 0 0 1 369 328.5"/><path class="s-bf" stroke-width="5" d="M252 198A48 7 0 0 1 348 198"/><path class="s-bf" stroke-width="5" d="M240 212.5A60 7 0 0 1 360 212.5"/><path class="s-bf" stroke-width="5" d="M231 227A69 7 0 0 1 369 227"/><path class="s-bf" stroke-width="5" d="M225 241.5A75 7 0 0 1 375 241.5"/><path class="s-bf" stroke-width="5" d="M221 256A79 7 0 0 1 379 256"/><path class="s-bf" stroke-width="5" d="M219 270.5A81 7 0 0 1 381 270.5"/><path class="s-bf" stroke-width="5" d="M219 285A81 7 0 0 1 381 285"/><path class="s-bf" stroke-width="5" d="M221 299.5A79 7 0 0 1 379 299.5"/><path class="s-bf" stroke-width="5" d="M225 314A75 7 0 0 1 375 314"/><path class="s-bf" stroke-width="5" d="M231 328.5A69 7 0 0 1 369 328.5"/><path class="s-o" stroke-width="4.6" d="M291 140h18q3 0 3 3v3.6q0 3 -3 3h-18q-3 0 -3 -3v-3.6q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M290.7 151.2h18.5q3 0 3 3v3.7q0 3 -3 3h-18.5q-3 0 -3 -3v-3.7q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M290.5 162.5h19.1q3 0 3 3v3.8q0 3 -3 3h-19.1q-3 0 -3 -3v-3.8q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M290.2 174h19.6q3 0 3 3v4q0 3 -3 3h-19.6q-3 0 -3 -3v-4q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M289.9 185.5h20.2q3 0 3 3v4.1q0 3 -3 3h-20.2q-3 0 -3 -3v-4.1q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M289.6 197.2h20.7q3 0 3 3v4.2q0 3 -3 3h-20.7q-3 0 -3 -3v-4.2q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M289.4 209h21.3q3 0 3 3v4.3q0 3 -3 3h-21.3q-3 0 -3 -3v-4.3q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M289.1 220.9h21.8q3 0 3 3v4.4q0 3 -3 3h-21.8q-3 0 -3 -3v-4.4q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M288.8 232.9h22.4q3 0 3 3v4.5q0 3 -3 3h-22.4q-3 0 -3 -3v-4.5q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M288.5 245.1h22.9q3 0 3 3v4.7q0 3 -3 3h-22.9q-3 0 -3 -3v-4.7q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M288.3 257.3h23.5q3 0 3 3v4.8q0 3 -3 3h-23.5q-3 0 -3 -3v-4.8q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M288 269.7h24q3 0 3 3v4.9q0 3 -3 3h-24q-3 0 -3 -3v-4.9q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M287.7 282.2h24.5q3 0 3 3v5q0 3 -3 3h-24.5q-3 0 -3 -3v-5q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M287.5 294.8h25.1q3 0 3 3v5.1q0 3 -3 3h-25.1q-3 0 -3 -3v-5.1q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M287.2 307.6h25.6q3 0 3 3v5.3q0 3 -3 3h-25.6q-3 0 -3 -3v-5.3q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M286.9 320.4h26.2q3 0 3 3v5.4q0 3 -3 3h-26.2q-3 0 -3 -3v-5.4q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M286.6 333.4h26.7q3 0 3 3v5.5q0 3 -3 3h-26.7q-3 0 -3 -3v-5.5q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M286.4 346.5h27.3q3 0 3 3v5.6q0 3 -3 3h-27.3q-3 0 -3 -3v-5.6q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M286.1 359.7h27.8q3 0 3 3v5.7q0 3 -3 3h-27.8q-3 0 -3 -3v-5.7q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M285.8 373h28.4q3 0 3 3v5.8q0 3 -3 3h-28.4q-3 0 -3 -3v-5.8q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M285.5 386.5h28.9q3 0 3 3v6q0 3 -3 3h-28.9q-3 0 -3 -3v-6q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M285.3 400h29.5q3 0 3 3v6.1q0 3 -3 3h-29.5q-3 0 -3 -3v-6.1q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M285 413.7h30q3 0 3 3v6.2q0 3 -3 3h-30q-3 0 -3 -3v-6.2q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M291 140h18q3 0 3 3v3.6q0 3 -3 3h-18q-3 0 -3 -3v-3.6q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M290.7 151.2h18.5q3 0 3 3v3.7q0 3 -3 3h-18.5q-3 0 -3 -3v-3.7q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M290.5 162.5h19.1q3 0 3 3v3.8q0 3 -3 3h-19.1q-3 0 -3 -3v-3.8q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M290.2 174h19.6q3 0 3 3v4q0 3 -3 3h-19.6q-3 0 -3 -3v-4q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M289.9 185.5h20.2q3 0 3 3v4.1q0 3 -3 3h-20.2q-3 0 -3 -3v-4.1q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M289.6 197.2h20.7q3 0 3 3v4.2q0 3 -3 3h-20.7q-3 0 -3 -3v-4.2q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M289.4 209h21.3q3 0 3 3v4.3q0 3 -3 3h-21.3q-3 0 -3 -3v-4.3q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M289.1 220.9h21.8q3 0 3 3v4.4q0 3 -3 3h-21.8q-3 0 -3 -3v-4.4q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M288.8 232.9h22.4q3 0 3 3v4.5q0 3 -3 3h-22.4q-3 0 -3 -3v-4.5q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M288.5 245.1h22.9q3 0 3 3v4.7q0 3 -3 3h-22.9q-3 0 -3 -3v-4.7q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M288.3 257.3h23.5q3 0 3 3v4.8q0 3 -3 3h-23.5q-3 0 -3 -3v-4.8q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M288 269.7h24q3 0 3 3v4.9q0 3 -3 3h-24q-3 0 -3 -3v-4.9q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M287.7 282.2h24.5q3 0 3 3v5q0 3 -3 3h-24.5q-3 0 -3 -3v-5q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M287.5 294.8h25.1q3 0 3 3v5.1q0 3 -3 3h-25.1q-3 0 -3 -3v-5.1q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M287.2 307.6h25.6q3 0 3 3v5.3q0 3 -3 3h-25.6q-3 0 -3 -3v-5.3q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M286.9 320.4h26.2q3 0 3 3v5.4q0 3 -3 3h-26.2q-3 0 -3 -3v-5.4q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M286.6 333.4h26.7q3 0 3 3v5.5q0 3 -3 3h-26.7q-3 0 -3 -3v-5.5q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M286.4 346.5h27.3q3 0 3 3v5.6q0 3 -3 3h-27.3q-3 0 -3 -3v-5.6q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M286.1 359.7h27.8q3 0 3 3v5.7q0 3 -3 3h-27.8q-3 0 -3 -3v-5.7q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M285.8 373h28.4q3 0 3 3v5.8q0 3 -3 3h-28.4q-3 0 -3 -3v-5.8q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M285.5 386.5h28.9q3 0 3 3v6q0 3 -3 3h-28.9q-3 0 -3 -3v-6q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M285.3 400h29.5q3 0 3 3v6.1q0 3 -3 3h-29.5q-3 0 -3 -3v-6.1q0 -3 3 -3Z"/><path class="s-f" stroke-width="0" d="M285 413.7h30q3 0 3 3v6.2q0 3 -3 3h-30q-3 0 -3 -3v-6.2q0 -3 3 -3Z"/><path class="s-o" stroke-width="4.6" d="M314 424C340 388 392 392 394 424C398 446 384 458 374 470C378 488 360 506 338 506C322 506 308 500 302 492L302 474C320 462 320 442 314 424Z"/><path class="s-o" stroke-width="4.6" d="M286 424C260 388 208 392 206 424C202 446 216 458 226 470C222 488 240 506 262 506C278 506 292 500 298 492L298 474C280 462 280 442 286 424Z"/><path class="s-o" stroke-width="4.6" d="M278 420L322 420L308 462L300 476L292 462Z"/><path class="s-f" stroke-width="0" d="M314 424C340 388 392 392 394 424C398 446 384 458 374 470C378 488 360 506 338 506C322 506 308 500 302 492L302 474C320 462 320 442 314 424Z"/><path class="s-f" stroke-width="0" d="M286 424C260 388 208 392 206 424C202 446 216 458 226 470C222 488 240 506 262 506C278 506 292 500 298 492L298 474C280 462 280 442 286 424Z"/><path class="s-f" stroke-width="0" d="M278 420L322 420L308 462L300 476L292 462Z"/><ellipse class="s-hole" cx="334" cy="488" rx="12" ry="8.5" transform="rotate(-20 334 488)"/><path class="s-det" d="M330 432C346 420 370 418 382 430"/><ellipse class="s-hole" cx="266" cy="488" rx="12" ry="8.5" transform="rotate(20 266 488)"/><path class="s-det" d="M270 432C254 420 230 418 218 430"/><path class="s-det" d="M300 478L300 504M290 430L310 430M292 442L308 442M295 454L305 454"/><path class="s-ol" stroke-width="10.2" d="M252 198A48 13 0 0 0 348 198"/><path class="s-ol" stroke-width="10.2" d="M240 212.5A60 13 0 0 0 360 212.5"/><path class="s-ol" stroke-width="10.2" d="M231 227A69 13 0 0 0 369 227"/><path class="s-ol" stroke-width="10.2" d="M225 241.5A75 13 0 0 0 375 241.5"/><path class="s-ol" stroke-width="10.2" d="M221 256A79 13 0 0 0 379 256"/><path class="s-ol" stroke-width="10.2" d="M219 270.5A81 13 0 0 0 381 270.5"/><path class="s-ol" stroke-width="10.2" d="M219 285A81 13 0 0 0 381 285"/><path class="s-ol" stroke-width="10.2" d="M379 299.5A79 13 0 0 1 316 312.2"/><path class="s-ol" stroke-width="10.2" d="M221 299.5A79 13 0 0 0 284 312.2"/><path class="s-ol" stroke-width="10.2" d="M375 314A75 13 0 0 1 332 325.8"/><path class="s-ol" stroke-width="10.2" d="M225 314A75 13 0 0 0 268 325.8"/><path class="s-ol" stroke-width="10.2" d="M369 328.5A69 13 0 0 1 348 337.8"/><path class="s-ol" stroke-width="10.2" d="M231 328.5A69 13 0 0 0 252 337.8"/><path class="s-fl" stroke-width="5.6" d="M252 198A48 13 0 0 0 348 198"/><path class="s-fl" stroke-width="5.6" d="M240 212.5A60 13 0 0 0 360 212.5"/><path class="s-fl" stroke-width="5.6" d="M231 227A69 13 0 0 0 369 227"/><path class="s-fl" stroke-width="5.6" d="M225 241.5A75 13 0 0 0 375 241.5"/><path class="s-fl" stroke-width="5.6" d="M221 256A79 13 0 0 0 379 256"/><path class="s-fl" stroke-width="5.6" d="M219 270.5A81 13 0 0 0 381 270.5"/><path class="s-fl" stroke-width="5.6" d="M219 285A81 13 0 0 0 381 285"/><path class="s-fl" stroke-width="5.6" d="M379 299.5A79 13 0 0 1 316 312.2"/><path class="s-fl" stroke-width="5.6" d="M221 299.5A79 13 0 0 0 284 312.2"/><path class="s-fl" stroke-width="5.6" d="M375 314A75 13 0 0 1 332 325.8"/><path class="s-fl" stroke-width="5.6" d="M225 314A75 13 0 0 0 268 325.8"/><path class="s-fl" stroke-width="5.6" d="M369 328.5A69 13 0 0 1 348 337.8"/><path class="s-fl" stroke-width="5.6" d="M231 328.5A69 13 0 0 0 252 337.8"/><path class="s-o" stroke-width="4.6" d="M287 180Q300 176 313 180L311 200Q307 204 307 212L306 296Q300 314 294 296L293 212Q293 204 289 200Z"/><path class="s-f" stroke-width="0" d="M287 180Q300 176 313 180L311 200Q307 204 307 212L306 296Q300 314 294 296L293 212Q293 204 289 200Z"/><path class="s-ol" stroke-width="12.1" d="M312 181C340 172 362 188 396 175"/><path class="s-fl" stroke-width="7.5" d="M312 181C340 172 362 188 396 175"/><path class="s-ol" stroke-width="12.1" d="M288 181C260 172 238 188 204 175"/><path class="s-fl" stroke-width="7.5" d="M288 181C260 172 238 188 204 175"/><path class="s-o" stroke-width="4.6" d="M269 110C268 134 278 150 300 152C322 150 332 134 331 110L324 114C323 130 314 137 300 137C286 137 277 130 276 114Z"/><path class="s-f" stroke-width="0" d="M269 110C268 134 278 150 300 152C322 150 332 134 331 110L324 114C323 130 314 137 300 137C286 137 277 130 276 114Z"/><path class="s-o" stroke-width="4.6" d="M260 74C254 14 346 14 340 74C340 94 334 106 328 113L323 126L277 126L272 113C266 106 260 94 260 74Z"/><path class="s-f" stroke-width="0" d="M260 74C254 14 346 14 340 74C340 94 334 106 328 113L323 126L277 126L272 113C266 106 260 94 260 74Z"/><ellipse class="s-hole" cx="283" cy="80" rx="11" ry="10"/><ellipse class="s-hole" cx="317" cy="80" rx="11" ry="10"/><path class="s-hole" d="M300 94L293 109Q300 113 307 109Z"/><path class="s-det" d="M282 126L318 126M288 120L288 132M294 120L294 133M300 120L300 133M306 120L306 133M312 120L312 132"/><path class="s-det" d="M300 26C296 34 304 40 300 48M270 54C278 58 284 56 290 60"/><ellipse class="s-o" stroke-width="0" cx="455" cy="491" rx="17.3" ry="10.3" transform="rotate(8 455 491)"/><path class="s-ol" stroke-width="9.2" d="M468 493L484 520"/><path class="s-ol" stroke-width="8.8" d="M464 497L472 548"/><path class="s-ol" stroke-width="8.8" d="M457 499L460 554"/><path class="s-ol" stroke-width="8.8" d="M450 498L448 550"/><path class="s-ol" stroke-width="8.4" d="M444 496L437 540"/><ellipse class="s-f" stroke-width="0" cx="455" cy="491" rx="15" ry="8" transform="rotate(8 455 491)"/><path class="s-fl" stroke-width="4.6" d="M468 493L484 520"/><path class="s-fl" stroke-width="4.2" d="M464 497L472 548"/><path class="s-fl" stroke-width="4.2" d="M457 499L460 554"/><path class="s-fl" stroke-width="4.2" d="M450 498L448 550"/><path class="s-fl" stroke-width="3.8" d="M444 496L437 540"/><ellipse class="s-o" stroke-width="0" cx="418" cy="344" rx="10.8" ry="10.8"/><path class="s-ol" stroke-width="11.6" d="M418 346L443 478"/><ellipse class="s-o" stroke-width="0" cx="443" cy="478" rx="7.8" ry="7.8"/><ellipse class="s-f" stroke-width="0" cx="418" cy="344" rx="8.5" ry="8.5"/><path class="s-fl" stroke-width="7" d="M418 346L443 478"/><ellipse class="s-f" stroke-width="0" cx="443" cy="478" rx="5.5" ry="5.5"/><ellipse class="s-o" stroke-width="0" cx="437" cy="348" rx="8.8" ry="8.8"/><path class="s-ol" stroke-width="12.1" d="M437 348L463 474"/><ellipse class="s-o" stroke-width="0" cx="463" cy="474" rx="10.8" ry="10.8"/><ellipse class="s-f" stroke-width="0" cx="437" cy="348" rx="6.5" ry="6.5"/><path class="s-fl" stroke-width="7.5" d="M437 348L463 474"/><ellipse class="s-f" stroke-width="0" cx="463" cy="474" rx="8.5" ry="8.5"/><ellipse class="s-o" stroke-width="0" cx="396" cy="186" rx="14.8" ry="14.8"/><ellipse class="s-o" stroke-width="0" cx="406" cy="192" rx="10.3" ry="10.3"/><path class="s-ol" stroke-width="16.6" d="M401 192L427 334"/><ellipse class="s-o" stroke-width="0" cx="419" cy="340" rx="9.8" ry="9.8"/><ellipse class="s-o" stroke-width="0" cx="435" cy="340" rx="9.8" ry="9.8"/><ellipse class="s-f" stroke-width="0" cx="396" cy="186" rx="12.5" ry="12.5"/><ellipse class="s-f" stroke-width="0" cx="406" cy="192" rx="8" ry="8"/><path class="s-fl" stroke-width="12" d="M401 192L427 334"/><ellipse class="s-f" stroke-width="0" cx="419" cy="340" rx="7.5" ry="7.5"/><ellipse class="s-f" stroke-width="0" cx="435" cy="340" rx="7.5" ry="7.5"/><ellipse class="s-o" stroke-width="0" cx="352" cy="856" rx="21.3" ry="11.3"/><path class="s-ol" stroke-width="9.8" d="M340 862L338 880"/><path class="s-ol" stroke-width="9.4" d="M346 862L348 878.8"/><path class="s-ol" stroke-width="9.1" d="M352 862L358 877.6"/><path class="s-ol" stroke-width="8.8" d="M358 862L368 876.4"/><path class="s-ol" stroke-width="8.4" d="M364 862L377 875.2"/><ellipse class="s-f" stroke-width="0" cx="352" cy="856" rx="19" ry="9"/><path class="s-fl" stroke-width="5.2" d="M340 862L338 880"/><path class="s-fl" stroke-width="4.9" d="M346 862L348 878.8"/><path class="s-fl" stroke-width="4.5" d="M352 862L358 877.6"/><path class="s-fl" stroke-width="4.2" d="M358 862L368 876.4"/><path class="s-fl" stroke-width="3.8" d="M364 862L377 875.2"/><ellipse class="s-o" stroke-width="0" cx="370" cy="684" rx="8.3" ry="8.3"/><path class="s-ol" stroke-width="10.2" d="M370 684L362 840"/><ellipse class="s-o" stroke-width="0" cx="363" cy="842" rx="8.8" ry="8.8"/><ellipse class="s-f" stroke-width="0" cx="370" cy="684" rx="6" ry="6"/><path class="s-fl" stroke-width="5.6" d="M370 684L362 840"/><ellipse class="s-f" stroke-width="0" cx="363" cy="842" rx="6.5" ry="6.5"/><ellipse class="s-o" stroke-width="0" cx="349" cy="676" rx="23.3" ry="10.3"/><path class="s-ol" stroke-width="17.1" d="M345 682L340 836"/><ellipse class="s-o" stroke-width="0" cx="335" cy="839" rx="10.3" ry="10.3"/><ellipse class="s-f" stroke-width="0" cx="349" cy="676" rx="21" ry="8"/><path class="s-fl" stroke-width="12.5" d="M345 682L340 836"/><ellipse class="s-f" stroke-width="0" cx="335" cy="839" rx="8" ry="8"/><ellipse class="s-o" stroke-width="0" cx="358" cy="460" rx="14.8" ry="14.8"/><path class="s-ol" stroke-width="14.6" d="M358 460L382 472"/><ellipse class="s-o" stroke-width="0" cx="386" cy="470" rx="11.8" ry="11.8"/><path class="s-ol" stroke-width="18.6" d="M383 478L353 644"/><ellipse class="s-o" stroke-width="0" cx="342" cy="654" rx="13.3" ry="13.3"/><ellipse class="s-o" stroke-width="0" cx="363" cy="654" rx="13.3" ry="13.3"/><ellipse class="s-f" stroke-width="0" cx="358" cy="460" rx="12.5" ry="12.5"/><path class="s-fl" stroke-width="10" d="M358 460L382 472"/><ellipse class="s-f" stroke-width="0" cx="386" cy="470" rx="9.5" ry="9.5"/><path class="s-fl" stroke-width="14" d="M383 478L353 644"/><ellipse class="s-f" stroke-width="0" cx="342" cy="654" rx="11" ry="11"/><ellipse class="s-f" stroke-width="0" cx="363" cy="654" rx="11" ry="11"/><ellipse class="s-o" stroke-width="0" cx="353" cy="652" rx="11.8" ry="12.8"/><ellipse class="s-f" stroke-width="0" cx="353" cy="652" rx="9.5" ry="10.5"/><ellipse class="s-o" stroke-width="0" cx="145" cy="491" rx="17.3" ry="10.3" transform="rotate(-8 145 491)"/><path class="s-ol" stroke-width="9.2" d="M132 493L116 520"/><path class="s-ol" stroke-width="8.8" d="M136 497L128 548"/><path class="s-ol" stroke-width="8.8" d="M143 499L140 554"/><path class="s-ol" stroke-width="8.8" d="M150 498L152 550"/><path class="s-ol" stroke-width="8.4" d="M156 496L163 540"/><ellipse class="s-f" stroke-width="0" cx="145" cy="491" rx="15" ry="8" transform="rotate(-8 145 491)"/><path class="s-fl" stroke-width="4.6" d="M132 493L116 520"/><path class="s-fl" stroke-width="4.2" d="M136 497L128 548"/><path class="s-fl" stroke-width="4.2" d="M143 499L140 554"/><path class="s-fl" stroke-width="4.2" d="M150 498L152 550"/><path class="s-fl" stroke-width="3.8" d="M156 496L163 540"/><ellipse class="s-o" stroke-width="0" cx="182" cy="344" rx="10.8" ry="10.8"/><path class="s-ol" stroke-width="11.6" d="M182 346L157 478"/><ellipse class="s-o" stroke-width="0" cx="157" cy="478" rx="7.8" ry="7.8"/><ellipse class="s-f" stroke-width="0" cx="182" cy="344" rx="8.5" ry="8.5"/><path class="s-fl" stroke-width="7" d="M182 346L157 478"/><ellipse class="s-f" stroke-width="0" cx="157" cy="478" rx="5.5" ry="5.5"/><ellipse class="s-o" stroke-width="0" cx="163" cy="348" rx="8.8" ry="8.8"/><path class="s-ol" stroke-width="12.1" d="M163 348L137 474"/><ellipse class="s-o" stroke-width="0" cx="137" cy="474" rx="10.8" ry="10.8"/><ellipse class="s-f" stroke-width="0" cx="163" cy="348" rx="6.5" ry="6.5"/><path class="s-fl" stroke-width="7.5" d="M163 348L137 474"/><ellipse class="s-f" stroke-width="0" cx="137" cy="474" rx="8.5" ry="8.5"/><ellipse class="s-o" stroke-width="0" cx="204" cy="186" rx="14.8" ry="14.8"/><ellipse class="s-o" stroke-width="0" cx="194" cy="192" rx="10.3" ry="10.3"/><path class="s-ol" stroke-width="16.6" d="M199 192L173 334"/><ellipse class="s-o" stroke-width="0" cx="181" cy="340" rx="9.8" ry="9.8"/><ellipse class="s-o" stroke-width="0" cx="165" cy="340" rx="9.8" ry="9.8"/><ellipse class="s-f" stroke-width="0" cx="204" cy="186" rx="12.5" ry="12.5"/><ellipse class="s-f" stroke-width="0" cx="194" cy="192" rx="8" ry="8"/><path class="s-fl" stroke-width="12" d="M199 192L173 334"/><ellipse class="s-f" stroke-width="0" cx="181" cy="340" rx="7.5" ry="7.5"/><ellipse class="s-f" stroke-width="0" cx="165" cy="340" rx="7.5" ry="7.5"/><ellipse class="s-o" stroke-width="0" cx="248" cy="856" rx="21.3" ry="11.3"/><path class="s-ol" stroke-width="9.8" d="M260 862L262 880"/><path class="s-ol" stroke-width="9.4" d="M254 862L252 878.8"/><path class="s-ol" stroke-width="9.1" d="M248 862L242 877.6"/><path class="s-ol" stroke-width="8.8" d="M242 862L232 876.4"/><path class="s-ol" stroke-width="8.4" d="M236 862L223 875.2"/><ellipse class="s-f" stroke-width="0" cx="248" cy="856" rx="19" ry="9"/><path class="s-fl" stroke-width="5.2" d="M260 862L262 880"/><path class="s-fl" stroke-width="4.9" d="M254 862L252 878.8"/><path class="s-fl" stroke-width="4.5" d="M248 862L242 877.6"/><path class="s-fl" stroke-width="4.2" d="M242 862L232 876.4"/><path class="s-fl" stroke-width="3.8" d="M236 862L223 875.2"/><ellipse class="s-o" stroke-width="0" cx="230" cy="684" rx="8.3" ry="8.3"/><path class="s-ol" stroke-width="10.2" d="M230 684L238 840"/><ellipse class="s-o" stroke-width="0" cx="237" cy="842" rx="8.8" ry="8.8"/><ellipse class="s-f" stroke-width="0" cx="230" cy="684" rx="6" ry="6"/><path class="s-fl" stroke-width="5.6" d="M230 684L238 840"/><ellipse class="s-f" stroke-width="0" cx="237" cy="842" rx="6.5" ry="6.5"/><ellipse class="s-o" stroke-width="0" cx="251" cy="676" rx="23.3" ry="10.3"/><path class="s-ol" stroke-width="17.1" d="M255 682L260 836"/><ellipse class="s-o" stroke-width="0" cx="265" cy="839" rx="10.3" ry="10.3"/><ellipse class="s-f" stroke-width="0" cx="251" cy="676" rx="21" ry="8"/><path class="s-fl" stroke-width="12.5" d="M255 682L260 836"/><ellipse class="s-f" stroke-width="0" cx="265" cy="839" rx="8" ry="8"/><ellipse class="s-o" stroke-width="0" cx="242" cy="460" rx="14.8" ry="14.8"/><path class="s-ol" stroke-width="14.6" d="M242 460L218 472"/><ellipse class="s-o" stroke-width="0" cx="214" cy="470" rx="11.8" ry="11.8"/><path class="s-ol" stroke-width="18.6" d="M217 478L247 644"/><ellipse class="s-o" stroke-width="0" cx="258" cy="654" rx="13.3" ry="13.3"/><ellipse class="s-o" stroke-width="0" cx="237" cy="654" rx="13.3" ry="13.3"/><ellipse class="s-f" stroke-width="0" cx="242" cy="460" rx="12.5" ry="12.5"/><path class="s-fl" stroke-width="10" d="M242 460L218 472"/><ellipse class="s-f" stroke-width="0" cx="214" cy="470" rx="9.5" ry="9.5"/><path class="s-fl" stroke-width="14" d="M217 478L247 644"/><ellipse class="s-f" stroke-width="0" cx="258" cy="654" rx="11" ry="11"/><ellipse class="s-f" stroke-width="0" cx="237" cy="654" rx="11" ry="11"/><ellipse class="s-o" stroke-width="0" cx="247" cy="652" rx="11.8" ry="12.8"/><ellipse class="s-f" stroke-width="0" cx="247" cy="652" rx="9.5" ry="10.5"/><g id="hits"><path class="hit" d="M300 184C252 184 216 236 216 296C216 330 236 350 262 352L300 322L338 352C364 350 384 330 384 296C384 236 348 184 300 184Z" data-o="ribs" tabindex="0" role="button" aria-label="Ribs"/><path class="hit hitv" stroke-width="32" d="M300 140L300 184" data-o="spine" tabindex="0" role="button" aria-label="Backbone"/><path class="hit hitv" stroke-width="34" d="M300 330L300 418" data-o="spine" aria-hidden="true"/><path class="hit" d="M300 414L340 414C380 384 404 400 398 432C394 462 380 500 338 510L300 508L262 510C220 500 206 462 202 432C196 400 220 384 260 414Z" data-o="pelvis" tabindex="0" role="button" aria-label="Pelvis"/><path class="hit" d="M300 22C250 22 252 80 262 108C264 136 276 156 300 156C324 156 336 136 338 108C348 80 350 22 300 22Z" data-o="skull" tabindex="0" role="button" aria-label="Skull"/><path class="hit hitv" stroke-width="18" d="M312 181C340 172 362 188 396 175" data-o="clavicle" tabindex="0" role="button" aria-label="Collarbone"/><path class="hit hitv" stroke-width="17" d="M416 340L440 480" data-o="ulna" tabindex="0" role="button" aria-label="Ulna"/><path class="hit hitv" stroke-width="17" d="M440 344L466 478" data-o="radius" tabindex="0" role="button" aria-label="Radius"/><path class="hit hitv" stroke-width="28" d="M399 188L427 334" data-o="humerus" tabindex="0" role="button" aria-label="Humerus"/><path class="hit hitv" stroke-width="17" d="M374 684L366 842" data-o="fibula" tabindex="0" role="button" aria-label="Fibula"/><path class="hit hitv" stroke-width="24" d="M344 676L337 840" data-o="tibia" tabindex="0" role="button" aria-label="Tibia"/><path class="hit hitv" stroke-width="30" d="M358 460L384 472L353 640" data-o="femur" tabindex="0" role="button" aria-label="Femur"/><circle class="hit" cx="353" cy="652" r="16" data-o="patella" tabindex="0" role="button" aria-label="Kneecap"/><path class="hit hitv" stroke-width="18" d="M288 181C260 172 238 188 204 175" data-o="clavicle" aria-hidden="true"/><path class="hit hitv" stroke-width="17" d="M184 340L160 480" data-o="ulna" aria-hidden="true"/><path class="hit hitv" stroke-width="17" d="M160 344L134 478" data-o="radius" aria-hidden="true"/><path class="hit hitv" stroke-width="28" d="M201 188L173 334" data-o="humerus" aria-hidden="true"/><path class="hit hitv" stroke-width="17" d="M226 684L234 842" data-o="fibula" aria-hidden="true"/><path class="hit hitv" stroke-width="24" d="M256 676L263 840" data-o="tibia" aria-hidden="true"/><path class="hit hitv" stroke-width="30" d="M242 460L216 472L247 640" data-o="femur" aria-hidden="true"/><circle class="hit" cx="247" cy="652" r="16" data-o="patella" aria-hidden="true"/></g><g id="pins"><g class="pin" data-o="skull"><path class="s-lead" d="M-14 46L272 44"/><circle class="s-dot" cx="272" cy="44" r="3.4"/><g class="s-pin" transform="translate(-14 46) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="pin" data-o="clavicle"><path class="s-lead" d="M614 112L352 177"/><circle class="s-dot" cx="352" cy="177" r="3.4"/><g class="s-pin" transform="translate(614 112) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="pin" data-o="ribs"><path class="s-lead" d="M-14 232L236 262"/><circle class="s-dot" cx="236" cy="262" r="3.4"/><g class="s-pin" transform="translate(-14 232) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="pin" data-o="humerus"><path class="s-lead" d="M614 250L412 262"/><circle class="s-dot" cx="412" cy="262" r="3.4"/><g class="s-pin" transform="translate(614 250) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="pin" data-o="spine"><path class="s-lead" d="M-14 376L300 386"/><circle class="s-dot" cx="300" cy="386" r="3.4"/><g class="s-pin" transform="translate(-14 376) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="pin" data-o="radius"><path class="s-lead" d="M614 392L448 404"/><circle class="s-dot" cx="448" cy="404" r="3.4"/><g class="s-pin" transform="translate(614 392) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">6</text></g></g><g class="pin" data-o="ulna"><path class="s-lead" d="M-14 462L167 428"/><circle class="s-dot" cx="167" cy="428" r="3.4"/><g class="s-pin" transform="translate(-14 462) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">7</text></g></g><g class="pin" data-o="pelvis"><path class="s-lead" d="M614 520L372 436"/><circle class="s-dot" cx="372" cy="436" r="3.4"/><g class="s-pin" transform="translate(614 520) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="pin" data-o="femur"><path class="s-lead" d="M-14 572L232 562"/><circle class="s-dot" cx="232" cy="562" r="3.4"/><g class="s-pin" transform="translate(-14 572) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">9</text></g></g><g class="pin" data-o="patella"><path class="s-lead" d="M614 652L353 652"/><circle class="s-dot" cx="353" cy="652" r="3.4"/><g class="s-pin" transform="translate(614 652) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">10</text></g></g><g class="pin" data-o="tibia"><path class="s-lead" d="M-14 760L257 760"/><circle class="s-dot" cx="257" cy="760" r="3.4"/><g class="s-pin" transform="translate(-14 760) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">11</text></g></g><g class="pin" data-o="fibula"><path class="s-lead" d="M614 772L366 772"/><circle class="s-dot" cx="366" cy="772" r="3.4"/><g class="s-pin" transform="translate(614 772) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">12</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="20" cx="300" cy="40"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Back</button>
+            <button class="btn" id="jNext">Next</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Play all</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="muscles">Muscles work in pairs</h2>
+    <p>A muscle is joined to a bone by a tendon. When a muscle contracts, it gets shorter and fatter and pulls on the bone. A muscle can pull, but it cannot push. So another muscle is needed to pull the bone back.</p>
+    <div class="vgrid"><div><div class="light"><svg class="arm" id="arm" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An arm with the biceps above the humerus and the triceps below it. The arm bends and straightens when you choose a button."><path d="M34 196C64 184 104 198 118 232C126 262 116 300 92 320C66 334 38 322 34 296Z" fill="#CDBE98" stroke="#7A6540" stroke-width="3" stroke-linejoin="round"/><path id="trT" d="M108.0 287.0L139.4 286.7M287.4 285.5L332.2 285.2" fill="none" stroke="#5A6688" stroke-width="7" stroke-linecap="round"/><path id="trT2" d="M108.0 287.0L139.4 286.7M287.4 285.5L332.2 285.2" fill="none" stroke="#F3EEDD" stroke-width="4" stroke-linecap="round"/><path id="trB" d="M139.4 286.7Q213.6 310.1 287.4 285.5Q213.3 281.1 139.4 286.7Z" fill="#D9655F" stroke="#7A3038" stroke-width="3" stroke-linejoin="round"/><g id="fore" transform="rotate(-105.0 326 262)"><path d="M302 262L522 262" stroke="#7A6540" stroke-width="27" stroke-linecap="round"/><path d="M302 262L522 262" stroke="#F7EFD9" stroke-width="21" stroke-linecap="round"/><path d="M346 262L516 262" stroke="#7A6540" stroke-width="1.6"/><ellipse cx="552" cy="262" rx="30" ry="19" fill="#F7EFD9" stroke="#7A6540" stroke-width="3"/><path d="M556 254L576 253M558 262L579 262M556 270L576 271" stroke="#7A6540" stroke-width="1.6" stroke-linecap="round"/></g><path d="M96 262L326 262" stroke="#7A6540" stroke-width="29" stroke-linecap="round"/><path d="M96 262L326 262" stroke="#F7EFD9" stroke-width="23" stroke-linecap="round"/><circle cx="96" cy="262" r="24" fill="#F7EFD9" stroke="#7A6540" stroke-width="3"/><circle cx="326" cy="262" r="19" fill="#F7EFD9" stroke="#7A6540" stroke-width="3"/><circle cx="326" cy="262" r="5" fill="#7A6540"/><path id="biT" d="M108.0 237.0L135.5 234.1M265.1 220.2L304.4 216.0" fill="none" stroke="#5A6688" stroke-width="7" stroke-linecap="round"/><path id="biT2" d="M108.0 237.0L135.5 234.1M265.1 220.2L304.4 216.0" fill="none" stroke="#F3EEDD" stroke-width="4" stroke-linecap="round"/><path id="biB" d="M135.5 234.1Q193.9 167.5 265.1 220.2Q200.8 232.1 135.5 234.1Z" fill="#D9655F" stroke="#7A3038" stroke-width="3" stroke-linejoin="round"/><path d="M206 150L214 231" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="214" cy="231" r="3.2" fill="#0F1C3F"/><g transform="translate(206 150)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">1</text></g><path d="M206 346L214 296" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="214" cy="296" r="3.2" fill="#0F1C3F"/><g transform="translate(206 346)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">2</text></g><path d="M60 150L116 239" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="116" cy="239" r="3.2" fill="#0F1C3F"/><g transform="translate(60 150)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">3</text></g><path d="M290 346L268 264" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="268" cy="264" r="3.2" fill="#0F1C3F"/><g transform="translate(290 346)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">4</text></g><path d="M420 334L334 270" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="334" cy="270" r="3.2" fill="#0F1C3F"/><g transform="translate(420 334)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">5</text></g></svg></div><div class="brbtns"><button class="seg" id="aBend" aria-pressed="true">Bend the arm</button><button class="seg" id="aStr" aria-pressed="false">Straighten the arm</button></div><p class="asay" id="aSay" aria-live="polite"></p><ol class="vlist"><li><span class="num">1</span><span>Biceps</span></li><li><span class="num">2</span><span>Triceps</span></li><li><span class="num">3</span><span>Tendon</span></li><li><span class="num">4</span><span>Humerus</span></li><li><span class="num">5</span><span>Elbow (a hinge joint)</span></li></ol></div><div class="cards"><div class="ecard"><h3>Bending the arm</h3><div class="eq">Biceps contracts</div><dl><dt>Biceps</dt><dd>Contracts. It gets shorter and fatter.</dd><dt>Triceps</dt><dd>Relaxes. It is stretched out.</dd><dt>Result</dt><dd>The forearm is pulled up.</dd></dl></div><div class="ecard"><h3>Straightening the arm</h3><div class="eq">Triceps contracts</div><dl><dt>Triceps</dt><dd>Contracts. It gets shorter and fatter.</dd><dt>Biceps</dt><dd>Relaxes. It is stretched out.</dd><dt>Result</dt><dd>The forearm is pulled down.</dd></dl></div></div></div>
+    <p class="muted">Two muscles that work against each other are called an antagonistic pair. The force of a muscle is measured in newtons (N).</p>
+    <h2 id="jointin">Inside a joint</h2>
+    <p>A joint is a place where two bones meet. This is a joint that can move, such as the knee, cut open so you can see inside.</p>
+    <div class="vgrid"><div class="light"><svg class="jnt" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A joint cut open, showing two bone ends covered in cartilage, the synovial fluid between them and the ligaments that hold them together"><path d="M196 126C250 78 350 78 404 126" fill="none" stroke="#5A6688" stroke-width="17" stroke-linecap="round"/><path d="M196 126C250 78 350 78 404 126" fill="none" stroke="#C9D1E6" stroke-width="12" stroke-linecap="round"/><path d="M196 246C250 294 350 294 404 246" fill="none" stroke="#5A6688" stroke-width="17" stroke-linecap="round"/><path d="M196 246C250 294 350 294 404 246" fill="none" stroke="#C9D1E6" stroke-width="12" stroke-linecap="round"/><path d="M214 132C262 92 338 92 386 132L386 240C338 280 262 280 214 240Z" fill="#F8E6A8" stroke="#C0606A" stroke-width="4" stroke-linejoin="round"/><path d="M0 146L196 146C226 146 238 118 268 118C306 118 326 150 326 186C326 222 306 254 268 254C238 254 226 226 196 226L0 226Z" fill="#F7EFD9" stroke="#7A6540" stroke-width="3.5" stroke-linejoin="round"/><path d="M0 170L190 170C214 170 236 160 262 160C280 160 290 172 290 186C290 200 280 212 262 212C236 212 214 202 190 202L0 202Z" fill="#E9A796" stroke="#B4544C" stroke-width="1.6"/><path d="M600 146L420 146C392 146 384 112 356 112C346 112 340 118 340 126C352 142 358 164 358 186C358 208 352 230 340 246C340 254 346 260 356 260C384 260 392 226 420 226L600 226Z" fill="#F7EFD9" stroke="#7A6540" stroke-width="3.5" stroke-linejoin="round"/><path d="M600 170L424 170C408 170 396 176 396 186C396 196 408 202 424 202L600 202Z" fill="#E9A796" stroke="#B4544C" stroke-width="1.6"/><path d="M268 118C306 118 326 150 326 186C326 222 306 254 268 254C296 240 312 214 312 186C312 158 296 132 268 118Z" fill="#9CC3F5" stroke="#2F568F" stroke-width="2.4" stroke-linejoin="round"/><path d="M356 112C346 112 340 118 340 126C352 142 358 164 358 186C358 208 352 230 340 246C340 254 346 260 356 260C366 238 372 212 372 186C372 160 366 134 356 112Z" fill="#9CC3F5" stroke="#2F568F" stroke-width="2.4" stroke-linejoin="round"/><path d="M70 96L96 154" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="96" cy="154" r="3.2" fill="#0F1C3F"/><g transform="translate(70 96)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">1</text></g><path d="M70 290L110 190" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="110" cy="190" r="3.2" fill="#0F1C3F"/><g transform="translate(70 290)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">2</text></g><path d="M300 336L318 204" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="318" cy="204" r="3.2" fill="#0F1C3F"/><g transform="translate(300 336)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">3</text></g><path d="M300 36L334 122" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="334" cy="122" r="3.2" fill="#0F1C3F"/><g transform="translate(300 36)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">4</text></g><path d="M500 76L400 118" stroke="#0F1C3F" stroke-width="1.5"/><circle cx="400" cy="118" r="3.2" fill="#0F1C3F"/><g transform="translate(500 76)"><circle r="15" fill="#F4B942" stroke="#0F1C3F" stroke-width="1.8"/><text y="6" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="17" font-weight="800" fill="#0F1C3F">5</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Bone.</b> Hard and strong. It contains calcium.</span></li><li><span class="num">2</span><span><b>Bone marrow.</b> Soft tissue inside the bone. It makes blood cells.</span></li><li><span class="num">3</span><span><b>Cartilage.</b> A smooth layer on the end of each bone. It stops the bones rubbing together and absorbs shocks.</span></li><li><span class="num">4</span><span><b>Synovial fluid.</b> An oily liquid that lets the joint move easily.</span></li><li><span class="num">5</span><span><b>Ligament.</b> A strong, slightly stretchy band that holds the two bones together.</span></li></ol></div>
+    <h2>Types of joint</h2>
+    <div class="cards"><div class="ecard"><h3>Hinge joint</h3><div class="eq">Bends and straightens</div><dl><dt>Where</dt><dd>Elbow, knee</dd><dt>Like</dt><dd>The hinge of a door</dd></dl></div><div class="ecard"><h3>Ball and socket joint</h3><div class="eq">Moves in almost every direction</div><dl><dt>Where</dt><dd>Shoulder, hip</dd><dt>How</dt><dd>A ball fits into a cup</dd></dl></div><div class="ecard"><h3>Pivot joint</h3><div class="eq">Turns from side to side</div><dl><dt>Where</dt><dd>Neck</dd><dt>How</dt><dd>One bone turns around another</dd></dl></div><div class="ecard"><h3>Fixed joint</h3><div class="eq">Does not move</div><dl><dt>Where</dt><dd>Skull</dd><dt>Why</dt><dd>A rigid case protects the brain</dd></dl></div></div>
+    <h2>What your skeleton does</h2>
+    <div class="cards"><div class="ecard"><h3>Support</h3><div class="eq">Holds you up</div><dl><dt>Example</dt><dd>The backbone keeps your body upright</dd></dl></div><div class="ecard"><h3>Protection</h3><div class="eq">Shields soft organs</div><dl><dt>Example</dt><dd>The skull protects the brain. The ribs protect the heart and lungs</dd></dl></div><div class="ecard"><h3>Movement</h3><div class="eq">Muscles pull on bones</div><dl><dt>Example</dt><dd>The biceps pulls on the radius to bend the arm</dd></dl></div><div class="ecard"><h3>Making blood cells</h3><div class="eq">Happens in bone marrow</div><dl><dt>Example</dt><dd>Marrow inside the femur makes red blood cells</dd></dl></div></div>
+    <p class="muted">An adult has 206 bones. A baby has about 300, and many of them join together as the child grows. Bone is living tissue, so a broken bone can heal.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find printable science packs in the shop →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Bones of the skeleton", "numbers": "Numbers", "view": "Diagram options", "tapTitle": "Tap a bone", "tapText": "Tap any bone on the diagram, or pick one from the numbered list.", "key": [["The four jobs of the skeleton", "are support, protection, movement and making blood cells."], ["Both sides match.", "Most bones come in pairs, one on each side of the body. Tap either one."], ["Two bones side by side.", "The forearm has a radius and an ulna. The lower leg has a tibia and a fibula."], ["Two names.", "Many bones have an everyday name and a scientific name. Each card gives both."]], "kinds": {"protect": "Protects organs", "support": "Support", "arm": "Arm bone", "leg": "Leg bone"}, "facts": "Key facts", "works": "Joins on to", "words": "Key words:", "more": {"muscles": "See how muscles move the arm", "jointin": "See inside a joint"}, "step": "Joint", "of": "of", "back": "Back", "next": "Next", "again": "Start again", "play": "Play all", "pause": "Pause", "happens": "What happens here", "oxygen": "Type of joint", "move": "Movement", "blood": "Joints", "away": {"fixed": "Fixed joint", "pivot": "Pivot joint", "ball": "Ball and socket joint", "hinge": "Hinge joint"}, "bendSay": "Bending: the biceps contracts and pulls the forearm up. The triceps relaxes.", "strSay": "Straightening: the triceps contracts and pulls the forearm down. The biceps relaxes."};
+  var PARTS=[{"id": "skull", "chip": "Skull", "name": "Skull (cranium)", "kind": "protect", "job": "A hard case of bone that protects your brain. It also protects your eyes and ears and gives your face its shape.", "facts": ["It is made of 22 bones. Most are locked together by joints that cannot move.", "The lower jaw is the only part that moves, so you can chew and talk.", "A baby's skull bones are not yet joined, which leaves room for the brain to grow."], "words": "cranium, protection, fixed joint", "n": 1, "links": [["spine", "It sits on top of the backbone."]], "meta": "Fixed joints between the skull bones"}, {"id": "clavicle", "chip": "Collarbone", "name": "Collarbone (clavicle)", "kind": "support", "job": "A thin bone that runs from the breastbone to the shoulder. It holds the shoulder out to the side.", "facts": ["You have two, one on each side. You can feel them at the top of your chest.", "It links the arm to the rest of the skeleton.", "It is one of the bones that people break most often."], "words": "clavicle, support", "n": 2, "links": [["humerus", "It meets the humerus and the shoulder blade at the shoulder."], ["ribs", "It joins the breastbone at the top of the ribcage."]]}, {"id": "ribs", "chip": "Ribs", "name": "Ribs", "kind": "protect", "job": "Curved bones that make a cage around your chest. They protect your heart and lungs.", "facts": ["You have 12 pairs of ribs.", "Most of them join the breastbone (sternum) at the front.", "Muscles between the ribs lift them up and out when you breathe in."], "words": "ribcage, sternum, protection", "n": 3, "links": [["spine", "Every rib joins the backbone at the back."], ["clavicle", "The collarbones sit just above the top ribs."]]}, {"id": "humerus", "chip": "Humerus", "name": "Humerus", "kind": "arm", "job": "The bone of the upper arm. It runs from the shoulder to the elbow.", "facts": ["Its rounded top fits into the shoulder blade.", "The biceps and triceps muscles lie along it.", "Like other large bones, it has bone marrow inside."], "words": "humerus, biceps, triceps", "n": 4, "links": [["clavicle", "They meet at the shoulder."], ["radius", "It meets the radius at the elbow."], ["ulna", "It makes a hinge with the ulna at the elbow."]], "meta": "Ball and socket at the shoulder, hinge at the elbow", "more": "muscles"}, {"id": "spine", "chip": "Backbone", "name": "Backbone (vertebral column)", "kind": "support", "job": "A column of small bones down the middle of your back. It holds your head and body upright and protects the spinal cord.", "facts": ["It is made of 33 small bones called vertebrae.", "Pads of cartilage between the vertebrae let it bend and soak up bumps.", "The spinal cord runs through a hole in each vertebra.", "It is also called the spine."], "words": "vertebrae, spinal cord, cartilage", "n": 5, "links": [["skull", "The skull sits on the top vertebra."], ["ribs", "The ribs join it at the back."], ["pelvis", "It joins the pelvis at the bottom."]], "meta": "A pivot joint at the top lets the head turn"}, {"id": "radius", "chip": "Radius", "name": "Radius", "kind": "arm", "job": "One of the two bones of the forearm. It is on the thumb side.", "facts": ["When you turn your palm over, the radius turns around the ulna.", "The biceps muscle is attached to it by a tendon.", "Its wider end forms most of the wrist joint."], "words": "radius, forearm, tendon", "n": 6, "links": [["humerus", "It meets the humerus at the elbow."], ["ulna", "The ulna lies beside it."]], "meta": "Hinge at the elbow", "more": "muscles"}, {"id": "ulna", "chip": "Ulna", "name": "Ulna", "kind": "arm", "job": "One of the two bones of the forearm. It is on the little finger side.", "facts": ["Its hooked top end makes the hinge of the elbow.", "The point of your elbow is the end of the ulna.", "The triceps muscle is attached to it by a tendon."], "words": "ulna, forearm, hinge joint", "n": 7, "links": [["humerus", "It makes a hinge joint with the humerus."], ["radius", "The radius lies beside it."]], "meta": "Hinge at the elbow", "more": "muscles"}, {"id": "pelvis", "chip": "Pelvis", "name": "Pelvis", "kind": "support", "job": "A strong ring of bone at the bottom of the backbone. It supports the weight of your upper body.", "facts": ["It protects organs such as the bladder.", "Each side has a deep socket for the top of the femur.", "It passes your weight from the backbone to the legs."], "words": "pelvis, hip, support", "n": 8, "links": [["spine", "The backbone joins it at the back."], ["femur", "The femurs fit into its sockets at the hips."]], "meta": "Ball and socket at each hip"}, {"id": "femur", "chip": "Femur", "name": "Femur (thigh bone)", "kind": "leg", "job": "The bone of the thigh. It supports your weight when you stand, walk and run.", "facts": ["It is the longest and strongest bone in the body.", "Its ball-shaped top fits into the pelvis.", "The bone marrow inside it makes blood cells."], "words": "femur, bone marrow, ball and socket", "n": 9, "links": [["pelvis", "They meet at the hip."], ["patella", "The kneecap sits in front of its lower end."], ["tibia", "It meets the tibia at the knee."]], "meta": "Ball and socket at the hip, hinge at the knee", "more": "jointin"}, {"id": "patella", "chip": "Kneecap", "name": "Kneecap (patella)", "kind": "protect", "job": "A small bone at the front of the knee. It protects the knee joint.", "facts": ["It sits inside the tendon of the big thigh muscle.", "It slides up and down as you bend and straighten your leg.", "It helps the thigh muscle to pull on the lower leg."], "words": "patella, tendon, protection", "n": 10, "links": [["femur", "It sits in front of the end of the femur."], ["tibia", "It is held to the tibia by a tough band."]], "meta": "Part of the knee, a hinge joint", "more": "jointin"}, {"id": "tibia", "chip": "Tibia", "name": "Tibia (shin bone)", "kind": "leg", "job": "The larger of the two bones of the lower leg. It carries most of your weight.", "facts": ["You can feel it just under the skin at the front of your shin.", "Its flat top forms the lower half of the knee joint.", "Its lower end makes the bump on the inside of your ankle."], "words": "tibia, shin, hinge joint", "n": 11, "links": [["femur", "It meets the femur at the knee."], ["fibula", "The fibula lies beside it."]], "meta": "Hinge at the knee"}, {"id": "fibula", "chip": "Fibula", "name": "Fibula", "kind": "leg", "job": "The thin bone on the outside of the lower leg.", "facts": ["It carries very little weight.", "Muscles of the lower leg are attached to it.", "Its lower end makes the bump on the outside of your ankle."], "words": "fibula, ankle", "n": 12, "links": [["tibia", "It lies beside the tibia."], ["femur", "It does not reach the femur. It is not part of the knee joint."]]}];
+  var STEPS=[{"title": "Skull: fixed joints", "sum": "The bones of the skull meet at wavy lines. These joints cannot move.", "move": "No movement", "pts": ["The bones are locked together like the pieces of a jigsaw.", "This makes a strong case that protects the brain."], "on": ["skull"], "ox": "fixed", "away": "fixed"}, {"title": "Neck: pivot joint", "sum": "The skull sits on the top of the backbone. The top two vertebrae make a pivot joint.", "move": "Turning from side to side", "pts": ["One bone turns around a peg on the bone below it.", "This lets you turn your head to the left and right."], "on": ["skull", "spine"], "ox": "pivot", "away": "pivot"}, {"title": "Shoulder: ball and socket joint", "sum": "The ball-shaped top of the humerus fits into a shallow cup in the shoulder blade.", "move": "Almost every direction", "pts": ["You can swing your arm forwards, backwards, out to the side and round in a circle.", "The shoulder is the joint that moves the most freely in the whole body."], "on": ["humerus", "clavicle"], "ox": "ball", "away": "ball"}, {"title": "Elbow: hinge joint", "sum": "The humerus meets the ulna and the radius at the elbow.", "move": "Bending and straightening", "pts": ["It opens and closes in one direction, like the hinge of a door.", "The biceps bends it. The triceps straightens it."], "on": ["humerus", "radius", "ulna"], "ox": "hinge", "away": "hinge"}, {"title": "Hip: ball and socket joint", "sum": "The ball at the top of the femur fits into a deep socket in the pelvis.", "move": "Almost every direction", "pts": ["The socket is deeper than the one in the shoulder.", "This makes the hip stronger and steadier, but it cannot move quite as far."], "on": ["pelvis", "femur"], "ox": "ball", "away": "ball"}, {"title": "Knee: hinge joint", "sum": "The femur meets the tibia at the knee. The kneecap sits at the front.", "move": "Bending and straightening", "pts": ["It is the biggest joint in the body.", "Cartilage covers the ends of the bones and strong ligaments hold them together."], "on": ["femur", "patella", "tibia"], "ox": "hinge", "away": "hinge"}];
+  var OX={"fixed": "Fixed joint", "pivot": "Pivot joint", "ball": "Ball and socket joint", "hinge": "Hinge joint"},PATHS=["M300 39L300 40", "M300 40L300 146", "M300 146L398 186", "M398 186L427 340", "M427 340L358 460", "M358 460L352 654"],DUR=[300, 1100, 1300, 1500, 1500, 1700];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.meta)h+="<div class=\"meta\"><span><b>"+esc(L.blood)+"</b>"+esc(o.meta)+"</span></div>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more)h+="<p><button class=\"btn ghost\" id=\"toVessels\" data-to=\""+o.more+"\">"+esc(L.more[o.more])+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toVessels"){show("more");var v=$(b.getAttribute("data-to"));if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.oxygen)+"</b>"+esc(OX[s.ox])+"</span><span><b>"+esc(L.move)+"</b>"+esc(s.move)+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.away){away.textContent=L.away[s.away];away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1600);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("pinBtn").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- arm model ---------- */
+  (function(){
+    var S=[96,262],E=[326,262],AMAX=105.0,k=0,raf=0;
+    function belly(p0,p1,side,fat){
+      var dx=p1[0]-p0[0],dy=p1[1]-p0[1],ln=Math.sqrt(dx*dx+dy*dy),nx=-dy/ln*side,ny=dx/ln*side;
+      var a0=[p0[0]+dx*.14,p0[1]+dy*.14],a1=[p0[0]+dx*.8,p0[1]+dy*.8],mx=(a0[0]+a1[0])/2,my=(a0[1]+a1[1])/2;
+      function n(v){return v.toFixed(1);}
+      return ["M"+n(a0[0])+" "+n(a0[1])+"Q"+n(mx+nx*fat*2)+" "+n(my+ny*fat*2)+" "+n(a1[0])+" "+n(a1[1])+"Q"+n(mx-nx*5)+" "+n(my-ny*5)+" "+n(a0[0])+" "+n(a0[1])+"Z",
+        "M"+n(p0[0])+" "+n(p0[1])+"L"+n(a0[0])+" "+n(a0[1])+"M"+n(a1[0])+" "+n(a1[1])+"L"+n(p1[0])+" "+n(p1[1])];
+    }
+    function draw(v){
+      k=v;
+      var deg=8+(AMAX-8)*v,a=deg*Math.PI/180,ux=Math.cos(a),uy=-Math.sin(a);
+      var b=belly([S[0]+12,S[1]-25],[E[0]+50*ux+9*uy,E[1]+50*uy-9*ux],-1,13+17*v);
+      var t=belly([S[0]+12,S[1]+25],[E[0]-24*ux,E[1]-24*uy],1,25-13*v);
+      $("fore").setAttribute("transform","rotate("+(-deg).toFixed(1)+" "+E[0]+" "+E[1]+")");
+      $("biB").setAttribute("d",b[0]);$("biT").setAttribute("d",b[1]);$("biT2").setAttribute("d",b[1]);
+      $("trB").setAttribute("d",t[0]);$("trT").setAttribute("d",t[1]);$("trT2").setAttribute("d",t[1]);
+    }
+    function go(to){
+      cancelAnimationFrame(raf);
+      $("aBend").setAttribute("aria-pressed",to?"true":"false");
+      $("aStr").setAttribute("aria-pressed",to?"false":"true");
+      $("aSay").textContent=to?L.bendSay:L.strSay;
+      if(reduce){draw(to);return;}
+      var from=k,t0=null;
+      function tick(ts){
+        if(t0===null)t0=ts;
+        var q=Math.min(1,(ts-t0)/900),e=q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2;
+        draw(from+(to-from)*e);
+        if(q<1)raf=requestAnimationFrame(tick);
+      }
+      raf=requestAnimationFrame(tick);
+    }
+    $("aBend").onclick=function(){go(1);};
+    $("aStr").onclick=function(){go(0);};
+    draw(1);$("aSay").textContent=L.bendSay;
+    window.SkelArm={go:go,k:function(){return k;}};
+  })();
+
+  select(null);
+
+  /* exposed for checking */
+  window.SkelLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
