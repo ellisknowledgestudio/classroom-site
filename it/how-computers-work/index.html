@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free How Computers Work Explorer for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive tool for ages 7-11 that shows how computers work. Tap the parts of a computer, follow data from keyboard to screen, sort input, output and storage devices, and take an auto-marked quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;
+--c-input:#5AA9FF;--c-output:#4CC38A;--c-process:#F4B942;--c-storage:#B48CFF;--c-support:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.chip:focus-visible,.choice:focus-visible,.part:focus-visible,.scen:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.ipo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:10px 0 4px;font:800 17px "Baloo 2",sans-serif}
+.ipo span{border-radius:999px;padding:2px 12px;color:var(--navy)}
+.ipo i{font-style:normal;color:var(--muted)}
+/* explore */
+.scene{background:var(--navy);border-radius:16px;padding:8px;margin-top:12px}
+.scene svg{width:100%;height:auto;display:block}
+.part{cursor:pointer;transition:opacity .2s}
+.part:hover,.part.sel{filter:drop-shadow(0 0 6px #F4B942)}
+.part.dim{opacity:.22}
+.blades{transform-box:fill-box;transform-origin:center;animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:999px;padding:6px 12px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.chip .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
+.info{background:var(--navy);border-radius:16px;padding:16px;margin-top:12px;border-left:6px solid var(--gold)}
+.info h3{font-size:28px;line-height:1.1}
+.tag{display:inline-block;color:var(--navy);border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px}
+.info p{margin:.5em 0}
+.info .like{color:var(--muted)}
+/* data flow */
+.scens{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.scen{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:14px;padding:8px 12px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.scen[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.flow{background:var(--navy);border-radius:16px;padding:8px;max-width:520px;margin:12px auto 0}
+.flow svg{width:100%;height:auto;display:block}
+.node rect{transition:fill .25s,stroke-width .25s}
+.node.lit rect{fill:#2C3B72;stroke-width:5}
+.edge{stroke:#2C3B72;stroke-width:4}
+.edge.lit{stroke:var(--gold)}
+.stepbox{background:var(--navy);border-radius:14px;padding:12px 16px;margin-top:12px;min-height:96px}
+.stepbox .n{color:var(--gold);font-weight:700}
+.bits{font-family:monospace;letter-spacing:.15em;color:var(--gold);font-weight:700}
+/* sort + quiz */
+.big{font-size:64px;line-height:1;margin:6px 0}
+.big svg{width:72px;height:72px}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choices.three{grid-template-columns:1fr 1fr 1fr}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.center{text-align:center}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.choices.three{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.blades{animation:none}.part{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › How Computers Work</nav>
+  <h1>How Computers Work 💻</h1>
+  <p class="lead">What is inside a computer, and how does pressing a key make a letter appear on the screen? Tap the parts, follow the data on its journey, sort the gadgets, then test yourself. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="How Computers Work modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the Parts</button>
+    <button class="tab" role="tab" id="t-flow" aria-controls="flow" aria-selected="false" tabindex="-1" data-p="flow">Follow the Data</button>
+    <button class="tab" role="tab" id="t-sort" aria-controls="sort" aria-selected="false" tabindex="-1" data-p="sort">Sort It!</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
+  </div>
+
+  <!-- ============ EXPLORE ============ -->
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Look inside a computer</h2>
+    <p>Every computer follows the same big idea. Information goes <b>in</b>, the computer <b>works on it</b>, and the result comes <b>out</b>. Memory and storage keep hold of things along the way.</p>
+    <div class="ipo" aria-label="Input, then process, then output">
+      <span style="background:var(--c-input)">Input</span><i>→</i><span style="background:var(--c-process)">Process</span><i>→</i><span style="background:var(--c-output)">Output</span>
+    </div>
+    <p class="muted center" style="margin-top:0">We've taken the side off the computer case so you can see inside. Tap any part.</p>
+
+    <div class="scene">
+      <svg id="pc" viewBox="0 0 640 336" role="group" aria-label="A desktop computer with the side of its case removed">
+        <line x1="0" y1="324" x2="640" y2="324" stroke="#26356b" stroke-width="4"/>
+        <!-- monitor -->
+        <g class="part" data-id="monitor" tabindex="0" role="button" aria-label="Monitor">
+          <rect x="40" y="40" width="260" height="170" rx="10" fill="#2B3A6E" stroke="#4CC38A" stroke-width="3"/>
+          <rect x="54" y="54" width="232" height="142" rx="4" fill="#0B1430"/>
+          <rect x="70" y="68" width="150" height="88" rx="6" fill="#1A2A55" stroke="#2C3B72"/>
+          <rect x="70" y="68" width="150" height="16" rx="6" fill="#2C3B72"/>
+          <text x="84" y="116" fill="#F4B942" font-size="26" font-family="Baloo 2, sans-serif" font-weight="800">Hello!</text>
+          <rect x="232" y="70" width="40" height="30" rx="4" fill="#4CC38A" opacity=".6"/>
+          <rect x="232" y="110" width="40" height="30" rx="4" fill="#5AA9FF" opacity=".6"/>
+          <rect x="155" y="210" width="30" height="36" fill="#2B3A6E"/>
+          <rect x="115" y="244" width="110" height="10" rx="5" fill="#2B3A6E"/>
+        </g>
+        <!-- webcam -->
+        <g class="part" data-id="webcam" tabindex="0" role="button" aria-label="Webcam">
+          <rect x="146" y="20" width="48" height="22" rx="10" fill="#1d2333" stroke="#5AA9FF" stroke-width="3"/>
+          <circle cx="170" cy="31" r="6" fill="#5AA9FF"/>
+        </g>
+        <!-- speakers -->
+        <g class="part" data-id="speakers" tabindex="0" role="button" aria-label="Speakers">
+          <rect x="4" y="138" width="30" height="112" rx="6" fill="#26356b" stroke="#4CC38A" stroke-width="3"/>
+          <circle cx="19" cy="164" r="7" fill="#0F1C3F"/><circle cx="19" cy="214" r="11" fill="#0F1C3F"/>
+          <rect x="306" y="138" width="30" height="112" rx="6" fill="#26356b" stroke="#4CC38A" stroke-width="3"/>
+          <circle cx="321" cy="164" r="7" fill="#0F1C3F"/><circle cx="321" cy="214" r="11" fill="#0F1C3F"/>
+        </g>
+        <!-- keyboard -->
+        <g class="part" data-id="keyboard" tabindex="0" role="button" aria-label="Keyboard">
+          <rect x="50" y="266" width="216" height="50" rx="8" fill="#26356b" stroke="#5AA9FF" stroke-width="3"/>
+          <g id="kbKeys"></g>
+        </g>
+        <!-- mouse -->
+        <g class="part" data-id="mouse" tabindex="0" role="button" aria-label="Mouse">
+          <ellipse cx="300" cy="292" rx="18" ry="26" fill="#26356b" stroke="#5AA9FF" stroke-width="3"/>
+          <line x1="300" y1="268" x2="300" y2="288" stroke="#5AA9FF" stroke-width="2"/>
+        </g>
+        <!-- case -->
+        <rect x="372" y="20" width="258" height="304" rx="14" fill="#16234E" stroke="#3A4C8A" stroke-width="3"/>
+        <!-- motherboard -->
+        <g class="part" data-id="motherboard" tabindex="0" role="button" aria-label="Motherboard">
+          <rect x="386" y="36" width="164" height="210" rx="6" fill="#1F5E45" stroke="#FF8FB1" stroke-width="3"/>
+          <path d="M470 120 V150 H530 M440 120 V140 H400 M500 140 V200 M410 210 H540 M420 200 V230 M470 200 V236" stroke="#39A575" stroke-width="2" fill="none" opacity=".8"/>
+          <rect x="520" y="214" width="20" height="20" rx="3" fill="#174a37" stroke="#39A575"/>
+        </g>
+        <!-- cpu -->
+        <g class="part" data-id="cpu" tabindex="0" role="button" aria-label="CPU (processor)">
+          <rect x="406" y="56" width="58" height="58" rx="4" fill="#C9CED8" stroke="#F4B942" stroke-width="3"/>
+          <rect x="419" y="69" width="32" height="32" rx="2" fill="#9AA3B5"/>
+          <text x="435" y="90" font-size="12" text-anchor="middle" fill="#0F1C3F" font-weight="700" font-family="Nunito Sans, sans-serif">CPU</text>
+        </g>
+        <!-- ram -->
+        <g class="part" data-id="ram" tabindex="0" role="button" aria-label="RAM (memory)">
+          <rect x="476" y="48" width="44" height="90" fill="#000" opacity="0"/>
+          <rect x="481" y="52" width="12" height="80" rx="2" fill="#3B3F8F" stroke="#B48CFF" stroke-width="2"/>
+          <rect x="501" y="52" width="12" height="80" rx="2" fill="#3B3F8F" stroke="#B48CFF" stroke-width="2"/>
+        </g>
+        <!-- gpu -->
+        <g class="part" data-id="gpu" tabindex="0" role="button" aria-label="Graphics card">
+          <rect x="396" y="158" width="144" height="36" rx="5" fill="#2A2F45" stroke="#F4B942" stroke-width="3"/>
+          <circle cx="432" cy="176" r="12" fill="#3E4563" stroke="#8C9BD1" stroke-width="2"/>
+          <circle cx="504" cy="176" r="12" fill="#3E4563" stroke="#8C9BD1" stroke-width="2"/>
+        </g>
+        <!-- storage -->
+        <g class="part" data-id="storage" tabindex="0" role="button" aria-label="Storage drive (SSD)">
+          <rect x="562" y="146" width="52" height="80" rx="5" fill="#2A2F45" stroke="#B48CFF" stroke-width="3"/>
+          <text x="588" y="191" font-size="13" text-anchor="middle" fill="#B48CFF" font-weight="700" font-family="Nunito Sans, sans-serif">SSD</text>
+        </g>
+        <!-- fan -->
+        <g class="part" data-id="fan" tabindex="0" role="button" aria-label="Cooling fan">
+          <circle cx="588" cy="82" r="31" fill="#0F1C3F" stroke="#FF8FB1" stroke-width="3"/>
+          <g class="blades">
+            <ellipse cx="588" cy="66" rx="7" ry="14" fill="#8C9BD1"/>
+            <ellipse cx="588" cy="98" rx="7" ry="14" fill="#8C9BD1"/>
+            <ellipse cx="572" cy="82" rx="14" ry="7" fill="#8C9BD1"/>
+            <ellipse cx="604" cy="82" rx="14" ry="7" fill="#8C9BD1"/>
+          </g>
+          <circle cx="588" cy="82" r="6" fill="#C7D2EE"/>
+        </g>
+        <!-- psu -->
+        <g class="part" data-id="psu" tabindex="0" role="button" aria-label="Power supply">
+          <rect x="386" y="256" width="164" height="56" rx="5" fill="#3A3F52" stroke="#FF8FB1" stroke-width="3"/>
+          <path d="M400 268 H440 M400 278 H440 M400 288 H440 M400 298 H440" stroke="#5B6178" stroke-width="3"/>
+          <text x="496" y="290" font-size="15" text-anchor="middle" fill="#FF8FB1" font-weight="700" font-family="Nunito Sans, sans-serif">⚡ POWER</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="chips" id="catChips" role="group" aria-label="Show parts by job"></div>
+    <div class="chips" id="partChips" role="group" aria-label="Choose a part"></div>
+
+    <div class="info" id="info" aria-live="polite">
+      <h3 id="iName">Tap a part</h3>
+      <span class="tag" id="iTag" style="background:var(--gold)">Start here</span> <span class="muted" id="iJob"></span>
+      <p id="iWhat">Tap any part of the computer in the picture, or use the buttons above, to find out what it does.</p>
+      <p id="iFact"></p>
+      <p class="like" id="iLike"></p>
+    </div>
+  </section>
+
+  <!-- ============ FOLLOW THE DATA ============ -->
+  <section class="panel" id="flow" role="tabpanel" aria-labelledby="t-flow">
+    <h2>Follow the data</h2>
+    <p>Pick something you might do on a computer, then press <b>Next</b> to follow the information as it travels between the parts.</p>
+    <div class="scens" id="scens" role="group" aria-label="Choose a journey"></div>
+    <div class="flow"><svg id="flowSvg" viewBox="0 0 400 440" role="img" aria-label="Diagram of the parts of a computer and how data moves between them"></svg></div>
+    <div class="stepbox" aria-live="polite">
+      <div class="n" id="stepNum"></div>
+      <div id="stepText"></div>
+    </div>
+    <div class="row" style="justify-content:center">
+      <button class="btn ghost" id="fBack">← Back</button>
+      <button class="btn" id="fNext">Next →</button>
+    </div>
+  </section>
+
+  <!-- ============ SORT ============ -->
+  <section class="panel" id="sort" role="tabpanel" aria-labelledby="t-sort">
+    <h2>Sort It! Input, output or storage?</h2>
+    <p class="muted"><b style="color:var(--c-input)">Input</b> devices send information in. <b style="color:var(--c-output)">Output</b> devices give results out. <b style="color:var(--c-storage)">Storage</b> keeps files safe for later. <span class="score" id="sScore">Score: 0</span> · <span id="sCount"></span></p>
+    <div class="bar" aria-hidden="true"><i id="sBar"></i></div>
+    <div id="sBox" class="center">
+      <div class="big" id="sIcon" aria-hidden="true"></div>
+      <p class="q" id="sName"></p>
+      <div class="choices three" id="sChoices"></div>
+      <div class="fb" id="sFb" aria-live="polite"></div>
+      <p class="why" id="sWhy"></p>
+      <button class="btn" id="sNext" style="display:none">Next gadget →</button>
+    </div>
+    <div id="sEnd" class="center" style="display:none">
+      <p class="q" id="sEndText"></p>
+      <button class="btn" id="sAgain">Play again</button>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>How Computers Work Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Did you know?</b> Phones, tablets, games consoles and smart speakers are all computers too. They are smaller, but inside they have the same kinds of parts: a processor, memory, storage, and ways to get information in and out.</p>
+
+  <p class="tip"><b>Next:</b> Computers do all of this using just 1s and 0s. Find out how in <a href="https://classroom.ellisknowledgestudio.com/it/binary/">Binary: 1s and 0s</a>.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  var SVGNS="http://www.w3.org/2000/svg";
+  function $(id){return document.getElementById(id);}
+  function el(tag,attrs,parent){
+    var e=document.createElementNS(SVGNS,tag);
+    for(var k in attrs){if(attrs.hasOwnProperty(k))e.setAttribute(k,attrs[k]);}
+    if(parent)parent.appendChild(e);
+    return e;
+  }
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- data ---------- */
+  var CATS={
+    input:{name:"Input",col:"#5AA9FF",job:"Sends information into the computer"},
+    output:{name:"Output",col:"#4CC38A",job:"Gives information out of the computer"},
+    process:{name:"Processing",col:"#F4B942",job:"Does the thinking and working out"},
+    storage:{name:"Memory & storage",col:"#B48CFF",job:"Keeps hold of information"},
+    support:{name:"Power & connections",col:"#FF8FB1",job:"Keeps everything running"}
+  };
+  var CAT_ORDER=["input","process","output","storage","support"];
+  var PARTS=[
+    {id:"keyboard",name:"Keyboard",cat:"input",
+     what:"You use the keyboard to type letters, numbers and commands. Under every key is a small switch.",
+     fact:"When you press a key, the keyboard sends a code number to the computer to say which key it was. A capital A is code 65.",
+     like:"It's like a postbox for your words: you post a letter in and the computer collects it."},
+    {id:"mouse",name:"Mouse",cat:"input",
+     what:"The mouse moves the pointer on the screen and lets you click on things.",
+     fact:"Underneath, a tiny light and camera take thousands of pictures of the desk every second. By comparing them, the mouse works out which way it moved.",
+     like:"It's like your finger pointing at things on the screen."},
+    {id:"webcam",name:"Webcam",cat:"input",
+     what:"The webcam is a small camera. It lets you take photos and join video calls.",
+     fact:"It turns light into numbers. Every tiny dot of the picture gets numbers saying how much red, green and blue light it has.",
+     like:"It's the computer's eye."},
+    {id:"monitor",name:"Monitor (screen)",cat:"output",
+     what:"The monitor shows you pictures, words and videos made by the computer.",
+     fact:"The screen is made of millions of tiny dots called pixels. Each pixel mixes red, green and blue light to make any colour.",
+     like:"It's like a giant mosaic that can change its tiles many times every second."},
+    {id:"speakers",name:"Speakers",cat:"output",
+     what:"Speakers play sounds, music and voices from the computer.",
+     fact:"Electrical signals make a part inside the speaker shake backwards and forwards very fast. That shakes the air, and your ears hear it as sound.",
+     like:"They're the computer's voice."},
+    {id:"cpu",name:"CPU (processor)",cat:"process",
+     what:"The CPU follows the instructions in programs and does the working out. CPU stands for Central Processing Unit.",
+     fact:"A CPU can do billions of tiny steps every second. Each step is very simple, like adding two numbers, but doing so many so fast lets it do amazing things.",
+     like:"People call it the brain of the computer."},
+    {id:"gpu",name:"Graphics card",cat:"process",
+     what:"The graphics card is a second processor that is brilliant at one job: making pictures for the screen.",
+     fact:"For every frame of a game it works out the colour of millions of pixels, and it can do this more than 60 times a second.",
+     like:"It's like the computer's artist, painting each picture before you see it."},
+    {id:"ram",name:"RAM (memory)",cat:"storage",
+     what:"RAM holds the programs and files you are using right now, so the CPU can reach them very quickly.",
+     fact:"RAM forgets everything when the computer is switched off. That's why you need to save your work!",
+     like:"It's like your desk: fast to reach, but it gets cleared away at the end of the day."},
+    {id:"storage",name:"Storage drive (SSD)",cat:"storage",
+     what:"The storage drive keeps your files, photos, games and programs, even when the computer is switched off.",
+     fact:"SSD means Solid State Drive. It has no moving parts. Older computers use hard drives, which store files on a spinning disc.",
+     like:"It's like a bookshelf: it holds lots, and things stay there until you take them away."},
+    {id:"motherboard",name:"Motherboard",cat:"support",
+     what:"The motherboard is the big circuit board that all the other parts plug into.",
+     fact:"Thin copper lines on the board, called tracks, carry signals between the parts.",
+     like:"It's like the roads of a town, connecting all the buildings."},
+    {id:"psu",name:"Power supply",cat:"support",
+     what:"The power supply takes electricity from the wall socket and changes it into the steady, lower power each part needs.",
+     fact:"Laptops, tablets and phones also have a battery so they can keep working away from the socket.",
+     like:"It's like the kitchen of the computer, turning food into meals for everyone."},
+    {id:"fan",name:"Cooling fan",cat:"support",
+     what:"Fans blow air through the case to stop the parts getting too hot.",
+     fact:"A CPU working hard gets hot. If it gets too hot it slows itself down to stay safe, so keeping it cool helps the computer run fast.",
+     like:"It's like the computer fanning its face on a hot day."}
+  ];
+  var BY_ID={};for(var p=0;p<PARTS.length;p++)BY_ID[PARTS[p].id]=PARTS[p];
+
+  /* ---------- explore ---------- */
+  (function drawKeys(){
+    var g=$("kbKeys");
+    for(var r=0;r<3;r++){
+      for(var c=0;c<12;c++){
+        el("rect",{x:60+c*16.6,y:274+r*12,width:13,height:9,rx:2,fill:"#4A5C9A"},g);
+      }
+    }
+  })();
+
+  var partEls=document.querySelectorAll("#pc .part");
+  var current=null,catFilter=null;
+
+  function showPart(id){
+    var d=BY_ID[id];current=id;
+    for(var i=0;i<partEls.length;i++){
+      partEls[i].setAttribute("class","part"+(partEls[i].getAttribute("data-id")===id?" sel":"")+
+        (catFilter&&BY_ID[partEls[i].getAttribute("data-id")].cat!==catFilter?" dim":""));
+      partEls[i].setAttribute("aria-pressed",partEls[i].getAttribute("data-id")===id?"true":"false");
+    }
+    var pcs=$("partChips").children;
+    for(var j=0;j<pcs.length;j++)pcs[j].setAttribute("aria-pressed",pcs[j].getAttribute("data-id")===id?"true":"false");
+    var c=CATS[d.cat];
+    $("iName").textContent=d.name;
+    $("iTag").textContent=c.name;
+    $("iJob").textContent=c.job+".";
+    $("iTag").style.background=c.col;
+    $("info").style.borderLeftColor=c.col;
+    $("iWhat").textContent=d.what;
+    $("iFact").innerHTML="<b>Amazing fact:</b> ";
+    $("iFact").appendChild(document.createTextNode(d.fact));
+    $("iLike").textContent=d.like;
+  }
+  function setFilter(cat){
+    catFilter=cat;
+    var cc=$("catChips").children;
+    for(var i=0;i<cc.length;i++)cc[i].setAttribute("aria-pressed",(cc[i].getAttribute("data-cat")||null)===cat||(!cat&&!cc[i].getAttribute("data-cat"))?"true":"false");
+    for(var k=0;k<partEls.length;k++){
+      var pid=partEls[k].getAttribute("data-id");
+      partEls[k].setAttribute("class","part"+(pid===current?" sel":"")+(cat&&BY_ID[pid].cat!==cat?" dim":""));
+    }
+    var pcs=$("partChips").children;
+    for(var j=0;j<pcs.length;j++)pcs[j].style.display=(!cat||BY_ID[pcs[j].getAttribute("data-id")].cat===cat)?"":"none";
+  }
+  (function buildChips(){
+    var all=document.createElement("button");
+    all.className="chip";all.textContent="All parts";all.setAttribute("aria-pressed","true");
+    all.addEventListener("click",function(){setFilter(null);});
+    $("catChips").appendChild(all);
+    for(var i=0;i<CAT_ORDER.length;i++){
+      (function(k){
+        var b=document.createElement("button");
+        b.className="chip";b.setAttribute("data-cat",k);b.setAttribute("aria-pressed","false");
+        b.innerHTML='<span class="dot" style="background:'+CATS[k].col+'"></span>';
+        b.appendChild(document.createTextNode(CATS[k].name));
+        b.addEventListener("click",function(){setFilter(k);});
+        $("catChips").appendChild(b);
+      })(CAT_ORDER[i]);
+    }
+    for(var j=0;j<PARTS.length;j++){
+      (function(d){
+        var b=document.createElement("button");
+        b.className="chip";b.setAttribute("data-id",d.id);b.setAttribute("aria-pressed","false");
+        b.innerHTML='<span class="dot" style="background:'+CATS[d.cat].col+'"></span>';
+        b.appendChild(document.createTextNode(d.name));
+        b.addEventListener("click",function(){showPart(d.id);});
+        $("partChips").appendChild(b);
+      })(PARTS[j]);
+    }
+    for(var m=0;m<partEls.length;m++){
+      partEls[m].addEventListener("click",function(){showPart(this.getAttribute("data-id"));});
+      partEls[m].addEventListener("keydown",function(e){
+        if(e.key==="Enter"||e.key===" "){showPart(this.getAttribute("data-id"));e.preventDefault();}
+      });
+    }
+  })();
+
+  /* ---------- follow the data ---------- */
+  var NODES={
+    keyboard:{x:70,y:45,label:"Keyboard",icon:"⌨️",cat:"input"},
+    mouse:{x:200,y:45,label:"Mouse",icon:"🖱️",cat:"input"},
+    webcam:{x:330,y:45,label:"Webcam",icon:"📷",cat:"input"},
+    ram:{x:70,y:190,label:"RAM",icon:"📝",cat:"storage"},
+    cpu:{x:200,y:190,label:"CPU",icon:"🧠",cat:"process",big:true},
+    storage:{x:330,y:190,label:"Storage",icon:"💾",cat:"storage"},
+    gpu:{x:110,y:295,label:"Graphics",icon:"🎨",cat:"process"},
+    monitor:{x:110,y:395,label:"Monitor",icon:"🖥️",cat:"output"},
+    speakers:{x:290,y:395,label:"Speakers",icon:"🔊",cat:"output"}
+  };
+  var EDGES=[["keyboard","cpu"],["mouse","cpu"],["webcam","cpu"],["cpu","ram"],["cpu","storage"],["cpu","gpu"],["gpu","monitor"],["cpu","speakers"]];
+  var SCENARIOS=[
+    {name:"⌨️ Typing a letter",steps:[
+      {on:"keyboard",text:"You press the A key. Inside the keyboard, a little switch under the key is pressed down."},
+      {from:"keyboard",to:"cpu",pkt:"65",text:"The keyboard sends a code to the computer. The code for a capital A is 65. Inside the computer, numbers are stored as 1s and 0s, so 65 travels as <span class=\"bits\">01000001</span>."},
+      {from:"cpu",to:"ram",pkt:"A",text:"The CPU follows the instructions in your writing program: add an A to the document. The document you are working on is kept in RAM, so the A goes there."},
+      {from:"cpu",to:"gpu",pkt:"A",text:"The CPU asks the graphics card to show the new letter. The graphics card works out exactly which pixels need to change colour to make the shape of an A."},
+      {from:"gpu",to:"monitor",pkt:"A",text:"The new picture is sent to the monitor, which lights up its pixels, and an A appears on your screen. All of that happened in a tiny fraction of a second!"}
+    ]},
+    {name:"🎵 Playing a song",steps:[
+      {on:"mouse",text:"You move the pointer onto the Play button and click the mouse."},
+      {from:"mouse",to:"cpu",pkt:"click",text:"The mouse tells the computer that it moved and that you clicked. The CPU works out that the pointer was on the Play button."},
+      {from:"storage",to:"cpu",pkt:"♪",text:"The song is saved as a file in storage. The CPU asks the storage drive for it…"},
+      {from:"cpu",to:"ram",pkt:"♪",text:"…and the song is copied into RAM, because the CPU can reach RAM much faster while the song plays."},
+      {from:"ram",to:"cpu",pkt:"♪",text:"Song files are squashed to take up less space. The CPU unpacks the song, bit by bit, and turns it into sound signals."},
+      {from:"cpu",to:"speakers",pkt:"♪",text:"The sound signals go to the speakers, which shake the air. Your ears hear the music!"}
+    ]},
+    {name:"💾 Saving a drawing",steps:[
+      {on:"ram",text:"You've been drawing a picture. While you work, the drawing is kept in RAM. RAM is fast, but it forgets everything if the power goes off!"},
+      {from:"keyboard",to:"cpu",pkt:"S",text:"You hold down Ctrl and press S, which is the shortcut for Save. The keyboard sends the codes for both keys to the CPU."},
+      {from:"ram",to:"cpu",pkt:"🖼️",text:"The CPU collects the drawing from RAM…"},
+      {from:"cpu",to:"storage",pkt:"🖼️",text:"…and writes a copy into storage as a file. Storage keeps it safe, even when the computer is switched off."},
+      {from:"cpu",to:"gpu",pkt:"✓",text:"The CPU asks the graphics card to draw a message saying the file has been saved."},
+      {from:"gpu",to:"monitor",pkt:"✓",text:"The message appears on the screen. Tomorrow you can open your drawing from storage and carry on."}
+    ]},
+    {name:"📷 Taking a photo",steps:[
+      {on:"webcam",text:"You smile and click to take a photo. Light from your face goes into the webcam's lens."},
+      {from:"webcam",to:"cpu",pkt:"📷",text:"The webcam turns the light into numbers. Every pixel gets three numbers: how much red, how much green and how much blue."},
+      {from:"cpu",to:"ram",pkt:"📷",text:"The photo is held in RAM while the CPU works on it, for example to add a fun filter."},
+      {from:"cpu",to:"gpu",pkt:"📷",text:"The graphics card turns all those numbers back into a picture…"},
+      {from:"gpu",to:"monitor",pkt:"📷",text:"…and the monitor shows your photo on the screen."},
+      {from:"cpu",to:"storage",pkt:"📷",text:"Finally the photo is saved to storage as a file, so you can still look at it next week."}
+    ]}
+  ];
+  var nodeEls={},edgeEls={},pkt,pktText,scen=0,step=0,anim=null;
+  function edgeKey(a,b){return a<b?a+"|"+b:b+"|"+a;}
+  (function drawFlow(){
+    var svg=$("flowSvg");
+    var eg=el("g",{},svg);
+    for(var i=0;i<EDGES.length;i++){
+      var a=NODES[EDGES[i][0]],b=NODES[EDGES[i][1]];
+      edgeEls[edgeKey(EDGES[i][0],EDGES[i][1])]=el("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,"class":"edge","stroke-linecap":"round"},eg);
+    }
+    for(var k in NODES){
+      if(!NODES.hasOwnProperty(k))continue;
+      var n=NODES[k],w=n.big?132:112,h=n.big?62:52;
+      var g=el("g",{"class":"node"},svg);
+      el("rect",{x:n.x-w/2,y:n.y-h/2,width:w,height:h,rx:12,fill:"#1A2A55",stroke:CATS[n.cat].col,"stroke-width":3},g);
+      var t=el("text",{x:n.x,y:n.y+6,"text-anchor":"middle",fill:"#F5F7FF","font-size":n.big?20:16,"font-weight":"700","font-family":"Nunito Sans, sans-serif"},g);
+      t.textContent=n.icon+" "+n.label;
+      nodeEls[k]=g;
+    }
+    pkt=el("g",{opacity:0},svg);
+    el("circle",{cx:0,cy:0,r:19,fill:"#F4B942",stroke:"#0F1C3F","stroke-width":3},pkt);
+    pktText=el("text",{x:0,y:5,"text-anchor":"middle",fill:"#0F1C3F","font-size":14,"font-weight":"800","font-family":"Nunito Sans, sans-serif"},pkt);
+  })();
+  function placePkt(x,y){pkt.setAttribute("transform","translate("+x+","+y+")");}
+  function renderStep(){
+    var S=SCENARIOS[scen].steps,s=S[step];
+    if(anim){cancelAnimationFrame(anim);anim=null;}
+    for(var k in nodeEls){if(nodeEls.hasOwnProperty(k))nodeEls[k].setAttribute("class","node");}
+    for(var e in edgeEls){if(edgeEls.hasOwnProperty(e))edgeEls[e].setAttribute("class","edge");}
+    $("stepNum").textContent="Step "+(step+1)+" of "+S.length;
+    $("stepText").innerHTML=s.text;
+    $("fBack").disabled=step===0;
+    $("fNext").textContent=step===S.length-1?"Start again ↺":"Next →";
+    if(s.on){
+      nodeEls[s.on].setAttribute("class","node lit");
+      pkt.setAttribute("opacity",0);
+      return;
+    }
+    nodeEls[s.from].setAttribute("class","node lit");
+    nodeEls[s.to].setAttribute("class","node lit");
+    edgeEls[edgeKey(s.from,s.to)].setAttribute("class","edge lit");
+    pktText.textContent=s.pkt;
+    pktText.setAttribute("font-size",s.pkt.length>3?11:(s.pkt.length>2?13:15));
+    pkt.setAttribute("opacity",1);
+    var a=NODES[s.from],b=NODES[s.to];
+    /* travel only along the gap between the two boxes so the dot never covers a label */
+    var dx=b.x-a.x,dy=b.y-a.y;
+    function clip(n){var hw=(n.big?66:56)+4,hh=(n.big?31:26)+4;return Math.min(dx?hw/Math.abs(dx):9,dy?hh/Math.abs(dy):9);}
+    var tS=clip(a),tE=1-clip(b);
+    if(tE<tS){tS=tE=(tS+tE)/2;}
+    var sx=a.x+dx*tS,sy=a.y+dy*tS,ex=a.x+dx*tE,ey=a.y+dy*tE;
+    if(reduceMotion){placePkt(ex,ey);return;}
+    var t0=null,dur=1100;
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var f=Math.min(1,(ts-t0)/dur);
+      var ease=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;
+      placePkt(sx+(ex-sx)*ease,sy+(ey-sy)*ease);
+      if(f<1)anim=requestAnimationFrame(tick);else anim=null;
+    }
+    placePkt(sx,sy);
+    anim=requestAnimationFrame(tick);
+  }
+  function setScen(i){
+    scen=i;step=0;
+    var bs=$("scens").children;
+    for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",j===i?"true":"false");
+    renderStep();
+  }
+  for(var si=0;si<SCENARIOS.length;si++){
+    (function(i){
+      var b=document.createElement("button");
+      b.className="scen";b.textContent=SCENARIOS[i].name;
+      b.addEventListener("click",function(){setScen(i);});
+      $("scens").appendChild(b);
+    })(si);
+  }
+  $("fNext").addEventListener("click",function(){
+    var S=SCENARIOS[scen].steps;
+    step=step===S.length-1?0:step+1;renderStep();
+  });
+  $("fBack").addEventListener("click",function(){if(step>0){step--;renderStep();}});
+  setScen(0);
+
+  /* ---------- sort it ---------- */
+  var USB_SVG='<svg viewBox="0 0 72 72"><rect x="22" y="4" width="28" height="18" rx="2" fill="#C9CED8"/><rect x="28" y="9" width="5" height="5" fill="#0F1C3F"/><rect x="39" y="9" width="5" height="5" fill="#0F1C3F"/><rect x="16" y="22" width="40" height="46" rx="8" fill="#5AA9FF"/></svg>';
+  var SD_SVG='<svg viewBox="0 0 72 72"><path d="M16 6 H46 L58 18 V66 H16 Z" fill="#2A2F45" stroke="#B48CFF" stroke-width="3"/><rect x="22" y="10" width="4" height="12" fill="#F4B942"/><rect x="30" y="10" width="4" height="12" fill="#F4B942"/><rect x="38" y="10" width="4" height="12" fill="#F4B942"/><text x="37" y="50" font-size="16" text-anchor="middle" fill="#B48CFF" font-weight="700" font-family="sans-serif">SD</text></svg>';
+  var HDD_SVG='<svg viewBox="0 0 72 72"><rect x="10" y="6" width="52" height="60" rx="5" fill="#9AA3B5"/><circle cx="36" cy="32" r="20" fill="#C9CED8" stroke="#5B6178" stroke-width="2"/><circle cx="36" cy="32" r="4" fill="#5B6178"/><path d="M54 58 L40 36" stroke="#2A2F45" stroke-width="4" stroke-linecap="round"/></svg>';
+  var GADGETS=[
+    {icon:"🎤",name:"Microphone",cat:"input",why:"A microphone turns your voice into signals that go into the computer."},
+    {icon:"🎮",name:"Game controller",cat:"input",why:"Pressing buttons and moving the sticks sends your moves into the computer."},
+    {icon:"⌨️",name:"Keyboard",cat:"input",why:"Every key you press sends a code into the computer."},
+    {icon:"🖱️",name:"Mouse",cat:"input",why:"The mouse sends movements and clicks into the computer."},
+    {icon:"📷",name:"Webcam",cat:"input",why:"A webcam turns light into numbers and sends pictures into the computer."},
+    {icon:"🖨️",name:"Printer",cat:"output",why:"A printer puts the computer's work out onto paper."},
+    {icon:"🎧",name:"Headphones",cat:"output",why:"Headphones play sound that comes out of the computer."},
+    {icon:"🔊",name:"Speakers",cat:"output",why:"Speakers turn signals from the computer into sound you can hear."},
+    {icon:"📽️",name:"Projector",cat:"output",why:"A projector shines the computer's picture onto a big screen or wall."},
+    {icon:"🖥️",name:"Monitor",cat:"output",why:"The monitor shows pictures that come out of the computer."},
+    {icon:USB_SVG,name:"USB memory stick",cat:"storage",why:"A memory stick keeps files so you can carry them to another computer."},
+    {icon:SD_SVG,name:"SD memory card",cat:"storage",why:"Cameras and consoles keep photos and games on SD cards."},
+    {icon:HDD_SVG,name:"Hard drive",cat:"storage",why:"A hard drive keeps files on a spinning disc, even with the power off."},
+    {icon:"💿",name:"DVD",cat:"storage",why:"A DVD stores films or files as tiny marks read by a laser."}
+  ];
+  var SN=10,sList=[],si2=0,sRight=0;
+  function showGadget(){
+    var g=sList[si2];
+    $("sCount").textContent="Gadget "+(si2+1)+" of "+SN;
+    $("sBar").style.width=(si2/SN*100)+"%";
+    $("sIcon").innerHTML=g.icon;
+    $("sName").textContent=g.name;
+    $("sFb").textContent="";$("sFb").className="fb";$("sWhy").textContent="";
+    $("sNext").style.display="none";
+    var box=$("sChoices");box.innerHTML="";
+    var opts=["input","output","storage"];
+    for(var i=0;i<opts.length;i++){
+      (function(k){
+        var b=document.createElement("button");
+        b.className="choice";b.textContent=CATS[k].name==="Memory & storage"?"Storage":CATS[k].name;
+        b.style.borderColor=CATS[k].col;
+        b.setAttribute("data-k",k);
+        b.addEventListener("click",function(){answerGadget(k,b);});
+        box.appendChild(b);
+      })(opts[i]);
+    }
+    box.children[0].focus({preventScroll:true});
+  }
+  function answerGadget(k,btn){
+    var g=sList[si2],bs=$("sChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].getAttribute("data-k")===g.cat)bs[i].className="choice ok";}
+    if(k===g.cat){sRight++;$("sFb").textContent="✓ Correct!";$("sFb").className="fb ok";}
+    else{btn.className="choice no";$("sFb").textContent="✗ Not quite. It's "+(g.cat==="storage"?"storage":g.cat)+".";$("sFb").className="fb no";}
+    $("sWhy").textContent=g.why;
+    $("sScore").textContent="Score: "+sRight;
+    $("sNext").style.display="";$("sNext").focus({preventScroll:true});
+  }
+  $("sNext").addEventListener("click",function(){
+    si2++;
+    if(si2>=SN){
+      $("sBar").style.width="100%";
+      $("sBox").style.display="none";$("sEnd").style.display="";
+      var msg=sRight===SN?"Perfect sorting! ":sRight>=7?"Super sorter! ":sRight>=4?"Good work! ":"Keep practising! ";
+      $("sEndText").textContent=msg+"You sorted "+sRight+" out of "+SN+" gadgets correctly.";
+      $("sAgain").focus({preventScroll:true});
+    } else showGadget();
+  });
+  function startSort(){sList=shuffle(GADGETS).slice(0,SN);si2=0;sRight=0;$("sScore").textContent="Score: 0";$("sEnd").style.display="none";$("sBox").style.display="";showGadget();}
+  $("sAgain").addEventListener("click",startSort);
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"Which part is often called the brain of the computer?",a:"CPU",w:["Monitor","Mouse","Speakers"],why:"The CPU (Central Processing Unit) follows the instructions and does the working out."},
+    {q:"Which of these is an input device?",a:"Keyboard",w:["Monitor","Speakers","Printer"],why:"A keyboard sends information into the computer."},
+    {q:"Which of these is an output device?",a:"Speakers",w:["Mouse","Microphone","Keyboard"],why:"Speakers give sound out of the computer."},
+    {q:"What does RAM do?",a:"Holds what the computer is using right now",w:["Shows pictures on the screen","Keeps the parts cool","Plays sounds"],why:"RAM is the computer's fast working memory, like a desk."},
+    {q:"What happens to everything in RAM when the computer is switched off?",a:"It is forgotten",w:["It is printed","It moves to the mouse","Nothing, it stays there"],why:"RAM needs power to remember. That's why we save our work to storage."},
+    {q:"Where are your photos and games kept when the computer is off?",a:"In storage (SSD or hard drive)",w:["In RAM","In the CPU","In the fan"],why:"Storage keeps files safe without power."},
+    {q:"What are the tiny dots that make up the picture on a screen called?",a:"Pixels",w:["Bytes","Chips","Tracks"],why:"Each pixel mixes red, green and blue light."},
+    {q:"Which part changes electricity from the wall socket into the power the parts need?",a:"Power supply",w:["Graphics card","Webcam","RAM"],why:"The power supply gives each part the steady power it needs."},
+    {q:"Which part do all the other parts plug into?",a:"Motherboard",w:["Keyboard","Monitor","Speakers"],why:"The motherboard connects everything, like the roads of a town."},
+    {q:"Why do computers have fans?",a:"To stop the parts getting too hot",w:["To make music","To move the mouse","To save files"],why:"A hot CPU slows itself down, so fans keep it cool."},
+    {q:"Which pattern do all computers follow?",a:"Input → Process → Output",w:["Output → Input → Process","Process → Output → Input","Output → Process → Input"],why:"Information goes in, gets worked on, then the result comes out."},
+    {q:"Which part is especially good at making pictures for the screen?",a:"Graphics card",w:["Power supply","Microphone","Storage drive"],why:"The graphics card works out the colour of millions of pixels very fast."},
+    {q:"When you press a key, what does the keyboard send to the computer?",a:"A code number",w:["A tiny picture","Some electricity from the wall","A sound"],why:"Each key has its own code. Capital A is 65."},
+    {q:"A microphone is…",a:"an input device",w:["an output device","a storage device","a processor"],why:"It turns your voice into signals that go into the computer."},
+    {q:"Which is quicker for the CPU to reach?",a:"RAM",w:["A DVD","A USB memory stick","A printer"],why:"RAM is the fastest place for the CPU to fetch information from."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];
+    $("qCount").textContent="Question "+(qi+1)+" of "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;
+    $("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";
+    $("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    var opts=shuffle([it.a].concat(it.w));
+    for(var i=0;i<opts.length;i++){
+      (function(o){
+        var b=document.createElement("button");
+        b.className="choice";b.textContent=o;
+        b.addEventListener("click",function(){answerQ(o,b);});
+        box.appendChild(b);
+      })(opts[i]);
+    }
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Correct!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Not quite. The answer is: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;
+    $("qScore").textContent="Score: "+qRight;
+    $("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Computer genius! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep exploring! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});
+    } else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+    var p=t.getAttribute("data-p");
+    if(p==="sort"&&!started.sort){started.sort=1;startSort();}
+    if(p==="quiz"&&!started.quiz){started.quiz=1;startQuiz();}
+    if(p==="flow")renderStep();
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__hcw={PARTS:PARTS,SCENARIOS:SCENARIOS,EDGES:EDGES,GADGETS:GADGETS,BANK:BANK,edgeKey:edgeKey,edgeEls:edgeEls};
+})();
+</script>
+</body>
+</html>
