@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Algorithms Robot Coding Game for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive algorithms game for ages 7-11. Program a robot through mazes with step-by-step commands, find and fix bugs, use repeat loops and take an auto-marked quiz. No login needed.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--fwd:#5AA9FF;--lft:#4CC38A;--rgt:#FF8FB1;--rep:#B48CFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.cmd:focus-visible,.blk:focus-visible,.lvl:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.lvls{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.lvl{width:40px;height:40px;border-radius:10px;border:2px solid #2C3B72;background:var(--navy);color:var(--ink);font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.lvl[aria-current="true"]{border-color:var(--gold);color:var(--gold)}
+.lvl.done{background:#1d4a3a;border-color:var(--good)}
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.board{background:var(--navy);border-radius:16px;padding:8px}
+.board svg{width:100%;height:auto;display:block}
+.goalline{font-weight:700;margin:4px 0 8px}
+.cmds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cmd{border:0;border-radius:12px;padding:10px 6px;font:800 15px "Baloo 2",sans-serif;cursor:pointer;color:var(--navy);line-height:1.15}
+.cmd .ic{display:block;font-size:24px}
+.cmd.f{background:var(--fwd)}.cmd.l{background:var(--lft)}.cmd.r{background:var(--rgt)}.cmd.rp{background:var(--rep)}.cmd.end{background:#8C9BD1}
+.cmd:disabled{opacity:.35;cursor:default}
+.prog{background:var(--navy);border-radius:14px;padding:10px;min-height:110px;margin:10px 0;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.prog .empty{color:var(--muted);font-size:14px}
+.blk{border:2px solid transparent;border-radius:10px;padding:4px 8px;font:800 14px "Nunito Sans",sans-serif;color:var(--navy);cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.blk .n{font-size:11px;opacity:.7}
+.blk.f{background:var(--fwd)}.blk.l{background:var(--lft)}.blk.r{background:var(--rgt)}.blk.rp{background:var(--rep)}.blk.end{background:#8C9BD1}
+.blk.now{border-color:#fff;box-shadow:0 0 0 3px var(--gold)}
+.blk.bad{border-color:#fff;box-shadow:0 0 0 3px var(--bad)}
+.blk.in{margin-left:10px}
+.msg{min-height:52px;font-weight:700;padding:8px 12px;border-radius:12px;background:var(--navy)}
+.msg.ok{color:var(--good)}.msg.no{color:var(--bad)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:720px){.game{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › Algorithms: Program the Robot</nav>
+  <h1>Algorithms: Program the Robot 🤖</h1>
+  <p class="lead">An algorithm is a set of step-by-step instructions. Computers follow instructions exactly, so every step has to be right! Build programs to guide the robot to the star, find and fix bugs, and use loops to make your programs shorter. <span style="white-space:nowrap">Ages 7-11.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Robot modes">
+    <button class="tab" role="tab" id="t-prog" aria-controls="prog" aria-selected="true" data-p="prog">Program the Robot</button>
+    <button class="tab" role="tab" id="t-dbg" aria-controls="dbg" aria-selected="false" tabindex="-1" data-p="dbg">Debug It</button>
+    <button class="tab" role="tab" id="t-loop" aria-controls="loop" aria-selected="false" tabindex="-1" data-p="loop">Loops</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
+  </div>
+
+  <!-- ============ PROGRAM ============ -->
+  <section class="panel on" id="prog" role="tabpanel" aria-labelledby="t-prog">
+    <h2>Program the robot</h2>
+    <p>Tap the command buttons to build a program, then press <b>Run</b>. The robot only moves when you run the program. <b>Turn</b> commands spin the robot on the spot without moving it.</p>
+    <div class="lvls" id="pLvls" role="group" aria-label="Choose a level"></div>
+    <div class="game">
+      <div><div class="board" id="pBoard"></div></div>
+      <div>
+        <div class="goalline" id="pGoal"></div>
+        <div class="cmds" id="pCmds"></div>
+        <div class="prog" id="pProg" aria-live="polite" aria-label="Your program"></div>
+        <div class="row">
+          <button class="btn" id="pRun">▶ Run</button>
+          <button class="btn ghost" id="pStep">Step</button>
+          <button class="btn ghost" id="pUndo">Undo</button>
+          <button class="btn ghost" id="pClear">Clear</button>
+        </div>
+        <div class="msg" id="pMsg" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="tip"><b>Tip:</b> tap a block in your program to remove it. Think about which way the robot is facing before you turn. Turning <b>left</b> and <b>right</b> is from the robot's point of view, so pretend you are the robot!</p>
+  </section>
+
+  <!-- ============ DEBUG ============ -->
+  <section class="panel" id="dbg" role="tabpanel" aria-labelledby="t-dbg">
+    <h2>Debug it</h2>
+    <p>A mistake in a program is called a <b>bug</b>, and fixing it is called <b>debugging</b>. Each of these programs has <b>one bug</b>. Run it to see what goes wrong, then <b>tap the wrong block</b> to change it (Forward → Turn left → Turn right). Run again to test your fix.</p>
+    <div class="lvls" id="dLvls" role="group" aria-label="Choose a puzzle"></div>
+    <div class="game">
+      <div><div class="board" id="dBoard"></div></div>
+      <div>
+        <div class="goalline" id="dGoal"></div>
+        <div class="prog" id="dProg" aria-live="polite" aria-label="Buggy program"></div>
+        <div class="row">
+          <button class="btn" id="dRun">▶ Run</button>
+          <button class="btn ghost" id="dStep">Step</button>
+          <button class="btn ghost" id="dReset">Start again</button>
+        </div>
+        <div class="msg" id="dMsg" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOOPS ============ -->
+  <section class="panel" id="loop" role="tabpanel" aria-labelledby="t-loop">
+    <h2>Loops: repeat it!</h2>
+    <p>A <b>loop</b> repeats some commands so you don't have to write them again and again. Press <b>Repeat</b>, add the commands to repeat, then press <b>End repeat</b>. Tap a Repeat block to change how many times it repeats. Each level has a <b>block limit</b>, so you'll need loops to fit!</p>
+    <div class="lvls" id="lLvls" role="group" aria-label="Choose a loop level"></div>
+    <div class="game">
+      <div><div class="board" id="lBoard"></div></div>
+      <div>
+        <div class="goalline" id="lGoal"></div>
+        <div class="cmds" id="lCmds"></div>
+        <div class="prog" id="lProg" aria-live="polite" aria-label="Your program"></div>
+        <div class="row">
+          <button class="btn" id="lRun">▶ Run</button>
+          <button class="btn ghost" id="lUndo">Undo</button>
+          <button class="btn ghost" id="lClear">Clear</button>
+        </div>
+        <div class="msg" id="lMsg" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="tip"><b>Look for patterns:</b> if you can see the same few moves happening again and again, that's a job for a loop. Real programmers use loops all the time.</p>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Algorithms Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Did you know?</b> Every app, game and website is built from algorithms like these: sequences of steps, loops that repeat, and decisions. Find out what's inside the machine that runs them in <a href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/">How Computers Work</a>.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  var SVGNS="http://www.w3.org/2000/svg";
+  function $(id){return document.getElementById(id);}
+  function el(tag,attrs,parent){var e=document.createElementNS(SVGNS,tag);for(var k in attrs){if(attrs.hasOwnProperty(k))e.setAttribute(k,attrs[k]);}if(parent)parent.appendChild(e);return e;}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DIRS=[[0,-1],[1,0],[0,1],[-1,0]]; /* N E S W */
+  var DIRNAME=["up","right","down","left"];
+  var CMD={F:{cls:"f",ic:"⬆",name:"Forward"},L:{cls:"l",ic:"↺",name:"Turn left"},R:{cls:"r",ic:"↻",name:"Turn right"}};
+
+  /* ---------- levels: S start, G goal, # wall, . empty ---------- */
+  var LEVELS=[
+    {map:["S....G"],dir:1},
+    {map:["S...","...#","...G"],dir:1},
+    {map:["S..#","...#","#...","##.G"],dir:1},
+    {map:["...G","..##","....","S..."],dir:0},
+    {map:["S.#...","..#.#.","....#G"],dir:2},
+    {map:["S#....",".#.##.",".#..#.","...#G."],dir:2},
+    {map:[".....",".###.",".#G#.",".#.#.","S#..."],dir:0},
+    {map:["S..#....","##.#.##.","...#..#.",".###.#..","......#G"],dir:1}
+  ];
+  /* debug puzzles: level map, start dir, correct program, index of bug, wrong command */
+  var DEBUG=[
+    {map:["S...G"],dir:1,prog:"FFFF",bug:2,wrong:"R"},
+    {map:["S..",".#.","..G"],dir:1,prog:"FFRFF",bug:2,wrong:"L"},
+    {map:["S.#","..#","#..","#.G"],dir:2,prog:"FLFRFLFRF",bug:0,wrong:"L"},
+    {map:["...G","..##","S..."],dir:0,prog:"FFRFFF",bug:4,wrong:"L"},
+    {map:["S...",".##.","...G"],dir:1,prog:"FFFRFF",bug:3,wrong:"F"},
+    {map:["S#...",".#.#.","...#G"],dir:2,prog:"FFLFFLFFRFFRFF",bug:8,wrong:"L"}
+  ];
+  /* loop levels with block limits (Repeat counts as 1 block, End repeat is free) */
+  var LOOPS=[
+    {map:["S.......G"],dir:1,limit:2,hint:"8 steps forward in a row..."},
+    {map:["S.##","#..#","##..","###G"],dir:1,limit:5,hint:"Forward, turn, forward, turn... spot the pattern."},
+    {map:["S....","####.","G....","....."],dir:1,limit:8,hint:"Three straight lines: you could use three loops."},
+    {map:["....#.G","...#..#","..#..#.",".#..#..","#..#...","..#....","S......"],dir:0,limit:5,hint:"It's a staircase!"}
+  ];
+
+  function parse(L){
+    var g={w:L.map[0].length,h:L.map.length,cells:L.map,dir:L.dir};
+    for(var y=0;y<g.h;y++)for(var x=0;x<g.w;x++){var c=L.map[y].charAt(x);if(c==="S"){g.sx=x;g.sy=y;}if(c==="G"){g.gx=x;g.gy=y;}}
+    return g;
+  }
+  function wall(g,x,y){return x<0||y<0||x>=g.w||y>=g.h||g.cells[y].charAt(x)==="#";}
+  /* shortest program length (BFS over position + direction) */
+  function par(g){
+    var start=[g.sx,g.sy,g.dir],seen={},q=[[start,0]];seen[start.join()]=1;
+    while(q.length){
+      var s=q.shift(),st=s[0];
+      if(st[0]===g.gx&&st[1]===g.gy)return s[1];
+      var nx=[[st[0]+DIRS[st[2]][0],st[1]+DIRS[st[2]][1],st[2]],[st[0],st[1],(st[2]+3)%4],[st[0],st[1],(st[2]+1)%4]];
+      for(var i=0;i<3;i++){
+        if(i===0&&wall(g,nx[0][0],nx[0][1]))continue;
+        var k=nx[i].join();if(!seen[k]){seen[k]=1;q.push([nx[i],s[1]+1]);}
+      }
+    }
+    return -1;
+  }
+  /* expand a block list with repeats into a flat list of {c, src} */
+  function expand(blocks){
+    var out=[],stack=[];
+    function run(list){
+      var i=0;
+      while(i<list.length){
+        var b=list[i];
+        if(b.t==="REP"){
+          var depth=1,j=i+1;
+          while(j<list.length&&depth>0){if(list[j].t==="REP")depth++;if(list[j].t==="END")depth--;if(depth>0)j++;}
+          var inner=list.slice(i+1,j);
+          for(var r=0;r<b.n;r++)run(inner);
+          i=j+1;
+        } else if(b.t==="END"){i++;}
+        else{out.push({c:b.t,src:b.id});i++;}
+      }
+    }
+    run(blocks);
+    return out;
+  }
+  /* simulate: returns list of states and outcome */
+  function simulate(g,flat){
+    var x=g.sx,y=g.sy,d=g.dir,states=[{x:x,y:y,d:d}];
+    for(var i=0;i<flat.length;i++){
+      var c=flat[i].c;
+      if(c==="F"){var nx=x+DIRS[d][0],ny=y+DIRS[d][1];if(wall(g,nx,ny))return {states:states,crash:i,bump:{x:nx,y:ny}};x=nx;y=ny;}
+      else if(c==="L")d=(d+3)%4;else if(c==="R")d=(d+1)%4;
+      states.push({x:x,y:y,d:d});
+    }
+    return {states:states,crash:-1,win:x===g.gx&&y===g.gy};
+  }
+
+  /* ---------- board drawing ---------- */
+  function Board(box){this.box=box;}
+  Board.prototype.draw=function(g){
+    this.g=g;this.box.innerHTML="";
+    var C=60,svg=el("svg",{viewBox:"0 0 "+(g.w*C)+" "+(g.h*C),role:"img","aria-label":"Grid "+g.w+" by "+g.h+". Robot starts facing "+DIRNAME[g.dir]+"."},this.box);
+    this.svg=svg;this.C=C;
+    for(var y=0;y<g.h;y++)for(var x=0;x<g.w;x++){
+      var w=g.cells[y].charAt(x)==="#";
+      el("rect",{x:x*C+2,y:y*C+2,width:C-4,height:C-4,rx:8,fill:w?"#3A4C8A":"#16234E",stroke:w?"#4A5C9A":"#22336A","stroke-width":2},svg);
+      if(w){el("path",{d:"M"+(x*C+12)+" "+(y*C+C/2)+"h"+(C-24)+"M"+(x*C+C/2)+" "+(y*C+12)+"v"+(C-24),stroke:"#2A3870","stroke-width":4},svg);}
+    }
+    var gx=g.gx*C+C/2,gy=g.gy*C+C/2,pts=[];
+    for(var i=0;i<10;i++){var r=i%2?9:21,a=Math.PI/5*i-Math.PI/2;pts.push((gx+r*Math.cos(a)).toFixed(1)+","+(gy+r*Math.sin(a)).toFixed(1));}
+    el("polygon",{points:pts.join(" "),fill:"#F4B942",stroke:"#fff","stroke-width":1.5},svg);
+    this.trail=el("g",{},svg);
+    this.bump=el("g",{opacity:0},svg);
+    var rb=el("g",{},svg);this.robot=rb;
+    var body=el("g",{},rb);this.body=body;
+    el("rect",{x:-17,y:-14,width:34,height:30,rx:8,fill:"#C9D6F5",stroke:"#0F1C3F","stroke-width":2.5},body);
+    el("rect",{x:-11,y:-8,width:22,height:12,rx:4,fill:"#0F1C3F"},body);
+    el("circle",{cx:-5,cy:-2,r:3,fill:"#5AA9FF"},body);el("circle",{cx:5,cy:-2,r:3,fill:"#5AA9FF"},body);
+    el("line",{x1:0,y1:-14,x2:0,y2:-21,stroke:"#0F1C3F","stroke-width":2.5},body);
+    el("circle",{cx:0,cy:-23,r:4,fill:"#FF6B6B",stroke:"#0F1C3F","stroke-width":2},body);
+    el("polygon",{points:"-7,-27 7,-27 0,-36",fill:"#F4B942",stroke:"#0F1C3F","stroke-width":1.5},body);
+    this.place(g.sx,g.sy,g.dir);
+  };
+  Board.prototype.place=function(x,y,d){
+    var C=this.C;this.cur={x:x,y:y,d:d};
+    this.robot.setAttribute("transform","translate("+(x*C+C/2)+","+(y*C+C/2)+")");
+    this.body.setAttribute("transform","rotate("+(d*90)+")");
+  };
+  Board.prototype.dot=function(x,y){el("circle",{cx:x*this.C+this.C/2,cy:y*this.C+this.C/2,r:5,fill:"#F4B942",opacity:.55},this.trail);};
+  Board.prototype.reset=function(){this.trail.innerHTML="";this.bump.innerHTML="";this.bump.setAttribute("opacity",0);this.place(this.g.sx,this.g.sy,this.g.dir);};
+  Board.prototype.showBump=function(x,y){
+    var C=this.C,cx=Math.max(0,Math.min(this.g.w-1,x))*C+C/2,cy=Math.max(0,Math.min(this.g.h-1,y))*C+C/2;
+    var px=this.cur.x*C+C/2+(x-this.cur.x)*C*0.42,py=this.cur.y*C+C/2+(y-this.cur.y)*C*0.42;
+    this.bump.innerHTML="";
+    var t=el("text",{x:px,y:py+8,"text-anchor":"middle","font-size":26},this.bump);t.textContent="💥";
+    this.bump.setAttribute("opacity",1);
+  };
+
+  /* ---------- runner shared by the three modes ---------- */
+  function Runner(opts){
+    this.o=opts;this.timer=null;this.stepIdx=-1;
+  }
+  Runner.prototype.stop=function(){if(this.timer){clearTimeout(this.timer);this.timer=null;}};
+  Runner.prototype.prepare=function(){
+    this.stop();
+    var flat=expand(this.o.blocks());
+    this.flat=flat;this.res=simulate(this.o.board.g,flat);this.stepIdx=0;
+    this.o.board.reset();
+  };
+  Runner.prototype.highlight=function(i,bad){
+    var bs=this.o.progBox.querySelectorAll(".blk");
+    for(var k=0;k<bs.length;k++)bs[k].classList.remove("now","bad");
+    if(i>=0&&i<this.flat.length){
+      var src=this.flat[i].src;
+      for(var m=0;m<bs.length;m++)if(+bs[m].getAttribute("data-id")===src)bs[m].classList.add(bad?"bad":"now");
+    }
+  };
+  Runner.prototype.advance=function(){
+    var i=this.stepIdx,r=this.res,b=this.o.board;
+    if(i>=this.flat.length||(r.crash>=0&&i>r.crash)){this.finish();return false;}
+    if(r.crash===i){this.highlight(i,true);b.showBump(r.bump.x,r.bump.y);this.stepIdx++;this.finish();return false;}
+    var s=r.states[i+1];
+    if(s.x!==b.cur.x||s.y!==b.cur.y)b.dot(b.cur.x,b.cur.y);
+    b.place(s.x,s.y,s.d);this.highlight(i,false);this.stepIdx++;
+    if(this.stepIdx>=this.flat.length){this.finish();return false;}
+    return true;
+  };
+  Runner.prototype.run=function(){
+    var self=this;
+    if(!this.o.blocks().length){this.o.say("Add some commands first!","");return;}
+    if(this.o.check&&!this.o.check())return;
+    this.prepare();this.o.say("Running…","");this.o.busy(true);
+    function tick(){if(self.advance())self.timer=setTimeout(tick,reduceMotion?120:420);}
+    this.timer=setTimeout(tick,reduceMotion?60:250);
+  };
+  Runner.prototype.step=function(){
+    if(!this.o.blocks().length){this.o.say("Add some commands first!","");return;}
+    if(this.stepIdx<0||this.stepIdx>=this.flat.length||this.done){this.done=false;this.prepare();this.o.say("Step 1: press Step again to keep going.","");}
+    var more=this.advance();
+    if(more)this.o.say("Step "+this.stepIdx+" of "+this.flat.length+" done.","");
+  };
+  Runner.prototype.finish=function(){
+    this.stop();this.o.busy(false);this.done=true;
+    var r=this.res;
+    if(r.crash>=0)this.o.say("💥 Bump! Step "+(r.crash+1)+" sent the robot into a wall or off the grid. That's a bug: fix it and run again.","no");
+    else if(r.win)this.o.win(this.flat.length);
+    else this.o.say("The robot stopped, but not on the star. Check your turns, or add more steps.","no");
+  };
+
+  function renderProg(box,blocks,onTap,emptyText){
+    box.innerHTML="";
+    if(!blocks.length){var e=document.createElement("span");e.className="empty";e.textContent=emptyText;box.appendChild(e);return;}
+    var depth=0,num=0;
+    blocks.forEach(function(b){
+      if(b.t==="END")depth=Math.max(0,depth-1);
+      var bt=document.createElement("button");
+      var cls=b.t==="REP"?"rp":b.t==="END"?"end":CMD[b.t].cls;
+      bt.className="blk "+cls+(depth?" in":"");
+      bt.setAttribute("data-id",b.id);
+      num++;
+      var label=b.t==="REP"?"🔁 Repeat ×"+b.n:b.t==="END"?"⤴ End repeat":CMD[b.t].ic+" "+CMD[b.t].name;
+      bt.innerHTML='<span class="n">'+num+'</span>';
+      bt.appendChild(document.createTextNode(label));
+      bt.setAttribute("aria-label","Block "+num+": "+label.replace(/^[^A-Za-z]+/,""));
+      bt.addEventListener("click",function(){onTap(b);});
+      box.appendChild(bt);
+      if(b.t==="REP")depth++;
+    });
+  }
+  function cmdButtons(box,list,onAdd){
+    box.innerHTML="";
+    list.forEach(function(k){
+      var b=document.createElement("button");
+      var meta=k==="REP"?{cls:"rp",ic:"🔁",name:"Repeat"}:k==="END"?{cls:"end",ic:"⤴",name:"End repeat"}:CMD[k];
+      b.className="cmd "+meta.cls;b.setAttribute("data-k",k);
+      b.innerHTML='<span class="ic" aria-hidden="true">'+meta.ic+'</span>';
+      b.appendChild(document.createTextNode(meta.name));
+      b.addEventListener("click",function(){onAdd(k);});
+      box.appendChild(b);
+    });
+  }
+  function levelButtons(box,n,onPick){
+    box.innerHTML="";
+    for(var i=0;i<n;i++)(function(i){
+      var b=document.createElement("button");b.className="lvl";b.textContent=i+1;b.setAttribute("aria-label","Level "+(i+1));
+      b.addEventListener("click",function(){onPick(i);});box.appendChild(b);
+    })(i);
+  }
+  function markLevels(box,cur,done){
+    var bs=box.children;
+    for(var i=0;i<bs.length;i++){bs[i].setAttribute("aria-current",i===cur?"true":"false");bs[i].classList.toggle("done",!!done[i]);}
+  }
+  var uid=1;
+
+  /* ---------- PROGRAM mode ---------- */
+  var P={lvl:0,blocks:[],done:{},board:new Board($("pBoard"))};
+  function pSay(t,c){$("pMsg").textContent=t;$("pMsg").className="msg"+(c?" "+c:"");}
+  P.runner=new Runner({board:P.board,progBox:$("pProg"),blocks:function(){return P.blocks;},say:pSay,
+    busy:function(b){["pRun","pStep","pUndo","pClear"].forEach(function(id){$(id).disabled=b;});},
+    win:function(n){
+      P.done[P.lvl]=1;markLevels($("pLvls"),P.lvl,P.done);
+      var best=P.par,txt="⭐ You reached the star in "+n+" steps!";
+      txt+=n<=best?" That's the shortest possible program. Brilliant!":" Can you do it in "+best+"?";
+      if(P.lvl<LEVELS.length-1)txt+=" Try the next level when you're ready.";
+      pSay(txt,"ok");
+    }});
+  function pLoad(i){
+    P.runner.stop();P.lvl=i;P.blocks=[];P.g=parse(LEVELS[i]);P.par=par(P.g);
+    P.board.draw(P.g);markLevels($("pLvls"),i,P.done);pRender();
+    $("pGoal").textContent="Level "+(i+1)+": get the robot to the star. The shortest program uses "+P.par+" blocks.";
+    pSay("Build your program, then press Run.","");
+    ["pRun","pStep","pUndo","pClear"].forEach(function(id){$(id).disabled=false;});
+  }
+  function pRender(){renderProg($("pProg"),P.blocks,function(b){if(P.runner.timer)return;P.blocks=P.blocks.filter(function(x){return x!==b;});P.runner.stepIdx=-1;P.board.reset();pRender();},"Your program is empty. Tap the commands above.");}
+  cmdButtons($("pCmds"),["F","L","R"],function(k){if(P.runner.timer)return;if(P.blocks.length>=40){pSay("That's a very long program! Try running it.","");return;}P.blocks.push({t:k,id:uid++});P.runner.stepIdx=-1;P.board.reset();pRender();});
+  levelButtons($("pLvls"),LEVELS.length,pLoad);
+  $("pRun").addEventListener("click",function(){P.runner.run();});
+  $("pStep").addEventListener("click",function(){P.runner.step();});
+  $("pUndo").addEventListener("click",function(){P.blocks.pop();P.runner.stepIdx=-1;P.board.reset();pRender();pSay("","");});
+  $("pClear").addEventListener("click",function(){P.blocks=[];P.runner.stepIdx=-1;P.board.reset();pRender();pSay("","");});
+  pLoad(0);
+
+  /* ---------- DEBUG mode ---------- */
+  var D={i:0,blocks:[],done:{},board:new Board($("dBoard"))};
+  function dSay(t,c){$("dMsg").textContent=t;$("dMsg").className="msg"+(c?" "+c:"");}
+  D.runner=new Runner({board:D.board,progBox:$("dProg"),blocks:function(){return D.blocks;},say:dSay,
+    busy:function(b){["dRun","dStep","dReset"].forEach(function(id){$(id).disabled=b;});},
+    win:function(){
+      D.done[D.i]=1;markLevels($("dLvls"),D.i,D.done);
+      dSay("✓ Bug fixed! The robot reached the star."+(D.i<DEBUG.length-1?" Try the next puzzle.":" You've fixed them all!"),"ok");
+    }});
+  function dLoad(i){
+    D.runner.stop();D.i=i;var p=DEBUG[i];D.g=parse(p);D.board.draw(D.g);
+    D.blocks=p.prog.split("").map(function(c,k){return {t:k===p.bug?p.wrong:c,id:uid++};});
+    markLevels($("dLvls"),i,D.done);dRender();
+    $("dGoal").textContent="Puzzle "+(i+1)+": this program should take the robot to the star, but it has one bug.";
+    dSay("Press Run to see what goes wrong.","");
+    ["dRun","dStep","dReset"].forEach(function(id){$(id).disabled=false;});
+  }
+  function dRender(){renderProg($("dProg"),D.blocks,function(b){
+    if(D.runner.timer)return;
+    b.t=b.t==="F"?"L":b.t==="L"?"R":"F";D.runner.stepIdx=-1;D.board.reset();dRender();
+    dSay("You changed block "+(D.blocks.indexOf(b)+1)+" to "+CMD[b.t].name+". Run it to test.","");
+  },"");}
+  levelButtons($("dLvls"),DEBUG.length,dLoad);
+  $("dRun").addEventListener("click",function(){D.runner.run();});
+  $("dStep").addEventListener("click",function(){D.runner.step();});
+  $("dReset").addEventListener("click",function(){dLoad(D.i);});
+
+  /* ---------- LOOPS mode ---------- */
+  var Lp={i:0,blocks:[],done:{},board:new Board($("lBoard"))};
+  function lSay(t,c){$("lMsg").textContent=t;$("lMsg").className="msg"+(c?" "+c:"");}
+  function lCount(){return Lp.blocks.filter(function(b){return b.t!=="END";}).length;}
+  function lOpen(){var d=0;Lp.blocks.forEach(function(b){if(b.t==="REP")d++;if(b.t==="END")d--;});return d;}
+  Lp.runner=new Runner({board:Lp.board,progBox:$("lProg"),blocks:function(){return Lp.blocks;},say:lSay,
+    check:function(){
+      if(lOpen()>0){lSay("Every Repeat needs an End repeat. Add one before you run.","no");return false;}
+      if(lCount()>LOOPS[Lp.i].limit){lSay("Too many blocks! This level allows "+LOOPS[Lp.i].limit+". Use a loop to shorten it.","no");return false;}
+      return true;
+    },
+    busy:function(b){["lRun","lUndo","lClear"].forEach(function(id){$(id).disabled=b;});},
+    win:function(n){
+      Lp.done[Lp.i]=1;markLevels($("lLvls"),Lp.i,Lp.done);
+      lSay("⭐ Loop-tastic! Your "+lCount()+" blocks made the robot do "+n+" steps."+(Lp.i<LOOPS.length-1?" Try the next level.":""),"ok");
+    }});
+  function lLoad(i){
+    Lp.runner.stop();Lp.i=i;Lp.blocks=[];Lp.g=parse(LOOPS[i]);Lp.board.draw(Lp.g);markLevels($("lLvls"),i,Lp.done);lRender();
+    $("lGoal").textContent="Loop level "+(i+1)+": reach the star using no more than "+LOOPS[i].limit+" blocks. Hint: "+LOOPS[i].hint;
+    lSay("Blocks used: 0 of "+LOOPS[i].limit+".","");
+    ["lRun","lUndo","lClear"].forEach(function(id){$(id).disabled=false;});
+  }
+  function lRender(){
+    renderProg($("lProg"),Lp.blocks,function(b){
+      if(Lp.runner.timer)return;
+      if(b.t==="REP"){b.n=b.n>=9?2:b.n+1;}
+      else{Lp.blocks=Lp.blocks.filter(function(x){return x!==b;});}
+      Lp.runner.stepIdx=-1;Lp.board.reset();lRender();
+    },"Your program is empty. Try starting with Repeat.");
+    var endBtn=$("lCmds").querySelector('[data-k="END"]');if(endBtn)endBtn.disabled=lOpen()<=0;
+    if(!Lp.runner.timer)lSay("Blocks used: "+lCount()+" of "+LOOPS[Lp.i].limit+"."+(lOpen()>0?" Don't forget End repeat.":""),lCount()>LOOPS[Lp.i].limit?"no":"");
+  }
+  cmdButtons($("lCmds"),["F","L","R","REP","END"],function(k){
+    if(Lp.runner.timer)return;
+    if(k==="END"&&lOpen()<=0)return;
+    Lp.blocks.push(k==="REP"?{t:"REP",n:2,id:uid++}:{t:k,id:uid++});Lp.runner.stepIdx=-1;Lp.board.reset();lRender();
+  });
+  levelButtons($("lLvls"),LOOPS.length,lLoad);
+  $("lRun").addEventListener("click",function(){Lp.runner.run();});
+  $("lUndo").addEventListener("click",function(){Lp.blocks.pop();Lp.runner.stepIdx=-1;Lp.board.reset();lRender();});
+  $("lClear").addEventListener("click",function(){Lp.blocks=[];Lp.runner.stepIdx=-1;Lp.board.reset();lRender();});
+  lLoad(0);
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"What is an algorithm?",a:"A set of step-by-step instructions",w:["A type of computer","A broken program","A very big number"],why:"An algorithm is a precise list of steps to do a job."},
+    {q:"What is a bug?",a:"A mistake in a program",w:["A part inside the computer","A fast robot","A kind of loop"],why:"Bugs are mistakes that make a program do the wrong thing."},
+    {q:"What is debugging?",a:"Finding and fixing mistakes in a program",w:["Writing a new program","Cleaning the keyboard","Turning the computer off"],why:"Debugging means finding the bug and fixing it."},
+    {q:"What does a loop do?",a:"Repeats some instructions",w:["Stops the program","Deletes the program","Turns the robot around"],why:"A loop repeats commands, so programs can be shorter."},
+    {q:"A robot faces up and turns right twice. Which way does it face now?",a:"Down",w:["Up","Left","Right"],why:"Two quarter turns make a half turn, so it faces the opposite way."},
+    {q:"A robot faces right and turns left once. Which way does it face now?",a:"Up",w:["Down","Left","Right"],why:"From facing right, a quarter turn left makes it face up."},
+    {q:"Why does the order of instructions matter?",a:"Computers do each step exactly in the order given",w:["It doesn't matter at all","Computers fix the order for you","Only the first step counts"],why:"Swap two steps and the result can be completely different."},
+    {q:"Which is the same as Forward, Forward, Forward, Forward?",a:"Repeat 4 times: Forward",w:["Repeat 2 times: Forward","Repeat 4 times: Turn right","Forward"],why:"The loop repeats Forward 4 times."},
+    {q:"Repeat 3 times: Forward, Turn right. How many commands does the robot carry out?",a:"6",w:["3","2","9"],why:"2 commands in the loop × 3 repeats = 6."},
+    {q:"What is a sequence?",a:"Instructions carried out one after another, in order",w:["A random list of numbers","A mistake in a program","A picture on the screen"],why:"Sequence means doing the steps in order, one at a time."},
+    {q:"Why must instructions for a computer be very precise?",a:"Computers do exactly what they are told, even if it's wrong",w:["Computers guess what you mean","Computers like long words","Computers ignore mistakes"],why:"A computer can't guess. Every step must be exactly right."},
+    {q:"Your robot crashes into a wall on step 5. What should you check first?",a:"Step 5 and the steps just before it",w:["Only step 1","The last step","Nothing, start a new program"],why:"The bug is usually at or just before the step that went wrong."},
+    {q:"Which everyday thing is most like an algorithm?",a:"A recipe for making a cake",w:["A photo of a cake","A cake shop","A birthday card"],why:"A recipe is a list of steps to follow in order."},
+    {q:"What is the main reason programmers use loops?",a:"To make programs shorter and easier to change",w:["To make programs slower","To add more bugs","To make the screen brighter"],why:"Loops avoid writing the same commands again and again."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];
+    $("qCount").textContent="Question "+(qi+1)+" of "+QN;$("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    shuffle([it.a].concat(it.w)).forEach(function(o){
+      var b=document.createElement("button");b.className="choice";b.textContent=o;
+      b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);
+    });
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Correct!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Not quite. The answer is: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Score: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      $("qEndText").textContent=(qRight===QN?"Master programmer! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep coding! ")+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});
+    } else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+    [P,D,Lp].forEach(function(m){m.runner.stop();m.runner.o.busy(false);});
+    var p=t.getAttribute("data-p");
+    if(p==="dbg"&&!started.d){started.d=1;dLoad(0);}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}
+    });
+  }
+  window.__robot={LEVELS:LEVELS,DEBUG:DEBUG,LOOPS:LOOPS,parse:parse,par:par,expand:expand,simulate:simulate,BANK:BANK,
+    P:P,D:D,Lp:Lp,pLoad:pLoad,dLoad:dLoad,lLoad:lLoad};
+})();
+</script>
+</body>
+</html>
