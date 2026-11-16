@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Continents and Oceans Map and Quiz for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive continents and oceans map for ages 7-11. Tap the world map to learn the 7 continents and 5 oceans, with easy facts, then take an auto-marked continents and oceans quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/geography/continents-oceans/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--sea:#24467E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn:focus-visible,.tab:focus-visible,.pick:focus-visible,.choice:focus-visible,.land:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.map{background:var(--sea);border-radius:14px;overflow:hidden;margin:10px 0}
+.map svg{width:100%;height:auto;display:block}
+.land{stroke:#0F1C3F;stroke-width:.5;cursor:pointer;transition:fill .2s}
+.land.sel{fill:#F4B942 !important}
+.olab{font:700 6px "Nunito Sans",sans-serif;fill:#BFD3F5;letter-spacing:.3px;cursor:pointer}
+.olab.sel{fill:#F4B942}
+.picks{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.pick{background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:6px 12px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.pick.ocean{color:#BFD3F5}
+.pick[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.card{background:var(--navy);border-radius:16px;padding:16px;margin-top:10px}
+.tag{display:inline-block;background:var(--gold);color:var(--navy);border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px}
+.card ul{margin:8px 0 0;padding-left:20px}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.ring{fill:none;stroke:#F4B942;stroke-width:2.5}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/geography/">Geography</a> › Continents and Oceans</nav>
+  <h1>Continents and Oceans 🌍</h1>
+  <p class="lead">Our planet has 7 continents (huge areas of land) and 5 oceans. Tap the map to explore each one, then take the quiz to see if you can name them all. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Continents and Oceans modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the Map</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">World Quiz</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Tap a continent or an ocean</h2>
+    <div class="map" id="mapE"></div>
+    <div class="picks" id="picks" role="group" aria-label="Continents and oceans"></div>
+    <div class="card" aria-live="polite">
+      <h3 id="iName" style="font-size:28px">Asia</h3>
+      <span class="tag" id="iTag">Continent</span>
+      <ul id="iFacts"></ul>
+    </div>
+    <p class="tip"><b>Memory tip:</b> from biggest to smallest the continents are Asia, Africa, North America, South America, Antarctica, Europe and Oceania. The oceans from biggest to smallest are the Pacific, Atlantic, Indian, Southern and Arctic. This map is flattened out, so lands near the poles (like Antarctica and Greenland) look bigger than they really are.</p>
+  </section>
+
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>World Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <div class="map" id="mapQ"></div>
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <button class="btn" id="qNext" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Get the printable geography region packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  /* Simplified outlines as [longitude, latitude] points, drawn on a flat (equirectangular) map */
+  var CONT=[
+    {id:"asia",n:"Asia",c:"#E89B6C",rank:1,shapes:[
+      [[60,68],[70,73],[80,73],[100,78],[115,74],[140,72],[160,70],[180,68],[180,65],[170,60],[160,58],[156,51],[142,54],[140,48],[130,42],[127,35],[122,40],[118,38],[121,31],[117,24],[110,21],[108,16],[109,11],[105,9],[100,14],[100,6],[104,1],[98,8],[98,16],[94,17],[90,22],[86,20],[80,15],[78,8],[73,17],[70,22],[66,25],[57,25],[56,27],[50,30],[48,30],[52,24],[56,24],[59,22],[52,16],[44,12],[42,16],[35,28],[34,31],[36,36],[28,37],[26,40],[28,41],[40,47],[50,47],[60,55]],
+      [[130,31],[132,34],[136,35],[140,35],[142,40],[141,45],[144,44],[140,42],[139,38],[136,37],[131,34]],
+      [[95,5],[106,-6],[115,-8],[110,-3],[104,-1],[98,3]],
+      [[109,1],[117,7],[119,1],[116,-4],[110,-2]]],
+      lx:95,ly:48,
+      f:["The biggest continent, with about 3 out of every 10 bits of land on Earth.","More than half of all the people in the world live here.","Mount Everest, the highest mountain on Earth (8,849 m), is in Asia.","China, India and Japan are in Asia."]},
+    {id:"africa",n:"Africa",c:"#F2CC6B",rank:2,shapes:[
+      [[-17,21],[-16,28],[-10,30],[-6,36],[10,37],[11,33],[20,31],[25,32],[32,31],[34,28],[43,12],[51,12],[48,4],[40,-3],[40,-11],[35,-20],[33,-26],[28,-33],[20,-35],[18,-32],[12,-18],[13,-10],[9,-1],[9,4],[3,6],[-8,4],[-13,8],[-17,14]],
+      [[44,-25],[47,-25],[50,-15],[49,-12],[44,-17]]],
+      lx:20,ly:5,
+      f:["The second biggest continent.","It has 54 countries, more than any other continent.","The Sahara, the biggest hot desert in the world, covers much of the north.","The River Nile flows north through Africa into the Mediterranean Sea."]},
+    {id:"namerica",n:"North America",c:"#8FD18B",rank:3,shapes:[
+      [[-165,68],[-156,71],[-130,70],[-115,73],[-95,72],[-80,73],[-65,60],[-55,52],[-66,45],[-70,42],[-76,35],[-81,31],[-80,25],[-83,29],[-90,30],[-97,27],[-97,21],[-90,21],[-87,16],[-83,10],[-79,8],[-84,10],[-92,14],[-105,20],[-112,30],[-115,32],[-125,40],[-124,48],[-133,56],[-150,60],[-165,60],[-160,64]],
+      [[-55,60],[-42,60],[-20,70],[-18,80],[-35,83],[-60,82],[-72,78],[-58,72]]],
+      lx:-102,ly:48,
+      f:["The third biggest continent.","Canada, the USA and Mexico are its three biggest countries.","Greenland, the biggest island in the world, is part of North America.","It stretches from the icy Arctic in the north to warm Central America in the south."]},
+    {id:"samerica",n:"South America",c:"#6FC7B8",rank:4,shapes:[
+      [[-79,8],[-72,12],[-62,11],[-50,4],[-35,-5],[-35,-9],[-39,-14],[-41,-22],[-48,-26],[-53,-34],[-58,-38],[-65,-42],[-68,-52],[-70,-55],[-75,-50],[-74,-40],[-71,-30],[-70,-18],[-76,-14],[-81,-6],[-80,0],[-77,4]]],
+      lx:-60,ly:-15,
+      f:["The fourth biggest continent, with 12 countries.","The Amazon, the biggest rainforest in the world, is here.","The Andes are the longest mountain range on land.","Brazil is its biggest country."]},
+    {id:"antarctica",n:"Antarctica",c:"#E6EEF8",rank:5,shapes:[
+      [[-180,-78],[-150,-76],[-120,-73],[-90,-72],[-70,-70],[-60,-64],[-56,-63],[-62,-68],[-45,-77],[-20,-73],[0,-70],[30,-69],[60,-67],[90,-66],[120,-66],[150,-68],[165,-71],[170,-76],[180,-78],[180,-85],[-180,-85]]],
+      lx:0,ly:-78,
+      f:["The coldest, windiest and driest continent on Earth.","Almost all of it is covered by a thick sheet of ice.","No country owns it and nobody lives there all the time, but scientists visit to do research.","The South Pole is in Antarctica. Penguins live on its coasts."]},
+    {id:"europe",n:"Europe",c:"#B79CE6",rank:6,shapes:[
+      [[-10,36],[-9,43],[-2,44],[-4,48],[2,51],[8,54],[10,57],[5,59],[5,62],[14,67],[20,70],[30,71],[40,68],[45,68],[60,68],[60,55],[50,47],[40,47],[28,41],[26,40],[23,38],[20,40],[18,42],[16,38],[12,44],[8,44],[3,43],[0,39],[-5,36]],
+      [[-5,50],[1,51],[2,53],[-2,56],[-3,59],[-6,58],[-5,55],[-3,54],[-5,52]],
+      [[-10,52],[-6,52],[-6,55],[-8,55]],
+      [[-24,64],[-14,64],[-15,66],[-22,66]]],
+      lx:22,ly:56,
+      f:["The second smallest continent, with about 44 countries.","The United Kingdom, France, Germany and Italy are in Europe.","Russia is partly in Europe and partly in Asia.","The Alps are a famous mountain range in the middle of Europe."]},
+    {id:"oceania",n:"Oceania",c:"#F09AB8",rank:7,shapes:[
+      [[114,-22],[122,-18],[130,-12],[137,-12],[136,-15],[141,-11],[146,-19],[153,-26],[150,-37],[144,-38],[138,-35],[132,-32],[115,-34]],
+      [[172,-34],[178,-38],[175,-41],[171,-44],[167,-46],[170,-41]],
+      [[131,-1],[141,-3],[150,-10],[141,-9]]],
+      lx:134,ly:-26,
+      f:["The smallest continent. It is often just called Australia.","It is made up of Australia, New Zealand, Papua New Guinea and thousands of Pacific islands.","Kangaroos and koalas live in the wild only in Australia.","The Great Barrier Reef, the biggest coral reef in the world, is off Australia's coast."]}
+  ];
+  var OCEANS=[
+    {id:"pacific",n:"Pacific Ocean",rank:1,lx:-140,ly:-5,f:["The biggest and deepest ocean. It is bigger than all the land on Earth put together.","It lies between Asia and Oceania on one side and North and South America on the other.","Its deepest point, in the Mariana Trench, is about 11,000 m deep."]},
+    {id:"atlantic",n:"Atlantic Ocean",rank:2,lx:-38,ly:22,f:["The second biggest ocean.","It lies between North and South America on one side and Europe and Africa on the other.","Ships crossing from the UK to the USA sail across the Atlantic."]},
+    {id:"indian",n:"Indian Ocean",rank:3,lx:78,ly:-22,f:["The third biggest ocean, and the warmest.","It has Africa to the west, Asia to the north and Australia to the east.","It is named after India."]},
+    {id:"southern",n:"Southern Ocean",rank:4,lx:-100,ly:-62,f:["The ocean that flows all the way round Antarctica.","Its water is very cold, and icebergs float in it.","Many maps only started to show it as the fifth ocean quite recently."]},
+    {id:"arctic",n:"Arctic Ocean",rank:5,lx:-20,ly:85,f:["The smallest and shallowest ocean.","It lies around the North Pole.","Much of it is covered by floating sea ice, where polar bears hunt."]}
+  ];
+  var ALL=CONT.concat(OCEANS), BYID={};
+  for(var a=0;a<ALL.length;a++){BYID[ALL[a].id]=ALL[a];ALL[a].ocean=a>=CONT.length;}
+
+  function px(p){return (p[0]+180).toFixed(1)+","+(90-p[1]).toFixed(1);}
+  function mapSVG(prefix,label){
+    var s='<svg viewBox="0 3 360 175" role="img" aria-label="'+label+'">';
+    s+='<rect x="0" y="0" width="360" height="180" fill="#24467E"/>';
+    for(var i=0;i<CONT.length;i++){
+      var C=CONT[i],d="";
+      for(var j=0;j<C.shapes.length;j++){
+        var sh=C.shapes[j];d+="M"+px(sh[0]);
+        for(var k=1;k<sh.length;k++){d+="L"+px(sh[k]);}
+        d+="Z";
+      }
+      s+='<path class="land" id="'+prefix+C.id+'" data-id="'+C.id+'" fill="'+C.c+'" d="'+d+'"><title>'+C.n+'</title></path>';
+    }
+    for(var o=0;o<OCEANS.length;o++){
+      var O=OCEANS[o];
+      s+='<text class="olab" id="'+prefix+O.id+'" data-id="'+O.id+'" x="'+(O.lx+180)+'" y="'+(90-O.ly)+'" text-anchor="middle">'+(prefix==="q"?"":O.n.toUpperCase())+'</text>';
+    }
+    s+='<circle class="ring" id="'+prefix+'ring" r="0" cx="0" cy="0" style="display:none"/>';
+    return s+'</svg>';
+  }
+
+  /* ---------- explore ---------- */
+  $("mapE").innerHTML=mapSVG("e","World map of the 7 continents and 5 oceans");
+  var pickBtns={};
+  function select(id){
+    var it=BYID[id];
+    for(var i=0;i<ALL.length;i++){
+      var el=$("e"+ALL[i].id), on=ALL[i].id===id;
+      el.setAttribute("class",(ALL[i].ocean?"olab":"land")+(on?" sel":""));
+      pickBtns[ALL[i].id].setAttribute("aria-pressed",on?"true":"false");
+    }
+    $("iName").textContent=it.n;
+    $("iTag").textContent=(it.ocean?"Ocean":"Continent")+" · number "+it.rank+" for size (out of "+(it.ocean?5:7)+")";
+    var ul=$("iFacts");ul.innerHTML="";
+    for(var f=0;f<it.f.length;f++){var li=document.createElement("li");li.textContent=it.f[f];ul.appendChild(li);}
+  }
+  var picks=$("picks");
+  for(var p=0;p<ALL.length;p++){
+    (function(it){
+      var b=document.createElement("button");b.type="button";b.className="pick"+(it.ocean?" ocean":"");
+      b.textContent=it.n;b.setAttribute("aria-pressed","false");
+      b.addEventListener("click",function(){select(it.id);});
+      picks.appendChild(b);pickBtns[it.id]=b;
+      var el=$("e"+it.id);
+      el.addEventListener("click",function(){select(it.id);});
+    })(ALL[p]);
+  }
+  select("asia");
+
+  /* ---------- quiz ---------- */
+  var COUNTRIES=[["Brazil","South America"],["Argentina","South America"],["Peru","South America"],["Egypt","Africa"],["Kenya","Africa"],["Nigeria","Africa"],["India","Asia"],["China","Asia"],["Japan","Asia"],["France","Europe"],["Italy","Europe"],["Spain","Europe"],["the United Kingdom","Europe"],["Canada","North America"],["Mexico","North America"],["the USA","North America"],["New Zealand","Oceania"],["Fiji","Oceania"]];
+  var FACTS=[
+    {q:"Which is the biggest continent?",a:"Asia",o:["Africa","Europe","North America"]},
+    {q:"Which is the smallest continent?",a:"Oceania",o:["Europe","Antarctica","South America"]},
+    {q:"Which is the biggest ocean?",a:"Pacific Ocean",o:["Atlantic Ocean","Indian Ocean","Arctic Ocean"]},
+    {q:"Which is the smallest ocean?",a:"Arctic Ocean",o:["Southern Ocean","Indian Ocean","Pacific Ocean"]},
+    {q:"Which continent is the coldest?",a:"Antarctica",o:["Europe","Asia","North America"]},
+    {q:"Which continent has the most countries?",a:"Africa",o:["Asia","Europe","South America"]},
+    {q:"Which ocean flows all the way round Antarctica?",a:"Southern Ocean",o:["Arctic Ocean","Indian Ocean","Atlantic Ocean"]},
+    {q:"Which ocean is around the North Pole?",a:"Arctic Ocean",o:["Southern Ocean","Pacific Ocean","Indian Ocean"]},
+    {q:"Which ocean lies between North America and Europe?",a:"Atlantic Ocean",o:["Pacific Ocean","Indian Ocean","Southern Ocean"]},
+    {q:"Which ocean lies between Africa and Australia?",a:"Indian Ocean",o:["Atlantic Ocean","Arctic Ocean","Southern Ocean"]},
+    {q:"How many continents are there?",a:"7",o:["5","6","9"]},
+    {q:"How many oceans are there?",a:"5",o:["3","4","7"]},
+    {q:"On which continent is Mount Everest?",a:"Asia",o:["Europe","South America","Africa"]},
+    {q:"On which continent is the Amazon rainforest?",a:"South America",o:["Africa","Asia","Oceania"]}
+  ];
+  var QN=10, qi=0, qRight=0, cur=null, answered=false;
+  $("mapQ").innerHTML=mapSVG("q","World map for the quiz");
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function others(list,ans,n){var r=[];for(var i=0;i<list.length;i++){if(list[i].n!==ans){r.push(list[i].n);}}return shuffle(r).slice(0,n);}
+  function makeQuestion(){
+    var type=Math.floor(Math.random()*5), q, it;
+    if(type<=1){
+      it=CONT[Math.floor(Math.random()*CONT.length)];
+      q={hl:it.id,text:"Which continent is shown in gold?",ans:it.n,opts:others(CONT,it.n,3),why:"That is "+it.n+"."};
+    } else if(type===2){
+      it=OCEANS[Math.floor(Math.random()*OCEANS.length)];
+      q={hl:it.id,text:"Which ocean is circled?",ans:it.n,opts:others(OCEANS,it.n,3),why:"That is the "+it.n+"."};
+    } else if(type===3){
+      var c=COUNTRIES[Math.floor(Math.random()*COUNTRIES.length)];
+      q={hl:null,text:"Which continent is "+c[0]+" in?",ans:c[1],opts:others(CONT,c[1],3),why:c[0].charAt(0).toUpperCase()+c[0].slice(1)+" is in "+c[1]+"."};
+    } else {
+      var F=FACTS[Math.floor(Math.random()*FACTS.length)];
+      q={hl:null,text:F.q,ans:F.a,opts:F.o.slice(0),why:"The answer is "+F.a+"."};
+    }
+    q.opts.push(q.ans);shuffle(q.opts);
+    return q;
+  }
+  function highlight(id){
+    var ring=$("qring");ring.style.display="none";
+    for(var i=0;i<CONT.length;i++){$("q"+CONT[i].id).setAttribute("class","land"+(CONT[i].id===id?" sel":""));}
+    if(id&&BYID[id].ocean){
+      var O=BYID[id];ring.setAttribute("cx",O.lx+180);ring.setAttribute("cy",90-O.ly);ring.setAttribute("r","11");ring.style.display="";
+    }
+  }
+  function showQ(){
+    answered=false;cur=makeQuestion();
+    highlight(cur.hl);
+    $("mapQ").style.display=cur.hl?"":"none";
+    $("qText").textContent=cur.text;
+    $("qFb").textContent="";$("qFb").className="fb";
+    $("qNext").style.display="none";
+    $("qCount").textContent="Question "+(qi+1)+" of "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    var box=$("qChoices");box.innerHTML="";
+    for(var k=0;k<cur.opts.length;k++){
+      (function(opt){
+        var b=document.createElement("button");b.className="choice";b.type="button";b.textContent=opt;
+        b.addEventListener("click",function(){answer(b,opt);});
+        box.appendChild(b);
+      })(cur.opts[k]);
+    }
+  }
+  function answer(btn,opt){
+    if(answered){return;}
+    answered=true;
+    var bs=$("qChoices").getElementsByTagName("button");
+    for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(bs[k].textContent===cur.ans){bs[k].className="choice ok";}}
+    if(opt===cur.ans){qRight++;$("qFb").textContent="Correct! "+cur.why;$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="Not quite. "+cur.why;$("qFb").className="fb no";}
+    $("qScore").textContent="Score: "+qRight;
+    $("qNext").style.display="";$("qNext").focus();
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"World expert! ":qRight>=7?"Brilliant explorer! ":qRight>=4?"Good work! ":"Keep exploring! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus();
+    } else {showQ();}
+  });
+  function startQuiz(){qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+  startQuiz();
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__co={CONT:CONT,OCEANS:OCEANS,COUNTRIES:COUNTRIES,FACTS:FACTS,makeQuestion:makeQuestion};
+})();
+</script>
+</body>
+</html>
