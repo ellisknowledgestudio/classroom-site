@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Διαδραστικό Διάγραμμα Ζωικού και Φυτικού Κυττάρου για το Γυμνάσιο | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό διάγραμμα κυττάρου για ηλικίες 11-14. Πάτησε τον πυρήνα, την κυτταρική μεμβράνη, τα μιτοχόνδρια, τους χλωροπλάστες και τα υπόλοιπα μέρη για να μάθεις τι κάνει το καθένα, σύγκρινε το ζωικό με το φυτικό κύτταρο, δες πώς τα κύτταρα φτιάχνουν ιστούς, όργανα και συστήματα οργάνων και γνώρισε έξι εξειδικευμένα κύτταρα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/cells/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/cells/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/cells/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/cells/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Noto Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Manrope",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Noto Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Manrope",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Noto Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Noto Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Manrope",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Manrope",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Noto Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Manrope",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Manrope",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* cells */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+.kind.both{background:#F6E7BD}.kind.plant{background:#8FD3A0}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke}
+.hit.on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.75)}
+.hit:focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.6)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.2)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.35)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.75)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins{display:none}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;margin:0 auto}
+.ladbox{background:#F5F7FF;border-radius:16px;padding:8px}
+#lad{display:block;width:100%;height:auto}
+#lad .lv{cursor:pointer;opacity:.28;transition:opacity .3s;outline:none}
+#lad .lv.done{opacity:.6}
+#lad .lv.on{opacity:1}
+#lad .lv.on .lvbg{stroke:#F4B942;stroke-width:6}
+#lad .lv:focus-visible .lvbg{stroke:#0F1C3F;stroke-width:5}
+.ecard .light{margin:0 0 10px;padding:6px}
+.ecard .light svg{max-width:210px}
+.ecard ul{margin:0;padding-left:20px;font-size:15px}
+.ecard li{margin:4px 0}
+.eq{font-size:17px}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+#scope{max-width:270px}
+#scope .scv{display:none}
+#scope[data-k="4"] .scv[data-k="4"],#scope[data-k="10"] .scv[data-k="10"],#scope[data-k="40"] .scv[data-k="40"]{display:block}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:10px 0 2px}
+.brbtns span{font-size:14px;color:var(--muted);font-weight:700}
+.scout{text-align:center;font:800 18px "Manrope",sans-serif;color:var(--gold);margin:8px 0 0;line-height:1.3}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin,#lad .lv{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+.chip{font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Φυσικές Επιστήμες</a> › Εξερευνητής Κυττάρων</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/cells/" lang="en" hreflang="en">English</a></div>
+  <h1>Εξερευνητής Κυττάρων</h1>
+  <p class="lead">Κάθε ζωντανός οργανισμός αποτελείται από κύτταρα. Πάτησε ένα μέρος του ζωικού ή του φυτικού κυττάρου για να δεις τι κάνει, και μετά ανακάλυψε πώς τα κύτταρα φτιάχνουν ιστούς, όργανα και ολόκληρους οργανισμούς. Ηλικίες 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες του Εξερευνητή Κυττάρων">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε τα κύτταρα</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Από το κύτταρο στον οργανισμό</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Εξειδικευμένα κύτταρα και μικροσκόπιο</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Μέρη του κυττάρου"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Επιλογές διαγράμματος">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Αριθμοί</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="0 0 720 790" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Διάγραμμα ενός ζωικού και ενός φυτικού κυττάρου με αριθμημένα τα μέρη τους"><style>.c-cyA{fill:#FBE0CF;stroke:#C96A3F;stroke-width:6;stroke-linejoin:round}
+.c-wall{fill:#8CBF6B;stroke:#4D7F3C;stroke-width:3}
+.c-cyP{fill:#E9F5D6;stroke:#C96A3F;stroke-width:4}
+.c-vac{fill:#C5E6F7;stroke:#5FA6CF;stroke-width:3;stroke-linejoin:round}
+.c-nuc{fill:#B58BD8;stroke:#6E3FA0;stroke-width:3}
+.c-nucl{fill:#7E4DB0}
+.c-hl{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.45}
+.c-mit{fill:#F5A66E;stroke:#B5562A;stroke-width:2.5}
+.c-mitl{fill:none;stroke:#B5562A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.c-chl{fill:#4FA95B;stroke:#256B33;stroke-width:2.5}
+.c-chll{fill:none;stroke:#256B33;stroke-width:3;stroke-linecap:round}</style><text class="c-title" x="360" y="38" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="27" font-weight="800" fill="#F5F7FF">Ζωικό κύτταρο</text><text class="c-title" x="360" y="436" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="27" font-weight="800" fill="#F5F7FF">Φυτικό κύτταρο</text><path class="c-cyA" d="M200 150C230 80 330 60 420 75C500 88 560 130 555 215C550 290 490 345 400 348C320 352 240 345 195 290C160 245 170 190 200 150Z"/><g transform="translate(262 150) rotate(-28)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(250 262) rotate(22)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(470 288) rotate(-30)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(482 132) rotate(32)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(335 303) rotate(4)"><rect class="c-mit" x="-29.4" y="-13.3" width="58.9" height="26.6" rx="13.3"/><path class="c-mitl" d="M-21.9 0L-14.6 6.4L-7.3 -6.4L0 6.4L7.3 -6.4L14.6 6.4L21.9 0"/></g><circle class="c-nuc" cx="385" cy="205" r="52"/><circle class="c-nucl" cx="396.4" cy="211.2" r="15.6"/><path class="c-hl" d="M349.6 199.8A36.4 36.4 0 0 1 379.8 169.6"/><rect class="c-wall" x="120" y="460" width="480" height="300" rx="26"/><rect class="c-cyP" x="136" y="476" width="448" height="268" rx="15"/><path class="c-vac" d="M272 562C300 520 420 514 500 532C545 546 548 660 510 690C450 714 320 712 277 686C246 660 250 598 272 562Z"/><g transform="translate(322 496) rotate(0)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(412 494) rotate(4)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(502 501) rotate(14)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(345 728) rotate(0)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(452 727) rotate(-5)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(540 716) rotate(-32)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(566 610) rotate(90)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(186 642) rotate(78)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(246 497) rotate(-8)"><rect class="c-mit" x="-22.3" y="-10.1" width="44.6" height="20.2" rx="10.1"/><path class="c-mitl" d="M-16.6 0L-11 4.8L-5.5 -4.8L0 4.8L5.5 -4.8L11 4.8L16.6 0"/></g><g transform="translate(165 700) rotate(52)"><rect class="c-mit" x="-22.3" y="-10.1" width="44.6" height="20.2" rx="10.1"/><path class="c-mitl" d="M-16.6 0L-11 4.8L-5.5 -4.8L0 4.8L5.5 -4.8L11 4.8L16.6 0"/></g><g transform="translate(258 727) rotate(4)"><rect class="c-mit" x="-22.3" y="-10.1" width="44.6" height="20.2" rx="10.1"/><path class="c-mitl" d="M-16.6 0L-11 4.8L-5.5 -4.8L0 4.8L5.5 -4.8L11 4.8L16.6 0"/></g><circle class="c-nuc" cx="196" cy="550" r="36"/><circle class="c-nucl" cx="203.9" cy="554.3" r="10.8"/><path class="c-hl" d="M171.5 546.4A25.2 25.2 0 0 1 192.4 525.5"/><g id="hits"><path class="hit" d="M200 150C230 80 330 60 420 75C500 88 560 130 555 215C550 290 490 345 400 348C320 352 240 345 195 290C160 245 170 190 200 150Z" data-o="cytoplasm" tabindex="0" role="button" aria-label="Κυτταρόπλασμα"/><rect class="hit" x="138" y="478" width="444" height="264" rx="13" data-o="cytoplasm" aria-hidden="true"/><path class="hit" d="M272 562C300 520 420 514 500 532C545 546 548 660 510 690C450 714 320 712 277 686C246 660 250 598 272 562Z" data-o="vacuole" tabindex="0" role="button" aria-label="Χυμοτόπιο"/><circle class="hit" cx="385" cy="205" r="54" data-o="nucleus" tabindex="0" role="button" aria-label="Πυρήνας"/><circle class="hit" cx="196" cy="550" r="38" data-o="nucleus" aria-hidden="true"/><rect class="hit" transform="translate(262 150) rotate(-28)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" tabindex="0" role="button" aria-label="Μιτοχόνδρια"/><rect class="hit" transform="translate(250 262) rotate(22)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(470 288) rotate(-30)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(482 132) rotate(32)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(335 303) rotate(4)" x="-31.3" y="-15.2" width="62.7" height="30.4" rx="15.2" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(246 497) rotate(-8)" x="-23.8" y="-11.5" width="47.5" height="23" rx="11.5" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(165 700) rotate(52)" x="-23.8" y="-11.5" width="47.5" height="23" rx="11.5" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(258 727) rotate(4)" x="-23.8" y="-11.5" width="47.5" height="23" rx="11.5" data-o="mito" aria-hidden="true"/><ellipse class="hit" transform="translate(322 496) rotate(0)" rx="28" ry="16" data-o="chloro" tabindex="0" role="button" aria-label="Χλωροπλάστες"/><ellipse class="hit" transform="translate(412 494) rotate(4)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(502 501) rotate(14)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(345 728) rotate(0)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(452 727) rotate(-5)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(540 716) rotate(-32)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(566 610) rotate(90)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(186 642) rotate(78)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><path class="hit hitv" stroke-width="16" d="M200 150C230 80 330 60 420 75C500 88 560 130 555 215C550 290 490 345 400 348C320 352 240 345 195 290C160 245 170 190 200 150Z" data-o="membrane" tabindex="0" role="button" aria-label="Κυτταρική μεμβράνη"/><rect class="hit hitv" stroke-width="9" x="138" y="478" width="444" height="264" rx="13" data-o="membrane" aria-hidden="true"/><rect class="hit hitv" stroke-width="15" x="127" y="467" width="466" height="286" rx="20" data-o="wall" tabindex="0" role="button" aria-label="Κυτταρικό τοίχωμα"/></g><g id="pins"><g class="pin" data-o="membrane"><path class="k-lead" d="M62 120L199 152" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="199" cy="152" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 120)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">1</text></g></g><g class="pin" data-o="cytoplasm"><path class="k-lead" d="M658 120L520 200" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="520" cy="200" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 120)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">2</text></g></g><g class="pin" data-o="nucleus"><path class="k-lead" d="M658 262L425 222" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="425" cy="222" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 262)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">3</text></g></g><g class="pin" data-o="mito"><path class="k-lead" d="M62 290L240 258" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="240" cy="258" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 290)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">4</text></g></g><g class="pin" data-o="wall"><path class="k-lead" d="M62 484L128 500" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="128" cy="500" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 484)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">5</text></g></g><g class="pin" data-o="nucleus"><path class="k-lead" d="M62 556L186 552" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="186" cy="552" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 556)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">3</text></g></g><g class="pin" data-o="cytoplasm"><path class="k-lead" d="M62 628L152 606" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="152" cy="606" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 628)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">2</text></g></g><g class="pin" data-o="mito"><path class="k-lead" d="M62 706L160 702" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="160" cy="702" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 706)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">4</text></g></g><g class="pin" data-o="membrane"><path class="k-lead" d="M658 520L584 540" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="584" cy="540" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 520)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">1</text></g></g><g class="pin" data-o="chloro"><path class="k-lead" d="M658 600L566 606" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="566" cy="606" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 600)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">6</text></g></g><g class="pin" data-o="vacuole"><path class="k-lead" d="M658 684L470 646" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="470" cy="646" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 684)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">7</text></g></g></g></svg></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Πίσω</button>
+            <button class="btn" id="jNext">Επόμενο</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Αναπαραγωγή</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"><div class="ladbox"><svg id="lad" viewBox="0 0 600 668" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Πέντε επίπεδα οργάνωσης, από το κύτταρο ως τον ολόκληρο οργανισμό"><g class="lv" data-l="0" tabindex="0" role="button" aria-label="Κύτταρο: Μυϊκό κύτταρο της καρδιάς" transform="translate(0 8)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">1</text></g><g transform="translate(84 8)"><rect x="22" y="32" width="106" height="36" rx="12.6" fill="#EC9393" stroke="#9C3F47" stroke-width="3.5"/><path d="M30.8 39.2V60.8M39.7 39.2V60.8M48.5 39.2V60.8M57.3 39.2V60.8M66.2 39.2V60.8M75 39.2V60.8M83.8 39.2V60.8M92.7 39.2V60.8M101.5 39.2V60.8M110.3 39.2V60.8M119.2 39.2V60.8" fill="none" stroke="#CF6E76" stroke-width="1.8"/><ellipse cx="75" cy="50" rx="11.5" ry="7.9" fill="#7E4DB0"/></g><text x="258" y="54" font-family="Manrope,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Κύτταρο</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Μυϊκό κύτταρο της καρδιάς</text></g><path d="M290 127H310L300 138Z" fill="#F4B942"/><g class="lv" data-l="1" tabindex="0" role="button" aria-label="Ιστός: Μυϊκός ιστός της καρδιάς" transform="translate(0 140)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">2</text></g><g transform="translate(84 8)"><rect x="6" y="16" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M14.8 20.2V32.8M23.6 20.2V32.8M32.4 20.2V32.8M41.2 20.2V32.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="28" cy="26.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="52" y="16" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M60.8 20.2V32.8M69.6 20.2V32.8M78.4 20.2V32.8M87.2 20.2V32.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="74" cy="26.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="98" y="16" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M106.8 20.2V32.8M115.6 20.2V32.8M124.4 20.2V32.8M133.2 20.2V32.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="120" cy="26.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="28" y="39" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M36.8 43.2V55.8M45.6 43.2V55.8M54.4 43.2V55.8M63.2 43.2V55.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="50" cy="49.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="74" y="39" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M82.8 43.2V55.8M91.6 43.2V55.8M100.4 43.2V55.8M109.2 43.2V55.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="96" cy="49.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="6" y="62" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M14.8 66.2V78.8M23.6 66.2V78.8M32.4 66.2V78.8M41.2 66.2V78.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="28" cy="72.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="52" y="62" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M60.8 66.2V78.8M69.6 66.2V78.8M78.4 66.2V78.8M87.2 66.2V78.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="74" cy="72.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="98" y="62" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M106.8 66.2V78.8M115.6 66.2V78.8M124.4 66.2V78.8M133.2 66.2V78.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="120" cy="72.5" rx="6.7" ry="4.6" fill="#7E4DB0"/></g><text x="258" y="54" font-family="Manrope,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Ιστός</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Μυϊκός ιστός της καρδιάς</text></g><path d="M290 259H310L300 270Z" fill="#F4B942"/><g class="lv" data-l="2" tabindex="0" role="button" aria-label="Όργανο: Η καρδιά" transform="translate(0 272)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">3</text></g><g transform="translate(84 8)"><path d="M62 30V8" stroke="#2F568F" stroke-width="15" stroke-linecap="round"/><path d="M62 30V8" stroke="#5B8FD6" stroke-width="10" stroke-linecap="round"/><path d="M84 32V20C84 6 106 6 108 20" fill="none" stroke="#8F2A30" stroke-width="15" stroke-linecap="round"/><path d="M84 32V20C84 6 106 6 108 20" fill="none" stroke="#E0484D" stroke-width="10" stroke-linecap="round"/><path d="M76 34C94 16 126 30 118 58C112 76 92 88 78 96C60 88 40 74 34 56C26 30 56 16 76 34Z" fill="#D9534F" stroke="#8F2A30" stroke-width="3.5" stroke-linejoin="round"/><path d="M78 40C84 56 74 70 80 88" fill="none" stroke="#8F2A30" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M46 46A26 22 0 0 1 62 32" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".4"/></g><text x="258" y="54" font-family="Manrope,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Όργανο</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Η καρδιά</text></g><path d="M290 391H310L300 402Z" fill="#F4B942"/><g class="lv" data-l="3" tabindex="0" role="button" aria-label="Σύστημα οργάνων: Κυκλοφορικό σύστημα" transform="translate(0 404)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">4</text></g><g transform="translate(84 8)"><g stroke="#D5DCEF" stroke-linecap="round" fill="none"><path d="M75 36V62" stroke-width="24"/><path d="M66 33L48 62M84 33L102 62" stroke-width="9"/><path d="M69 64L64 94M81 64L86 94" stroke-width="10"/></g><circle cx="75" cy="13" r="10" fill="#D5DCEF"/><g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M77 40V20M77 34L66 36L50 60M77 34L86 36L101 60M77 40V60L67 64L63 92M77 60L84 64L88 92" stroke="#E0484D"/><path d="M72 42V20M72 38L64 40L47 63M72 46V62L70 66L66 92M73 56L81 66L85 92M74 38L88 40L103 63" stroke="#4C7FD0"/></g><path d="M75 37C80 31 88 36 84 43C82 47 78 49 75 52C72 49 68 47 66 43C62 36 70 31 75 37Z" fill="#D9534F" stroke="#8F2A30" stroke-width="1.5"/></g><text x="258" y="54" font-family="Manrope,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Σύστημα οργάνων</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Κυκλοφορικό σύστημα</text></g><path d="M290 523H310L300 534Z" fill="#F4B942"/><g class="lv" data-l="4" tabindex="0" role="button" aria-label="Οργανισμός: Ο άνθρωπος" transform="translate(0 536)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">5</text></g><g transform="translate(84 8)"><g stroke="#24356A" stroke-linecap="round" fill="none"><path d="M75 36V62" stroke-width="24"/><path d="M66 33L48 62M84 33L102 62" stroke-width="9"/><path d="M69 64L64 94M81 64L86 94" stroke-width="10"/></g><circle cx="75" cy="13" r="10" fill="#24356A"/></g><text x="258" y="54" font-family="Manrope,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Οργανισμός</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Ο άνθρωπος</text></g></svg></div></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="special">Εξειδικευμένα κύτταρα</h2>
+    <p>Το σώμα σου έχει περίπου 200 διαφορετικά είδη κυττάρων. Τα περισσότερα είναι εξειδικευμένα: το καθένα έχει σχήμα και χαρακτηριστικά που το βοηθούν να κάνει μία δουλειά. Αυτά τα χαρακτηριστικά λέγονται προσαρμογές.</p>
+    <div class="cards"><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ερυθρό αιμοσφαίριο: ένας κόκκινος δίσκος με βαθούλωμα στη μέση"><ellipse cx="100" cy="60" rx="64" ry="46" fill="#E0484D" stroke="#8F2A30" stroke-width="3.5"/><ellipse cx="100" cy="62" rx="31" ry="21" fill="#C2343A"/><path d="M52 44A52 36 0 0 1 96 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".45"/></svg></div><h3>Ερυθρό αιμοσφαίριο</h3><div class="eq">Μεταφέρει οξυγόνο</div><ul><li>Δεν έχει πυρήνα, άρα έχει περισσότερο χώρο για την αιμοσφαιρίνη, την κόκκινη ουσία που μεταφέρει το οξυγόνο.</li><li>Το σχήμα του, σαν δίσκος με βαθούλωμα, του δίνει μεγάλη επιφάνεια για να παίρνει οξυγόνο.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Νευρικό κύτταρο: ένα κυτταρικό σώμα με διακλαδώσεις και μία μακριά ίνα"><g fill="none" stroke="#A8873A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M44 60C80 52 120 68 158 60"/><path d="M158 60L180 44M158 60L184 62M158 60L178 80M170 51L182 34M171 70L188 90"/><path d="M40 60L18 34M26 43L12 46M40 60L46 26M44 38L58 22M40 60L14 72M24 68L16 88M40 60L50 96M46 80L62 92"/></g><circle cx="182" cy="34" r="4.5" fill="#A8873A"/><circle cx="184" cy="62" r="4.5" fill="#A8873A"/><circle cx="188" cy="90" r="4.5" fill="#A8873A"/><circle cx="180" cy="44" r="4.5" fill="#A8873A"/><circle cx="178" cy="80" r="4.5" fill="#A8873A"/><circle cx="40" cy="60" r="19" fill="#F3C96B" stroke="#A8873A" stroke-width="3.5"/><circle cx="40" cy="60" r="8" fill="#7E4DB0"/></svg></div><h3>Νευρικό κύτταρο (νευρώνας)</h3><div class="eq">Μεταφέρει ηλεκτρικά σήματα</div><ul><li>Είναι πολύ μακρύ, για να μεταφέρει σήματα από ένα μέρος του σώματος σε άλλο.</li><li>Οι διακλαδισμένες άκρες του το συνδέουν με πολλά άλλα νευρικά κύτταρα.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Σπερματοζωάριο: κεφαλή, μεσαίο τμήμα και μακριά ουρά"><path d="M86 60C100 44 112 76 126 60C140 44 152 76 166 60C174 51 182 56 190 60" fill="none" stroke="#4A5E9A" stroke-width="4" stroke-linecap="round"/><rect x="58" y="52" width="30" height="16" rx="7" fill="#F5A66E" stroke="#B5562A" stroke-width="3"/><ellipse cx="38" cy="60" rx="25" ry="17" fill="#B9C7F2" stroke="#4A5E9A" stroke-width="3.5"/><ellipse cx="42" cy="60" rx="13" ry="10" fill="#7E4DB0"/></svg></div><h3>Σπερματοζωάριο</h3><div class="eq">Μεταφέρει γενετικό υλικό στο ωάριο</div><ul><li>Έχει ουρά για να κολυμπά.</li><li>Έχει πολλά μιτοχόνδρια, που απελευθερώνουν την ενέργεια που χρειάζεται για να κολυμπά.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Βλεφαριδοφόρο κύτταρο: ένα κύτταρο σαν κουτί με μικρές τρίχες στην κορυφή"><g fill="none" stroke="#B8605C" stroke-width="3.5" stroke-linecap="round"><path d="M62 42C57 32 68 26 63 12"/><path d="M71.5 42C66.5 32 77.5 26 72.5 12"/><path d="M81 42C76 32 87 26 82 12"/><path d="M90.5 42C85.5 32 96.5 26 91.5 12"/><path d="M100 42C95 32 106 26 101 12"/><path d="M109.5 42C104.5 32 115.5 26 110.5 12"/><path d="M119 42C114 32 125 26 120 12"/><path d="M128.5 42C123.5 32 134.5 26 129.5 12"/><path d="M138 42C133 32 144 26 139 12"/></g><rect x="56" y="42" width="88" height="70" rx="7" fill="#F8D2C8" stroke="#B8605C" stroke-width="3.5"/><circle cx="100" cy="86" r="14" fill="#B58BD8" stroke="#6E3FA0" stroke-width="3"/></svg></div><h3>Βλεφαριδοφόρο κύτταρο</h3><div class="eq">Κρατά καθαρούς τους αεραγωγούς</div><ul><li>Έχει στην επάνω επιφάνειά του μικροσκοπικές τρίχες, τις βλεφαρίδες.</li><li>Οι βλεφαρίδες κινούνται κυματιστά και διώχνουν τη βλέννα, τη σκόνη και τα μικρόβια μακριά από τους πνεύμονες.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Κύτταρο ριζικού τριχιδίου: ένα φυτικό κύτταρο με μία μακριά λεπτή προεξοχή"><path d="M18 24H104V46H178C194 46 194 76 178 76H104V98H18Z" fill="#E9F5D6" stroke="#4D7F3C" stroke-width="5" stroke-linejoin="round"/><path d="M52 38H92V56H170C178 56 178 66 170 66H92V86H52C42 86 42 38 52 38Z" fill="#C5E6F7" stroke="#5FA6CF" stroke-width="2.5" stroke-linejoin="round"/><circle cx="36" cy="46" r="10" fill="#B58BD8" stroke="#6E3FA0" stroke-width="2.5"/></svg></div><h3>Κύτταρο ριζικού τριχιδίου</h3><div class="eq">Απορροφά νερό και ανόργανα άλατα από το έδαφος</div><ul><li>Μια μακριά, λεπτή προεξοχή τού δίνει μεγάλη επιφάνεια.</li><li>Δεν έχει χλωροπλάστες, γιατί κάτω από το έδαφος δεν υπάρχει φως.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Πασσαλώδες κύτταρο: ένα ψηλό φυτικό κύτταρο γεμάτο χλωροπλάστες"><rect x="64" y="6" width="72" height="108" rx="9" fill="#E9F5D6" stroke="#4D7F3C" stroke-width="5"/><rect x="88" y="26" width="24" height="58" rx="10" fill="#C5E6F7" stroke="#5FA6CF" stroke-width="2.5"/><ellipse transform="translate(79 24) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(79 46) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(79 68) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 24) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 46) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 68) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(100 16) rotate(0)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 90) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><circle cx="88" cy="98" r="9" fill="#B58BD8" stroke="#6E3FA0" stroke-width="2.5"/></svg></div><h3>Πασσαλώδες κύτταρο</h3><div class="eq">Φτιάχνει τροφή με φωτοσύνθεση</div><ul><li>Είναι γεμάτο χλωροπλάστες.</li><li>Βρίσκεται κοντά στην επάνω επιφάνεια του φύλλου, όπου υπάρχει το περισσότερο φως.</li></ul></div></div>
+    <h2>Ζωικό ή φυτικό κύτταρο;</h2>
+    <div class="cards"><div class="ecard"><h3>Έχουν και τα δύο</h3><div class="eq">Τέσσερα κοινά μέρη</div><dl><dt>Πυρήνας</dt><dd>Ελέγχει το κύτταρο</dd><dt>Κυτταρόπλασμα</dt><dd>Εδώ γίνονται οι χημικές αντιδράσεις</dd><dt>Κυτταρική μεμβράνη</dt><dd>Ελέγχει τι μπαίνει και τι βγαίνει</dd><dt>Μιτοχόνδρια</dt><dd>Απελευθερώνουν ενέργεια με την κυτταρική αναπνοή</dd></dl></div><div class="ecard"><h3>Έχουν μόνο τα φυτικά κύτταρα</h3><div class="eq">Τρία επιπλέον μέρη</div><dl><dt>Κυτταρικό τοίχωμα</dt><dd>Στηρίζει το κύτταρο</dd><dt>Χλωροπλάστες</dt><dd>Φτιάχνουν τροφή με φωτοσύνθεση</dd><dt>Χυμοτόπιο</dt><dd>Κρατά το κύτταρο σφιχτό</dd></dl></div><div class="ecard"><h3>Γιατί διαφέρουν;</h3><div class="eq">Τα φυτά φτιάχνουν μόνα τους την τροφή τους</div><dl><dt>Τροφή</dt><dd>Το φυτό δεν μπορεί να μετακινηθεί για να βρει τροφή, γι&#x27; αυτό τη φτιάχνει στους χλωροπλάστες του</dd><dt>Στήριξη</dt><dd>Το φυτό δεν έχει σκελετό, γι&#x27; αυτό το στηρίζουν τα κυτταρικά τοιχώματα και τα γεμάτα χυμοτόπια</dd></dl></div></div>
+    <h2>Παρατηρούμε κύτταρα: το μικροσκόπιο</h2>
+    <p>Τα κύτταρα είναι πολύ μικρά για να τα δεις με γυμνό μάτι. Το οπτικό μικροσκόπιο χρησιμοποιεί δύο φακούς για να τα δείχνει μεγαλύτερα. Διάλεξε έναν αντικειμενικό φακό και δες τι γίνεται με αυτά τα κύτταρα κρεμμυδιού.</p>
+    <div class="vgrid"><div><div class="light"><svg id="scope" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Η εικόνα μέσα από το μικροσκόπιο: κύτταρα κρεμμυδιού που φαίνονται μεγαλύτερα όταν διαλέγεις πιο ισχυρό φακό"><defs><clipPath id="scClip"><circle cx="110" cy="110" r="98"/></clipPath><pattern id="scP4" width="13" height="13" patternUnits="userSpaceOnUse" x="106.1" y="106.8"><rect x="0" y="0" width="13" height="6.5" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="0.8"/><circle cx="8.1" cy="3.2" r="1" fill="#8A4B9E"/><rect x="-6.5" y="6.5" width="13" height="6.5" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="0.8"/><circle cx="1.6" cy="9.8" r="1" fill="#8A4B9E"/><rect x="6.5" y="6.5" width="13" height="6.5" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="0.8"/><circle cx="14.6" cy="9.8" r="1" fill="#8A4B9E"/></pattern><pattern id="scP10" width="32.5" height="32.5" patternUnits="userSpaceOnUse" x="100.2" y="101.9"><rect x="0" y="0" width="32.5" height="16.2" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="1.4"/><circle cx="20.1" cy="8.1" r="2.6" fill="#8A4B9E"/><rect x="-16.2" y="16.2" width="32.5" height="16.2" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="1.4"/><circle cx="3.9" cy="24.4" r="2.6" fill="#8A4B9E"/><rect x="16.2" y="16.2" width="32.5" height="16.2" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="1.4"/><circle cx="36.4" cy="24.4" r="2.6" fill="#8A4B9E"/></pattern><pattern id="scP40" width="130" height="130" patternUnits="userSpaceOnUse" x="71" y="77.5"><rect x="0" y="0" width="130" height="65" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="3"/><circle cx="80.6" cy="32.5" r="10.4" fill="#8A4B9E"/><rect x="-65" y="65" width="130" height="65" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="3"/><circle cx="15.6" cy="97.5" r="10.4" fill="#8A4B9E"/><rect x="65" y="65" width="130" height="65" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="3"/><circle cx="145.6" cy="97.5" r="10.4" fill="#8A4B9E"/></pattern></defs><circle cx="110" cy="110" r="104" fill="#0F1C3F"/><g clip-path="url(#scClip)"><rect class="scv" data-k="4" x="0" y="0" width="220" height="220" fill="url(#scP4)"/><rect class="scv" data-k="10" x="0" y="0" width="220" height="220" fill="url(#scP10)"/><rect class="scv" data-k="40" x="0" y="0" width="220" height="220" fill="url(#scP40)"/></g><circle cx="110" cy="110" r="98" fill="none" stroke="#0F1C3F" stroke-width="5"/></svg></div><div class="brbtns" role="group" aria-label="Αντικειμενικός φακός"><span>Αντικειμενικός φακός:</span><button class="seg" data-sk="4" aria-pressed="true">×4</button><button class="seg" data-sk="10" aria-pressed="false">×10</button><button class="seg" data-sk="40" aria-pressed="false">×40</button></div><p class="scout" id="scOut" aria-live="polite"></p></div><div class="cards"><div class="ecard"><h3>Συνολική μεγέθυνση</h3><div class="eq">προσοφθάλμιος φακός × αντικειμενικός φακός</div><dl><dt>Μικρή μεγέθυνση</dt><dd>10 × 4 = ×40</dd><dt>Μεσαία μεγέθυνση</dt><dd>10 × 10 = ×100</dd><dt>Μεγάλη μεγέθυνση</dt><dd>10 × 40 = ×400</dd></dl></div><div class="ecard"><h3>Πόσο μεγάλα είναι τα κύτταρα;</h3><div class="eq">Πολύ μικρά για να τα δεις</div><dl><dt>Ζωικό κύτταρο</dt><dd>Περίπου 0,01 ως 0,03 mm</dd><dt>Φυτικό κύτταρο</dt><dd>Περίπου 0,01 ως 0,1 mm</dd><dt>Μονάδες</dt><dd>1 mm = 1000 μικρόμετρα (μm)</dd></dl></div></div></div>
+    <p class="muted">Ξεκίνα πάντα με τον φακό της μικρότερης μεγέθυνσης και μετά προχώρησε στους ισχυρότερους. Μια χρωστική, όπως το διάλυμα ιωδίου, κάνει τον πυρήνα να φαίνεται πιο εύκολα.</p>
+    <h2>Οργανισμοί με ένα μόνο κύτταρο</h2>
+    <p>Εσύ είσαι πολυκύτταρος οργανισμός, δηλαδή αποτελείσαι από πολλά κύτταρα. Κάποιοι οργανισμοί είναι μονοκύτταροι: όλος ο οργανισμός είναι ένα κύτταρο που κάνει μόνο του όλες τις δουλειές.</p>
+    <div class="cards"><div class="ecard"><h3>Αμοιβάδα</h3><div class="eq">Ζει σε λίμνες και νερόλακκους</div><dl><dt>Κινείται</dt><dd>Αλλάζοντας σχήμα και ρέοντας προς τα εμπρός</dd><dt>Τρέφεται</dt><dd>Τυλίγοντας την τροφή της με το σώμα της</dd></dl></div><div class="ecard"><h3>Ευγλήνη</h3><div class="eq">Μοιάζει λίγο με φυτό και λίγο με ζώο</div><dl><dt>Κινείται</dt><dd>Χτυπώντας μια ουρά σαν μαστίγιο, το μαστίγιο</dd><dt>Τρέφεται</dt><dd>Με φωτοσύνθεση, χάρη στους χλωροπλάστες της</dd></dl></div><div class="ecard"><h3>Ζυμομύκητας (μαγιά)</h3><div class="eq">Ένας μονοκύτταρος μύκητας</div><dl><dt>Τρέφεται με</dt><dd>Σάκχαρα</dd><dt>Χρησιμεύει</dt><dd>Για να φουσκώνει το ψωμί</dd></dl></div><div class="ecard"><h3>Βακτήρια</h3><div class="eq">Τα μικρότερα κύτταρα</div><dl><dt>Ιδιαίτερο χαρακτηριστικό</dt><dd>Δεν έχουν πυρήνα. Το DNA βρίσκεται ελεύθερο στο κυτταρόπλασμα</dd><dt>Μέγεθος</dt><dd>Περίπου το ένα δέκατο του μήκους ενός ζωικού κυττάρου</dd></dl></div></div>
+    <h2>Μέσα και έξω από το κύτταρο: η διάχυση</h2>
+    <p>Οι ουσίες μπαίνουν στο κύτταρο και βγαίνουν από αυτό περνώντας από την κυτταρική μεμβράνη με διάχυση. Τα σωματίδια απλώνονται από εκεί όπου είναι πολλά (υψηλή συγκέντρωση) προς τα εκεί όπου είναι λιγότερα (χαμηλή συγκέντρωση).</p>
+    <div class="cards"><div class="ecard"><h3>Προς το κύτταρο</h3><div class="eq">Οξυγόνο και γλυκόζη</div><dl><dt>Γιατί</dt><dd>Τα χρειάζονται τα μιτοχόνδρια για την κυτταρική αναπνοή</dd></dl></div><div class="ecard"><h3>Έξω από το κύτταρο</h3><div class="eq">Διοξείδιο του άνθρακα</div><dl><dt>Γιατί</dt><dd>Είναι άχρηστο προϊόν της κυτταρικής αναπνοής</dd></dl></div></div>
+    <p class="muted">Ο Ρόμπερτ Χουκ ήταν ο πρώτος που περιέγραψε τα κύτταρα. Το 1665 παρατήρησε με μικροσκόπιο μια λεπτή φέτα φελλού και είδε σειρές από μικροσκοπικά κουτάκια. Τα ονόμασε κύτταρα.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Βρες εκτυπώσιμα πακέτα επιστήμης στο κατάστημα →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Μέρη του κυττάρου", "numbers": "Αριθμοί", "view": "Επιλογές διαγράμματος", "tapTitle": "Πάτησε ένα μέρος", "tapText": "Πάτησε οποιοδήποτε μέρος στο διάγραμμα ή διάλεξε ένα από την αριθμημένη λίστα.", "key": [["Οι αριθμοί 1 ως 4", "υπάρχουν και στα ζωικά και στα φυτικά κύτταρα."], ["Οι αριθμοί 5 ως 7", "υπάρχουν μόνο στα φυτικά κύτταρα."], ["Τα πραγματικά κύτταρα", "είναι πολύ μικρά για να τα δεις χωρίς μικροσκόπιο. Εδώ είναι σχεδιασμένα πολύ μεγαλύτερα από το πραγματικό τους μέγεθος."], ["Τα χρώματα", "σε βοηθούν να ξεχωρίζεις τα μέρη. Στην πραγματικότητα, τα περισσότερα μέρη ενός κυττάρου είναι άχρωμα. Μόνο οι χλωροπλάστες είναι πράσινοι."]], "kinds": {"both": "Σε ζωικά και φυτικά κύτταρα", "plant": "Μόνο σε φυτικά κύτταρα"}, "facts": "Βασικά στοιχεία", "works": "Συνεργάζεται με", "words": "Λέξεις-κλειδιά:", "toSpecial": "Γνώρισε έξι εξειδικευμένα κύτταρα", "step": "Επίπεδο", "of": "από", "back": "Πίσω", "next": "Επόμενο", "again": "Από την αρχή", "play": "Αναπαραγωγή", "pause": "Παύση", "happens": "Τι να ξέρεις", "exA": "Στο σώμα σου", "exP": "Σε ένα φυτό", "scOut": "Προσοφθάλμιος ×10 × αντικειμενικός ×{k} = συνολικά ×{t}"};
+  var PARTS=[{"id": "membrane", "n": 1, "chip": "Κυτταρική μεμβράνη", "name": "Κυτταρική μεμβράνη", "kind": "both", "job": "Ένα λεπτό στρώμα γύρω από το κύτταρο. Ελέγχει ποιες ουσίες μπαίνουν στο κύτταρο και ποιες βγαίνουν από αυτό.", "facts": ["Χρήσιμες ουσίες, όπως το οξυγόνο και η γλυκόζη, μπαίνουν μέσα από αυτήν.", "Άχρηστες ουσίες, όπως το διοξείδιο του άνθρακα, βγαίνουν.", "Στο φυτικό κύτταρο βρίσκεται ακριβώς μέσα από το κυτταρικό τοίχωμα, γι' αυτό φαίνεται δύσκολα στο μικροσκόπιο."], "links": [["cytoplasm", "Συγκρατεί το κυτταρόπλασμα."], ["wall", "Στο φυτικό κύτταρο, το κυτταρικό τοίχωμα βρίσκεται ακριβώς απέξω της."]], "words": "μεμβράνη, διάχυση"}, {"id": "cytoplasm", "n": 2, "chip": "Κυτταρόπλασμα", "name": "Κυτταρόπλασμα", "kind": "both", "job": "Ένα παχύρρευστο υγρό που γεμίζει το κύτταρο. Εδώ γίνονται οι περισσότερες χημικές αντιδράσεις του κυττάρου.", "facts": ["Είναι κυρίως νερό, με πολλές ουσίες διαλυμένες μέσα του.", "Τα άλλα μέρη του κυττάρου, όπως τα μιτοχόνδρια, βρίσκονται μέσα σε αυτό.", "Στο φυτικό κύτταρο, το μεγάλο χυμοτόπιο το σπρώχνει προς τις άκρες."], "links": [["membrane", "Η κυτταρική μεμβράνη το συγκρατεί."], ["mito", "Τα μιτοχόνδρια βρίσκονται μέσα του."]], "words": "κυτταρόπλασμα, χημική αντίδραση"}, {"id": "nucleus", "n": 3, "chip": "Πυρήνας", "name": "Πυρήνας", "kind": "both", "job": "Το κέντρο ελέγχου του κυττάρου. Περιέχει το γενετικό υλικό, το DNA, που έχει τις οδηγίες για όλα όσα κάνει το κύτταρο.", "facts": ["Όταν ένα κύτταρο διαιρείται για να φτιάξει νέα κύτταρα, το DNA αντιγράφεται και περνά σε αυτά.", "Συνήθως είναι το μέρος που φαίνεται πιο εύκολα στο οπτικό μικροσκόπιο, ειδικά αν το κύτταρο έχει χρωματιστεί με χρωστική.", "Δεν έχουν όλα τα κύτταρα πυρήνα. Τα ερυθρά αιμοσφαίρια δεν έχουν."], "links": [["cytoplasm", "Βρίσκεται μέσα στο κυτταρόπλασμα."], ["vacuole", "Στο φυτικό κύτταρο, το χυμοτόπιο τον σπρώχνει στο πλάι."]], "words": "πυρήνας, DNA, γενετικό υλικό", "more": "special"}, {"id": "mito", "n": 4, "chip": "Μιτοχόνδρια", "name": "Μιτοχόνδρια", "kind": "both", "job": "Μικροσκοπικά οργανίδια όπου γίνεται η κυτταρική αναπνοή. Χρησιμοποιούν οξυγόνο για να απελευθερώσουν ενέργεια από τη γλυκόζη.", "facts": ["Το ένα λέγεται μιτοχόνδριο.", "Τα κύτταρα που χρειάζονται πολλή ενέργεια, όπως τα μυϊκά, έχουν πολλά μιτοχόνδρια.", "Είναι πολύ μικρά για να φανούν καθαρά με ένα σχολικό μικροσκόπιο.", "Η κυτταρική αναπνοή δεν είναι το ίδιο με την αναπνοή που κάνουμε με τους πνεύμονες. Είναι μια χημική αντίδραση που γίνεται σε κάθε ζωντανό κύτταρο."], "links": [["cytoplasm", "Βρίσκονται μέσα στο κυτταρόπλασμα."], ["chloro", "Στα φυτά, οι χλωροπλάστες φτιάχνουν τη γλυκόζη που χρησιμοποιούν τα μιτοχόνδρια."]], "words": "μιτοχόνδρια, κυτταρική αναπνοή, ενέργεια"}, {"id": "wall", "n": 5, "chip": "Κυτταρικό τοίχωμα", "name": "Κυτταρικό τοίχωμα", "kind": "plant", "job": "Ένα ανθεκτικό στρώμα γύρω από το φυτικό κύτταρο. Στηρίζει το κύτταρο και το βοηθά να κρατά το σχήμα του.", "facts": ["Είναι φτιαγμένο από μια σκληρή ουσία, την κυτταρίνη.", "Το νερό και οι διαλυμένες ουσίες περνούν εύκολα μέσα από αυτό.", "Τα ζωικά κύτταρα δεν έχουν κυτταρικό τοίχωμα. Γι' αυτό μπορούν να έχουν στρογγυλά ή ακανόνιστα σχήματα.", "Μην το μπερδεύεις με την κυτταρική μεμβράνη, που βρίσκεται ακριβώς από μέσα."], "links": [["membrane", "Η κυτταρική μεμβράνη βρίσκεται ακριβώς από μέσα."], ["vacuole", "Το χυμοτόπιο το πιέζει προς τα έξω και κρατά το κύτταρο σφιχτό."]], "words": "κυτταρικό τοίχωμα, κυτταρίνη, στήριξη"}, {"id": "chloro", "n": 6, "chip": "Χλωροπλάστες", "name": "Χλωροπλάστες", "kind": "plant", "job": "Μικρά πράσινα οργανίδια όπου γίνεται η φωτοσύνθεση. Χρησιμοποιούν την ενέργεια του φωτός για να φτιάξουν γλυκόζη από διοξείδιο του άνθρακα και νερό.", "facts": ["Περιέχουν μια πράσινη ουσία, τη χλωροφύλλη, που απορροφά το φως.", "Σε αυτούς οφείλεται το πράσινο χρώμα των φύλλων.", "Τους έχουν μόνο τα μέρη του φυτού που βλέπουν φως. Τα κύτταρα της ρίζας δεν έχουν.", "Τα ζωικά κύτταρα δεν έχουν ποτέ χλωροπλάστες, γι' αυτό τα ζώα δεν μπορούν να φτιάξουν μόνα τους την τροφή τους."], "links": [["mito", "Τα μιτοχόνδρια απελευθερώνουν ενέργεια από τη γλυκόζη που φτιάχνουν οι χλωροπλάστες."], ["cytoplasm", "Βρίσκονται μέσα στο κυτταρόπλασμα."]], "words": "χλωροπλάστης, χλωροφύλλη, φωτοσύνθεση"}, {"id": "vacuole", "n": 7, "chip": "Χυμοτόπιο", "name": "Χυμοτόπιο", "kind": "plant", "job": "Ένας μεγάλος χώρος στο κέντρο του φυτικού κυττάρου, γεμάτος με ένα υδαρές υγρό, τον κυτταρικό χυμό. Βοηθά το κύτταρο να μένει σφιχτό.", "facts": ["Ο κυτταρικός χυμός είναι νερό με διαλυμένα σάκχαρα και ανόργανα άλατα.", "Όταν το χυμοτόπιο είναι γεμάτο, πιέζει το κυτταρικό τοίχωμα προς τα έξω. Έτσι το φυτό στέκεται όρθιο.", "Αν το φυτό δεν έχει αρκετό νερό, τα χυμοτόπια συρρικνώνονται και το φυτό μαραίνεται.", "Τα ζωικά κύτταρα μπορεί να έχουν μικρά, προσωρινά κενοτόπια, αλλά όχι ένα μεγάλο και μόνιμο."], "links": [["wall", "Πιέζει το κυτταρικό τοίχωμα προς τα έξω."], ["cytoplasm", "Σπρώχνει το κυτταρόπλασμα προς τις άκρες του κυττάρου."]], "words": "χυμοτόπιο, κυτταρικός χυμός, μαραίνεται"}];
+  var STEPS=[{"title": "Κύτταρο", "sum": "Το κύτταρο είναι το μικρότερο δομικό στοιχείο ενός ζωντανού οργανισμού.", "pts": ["Το σώμα σου έχει πολλά είδη κυττάρων, και κάθε είδος κάνει διαφορετική δουλειά.", "Ένα μυϊκό κύτταρο της καρδιάς μπορεί να συσπάται, δηλαδή να κονταίνει.", "Έχει πολλά μιτοχόνδρια για να απελευθερώνει την ενέργεια που χρειάζεται."], "a": "Μυϊκό κύτταρο της καρδιάς", "p": "Πασσαλώδες κύτταρο"}, {"title": "Ιστός", "sum": "Ιστός είναι μια ομάδα από όμοια κύτταρα που συνεργάζονται για να κάνουν μία δουλειά.", "pts": ["Τα μυϊκά κύτταρα της καρδιάς ενώνονται και φτιάχνουν τον μυϊκό ιστό της καρδιάς.", "Όταν όλα τα κύτταρα συσπώνται μαζί, ο ιστός σφίγγει.", "Άλλοι ιστοί του σώματός σου είναι ο νευρικός και ο οστίτης ιστός."], "a": "Μυϊκός ιστός της καρδιάς", "p": "Πασσαλώδης ιστός (πασσαλώδες παρέγχυμα)"}, {"title": "Όργανο", "sum": "Όργανο είναι μια ομάδα από διαφορετικούς ιστούς που συνεργάζονται για να κάνουν μια δουλειά.", "pts": ["Η καρδιά αποτελείται από μυϊκό ιστό, νευρικό ιστό και άλλους ιστούς.", "Η δουλειά της είναι να αντλεί το αίμα.", "Άλλα όργανα είναι το στομάχι, οι πνεύμονες, ο εγκέφαλος, οι νεφροί και το δέρμα."], "a": "Η καρδιά", "p": "Το φύλλο"}, {"title": "Σύστημα οργάνων", "sum": "Σύστημα οργάνων είναι μια ομάδα από όργανα που συνεργάζονται.", "pts": ["Η καρδιά, τα αιμοφόρα αγγεία και το αίμα αποτελούν το κυκλοφορικό σύστημα.", "Μεταφέρει οξυγόνο και τροφή σε κάθε κύτταρο του σώματός σου.", "Άλλα συστήματα οργάνων είναι το πεπτικό, το αναπνευστικό, το απεκκριτικό, το νευρικό και το σκελετικό."], "a": "Κυκλοφορικό σύστημα", "p": "Το υπέργειο τμήμα: βλαστός, φύλλα και άνθη"}, {"title": "Οργανισμός", "sum": "Οργανισμός είναι ένα ολόκληρο ζωντανό πλάσμα. Όλα τα συστήματα οργάνων του συνεργάζονται για να το κρατούν ζωντανό.", "pts": ["Είσαι ένας πολυκύτταρος οργανισμός, φτιαγμένος από δεκάδες τρισεκατομμύρια κύτταρα.", "Κάποιοι οργανισμοί αποτελούνται από ένα μόνο κύτταρο. Λέγονται μονοκύτταροι οργανισμοί.", "Θυμήσου τη σειρά: κύτταρο, ιστός, όργανο, σύστημα οργάνων, οργανισμός."], "a": "Ο άνθρωπος", "p": "Ολόκληρο το φυτό"}];
+  var fig=$("fig"),info=$("info"),chips=$("chips"),lad=$("lad");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(id){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      if(id&&els[a].getAttribute("data-o")===id)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(id)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more==="special")h+="<p><button class=\"btn ghost\" id=\"toSpecial\">"+esc(L.toSpecial)+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    light(id);
+    if(!id){info.innerHTML=intro();return;}
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toSpecial"){show("more");var v=$("special");if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- from cell to organism ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1);
+  }
+  function jGo(n){
+    clearTimeout(jTimer);
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children,lv=lad.querySelectorAll(".lv");
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    for(a=0;a<lv.length;a++)lv[a].setAttribute("class","lv"+(a<n?" done":(a===n?" on":"")));
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.exA)+"</b>"+esc(s.a)+"</span><span><b>"+esc(L.exP)+"</b>"+esc(s.p)+"</span></div>";
+    $("jInfo").innerHTML=h;
+    if(playing)jTimer=setTimeout(adv,4200);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji);
+  };
+  function ladPick(e){
+    var t=e.target.closest?e.target.closest(".lv"):null;
+    if(t){setPlaying(false);jGo(parseInt(t.getAttribute("data-l"),10));}
+  }
+  lad.addEventListener("click",ladPick);
+  lad.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();ladPick(e);}
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey")setPlaying(false);
+    mode=id;
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- microscope ---------- */
+  (function(){
+    var sc=$("scope"),out=$("scOut"),bs=document.querySelectorAll("[data-sk]");
+    function set(k){
+      sc.setAttribute("data-k",k);
+      for(var a=0;a<bs.length;a++)bs[a].setAttribute("aria-pressed",bs[a].getAttribute("data-sk")===k?"true":"false");
+      out.textContent=L.scOut.replace("{k}",k).replace("{t}",String(10*parseInt(k,10)));
+    }
+    for(var a=0;a<bs.length;a++)bs[a].onclick=function(){set(this.getAttribute("data-sk"));};
+    set("4");
+  })();
+
+  select(null);
+  jGo(0);
+
+  /* exposed for checking */
+  window.CellLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Animal and Plant Cell Diagram for KS3 | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive cell diagram for ages 11-14. Tap the nucleus, cell membrane, mitochondria, chloroplasts and more to learn what each part does, compare animal and plant cells, see how cells build tissues, organs and organ systems, and meet six specialised cells.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/cells/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/cells/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/cells/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/cells/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Baloo 2",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Baloo 2",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Nunito Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Baloo 2",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Baloo 2",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* cells */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+.kind.both{background:#F6E7BD}.kind.plant{background:#8FD3A0}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke}
+.hit.on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.75)}
+.hit:focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.6)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.2)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.35)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.75)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins{display:none}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;margin:0 auto}
+.ladbox{background:#F5F7FF;border-radius:16px;padding:8px}
+#lad{display:block;width:100%;height:auto}
+#lad .lv{cursor:pointer;opacity:.28;transition:opacity .3s;outline:none}
+#lad .lv.done{opacity:.6}
+#lad .lv.on{opacity:1}
+#lad .lv.on .lvbg{stroke:#F4B942;stroke-width:6}
+#lad .lv:focus-visible .lvbg{stroke:#0F1C3F;stroke-width:5}
+.ecard .light{margin:0 0 10px;padding:6px}
+.ecard .light svg{max-width:210px}
+.ecard ul{margin:0;padding-left:20px;font-size:15px}
+.ecard li{margin:4px 0}
+.eq{font-size:17px}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+#scope{max-width:270px}
+#scope .scv{display:none}
+#scope[data-k="4"] .scv[data-k="4"],#scope[data-k="10"] .scv[data-k="10"],#scope[data-k="40"] .scv[data-k="40"]{display:block}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:10px 0 2px}
+.brbtns span{font-size:14px;color:var(--muted);font-weight:700}
+.scout{text-align:center;font:800 18px "Baloo 2",sans-serif;color:var(--gold);margin:8px 0 0;line-height:1.3}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin,#lad .lv{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › Cells Explorer</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/cells/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Cells Explorer</h1>
+  <p class="lead">Every living thing is made of cells. Tap any part of the animal cell or the plant cell to see what it does, then find out how cells build tissues, organs and whole organisms. Ages 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Cells Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the cells</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">From cell to organism</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Specialised cells and microscopes</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Parts of a cell"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Diagram options">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Numbers</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="0 0 720 790" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Diagram of an animal cell and a plant cell with their parts numbered"><style>.c-cyA{fill:#FBE0CF;stroke:#C96A3F;stroke-width:6;stroke-linejoin:round}
+.c-wall{fill:#8CBF6B;stroke:#4D7F3C;stroke-width:3}
+.c-cyP{fill:#E9F5D6;stroke:#C96A3F;stroke-width:4}
+.c-vac{fill:#C5E6F7;stroke:#5FA6CF;stroke-width:3;stroke-linejoin:round}
+.c-nuc{fill:#B58BD8;stroke:#6E3FA0;stroke-width:3}
+.c-nucl{fill:#7E4DB0}
+.c-hl{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.45}
+.c-mit{fill:#F5A66E;stroke:#B5562A;stroke-width:2.5}
+.c-mitl{fill:none;stroke:#B5562A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.c-chl{fill:#4FA95B;stroke:#256B33;stroke-width:2.5}
+.c-chll{fill:none;stroke:#256B33;stroke-width:3;stroke-linecap:round}</style><text class="c-title" x="360" y="38" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="27" font-weight="800" fill="#F5F7FF">Animal cell</text><text class="c-title" x="360" y="436" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="27" font-weight="800" fill="#F5F7FF">Plant cell</text><path class="c-cyA" d="M200 150C230 80 330 60 420 75C500 88 560 130 555 215C550 290 490 345 400 348C320 352 240 345 195 290C160 245 170 190 200 150Z"/><g transform="translate(262 150) rotate(-28)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(250 262) rotate(22)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(470 288) rotate(-30)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(482 132) rotate(32)"><rect class="c-mit" x="-31" y="-14" width="62" height="28" rx="14"/><path class="c-mitl" d="M-23 0L-15.3 6.7L-7.7 -6.7L0 6.7L7.7 -6.7L15.3 6.7L23 0"/></g><g transform="translate(335 303) rotate(4)"><rect class="c-mit" x="-29.4" y="-13.3" width="58.9" height="26.6" rx="13.3"/><path class="c-mitl" d="M-21.9 0L-14.6 6.4L-7.3 -6.4L0 6.4L7.3 -6.4L14.6 6.4L21.9 0"/></g><circle class="c-nuc" cx="385" cy="205" r="52"/><circle class="c-nucl" cx="396.4" cy="211.2" r="15.6"/><path class="c-hl" d="M349.6 199.8A36.4 36.4 0 0 1 379.8 169.6"/><rect class="c-wall" x="120" y="460" width="480" height="300" rx="26"/><rect class="c-cyP" x="136" y="476" width="448" height="268" rx="15"/><path class="c-vac" d="M272 562C300 520 420 514 500 532C545 546 548 660 510 690C450 714 320 712 277 686C246 660 250 598 272 562Z"/><g transform="translate(322 496) rotate(0)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(412 494) rotate(4)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(502 501) rotate(14)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(345 728) rotate(0)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(452 727) rotate(-5)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(540 716) rotate(-32)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(566 610) rotate(90)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(186 642) rotate(78)"><ellipse class="c-chl" rx="25" ry="13"/><path class="c-chll" d="M-11 -5V5M0 -7V7M11 -5V5"/></g><g transform="translate(246 497) rotate(-8)"><rect class="c-mit" x="-22.3" y="-10.1" width="44.6" height="20.2" rx="10.1"/><path class="c-mitl" d="M-16.6 0L-11 4.8L-5.5 -4.8L0 4.8L5.5 -4.8L11 4.8L16.6 0"/></g><g transform="translate(165 700) rotate(52)"><rect class="c-mit" x="-22.3" y="-10.1" width="44.6" height="20.2" rx="10.1"/><path class="c-mitl" d="M-16.6 0L-11 4.8L-5.5 -4.8L0 4.8L5.5 -4.8L11 4.8L16.6 0"/></g><g transform="translate(258 727) rotate(4)"><rect class="c-mit" x="-22.3" y="-10.1" width="44.6" height="20.2" rx="10.1"/><path class="c-mitl" d="M-16.6 0L-11 4.8L-5.5 -4.8L0 4.8L5.5 -4.8L11 4.8L16.6 0"/></g><circle class="c-nuc" cx="196" cy="550" r="36"/><circle class="c-nucl" cx="203.9" cy="554.3" r="10.8"/><path class="c-hl" d="M171.5 546.4A25.2 25.2 0 0 1 192.4 525.5"/><g id="hits"><path class="hit" d="M200 150C230 80 330 60 420 75C500 88 560 130 555 215C550 290 490 345 400 348C320 352 240 345 195 290C160 245 170 190 200 150Z" data-o="cytoplasm" tabindex="0" role="button" aria-label="Cytoplasm"/><rect class="hit" x="138" y="478" width="444" height="264" rx="13" data-o="cytoplasm" aria-hidden="true"/><path class="hit" d="M272 562C300 520 420 514 500 532C545 546 548 660 510 690C450 714 320 712 277 686C246 660 250 598 272 562Z" data-o="vacuole" tabindex="0" role="button" aria-label="Vacuole"/><circle class="hit" cx="385" cy="205" r="54" data-o="nucleus" tabindex="0" role="button" aria-label="Nucleus"/><circle class="hit" cx="196" cy="550" r="38" data-o="nucleus" aria-hidden="true"/><rect class="hit" transform="translate(262 150) rotate(-28)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" tabindex="0" role="button" aria-label="Mitochondria"/><rect class="hit" transform="translate(250 262) rotate(22)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(470 288) rotate(-30)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(482 132) rotate(32)" x="-33" y="-16" width="66" height="32" rx="16" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(335 303) rotate(4)" x="-31.3" y="-15.2" width="62.7" height="30.4" rx="15.2" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(246 497) rotate(-8)" x="-23.8" y="-11.5" width="47.5" height="23" rx="11.5" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(165 700) rotate(52)" x="-23.8" y="-11.5" width="47.5" height="23" rx="11.5" data-o="mito" aria-hidden="true"/><rect class="hit" transform="translate(258 727) rotate(4)" x="-23.8" y="-11.5" width="47.5" height="23" rx="11.5" data-o="mito" aria-hidden="true"/><ellipse class="hit" transform="translate(322 496) rotate(0)" rx="28" ry="16" data-o="chloro" tabindex="0" role="button" aria-label="Chloroplasts"/><ellipse class="hit" transform="translate(412 494) rotate(4)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(502 501) rotate(14)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(345 728) rotate(0)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(452 727) rotate(-5)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(540 716) rotate(-32)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(566 610) rotate(90)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><ellipse class="hit" transform="translate(186 642) rotate(78)" rx="28" ry="16" data-o="chloro" aria-hidden="true"/><path class="hit hitv" stroke-width="16" d="M200 150C230 80 330 60 420 75C500 88 560 130 555 215C550 290 490 345 400 348C320 352 240 345 195 290C160 245 170 190 200 150Z" data-o="membrane" tabindex="0" role="button" aria-label="Cell membrane"/><rect class="hit hitv" stroke-width="9" x="138" y="478" width="444" height="264" rx="13" data-o="membrane" aria-hidden="true"/><rect class="hit hitv" stroke-width="15" x="127" y="467" width="466" height="286" rx="20" data-o="wall" tabindex="0" role="button" aria-label="Cell wall"/></g><g id="pins"><g class="pin" data-o="membrane"><path class="k-lead" d="M62 120L199 152" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="199" cy="152" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 120)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">1</text></g></g><g class="pin" data-o="cytoplasm"><path class="k-lead" d="M658 120L520 200" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="520" cy="200" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 120)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">2</text></g></g><g class="pin" data-o="nucleus"><path class="k-lead" d="M658 262L425 222" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="425" cy="222" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 262)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">3</text></g></g><g class="pin" data-o="mito"><path class="k-lead" d="M62 290L240 258" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="240" cy="258" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 290)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">4</text></g></g><g class="pin" data-o="wall"><path class="k-lead" d="M62 484L128 500" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="128" cy="500" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 484)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">5</text></g></g><g class="pin" data-o="nucleus"><path class="k-lead" d="M62 556L186 552" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="186" cy="552" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 556)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">3</text></g></g><g class="pin" data-o="cytoplasm"><path class="k-lead" d="M62 628L152 606" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="152" cy="606" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 628)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">2</text></g></g><g class="pin" data-o="mito"><path class="k-lead" d="M62 706L160 702" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="160" cy="702" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(62 706)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">4</text></g></g><g class="pin" data-o="membrane"><path class="k-lead" d="M658 520L584 540" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="584" cy="540" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 520)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">1</text></g></g><g class="pin" data-o="chloro"><path class="k-lead" d="M658 600L566 606" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="566" cy="606" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 600)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">6</text></g></g><g class="pin" data-o="vacuole"><path class="k-lead" d="M658 684L470 646" stroke="#F4B942" stroke-width="1.8"/><circle class="k-dot" cx="470" cy="646" r="3.6" fill="#F4B942"/><g class="k-pin" transform="translate(658 684)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Manrope,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">7</text></g></g></g></svg></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Back</button>
+            <button class="btn" id="jNext">Next</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Play all</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"><div class="ladbox"><svg id="lad" viewBox="0 0 600 668" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Five levels of organisation, from a cell to a whole organism"><g class="lv" data-l="0" tabindex="0" role="button" aria-label="Cell: Heart muscle cell" transform="translate(0 8)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">1</text></g><g transform="translate(84 8)"><rect x="22" y="32" width="106" height="36" rx="12.6" fill="#EC9393" stroke="#9C3F47" stroke-width="3.5"/><path d="M30.8 39.2V60.8M39.7 39.2V60.8M48.5 39.2V60.8M57.3 39.2V60.8M66.2 39.2V60.8M75 39.2V60.8M83.8 39.2V60.8M92.7 39.2V60.8M101.5 39.2V60.8M110.3 39.2V60.8M119.2 39.2V60.8" fill="none" stroke="#CF6E76" stroke-width="1.8"/><ellipse cx="75" cy="50" rx="11.5" ry="7.9" fill="#7E4DB0"/></g><text x="258" y="54" font-family="Baloo 2,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Cell</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Heart muscle cell</text></g><path d="M290 127H310L300 138Z" fill="#F4B942"/><g class="lv" data-l="1" tabindex="0" role="button" aria-label="Tissue: Heart muscle tissue" transform="translate(0 140)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">2</text></g><g transform="translate(84 8)"><rect x="6" y="16" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M14.8 20.2V32.8M23.6 20.2V32.8M32.4 20.2V32.8M41.2 20.2V32.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="28" cy="26.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="52" y="16" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M60.8 20.2V32.8M69.6 20.2V32.8M78.4 20.2V32.8M87.2 20.2V32.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="74" cy="26.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="98" y="16" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M106.8 20.2V32.8M115.6 20.2V32.8M124.4 20.2V32.8M133.2 20.2V32.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="120" cy="26.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="28" y="39" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M36.8 43.2V55.8M45.6 43.2V55.8M54.4 43.2V55.8M63.2 43.2V55.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="50" cy="49.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="74" y="39" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M82.8 43.2V55.8M91.6 43.2V55.8M100.4 43.2V55.8M109.2 43.2V55.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="96" cy="49.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="6" y="62" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M14.8 66.2V78.8M23.6 66.2V78.8M32.4 66.2V78.8M41.2 66.2V78.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="28" cy="72.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="52" y="62" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M60.8 66.2V78.8M69.6 66.2V78.8M78.4 66.2V78.8M87.2 66.2V78.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="74" cy="72.5" rx="6.7" ry="4.6" fill="#7E4DB0"/><rect x="98" y="62" width="44" height="21" rx="7.3" fill="#EC9393" stroke="#9C3F47" stroke-width="2.5"/><path d="M106.8 66.2V78.8M115.6 66.2V78.8M124.4 66.2V78.8M133.2 66.2V78.8" fill="none" stroke="#CF6E76" stroke-width="1.2"/><ellipse cx="120" cy="72.5" rx="6.7" ry="4.6" fill="#7E4DB0"/></g><text x="258" y="54" font-family="Baloo 2,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Tissue</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Heart muscle tissue</text></g><path d="M290 259H310L300 270Z" fill="#F4B942"/><g class="lv" data-l="2" tabindex="0" role="button" aria-label="Organ: The heart" transform="translate(0 272)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">3</text></g><g transform="translate(84 8)"><path d="M62 30V8" stroke="#2F568F" stroke-width="15" stroke-linecap="round"/><path d="M62 30V8" stroke="#5B8FD6" stroke-width="10" stroke-linecap="round"/><path d="M84 32V20C84 6 106 6 108 20" fill="none" stroke="#8F2A30" stroke-width="15" stroke-linecap="round"/><path d="M84 32V20C84 6 106 6 108 20" fill="none" stroke="#E0484D" stroke-width="10" stroke-linecap="round"/><path d="M76 34C94 16 126 30 118 58C112 76 92 88 78 96C60 88 40 74 34 56C26 30 56 16 76 34Z" fill="#D9534F" stroke="#8F2A30" stroke-width="3.5" stroke-linejoin="round"/><path d="M78 40C84 56 74 70 80 88" fill="none" stroke="#8F2A30" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><path d="M46 46A26 22 0 0 1 62 32" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".4"/></g><text x="258" y="54" font-family="Baloo 2,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Organ</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">The heart</text></g><path d="M290 391H310L300 402Z" fill="#F4B942"/><g class="lv" data-l="3" tabindex="0" role="button" aria-label="Organ system: Circulatory system" transform="translate(0 404)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">4</text></g><g transform="translate(84 8)"><g stroke="#D5DCEF" stroke-linecap="round" fill="none"><path d="M75 36V62" stroke-width="24"/><path d="M66 33L48 62M84 33L102 62" stroke-width="9"/><path d="M69 64L64 94M81 64L86 94" stroke-width="10"/></g><circle cx="75" cy="13" r="10" fill="#D5DCEF"/><g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M77 40V20M77 34L66 36L50 60M77 34L86 36L101 60M77 40V60L67 64L63 92M77 60L84 64L88 92" stroke="#E0484D"/><path d="M72 42V20M72 38L64 40L47 63M72 46V62L70 66L66 92M73 56L81 66L85 92M74 38L88 40L103 63" stroke="#4C7FD0"/></g><path d="M75 37C80 31 88 36 84 43C82 47 78 49 75 52C72 49 68 47 66 43C62 36 70 31 75 37Z" fill="#D9534F" stroke="#8F2A30" stroke-width="1.5"/></g><text x="258" y="54" font-family="Baloo 2,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Organ system</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">Circulatory system</text></g><path d="M290 523H310L300 534Z" fill="#F4B942"/><g class="lv" data-l="4" tabindex="0" role="button" aria-label="Organism: A human" transform="translate(0 536)"><rect class="lvbg" x="8" y="0" width="584" height="116" rx="18" fill="#fff" stroke="#C5CEE8" stroke-width="2.5"/><g transform="translate(46 58)"><circle r="20" fill="#F4B942" stroke="#0F1C3F" stroke-width="2"/><text y="7.5" text-anchor="middle" font-family="Baloo 2,Arial,sans-serif" font-size="22" font-weight="800" fill="#0F1C3F">5</text></g><g transform="translate(84 8)"><g stroke="#24356A" stroke-linecap="round" fill="none"><path d="M75 36V62" stroke-width="24"/><path d="M66 33L48 62M84 33L102 62" stroke-width="9"/><path d="M69 64L64 94M81 64L86 94" stroke-width="10"/></g><circle cx="75" cy="13" r="10" fill="#24356A"/></g><text x="258" y="54" font-family="Baloo 2,Arial,sans-serif" font-size="29" font-weight="800" fill="#0F1C3F">Organism</text><text x="258" y="84" font-family="Nunito Sans,Noto Sans,Arial,sans-serif" font-size="20" fill="#3A4A7A">A human</text></g></svg></div></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="special">Specialised cells</h2>
+    <p>Your body has about 200 different types of cell. Most of them are specialised: each has a shape and features that help it to do one job. These features are called adaptations.</p>
+    <div class="cards"><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A red blood cell: a red disc with a dimple in the middle"><ellipse cx="100" cy="60" rx="64" ry="46" fill="#E0484D" stroke="#8F2A30" stroke-width="3.5"/><ellipse cx="100" cy="62" rx="31" ry="21" fill="#C2343A"/><path d="M52 44A52 36 0 0 1 96 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".45"/></svg></div><h3>Red blood cell</h3><div class="eq">Carries oxygen</div><ul><li>No nucleus, so there is more room for haemoglobin, the red substance that carries oxygen.</li><li>Its dimpled disc shape gives it a large surface area for taking in oxygen.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A nerve cell: a cell body with branches and one long fibre"><g fill="none" stroke="#A8873A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M44 60C80 52 120 68 158 60"/><path d="M158 60L180 44M158 60L184 62M158 60L178 80M170 51L182 34M171 70L188 90"/><path d="M40 60L18 34M26 43L12 46M40 60L46 26M44 38L58 22M40 60L14 72M24 68L16 88M40 60L50 96M46 80L62 92"/></g><circle cx="182" cy="34" r="4.5" fill="#A8873A"/><circle cx="184" cy="62" r="4.5" fill="#A8873A"/><circle cx="188" cy="90" r="4.5" fill="#A8873A"/><circle cx="180" cy="44" r="4.5" fill="#A8873A"/><circle cx="178" cy="80" r="4.5" fill="#A8873A"/><circle cx="40" cy="60" r="19" fill="#F3C96B" stroke="#A8873A" stroke-width="3.5"/><circle cx="40" cy="60" r="8" fill="#7E4DB0"/></svg></div><h3>Nerve cell</h3><div class="eq">Carries electrical signals</div><ul><li>Very long, so it can carry signals from one part of the body to another.</li><li>Branched ends connect it to many other nerve cells.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A sperm cell: a head, a middle section and a long tail"><path d="M86 60C100 44 112 76 126 60C140 44 152 76 166 60C174 51 182 56 190 60" fill="none" stroke="#4A5E9A" stroke-width="4" stroke-linecap="round"/><rect x="58" y="52" width="30" height="16" rx="7" fill="#F5A66E" stroke="#B5562A" stroke-width="3"/><ellipse cx="38" cy="60" rx="25" ry="17" fill="#B9C7F2" stroke="#4A5E9A" stroke-width="3.5"/><ellipse cx="42" cy="60" rx="13" ry="10" fill="#7E4DB0"/></svg></div><h3>Sperm cell</h3><div class="eq">Carries genetic material to the egg cell</div><ul><li>A tail for swimming.</li><li>Lots of mitochondria to release the energy it needs to swim.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A ciliated cell: a box-shaped cell with tiny hairs on top"><g fill="none" stroke="#B8605C" stroke-width="3.5" stroke-linecap="round"><path d="M62 42C57 32 68 26 63 12"/><path d="M71.5 42C66.5 32 77.5 26 72.5 12"/><path d="M81 42C76 32 87 26 82 12"/><path d="M90.5 42C85.5 32 96.5 26 91.5 12"/><path d="M100 42C95 32 106 26 101 12"/><path d="M109.5 42C104.5 32 115.5 26 110.5 12"/><path d="M119 42C114 32 125 26 120 12"/><path d="M128.5 42C123.5 32 134.5 26 129.5 12"/><path d="M138 42C133 32 144 26 139 12"/></g><rect x="56" y="42" width="88" height="70" rx="7" fill="#F8D2C8" stroke="#B8605C" stroke-width="3.5"/><circle cx="100" cy="86" r="14" fill="#B58BD8" stroke="#6E3FA0" stroke-width="3"/></svg></div><h3>Ciliated cell</h3><div class="eq">Keeps the airways clean</div><ul><li>Tiny hairs called cilia on its top surface.</li><li>The cilia wave to sweep mucus, dust and microbes away from the lungs.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A root hair cell: a plant cell with one long thin extension"><path d="M18 24H104V46H178C194 46 194 76 178 76H104V98H18Z" fill="#E9F5D6" stroke="#4D7F3C" stroke-width="5" stroke-linejoin="round"/><path d="M52 38H92V56H170C178 56 178 66 170 66H92V86H52C42 86 42 38 52 38Z" fill="#C5E6F7" stroke="#5FA6CF" stroke-width="2.5" stroke-linejoin="round"/><circle cx="36" cy="46" r="10" fill="#B58BD8" stroke="#6E3FA0" stroke-width="2.5"/></svg></div><h3>Root hair cell</h3><div class="eq">Takes in water and minerals from the soil</div><ul><li>A long, thin hair gives it a large surface area.</li><li>No chloroplasts, because there is no light underground.</li></ul></div><div class="ecard"><div class="light"><svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A palisade cell: a tall plant cell full of chloroplasts"><rect x="64" y="6" width="72" height="108" rx="9" fill="#E9F5D6" stroke="#4D7F3C" stroke-width="5"/><rect x="88" y="26" width="24" height="58" rx="10" fill="#C5E6F7" stroke="#5FA6CF" stroke-width="2.5"/><ellipse transform="translate(79 24) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(79 46) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(79 68) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 24) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 46) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 68) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(100 16) rotate(0)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><ellipse transform="translate(121 90) rotate(90)" rx="9.5" ry="5.5" fill="#4FA95B" stroke="#256B33" stroke-width="2"/><circle cx="88" cy="98" r="9" fill="#B58BD8" stroke="#6E3FA0" stroke-width="2.5"/></svg></div><h3>Palisade cell</h3><div class="eq">Makes food by photosynthesis</div><ul><li>Packed with chloroplasts.</li><li>Found near the top of a leaf, where there is the most light.</li></ul></div></div>
+    <h2>Animal cell or plant cell?</h2>
+    <div class="cards"><div class="ecard"><h3>Both have</h3><div class="eq">Four parts in common</div><dl><dt>Nucleus</dt><dd>Controls the cell</dd><dt>Cytoplasm</dt><dd>Where chemical reactions happen</dd><dt>Cell membrane</dt><dd>Controls what goes in and out</dd><dt>Mitochondria</dt><dd>Release energy by respiration</dd></dl></div><div class="ecard"><h3>Only plant cells have</h3><div class="eq">Three extra parts</div><dl><dt>Cell wall</dt><dd>Supports the cell</dd><dt>Chloroplasts</dt><dd>Make food by photosynthesis</dd><dt>Vacuole</dt><dd>Keeps the cell firm</dd></dl></div><div class="ecard"><h3>Why the difference?</h3><div class="eq">Plants make their own food</div><dl><dt>Food</dt><dd>A plant cannot move to find food, so it makes it in its chloroplasts</dd><dt>Support</dt><dd>A plant has no skeleton, so cell walls and full vacuoles hold it up</dd></dl></div></div>
+    <h2>Looking at cells: the microscope</h2>
+    <p>Cells are too small to see with your eyes alone. A light microscope uses two lenses to make them look bigger. Choose an objective lens to see what happens to these onion cells.</p>
+    <div class="vgrid"><div><div class="light"><svg id="scope" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The view down a microscope: onion cells that look bigger when you choose a stronger lens"><defs><clipPath id="scClip"><circle cx="110" cy="110" r="98"/></clipPath><pattern id="scP4" width="13" height="13" patternUnits="userSpaceOnUse" x="106.1" y="106.8"><rect x="0" y="0" width="13" height="6.5" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="0.8"/><circle cx="8.1" cy="3.2" r="1" fill="#8A4B9E"/><rect x="-6.5" y="6.5" width="13" height="6.5" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="0.8"/><circle cx="1.6" cy="9.8" r="1" fill="#8A4B9E"/><rect x="6.5" y="6.5" width="13" height="6.5" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="0.8"/><circle cx="14.6" cy="9.8" r="1" fill="#8A4B9E"/></pattern><pattern id="scP10" width="32.5" height="32.5" patternUnits="userSpaceOnUse" x="100.2" y="101.9"><rect x="0" y="0" width="32.5" height="16.2" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="1.4"/><circle cx="20.1" cy="8.1" r="2.6" fill="#8A4B9E"/><rect x="-16.2" y="16.2" width="32.5" height="16.2" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="1.4"/><circle cx="3.9" cy="24.4" r="2.6" fill="#8A4B9E"/><rect x="16.2" y="16.2" width="32.5" height="16.2" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="1.4"/><circle cx="36.4" cy="24.4" r="2.6" fill="#8A4B9E"/></pattern><pattern id="scP40" width="130" height="130" patternUnits="userSpaceOnUse" x="71" y="77.5"><rect x="0" y="0" width="130" height="65" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="3"/><circle cx="80.6" cy="32.5" r="10.4" fill="#8A4B9E"/><rect x="-65" y="65" width="130" height="65" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="3"/><circle cx="15.6" cy="97.5" r="10.4" fill="#8A4B9E"/><rect x="65" y="65" width="130" height="65" fill="#F6E6F2" stroke="#9A5C8E" stroke-width="3"/><circle cx="145.6" cy="97.5" r="10.4" fill="#8A4B9E"/></pattern></defs><circle cx="110" cy="110" r="104" fill="#0F1C3F"/><g clip-path="url(#scClip)"><rect class="scv" data-k="4" x="0" y="0" width="220" height="220" fill="url(#scP4)"/><rect class="scv" data-k="10" x="0" y="0" width="220" height="220" fill="url(#scP10)"/><rect class="scv" data-k="40" x="0" y="0" width="220" height="220" fill="url(#scP40)"/></g><circle cx="110" cy="110" r="98" fill="none" stroke="#0F1C3F" stroke-width="5"/></svg></div><div class="brbtns" role="group" aria-label="Objective lens"><span>Objective lens:</span><button class="seg" data-sk="4" aria-pressed="true">×4</button><button class="seg" data-sk="10" aria-pressed="false">×10</button><button class="seg" data-sk="40" aria-pressed="false">×40</button></div><p class="scout" id="scOut" aria-live="polite"></p></div><div class="cards"><div class="ecard"><h3>Total magnification</h3><div class="eq">eyepiece lens × objective lens</div><dl><dt>Low power</dt><dd>10 × 4 = ×40</dd><dt>Medium power</dt><dd>10 × 10 = ×100</dd><dt>High power</dt><dd>10 × 40 = ×400</dd></dl></div><div class="ecard"><h3>How big are cells?</h3><div class="eq">Too small to see</div><dl><dt>Animal cell</dt><dd>About 0.01 to 0.03 mm across</dd><dt>Plant cell</dt><dd>About 0.01 to 0.1 mm long</dd><dt>Units</dt><dd>1 mm = 1000 micrometres (µm)</dd></dl></div></div></div>
+    <p class="muted">Always start with the lowest power lens, then move up. A stain such as iodine solution makes the nucleus easier to see.</p>
+    <h2>Living things made of one cell</h2>
+    <p>You are multicellular, which means you are made of many cells. Some living things are unicellular: the whole organism is a single cell that does every job itself.</p>
+    <div class="cards"><div class="ecard"><h3>Amoeba</h3><div class="eq">Lives in ponds</div><dl><dt>Moves by</dt><dd>Changing its shape and flowing along</dd><dt>Feeds by</dt><dd>Wrapping itself around its food</dd></dl></div><div class="ecard"><h3>Euglena</h3><div class="eq">Part plant-like, part animal-like</div><dl><dt>Moves by</dt><dd>Beating a whip-like tail called a flagellum</dd><dt>Feeds by</dt><dd>Photosynthesis, using its chloroplasts</dd></dl></div><div class="ecard"><h3>Yeast</h3><div class="eq">A single-celled fungus</div><dl><dt>Feeds on</dt><dd>Sugar</dd><dt>Used for</dt><dd>Making bread rise</dd></dl></div><div class="ecard"><h3>Bacteria</h3><div class="eq">The smallest cells</div><dl><dt>Special feature</dt><dd>No nucleus. The DNA is loose in the cytoplasm</dd><dt>Size</dt><dd>About a tenth of the length of an animal cell</dd></dl></div></div>
+    <h2>Getting in and out: diffusion</h2>
+    <p>Substances move into and out of a cell through the cell membrane by diffusion. The particles spread out from where there are a lot of them (a high concentration) to where there are fewer (a low concentration).</p>
+    <div class="cards"><div class="ecard"><h3>Into the cell</h3><div class="eq">Oxygen and glucose</div><dl><dt>Why</dt><dd>The mitochondria need them for respiration</dd></dl></div><div class="ecard"><h3>Out of the cell</h3><div class="eq">Carbon dioxide</div><dl><dt>Why</dt><dd>It is a waste product of respiration</dd></dl></div></div>
+    <p class="muted">Robert Hooke was the first person to describe cells. In 1665 he looked at a thin slice of cork through a microscope and saw rows of tiny boxes. He called them cells.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find the printable Cells and Organisation Practice Pack in our shop →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Parts of a cell", "numbers": "Numbers", "view": "Diagram options", "tapTitle": "Tap a part", "tapText": "Tap any part of the diagram, or pick one from the numbered list.", "key": [["Numbers 1 to 4", "are found in both animal cells and plant cells."], ["Numbers 5 to 7", "are found only in plant cells."], ["Real cells", "are far too small to see without a microscope. These are drawn much larger than real size."], ["The colours", "are there to help you tell the parts apart. Most parts of a real cell are colourless. Only the chloroplasts are green."]], "kinds": {"both": "In animal and plant cells", "plant": "In plant cells only"}, "facts": "Key facts", "works": "Works with", "words": "Key words:", "toSpecial": "Meet six specialised cells", "step": "Level", "of": "of", "back": "Back", "next": "Next", "again": "Start again", "play": "Play all", "pause": "Pause", "happens": "What to know", "exA": "In your body", "exP": "In a plant", "scOut": "Eyepiece ×10 × objective ×{k} = total ×{t}"};
+  var PARTS=[{"id": "membrane", "n": 1, "chip": "Cell membrane", "name": "Cell membrane", "kind": "both", "job": "A thin layer around the outside of the cell. It controls which substances can go into and out of the cell.", "facts": ["Useful substances such as oxygen and glucose pass in through it.", "Waste substances such as carbon dioxide pass out.", "In a plant cell it sits just inside the cell wall, so it is hard to see under a microscope."], "links": [["cytoplasm", "It holds the cytoplasm in."], ["wall", "In a plant cell, the cell wall is just outside it."]], "words": "membrane, diffusion"}, {"id": "cytoplasm", "n": 2, "chip": "Cytoplasm", "name": "Cytoplasm", "kind": "both", "job": "A jelly-like liquid that fills the cell. Most of the cell's chemical reactions happen here.", "facts": ["It is mostly water, with many substances dissolved in it.", "The other parts of the cell, such as the mitochondria, sit in it.", "In a plant cell it is pushed to the edges by the large vacuole."], "links": [["membrane", "The cell membrane holds it in."], ["mito", "The mitochondria are found in it."]], "words": "cytoplasm, chemical reaction"}, {"id": "nucleus", "n": 3, "chip": "Nucleus", "name": "Nucleus", "kind": "both", "job": "The control centre of the cell. It contains the genetic material, DNA, which holds the instructions for everything the cell does.", "facts": ["The DNA is copied and passed on when a cell divides to make new cells.", "It is usually the easiest part to see under a light microscope, especially if the cell has been stained.", "Not every cell has one. Red blood cells have no nucleus."], "links": [["cytoplasm", "It sits in the cytoplasm."], ["vacuole", "In a plant cell, the vacuole pushes it to one side."]], "words": "nucleus, DNA, genetic material", "more": "special"}, {"id": "mito", "n": 4, "chip": "Mitochondria", "name": "Mitochondria", "kind": "both", "job": "Tiny structures where aerobic respiration happens. They use oxygen to release energy from glucose.", "facts": ["One on its own is called a mitochondrion.", "Cells that need a lot of energy, such as muscle cells, have a lot of mitochondria.", "They are too small to see clearly with a school microscope.", "Respiration is not the same as breathing. It is a chemical reaction that happens in every living cell."], "links": [["cytoplasm", "They are found in the cytoplasm."], ["chloro", "In a plant, chloroplasts make the glucose that the mitochondria use."]], "words": "mitochondria, respiration, energy"}, {"id": "wall", "n": 5, "chip": "Cell wall", "name": "Cell wall", "kind": "plant", "job": "A strong layer around the outside of a plant cell. It supports the cell and helps it to keep its shape.", "facts": ["It is made of a tough substance called cellulose.", "Water and dissolved substances can pass through it easily.", "Animal cells do not have a cell wall. That is why they can have rounded or uneven shapes.", "Do not mix it up with the cell membrane, which is just inside it."], "links": [["membrane", "The cell membrane is just inside it."], ["vacuole", "The vacuole pushes out against it and keeps the cell firm."]], "words": "cell wall, cellulose, support"}, {"id": "chloro", "n": 6, "chip": "Chloroplasts", "name": "Chloroplasts", "kind": "plant", "job": "Small green structures where photosynthesis happens. They use light energy to make glucose from carbon dioxide and water.", "facts": ["They contain a green substance called chlorophyll, which absorbs light.", "They are the reason that leaves are green.", "Only the parts of a plant that get light have them. Root cells have none.", "Animal cells never have chloroplasts, so animals cannot make their own food."], "links": [["mito", "The mitochondria release energy from the glucose that chloroplasts make."], ["cytoplasm", "They are found in the cytoplasm."]], "words": "chloroplast, chlorophyll, photosynthesis"}, {"id": "vacuole", "n": 7, "chip": "Vacuole", "name": "Vacuole", "kind": "plant", "job": "A large space in the middle of a plant cell, filled with a watery liquid called cell sap. It helps to keep the cell firm.", "facts": ["Cell sap is water with sugars and mineral salts dissolved in it.", "When the vacuole is full, it pushes out against the cell wall. This helps to hold the plant upright.", "If a plant is short of water, its vacuoles shrink and the plant wilts.", "Animal cells may have small, temporary vacuoles, but not a large permanent one."], "links": [["wall", "It pushes out against the cell wall."], ["cytoplasm", "It pushes the cytoplasm to the edges of the cell."]], "words": "vacuole, cell sap, wilt"}];
+  var STEPS=[{"title": "Cell", "sum": "A cell is the smallest building block of a living thing.", "pts": ["Your body is made of many types of cell, and each type does a different job.", "A heart muscle cell can contract, which means it gets shorter.", "It has lots of mitochondria to release the energy it needs."], "a": "Heart muscle cell", "p": "Palisade cell"}, {"title": "Tissue", "sum": "A tissue is a group of similar cells that work together to do one job.", "pts": ["Heart muscle cells join together to make heart muscle tissue.", "When all the cells contract at the same time, the tissue squeezes.", "Other tissues in your body include nervous tissue and bone tissue."], "a": "Heart muscle tissue", "p": "Palisade tissue"}, {"title": "Organ", "sum": "An organ is a group of different tissues that work together to do a job.", "pts": ["The heart is made of muscle tissue, nervous tissue and other tissues.", "Its job is to pump blood.", "Other organs include the stomach, lungs, brain, kidneys and skin."], "a": "The heart", "p": "A leaf"}, {"title": "Organ system", "sum": "An organ system is a group of organs that work together.", "pts": ["The heart, the blood vessels and the blood make up the circulatory system.", "It carries oxygen and food to every cell in your body.", "Other organ systems include the digestive, respiratory, excretory, nervous and skeletal systems."], "a": "Circulatory system", "p": "Shoot system: the stem, leaves and flowers"}, {"title": "Organism", "sum": "An organism is a whole living thing. All of its organ systems work together to keep it alive.", "pts": ["You are a multicellular organism, made of tens of trillions of cells.", "Some organisms are made of only one cell. They are called unicellular organisms.", "Remember the order: cell, tissue, organ, organ system, organism."], "a": "A human", "p": "A whole plant"}];
+  var fig=$("fig"),info=$("info"),chips=$("chips"),lad=$("lad");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(id){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      if(id&&els[a].getAttribute("data-o")===id)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(id)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more==="special")h+="<p><button class=\"btn ghost\" id=\"toSpecial\">"+esc(L.toSpecial)+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    light(id);
+    if(!id){info.innerHTML=intro();return;}
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toSpecial"){show("more");var v=$("special");if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- from cell to organism ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1);
+  }
+  function jGo(n){
+    clearTimeout(jTimer);
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children,lv=lad.querySelectorAll(".lv");
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    for(a=0;a<lv.length;a++)lv[a].setAttribute("class","lv"+(a<n?" done":(a===n?" on":"")));
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.exA)+"</b>"+esc(s.a)+"</span><span><b>"+esc(L.exP)+"</b>"+esc(s.p)+"</span></div>";
+    $("jInfo").innerHTML=h;
+    if(playing)jTimer=setTimeout(adv,4200);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji);
+  };
+  function ladPick(e){
+    var t=e.target.closest?e.target.closest(".lv"):null;
+    if(t){setPlaying(false);jGo(parseInt(t.getAttribute("data-l"),10));}
+  }
+  lad.addEventListener("click",ladPick);
+  lad.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();ladPick(e);}
+  });
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey")setPlaying(false);
+    mode=id;
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- microscope ---------- */
+  (function(){
+    var sc=$("scope"),out=$("scOut"),bs=document.querySelectorAll("[data-sk]");
+    function set(k){
+      sc.setAttribute("data-k",k);
+      for(var a=0;a<bs.length;a++)bs[a].setAttribute("aria-pressed",bs[a].getAttribute("data-sk")===k?"true":"false");
+      out.textContent=L.scOut.replace("{k}",k).replace("{t}",String(10*parseInt(k,10)));
+    }
+    for(var a=0;a<bs.length;a++)bs[a].onclick=function(){set(this.getAttribute("data-sk"));};
+    set("4");
+  })();
+
+  select(null);
+  jGo(0);
+
+  /* exposed for checking */
+  window.CellLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
