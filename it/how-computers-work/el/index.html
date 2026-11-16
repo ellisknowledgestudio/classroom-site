@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Πώς Λειτουργεί ένας Υπολογιστής: Δωρεάν Διαδραστικό Εργαλείο για Παιδιά | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό εργαλείο για ηλικίες 7-11 που δείχνει πώς λειτουργεί ένας υπολογιστής. Πάτησε τα μέρη του υπολογιστή, ακολούθησε τα δεδομένα από το πληκτρολόγιο ως την οθόνη, ταξινόμησε συσκευές εισόδου, εξόδου και αποθήκευσης και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;
+--c-input:#5AA9FF;--c-output:#4CC38A;--c-process:#F4B942;--c-storage:#B48CFF;--c-support:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.chip:focus-visible,.choice:focus-visible,.part:focus-visible,.scen:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.ipo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:10px 0 4px;font:800 17px "Baloo 2",sans-serif}
+.ipo span{border-radius:999px;padding:2px 12px;color:var(--navy)}
+.ipo i{font-style:normal;color:var(--muted)}
+/* explore */
+.scene{background:var(--navy);border-radius:16px;padding:8px;margin-top:12px}
+.scene svg{width:100%;height:auto;display:block}
+.part{cursor:pointer;transition:opacity .2s}
+.part:hover,.part.sel{filter:drop-shadow(0 0 6px #F4B942)}
+.part.dim{opacity:.22}
+.blades{transform-box:fill-box;transform-origin:center;animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:999px;padding:6px 12px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.chip .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:0}
+.info{background:var(--navy);border-radius:16px;padding:16px;margin-top:12px;border-left:6px solid var(--gold)}
+.info h3{font-size:28px;line-height:1.1}
+.tag{display:inline-block;color:var(--navy);border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px}
+.info p{margin:.5em 0}
+.info .like{color:var(--muted)}
+/* data flow */
+.scens{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.scen{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:14px;padding:8px 12px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.scen[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.flow{background:var(--navy);border-radius:16px;padding:8px;max-width:520px;margin:12px auto 0}
+.flow svg{width:100%;height:auto;display:block}
+.node rect{transition:fill .25s,stroke-width .25s}
+.node.lit rect{fill:#2C3B72;stroke-width:5}
+.edge{stroke:#2C3B72;stroke-width:4}
+.edge.lit{stroke:var(--gold)}
+.stepbox{background:var(--navy);border-radius:14px;padding:12px 16px;margin-top:12px;min-height:96px}
+.stepbox .n{color:var(--gold);font-weight:700}
+.bits{font-family:monospace;letter-spacing:.15em;color:var(--gold);font-weight:700}
+/* sort + quiz */
+.big{font-size:64px;line-height:1;margin:6px 0}
+.big svg{width:72px;height:72px}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choices.three{grid-template-columns:1fr 1fr 1fr}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.center{text-align:center}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.choices.three{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.blades{animation:none}.part{transition:none}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Πώς Λειτουργεί ένας Υπολογιστής</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/" lang="en" hreflang="en">English</a></div>
+  <h1>Πώς Λειτουργεί ένας Υπολογιστής 💻</h1>
+  <p class="lead">Τι υπάρχει μέσα σε έναν υπολογιστή και πώς, όταν πατάς ένα πλήκτρο, εμφανίζεται ένα γράμμα στην οθόνη; Πάτησε τα μέρη, ακολούθησε το ταξίδι των δεδομένων, ταξινόμησε τις συσκευές και μετά δοκίμασε τις γνώσεις σου. Ηλικίες 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες: Πώς Λειτουργεί ένας Υπολογιστής">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε τα Μέρη</button>
+    <button class="tab" role="tab" id="t-flow" aria-controls="flow" aria-selected="false" tabindex="-1" data-p="flow">Ακολούθησε τα Δεδομένα</button>
+    <button class="tab" role="tab" id="t-sort" aria-controls="sort" aria-selected="false" tabindex="-1" data-p="sort">Ταξινόμησέ τα!</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
+  </div>
+
+  <!-- ============ EXPLORE ============ -->
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Κοίτα μέσα σε έναν υπολογιστή</h2>
+    <p>Κάθε υπολογιστής ακολουθεί την ίδια μεγάλη ιδέα. Οι πληροφορίες <b>μπαίνουν</b>, ο υπολογιστής <b>τις επεξεργάζεται</b> και το αποτέλεσμα <b>βγαίνει</b>. Η μνήμη και η αποθήκευση κρατούν πράγματα στην πορεία.</p>
+    <div class="ipo" aria-label="Είσοδος, μετά επεξεργασία, μετά έξοδος">
+      <span style="background:var(--c-input)">Είσοδος</span><i>→</i><span style="background:var(--c-process)">Επεξεργασία</span><i>→</i><span style="background:var(--c-output)">Έξοδος</span>
+    </div>
+    <p class="muted center" style="margin-top:0">Βγάλαμε το πλάι από το κουτί του υπολογιστή για να δεις μέσα. Πάτησε όποιο μέρος θέλεις.</p>
+
+    <div class="scene">
+      <svg id="pc" viewBox="0 0 640 336" role="group" aria-label="Ένας επιτραπέζιος υπολογιστής χωρίς το πλάι του κουτιού του">
+        <line x1="0" y1="324" x2="640" y2="324" stroke="#26356b" stroke-width="4"/>
+        <!-- monitor -->
+        <g class="part" data-id="monitor" tabindex="0" role="button" aria-label="Οθόνη">
+          <rect x="40" y="40" width="260" height="170" rx="10" fill="#2B3A6E" stroke="#4CC38A" stroke-width="3"/>
+          <rect x="54" y="54" width="232" height="142" rx="4" fill="#0B1430"/>
+          <rect x="70" y="68" width="150" height="88" rx="6" fill="#1A2A55" stroke="#2C3B72"/>
+          <rect x="70" y="68" width="150" height="16" rx="6" fill="#2C3B72"/>
+          <text x="84" y="116" fill="#F4B942" font-size="26" font-family="Baloo 2, sans-serif" font-weight="800">Γεια!</text>
+          <rect x="232" y="70" width="40" height="30" rx="4" fill="#4CC38A" opacity=".6"/>
+          <rect x="232" y="110" width="40" height="30" rx="4" fill="#5AA9FF" opacity=".6"/>
+          <rect x="155" y="210" width="30" height="36" fill="#2B3A6E"/>
+          <rect x="115" y="244" width="110" height="10" rx="5" fill="#2B3A6E"/>
+        </g>
+        <!-- webcam -->
+        <g class="part" data-id="webcam" tabindex="0" role="button" aria-label="Κάμερα web">
+          <rect x="146" y="20" width="48" height="22" rx="10" fill="#1d2333" stroke="#5AA9FF" stroke-width="3"/>
+          <circle cx="170" cy="31" r="6" fill="#5AA9FF"/>
+        </g>
+        <!-- speakers -->
+        <g class="part" data-id="speakers" tabindex="0" role="button" aria-label="Ηχεία">
+          <rect x="4" y="138" width="30" height="112" rx="6" fill="#26356b" stroke="#4CC38A" stroke-width="3"/>
+          <circle cx="19" cy="164" r="7" fill="#0F1C3F"/><circle cx="19" cy="214" r="11" fill="#0F1C3F"/>
+          <rect x="306" y="138" width="30" height="112" rx="6" fill="#26356b" stroke="#4CC38A" stroke-width="3"/>
+          <circle cx="321" cy="164" r="7" fill="#0F1C3F"/><circle cx="321" cy="214" r="11" fill="#0F1C3F"/>
+        </g>
+        <!-- keyboard -->
+        <g class="part" data-id="keyboard" tabindex="0" role="button" aria-label="Πληκτρολόγιο">
+          <rect x="50" y="266" width="216" height="50" rx="8" fill="#26356b" stroke="#5AA9FF" stroke-width="3"/>
+          <g id="kbKeys"></g>
+        </g>
+        <!-- mouse -->
+        <g class="part" data-id="mouse" tabindex="0" role="button" aria-label="Ποντίκι">
+          <ellipse cx="300" cy="292" rx="18" ry="26" fill="#26356b" stroke="#5AA9FF" stroke-width="3"/>
+          <line x1="300" y1="268" x2="300" y2="288" stroke="#5AA9FF" stroke-width="2"/>
+        </g>
+        <!-- case -->
+        <rect x="372" y="20" width="258" height="304" rx="14" fill="#16234E" stroke="#3A4C8A" stroke-width="3"/>
+        <!-- motherboard -->
+        <g class="part" data-id="motherboard" tabindex="0" role="button" aria-label="Μητρική πλακέτα">
+          <rect x="386" y="36" width="164" height="210" rx="6" fill="#1F5E45" stroke="#FF8FB1" stroke-width="3"/>
+          <path d="M470 120 V150 H530 M440 120 V140 H400 M500 140 V200 M410 210 H540 M420 200 V230 M470 200 V236" stroke="#39A575" stroke-width="2" fill="none" opacity=".8"/>
+          <rect x="520" y="214" width="20" height="20" rx="3" fill="#174a37" stroke="#39A575"/>
+        </g>
+        <!-- cpu -->
+        <g class="part" data-id="cpu" tabindex="0" role="button" aria-label="CPU (επεξεργαστής)">
+          <rect x="406" y="56" width="58" height="58" rx="4" fill="#C9CED8" stroke="#F4B942" stroke-width="3"/>
+          <rect x="419" y="69" width="32" height="32" rx="2" fill="#9AA3B5"/>
+          <text x="435" y="90" font-size="12" text-anchor="middle" fill="#0F1C3F" font-weight="700" font-family="Nunito Sans, sans-serif">CPU</text>
+        </g>
+        <!-- ram -->
+        <g class="part" data-id="ram" tabindex="0" role="button" aria-label="RAM (μνήμη)">
+          <rect x="476" y="48" width="44" height="90" fill="#000" opacity="0"/>
+          <rect x="481" y="52" width="12" height="80" rx="2" fill="#3B3F8F" stroke="#B48CFF" stroke-width="2"/>
+          <rect x="501" y="52" width="12" height="80" rx="2" fill="#3B3F8F" stroke="#B48CFF" stroke-width="2"/>
+        </g>
+        <!-- gpu -->
+        <g class="part" data-id="gpu" tabindex="0" role="button" aria-label="Κάρτα γραφικών">
+          <rect x="396" y="158" width="144" height="36" rx="5" fill="#2A2F45" stroke="#F4B942" stroke-width="3"/>
+          <circle cx="432" cy="176" r="12" fill="#3E4563" stroke="#8C9BD1" stroke-width="2"/>
+          <circle cx="504" cy="176" r="12" fill="#3E4563" stroke="#8C9BD1" stroke-width="2"/>
+        </g>
+        <!-- storage -->
+        <g class="part" data-id="storage" tabindex="0" role="button" aria-label="Δίσκος αποθήκευσης (SSD)">
+          <rect x="562" y="146" width="52" height="80" rx="5" fill="#2A2F45" stroke="#B48CFF" stroke-width="3"/>
+          <text x="588" y="191" font-size="13" text-anchor="middle" fill="#B48CFF" font-weight="700" font-family="Nunito Sans, sans-serif">SSD</text>
+        </g>
+        <!-- fan -->
+        <g class="part" data-id="fan" tabindex="0" role="button" aria-label="Ανεμιστήρας ψύξης">
+          <circle cx="588" cy="82" r="31" fill="#0F1C3F" stroke="#FF8FB1" stroke-width="3"/>
+          <g class="blades">
+            <ellipse cx="588" cy="66" rx="7" ry="14" fill="#8C9BD1"/>
+            <ellipse cx="588" cy="98" rx="7" ry="14" fill="#8C9BD1"/>
+            <ellipse cx="572" cy="82" rx="14" ry="7" fill="#8C9BD1"/>
+            <ellipse cx="604" cy="82" rx="14" ry="7" fill="#8C9BD1"/>
+          </g>
+          <circle cx="588" cy="82" r="6" fill="#C7D2EE"/>
+        </g>
+        <!-- psu -->
+        <g class="part" data-id="psu" tabindex="0" role="button" aria-label="Τροφοδοτικό">
+          <rect x="386" y="256" width="164" height="56" rx="5" fill="#3A3F52" stroke="#FF8FB1" stroke-width="3"/>
+          <path d="M400 268 H440 M400 278 H440 M400 288 H440 M400 298 H440" stroke="#5B6178" stroke-width="3"/>
+          <text x="496" y="290" font-size="15" text-anchor="middle" fill="#FF8FB1" font-weight="700" font-family="Nunito Sans, sans-serif">⚡ ΡΕΥΜΑ</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="chips" id="catChips" role="group" aria-label="Δείξε τα μέρη ανά δουλειά"></div>
+    <div class="chips" id="partChips" role="group" aria-label="Διάλεξε ένα μέρος"></div>
+
+    <div class="info" id="info" aria-live="polite">
+      <h3 id="iName">Πάτησε ένα μέρος</h3>
+      <span class="tag" id="iTag" style="background:var(--gold)">Ξεκίνα εδώ</span> <span class="muted" id="iJob"></span>
+      <p id="iWhat">Πάτησε οποιοδήποτε μέρος του υπολογιστή στην εικόνα ή χρησιμοποίησε τα κουμπιά από πάνω για να μάθεις τι κάνει.</p>
+      <p id="iFact"></p>
+      <p class="like" id="iLike"></p>
+    </div>
+  </section>
+
+  <!-- ============ FOLLOW THE DATA ============ -->
+  <section class="panel" id="flow" role="tabpanel" aria-labelledby="t-flow">
+    <h2>Ακολούθησε τα δεδομένα</h2>
+    <p>Διάλεξε κάτι που μπορεί να κάνεις σε έναν υπολογιστή και μετά πάτησε <b>Επόμενο</b> για να ακολουθήσεις τις πληροφορίες καθώς ταξιδεύουν ανάμεσα στα μέρη.</p>
+    <div class="scens" id="scens" role="group" aria-label="Διάλεξε ένα ταξίδι"></div>
+    <div class="flow"><svg id="flowSvg" viewBox="0 0 400 440" role="img" aria-label="Διάγραμμα με τα μέρη ενός υπολογιστή και πώς κινούνται τα δεδομένα ανάμεσά τους"></svg></div>
+    <div class="stepbox" aria-live="polite">
+      <div class="n" id="stepNum"></div>
+      <div id="stepText"></div>
+    </div>
+    <div class="row" style="justify-content:center">
+      <button class="btn ghost" id="fBack">← Πίσω</button>
+      <button class="btn" id="fNext">Επόμενο →</button>
+    </div>
+  </section>
+
+  <!-- ============ SORT ============ -->
+  <section class="panel" id="sort" role="tabpanel" aria-labelledby="t-sort">
+    <h2>Ταξινόμησέ τα! Είσοδος, έξοδος ή αποθήκευση;</h2>
+    <p class="muted">Οι συσκευές <b style="color:var(--c-input)">εισόδου</b> στέλνουν πληροφορίες μέσα. Οι συσκευές <b style="color:var(--c-output)">εξόδου</b> βγάζουν αποτελέσματα έξω. Η <b style="color:var(--c-storage)">αποθήκευση</b> κρατά τα αρχεία ασφαλή για αργότερα. <span class="score" id="sScore">Βαθμός: 0</span> · <span id="sCount"></span></p>
+    <div class="bar" aria-hidden="true"><i id="sBar"></i></div>
+    <div id="sBox" class="center">
+      <div class="big" id="sIcon" aria-hidden="true"></div>
+      <p class="q" id="sName"></p>
+      <div class="choices three" id="sChoices"></div>
+      <div class="fb" id="sFb" aria-live="polite"></div>
+      <p class="why" id="sWhy"></p>
+      <button class="btn" id="sNext" style="display:none">Επόμενη συσκευή →</button>
+    </div>
+    <div id="sEnd" class="center" style="display:none">
+      <p class="q" id="sEndText"></p>
+      <button class="btn" id="sAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Κουίζ: Πώς Λειτουργεί ένας Υπολογιστής</h2>
+    <p class="muted">10 ερωτήσεις. <span class="score" id="qScore">Βαθμός: 0</span> · <span id="qCount">Ερώτηση 1 από 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Επόμενη ερώτηση →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Το ήξερες;</b> Τα κινητά, τα τάμπλετ, οι κονσόλες παιχνιδιών και τα έξυπνα ηχεία είναι κι αυτά υπολογιστές. Είναι μικρότερα, αλλά μέσα έχουν τα ίδια είδη μερών: επεξεργαστή, μνήμη, αποθήκευση και τρόπους να μπαίνουν και να βγαίνουν πληροφορίες.</p>
+
+  <p class="tip"><b>Επόμενο:</b> Οι υπολογιστές τα κάνουν όλα αυτά χρησιμοποιώντας μόνο 1 και 0. Μάθε πώς στο <a href="https://classroom.ellisknowledgestudio.com/it/binary/el/">Δυαδικό σύστημα: 1 και 0</a>.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  var SVGNS="http://www.w3.org/2000/svg";
+  function $(id){return document.getElementById(id);}
+  function el(tag,attrs,parent){
+    var e=document.createElementNS(SVGNS,tag);
+    for(var k in attrs){if(attrs.hasOwnProperty(k))e.setAttribute(k,attrs[k]);}
+    if(parent)parent.appendChild(e);
+    return e;
+  }
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- data ---------- */
+  var CATS={
+    input:{name:"Είσοδος",col:"#5AA9FF",job:"Στέλνει πληροφορίες μέσα στον υπολογιστή"},
+    output:{name:"Έξοδος",col:"#4CC38A",job:"Βγάζει πληροφορίες έξω από τον υπολογιστή"},
+    process:{name:"Επεξεργασία",col:"#F4B942",job:"Κάνει τη σκέψη και τους υπολογισμούς"},
+    storage:{name:"Μνήμη και αποθήκευση",col:"#B48CFF",job:"Κρατά τις πληροφορίες"},
+    support:{name:"Ρεύμα και συνδέσεις",col:"#FF8FB1",job:"Κρατά τα πάντα σε λειτουργία"}
+  };
+  var CAT_ORDER=["input","process","output","storage","support"];
+  var PARTS=[
+    {id:"keyboard",name:"Πληκτρολόγιο",cat:"input",
+     what:"Με το πληκτρολόγιο γράφεις γράμματα, αριθμούς και εντολές. Κάτω από κάθε πλήκτρο υπάρχει ένας μικρός διακόπτης.",
+     fact:"Όταν πατάς ένα πλήκτρο, το πληκτρολόγιο στέλνει στον υπολογιστή έναν αριθμό-κωδικό που λέει ποιο πλήκτρο ήταν. Το κεφαλαίο A έχει τον κωδικό 65.",
+     like:"Είναι σαν γραμματοκιβώτιο για τις λέξεις σου: ρίχνεις ένα γράμμα μέσα και ο υπολογιστής το παραλαμβάνει."},
+    {id:"mouse",name:"Ποντίκι",cat:"input",
+     what:"Το ποντίκι κινεί τον δείκτη στην οθόνη και σε αφήνει να κάνεις κλικ σε πράγματα.",
+     fact:"Από κάτω, ένα μικροσκοπικό φως και μια κάμερα τραβούν χιλιάδες φωτογραφίες του γραφείου κάθε δευτερόλεπτο. Συγκρίνοντάς τες, το ποντίκι καταλαβαίνει προς τα πού κινήθηκε.",
+     like:"Είναι σαν το δάχτυλό σου που δείχνει πράγματα στην οθόνη."},
+    {id:"webcam",name:"Κάμερα web",cat:"input",
+     what:"Η κάμερα web είναι μια μικρή κάμερα. Σε αφήνει να βγάζεις φωτογραφίες και να μπαίνεις σε βιντεοκλήσεις.",
+     fact:"Μετατρέπει το φως σε αριθμούς. Κάθε μικροσκοπική κουκκίδα της εικόνας παίρνει αριθμούς που λένε πόσο κόκκινο, πράσινο και μπλε φως έχει.",
+     like:"Είναι το μάτι του υπολογιστή."},
+    {id:"monitor",name:"Οθόνη",cat:"output",
+     what:"Η οθόνη σου δείχνει εικόνες, λέξεις και βίντεο που φτιάχνει ο υπολογιστής.",
+     fact:"Η οθόνη αποτελείται από εκατομμύρια μικροσκοπικές κουκκίδες που λέγονται πίξελ (εικονοστοιχεία). Κάθε πίξελ αναμειγνύει κόκκινο, πράσινο και μπλε φως για να φτιάξει οποιοδήποτε χρώμα.",
+     like:"Είναι σαν ένα τεράστιο ψηφιδωτό που μπορεί να αλλάζει τις ψηφίδες του πολλές φορές κάθε δευτερόλεπτο."},
+    {id:"speakers",name:"Ηχεία",cat:"output",
+     what:"Τα ηχεία παίζουν ήχους, μουσική και φωνές από τον υπολογιστή.",
+     fact:"Ηλεκτρικά σήματα κάνουν ένα κομμάτι μέσα στο ηχείο να κουνιέται μπρος-πίσω πολύ γρήγορα. Αυτό κουνάει τον αέρα και τα αυτιά σου το ακούνε ως ήχο.",
+     like:"Είναι η φωνή του υπολογιστή."},
+    {id:"cpu",name:"CPU (επεξεργαστής)",cat:"process",
+     what:"Η CPU ακολουθεί τις οδηγίες των προγραμμάτων και κάνει τους υπολογισμούς. CPU σημαίνει Κεντρική Μονάδα Επεξεργασίας.",
+     fact:"Μια CPU μπορεί να κάνει δισεκατομμύρια μικροσκοπικά βήματα κάθε δευτερόλεπτο. Κάθε βήμα είναι πολύ απλό, όπως η πρόσθεση δύο αριθμών, αλλά κάνοντας τόσα πολλά τόσο γρήγορα καταφέρνει καταπληκτικά πράγματα.",
+     like:"Τη λένε ο εγκέφαλος του υπολογιστή."},
+    {id:"gpu",name:"Κάρτα γραφικών",cat:"process",
+     what:"Η κάρτα γραφικών είναι ένας δεύτερος επεξεργαστής που είναι εξαιρετικός σε μία δουλειά: να φτιάχνει εικόνες για την οθόνη.",
+     fact:"Για κάθε καρέ ενός παιχνιδιού υπολογίζει το χρώμα εκατομμυρίων πίξελ και μπορεί να το κάνει περισσότερες από 60 φορές το δευτερόλεπτο.",
+     like:"Είναι σαν τον καλλιτέχνη του υπολογιστή, που ζωγραφίζει κάθε εικόνα πριν τη δεις."},
+    {id:"ram",name:"RAM (μνήμη)",cat:"storage",
+     what:"Η RAM κρατά τα προγράμματα και τα αρχεία που χρησιμοποιείς αυτή τη στιγμή, ώστε η CPU να τα φτάνει πολύ γρήγορα.",
+     fact:"Η RAM τα ξεχνά όλα όταν κλείνει ο υπολογιστής. Γι' αυτό πρέπει να αποθηκεύεις τη δουλειά σου!",
+     like:"Είναι σαν το γραφείο σου: τα φτάνεις γρήγορα, αλλά στο τέλος της μέρας μαζεύονται όλα."},
+    {id:"storage",name:"Δίσκος αποθήκευσης (SSD)",cat:"storage",
+     what:"Ο δίσκος αποθήκευσης κρατά τα αρχεία, τις φωτογραφίες, τα παιχνίδια και τα προγράμματά σου, ακόμα κι όταν ο υπολογιστής είναι κλειστός.",
+     fact:"SSD σημαίνει δίσκος στερεάς κατάστασης. Δεν έχει κινούμενα μέρη. Οι παλιότεροι υπολογιστές έχουν σκληρούς δίσκους, που αποθηκεύουν τα αρχεία σε έναν δίσκο που γυρίζει.",
+     like:"Είναι σαν μια βιβλιοθήκη: χωράει πολλά και τα πράγματα μένουν εκεί μέχρι να τα πάρεις."},
+    {id:"motherboard",name:"Μητρική πλακέτα",cat:"support",
+     what:"Η μητρική πλακέτα είναι η μεγάλη πλακέτα κυκλωμάτων όπου συνδέονται όλα τα άλλα μέρη.",
+     fact:"Λεπτές χάλκινες γραμμές πάνω στην πλακέτα, που λέγονται αγωγοί, μεταφέρουν σήματα ανάμεσα στα μέρη.",
+     like:"Είναι σαν τους δρόμους μιας πόλης, που συνδέουν όλα τα κτίρια."},
+    {id:"psu",name:"Τροφοδοτικό",cat:"support",
+     what:"Το τροφοδοτικό παίρνει ρεύμα από την πρίζα και το μετατρέπει στο σταθερό, χαμηλότερο ρεύμα που χρειάζεται κάθε μέρος.",
+     fact:"Τα λάπτοπ, τα τάμπλετ και τα κινητά έχουν επίσης μπαταρία, για να συνεχίζουν να δουλεύουν μακριά από την πρίζα.",
+     like:"Είναι σαν την κουζίνα του υπολογιστή, που μετατρέπει τα υλικά σε φαγητό για όλους."},
+    {id:"fan",name:"Ανεμιστήρας ψύξης",cat:"support",
+     what:"Οι ανεμιστήρες φυσούν αέρα μέσα στο κουτί για να μη ζεσταίνονται πολύ τα μέρη.",
+     fact:"Μια CPU που δουλεύει σκληρά ζεσταίνεται. Αν ζεσταθεί πολύ, επιβραδύνει τον εαυτό της για να μείνει ασφαλής, οπότε όταν μένει δροσερή ο υπολογιστής τρέχει γρήγορα.",
+     like:"Είναι σαν τον υπολογιστή να κάνει αέρα στο πρόσωπό του μια ζεστή μέρα."}
+  ];
+  var BY_ID={};for(var p=0;p<PARTS.length;p++)BY_ID[PARTS[p].id]=PARTS[p];
+
+  /* ---------- explore ---------- */
+  (function drawKeys(){
+    var g=$("kbKeys");
+    for(var r=0;r<3;r++){
+      for(var c=0;c<12;c++){
+        el("rect",{x:60+c*16.6,y:274+r*12,width:13,height:9,rx:2,fill:"#4A5C9A"},g);
+      }
+    }
+  })();
+
+  var partEls=document.querySelectorAll("#pc .part");
+  var current=null,catFilter=null;
+
+  function showPart(id){
+    var d=BY_ID[id];current=id;
+    for(var i=0;i<partEls.length;i++){
+      partEls[i].setAttribute("class","part"+(partEls[i].getAttribute("data-id")===id?" sel":"")+
+        (catFilter&&BY_ID[partEls[i].getAttribute("data-id")].cat!==catFilter?" dim":""));
+      partEls[i].setAttribute("aria-pressed",partEls[i].getAttribute("data-id")===id?"true":"false");
+    }
+    var pcs=$("partChips").children;
+    for(var j=0;j<pcs.length;j++)pcs[j].setAttribute("aria-pressed",pcs[j].getAttribute("data-id")===id?"true":"false");
+    var c=CATS[d.cat];
+    $("iName").textContent=d.name;
+    $("iTag").textContent=c.name;
+    $("iJob").textContent=c.job+".";
+    $("iTag").style.background=c.col;
+    $("info").style.borderLeftColor=c.col;
+    $("iWhat").textContent=d.what;
+    $("iFact").innerHTML="<b>Καταπληκτικό γεγονός:</b> ";
+    $("iFact").appendChild(document.createTextNode(d.fact));
+    $("iLike").textContent=d.like;
+  }
+  function setFilter(cat){
+    catFilter=cat;
+    var cc=$("catChips").children;
+    for(var i=0;i<cc.length;i++)cc[i].setAttribute("aria-pressed",(cc[i].getAttribute("data-cat")||null)===cat||(!cat&&!cc[i].getAttribute("data-cat"))?"true":"false");
+    for(var k=0;k<partEls.length;k++){
+      var pid=partEls[k].getAttribute("data-id");
+      partEls[k].setAttribute("class","part"+(pid===current?" sel":"")+(cat&&BY_ID[pid].cat!==cat?" dim":""));
+    }
+    var pcs=$("partChips").children;
+    for(var j=0;j<pcs.length;j++)pcs[j].style.display=(!cat||BY_ID[pcs[j].getAttribute("data-id")].cat===cat)?"":"none";
+  }
+  (function buildChips(){
+    var all=document.createElement("button");
+    all.className="chip";all.textContent="Όλα τα μέρη";all.setAttribute("aria-pressed","true");
+    all.addEventListener("click",function(){setFilter(null);});
+    $("catChips").appendChild(all);
+    for(var i=0;i<CAT_ORDER.length;i++){
+      (function(k){
+        var b=document.createElement("button");
+        b.className="chip";b.setAttribute("data-cat",k);b.setAttribute("aria-pressed","false");
+        b.innerHTML='<span class="dot" style="background:'+CATS[k].col+'"></span>';
+        b.appendChild(document.createTextNode(CATS[k].name));
+        b.addEventListener("click",function(){setFilter(k);});
+        $("catChips").appendChild(b);
+      })(CAT_ORDER[i]);
+    }
+    for(var j=0;j<PARTS.length;j++){
+      (function(d){
+        var b=document.createElement("button");
+        b.className="chip";b.setAttribute("data-id",d.id);b.setAttribute("aria-pressed","false");
+        b.innerHTML='<span class="dot" style="background:'+CATS[d.cat].col+'"></span>';
+        b.appendChild(document.createTextNode(d.name));
+        b.addEventListener("click",function(){showPart(d.id);});
+        $("partChips").appendChild(b);
+      })(PARTS[j]);
+    }
+    for(var m=0;m<partEls.length;m++){
+      partEls[m].addEventListener("click",function(){showPart(this.getAttribute("data-id"));});
+      partEls[m].addEventListener("keydown",function(e){
+        if(e.key==="Enter"||e.key===" "){showPart(this.getAttribute("data-id"));e.preventDefault();}
+      });
+    }
+  })();
+
+  /* ---------- follow the data ---------- */
+  var NODES={
+    keyboard:{x:70,y:45,label:"Πληκτρολόγιο",icon:"⌨️",cat:"input"},
+    mouse:{x:200,y:45,label:"Ποντίκι",icon:"🖱️",cat:"input"},
+    webcam:{x:330,y:45,label:"Κάμερα",icon:"📷",cat:"input"},
+    ram:{x:70,y:190,label:"RAM",icon:"📝",cat:"storage"},
+    cpu:{x:200,y:190,label:"CPU",icon:"🧠",cat:"process",big:true},
+    storage:{x:330,y:190,label:"Αποθήκευση",icon:"💾",cat:"storage"},
+    gpu:{x:110,y:295,label:"Γραφικά",icon:"🎨",cat:"process"},
+    monitor:{x:110,y:395,label:"Οθόνη",icon:"🖥️",cat:"output"},
+    speakers:{x:290,y:395,label:"Ηχεία",icon:"🔊",cat:"output"}
+  };
+  var EDGES=[["keyboard","cpu"],["mouse","cpu"],["webcam","cpu"],["cpu","ram"],["cpu","storage"],["cpu","gpu"],["gpu","monitor"],["cpu","speakers"]];
+  var SCENARIOS=[
+    {name:"⌨️ Πληκτρολογώ ένα γράμμα",steps:[
+      {on:"keyboard",text:"Πατάς το πλήκτρο A. Μέσα στο πληκτρολόγιο, ένας μικρός διακόπτης κάτω από το πλήκτρο πιέζεται προς τα κάτω."},
+      {from:"keyboard",to:"cpu",pkt:"65",text:"Το πληκτρολόγιο στέλνει έναν κωδικό στον υπολογιστή. Ο κωδικός για το κεφαλαίο A είναι 65. Μέσα στον υπολογιστή οι αριθμοί αποθηκεύονται ως 1 και 0, οπότε το 65 ταξιδεύει ως <span class=\"bits\">01000001</span>."},
+      {from:"cpu",to:"ram",pkt:"A",text:"Η CPU ακολουθεί τις οδηγίες του προγράμματος γραφής σου: πρόσθεσε ένα A στο έγγραφο. Το έγγραφο που δουλεύεις βρίσκεται στη RAM, οπότε το A πηγαίνει εκεί."},
+      {from:"cpu",to:"gpu",pkt:"A",text:"Η CPU ζητά από την κάρτα γραφικών να δείξει το νέο γράμμα. Η κάρτα γραφικών υπολογίζει ακριβώς ποια πίξελ πρέπει να αλλάξουν χρώμα για να σχηματιστεί ένα A."},
+      {from:"gpu",to:"monitor",pkt:"A",text:"Η νέα εικόνα στέλνεται στην οθόνη, που ανάβει τα πίξελ της, και ένα A εμφανίζεται μπροστά σου. Όλα αυτά έγιναν σε ένα μικροσκοπικό κλάσμα του δευτερολέπτου!"}
+    ]},
+    {name:"🎵 Παίζω ένα τραγούδι",steps:[
+      {on:"mouse",text:"Πηγαίνεις τον δείκτη πάνω στο κουμπί Αναπαραγωγή και κάνεις κλικ με το ποντίκι."},
+      {from:"mouse",to:"cpu",pkt:"κλικ",text:"Το ποντίκι λέει στον υπολογιστή ότι κινήθηκε και ότι έκανες κλικ. Η CPU καταλαβαίνει ότι ο δείκτης ήταν πάνω στο κουμπί Αναπαραγωγή."},
+      {from:"storage",to:"cpu",pkt:"♪",text:"Το τραγούδι είναι αποθηκευμένο ως αρχείο στον δίσκο. Η CPU το ζητά από τον δίσκο αποθήκευσης…"},
+      {from:"cpu",to:"ram",pkt:"♪",text:"…και το τραγούδι αντιγράφεται στη RAM, γιατί η CPU φτάνει τη RAM πολύ πιο γρήγορα όσο παίζει το τραγούδι."},
+      {from:"ram",to:"cpu",pkt:"♪",text:"Τα αρχεία τραγουδιών είναι συμπιεσμένα για να πιάνουν λιγότερο χώρο. Η CPU αποσυμπιέζει το τραγούδι, κομμάτι-κομμάτι, και το μετατρέπει σε σήματα ήχου."},
+      {from:"cpu",to:"speakers",pkt:"♪",text:"Τα σήματα ήχου πηγαίνουν στα ηχεία, που κουνούν τον αέρα. Τα αυτιά σου ακούνε τη μουσική!"}
+    ]},
+    {name:"💾 Αποθηκεύω μια ζωγραφιά",steps:[
+      {on:"ram",text:"Ζωγραφίζεις μια εικόνα. Όσο δουλεύεις, η ζωγραφιά κρατιέται στη RAM. Η RAM είναι γρήγορη, αλλά τα ξεχνά όλα αν κοπεί το ρεύμα!"},
+      {from:"keyboard",to:"cpu",pkt:"S",text:"Κρατάς πατημένο το Ctrl και πατάς S, που είναι η συντόμευση για την Αποθήκευση. Το πληκτρολόγιο στέλνει τους κωδικούς και των δύο πλήκτρων στη CPU."},
+      {from:"ram",to:"cpu",pkt:"🖼️",text:"Η CPU παίρνει τη ζωγραφιά από τη RAM…"},
+      {from:"cpu",to:"storage",pkt:"🖼️",text:"…και γράφει ένα αντίγραφο στον δίσκο ως αρχείο. Η αποθήκευση την κρατά ασφαλή, ακόμα κι όταν ο υπολογιστής είναι κλειστός."},
+      {from:"cpu",to:"gpu",pkt:"✓",text:"Η CPU ζητά από την κάρτα γραφικών να σχεδιάσει ένα μήνυμα που λέει ότι το αρχείο αποθηκεύτηκε."},
+      {from:"gpu",to:"monitor",pkt:"✓",text:"Το μήνυμα εμφανίζεται στην οθόνη. Αύριο μπορείς να ανοίξεις τη ζωγραφιά σου από τον δίσκο και να συνεχίσεις."}
+    ]},
+    {name:"📷 Βγάζω μια φωτογραφία",steps:[
+      {on:"webcam",text:"Χαμογελάς και κάνεις κλικ για να βγάλεις φωτογραφία. Το φως από το πρόσωπό σου μπαίνει στον φακό της κάμερας."},
+      {from:"webcam",to:"cpu",pkt:"📷",text:"Η κάμερα μετατρέπει το φως σε αριθμούς. Κάθε πίξελ παίρνει τρεις αριθμούς: πόσο κόκκινο, πόσο πράσινο και πόσο μπλε."},
+      {from:"cpu",to:"ram",pkt:"📷",text:"Η φωτογραφία κρατιέται στη RAM όσο η CPU τη δουλεύει, για παράδειγμα για να προσθέσει ένα αστείο φίλτρο."},
+      {from:"cpu",to:"gpu",pkt:"📷",text:"Η κάρτα γραφικών μετατρέπει όλους αυτούς τους αριθμούς ξανά σε εικόνα…"},
+      {from:"gpu",to:"monitor",pkt:"📷",text:"…και η οθόνη δείχνει τη φωτογραφία σου."},
+      {from:"cpu",to:"storage",pkt:"📷",text:"Στο τέλος η φωτογραφία αποθηκεύεται στον δίσκο ως αρχείο, για να μπορείς να τη δεις και την επόμενη εβδομάδα."}
+    ]}
+  ];
+  var nodeEls={},edgeEls={},pkt,pktText,scen=0,step=0,anim=null;
+  function edgeKey(a,b){return a<b?a+"|"+b:b+"|"+a;}
+  (function drawFlow(){
+    var svg=$("flowSvg");
+    var eg=el("g",{},svg);
+    for(var i=0;i<EDGES.length;i++){
+      var a=NODES[EDGES[i][0]],b=NODES[EDGES[i][1]];
+      edgeEls[edgeKey(EDGES[i][0],EDGES[i][1])]=el("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,"class":"edge","stroke-linecap":"round"},eg);
+    }
+    for(var k in NODES){
+      if(!NODES.hasOwnProperty(k))continue;
+      var n=NODES[k],w=n.big?132:112,h=n.big?62:52;
+      var g=el("g",{"class":"node"},svg);
+      el("rect",{x:n.x-w/2,y:n.y-h/2,width:w,height:h,rx:12,fill:"#1A2A55",stroke:CATS[n.cat].col,"stroke-width":3},g);
+      var t=el("text",{x:n.x,y:n.y+6,"text-anchor":"middle",fill:"#F5F7FF","font-size":n.big?20:16,"font-weight":"700","font-family":"Nunito Sans, sans-serif"},g);
+      t.textContent=n.icon+" "+n.label;
+      nodeEls[k]=g;
+    }
+    pkt=el("g",{opacity:0},svg);
+    el("circle",{cx:0,cy:0,r:19,fill:"#F4B942",stroke:"#0F1C3F","stroke-width":3},pkt);
+    pktText=el("text",{x:0,y:5,"text-anchor":"middle",fill:"#0F1C3F","font-size":14,"font-weight":"800","font-family":"Nunito Sans, sans-serif"},pkt);
+  })();
+  function placePkt(x,y){pkt.setAttribute("transform","translate("+x+","+y+")");}
+  function renderStep(){
+    var S=SCENARIOS[scen].steps,s=S[step];
+    if(anim){cancelAnimationFrame(anim);anim=null;}
+    for(var k in nodeEls){if(nodeEls.hasOwnProperty(k))nodeEls[k].setAttribute("class","node");}
+    for(var e in edgeEls){if(edgeEls.hasOwnProperty(e))edgeEls[e].setAttribute("class","edge");}
+    $("stepNum").textContent="Βήμα "+(step+1)+" από "+S.length;
+    $("stepText").innerHTML=s.text;
+    $("fBack").disabled=step===0;
+    $("fNext").textContent=step===S.length-1?"Από την αρχή ↺":"Επόμενο →";
+    if(s.on){
+      nodeEls[s.on].setAttribute("class","node lit");
+      pkt.setAttribute("opacity",0);
+      return;
+    }
+    nodeEls[s.from].setAttribute("class","node lit");
+    nodeEls[s.to].setAttribute("class","node lit");
+    edgeEls[edgeKey(s.from,s.to)].setAttribute("class","edge lit");
+    pktText.textContent=s.pkt;
+    pktText.setAttribute("font-size",s.pkt.length>3?11:(s.pkt.length>2?13:15));
+    pkt.setAttribute("opacity",1);
+    var a=NODES[s.from],b=NODES[s.to];
+    /* travel only along the gap between the two boxes so the dot never covers a label */
+    var dx=b.x-a.x,dy=b.y-a.y;
+    function clip(n){var hw=(n.big?66:56)+4,hh=(n.big?31:26)+4;return Math.min(dx?hw/Math.abs(dx):9,dy?hh/Math.abs(dy):9);}
+    var tS=clip(a),tE=1-clip(b);
+    if(tE<tS){tS=tE=(tS+tE)/2;}
+    var sx=a.x+dx*tS,sy=a.y+dy*tS,ex=a.x+dx*tE,ey=a.y+dy*tE;
+    if(reduceMotion){placePkt(ex,ey);return;}
+    var t0=null,dur=1100;
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var f=Math.min(1,(ts-t0)/dur);
+      var ease=f<.5?2*f*f:1-Math.pow(-2*f+2,2)/2;
+      placePkt(sx+(ex-sx)*ease,sy+(ey-sy)*ease);
+      if(f<1)anim=requestAnimationFrame(tick);else anim=null;
+    }
+    placePkt(sx,sy);
+    anim=requestAnimationFrame(tick);
+  }
+  function setScen(i){
+    scen=i;step=0;
+    var bs=$("scens").children;
+    for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",j===i?"true":"false");
+    renderStep();
+  }
+  for(var si=0;si<SCENARIOS.length;si++){
+    (function(i){
+      var b=document.createElement("button");
+      b.className="scen";b.textContent=SCENARIOS[i].name;
+      b.addEventListener("click",function(){setScen(i);});
+      $("scens").appendChild(b);
+    })(si);
+  }
+  $("fNext").addEventListener("click",function(){
+    var S=SCENARIOS[scen].steps;
+    step=step===S.length-1?0:step+1;renderStep();
+  });
+  $("fBack").addEventListener("click",function(){if(step>0){step--;renderStep();}});
+  setScen(0);
+
+  /* ---------- sort it ---------- */
+  var USB_SVG='<svg viewBox="0 0 72 72"><rect x="22" y="4" width="28" height="18" rx="2" fill="#C9CED8"/><rect x="28" y="9" width="5" height="5" fill="#0F1C3F"/><rect x="39" y="9" width="5" height="5" fill="#0F1C3F"/><rect x="16" y="22" width="40" height="46" rx="8" fill="#5AA9FF"/></svg>';
+  var SD_SVG='<svg viewBox="0 0 72 72"><path d="M16 6 H46 L58 18 V66 H16 Z" fill="#2A2F45" stroke="#B48CFF" stroke-width="3"/><rect x="22" y="10" width="4" height="12" fill="#F4B942"/><rect x="30" y="10" width="4" height="12" fill="#F4B942"/><rect x="38" y="10" width="4" height="12" fill="#F4B942"/><text x="37" y="50" font-size="16" text-anchor="middle" fill="#B48CFF" font-weight="700" font-family="sans-serif">SD</text></svg>';
+  var HDD_SVG='<svg viewBox="0 0 72 72"><rect x="10" y="6" width="52" height="60" rx="5" fill="#9AA3B5"/><circle cx="36" cy="32" r="20" fill="#C9CED8" stroke="#5B6178" stroke-width="2"/><circle cx="36" cy="32" r="4" fill="#5B6178"/><path d="M54 58 L40 36" stroke="#2A2F45" stroke-width="4" stroke-linecap="round"/></svg>';
+  var GADGETS=[
+    {icon:"🎤",name:"Μικρόφωνο",cat:"input",why:"Το μικρόφωνο μετατρέπει τη φωνή σου σε σήματα που μπαίνουν στον υπολογιστή."},
+    {icon:"🎮",name:"Χειριστήριο παιχνιδιών",cat:"input",why:"Πατώντας κουμπιά και κουνώντας τους μοχλούς στέλνεις τις κινήσεις σου μέσα στον υπολογιστή."},
+    {icon:"⌨️",name:"Πληκτρολόγιο",cat:"input",why:"Κάθε πλήκτρο που πατάς στέλνει έναν κωδικό μέσα στον υπολογιστή."},
+    {icon:"🖱️",name:"Ποντίκι",cat:"input",why:"Το ποντίκι στέλνει κινήσεις και κλικ μέσα στον υπολογιστή."},
+    {icon:"📷",name:"Κάμερα web",cat:"input",why:"Η κάμερα web μετατρέπει το φως σε αριθμούς και στέλνει εικόνες μέσα στον υπολογιστή."},
+    {icon:"🖨️",name:"Εκτυπωτής",cat:"output",why:"Ο εκτυπωτής βγάζει τη δουλειά του υπολογιστή πάνω σε χαρτί."},
+    {icon:"🎧",name:"Ακουστικά",cat:"output",why:"Τα ακουστικά παίζουν τον ήχο που βγαίνει από τον υπολογιστή."},
+    {icon:"🔊",name:"Ηχεία",cat:"output",why:"Τα ηχεία μετατρέπουν τα σήματα του υπολογιστή σε ήχο που μπορείς να ακούσεις."},
+    {icon:"📽️",name:"Προβολέας",cat:"output",why:"Ο προβολέας ρίχνει την εικόνα του υπολογιστή σε μια μεγάλη οθόνη ή σε έναν τοίχο."},
+    {icon:"🖥️",name:"Οθόνη",cat:"output",why:"Η οθόνη δείχνει τις εικόνες που βγαίνουν από τον υπολογιστή."},
+    {icon:USB_SVG,name:"Στικάκι USB",cat:"storage",why:"Το στικάκι κρατά αρχεία για να τα μεταφέρεις σε άλλον υπολογιστή."},
+    {icon:SD_SVG,name:"Κάρτα μνήμης SD",cat:"storage",why:"Οι κάμερες και οι κονσόλες κρατούν φωτογραφίες και παιχνίδια σε κάρτες SD."},
+    {icon:HDD_SVG,name:"Σκληρός δίσκος",cat:"storage",why:"Ο σκληρός δίσκος κρατά αρχεία σε έναν δίσκο που γυρίζει, ακόμα και χωρίς ρεύμα."},
+    {icon:"💿",name:"DVD",cat:"storage",why:"Το DVD αποθηκεύει ταινίες ή αρχεία ως μικροσκοπικά σημάδια που διαβάζει ένα λέιζερ."}
+  ];
+  var SN=10,sList=[],si2=0,sRight=0;
+  function showGadget(){
+    var g=sList[si2];
+    $("sCount").textContent="Συσκευή "+(si2+1)+" από "+SN;
+    $("sBar").style.width=(si2/SN*100)+"%";
+    $("sIcon").innerHTML=g.icon;
+    $("sName").textContent=g.name;
+    $("sFb").textContent="";$("sFb").className="fb";$("sWhy").textContent="";
+    $("sNext").style.display="none";
+    var box=$("sChoices");box.innerHTML="";
+    var opts=["input","output","storage"];
+    for(var i=0;i<opts.length;i++){
+      (function(k){
+        var b=document.createElement("button");
+        b.className="choice";b.textContent=k==="storage"?"Αποθήκευση":CATS[k].name;
+        b.style.borderColor=CATS[k].col;
+        b.setAttribute("data-k",k);
+        b.addEventListener("click",function(){answerGadget(k,b);});
+        box.appendChild(b);
+      })(opts[i]);
+    }
+    box.children[0].focus({preventScroll:true});
+  }
+  function answerGadget(k,btn){
+    var g=sList[si2],bs=$("sChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].getAttribute("data-k")===g.cat)bs[i].className="choice ok";}
+    if(k===g.cat){sRight++;$("sFb").textContent="✓ Σωστό!";$("sFb").className="fb ok";}
+    else{btn.className="choice no";$("sFb").textContent="✗ Όχι ακριβώς. Είναι "+({input:"είσοδος",output:"έξοδος",storage:"αποθήκευση"})[g.cat]+".";$("sFb").className="fb no";}
+    $("sWhy").textContent=g.why;
+    $("sScore").textContent="Βαθμός: "+sRight;
+    $("sNext").style.display="";$("sNext").focus({preventScroll:true});
+  }
+  $("sNext").addEventListener("click",function(){
+    si2++;
+    if(si2>=SN){
+      $("sBar").style.width="100%";
+      $("sBox").style.display="none";$("sEnd").style.display="";
+      var msg=sRight===SN?"Τέλεια ταξινόμηση! ":sRight>=7?"Σούπερ ταξινόμηση! ":sRight>=4?"Μπράβο! ":"Συνέχισε την εξάσκηση! ";
+      $("sEndText").textContent=msg+"Ταξινόμησες σωστά "+sRight+" από τις "+SN+" συσκευές.";
+      $("sAgain").focus({preventScroll:true});
+    } else showGadget();
+  });
+  function startSort(){sList=shuffle(GADGETS).slice(0,SN);si2=0;sRight=0;$("sScore").textContent="Βαθμός: 0";$("sEnd").style.display="none";$("sBox").style.display="";showGadget();}
+  $("sAgain").addEventListener("click",startSort);
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"Ποιο μέρος λέγεται συχνά ο εγκέφαλος του υπολογιστή;",a:"CPU",w:["Οθόνη","Ποντίκι","Ηχεία"],why:"Η CPU (Κεντρική Μονάδα Επεξεργασίας) ακολουθεί τις οδηγίες και κάνει τους υπολογισμούς."},
+    {q:"Ποια από αυτές είναι συσκευή εισόδου;",a:"Πληκτρολόγιο",w:["Οθόνη","Ηχεία","Εκτυπωτής"],why:"Το πληκτρολόγιο στέλνει πληροφορίες μέσα στον υπολογιστή."},
+    {q:"Ποια από αυτές είναι συσκευή εξόδου;",a:"Ηχεία",w:["Ποντίκι","Μικρόφωνο","Πληκτρολόγιο"],why:"Τα ηχεία βγάζουν ήχο από τον υπολογιστή."},
+    {q:"Τι κάνει η RAM;",a:"Κρατά ό,τι χρησιμοποιεί ο υπολογιστής αυτή τη στιγμή",w:["Δείχνει εικόνες στην οθόνη","Κρατά τα μέρη δροσερά","Παίζει ήχους"],why:"Η RAM είναι η γρήγορη μνήμη εργασίας του υπολογιστή, σαν ένα γραφείο."},
+    {q:"Τι παθαίνουν όλα όσα είναι στη RAM όταν κλείνει ο υπολογιστής;",a:"Ξεχνιούνται",w:["Τυπώνονται","Πηγαίνουν στο ποντίκι","Τίποτα, μένουν εκεί"],why:"Η RAM χρειάζεται ρεύμα για να θυμάται. Γι' αυτό αποθηκεύουμε τη δουλειά μας στον δίσκο."},
+    {q:"Πού κρατιούνται οι φωτογραφίες και τα παιχνίδια σου όταν ο υπολογιστής είναι κλειστός;",a:"Στην αποθήκευση (SSD ή σκληρός δίσκος)",w:["Στη RAM","Στη CPU","Στον ανεμιστήρα"],why:"Η αποθήκευση κρατά τα αρχεία ασφαλή χωρίς ρεύμα."},
+    {q:"Πώς λέγονται οι μικροσκοπικές κουκκίδες που φτιάχνουν την εικόνα στην οθόνη;",a:"Πίξελ",w:["Byte","Τσιπ","Αγωγοί"],why:"Κάθε πίξελ αναμειγνύει κόκκινο, πράσινο και μπλε φως."},
+    {q:"Ποιο μέρος μετατρέπει το ρεύμα από την πρίζα στο ρεύμα που χρειάζονται τα μέρη;",a:"Τροφοδοτικό",w:["Κάρτα γραφικών","Κάμερα web","RAM"],why:"Το τροφοδοτικό δίνει σε κάθε μέρος το σταθερό ρεύμα που χρειάζεται."},
+    {q:"Σε ποιο μέρος συνδέονται όλα τα άλλα μέρη;",a:"Μητρική πλακέτα",w:["Πληκτρολόγιο","Οθόνη","Ηχεία"],why:"Η μητρική πλακέτα τα συνδέει όλα, σαν τους δρόμους μιας πόλης."},
+    {q:"Γιατί οι υπολογιστές έχουν ανεμιστήρες;",a:"Για να μη ζεσταίνονται πολύ τα μέρη",w:["Για να παίζουν μουσική","Για να κινούν το ποντίκι","Για να αποθηκεύουν αρχεία"],why:"Μια ζεστή CPU επιβραδύνει τον εαυτό της, γι' αυτό οι ανεμιστήρες την κρατούν δροσερή."},
+    {q:"Ποιο μοτίβο ακολουθούν όλοι οι υπολογιστές;",a:"Είσοδος → Επεξεργασία → Έξοδος",w:["Έξοδος → Είσοδος → Επεξεργασία","Επεξεργασία → Έξοδος → Είσοδος","Έξοδος → Επεξεργασία → Είσοδος"],why:"Οι πληροφορίες μπαίνουν, επεξεργάζονται και μετά βγαίνει το αποτέλεσμα."},
+    {q:"Ποιο μέρος είναι ιδιαίτερα καλό στο να φτιάχνει εικόνες για την οθόνη;",a:"Κάρτα γραφικών",w:["Τροφοδοτικό","Μικρόφωνο","Δίσκος αποθήκευσης"],why:"Η κάρτα γραφικών υπολογίζει πολύ γρήγορα το χρώμα εκατομμυρίων πίξελ."},
+    {q:"Όταν πατάς ένα πλήκτρο, τι στέλνει το πληκτρολόγιο στον υπολογιστή;",a:"Έναν αριθμό-κωδικό",w:["Μια μικροσκοπική εικόνα","Λίγο ρεύμα από την πρίζα","Έναν ήχο"],why:"Κάθε πλήκτρο έχει τον δικό του κωδικό. Το κεφαλαίο A είναι 65."},
+    {q:"Το μικρόφωνο είναι…",a:"συσκευή εισόδου",w:["συσκευή εξόδου","συσκευή αποθήκευσης","επεξεργαστής"],why:"Μετατρέπει τη φωνή σου σε σήματα που μπαίνουν στον υπολογιστή."},
+    {q:"Τι φτάνει πιο γρήγορα η CPU;",a:"Τη RAM",w:["Ένα DVD","Ένα στικάκι USB","Έναν εκτυπωτή"],why:"Η RAM είναι το πιο γρήγορο μέρος από όπου η CPU παίρνει πληροφορίες."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];
+    $("qCount").textContent="Ερώτηση "+(qi+1)+" από "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;
+    $("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";
+    $("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    var opts=shuffle([it.a].concat(it.w));
+    for(var i=0;i<opts.length;i++){
+      (function(o){
+        var b=document.createElement("button");
+        b.className="choice";b.textContent=o;
+        b.addEventListener("click",function(){answerQ(o,b);});
+        box.appendChild(b);
+      })(opts[i]);
+    }
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Σωστό!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;
+    $("qScore").textContent="Βαθμός: "+qRight;
+    $("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Ιδιοφυΐα των υπολογιστών! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε την εξερεύνηση! ";
+      $("qEndText").textContent=msg+"Πέτυχες "+qRight+" από "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});
+    } else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Βαθμός: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+    var p=t.getAttribute("data-p");
+    if(p==="sort"&&!started.sort){started.sort=1;startSort();}
+    if(p==="quiz"&&!started.quiz){started.quiz=1;startQuiz();}
+    if(p==="flow")renderStep();
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__hcw={PARTS:PARTS,SCENARIOS:SCENARIOS,EDGES:EDGES,GADGETS:GADGETS,BANK:BANK,edgeKey:edgeKey,edgeEls:edgeEls};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Coding Basics Tool for Kids: Variables, If Statements and Loops | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive coding tool for ages 9-13. Predict what block programs do, step through them to watch variables change, learn if-else and repeat loops, find and fix bugs, and take an auto-marked quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/coding-basics/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/coding-basics/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/coding-basics/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/coding-basics/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,input:focus-visible,textarea:focus-visible,.fbar:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+textarea,input[type=text]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 18px "DejaVu Sans Mono",Consolas,monospace;width:100%}
+textarea{min-height:76px;resize:vertical;text-transform:uppercase}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+
+.btn:focus-visible,.blk:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+input.ans{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 20px "DejaVu Sans Mono",Consolas,monospace;width:100%;max-width:220px}
+.lab{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+.prog{background:#0B1530;border-radius:14px;padding:12px;min-height:120px}
+.blk{display:block;width:100%;text-align:left;border:0;border-radius:8px;padding:7px 12px;margin:4px 0;font:800 16px "Nunito Sans",sans-serif;color:#fff;cursor:default;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.blk .v{background:rgba(255,255,255,.92);color:#16213F;border-radius:999px;padding:1px 9px;font:800 15px "DejaVu Sans Mono",Consolas,monospace;margin:0 3px}
+.blk .c{background:rgba(0,0,0,.25);border-radius:6px;padding:1px 8px;font:800 15px "DejaVu Sans Mono",Consolas,monospace;margin:0 3px}
+.b-set,.b-change{background:#E8803A}
+.b-say{background:#8E6CE0}
+.b-if,.b-repeat,.b-else,.b-end{background:#E0A82E;color:#1A1A1A}
+.b-else,.b-end{padding:4px 12px;font-size:14px}
+.nest{margin-left:22px;border-left:4px solid #E0A82E;padding-left:8px}
+.blk.cur{outline:4px solid #fff;outline-offset:1px;filter:brightness(1.15)}
+.dbg .blk{cursor:pointer}
+.dbg .blk:hover{filter:brightness(1.1)}
+.blk.bug{outline:4px solid var(--bad)}
+.blk.fixed{outline:4px solid var(--good)}
+.blk.wrongpick{animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.side{display:grid;gap:10px}
+.vars{display:flex;flex-wrap:wrap;gap:8px}
+.var{background:var(--navy);border:2px solid #E8803A;border-radius:12px;padding:6px 12px;min-width:90px;text-align:center}
+.var b{display:block;color:#E8803A;font-size:13px}
+.var span{font:800 24px "DejaVu Sans Mono",Consolas,monospace}
+.var.flash{animation:fl .5s}
+@keyframes fl{0%{background:#5a3a1a}100%{background:var(--navy)}}
+.says{background:#fff;color:#16213F;border-radius:16px;padding:10px 14px;font:800 20px "Nunito Sans",sans-serif;min-height:48px;position:relative}
+.says:after{content:"";position:absolute;left:24px;bottom:-10px;border:10px solid transparent;border-top-color:#fff;border-bottom:0}
+.sprite{font-size:34px;margin-top:6px}
+.note{background:var(--navy);border-radius:12px;padding:8px 12px;color:var(--muted);font-size:15px;min-height:44px}
+.note b{color:var(--ink)}
+.outlog{font:700 14px "DejaVu Sans Mono",Consolas,monospace;color:var(--muted)}
+.goal{background:#1d4a3a;border:2px solid var(--good);border-radius:12px;padding:8px 12px;font-weight:700}
+.navrow{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+@media (max-width:760px){.lab{grid-template-columns:1fr}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › Coding Basics</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/coding-basics/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Coding Basics: Variables, If and Loops 🧩</h1>
+  <p class="lead">Programs are built from a few big ideas: <b>variables</b> remember values, <b>if</b> blocks make decisions and <b>loops</b> repeat things. Predict what each block program will do, then step through it and watch the variables change. Finally, hunt down the bugs! <span style="white-space:nowrap">Ages 9-13.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Coding modes">
+    <button class="tab" role="tab" id="t-var" aria-controls="p-var" aria-selected="true" data-p="p-var">Variables</button>
+    <button class="tab" role="tab" id="t-if" aria-controls="p-if" aria-selected="false" tabindex="-1" data-p="p-if">If / Else</button>
+    <button class="tab" role="tab" id="t-loop" aria-controls="p-loop" aria-selected="false" tabindex="-1" data-p="p-loop">Loops</button>
+    <button class="tab" role="tab" id="t-dbg" aria-controls="p-dbg" aria-selected="false" tabindex="-1" data-p="p-dbg">Debug It</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
+  </div>
+
+  <section class="panel on" id="p-var" role="tabpanel" aria-labelledby="t-var" data-set="var"></section>
+  <section class="panel" id="p-if" role="tabpanel" aria-labelledby="t-if" data-set="if"></section>
+  <section class="panel" id="p-loop" role="tabpanel" aria-labelledby="t-loop" data-set="loop"></section>
+
+  <!-- ============ DEBUG ============ -->
+  <section class="panel" id="p-dbg" role="tabpanel" aria-labelledby="t-dbg">
+    <h2>Debug it 🐞</h2>
+    <p>Each program has <b>one bug</b>: a block that stops it doing what it should. Read the goal, run the program to see what goes wrong, then tap the block with the bug. <span class="score" id="dScore"></span></p>
+    <div class="navrow"><span class="q" id="dTitle" style="margin:0"></span><span><button class="btn ghost sm" id="dPrev">← Back</button> <button class="btn sm" id="dNext">Next bug →</button></span></div>
+    <div class="goal" id="dGoal"></div>
+    <div class="lab" style="margin-top:10px">
+      <div class="prog dbg" id="dProg"></div>
+      <div class="side">
+        <div class="row" style="margin:0"><button class="btn sm" id="dRun">▶ Run it</button></div>
+        <div class="vars" id="dVars"></div>
+        <div><div class="says" id="dSays" aria-live="polite"></div><div class="sprite">🐱</div></div>
+        <div class="fb" id="dFb" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Coding Basics Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox"><p class="q" id="qText"></p><div class="choices" id="qChoices"></div><div class="fb" id="qFb" aria-live="polite"></div><p class="why" id="qWhy"></p><button class="btn" id="qNext" style="display:none">Next question →</button></div>
+    <div id="qEnd" style="display:none"><p class="q" id="qEndText"></p><button class="btn" id="qAgain">Play again</button></div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Want to know more?</b> Practise writing step-by-step instructions with <a href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/">Algorithms: Program the Robot</a>, then see how computers make decisions in hardware with <a href="https://classroom.ellisknowledgestudio.com/it/logic-gates/">Logic Gates</a>.</p>
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+  /* ---------- block shorthands ---------- */
+  function S(v,e){return {t:"set",v:v,e:e};}
+  function C(v,e){return {t:"change",v:v,e:e};}
+  function SAY(e){return {t:"say",e:e};}
+  function IF(c,th,el){return {t:"if",c:c,th:th,el:el||null};}
+  function REP(n,b){return {t:"repeat",n:n,b:b};}
+
+  /* ---------- evaluator (expressions are fixed strings written in this page) ---------- */
+  function ev(expr,v){
+    expr=String(expr).trim();
+    if(/^".*"$/.test(expr))return expr.slice(1,-1);
+    var js=expr.replace(/ = /g," == ").replace(/[A-Za-z_][A-Za-z_0-9]*/g,function(w){return "v."+w;});
+    return Function("v","return ("+js+");")(v);
+  }
+  /* ---------- run a program into a trace of steps ---------- */
+  function trace(prog){
+    var v={},out=[],steps=[];
+    function snap(id,note){steps.push({id:id,v:JSON.parse(JSON.stringify(v)),out:out.slice(),note:note});}
+    function run(list,path){
+      list.forEach(function(b,i){
+        var id=path+"."+i;
+        if(b.t==="set"){v[b.v]=ev(b.e,v);snap(id,"Set <b>"+b.v+"</b> to <b>"+v[b.v]+"</b>.");}
+        else if(b.t==="change"){var old=v[b.v],d=ev(b.e,v);v[b.v]=old+d;snap(id,"Change <b>"+b.v+"</b> by "+d+": "+old+(d<0?" − "+(-d):" + "+d)+" = <b>"+v[b.v]+"</b>.");}
+        else if(b.t==="say"){var s=ev(b.e,v);out.push(s);snap(id,"The cat says <b>"+esc(s)+"</b>.");}
+        else if(b.t==="if"){var c=!!ev(b.c,v);snap(id,"Is <b>"+esc(b.c)+"</b>? "+esc(showCond(b.c,v))+" is <b>"+(c?"true":"false")+"</b>, so "+(c?"do the blocks inside ‘if’.":(b.el?"do the blocks inside ‘else’.":"skip the blocks inside."))+"");
+          if(c)run(b.th,id+".t");else if(b.el)run(b.el,id+".e");}
+        else if(b.t==="repeat"){var n=ev(b.n,v);for(var k=1;k<=n;k++){snap(id,"Repeat: time <b>"+k+"</b> of "+n+".");run(b.b,id+".b");}snap(id+"#end","The loop has finished after "+n+" times.");}
+      });
+    }
+    run(prog,"r");
+    return {steps:steps,v:v,out:out};
+  }
+  function showCond(c,v){return c.replace(/[A-Za-z_][A-Za-z_0-9]*/g,function(w){return v[w]!==undefined?(typeof v[w]==="string"?'"'+v[w]+'"':v[w]):w;});}
+  function fmtE(e){return /^".*"$/.test(String(e))?esc(e):esc(e);}
+  /* ---------- render blocks ---------- */
+  function render(list,path){
+    var h="";
+    list.forEach(function(b,i){
+      var id=path+"."+i;
+      if(b.t==="set")h+='<button class="blk b-set" data-id="'+id+'">set <span class="c">'+b.v+'</span> to <span class="v">'+fmtE(b.e)+'</span></button>';
+      else if(b.t==="change")h+='<button class="blk b-change" data-id="'+id+'">change <span class="c">'+b.v+'</span> by <span class="v">'+fmtE(b.e)+'</span></button>';
+      else if(b.t==="say")h+='<button class="blk b-say" data-id="'+id+'">say <span class="v">'+fmtE(b.e)+'</span></button>';
+      else if(b.t==="if"){h+='<button class="blk b-if" data-id="'+id+'">if <span class="c">'+esc(b.c)+'</span> then</button><div class="nest">'+render(b.th,id+".t")+'</div>';
+        if(b.el)h+='<div class="blk b-else">else</div><div class="nest">'+render(b.el,id+".e")+'</div>';h+='<div class="blk b-end">end if</div>';}
+      else if(b.t==="repeat")h+='<button class="blk b-repeat" data-id="'+id+'">repeat <span class="v">'+fmtE(b.n)+'</span> times</button><div class="nest">'+render(b.b,id+".b")+'</div><div class="blk b-end" data-id="'+id+'#end">end repeat</div>';
+    });
+    return h;
+  }
+  function blockAt(prog,id){var parts=id.replace(/#end$/,"").split(".").slice(1),list=prog,b=null;
+    for(var i=0;i<parts.length;i++){var p=parts[i];if(p==="t")list=b.th;else if(p==="e")list=b.el;else if(p==="b")list=b.b;else{b=list[+p];}}return b;}
+
+  /* ---------- program sets ---------- */
+  var SETS={
+    var:{title:"Variables",intro:"A <b>variable</b> is a named box that stores a value, like a score or a number of lives. <b>set</b> puts a new value in the box. <b>change</b> adds to what is already there (a negative number takes away).",
+      list:[
+        {p:[S("score","0"),C("score","10"),C("score","5"),SAY("score")],q:"What will the cat say?",a:15},
+        {p:[S("lives","3"),C("lives","-1"),C("lives","-1"),C("lives","2"),SAY("lives")],q:"What will the cat say?",a:3},
+        {p:[S("coins","20"),C("coins","-8"),S("coins","coins * 2"),SAY("coins")],q:"What will the cat say?",a:24},
+        {p:[S("a","3"),S("b","4"),S("a","a + b"),S("b","a - b"),SAY("a"),SAY("b")],q:"What is the last thing the cat says?",a:3},
+        {p:[S("x","5"),S("y","x"),C("x","10"),SAY("y")],q:"What will the cat say? (Careful!)",a:5,tip:"y was set to the value of x at that moment (5). Changing x afterwards does not change y."}
+      ]},
+    if:{title:"If / Else",intro:"An <b>if</b> block checks a <b>condition</b>. If it is true, the blocks inside run. If it is false, the <b>else</b> blocks run instead (or nothing, if there is no else).",
+      list:[
+        {p:[S("temp","30"),IF("temp > 25",[SAY('"Hot!"')],[SAY('"Not hot"')])],q:"What will the cat say?",opts:["Hot!","Not hot"],a:"Hot!"},
+        {p:[S("score","45"),IF("score > 50",[SAY('"Pass"')],[SAY('"Try again"')])],q:"What will the cat say?",opts:["Pass","Try again"],a:"Try again"},
+        {p:[S("age","12"),IF("age < 13",[SAY('"Too young for this app"')],[SAY('"Welcome!"')])],q:"What will the cat say?",opts:["Too young for this app","Welcome!"],a:"Too young for this app"},
+        {p:[S("coins","15"),IF("coins = 15",[C("coins","5")]),SAY("coins")],q:"What will the cat say?",a:20},
+        {p:[S("x","7"),IF("x > 5",[IF("x > 10",[SAY('"Big"')],[SAY('"Medium"')])],[SAY('"Small"')])],q:"What will the cat say?",opts:["Big","Medium","Small"],a:"Medium"},
+        {p:[S("points","0"),S("answer","12"),IF("answer = 3 * 4",[C("points","10")],[C("points","-5")]),SAY("points")],q:"What will the cat say?",a:10}
+      ]},
+    loop:{title:"Loops",intro:"A <b>loop</b> repeats the blocks inside it. <b>repeat 4 times</b> runs everything inside four times, which saves writing the same blocks again and again.",
+      list:[
+        {p:[S("count","0"),REP("4",[C("count","1")]),SAY("count")],q:"What will the cat say?",a:4},
+        {p:[S("total","0"),REP("3",[C("total","5")]),SAY("total")],q:"What will the cat say?",a:15},
+        {p:[S("x","10"),REP("3",[C("x","-3")]),SAY("x")],q:"What will the cat say?",a:1},
+        {p:[S("n","1"),REP("4",[S("n","n * 2")]),SAY("n")],q:"What will the cat say?",a:16},
+        {p:[S("i","1"),REP("3",[SAY("i"),C("i","1")])],q:"How many times does the cat speak?",a:3},
+        {p:[S("stars","0"),REP("3",[REP("2",[C("stars","1")])]),SAY("stars")],q:"What will the cat say? (A loop inside a loop!)",a:6}
+      ]}
+  };
+
+  /* ---------- lab (one per set) ---------- */
+  var LABS={};
+  function makeLab(sec){
+    var key=sec.getAttribute("data-set"),S0=SETS[key],st={i:0,done:{},trace:null,step:-1,timer:null,answered:false};
+    sec.innerHTML='<h2>'+S0.title+'</h2><p>'+S0.intro+'</p>'+
+      '<div class="navrow"><span class="q" style="margin:0" data-r="title"></span><span><button class="btn ghost sm" data-r="prev">← Back</button> <button class="btn sm" data-r="next">Next program →</button></span></div>'+
+      '<div class="lab" style="margin-top:10px"><div class="prog" data-r="prog"></div><div class="side">'+
+      '<div><p class="q" style="font-size:20px;margin:0 0 6px" data-r="q"></p><div data-r="ans"></div><div class="fb" data-r="fb" aria-live="polite"></div></div>'+
+      '<div class="row" style="margin:0"><button class="btn sm" data-r="run">▶ Run</button><button class="btn ghost sm" data-r="step">Step ⏭</button><button class="btn ghost sm" data-r="reset">Reset</button></div>'+
+      '<div class="vars" data-r="vars"></div><div><div class="says" data-r="says" aria-live="polite"></div><div class="sprite">🐱</div></div>'+
+      '<div class="note" data-r="note" aria-live="polite"></div><div class="outlog" data-r="log"></div></div></div>'+
+      '<p class="score" data-r="score" style="margin-top:10px"></p>';
+    function r(n){return sec.querySelector('[data-r="'+n+'"]');}
+    function cur(){return S0.list[st.i];}
+    function paint(){
+      var bl=sec.querySelectorAll(".blk");for(var k=0;k<bl.length;k++)bl[k].classList.remove("cur");
+      var vars=r("vars"),s=st.step>=0?st.trace.steps[st.step]:null,v=s?s.v:{};
+      var names=[];(function walk(l){l.forEach(function(b){if(b.v&&names.indexOf(b.v)<0)names.push(b.v);if(b.th)walk(b.th);if(b.el)walk(b.el);if(b.b)walk(b.b);});})(cur().p);
+      vars.innerHTML=names.map(function(nm){return '<div class="var" data-n="'+nm+'"><b>'+nm+'</b><span>'+(v[nm]===undefined?"?":esc(v[nm]))+'</span></div>';}).join("");
+      if(s){var el=sec.querySelector('.blk[data-id="'+s.id+'"]');if(el)el.classList.add("cur");
+        var prev=st.step>0?st.trace.steps[st.step-1].v:{};names.forEach(function(nm){if(prev[nm]!==v[nm]){var x=vars.querySelector('[data-n="'+nm+'"]');if(x)x.classList.add("flash");}});}
+      r("says").textContent=s&&s.out.length?s.out[s.out.length-1]:"";
+      r("note").innerHTML=s?s.note:"Press <b>Run</b> to watch the program, or <b>Step</b> to go one block at a time.";
+      r("log").textContent=s&&s.out.length>1?"Said so far: "+s.out.join(", "):"";
+      r("step").disabled=!!(st.trace&&st.step>=st.trace.steps.length-1);
+    }
+    function stop(){if(st.timer){clearInterval(st.timer);st.timer=null;}r("run").textContent="▶ Run";}
+    function stepF(){if(st.step<st.trace.steps.length-1){st.step++;paint();}if(st.step>=st.trace.steps.length-1)stop();}
+    function show(){
+      stop();var P=cur();st.trace=trace(P.p);st.step=-1;st.answered=!!st.done[st.i];
+      r("title").textContent="Program "+(st.i+1)+" of "+S0.list.length;
+      r("prog").innerHTML=render(P.p,"r");r("q").textContent=P.q;
+      var ans=r("ans");
+      if(P.opts){ans.innerHTML='<div class="choices" style="margin:6px 0">'+P.opts.map(function(o){return '<button class="choice" data-o="'+esc(o)+'">'+esc(o)+'</button>';}).join("")+'</div>';
+        ans.querySelectorAll(".choice").forEach(function(b){b.addEventListener("click",function(){check(b.getAttribute("data-o"),b);});});}
+      else{ans.innerHTML='<div class="row" style="margin:6px 0"><input class="ans" type="text" inputmode="numeric" aria-label="Your prediction" placeholder="Your prediction"><button class="btn" data-r="chk">Check</button></div>';
+        var inp=ans.querySelector("input");ans.querySelector('[data-r="chk"]').addEventListener("click",function(){check(inp.value,null);});
+        inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();check(inp.value,null);}});}
+      r("fb").textContent=st.done[st.i]?"✓ You've already predicted this one.":"Predict first, then run it to check!";r("fb").className="fb"+(st.done[st.i]?" ok":"");
+      r("prev").disabled=st.i===0;r("next").textContent=st.i===S0.list.length-1?"Back to program 1 ↺":"Next program →";
+      r("score").textContent="Correct predictions: "+Object.keys(st.done).length+" of "+S0.list.length;
+      paint();
+    }
+    function check(g,btn){
+      if(st.answered&&!st.done[st.i]){}
+      var P=cur(),ok=String(g).trim().toLowerCase()===String(P.a).toLowerCase();
+      if(String(g).trim()===""){r("fb").textContent="Type a prediction first.";r("fb").className="fb";return;}
+      st.answered=true;
+      if(btn){r("ans").querySelectorAll(".choice").forEach(function(b){b.disabled=true;if(b.getAttribute("data-o")===String(P.a))b.className="choice ok";});if(!ok)btn.className="choice no";}
+      else{var inp=r("ans").querySelector("input");inp.disabled=true;r("ans").querySelector("button").disabled=true;}
+      if(ok)st.done[st.i]=1;
+      r("fb").innerHTML=(ok?"✓ Correct! ":"✗ Not quite. The answer is <b>"+esc(P.a)+"</b>. ")+(P.tip?P.tip+" ":"")+"Watch it run…";r("fb").className="fb "+(ok?"ok":"no");
+      r("score").textContent="Correct predictions: "+Object.keys(st.done).length+" of "+S0.list.length;
+      st.step=-1;run();
+    }
+    function run(){stop();if(st.step>=st.trace.steps.length-1)st.step=-1;r("run").textContent="⏸ Pause";st.timer=setInterval(stepF,LAB_SPEED);}
+    r("run").addEventListener("click",function(){if(st.timer)stop();else run();});
+    r("step").addEventListener("click",function(){stop();stepF();});
+    r("reset").addEventListener("click",function(){stop();st.step=-1;paint();});
+    r("next").addEventListener("click",function(){st.i=(st.i+1)%S0.list.length;show();});
+    r("prev").addEventListener("click",function(){if(st.i>0){st.i--;show();}});
+    LABS[key]={show:show,st:st,set:S0,trace:function(){return st.trace;},finish:function(){stop();st.step=st.trace.steps.length-1;paint();}};
+    show();
+  }
+  var LAB_SPEED=750;
+
+  /* ---------- debug ---------- */
+  var BUGS=[
+    {goal:"The cat should say 10.",p:[S("score","0"),C("score","5"),C("score","4"),SAY("score")],bug:"r.2",fix:C("score","5"),why:"It should change score by 5, not 4. 0 + 5 + 5 = 10."},
+    {goal:"Count up to 5. The cat should say 5.",p:[S("count","0"),REP("4",[C("count","1")]),SAY("count")],bug:"r.1",fix:REP("5",[C("count","1")]),why:"The loop must repeat 5 times, not 4."},
+    {goal:"When the temperature is 30, the cat should say \"Hot!\".",p:[S("temp","30"),IF("temp < 25",[SAY('"Hot!"')],[SAY('"Cold"')])],bug:"r.1",fix:IF("temp > 25",[SAY('"Hot!"')],[SAY('"Cold"')]),why:"The condition should be temp > 25 (greater than), not temp < 25."},
+    {goal:"Start at 1 and double three times. The cat should say 8.",p:[S("n","2"),REP("3",[S("n","n * 2")]),SAY("n")],bug:"r.0",fix:S("n","1"),why:"n must start at 1: 1 → 2 → 4 → 8. Starting at 2 gives 16."},
+    {goal:"The player loses a life. The cat should say 2.",p:[S("lives","3"),C("lives","1"),SAY("lives")],bug:"r.1",fix:C("lives","-1"),why:"To lose a life, change lives by -1. Changing by 1 adds a life."},
+    {goal:"With a score of 80, the cat should say \"Well done\".",p:[S("score","80"),IF("score > 50",[SAY('"Try again"')],[SAY('"Well done"')])],bug:"r.1.t.0",fix:SAY('"Well done"'),fixElse:true,why:"The messages are the wrong way round. \"Well done\" belongs inside the if, and \"Try again\" inside the else."},
+    {goal:"The cat should say 1, 2, 3 (one number each time round the loop).",p:[S("i","1"),REP("3",[C("i","1"),SAY("i")])],bug:"r.1.b.0",fix:null,swap:true,why:"The blocks inside the loop are in the wrong order. Say i first, then change i by 1. Otherwise the cat says 2, 3, 4."}
+  ];
+  var di=0,dSolved={},dTimer=null;
+  function fixed(B){
+    var p=JSON.parse(JSON.stringify(B.p));
+    if(B.swap){var rep=p[1];rep.b=[rep.b[1],rep.b[0]];return p;}
+    if(B.fixElse){p[1].th=[SAY('"Well done"')];p[1].el=[SAY('"Try again"')];return p;}
+    var parts=B.bug.split(".").slice(1),list=p;for(var i=0;i<parts.length-1;i++){var x=parts[i];if(x==="t")list=list.th;else if(x==="b")list=list.b;else if(x==="e")list=list.el;else list=list[+x];}
+    list[+parts[parts.length-1]]=JSON.parse(JSON.stringify(B.fix));return p;
+  }
+  function showD(){
+    if(dTimer){clearInterval(dTimer);dTimer=null;}
+    var B=BUGS[di];$("dTitle").textContent="Bug "+(di+1)+" of "+BUGS.length;$("dGoal").textContent="🎯 Goal: "+B.goal;
+    drawD(B.p,false);$("dFb").textContent=dSolved[di]?"✓ Already fixed!":"Run it, then tap the block with the bug.";$("dFb").className="fb"+(dSolved[di]?" ok":"");
+    $("dPrev").disabled=di===0;$("dNext").textContent=di===BUGS.length-1?"Back to bug 1 ↺":"Next bug →";
+    $("dScore").textContent="Bugs fixed: "+Object.keys(dSolved).length+" of "+BUGS.length;
+  }
+  function drawD(p,isFixed){
+    $("dProg").innerHTML=render(p,"r");$("dVars").innerHTML="";$("dSays").textContent="";
+    var bl=$("dProg").querySelectorAll(".blk");
+    for(var i=0;i<bl.length;i++)(function(b){b.addEventListener("click",function(){if(!isFixed)pickD(b);});})(bl[i]);
+    $("dProg").setAttribute("data-fixed",isFixed?"1":"");
+  }
+  function runD(p){
+    if(dTimer)clearInterval(dTimer);var t=trace(p),k=-1;
+    dTimer=setInterval(function(){k++;var s=t.steps[k];
+      var bl=$("dProg").querySelectorAll(".blk");for(var i=0;i<bl.length;i++)bl[i].classList.remove("cur");
+      var el=$("dProg").querySelector('.blk[data-id="'+s.id+'"]');if(el)el.classList.add("cur");
+      $("dVars").innerHTML=Object.keys(s.v).map(function(n){return '<div class="var"><b>'+n+'</b><span>'+esc(s.v[n])+'</span></div>';}).join("");
+      $("dSays").textContent=s.out.join(", ");
+      if(k>=t.steps.length-1){clearInterval(dTimer);dTimer=null;}},LAB_SPEED*0.7);
+    return t;
+  }
+  $("dRun").addEventListener("click",function(){var B=BUGS[di];runD($("dProg").getAttribute("data-fixed")?fixed(B):B.p);});
+  function pickD(b){
+    var B=BUGS[di],id=b.getAttribute("data-id");
+    var ok=id===B.bug||(B.fixElse&&(id==="r.1.e.0"))||(B.swap&&(id==="r.1.b.1"));
+    if(!id){return;}
+    if(ok){dSolved[di]=1;b.classList.add("bug");$("dFb").innerHTML="✓ Found it! "+B.why+" Here is the fixed program. Press Run to check it works.";$("dFb").className="fb ok";
+      setTimeout(function(){drawD(fixed(B),true);var bl=$("dProg").querySelectorAll(".blk");},900);
+      $("dScore").textContent="Bugs fixed: "+Object.keys(dSolved).length+" of "+BUGS.length;}
+    else{b.classList.add("wrongpick");setTimeout(function(){b.classList.remove("wrongpick");},400);$("dFb").textContent="✗ That block is fine. Run the program and watch where it goes wrong.";$("dFb").className="fb no";}
+  }
+  $("dNext").addEventListener("click",function(){di=(di+1)%BUGS.length;showD();});
+  $("dPrev").addEventListener("click",function(){if(di>0){di--;showD();}});
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"What is a variable?",a:"A named box that stores a value",w:["A type of loop","A mistake in a program","A picture on the screen"],why:"Variables remember values, like a score or number of lives."},
+    {q:"score is 10. Then: change score by 5. What is score now?",a:"15",w:["5","10","105"],why:"Change adds to the value: 10 + 5 = 15."},
+    {q:"score is 10. Then: set score to 5. What is score now?",a:"5",w:["15","10","50"],why:"Set replaces the old value completely."},
+    {q:"lives is 3. Then: change lives by -1. What is lives now?",a:"2",w:["4","-1","3"],why:"Changing by a negative number takes away: 3 − 1 = 2."},
+    {q:"What does an if block do?",a:"Runs blocks only when a condition is true",w:["Repeats blocks forever","Stores a number","Deletes the program"],why:"If blocks make decisions."},
+    {q:"temp is 18. Which runs? if temp > 25 then say Hot, else say Cool",a:"say Cool",w:["say Hot","Both","Neither"],why:"18 > 25 is false, so the else blocks run."},
+    {q:"What is a condition?",a:"A question that is either true or false",w:["A kind of variable","A loop that never stops","A sound block"],why:"For example: score > 50."},
+    {q:"What does a loop do?",a:"Repeats some blocks",w:["Makes a decision","Stores a value","Fixes bugs"],why:"Loops save writing the same blocks again and again."},
+    {q:"count is 0. repeat 6 times: change count by 1. What is count?",a:"6",w:["1","7","0"],why:"1 is added six times."},
+    {q:"total is 0. repeat 4 times: change total by 3. What is total?",a:"12",w:["7","4","3"],why:"3 + 3 + 3 + 3 = 12."},
+    {q:"n is 1. repeat 3 times: set n to n * 2. What is n?",a:"8",w:["6","3","2"],why:"1 → 2 → 4 → 8."},
+    {q:"A loop inside a loop: repeat 3 times (repeat 4 times (change x by 1)). x starts at 0. What is x?",a:"12",w:["7","4","3"],why:"The inside loop runs 4 times, and the whole thing happens 3 times: 3 × 4 = 12."},
+    {q:"What is a bug?",a:"A mistake in a program",w:["A type of variable","A fast loop","A computer virus only"],why:"Bugs make programs do the wrong thing."},
+    {q:"What is debugging?",a:"Finding and fixing mistakes in a program",w:["Writing a new program","Deleting variables","Running a program faster"],why:"Debugging means tracking down bugs and fixing them."},
+    {q:"Which symbol means \"greater than\"?",a:">",w:["<","=","+"],why:"5 > 3 means 5 is greater than 3."},
+    {q:"Why use a loop instead of copying the same block 10 times?",a:"It is shorter and easier to change",w:["Loops run without a computer","Copying blocks is not allowed","Loops make programs slower"],why:"One loop with a number is shorter, clearer and quick to change."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){var it=qList[qi];$("qCount").textContent="Question "+(qi+1)+" of "+QN;$("qBar").style.width=(qi/QN*100)+"%";$("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});}
+  function answerQ(o,btn){var it=qList[qi],bs=$("qChoices").children;for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Correct!";$("qFb").className="fb ok";}else{btn.className="choice no";$("qFb").textContent="✗ Not quite. The answer is: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Score: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});}
+  $("qNext").addEventListener("click",function(){qi++;if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";$("qEndText").textContent=(qRight===QN?"Coding champion! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep coding! ")+"You scored "+qRight+" out of "+QN+". "+stars;$("qAgain").focus({preventScroll:true});}else showQ();});
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
+    var p=t.getAttribute("data-p");
+    if((p==="p-if"||p==="p-loop")&&!started[p]){started[p]=1;makeLab($(p));}
+    if(p==="p-dbg"&&!started.d){started.d=1;showD();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){tabs[ti].addEventListener("click",function(){setTab(this);});tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});}
+  makeLab($("p-var"));
+  window.__cb={SETS:SETS,BUGS:BUGS,trace:trace,fixed:fixed,LABS:LABS,BANK:BANK,speed:function(ms){LAB_SPEED=ms;},di:function(){return di;}};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Data Storage Units Tool for Kids: Bits, Bytes, KB, MB, GB and TB | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive data storage tool for ages 9-13. Climb the units ladder from bits to terabytes, convert between units, work out how many photos, songs and films fit on a device, compare storage devices and take an auto-marked quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/data-storage/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/data-storage/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/data-storage/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/data-storage/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,input:focus-visible,textarea:focus-visible,.fbar:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+textarea,input[type=text]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 18px "DejaVu Sans Mono",Consolas,monospace;width:100%}
+textarea{min-height:76px;resize:vertical;text-transform:uppercase}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+
+select,input[type=number]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:8px 12px;font:700 18px "Nunito Sans",sans-serif}
+input[type=number]{width:160px}
+select:focus-visible,input:focus-visible,.rung:focus-visible,.dev:focus-visible{outline:3px solid #fff;outline-offset:2px}
+/* ladder */
+.ladder{display:grid;gap:8px;margin:12px 0}
+.rung{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:center;background:var(--navy);border:2px solid #2C3B72;border-radius:14px;padding:10px 14px;text-align:left;color:var(--ink);cursor:pointer;font:inherit}
+.rung.on{border-color:var(--gold);background:#22356B}
+.rung .u{font:800 22px "Baloo 2",sans-serif;color:var(--gold)}
+.rung .s{font-size:13px;color:var(--muted)}
+.rung .x{font:700 14px "DejaVu Sans Mono",Consolas,monospace;color:var(--hi);white-space:nowrap}
+.detail{background:var(--navy);border-radius:14px;padding:12px 16px;margin:10px 0;min-height:110px}
+.detail .big{font:800 26px "Baloo 2",sans-serif;color:var(--gold)}
+.conv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+.conv div{background:var(--navy);border-radius:12px;padding:8px 12px}
+.conv b{display:block;font:800 13px "Nunito Sans",sans-serif;color:var(--muted)}
+.conv span{font:800 18px "DejaVu Sans Mono",Consolas,monospace;color:var(--ink);word-break:break-all}
+/* fit */
+.fitres{background:var(--navy);border-radius:14px;padding:14px 16px;margin:10px 0}
+.fitres .n{font:800 clamp(30px,8vw,46px) "Baloo 2",sans-serif;color:var(--gold);line-height:1.1}
+.icons{font-size:22px;line-height:1.2;letter-spacing:2px;word-break:break-all;margin-top:6px}
+.cap{height:22px;background:#22356B;border-radius:999px;overflow:hidden;margin:8px 0;border:2px solid #2C3B72}
+.cap i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#FF9F5A);width:0;transition:width .3s}
+input.ans{width:100%;max-width:240px;font-size:22px}
+/* devices */
+.devs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.dev{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:12px;padding:8px 12px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.dev.sel{border-color:var(--gold);color:var(--gold)}
+.dev.done{opacity:.35;cursor:default}
+.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.binb{background:var(--navy);border:2px dashed var(--muted);border-radius:14px;padding:10px;min-height:150px;cursor:pointer;color:var(--ink);text-align:left;font:inherit}
+.binb h3{margin:0 0 4px;color:var(--gold)}
+.binb p{margin:0 0 6px;font-size:13px;color:var(--muted)}
+.binb .it{display:inline-block;background:#1d4a3a;border:1px solid var(--good);border-radius:8px;padding:2px 8px;margin:2px;font-size:13px}
+.cmp{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0}
+.cmp th{background:var(--navy);color:var(--gold);padding:8px;text-align:left;font-family:"Baloo 2",sans-serif}
+.cmp td{border-bottom:1px solid #2C3B72;padding:8px}
+@media (max-width:620px){.bins{grid-template-columns:1fr}.rung{grid-template-columns:80px 1fr}.rung .x{grid-column:1/-1}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › Data Storage</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/data-storage/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Data Storage: Bits to Terabytes 💾</h1>
+  <p class="lead">Everything on a computer is stored as bits: tiny 1s and 0s. Climb the ladder from a single bit to a terabyte, convert between units, find out how many photos, songs and films fit on a device, and compare different kinds of storage. <span style="white-space:nowrap">Ages 9-13.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Data storage modes">
+    <button class="tab" role="tab" id="t-ld" aria-controls="ld" aria-selected="true" data-p="ld">Unit Ladder</button>
+    <button class="tab" role="tab" id="t-fit" aria-controls="fit" aria-selected="false" tabindex="-1" data-p="fit">How Many Fit?</button>
+    <button class="tab" role="tab" id="t-dv" aria-controls="dv" aria-selected="false" tabindex="-1" data-p="dv">Storage Devices</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
+  </div>
+
+  <!-- ============ LADDER ============ -->
+  <section class="panel on" id="ld" role="tabpanel" aria-labelledby="t-ld">
+    <h2>The units ladder</h2>
+    <p>Each step up the ladder is a bigger unit. Tap a step to see how big it is and what it can hold.</p>
+    <div class="ladder" id="ladder"></div>
+    <div class="detail" id="ldDetail" aria-live="polite"></div>
+    <h2 style="margin-top:20px">Unit converter</h2>
+    <div class="row">
+      <label class="muted" for="cvN" style="font-weight:700">Amount</label>
+      <input type="number" id="cvN" value="2" min="0" step="any">
+      <select id="cvU" aria-label="Unit"></select>
+    </div>
+    <div class="conv" id="cvOut" aria-live="polite"></div>
+    <p class="tip"><b>1,000 or 1,024?</b> In this tool, each unit is 1,000 times bigger than the one below, like metres and kilometres. Computers often count in 1,024s instead (because 1,024 = 2<sup>10</sup>), so you may see both. Either way, the answers are very close.</p>
+  </section>
+
+  <!-- ============ FIT ============ -->
+  <section class="panel" id="fit" role="tabpanel" aria-labelledby="t-fit">
+    <h2>How many fit?</h2>
+    <div class="row">
+      <label class="muted" for="fDev" style="font-weight:700">Device</label><select id="fDev"></select>
+      <label class="muted" for="fItem" style="font-weight:700">File</label><select id="fItem"></select>
+    </div>
+    <div class="fitres" aria-live="polite">
+      <div class="n" id="fN"></div>
+      <div id="fWork" class="muted"></div>
+      <div class="cap" aria-hidden="true"><i id="fCap"></i></div>
+      <div class="icons" id="fIcons" aria-hidden="true"></div>
+    </div>
+    <h2 style="margin-top:22px">Storage challenges 🧮</h2>
+    <p>Work out each answer. Remember: change both sizes to the <b>same unit</b> first, then divide. <span class="score" id="chScore">Score: 0</span> · <span id="chCount"></span></p>
+    <div id="chBox">
+      <p class="q" id="chQ"></p>
+      <div class="row"><input type="number" class="ans" id="chIn" inputmode="numeric" aria-label="Your answer" placeholder="Your answer"><button class="btn" id="chCheck">Check</button></div>
+      <div class="fb" id="chFb" aria-live="polite"></div>
+      <p class="why" id="chWhy"></p>
+      <button class="btn" id="chNext" style="display:none">Next →</button>
+    </div>
+    <div id="chEnd" style="display:none"><p class="q" id="chEndText"></p><button class="btn" id="chAgain">Play again</button></div>
+  </section>
+
+  <!-- ============ DEVICES ============ -->
+  <section class="panel" id="dv" role="tabpanel" aria-labelledby="t-dv">
+    <h2>Three kinds of storage</h2>
+    <table class="cmp">
+      <tr><th></th><th>🧲 Magnetic</th><th>💿 Optical</th><th>⚡ Solid state</th></tr>
+      <tr><td><b>How it works</b></td><td>Tiny magnetic spots on a spinning disk</td><td>A laser reads pits and flat areas on a disc</td><td>Electric charges trapped in memory chips, no moving parts</td></tr>
+      <tr><td><b>Examples</b></td><td>Hard disk drive (HDD)</td><td>CD, DVD, Blu-ray</td><td>SSD, USB stick, SD card, phone memory</td></tr>
+      <tr><td><b>Good at</b></td><td>Lots of storage for a low price</td><td>Cheap to post and sell films and music</td><td>Very fast, light, silent and tough</td></tr>
+      <tr><td><b>Not so good</b></td><td>Moving parts can break if dropped</td><td>Small capacity, scratches easily</td><td>Costs more per GB</td></tr>
+    </table>
+    <h2 style="margin-top:20px">Sort the devices</h2>
+    <p>Tap a device, then tap the kind of storage it uses. <span class="score" id="srScore"></span></p>
+    <div class="devs" id="srDevs"></div>
+    <div class="bins" id="srBins"></div>
+    <div class="fb" id="srFb" aria-live="polite"></div>
+    <button class="btn ghost sm" id="srAgain">Start again</button>
+    <h2 style="margin-top:22px">Pick the best device</h2>
+    <p><span class="score" id="pkScore">Score: 0</span> · <span id="pkCount"></span></p>
+    <div id="pkBox">
+      <p class="q" id="pkQ"></p>
+      <div class="choices" id="pkChoices"></div>
+      <div class="fb" id="pkFb" aria-live="polite"></div>
+      <p class="why" id="pkWhy"></p>
+      <button class="btn" id="pkNext" style="display:none">Next →</button>
+    </div>
+    <div id="pkEnd" style="display:none"><p class="q" id="pkEndText"></p><button class="btn" id="pkAgain">Play again</button></div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Data Storage Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none"><p class="q" id="qEndText"></p><button class="btn" id="qAgain">Play again</button></div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Want to know more?</b> See how a picture's size in bytes is worked out with <a href="https://classroom.ellisknowledgestudio.com/it/pixels-images/">Pixels and Images</a>, or learn to count in bits with <a href="https://classroom.ellisknowledgestudio.com/it/binary/">Binary: 1s and 0s</a>.</p>
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function fmt(n){if(n>=1e15)return n.toExponential(2);var r=Math.round(n*1000)/1000;return r.toLocaleString("en-GB",{maximumFractionDigits:3});}
+
+  /* units in bits */
+  var U=[
+    {k:"bit",n:"Bit",b:1,s:"A single 1 or 0",x:"1 bit",ex:"One light switch: on or off. One answer to a yes/no question."},
+    {k:"nibble",n:"Nibble",b:4,s:"4 bits",x:"4 bits",ex:"Enough for one hexadecimal digit (0 to F)."},
+    {k:"byte",n:"Byte",b:8,s:"8 bits",x:"8 bits",ex:"Enough to store one letter, like A, or a number from 0 to 255."},
+    {k:"KB",n:"Kilobyte (KB)",b:8e3,s:"1,000 bytes",x:"× 1,000",ex:"About half a page of text, or a tiny icon."},
+    {k:"MB",n:"Megabyte (MB)",b:8e6,s:"1,000 KB",x:"× 1,000",ex:"A photo is about 3 MB. A song is about 4 MB. A whole book of text is about 1 MB."},
+    {k:"GB",n:"Gigabyte (GB)",b:8e9,s:"1,000 MB",x:"× 1,000",ex:"An HD film is about 4 GB. A phone might hold 128 GB."},
+    {k:"TB",n:"Terabyte (TB)",b:8e12,s:"1,000 GB",x:"× 1,000",ex:"Around 300,000 photos or 250 HD films. Many laptops and external drives hold 1 or 2 TB."},
+    {k:"PB",n:"Petabyte (PB)",b:8e15,s:"1,000 TB",x:"× 1,000",ex:"Huge! Big companies store many petabytes of photos and videos in their data centres."}
+  ];
+  var cur=2;
+  (function(){
+    var box=$("ladder");
+    U.slice().reverse().forEach(function(u){
+      var i=U.indexOf(u),b=document.createElement("button");b.className="rung";b.setAttribute("data-i",i);
+      b.innerHTML='<span class="u">'+u.k+'</span><span><b>'+u.n+'</b><br><span class="s">'+u.s+'</span></span><span class="x">'+(i?u.x+" ↑":"start")+'</span>';
+      b.addEventListener("click",function(){cur=i;showLd();});box.appendChild(b);
+    });
+    U.forEach(function(u,i){if(i<2)return;var o=document.createElement("option");o.value=i;o.textContent=u.k==="KB"||u.k==="MB"||u.k==="GB"||u.k==="TB"||u.k==="PB"?u.k:u.n;if(u.k==="GB")o.selected=true;$("cvU").appendChild(o);});
+  })();
+  function showLd(){
+    var bs=$("ladder").children;for(var i=0;i<bs.length;i++)bs[i].classList.toggle("on",+bs[i].getAttribute("data-i")===cur);
+    var u=U[cur],h='<div class="big">1 '+u.n+'</div>';
+    h+='<div>= <b>'+fmt(u.b)+'</b> bit'+(u.b>1?"s":"")+(cur>=2?' = <b>'+fmt(u.b/8)+'</b> byte'+(u.b/8>1?"s":""):"")+'</div>';
+    h+='<p style="margin:6px 0 0">📦 '+u.ex+'</p>';
+    $("ldDetail").innerHTML=h;
+  }
+  function showCv(){
+    var n=parseFloat($("cvN").value);if(isNaN(n)||n<0)n=0;var bits=n*U[+$("cvU").value].b,h="";
+    U.forEach(function(u){h+='<div><b>'+u.n+'</b><span>'+fmt(bits/u.b)+'</span></div>';});
+    $("cvOut").innerHTML=h;
+  }
+  $("cvN").addEventListener("input",showCv);$("cvU").addEventListener("change",showCv);
+  showLd();showCv();
+
+  /* ---------- fit ---------- */
+  var DEV=[["CD","700 MB",700],["DVD","4.7 GB",4700],["Blu-ray disc","25 GB",25000],["USB stick","32 GB",32000],["SD card","64 GB",64000],["Phone","128 GB",128000],["Laptop SSD","512 GB",512000],["External hard drive","2 TB",2000000]];
+  var ITEM=[["📷","Photo","3 MB",3],["🎵","Song","4 MB",4],["📄","Text document","100 KB",0.1],["📚","E-book","2 MB",2],["🎬","HD film","4 GB",4000],["🎮","Video game","50 GB",50000],["📹","1 minute of HD video","100 MB",100]];
+  (function(){
+    DEV.forEach(function(d,i){var o=document.createElement("option");o.value=i;o.textContent=d[0]+" ("+d[1]+")";if(i===3)o.selected=true;$("fDev").appendChild(o);});
+    ITEM.forEach(function(t,i){var o=document.createElement("option");o.value=i;o.textContent=t[0]+" "+t[1]+" ("+t[2]+")";$("fItem").appendChild(o);});
+  })();
+  function showFit(){
+    var d=DEV[+$("fDev").value],t=ITEM[+$("fItem").value],n=Math.floor(d[2]/t[3]+1e-9);
+    $("fN").textContent=n.toLocaleString("en-GB")+" "+t[1].toLowerCase()+(n===1?"":"s");
+    var capMB=d[2]>=1000?fmt(d[2]/1000)+" GB = "+fmt(d[2])+" MB":fmt(d[2])+" MB";
+    $("fWork").textContent=d[0]+": "+capMB+". Each "+t[1].toLowerCase()+" is "+fmt(t[3])+" MB. "+fmt(d[2])+" ÷ "+fmt(t[3])+" = "+fmt(d[2]/t[3])+(Math.abs(d[2]/t[3]-n)>1e-9?", so "+n.toLocaleString("en-GB")+" whole files fit.":".");
+    $("fCap").style.width=n?Math.min(100,n*t[3]/d[2]*100)+"%":"0";
+    var ic=n>100?t[0].repeat(100)+" … ×"+n.toLocaleString("en-GB"):(n?t[0].repeat(n):"❌ It doesn't fit at all!");
+    $("fIcons").textContent=ic;
+  }
+  $("fDev").addEventListener("change",showFit);$("fItem").addEventListener("change",showFit);showFit();
+
+  var CN=8,chList=[],chi=0,chRight=0,chDone=false;
+  function makeCh(t){
+    if(t==="up"){var u=pick([["KB","bytes",1000],["MB","KB",1000],["GB","MB",1000],["TB","GB",1000]]),n=pick([2,3,5,8,12,25]);
+      return {q:"How many "+u[1]+" are in "+n+" "+u[0]+"?",a:n*u[2],why:n+" × 1,000 = "+(n*u[2]).toLocaleString("en-GB")+" "+u[1]+"."};}
+    if(t==="down"){var v=pick([["MB","GB"],["GB","TB"],["KB","MB"]]),m=pick([2000,3000,5000,7000,10000]);
+      return {q:"How many "+v[1]+" is "+m.toLocaleString("en-GB")+" "+v[0]+"?",a:m/1000,why:m.toLocaleString("en-GB")+" ÷ 1,000 = "+(m/1000)+" "+v[1]+"."};}
+    if(t==="bits"){var b=pick([2,4,5,10,16,100]);return {q:"How many bits are in "+b+" bytes?",a:b*8,why:b+" × 8 = "+b*8+" bits."};}
+    if(t==="bytes"){var c=pick([16,24,40,64,80,800]);return {q:"How many bytes is "+c+" bits?",a:c/8,why:c+" ÷ 8 = "+c/8+" bytes."};}
+    var s=pick([[2,"GB",4,"song (4 MB)"],[1,"GB",5,"photo (5 MB)"],[32,"GB",4000,"film (4 GB)"],[64,"GB",2,"e-book (2 MB)"],[4,"GB",8,"song (8 MB)"],[500,"MB",2,"photo (2 MB)"],[2,"TB",50000,"game (50 GB)"]]);
+    var capMB=s[1]==="GB"?s[0]*1000:s[1]==="TB"?s[0]*1000000:s[0],ans=Math.floor(capMB/s[2]);
+    return {q:"How many "+s[3].replace(/ \(.*/,"")+"s of "+s[3].replace(/.*\((.*)\)/,"$1")+" fit on a "+s[0]+" "+s[1]+" device?",a:ans,why:s[0]+" "+s[1]+" = "+capMB.toLocaleString("en-GB")+" MB. "+capMB.toLocaleString("en-GB")+" ÷ "+s[2].toLocaleString("en-GB")+" = "+ans.toLocaleString("en-GB")+"."};
+  }
+  function showCh(){
+    var it=chList[chi];chDone=false;$("chCount").textContent="Question "+(chi+1)+" of "+CN;$("chQ").textContent=it.q;
+    $("chIn").value="";$("chIn").disabled=false;$("chCheck").disabled=false;$("chFb").textContent="";$("chFb").className="fb";$("chWhy").textContent="";$("chNext").style.display="none";
+  }
+  function checkCh(){
+    if(chDone)return;var it=chList[chi],g=$("chIn").value.replace(/[\s,]/g,"");
+    if(g===""){$("chFb").textContent="Type an answer first.";$("chFb").className="fb";return;}
+    chDone=true;$("chIn").disabled=true;$("chCheck").disabled=true;
+    if(Math.abs(Number(g)-it.a)<1e-9){chRight++;$("chFb").textContent="✓ Correct!";$("chFb").className="fb ok";}
+    else{$("chFb").textContent="✗ Not quite. The answer is "+it.a.toLocaleString("en-GB")+".";$("chFb").className="fb no";}
+    $("chWhy").textContent=it.why;$("chScore").textContent="Score: "+chRight;$("chNext").style.display="";$("chNext").focus({preventScroll:true});
+  }
+  $("chCheck").addEventListener("click",checkCh);
+  $("chIn").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkCh();}});
+  $("chNext").addEventListener("click",function(){chi++;if(chi>=CN){$("chBox").style.display="none";$("chEnd").style.display="";$("chEndText").textContent=(chRight===CN?"Storage superstar! ":chRight>=6?"Excellent! ":chRight>=3?"Good work! ":"Keep practising! ")+"You got "+chRight+" out of "+CN+".";$("chAgain").focus({preventScroll:true});}else showCh();});
+  function startCh(){chList=shuffle(["up","down","bits","bytes","fit","fit","fit","up"]).map(makeCh);chi=0;chRight=0;$("chScore").textContent="Score: 0";$("chEnd").style.display="none";$("chBox").style.display="";showCh();}
+  $("chAgain").addEventListener("click",startCh);
+
+  /* ---------- sort devices ---------- */
+  var KINDS=[["mag","🧲 Magnetic","Spinning disks and magnets"],["opt","💿 Optical","Read by a laser"],["ss","⚡ Solid state","Memory chips, no moving parts"]];
+  var SORT=[["Hard disk drive (HDD)","mag"],["CD","opt"],["DVD","opt"],["Blu-ray disc","opt"],["SSD","ss"],["USB stick","ss"],["SD card","ss"],["Phone memory","ss"],["Magnetic tape","mag"]];
+  var srSel=-1,srDone={},srMiss=0;
+  function startSr(){
+    srSel=-1;srDone={};srMiss=0;var d=$("srDevs"),b=$("srBins");d.innerHTML="";b.innerHTML="";
+    shuffle(SORT.map(function(s,i){return i;})).forEach(function(i){var x=document.createElement("button");x.className="dev";x.textContent=SORT[i][0];x.setAttribute("data-i",i);
+      x.addEventListener("click",function(){if(srDone[i])return;srSel=i;var all=d.children;for(var k=0;k<all.length;k++)all[k].classList.toggle("sel",all[k]===x);$("srFb").textContent="Now tap where "+SORT[i][0]+" belongs.";$("srFb").className="fb";});d.appendChild(x);});
+    KINDS.forEach(function(k){var x=document.createElement("button");x.className="binb";x.setAttribute("data-k",k[0]);x.innerHTML="<h3>"+k[1]+"</h3><p>"+k[2]+"</p><div class='got'></div>";
+      x.addEventListener("click",function(){
+        if(srSel<0){$("srFb").textContent="Tap a device first.";$("srFb").className="fb";return;}
+        var s=SORT[srSel];
+        if(s[1]===k[0]){srDone[srSel]=1;var t=document.createElement("span");t.className="it";t.textContent=s[0];x.querySelector(".got").appendChild(t);
+          var db=d.querySelector('[data-i="'+srSel+'"]');db.className="dev done";db.disabled=true;srSel=-1;
+          var n=Object.keys(srDone).length;$("srFb").textContent=n===SORT.length?"✓ All sorted! "+(srMiss?"You had "+srMiss+" wrong tap"+(srMiss>1?"s":"")+".":"Perfect, no mistakes!"):"✓ Correct!";$("srFb").className="fb ok";
+          $("srScore").textContent="Sorted: "+n+" of "+SORT.length;
+        } else {srMiss++;$("srFb").textContent="✗ Not that one. Think about how "+s[0]+" stores data.";$("srFb").className="fb no";}
+      });b.appendChild(x);});
+    $("srScore").textContent="Sorted: 0 of "+SORT.length;$("srFb").textContent="";
+  }
+  $("srAgain").addEventListener("click",startSr);
+
+  var PICK=[
+    {q:"You want to carry homework between home and school in your pocket.",a:"USB stick",w:["External hard drive","Blu-ray disc","Magnetic tape"],why:"A USB stick is small, light, tough and holds plenty of documents."},
+    {q:"A photographer needs to store 200,000 photos cheaply at home.",a:"External hard drive",w:["CD","SD card","USB stick"],why:"Hard drives give lots of storage for a low price."},
+    {q:"A camera needs storage that is tiny and slots inside it.",a:"SD card",w:["DVD","Hard disk drive","Magnetic tape"],why:"SD cards are small, solid state cards made for cameras."},
+    {q:"A film company wants to sell a film in shops on a disc.",a:"Blu-ray disc",w:["SSD","USB stick","Magnetic tape"],why:"Optical discs are cheap to make in large numbers and to post."},
+    {q:"A laptop needs to start up in seconds and survive being bumped.",a:"SSD",w:["Hard disk drive","CD","DVD"],why:"SSDs have no moving parts, so they are fast and tough."},
+    {q:"A bank wants to back up huge amounts of data and keep it for years at low cost.",a:"Magnetic tape",w:["SD card","CD","USB stick"],why:"Tape is very cheap per GB and good for long-term backups, even though it is slow."}
+  ];
+  var PN=6,pkList=[],pki=0,pkRight=0;
+  function showPk(){var it=pkList[pki];$("pkCount").textContent="Question "+(pki+1)+" of "+PN;$("pkQ").textContent=it.q;$("pkFb").textContent="";$("pkFb").className="fb";$("pkWhy").textContent="";$("pkNext").style.display="none";
+    var box=$("pkChoices");box.innerHTML="";shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){
+      var bs=box.children;for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+      if(o===it.a){pkRight++;$("pkFb").textContent="✓ Good choice!";$("pkFb").className="fb ok";}else{b.className="choice no";$("pkFb").textContent="✗ The best choice is: "+it.a;$("pkFb").className="fb no";}
+      $("pkWhy").textContent=it.why;$("pkScore").textContent="Score: "+pkRight;$("pkNext").style.display="";$("pkNext").focus({preventScroll:true});});box.appendChild(b);});}
+  $("pkNext").addEventListener("click",function(){pki++;if(pki>=PN){$("pkBox").style.display="none";$("pkEnd").style.display="";$("pkEndText").textContent="You chose the best device "+pkRight+" out of "+PN+" times.";$("pkAgain").focus({preventScroll:true});}else showPk();});
+  function startPk(){pkList=shuffle(PICK);pki=0;pkRight=0;$("pkScore").textContent="Score: 0";$("pkEnd").style.display="none";$("pkBox").style.display="";showPk();}
+  $("pkAgain").addEventListener("click",startPk);
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"What is the smallest unit of data?",a:"A bit",w:["A byte","A kilobyte","A nibble"],why:"A bit is a single 1 or 0."},
+    {q:"How many bits are in a byte?",a:"8",w:["4","10","1,000"],why:"A byte is a group of 8 bits."},
+    {q:"How many bits are in a nibble?",a:"4",w:["2","8","16"],why:"A nibble is half a byte: 4 bits."},
+    {q:"Which is the biggest?",a:"1 terabyte",w:["1 gigabyte","1 megabyte","1 kilobyte"],why:"Bit, byte, KB, MB, GB, TB: TB is the biggest here."},
+    {q:"How many megabytes are in a gigabyte?",a:"1,000",w:["8","100","1,000,000"],why:"Each step up the ladder is 1,000 times bigger (or 1,024 on some computers)."},
+    {q:"How many GB are in 3 TB?",a:"3,000",w:["300","30","3,000,000"],why:"3 × 1,000 = 3,000 GB."},
+    {q:"About how much storage does one letter of text need?",a:"1 byte",w:["1 bit","1 megabyte","1 gigabyte"],why:"One byte can store one character."},
+    {q:"Which is about the size of one photo?",a:"3 MB",w:["3 KB","3 GB","3 TB"],why:"A typical phone photo is a few megabytes."},
+    {q:"How many 4 MB songs fit on a 2 GB device?",a:"500",w:["50","2,000","8"],why:"2 GB = 2,000 MB. 2,000 ÷ 4 = 500."},
+    {q:"Which type of storage has no moving parts?",a:"Solid state",w:["Magnetic","Optical","Paper"],why:"SSDs, USB sticks and SD cards use memory chips."},
+    {q:"Which type of storage is read by a laser?",a:"Optical",w:["Magnetic","Solid state","Cloud"],why:"CDs, DVDs and Blu-ray discs are optical."},
+    {q:"Which uses spinning disks and magnets?",a:"Hard disk drive",w:["USB stick","DVD","SD card"],why:"A hard disk drive stores data magnetically on spinning platters."},
+    {q:"Why is an SSD good for a laptop?",a:"It is fast and survives bumps",w:["It is the cheapest per GB","It is read by a laser","It can be posted in an envelope"],why:"No moving parts make SSDs fast and tough."},
+    {q:"Which device holds the most?",a:"2 TB external hard drive",w:["128 GB phone","32 GB USB stick","4.7 GB DVD"],why:"2 TB = 2,000 GB, far more than the others."},
+    {q:"Why do computers sometimes use 1,024 instead of 1,000?",a:"1,024 is a power of 2, which suits binary",w:["1,024 is easier to say","It is a mistake","Because of the metric system"],why:"2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 1,024."},
+    {q:"How many bytes is 32 bits?",a:"4",w:["8","32","256"],why:"32 ÷ 8 = 4 bytes."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){var it=qList[qi];$("qCount").textContent="Question "+(qi+1)+" of "+QN;$("qBar").style.width=(qi/QN*100)+"%";$("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});}
+  function answerQ(o,btn){var it=qList[qi],bs=$("qChoices").children;for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Correct!";$("qFb").className="fb ok";}else{btn.className="choice no";$("qFb").textContent="✗ Not quite. The answer is: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Score: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});}
+  $("qNext").addEventListener("click",function(){qi++;if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";$("qEndText").textContent=(qRight===QN?"Storage genius! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep exploring! ")+"You scored "+qRight+" out of "+QN+". "+stars;$("qAgain").focus({preventScroll:true});}else showQ();});
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
+    var p=t.getAttribute("data-p");
+    if(p==="fit"&&!started.f){started.f=1;startCh();}
+    if(p==="dv"&&!started.d){started.d=1;startSr();startPk();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){tabs[ti].addEventListener("click",function(){setTab(this);});tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});}
+  window.__ds={U:U,DEV:DEV,ITEM:ITEM,SORT:SORT,PICK:PICK,BANK:BANK,ch:function(){return chList[chi];},pk:function(){return pkList[pki];}};
+})();
+</script>
+</body>
+</html>

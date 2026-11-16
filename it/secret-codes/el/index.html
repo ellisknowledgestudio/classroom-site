@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Μυστικοί Κώδικες και Κρυπτογράφηση: Δωρεάν Εργαλείο για Παιδιά με τον Τροχό του Καίσαρα | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό εργαλείο κρυπτογράφησης, για ηλικίες 9-14, με το ελληνικό αλφάβητο. Γύρισε τον τροχό του κρυπτογραφήματος του Καίσαρα, κρυπτογράφησε και αποκρυπτογράφησε μυστικά μηνύματα, σπάσε κώδικες με και χωρίς το κλειδί, χρησιμοποίησε ανάλυση συχνότητας και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/secret-codes/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/secret-codes/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/secret-codes/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/secret-codes/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,input:focus-visible,textarea:focus-visible,.fbar:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+textarea,input[type=text]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 18px "DejaVu Sans Mono",Consolas,monospace;width:100%}
+textarea{min-height:76px;resize:vertical;text-transform:uppercase}
+/* wheel */
+.wgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+.wheel{width:100%;max-width:360px;display:block;margin:0 auto}
+.wheel .ring{fill:#22356B;stroke:#2C3B72;stroke-width:2}
+.wheel .ring2{fill:#1A2A55;stroke:var(--gold);stroke-width:2}
+.wheel .lo{fill:var(--ink);font:800 17px "Baloo 2",sans-serif;text-anchor:middle;dominant-baseline:central}
+.wheel .li{fill:var(--gold);font:800 16px "Baloo 2",sans-serif;text-anchor:middle;dominant-baseline:central}
+.wheel .inner{transition:transform .35s ease}
+.wheel .ptr{fill:var(--good)}
+.shiftbig{font:800 34px "Baloo 2",sans-serif;color:var(--gold);text-align:center}
+.strip{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;font:700 14px "DejaVu Sans Mono",Consolas,monospace;text-align:center;margin:8px 0}
+.strip div{background:var(--navy);border-radius:6px;padding:2px 0;line-height:1.25}
+.strip b{display:block;color:var(--gold)}
+.outbox{background:var(--navy);border-radius:12px;padding:12px 14px;font:800 22px "DejaVu Sans Mono",Consolas,monospace;color:var(--good);min-height:56px;word-break:break-word;letter-spacing:.04em}
+.cipher{background:var(--navy);border-radius:12px;padding:12px 14px;font:800 clamp(20px,5vw,28px) "DejaVu Sans Mono",Consolas,monospace;color:var(--gold);letter-spacing:.06em;word-break:break-word}
+.preview{font:700 18px "DejaVu Sans Mono",Consolas,monospace;color:var(--muted);min-height:28px;word-break:break-word}
+/* frequency */
+.fchart{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;align-items:end;height:160px;margin:8px 0 2px}
+.fbar{background:#3A4B85;border:0;border-radius:4px 4px 0 0;cursor:pointer;padding:0;min-height:2px;position:relative}
+.fbar.top{background:var(--gold)}
+.fbar.sel{background:var(--good)}
+.flabels{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;font:700 12px "DejaVu Sans Mono",Consolas,monospace;text-align:center;color:var(--muted)}
+.echart{display:grid;grid-template-columns:repeat(24,1fr);gap:2px;align-items:end;height:60px;margin:8px 0 2px}
+.echart i{background:var(--hi);border-radius:3px 3px 0 0;display:block;opacity:.7}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:720px){.wgrid{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.strip{font-size:12px}.flabels{font-size:9px}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Μυστικοί Κώδικες</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/secret-codes/" lang="en" hreflang="en">English</a></div>
+  <h1>Μυστικοί Κώδικες: Κρυπτογράφηση 🔐</h1>
+  <p class="lead">Η κρυπτογράφηση ανακατεύει ένα μήνυμα ώστε να μπορεί να το διαβάσει μόνο όποιος έχει το κλειδί. Γύρισε τον τροχό του Καίσαρα για να στείλεις μυστικά μηνύματα, σπάσε κώδικες σαν κατάσκοπος και μέτρα γράμματα για να σπάσεις έναν κώδικα χωρίς το κλειδί. <span style="white-space:nowrap">Ηλικίες 9-14.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες μυστικών κωδίκων">
+    <button class="tab" role="tab" id="t-wh" aria-controls="wh" aria-selected="true" data-p="wh">Τροχός Κρυπτογράφησης</button>
+    <button class="tab" role="tab" id="t-cr" aria-controls="cr" aria-selected="false" tabindex="-1" data-p="cr">Σπάσε τον Κώδικα</button>
+    <button class="tab" role="tab" id="t-fq" aria-controls="fq" aria-selected="false" tabindex="-1" data-p="fq">Ντετέκτιβ Συχνότητας</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
+  </div>
+
+  <!-- ============ WHEEL ============ -->
+  <section class="panel on" id="wh" role="tabpanel" aria-labelledby="t-wh">
+    <h2>Ο τροχός του κρυπτογραφήματος του Καίσαρα</h2>
+    <p>Ο Ιούλιος Καίσαρας έστελνε μυστικές διαταγές μετακινώντας κάθε γράμμα έναν συγκεκριμένο αριθμό θέσεων μέσα στο αλφάβητο. Ο αριθμός των θέσεων είναι το <b>κλειδί</b>. Εδώ χρησιμοποιούμε το ελληνικό αλφάβητο με τα 24 γράμματα. Γύρισε τον τροχό για να διαλέξεις κλειδί και μετά γράψε ένα μήνυμα.</p>
+    <div class="wgrid">
+      <div>
+        <svg class="wheel" id="wheel" viewBox="0 0 360 360" role="img" aria-label="Ο τροχός του Καίσαρα. Ο εξωτερικός δακτύλιος είναι το κανονικό αλφάβητο και ο εσωτερικός χρυσός δακτύλιος είναι το αλφάβητο του κώδικα."></svg>
+        <div class="row" style="justify-content:center">
+          <button class="btn ghost sm" id="kDown" aria-label="Γύρισε τον τροχό πίσω">◀</button>
+          <span class="shiftbig" id="kShow" aria-live="polite">Κλειδί 3</span>
+          <button class="btn ghost sm" id="kUp" aria-label="Γύρισε τον τροχό μπροστά">▶</button>
+        </div>
+        <input type="range" id="kRange" min="0" max="23" value="3" aria-label="Κλειδί (μετατόπιση)">
+      </div>
+      <div>
+        <div class="row" style="margin-top:0"><div class="seg" role="group" aria-label="Λειτουργία" id="mode">
+          <button data-m="enc" aria-pressed="true">🔒 Κρυπτογράφηση</button>
+          <button data-m="dec" aria-pressed="false">🔓 Αποκρυπτογράφηση</button>
+        </div></div>
+        <label for="msgIn" class="muted" style="font-weight:700" id="inLab">Το μήνυμά σου (απλό κείμενο)</label>
+        <textarea id="msgIn" spellcheck="false">ΣΥΝΑΝΤΗΣΗ ΣΤΗ ΓΕΡΙΚΗ ΒΕΛΑΝΙΔΙΑ</textarea>
+        <p class="muted" style="margin:10px 0 4px;font-weight:700" id="outLab">Μυστικό μήνυμα (κρυπτοκείμενο)</p>
+        <div class="outbox" id="msgOut" aria-live="polite"></div>
+        <div class="row"><button class="btn sm" id="swap">⇅ Αντιστροφή: αποκρυπτογράφησέ το</button></div>
+      </div>
+    </div>
+    <h3>Το αλφάβητο του κώδικα για αυτό το κλειδί</h3>
+    <div class="strip" id="strip" aria-label="Απλά γράμματα και τα γράμματα του κώδικα"></div>
+    <p class="tip"><b>Λέξεις που πρέπει να ξέρεις:</b> το κανονικό μήνυμα είναι το <b>απλό κείμενο</b>. Το ανακατεμένο μήνυμα είναι το <b>κρυπτοκείμενο</b>. Το <b>κλειδί</b> είναι το μυστικό που μετατρέπει το ένα στο άλλο. Για να αποκρυπτογραφήσεις, μετακινείς τα γράμματα προς την αντίθετη κατεύθυνση.</p>
+  </section>
+
+  <!-- ============ CRACK ============ -->
+  <section class="panel" id="cr" role="tabpanel" aria-labelledby="t-cr">
+    <h2>Σπάσε τον κώδικα 🕵️</h2>
+    <p>Αποκρυπτογράφησε κάθε μυστικό μήνυμα και γράψε τι λέει. Στα πρώτα σου λέμε το κλειδί. Αργότερα θα πρέπει να βρεις το κλειδί μόνος/η σου! <span class="score" id="crScore">Λυμένα: 0</span> · <span id="crCount"></span></p>
+    <div class="cipher" id="crCipher"></div>
+    <p class="fb" id="crKeyInfo" style="margin:8px 0"></p>
+    <div id="crTry">
+      <label for="crRange" class="muted" style="font-weight:700">Δοκίμασε ένα κλειδί: <span id="crTryK" class="score">0</span></label>
+      <input type="range" id="crRange" min="0" max="23" value="0" aria-label="Δοκίμασε ένα κλειδί">
+      <div class="preview" id="crPrev" aria-live="polite"></div>
+    </div>
+    <label for="crIn" class="muted" style="font-weight:700">Τι λέει;</label>
+    <div class="row" style="margin-top:4px"><input type="text" id="crIn" autocomplete="off" spellcheck="false" style="max-width:560px"><button class="btn" id="crCheck">Έλεγχος</button></div>
+    <div class="fb" id="crFb" aria-live="polite"></div>
+    <div class="row"><button class="btn ghost sm" id="crPrevBtn">← Πίσω</button><button class="btn ghost sm" id="crReveal">Δείξε την απάντηση</button><button class="btn sm" id="crNext">Επόμενος κώδικας →</button></div>
+    <p class="tip"><b>Ωμή βία (brute force):</b> με το ελληνικό αλφάβητο ο κώδικας του Καίσαρα έχει μόνο 23 χρήσιμα κλειδιά, οπότε όποιος θέλει να τον σπάσει μπορεί απλώς να τα δοκιμάσει όλα μέχρι να βγάλει νόημα το μήνυμα. Γι' αυτό η πραγματική κρυπτογράφηση χρησιμοποιεί κλειδιά με δισεκατομμύρια δισεκατομμυρίων δυνατότητες.</p>
+  </section>
+
+  <!-- ============ FREQUENCY ============ -->
+  <section class="panel" id="fq" role="tabpanel" aria-labelledby="t-fq">
+    <h2>Ντετέκτιβ συχνότητας 📊</h2>
+    <p>Στα ελληνικά, το πιο συχνό γράμμα είναι το <b>Α</b>. Σε ένα μεγάλο μυστικό μήνυμα, το πιο συχνό γράμμα του κώδικα είναι μάλλον ένα μεταμφιεσμένο Α. Βρες την πιο ψηλή μπάρα, πάτησέ την και το κλειδί θα υπολογιστεί για σένα.</p>
+    <div class="row"><div class="seg" role="group" aria-label="Διάλεξε μήνυμα" id="fqPick"></div></div>
+    <div class="cipher" id="fqCipher" style="font-size:17px"></div>
+    <h3>Πόσο συχνά εμφανίζεται κάθε γράμμα στο μυστικό μήνυμα</h3>
+    <div class="fchart" id="fqChart"></div>
+    <div class="flabels" id="fqLab"></div>
+    <h3 style="margin-top:14px">Πόσο συχνά εμφανίζονται τα γράμματα σε κανονικά ελληνικά κείμενα</h3>
+    <div class="echart" id="eChart" aria-hidden="true"></div>
+    <div class="flabels" id="eLab" aria-hidden="true"></div>
+    <div class="fb" id="fqFb" style="margin-top:12px" aria-live="polite">Πάτησε τη μπάρα που πιστεύεις ότι είναι το Α.</div>
+    <div class="outbox" id="fqOut" style="font-size:17px"></div>
+    <p class="tip"><b>Ιστορία:</b> ένας Άραβας λόγιος, ο Αλ-Κίντι, περιέγραψε την ανάλυση συχνότητας πριν από πάνω από 1.100 χρόνια. Όσοι σπάνε κώδικες τη χρησιμοποιούν από τότε, γι' αυτό οι απλοί κώδικες που αλλάζουν γράμματα δεν είναι ασφαλείς για πραγματικά μυστικά.</p>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Κουίζ Μυστικών Κωδίκων</h2>
+    <p class="muted">10 ερωτήσεις. <span class="score" id="qScore">Βαθμός: 0</span> · <span id="qCount">Ερώτηση 1 από 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Επόμενη ερώτηση →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Θέλεις να μάθεις περισσότερα;</b> Η κρυπτογράφηση κρατά ασφαλή τα μηνύματα και τους κωδικούς σου καθώς ταξιδεύουν στο διαδίκτυο. Μάθε πώς στο <a href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/el/">Πώς Λειτουργεί το Διαδίκτυο</a> ή δες πώς τα γράμματα γίνονται αριθμοί στο <a href="https://classroom.ellisknowledgestudio.com/it/binary/el/">Δυαδικό σύστημα: 1 και 0</a>.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var NS="http://www.w3.org/2000/svg",AL="ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ",N=24;
+  function norm(s){return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();}
+  function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+  function caesar(s,k){
+    k=((k%N)+N)%N;
+    return norm(s).replace(/[\u0391-\u03A9]/g,function(c){var i=AL.indexOf(c);return i<0?c:AL[(i+k)%N];});
+  }
+  function letters(s){return norm(s).split("").filter(function(c){return AL.indexOf(c)>=0;}).join("");}
+
+  /* ---------- wheel ---------- */
+  var key=3,mode="enc",svg=$("wheel"),inner;
+  (function(){
+    var cx=180,cy=180;
+    el("circle",{"class":"ring",cx:cx,cy:cy,r:172},svg);
+    el("circle",{"class":"ring2",cx:cx,cy:cy,r:128},svg);
+    el("circle",{cx:cx,cy:cy,r:86,fill:"#0F1C3F",stroke:"#2C3B72","stroke-width":2},svg);
+    for(var i=0;i<N;i++){
+      var a=(i/N)*Math.PI*2-Math.PI/2,x=cx+150*Math.cos(a),y=cy+150*Math.sin(a);
+      var t=el("text",{"class":"lo",x:x,y:y,transform:"rotate("+(i*360/N)+" "+x+" "+y+")"},svg);t.textContent=AL[i];
+    }
+    inner=el("g",{"class":"inner"},svg);inner.style.transformOrigin="180px 180px";
+    for(var j=0;j<N;j++){
+      var b=(j/N)*Math.PI*2-Math.PI/2,x2=cx+107*Math.cos(b),y2=cy+107*Math.sin(b);
+      var t2=el("text",{"class":"li",x:x2,y:y2,transform:"rotate("+(j*360/N)+" "+x2+" "+y2+")"},inner);t2.textContent=AL[j];
+    }
+    el("path",{"class":"ptr",d:"M180 2 l-8 -0 l8 14 l8 -14 z"},svg);
+    var c=el("text",{x:cx,y:cy-8,"text-anchor":"middle",fill:"#B8C2E0",style:"font:700 12px Nunito Sans,sans-serif"},svg);c.textContent="έξω: απλό";
+    var c2=el("text",{x:cx,y:cy+12,"text-anchor":"middle",fill:"#F4B942",style:"font:700 12px Nunito Sans,sans-serif"},svg);c2.textContent="μέσα: κώδικας";
+  })();
+  function showWheel(){
+    inner.style.transform="rotate("+(-key*360/N)+"deg)";
+    $("kShow").textContent="Κλειδί "+key;$("kRange").value=key;
+    var s=$("strip");s.innerHTML="";
+    for(var i=0;i<N;i++){var d=document.createElement("div");d.innerHTML=AL[i]+"<b>"+AL[(i+key)%N]+"</b>";s.appendChild(d);}
+    var src=norm($("msgIn").value);
+    $("msgOut").textContent=caesar(src,mode==="enc"?key:-key)||"…";
+  }
+  function setKey(k){key=((k%N)+N)%N;showWheel();}
+  $("kUp").addEventListener("click",function(){setKey(key+1);});
+  $("kDown").addEventListener("click",function(){setKey(key-1);});
+  $("kRange").addEventListener("input",function(){setKey(+this.value);});
+  $("msgIn").addEventListener("input",showWheel);
+  function setMode(m){
+    mode=m;var bs=$("mode").children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",String(bs[i].getAttribute("data-m")===m));
+    $("inLab").textContent=m==="enc"?"Το μήνυμά σου (απλό κείμενο)":"Μυστικό μήνυμα για αποκρυπτογράφηση (κρυπτοκείμενο)";
+    $("outLab").textContent=m==="enc"?"Μυστικό μήνυμα (κρυπτοκείμενο)":"Αποκρυπτογραφημένο μήνυμα (απλό κείμενο)";
+    $("swap").textContent=m==="enc"?"⇅ Αντιστροφή: αποκρυπτογράφησέ το":"⇅ Αντιστροφή: κρυπτογράφησέ το";
+    showWheel();
+  }
+  (function(){var bs=$("mode").children;for(var i=0;i<bs.length;i++)bs[i].addEventListener("click",function(){setMode(this.getAttribute("data-m"));});})();
+  $("swap").addEventListener("click",function(){$("msgIn").value=$("msgOut").textContent==="…"?"":$("msgOut").textContent;setMode(mode==="enc"?"dec":"enc");});
+  showWheel();
+
+  /* ---------- crack ---------- */
+  var CODES=[
+    ["Η ΟΜΑΔΑ ΚΩΔΙΚΑ ΕΙΝΑΙ ΤΕΛΕΙΑ",1,true],["ΣΥΝΑΝΤΗΣΗ ΣΤΗ ΒΙΒΛΙΟΘΗΚΗ",3,true],["ΤΟ ΚΕΙΚ ΕΙΝΑΙ ΣΤΟ ΨΥΓΕΙΟ",5,true],["ΤΟ ΔΩΔΕΚΑ ΑΝΑΙΡΕΙ ΤΟΝ ΕΑΥΤΟ ΤΟΥ",12,true],
+    ["ΠΙΤΣΑ ΓΙΑ ΒΡΑΔΙΝΟ ΑΠΟΨΕ",7,false],["Ο ΔΡΑΚΟΣ ΚΟΙΜΑΤΑΙ ΤΑ ΜΕΣΑΝΥΧΤΑ",10,false],["ΦΕΡΕ ΤΟΝ ΦΑΚΟ ΣΟΥ",19,false],["ΕΙΣΑΙ ΣΠΑΣΤΗΣ ΚΩΔΙΚΩΝ",17,false]
+  ];
+  var ci=0,cracked={};
+  function showCr(){
+    var c=CODES[ci],ct=caesar(c[0],c[1]);
+    $("crCount").textContent="Κώδικας "+(ci+1)+" από "+CODES.length;
+    $("crCipher").textContent=ct;
+    $("crKeyInfo").innerHTML=c[2]?"🔑 Το κλειδί είναι <b>"+c[1]+"</b>. Μετακίνησε κάθε γράμμα <b>πίσω</b> "+c[1]+(c[1]>1?" θέσεις.":" θέση."):"❓ Το κλειδί είναι άγνωστο. Χρησιμοποίησε τον ολισθητή για να δοκιμάσεις κλειδιά μέχρι να βγάλει νόημα το μήνυμα.";
+    $("crKeyInfo").className="fb";
+    $("crTry").style.display=c[2]?"none":"";
+    $("crRange").value=0;tryK();
+    $("crIn").value="";$("crIn").disabled=false;$("crCheck").disabled=false;
+    $("crFb").textContent=cracked[ci]?"✓ Έχει ήδη λυθεί: "+c[0]:"";$("crFb").className="fb"+(cracked[ci]?" ok":"");
+    $("crPrevBtn").disabled=ci===0;$("crNext").textContent=ci===CODES.length-1?"Πίσω στον κώδικα 1 ↺":"Επόμενος κώδικας →";
+  }
+  function tryK(){var k=+$("crRange").value;$("crTryK").textContent=k;$("crPrev").textContent=caesar(caesar(CODES[ci][0],CODES[ci][1]),-k);}
+  $("crRange").addEventListener("input",tryK);
+  function checkCr(){
+    var c=CODES[ci],g=letters($("crIn").value);
+    if(!g){$("crFb").textContent="Γράψε πρώτα την απάντησή σου.";$("crFb").className="fb";return;}
+    if(g===letters(c[0])){cracked[ci]=1;$("crFb").textContent="✓ Τον έσπασες! Το μήνυμα είναι: "+c[0]+(c[2]?"":" (το κλειδί ήταν "+c[1]+")");$("crFb").className="fb ok";$("crNext").focus({preventScroll:true});}
+    else{var same=0;for(var i=0;i<Math.min(g.length,letters(c[0]).length);i++)if(g[i]===letters(c[0])[i])same++;
+      $("crFb").textContent="✗ Όχι ακριβώς. "+(same>letters(c[0]).length/2?"Είσαι κοντά! Έλεγξε κάθε γράμμα.":"Δοκίμασε ξανά.");$("crFb").className="fb no";}
+    $("crScore").textContent="Λυμένα: "+Object.keys(cracked).length+" από "+CODES.length;
+  }
+  $("crCheck").addEventListener("click",checkCr);
+  $("crIn").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkCr();}});
+  $("crReveal").addEventListener("click",function(){var c=CODES[ci];$("crFb").textContent="Το μήνυμα ήταν: "+c[0]+" (κλειδί "+c[1]+")";$("crFb").className="fb";});
+  $("crNext").addEventListener("click",function(){ci=(ci+1)%CODES.length;showCr();});
+  $("crPrevBtn").addEventListener("click",function(){if(ci>0){ci--;showCr();}});
+
+  /* ---------- frequency ---------- */
+  var FQ=[
+    ["ΤΑ ΜΥΣΤΙΚΑ ΜΗΝΥΜΑΤΑ ΣΤΕΛΝΟΝΤΑΙ ΕΔΩ ΚΑΙ ΧΙΛΙΑΔΕΣ ΧΡΟΝΙΑ. Ο ΡΩΜΑΙΟΣ ΣΤΡΑΤΗΓΟΣ ΙΟΥΛΙΟΣ ΚΑΙΣΑΡΑΣ ΕΣΤΕΛΝΕ ΔΙΑΤΑΓΕΣ ΣΤΟΝ ΣΤΡΑΤΟ ΤΟΥ ΜΕΤΑΚΙΝΩΝΤΑΣ ΚΑΘΕ ΓΡΑΜΜΑ ΤΡΕΙΣ ΘΕΣΕΙΣ ΣΤΟ ΑΛΦΑΒΗΤΟ. ΟΙ ΕΧΘΡΟΙ ΤΟΥ ΕΒΛΕΠΑΝ ΜΟΝΟ ΑΝΟΗΣΙΕΣ, ΑΛΛΑ ΟΙ ΣΤΡΑΤΗΓΟΙ ΤΟΥ ΜΠΟΡΟΥΣΑΝ ΝΑ ΔΙΑΒΑΣΟΥΝ ΤΟ ΜΗΝΥΜΑ.",3],
+    ["Ο ΘΗΣΑΥΡΟΣ ΕΙΝΑΙ ΚΡΥΜΜΕΝΟΣ ΚΑΤΩ ΑΠΟ ΤΟ ΤΡΙΤΟ ΔΕΝΤΡΟ ΔΙΠΛΑ ΣΤΗΝ ΠΡΑΣΙΝΗ ΠΥΛΗ. ΦΕΡΕ ΕΝΑ ΦΤΥΑΡΙ ΚΑΙ ΣΥΝΑΝΤΗΣΕ ΜΕ ΕΚΕΙ ΣΤΙΣ ΕΠΤΑ. ΜΗΝ ΠΕΙΣ ΣΕ ΚΑΝΕΝΑΝ ΓΙΑ ΑΥΤΟ ΤΟ ΣΗΜΕΙΩΜΑ ΚΑΙ ΚΑΨΕ ΤΟ ΜΟΛΙΣ ΤΟ ΔΙΑΒΑΣΕΙΣ.",11],
+    ["ΟΙ ΜΕΛΙΣΣΕΣ ΕΙΝΑΙ ΚΑΤΑΠΛΗΚΤΙΚΕΣ. ΚΑΘΕ ΜΕΛΙΣΣΑ ΣΤΗΝ ΚΥΨΕΛΗ ΕΧΕΙ ΜΙΑ ΔΟΥΛΕΙΑ. ΚΑΠΟΙΕΣ ΜΑΖΕΥΟΥΝ ΝΕΚΤΑΡ ΑΠΟ ΤΑ ΛΟΥΛΟΥΔΙΑ, ΚΑΠΟΙΕΣ ΚΑΘΑΡΙΖΟΥΝ ΤΗΝ ΚΥΨΕΛΗ ΚΑΙ Η ΒΑΣΙΛΙΣΣΑ ΓΕΝΝΑ ΟΛΑ ΤΑ ΑΥΓΑ. ΧΡΕΙΑΖΟΜΑΣΤΕ ΤΙΣ ΜΕΛΙΣΣΕΣ ΓΙΑ ΝΑ ΜΕΓΑΛΩΝΟΥΝ ΤΑ ΦΡΟΥΤΑ ΚΑΙ ΤΑ ΛΑΧΑΝΙΚΑ ΠΟΥ ΤΡΩΜΕ.",19]
+  ];
+  var EN=[12.5,0.7,1.8,2.5,9.6,0.4,3.7,1.2,10.3,4.2,2.8,3.7,5.4,0.8,10.5,4.1,4.0,7.7,6.8,3.7,0.8,1.1,0.2,1.5]; // measured from 47,000 letters of Greek text
+  var fi=0;
+  (function(){
+    var e=$("eChart"),l=$("eLab"),mx=12.5;
+    for(var i=0;i<N;i++){var b=document.createElement("i");b.style.height=(EN[i]/mx*100)+"%";e.appendChild(b);var t=document.createElement("span");t.textContent=AL[i];l.appendChild(t);}
+    for(var k=0;k<FQ.length;k++)(function(k){var b=document.createElement("button");b.textContent="Μήνυμα "+(k+1);b.setAttribute("aria-pressed",String(k===0));b.addEventListener("click",function(){fi=k;var bs=$("fqPick").children;for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",String(j===k));showFq();});$("fqPick").appendChild(b);})(k);
+  })();
+  function counts(s){var c=[];for(var i=0;i<N;i++)c.push(0);letters(s).split("").forEach(function(ch){c[AL.indexOf(ch)]++;});return c;}
+  function showFq(){
+    var ct=caesar(FQ[fi][0],FQ[fi][1]),c=counts(ct),mx=Math.max.apply(null,c);
+    $("fqCipher").textContent=ct;
+    var ch=$("fqChart"),lb=$("fqLab");ch.innerHTML="";lb.innerHTML="";
+    for(var i=0;i<N;i++)(function(i){
+      var b=document.createElement("button");b.className="fbar"+(c[i]===mx?" top":"");b.style.height=(c[i]/mx*100)+"%";
+      b.title=AL[i]+": "+c[i];b.setAttribute("aria-label","Γράμμα κώδικα "+AL[i]+", εμφανίζεται "+c[i]+" φορές");
+      b.addEventListener("click",function(){pickE(i);});ch.appendChild(b);
+      var t=document.createElement("span");t.textContent=AL[i];lb.appendChild(t);
+    })(i);
+    $("fqFb").textContent="Πάτησε τη μπάρα που πιστεύεις ότι είναι το Α.";$("fqFb").className="fb";$("fqOut").textContent="";
+  }
+  function pickE(i){
+    var bs=$("fqChart").children;for(var j=0;j<N;j++)bs[j].classList.toggle("sel",j===i);
+    var k=(i-0+N)%N,ct=caesar(FQ[fi][0],FQ[fi][1]),pt=caesar(ct,-k);
+    $("fqOut").textContent=pt;
+    if(k===FQ[fi][1]){$("fqFb").textContent="✓ Διάλεξες το "+AL[i]+" ως Α, άρα το κλειδί είναι "+k+". Το μήνυμα βγάζει νόημα. Ο κώδικας έσπασε!";$("fqFb").className="fb ok";}
+    else{$("fqFb").textContent="Αν το "+AL[i]+" ήταν το Α, το κλειδί θα ήταν "+k+"… αλλά έτσι βγαίνουν ασυναρτησίες. Δοκίμασε την πιο ψηλή μπάρα!";$("fqFb").className="fb no";}
+  }
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"Τι είναι η κρυπτογράφηση;",a:"Το ανακάτεμα ενός μηνύματος ώστε να το διαβάζουν μόνο όσοι έχουν το κλειδί",w:["Η διαγραφή ενός μηνύματος","Η πιο γρήγορη αποστολή ενός μηνύματος","Το να γίνει ένα μήνυμα πιο μεγάλο"],why:"Η κρυπτογράφηση κρατά τις πληροφορίες μυστικές από όποιον δεν έχει το κλειδί."},
+    {q:"Πώς λέγεται το ανακατεμένο μήνυμα;",a:"Κρυπτοκείμενο",w:["Απλό κείμενο","Κείμενο-κλειδί","Hashtag"],why:"Απλό κείμενο είναι το κανονικό μήνυμα. Κρυπτοκείμενο είναι η ανακατεμένη εκδοχή του."},
+    {q:"Πώς λέγεται το κανονικό μήνυμα που διαβάζεται;",a:"Απλό κείμενο",w:["Κρυπτοκείμενο","Κωδική λέξη","Κωδικός πρόσβασης"],why:"Το απλό κείμενο είναι αυτό με το οποίο ξεκινάς πριν την κρυπτογράφηση."},
+    {q:"Με τον κώδικα του Καίσαρα και κλειδί 3, τι γίνεται το Α;",a:"Δ",w:["Γ","Β","Χ"],why:"Μετακινήσου 3 θέσεις: Α → Β → Γ → Δ."},
+    {q:"Με κλειδί 3, σε τι αποκρυπτογραφείται το γράμμα κώδικα Δ;",a:"Α",w:["Η","Δ","Β"],why:"Για να αποκρυπτογραφήσεις, πήγαινε 3 θέσεις πίσω: Δ → Γ → Β → Α."},
+    {q:"Με κλειδί 1, πώς γράφεται η λέξη ΓΑΤΑ;",a:"ΔΒΥΒ",w:["ΒΩΣΩ","ΓΑΤΑ","ΕΓΦΓ"],why:"Κάθε γράμμα πηγαίνει μία θέση μπροστά: Γ→Δ, Α→Β, Τ→Υ, Α→Β."},
+    {q:"Με κλειδί 3, τι γίνεται το Χ;",a:"Α",w:["Ω","Ψ","Β"],why:"Το αλφάβητο κάνει κύκλο: Χ → Ψ → Ω → Α."},
+    {q:"Ποιος διάσημος Ρωμαίος έδωσε το όνομά του στον κώδικα του Καίσαρα;",a:"Ο Ιούλιος Καίσαρας",w:["Ο Νέρωνας","Ο Ρωμύλος","Ο Αύγουστος Παπαδόπουλος"],why:"Ο Ιούλιος Καίσαρας τον χρησιμοποιούσε για να στέλνει μυστικές διαταγές στους στρατηγούς του."},
+    {q:"Πόσα χρήσιμα κλειδιά έχει ο κώδικας του Καίσαρα με το ελληνικό αλφάβητο;",a:"23",w:["2","100","1.000.000"],why:"Το κλειδί 0 ή 24 δεν αλλάζει τίποτα, οπότε υπάρχουν 23 χρήσιμα κλειδιά."},
+    {q:"Το να δοκιμάζεις κάθε πιθανό κλειδί μέχρι να δουλέψει ένα λέγεται…",a:"Ωμή βία (brute force)",w:["Ανάλυση συχνότητας","Phishing","Λήψη αρχείων"],why:"Με μόνο 23 κλειδιά, η ωμή βία σπάει τον κώδικα του Καίσαρα πολύ γρήγορα."},
+    {q:"Ποιο γράμμα χρησιμοποιείται πιο συχνά στα ελληνικά;",a:"Α",w:["Ε","Ζ","Ψ"],why:"Το Α είναι περίπου 1 στα 8 γράμματα σε ελληνικά κείμενα, με το Ο και το Ι να ακολουθούν."},
+    {q:"Το να μετράς πόσο συχνά εμφανίζονται τα γράμματα για να σπάσεις έναν κώδικα λέγεται…",a:"Ανάλυση συχνότητας",w:["Ωμή βία","Κρυπτογράφηση","Ορθογραφικός έλεγχος"],why:"Στα ελληνικά, το πιο συχνό γράμμα του κώδικα είναι μάλλον ένα μεταμφιεσμένο Α."},
+    {q:"Με το ελληνικό αλφάβητο, το κλειδί 12 είναι ξεχωριστό γιατί…",a:"Αν το κάνεις δύο φορές, γυρνάς στην αρχή",w:["Είναι το μεγαλύτερο κλειδί","Σβήνει τα φωνήεντα","Δουλεύει μόνο με αριθμούς"],why:"12 + 12 = 24, μια ολόκληρη στροφή του ελληνικού αλφαβήτου. (Στο λατινικό αλφάβητο με τα 26 γράμματα, το ίδιο κάνει το ROT13.)"},
+    {q:"Τι σου λέει το λουκέτο δίπλα στη διεύθυνση μιας ιστοσελίδας;",a:"Τα δεδομένα που στέλνεις στη σελίδα κρυπτογραφούνται",w:["Η ιστοσελίδα είναι δωρεάν","Η ιστοσελίδα είναι κλειστή","Δεν μπορείς να συνδεθείς"],why:"Το λουκέτο σημαίνει ότι η σύνδεσή σου είναι κρυπτογραφημένη (HTTPS)."},
+    {q:"Γιατί ο κώδικας του Καίσαρα δεν χρησιμοποιείται σήμερα για πραγματικά μυστικά;",a:"Σπάει πάρα πολύ εύκολα",w:["Απαγορεύεται από τον νόμο","Οι υπολογιστές δεν διαβάζουν γράμματα","Δουλεύει μόνο στα λατινικά"],why:"Η ωμή βία ή η ανάλυση συχνότητας μπορούν να τον σπάσουν σε λίγα λεπτά."},
+    {q:"Πού χρησιμοποιείται η κρυπτογράφηση κάθε μέρα;",a:"Στις αγορές στο διαδίκτυο, στις εφαρμογές μηνυμάτων και στους κωδικούς",w:["Μόνο σε ταινίες κατασκοπείας","Μόνο στις βιβλιοθήκες","Πουθενά πια"],why:"Η κρυπτογράφηση προστατεύει τα στοιχεία της κάρτας, τα μηνύματα και τους κωδικούς σου."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];$("qCount").textContent="Ερώτηση "+(qi+1)+" από "+QN;$("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Σωστό!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Βαθμός: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      $("qEndText").textContent=(qRight===QN?"Μάστορας στο σπάσιμο κωδίκων! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε να σπας κώδικες! ")+"Πέτυχες "+qRight+" από "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});}
+    else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Βαθμός: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
+    var p=t.getAttribute("data-p");
+    if(p==="cr"&&!started.c){started.c=1;showCr();}
+    if(p==="fq"&&!started.f){started.f=1;showFq();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});
+  }
+  window.__sc={caesar:caesar,CODES:CODES,FQ:FQ,counts:counts,BANK:BANK,ci:function(){return ci;}};
+})();
+</script>
+</body>
+</html>

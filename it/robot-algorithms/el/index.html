@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Αλγόριθμοι: Προγραμμάτισε το Ρομπότ, Δωρεάν Παιχνίδι Κώδικα για Παιδιά | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν παιχνίδι προγραμματισμού για ηλικίες 7-11. Προγραμμάτισε ένα ρομπότ να περάσει λαβυρίνθους βήμα-βήμα, βρες και διόρθωσε σφάλματα (bugs), χρησιμοποίησε βρόχους επανάληψης και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--fwd:#5AA9FF;--lft:#4CC38A;--rgt:#FF8FB1;--rep:#B48CFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.cmd:focus-visible,.blk:focus-visible,.lvl:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.lvls{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.lvl{width:40px;height:40px;border-radius:10px;border:2px solid #2C3B72;background:var(--navy);color:var(--ink);font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.lvl[aria-current="true"]{border-color:var(--gold);color:var(--gold)}
+.lvl.done{background:#1d4a3a;border-color:var(--good)}
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.board{background:var(--navy);border-radius:16px;padding:8px}
+.board svg{width:100%;height:auto;display:block}
+.goalline{font-weight:700;margin:4px 0 8px}
+.cmds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cmd{border:0;border-radius:12px;padding:10px 6px;font:800 15px "Baloo 2",sans-serif;cursor:pointer;color:var(--navy);line-height:1.15}
+.cmd .ic{display:block;font-size:24px}
+.cmd.f{background:var(--fwd)}.cmd.l{background:var(--lft)}.cmd.r{background:var(--rgt)}.cmd.rp{background:var(--rep)}.cmd.end{background:#8C9BD1}
+.cmd:disabled{opacity:.35;cursor:default}
+.prog{background:var(--navy);border-radius:14px;padding:10px;min-height:110px;margin:10px 0;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.prog .empty{color:var(--muted);font-size:14px}
+.blk{border:2px solid transparent;border-radius:10px;padding:4px 8px;font:800 14px "Nunito Sans",sans-serif;color:var(--navy);cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.blk .n{font-size:11px;opacity:.7}
+.blk.f{background:var(--fwd)}.blk.l{background:var(--lft)}.blk.r{background:var(--rgt)}.blk.rp{background:var(--rep)}.blk.end{background:#8C9BD1}
+.blk.now{border-color:#fff;box-shadow:0 0 0 3px var(--gold)}
+.blk.bad{border-color:#fff;box-shadow:0 0 0 3px var(--bad)}
+.blk.in{margin-left:10px}
+.msg{min-height:52px;font-weight:700;padding:8px 12px;border-radius:12px;background:var(--navy)}
+.msg.ok{color:var(--good)}.msg.no{color:var(--bad)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:720px){.game{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Αλγόριθμοι: Προγραμμάτισε το Ρομπότ</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/" lang="en" hreflang="en">English</a></div>
+  <h1>Αλγόριθμοι: Προγραμμάτισε το Ρομπότ 🤖</h1>
+  <p class="lead">Αλγόριθμος είναι μια σειρά από οδηγίες βήμα-βήμα. Οι υπολογιστές ακολουθούν τις οδηγίες ακριβώς, οπότε κάθε βήμα πρέπει να είναι σωστό! Φτιάξε προγράμματα για να οδηγήσεις το ρομπότ στο αστέρι, βρες και διόρθωσε σφάλματα και χρησιμοποίησε βρόχους για να κάνεις τα προγράμματά σου πιο σύντομα. <span style="white-space:nowrap">Ηλικίες 7-11.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες ρομπότ">
+    <button class="tab" role="tab" id="t-prog" aria-controls="prog" aria-selected="true" data-p="prog">Προγραμμάτισε το Ρομπότ</button>
+    <button class="tab" role="tab" id="t-dbg" aria-controls="dbg" aria-selected="false" tabindex="-1" data-p="dbg">Διόρθωσέ το</button>
+    <button class="tab" role="tab" id="t-loop" aria-controls="loop" aria-selected="false" tabindex="-1" data-p="loop">Βρόχοι</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
+  </div>
+
+  <!-- ============ PROGRAM ============ -->
+  <section class="panel on" id="prog" role="tabpanel" aria-labelledby="t-prog">
+    <h2>Προγραμμάτισε το ρομπότ</h2>
+    <p>Πάτησε τα κουμπιά εντολών για να φτιάξεις ένα πρόγραμμα και μετά πάτησε <b>Εκτέλεση</b>. Το ρομπότ κινείται μόνο όταν εκτελείς το πρόγραμμα. Οι εντολές <b>Στρίψε</b> γυρίζουν το ρομπότ επί τόπου χωρίς να το μετακινούν.</p>
+    <div class="lvls" id="pLvls" role="group" aria-label="Διάλεξε επίπεδο"></div>
+    <div class="game">
+      <div><div class="board" id="pBoard"></div></div>
+      <div>
+        <div class="goalline" id="pGoal"></div>
+        <div class="cmds" id="pCmds"></div>
+        <div class="prog" id="pProg" aria-live="polite" aria-label="Το πρόγραμμά σου"></div>
+        <div class="row">
+          <button class="btn" id="pRun">▶ Εκτέλεση</button>
+          <button class="btn ghost" id="pStep">Βήμα</button>
+          <button class="btn ghost" id="pUndo">Αναίρεση</button>
+          <button class="btn ghost" id="pClear">Καθαρισμός</button>
+        </div>
+        <div class="msg" id="pMsg" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="tip"><b>Συμβουλή:</b> πάτησε ένα μπλοκ στο πρόγραμμά σου για να το αφαιρέσεις. Σκέψου προς τα πού κοιτάζει το ρομπότ πριν στρίψεις. Το <b>αριστερά</b> και το <b>δεξιά</b> είναι από τη μεριά του ρομπότ, οπότε φαντάσου ότι είσαι το ρομπότ!</p>
+  </section>
+
+  <!-- ============ DEBUG ============ -->
+  <section class="panel" id="dbg" role="tabpanel" aria-labelledby="t-dbg">
+    <h2>Διόρθωσέ το</h2>
+    <p>Ένα λάθος σε πρόγραμμα λέγεται <b>σφάλμα</b> (bug) και η διόρθωσή του λέγεται <b>αποσφαλμάτωση</b> (debugging). Καθένα από αυτά τα προγράμματα έχει <b>ένα σφάλμα</b>. Εκτέλεσέ το για να δεις τι πάει στραβά και μετά <b>πάτησε το λάθος μπλοκ</b> για να το αλλάξεις (Μπροστά → Στρίψε αριστερά → Στρίψε δεξιά). Εκτέλεσέ το ξανά για να δοκιμάσεις τη διόρθωσή σου.</p>
+    <div class="lvls" id="dLvls" role="group" aria-label="Διάλεξε γρίφο"></div>
+    <div class="game">
+      <div><div class="board" id="dBoard"></div></div>
+      <div>
+        <div class="goalline" id="dGoal"></div>
+        <div class="prog" id="dProg" aria-live="polite" aria-label="Πρόγραμμα με σφάλμα"></div>
+        <div class="row">
+          <button class="btn" id="dRun">▶ Εκτέλεση</button>
+          <button class="btn ghost" id="dStep">Βήμα</button>
+          <button class="btn ghost" id="dReset">Από την αρχή</button>
+        </div>
+        <div class="msg" id="dMsg" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOOPS ============ -->
+  <section class="panel" id="loop" role="tabpanel" aria-labelledby="t-loop">
+    <h2>Βρόχοι: επανάλαβέ το!</h2>
+    <p>Ένας <b>βρόχος</b> επαναλαμβάνει κάποιες εντολές για να μη χρειάζεται να τις γράφεις ξανά και ξανά. Πάτησε <b>Επανάλαβε</b>, πρόσθεσε τις εντολές που θέλεις να επαναληφθούν και μετά πάτησε <b>Τέλος επανάληψης</b>. Πάτησε ένα μπλοκ Επανάλαβε για να αλλάξεις πόσες φορές επαναλαμβάνεται. Κάθε επίπεδο έχει <b>όριο μπλοκ</b>, οπότε θα χρειαστείς βρόχους για να χωρέσεις!</p>
+    <div class="lvls" id="lLvls" role="group" aria-label="Διάλεξε επίπεδο βρόχων"></div>
+    <div class="game">
+      <div><div class="board" id="lBoard"></div></div>
+      <div>
+        <div class="goalline" id="lGoal"></div>
+        <div class="cmds" id="lCmds"></div>
+        <div class="prog" id="lProg" aria-live="polite" aria-label="Το πρόγραμμά σου"></div>
+        <div class="row">
+          <button class="btn" id="lRun">▶ Εκτέλεση</button>
+          <button class="btn ghost" id="lUndo">Αναίρεση</button>
+          <button class="btn ghost" id="lClear">Καθαρισμός</button>
+        </div>
+        <div class="msg" id="lMsg" aria-live="polite"></div>
+      </div>
+    </div>
+    <p class="tip"><b>Ψάξε για μοτίβα:</b> αν βλέπεις τις ίδιες κινήσεις να επαναλαμβάνονται ξανά και ξανά, αυτό είναι δουλειά για έναν βρόχο. Οι αληθινοί προγραμματιστές χρησιμοποιούν βρόχους συνέχεια.</p>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Κουίζ Αλγορίθμων</h2>
+    <p class="muted">10 ερωτήσεις. <span class="score" id="qScore">Βαθμός: 0</span> · <span id="qCount">Ερώτηση 1 από 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Επόμενη ερώτηση →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Το ήξερες;</b> Κάθε εφαρμογή, παιχνίδι και ιστοσελίδα είναι φτιαγμένα από αλγορίθμους σαν αυτούς: ακολουθίες βημάτων, βρόχους που επαναλαμβάνονται και αποφάσεις. Μάθε τι υπάρχει μέσα στη μηχανή που τους εκτελεί στο <a href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/el/">Πώς Λειτουργεί ένας Υπολογιστής</a>.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  var SVGNS="http://www.w3.org/2000/svg";
+  function $(id){return document.getElementById(id);}
+  function el(tag,attrs,parent){var e=document.createElementNS(SVGNS,tag);for(var k in attrs){if(attrs.hasOwnProperty(k))e.setAttribute(k,attrs[k]);}if(parent)parent.appendChild(e);return e;}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var reduceMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DIRS=[[0,-1],[1,0],[0,1],[-1,0]]; /* N E S W */
+  var DIRNAME=["πάνω","δεξιά","κάτω","αριστερά"];
+  var CMD={F:{cls:"f",ic:"⬆",name:"Μπροστά"},L:{cls:"l",ic:"↺",name:"Στρίψε αριστερά"},R:{cls:"r",ic:"↻",name:"Στρίψε δεξιά"}};
+
+  /* ---------- levels: S start, G goal, # wall, . empty ---------- */
+  var LEVELS=[
+    {map:["S....G"],dir:1},
+    {map:["S...","...#","...G"],dir:1},
+    {map:["S..#","...#","#...","##.G"],dir:1},
+    {map:["...G","..##","....","S..."],dir:0},
+    {map:["S.#...","..#.#.","....#G"],dir:2},
+    {map:["S#....",".#.##.",".#..#.","...#G."],dir:2},
+    {map:[".....",".###.",".#G#.",".#.#.","S#..."],dir:0},
+    {map:["S..#....","##.#.##.","...#..#.",".###.#..","......#G"],dir:1}
+  ];
+  /* debug puzzles: level map, start dir, correct program, index of bug, wrong command */
+  var DEBUG=[
+    {map:["S...G"],dir:1,prog:"FFFF",bug:2,wrong:"R"},
+    {map:["S..",".#.","..G"],dir:1,prog:"FFRFF",bug:2,wrong:"L"},
+    {map:["S.#","..#","#..","#.G"],dir:2,prog:"FLFRFLFRF",bug:0,wrong:"L"},
+    {map:["...G","..##","S..."],dir:0,prog:"FFRFFF",bug:4,wrong:"L"},
+    {map:["S...",".##.","...G"],dir:1,prog:"FFFRFF",bug:3,wrong:"F"},
+    {map:["S#...",".#.#.","...#G"],dir:2,prog:"FFLFFLFFRFFRFF",bug:8,wrong:"L"}
+  ];
+  /* loop levels with block limits (Repeat counts as 1 block, End repeat is free) */
+  var LOOPS=[
+    {map:["S.......G"],dir:1,limit:2,hint:"8 βήματα μπροστά στη σειρά..."},
+    {map:["S.##","#..#","##..","###G"],dir:1,limit:5,hint:"Μπροστά, στρίψε, μπροστά, στρίψε... βρες το μοτίβο."},
+    {map:["S....","####.","G....","....."],dir:1,limit:8,hint:"Τρεις ευθείες γραμμές: θα μπορούσες να χρησιμοποιήσεις τρεις βρόχους."},
+    {map:["....#.G","...#..#","..#..#.",".#..#..","#..#...","..#....","S......"],dir:0,limit:5,hint:"Είναι μια σκάλα!"}
+  ];
+
+  function parse(L){
+    var g={w:L.map[0].length,h:L.map.length,cells:L.map,dir:L.dir};
+    for(var y=0;y<g.h;y++)for(var x=0;x<g.w;x++){var c=L.map[y].charAt(x);if(c==="S"){g.sx=x;g.sy=y;}if(c==="G"){g.gx=x;g.gy=y;}}
+    return g;
+  }
+  function wall(g,x,y){return x<0||y<0||x>=g.w||y>=g.h||g.cells[y].charAt(x)==="#";}
+  /* shortest program length (BFS over position + direction) */
+  function par(g){
+    var start=[g.sx,g.sy,g.dir],seen={},q=[[start,0]];seen[start.join()]=1;
+    while(q.length){
+      var s=q.shift(),st=s[0];
+      if(st[0]===g.gx&&st[1]===g.gy)return s[1];
+      var nx=[[st[0]+DIRS[st[2]][0],st[1]+DIRS[st[2]][1],st[2]],[st[0],st[1],(st[2]+3)%4],[st[0],st[1],(st[2]+1)%4]];
+      for(var i=0;i<3;i++){
+        if(i===0&&wall(g,nx[0][0],nx[0][1]))continue;
+        var k=nx[i].join();if(!seen[k]){seen[k]=1;q.push([nx[i],s[1]+1]);}
+      }
+    }
+    return -1;
+  }
+  /* expand a block list with repeats into a flat list of {c, src} */
+  function expand(blocks){
+    var out=[],stack=[];
+    function run(list){
+      var i=0;
+      while(i<list.length){
+        var b=list[i];
+        if(b.t==="REP"){
+          var depth=1,j=i+1;
+          while(j<list.length&&depth>0){if(list[j].t==="REP")depth++;if(list[j].t==="END")depth--;if(depth>0)j++;}
+          var inner=list.slice(i+1,j);
+          for(var r=0;r<b.n;r++)run(inner);
+          i=j+1;
+        } else if(b.t==="END"){i++;}
+        else{out.push({c:b.t,src:b.id});i++;}
+      }
+    }
+    run(blocks);
+    return out;
+  }
+  /* simulate: returns list of states and outcome */
+  function simulate(g,flat){
+    var x=g.sx,y=g.sy,d=g.dir,states=[{x:x,y:y,d:d}];
+    for(var i=0;i<flat.length;i++){
+      var c=flat[i].c;
+      if(c==="F"){var nx=x+DIRS[d][0],ny=y+DIRS[d][1];if(wall(g,nx,ny))return {states:states,crash:i,bump:{x:nx,y:ny}};x=nx;y=ny;}
+      else if(c==="L")d=(d+3)%4;else if(c==="R")d=(d+1)%4;
+      states.push({x:x,y:y,d:d});
+    }
+    return {states:states,crash:-1,win:x===g.gx&&y===g.gy};
+  }
+
+  /* ---------- board drawing ---------- */
+  function Board(box){this.box=box;}
+  Board.prototype.draw=function(g){
+    this.g=g;this.box.innerHTML="";
+    var C=60,svg=el("svg",{viewBox:"0 0 "+(g.w*C)+" "+(g.h*C),role:"img","aria-label":"Πλέγμα "+g.w+" επί "+g.h+". Το ρομπότ ξεκινά κοιτάζοντας "+DIRNAME[g.dir]+"."},this.box);
+    this.svg=svg;this.C=C;
+    for(var y=0;y<g.h;y++)for(var x=0;x<g.w;x++){
+      var w=g.cells[y].charAt(x)==="#";
+      el("rect",{x:x*C+2,y:y*C+2,width:C-4,height:C-4,rx:8,fill:w?"#3A4C8A":"#16234E",stroke:w?"#4A5C9A":"#22336A","stroke-width":2},svg);
+      if(w){el("path",{d:"M"+(x*C+12)+" "+(y*C+C/2)+"h"+(C-24)+"M"+(x*C+C/2)+" "+(y*C+12)+"v"+(C-24),stroke:"#2A3870","stroke-width":4},svg);}
+    }
+    var gx=g.gx*C+C/2,gy=g.gy*C+C/2,pts=[];
+    for(var i=0;i<10;i++){var r=i%2?9:21,a=Math.PI/5*i-Math.PI/2;pts.push((gx+r*Math.cos(a)).toFixed(1)+","+(gy+r*Math.sin(a)).toFixed(1));}
+    el("polygon",{points:pts.join(" "),fill:"#F4B942",stroke:"#fff","stroke-width":1.5},svg);
+    this.trail=el("g",{},svg);
+    this.bump=el("g",{opacity:0},svg);
+    var rb=el("g",{},svg);this.robot=rb;
+    var body=el("g",{},rb);this.body=body;
+    el("rect",{x:-17,y:-14,width:34,height:30,rx:8,fill:"#C9D6F5",stroke:"#0F1C3F","stroke-width":2.5},body);
+    el("rect",{x:-11,y:-8,width:22,height:12,rx:4,fill:"#0F1C3F"},body);
+    el("circle",{cx:-5,cy:-2,r:3,fill:"#5AA9FF"},body);el("circle",{cx:5,cy:-2,r:3,fill:"#5AA9FF"},body);
+    el("line",{x1:0,y1:-14,x2:0,y2:-21,stroke:"#0F1C3F","stroke-width":2.5},body);
+    el("circle",{cx:0,cy:-23,r:4,fill:"#FF6B6B",stroke:"#0F1C3F","stroke-width":2},body);
+    el("polygon",{points:"-7,-27 7,-27 0,-36",fill:"#F4B942",stroke:"#0F1C3F","stroke-width":1.5},body);
+    this.place(g.sx,g.sy,g.dir);
+  };
+  Board.prototype.place=function(x,y,d){
+    var C=this.C;this.cur={x:x,y:y,d:d};
+    this.robot.setAttribute("transform","translate("+(x*C+C/2)+","+(y*C+C/2)+")");
+    this.body.setAttribute("transform","rotate("+(d*90)+")");
+  };
+  Board.prototype.dot=function(x,y){el("circle",{cx:x*this.C+this.C/2,cy:y*this.C+this.C/2,r:5,fill:"#F4B942",opacity:.55},this.trail);};
+  Board.prototype.reset=function(){this.trail.innerHTML="";this.bump.innerHTML="";this.bump.setAttribute("opacity",0);this.place(this.g.sx,this.g.sy,this.g.dir);};
+  Board.prototype.showBump=function(x,y){
+    var C=this.C,cx=Math.max(0,Math.min(this.g.w-1,x))*C+C/2,cy=Math.max(0,Math.min(this.g.h-1,y))*C+C/2;
+    var px=this.cur.x*C+C/2+(x-this.cur.x)*C*0.42,py=this.cur.y*C+C/2+(y-this.cur.y)*C*0.42;
+    this.bump.innerHTML="";
+    var t=el("text",{x:px,y:py+8,"text-anchor":"middle","font-size":26},this.bump);t.textContent="💥";
+    this.bump.setAttribute("opacity",1);
+  };
+
+  /* ---------- runner shared by the three modes ---------- */
+  function Runner(opts){
+    this.o=opts;this.timer=null;this.stepIdx=-1;
+  }
+  Runner.prototype.stop=function(){if(this.timer){clearTimeout(this.timer);this.timer=null;}};
+  Runner.prototype.prepare=function(){
+    this.stop();
+    var flat=expand(this.o.blocks());
+    this.flat=flat;this.res=simulate(this.o.board.g,flat);this.stepIdx=0;
+    this.o.board.reset();
+  };
+  Runner.prototype.highlight=function(i,bad){
+    var bs=this.o.progBox.querySelectorAll(".blk");
+    for(var k=0;k<bs.length;k++)bs[k].classList.remove("now","bad");
+    if(i>=0&&i<this.flat.length){
+      var src=this.flat[i].src;
+      for(var m=0;m<bs.length;m++)if(+bs[m].getAttribute("data-id")===src)bs[m].classList.add(bad?"bad":"now");
+    }
+  };
+  Runner.prototype.advance=function(){
+    var i=this.stepIdx,r=this.res,b=this.o.board;
+    if(i>=this.flat.length||(r.crash>=0&&i>r.crash)){this.finish();return false;}
+    if(r.crash===i){this.highlight(i,true);b.showBump(r.bump.x,r.bump.y);this.stepIdx++;this.finish();return false;}
+    var s=r.states[i+1];
+    if(s.x!==b.cur.x||s.y!==b.cur.y)b.dot(b.cur.x,b.cur.y);
+    b.place(s.x,s.y,s.d);this.highlight(i,false);this.stepIdx++;
+    if(this.stepIdx>=this.flat.length){this.finish();return false;}
+    return true;
+  };
+  Runner.prototype.run=function(){
+    var self=this;
+    if(!this.o.blocks().length){this.o.say("Πρόσθεσε πρώτα μερικές εντολές!","");return;}
+    if(this.o.check&&!this.o.check())return;
+    this.prepare();this.o.say("Εκτελείται…","");this.o.busy(true);
+    function tick(){if(self.advance())self.timer=setTimeout(tick,reduceMotion?120:420);}
+    this.timer=setTimeout(tick,reduceMotion?60:250);
+  };
+  Runner.prototype.step=function(){
+    if(!this.o.blocks().length){this.o.say("Πρόσθεσε πρώτα μερικές εντολές!","");return;}
+    if(this.stepIdx<0||this.stepIdx>=this.flat.length||this.done){this.done=false;this.prepare();this.o.say("Βήμα 1: πάτησε ξανά Βήμα για να συνεχίσεις.","");}
+    var more=this.advance();
+    if(more)this.o.say("Ολοκληρώθηκε το βήμα "+this.stepIdx+" από "+this.flat.length+".","");
+  };
+  Runner.prototype.finish=function(){
+    this.stop();this.o.busy(false);this.done=true;
+    var r=this.res;
+    if(r.crash>=0)this.o.say("💥 Μπαμ! Το βήμα "+(r.crash+1)+" έστειλε το ρομπότ σε τοίχο ή έξω από το πλέγμα. Αυτό είναι σφάλμα: διόρθωσέ το και εκτέλεσέ το ξανά.","no");
+    else if(r.win)this.o.win(this.flat.length);
+    else this.o.say("Το ρομπότ σταμάτησε, αλλά όχι πάνω στο αστέρι. Έλεγξε τις στροφές σου ή πρόσθεσε κι άλλα βήματα.","no");
+  };
+
+  function renderProg(box,blocks,onTap,emptyText){
+    box.innerHTML="";
+    if(!blocks.length){var e=document.createElement("span");e.className="empty";e.textContent=emptyText;box.appendChild(e);return;}
+    var depth=0,num=0;
+    blocks.forEach(function(b){
+      if(b.t==="END")depth=Math.max(0,depth-1);
+      var bt=document.createElement("button");
+      var cls=b.t==="REP"?"rp":b.t==="END"?"end":CMD[b.t].cls;
+      bt.className="blk "+cls+(depth?" in":"");
+      bt.setAttribute("data-id",b.id);
+      num++;
+      var label=b.t==="REP"?"🔁 Επανάλαβε ×"+b.n:b.t==="END"?"⤴ Τέλος επανάληψης":CMD[b.t].ic+" "+CMD[b.t].name;
+      bt.innerHTML='<span class="n">'+num+'</span>';
+      bt.appendChild(document.createTextNode(label));
+      bt.setAttribute("aria-label","Μπλοκ "+num+": "+label.replace(/^[^A-Za-z\u0370-\u03FF\u1F00-\u1FFF]+/,""));
+      bt.addEventListener("click",function(){onTap(b);});
+      box.appendChild(bt);
+      if(b.t==="REP")depth++;
+    });
+  }
+  function cmdButtons(box,list,onAdd){
+    box.innerHTML="";
+    list.forEach(function(k){
+      var b=document.createElement("button");
+      var meta=k==="REP"?{cls:"rp",ic:"🔁",name:"Επανάλαβε"}:k==="END"?{cls:"end",ic:"⤴",name:"Τέλος επανάληψης"}:CMD[k];
+      b.className="cmd "+meta.cls;b.setAttribute("data-k",k);
+      b.innerHTML='<span class="ic" aria-hidden="true">'+meta.ic+'</span>';
+      b.appendChild(document.createTextNode(meta.name));
+      b.addEventListener("click",function(){onAdd(k);});
+      box.appendChild(b);
+    });
+  }
+  function levelButtons(box,n,onPick){
+    box.innerHTML="";
+    for(var i=0;i<n;i++)(function(i){
+      var b=document.createElement("button");b.className="lvl";b.textContent=i+1;b.setAttribute("aria-label","Επίπεδο "+(i+1));
+      b.addEventListener("click",function(){onPick(i);});box.appendChild(b);
+    })(i);
+  }
+  function markLevels(box,cur,done){
+    var bs=box.children;
+    for(var i=0;i<bs.length;i++){bs[i].setAttribute("aria-current",i===cur?"true":"false");bs[i].classList.toggle("done",!!done[i]);}
+  }
+  var uid=1;
+
+  /* ---------- PROGRAM mode ---------- */
+  var P={lvl:0,blocks:[],done:{},board:new Board($("pBoard"))};
+  function pSay(t,c){$("pMsg").textContent=t;$("pMsg").className="msg"+(c?" "+c:"");}
+  P.runner=new Runner({board:P.board,progBox:$("pProg"),blocks:function(){return P.blocks;},say:pSay,
+    busy:function(b){["pRun","pStep","pUndo","pClear"].forEach(function(id){$(id).disabled=b;});},
+    win:function(n){
+      P.done[P.lvl]=1;markLevels($("pLvls"),P.lvl,P.done);
+      var best=P.par,txt="⭐ Έφτασες στο αστέρι σε "+n+" βήματα!";
+      txt+=n<=best?" Αυτό είναι το πιο σύντομο δυνατό πρόγραμμα. Εξαιρετικά!":" Μπορείς να το κάνεις σε "+best+";";
+      if(P.lvl<LEVELS.length-1)txt+=" Δοκίμασε το επόμενο επίπεδο όταν είσαι έτοιμος/η.";
+      pSay(txt,"ok");
+    }});
+  function pLoad(i){
+    P.runner.stop();P.lvl=i;P.blocks=[];P.g=parse(LEVELS[i]);P.par=par(P.g);
+    P.board.draw(P.g);markLevels($("pLvls"),i,P.done);pRender();
+    $("pGoal").textContent="Επίπεδο "+(i+1)+": φέρε το ρομπότ στο αστέρι. Το πιο σύντομο πρόγραμμα έχει "+P.par+" μπλοκ.";
+    pSay("Φτιάξε το πρόγραμμά σου και μετά πάτησε Εκτέλεση.","");
+    ["pRun","pStep","pUndo","pClear"].forEach(function(id){$(id).disabled=false;});
+  }
+  function pRender(){renderProg($("pProg"),P.blocks,function(b){if(P.runner.timer)return;P.blocks=P.blocks.filter(function(x){return x!==b;});P.runner.stepIdx=-1;P.board.reset();pRender();},"Το πρόγραμμά σου είναι άδειο. Πάτησε τις εντολές από πάνω.");}
+  cmdButtons($("pCmds"),["F","L","R"],function(k){if(P.runner.timer)return;if(P.blocks.length>=40){pSay("Αυτό είναι πολύ μεγάλο πρόγραμμα! Δοκίμασε να το εκτελέσεις.","");return;}P.blocks.push({t:k,id:uid++});P.runner.stepIdx=-1;P.board.reset();pRender();});
+  levelButtons($("pLvls"),LEVELS.length,pLoad);
+  $("pRun").addEventListener("click",function(){P.runner.run();});
+  $("pStep").addEventListener("click",function(){P.runner.step();});
+  $("pUndo").addEventListener("click",function(){P.blocks.pop();P.runner.stepIdx=-1;P.board.reset();pRender();pSay("","");});
+  $("pClear").addEventListener("click",function(){P.blocks=[];P.runner.stepIdx=-1;P.board.reset();pRender();pSay("","");});
+  pLoad(0);
+
+  /* ---------- DEBUG mode ---------- */
+  var D={i:0,blocks:[],done:{},board:new Board($("dBoard"))};
+  function dSay(t,c){$("dMsg").textContent=t;$("dMsg").className="msg"+(c?" "+c:"");}
+  D.runner=new Runner({board:D.board,progBox:$("dProg"),blocks:function(){return D.blocks;},say:dSay,
+    busy:function(b){["dRun","dStep","dReset"].forEach(function(id){$(id).disabled=b;});},
+    win:function(){
+      D.done[D.i]=1;markLevels($("dLvls"),D.i,D.done);
+      dSay("✓ Το σφάλμα διορθώθηκε! Το ρομπότ έφτασε στο αστέρι."+(D.i<DEBUG.length-1?" Δοκίμασε τον επόμενο γρίφο.":" Τα διόρθωσες όλα!"),"ok");
+    }});
+  function dLoad(i){
+    D.runner.stop();D.i=i;var p=DEBUG[i];D.g=parse(p);D.board.draw(D.g);
+    D.blocks=p.prog.split("").map(function(c,k){return {t:k===p.bug?p.wrong:c,id:uid++};});
+    markLevels($("dLvls"),i,D.done);dRender();
+    $("dGoal").textContent="Γρίφος "+(i+1)+": αυτό το πρόγραμμα πρέπει να πάει το ρομπότ στο αστέρι, αλλά έχει ένα σφάλμα.";
+    dSay("Πάτησε Εκτέλεση για να δεις τι πάει στραβά.","");
+    ["dRun","dStep","dReset"].forEach(function(id){$(id).disabled=false;});
+  }
+  function dRender(){renderProg($("dProg"),D.blocks,function(b){
+    if(D.runner.timer)return;
+    b.t=b.t==="F"?"L":b.t==="L"?"R":"F";D.runner.stepIdx=-1;D.board.reset();dRender();
+    dSay("Άλλαξες το μπλοκ "+(D.blocks.indexOf(b)+1)+" σε «"+CMD[b.t].name+"». Εκτέλεσέ το για να το δοκιμάσεις.","");
+  },"");}
+  levelButtons($("dLvls"),DEBUG.length,dLoad);
+  $("dRun").addEventListener("click",function(){D.runner.run();});
+  $("dStep").addEventListener("click",function(){D.runner.step();});
+  $("dReset").addEventListener("click",function(){dLoad(D.i);});
+
+  /* ---------- LOOPS mode ---------- */
+  var Lp={i:0,blocks:[],done:{},board:new Board($("lBoard"))};
+  function lSay(t,c){$("lMsg").textContent=t;$("lMsg").className="msg"+(c?" "+c:"");}
+  function lCount(){return Lp.blocks.filter(function(b){return b.t!=="END";}).length;}
+  function lOpen(){var d=0;Lp.blocks.forEach(function(b){if(b.t==="REP")d++;if(b.t==="END")d--;});return d;}
+  Lp.runner=new Runner({board:Lp.board,progBox:$("lProg"),blocks:function(){return Lp.blocks;},say:lSay,
+    check:function(){
+      if(lOpen()>0){lSay("Κάθε Επανάλαβε χρειάζεται ένα Τέλος επανάληψης. Πρόσθεσε ένα πριν την εκτέλεση.","no");return false;}
+      if(lCount()>LOOPS[Lp.i].limit){lSay("Πάρα πολλά μπλοκ! Αυτό το επίπεδο επιτρέπει "+LOOPS[Lp.i].limit+". Χρησιμοποίησε έναν βρόχο για να το κοντύνεις.","no");return false;}
+      return true;
+    },
+    busy:function(b){["lRun","lUndo","lClear"].forEach(function(id){$(id).disabled=b;});},
+    win:function(n){
+      Lp.done[Lp.i]=1;markLevels($("lLvls"),Lp.i,Lp.done);
+      lSay("⭐ Φανταστικός βρόχος! Τα "+lCount()+" μπλοκ σου έβαλαν το ρομπότ να κάνει "+n+" βήματα."+(Lp.i<LOOPS.length-1?" Δοκίμασε το επόμενο επίπεδο.":""),"ok");
+    }});
+  function lLoad(i){
+    Lp.runner.stop();Lp.i=i;Lp.blocks=[];Lp.g=parse(LOOPS[i]);Lp.board.draw(Lp.g);markLevels($("lLvls"),i,Lp.done);lRender();
+    $("lGoal").textContent="Επίπεδο βρόχων "+(i+1)+": φτάσε στο αστέρι με όχι περισσότερα από "+LOOPS[i].limit+" μπλοκ. Βοήθεια: "+LOOPS[i].hint;
+    lSay("Μπλοκ που χρησιμοποιήθηκαν: 0 από "+LOOPS[i].limit+".","");
+    ["lRun","lUndo","lClear"].forEach(function(id){$(id).disabled=false;});
+  }
+  function lRender(){
+    renderProg($("lProg"),Lp.blocks,function(b){
+      if(Lp.runner.timer)return;
+      if(b.t==="REP"){b.n=b.n>=9?2:b.n+1;}
+      else{Lp.blocks=Lp.blocks.filter(function(x){return x!==b;});}
+      Lp.runner.stepIdx=-1;Lp.board.reset();lRender();
+    },"Το πρόγραμμά σου είναι άδειο. Δοκίμασε να ξεκινήσεις με Επανάλαβε.");
+    var endBtn=$("lCmds").querySelector('[data-k="END"]');if(endBtn)endBtn.disabled=lOpen()<=0;
+    if(!Lp.runner.timer)lSay("Μπλοκ που χρησιμοποιήθηκαν: "+lCount()+" από "+LOOPS[Lp.i].limit+"."+(lOpen()>0?" Μην ξεχάσεις το Τέλος επανάληψης.":""),lCount()>LOOPS[Lp.i].limit?"no":"");
+  }
+  cmdButtons($("lCmds"),["F","L","R","REP","END"],function(k){
+    if(Lp.runner.timer)return;
+    if(k==="END"&&lOpen()<=0)return;
+    Lp.blocks.push(k==="REP"?{t:"REP",n:2,id:uid++}:{t:k,id:uid++});Lp.runner.stepIdx=-1;Lp.board.reset();lRender();
+  });
+  levelButtons($("lLvls"),LOOPS.length,lLoad);
+  $("lRun").addEventListener("click",function(){Lp.runner.run();});
+  $("lUndo").addEventListener("click",function(){Lp.blocks.pop();Lp.runner.stepIdx=-1;Lp.board.reset();lRender();});
+  $("lClear").addEventListener("click",function(){Lp.blocks=[];Lp.runner.stepIdx=-1;Lp.board.reset();lRender();});
+  lLoad(0);
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"Τι είναι ένας αλγόριθμος;",a:"Μια σειρά από οδηγίες βήμα-βήμα",w:["Ένα είδος υπολογιστή","Ένα χαλασμένο πρόγραμμα","Ένας πολύ μεγάλος αριθμός"],why:"Ο αλγόριθμος είναι μια ακριβής λίστα βημάτων για να γίνει μια δουλειά."},
+    {q:"Τι είναι ένα σφάλμα (bug);",a:"Ένα λάθος σε ένα πρόγραμμα",w:["Ένα μέρος μέσα στον υπολογιστή","Ένα γρήγορο ρομπότ","Ένα είδος βρόχου"],why:"Τα σφάλματα είναι λάθη που κάνουν ένα πρόγραμμα να κάνει το λάθος πράγμα."},
+    {q:"Τι είναι η αποσφαλμάτωση (debugging);",a:"Το να βρίσκεις και να διορθώνεις λάθη σε ένα πρόγραμμα",w:["Το να γράφεις ένα νέο πρόγραμμα","Το να καθαρίζεις το πληκτρολόγιο","Το να κλείνεις τον υπολογιστή"],why:"Αποσφαλμάτωση σημαίνει να βρεις το σφάλμα και να το διορθώσεις."},
+    {q:"Τι κάνει ένας βρόχος;",a:"Επαναλαμβάνει κάποιες οδηγίες",w:["Σταματά το πρόγραμμα","Σβήνει το πρόγραμμα","Γυρίζει το ρομπότ ανάποδα"],why:"Ο βρόχος επαναλαμβάνει εντολές, ώστε τα προγράμματα να είναι πιο σύντομα."},
+    {q:"Ένα ρομπότ κοιτάζει πάνω και στρίβει δεξιά δύο φορές. Προς τα πού κοιτάζει τώρα;",a:"Κάτω",w:["Πάνω","Αριστερά","Δεξιά"],why:"Δύο τέταρτα της στροφής κάνουν μισή στροφή, οπότε κοιτάζει προς την αντίθετη μεριά."},
+    {q:"Ένα ρομπότ κοιτάζει δεξιά και στρίβει αριστερά μία φορά. Προς τα πού κοιτάζει τώρα;",a:"Πάνω",w:["Κάτω","Αριστερά","Δεξιά"],why:"Αν κοιτάζει δεξιά, ένα τέταρτο της στροφής αριστερά το κάνει να κοιτάζει πάνω."},
+    {q:"Γιατί έχει σημασία η σειρά των οδηγιών;",a:"Οι υπολογιστές κάνουν κάθε βήμα ακριβώς με τη σειρά που τους δίνεται",w:["Δεν έχει καμία σημασία","Οι υπολογιστές διορθώνουν τη σειρά για σένα","Μετράει μόνο το πρώτο βήμα"],why:"Αν αλλάξεις τη σειρά δύο βημάτων, το αποτέλεσμα μπορεί να είναι εντελώς διαφορετικό."},
+    {q:"Ποιο είναι ίδιο με το Μπροστά, Μπροστά, Μπροστά, Μπροστά;",a:"Επανάλαβε 4 φορές: Μπροστά",w:["Επανάλαβε 2 φορές: Μπροστά","Επανάλαβε 4 φορές: Στρίψε δεξιά","Μπροστά"],why:"Ο βρόχος επαναλαμβάνει το Μπροστά 4 φορές."},
+    {q:"Επανάλαβε 3 φορές: Μπροστά, Στρίψε δεξιά. Πόσες εντολές εκτελεί το ρομπότ;",a:"6",w:["3","2","9"],why:"2 εντολές στον βρόχο × 3 επαναλήψεις = 6."},
+    {q:"Τι είναι μια ακολουθία;",a:"Οδηγίες που εκτελούνται η μία μετά την άλλη, με τη σειρά",w:["Μια τυχαία λίστα αριθμών","Ένα λάθος σε πρόγραμμα","Μια εικόνα στην οθόνη"],why:"Ακολουθία σημαίνει να κάνεις τα βήματα με τη σειρά, ένα κάθε φορά."},
+    {q:"Γιατί οι οδηγίες για έναν υπολογιστή πρέπει να είναι πολύ ακριβείς;",a:"Οι υπολογιστές κάνουν ακριβώς ό,τι τους λένε, ακόμα κι αν είναι λάθος",w:["Οι υπολογιστές μαντεύουν τι εννοείς","Στους υπολογιστές αρέσουν οι μεγάλες λέξεις","Οι υπολογιστές αγνοούν τα λάθη"],why:"Ένας υπολογιστής δεν μπορεί να μαντέψει. Κάθε βήμα πρέπει να είναι ακριβώς σωστό."},
+    {q:"Το ρομπότ σου πέφτει σε τοίχο στο βήμα 5. Τι πρέπει να ελέγξεις πρώτα;",a:"Το βήμα 5 και τα βήματα ακριβώς πριν από αυτό",w:["Μόνο το βήμα 1","Το τελευταίο βήμα","Τίποτα, ξεκίνα νέο πρόγραμμα"],why:"Το σφάλμα συνήθως βρίσκεται στο βήμα που πήγε στραβά ή λίγο πριν από αυτό."},
+    {q:"Ποιο καθημερινό πράγμα μοιάζει περισσότερο με αλγόριθμο;",a:"Μια συνταγή για κέικ",w:["Μια φωτογραφία ενός κέικ","Ένα ζαχαροπλαστείο","Μια κάρτα γενεθλίων"],why:"Η συνταγή είναι μια λίστα βημάτων που ακολουθείς με τη σειρά."},
+    {q:"Ποιος είναι ο βασικός λόγος που οι προγραμματιστές χρησιμοποιούν βρόχους;",a:"Για να κάνουν τα προγράμματα πιο σύντομα και πιο εύκολα στην αλλαγή",w:["Για να κάνουν τα προγράμματα πιο αργά","Για να προσθέσουν περισσότερα σφάλματα","Για να κάνουν την οθόνη πιο φωτεινή"],why:"Οι βρόχοι γλιτώνουν το να γράφεις τις ίδιες εντολές ξανά και ξανά."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];
+    $("qCount").textContent="Ερώτηση "+(qi+1)+" από "+QN;$("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    shuffle([it.a].concat(it.w)).forEach(function(o){
+      var b=document.createElement("button");b.className="choice";b.textContent=o;
+      b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);
+    });
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Σωστό!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Βαθμός: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      $("qEndText").textContent=(qRight===QN?"Πρωταθλητής του προγραμματισμού! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε τον προγραμματισμό! ")+"Πέτυχες "+qRight+" από "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});
+    } else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Βαθμός: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+    [P,D,Lp].forEach(function(m){m.runner.stop();m.runner.o.busy(false);});
+    var p=t.getAttribute("data-p");
+    if(p==="dbg"&&!started.d){started.d=1;dLoad(0);}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}
+    });
+  }
+  window.__robot={LEVELS:LEVELS,DEBUG:DEBUG,LOOPS:LOOPS,parse:parse,par:par,expand:expand,simulate:simulate,BANK:BANK,
+    P:P,D:D,Lp:Lp,pLoad:pLoad,dLoad:dLoad,lLoad:lLoad};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Δεκαεξαδικό Σύστημα: Δωρεάν Διαδραστικό Εργαλείο για Μαθητές | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό εργαλείο για το δεκαεξαδικό σύστημα (hex), για ηλικίες 11-14. Δες πώς συνδέονται το δεκαεξαδικό, το δυαδικό και το δεκαδικό, εξασκήσου σε μετατροπές, ανάμειξε χρώματα με πραγματικούς κωδικούς hex και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.sw:focus-visible,input:focus-visible,.seg button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+/* explorer */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.box{background:var(--navy);border-radius:14px;padding:12px;text-align:center}
+.box .lab{color:var(--muted);font-weight:700;font-size:14px}
+.box .val{font:800 clamp(26px,7vw,42px)/1.15 "Baloo 2",sans-serif}
+.box .val.mono{font-family:"DejaVu Sans Mono",Consolas,monospace;font-size:clamp(20px,5.5vw,34px)}
+.hi{color:var(--hi)}.lo{color:var(--lo)}
+.nib{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.nib div{background:var(--navy);border-radius:14px;padding:10px 16px;text-align:center;min-width:140px}
+.nib .b{font:700 24px "DejaVu Sans Mono",Consolas,monospace;letter-spacing:.1em}
+.nib .arrow{color:var(--muted);font-size:14px}
+.nib .h{font:800 38px/1.1 "Baloo 2",sans-serif}
+.work{background:var(--navy);border-radius:12px;padding:10px 14px;margin:10px 0;font-weight:700;text-align:center}
+.ref{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:12px 0}
+.ref div{background:var(--navy);border:2px solid #2C3B72;border-radius:10px;text-align:center;padding:4px 2px}
+.ref b{display:block;font:800 22px "Baloo 2",sans-serif;color:var(--gold)}
+.ref span{display:block;font-size:13px}
+.ref i{display:block;font:normal 12px "DejaVu Sans Mono",Consolas,monospace;color:var(--muted)}
+.ref div.u1{border-color:var(--hi)}.ref div.u2{border-color:var(--lo)}.ref div.u1.u2{border-color:#fff}
+/* convert */
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.big{font:800 clamp(34px,10vw,56px)/1.1 "Baloo 2",sans-serif;color:var(--gold);text-align:center;margin:6px 0;word-break:break-all}
+.big.mono{font-family:"DejaVu Sans Mono",Consolas,monospace;font-size:clamp(26px,8vw,44px)}
+input[type=text]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 22px "DejaVu Sans Mono",Consolas,monospace;width:100%;max-width:300px;text-transform:uppercase}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+/* colours */
+.mix{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+.swatch{height:200px;border-radius:16px;border:3px solid #2C3B72;display:flex;align-items:flex-end;justify-content:center;padding:10px}
+.swatch span{background:rgba(15,28,63,.85);border-radius:10px;padding:4px 12px;font:800 24px "DejaVu Sans Mono",Consolas,monospace}
+.ch{margin:10px 0}
+.ch label{display:flex;justify-content:space-between;font-weight:700}
+.ch .r{color:#FF7A7A}.ch .g{color:#6EE07A}.ch .bl{color:#7AB8FF}
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.presets button{width:34px;height:34px;border-radius:8px;border:2px solid #2C3B72;cursor:pointer}
+.sws{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.sw{height:90px;border-radius:14px;border:3px solid #2C3B72;cursor:pointer}
+.sw.ok{border-color:var(--good);box-shadow:0 0 0 3px var(--good)}
+.sw.no{border-color:var(--bad);box-shadow:0 0 0 3px var(--bad)}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled,.sw:disabled{cursor:default}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:620px){.ref{grid-template-columns:repeat(4,1fr)}.mix{grid-template-columns:1fr}.swatch{height:130px}.sws{grid-template-columns:1fr 1fr}.trio{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Δεκαεξαδικό</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/" lang="en" hreflang="en">English</a></div>
+  <h1>Δεκαεξαδικό: Μετράμε σε 16άδες 🔢</h1>
+  <p class="lead">Οι μεγάλοι δυαδικοί αριθμοί διαβάζονται δύσκολα από τους ανθρώπους, γι' αυτό οι προγραμματιστές χρησιμοποιούν το δεκαεξαδικό σύστημα (hex για συντομία). Κάθε δεκαεξαδικό ψηφίο αντιστοιχεί σε ακριβώς 4 bit. Εξερεύνησε πώς συνδέονται το δεκαεξαδικό, το δυαδικό και το δεκαδικό, εξασκήσου σε μετατροπές και ανάμειξε χρώματα με πραγματικούς κωδικούς hex. <span style="white-space:nowrap">Ηλικίες 11-14.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες δεκαεξαδικού">
+    <button class="tab" role="tab" id="t-exp" aria-controls="exp" aria-selected="true" data-p="exp">Εξερευνητής Hex</button>
+    <button class="tab" role="tab" id="t-conv" aria-controls="conv" aria-selected="false" tabindex="-1" data-p="conv">Μετάτρεψέ το</button>
+    <button class="tab" role="tab" id="t-col" aria-controls="col" aria-selected="false" tabindex="-1" data-p="col">Χρώματα Hex</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
+  </div>
+
+  <!-- ============ EXPLORER ============ -->
+  <section class="panel on" id="exp" role="tabpanel" aria-labelledby="t-exp">
+    <h2>Ένα byte, τρεις τρόποι</h2>
+    <p>Το δεκαδικό (οι συνηθισμένοι μας αριθμοί) χρησιμοποιεί 10 ψηφία. Το δυαδικό χρησιμοποιεί 2. <b>Το δεκαεξαδικό χρησιμοποιεί 16</b>: 0 έως 9 και μετά <b>A έως F</b> για το 10 έως το 15. Κούνησε τον ολισθητή και δες πώς φαίνεται ένα byte σε κάθε σύστημα.</p>
+    <label for="eRange" class="muted">Διάλεξε έναν αριθμό από 0 έως 255</label>
+    <input type="range" id="eRange" min="0" max="255" value="175">
+    <div class="row" style="justify-content:center">
+      <button class="btn ghost sm" id="eDown">− 1</button>
+      <button class="btn ghost sm" id="eUp">+ 1</button>
+      <button class="btn sm" id="eRand">Τυχαίο</button>
+    </div>
+    <div class="trio" aria-live="polite">
+      <div class="box"><div class="lab">Δεκαδικό</div><div class="val" id="eDec"></div></div>
+      <div class="box"><div class="lab">Δυαδικό</div><div class="val mono" id="eBin"></div></div>
+      <div class="box"><div class="lab">Δεκαεξαδικό</div><div class="val" id="eHex"></div></div>
+    </div>
+    <h3>Χώρισε το byte σε δύο nibble</h3>
+    <p class="muted" style="margin-top:0">Τα 4 bit λέγονται <b>nibble</b> (μισό byte). Κάθε nibble γίνεται ένα δεκαεξαδικό ψηφίο.</p>
+    <div class="nib">
+      <div><div class="muted">Αριστερό nibble</div><div class="b hi" id="eN1"></div><div class="arrow" id="eN1v"></div><div class="h hi" id="eH1"></div></div>
+      <div><div class="muted">Δεξί nibble</div><div class="b lo" id="eN2"></div><div class="arrow" id="eN2v"></div><div class="h lo" id="eH2"></div></div>
+    </div>
+    <div class="work" id="eWork"></div>
+    <h3>Τα 16 δεκαεξαδικά ψηφία</h3>
+    <div class="ref" id="eRef" aria-label="Πίνακας δεκαεξαδικών ψηφίων με τις δεκαδικές και δυαδικές τιμές τους"></div>
+    <p class="tip"><b>Γιατί δεκαεξαδικό;</b> Το byte <span class="mono">10101111</span> διαβάζεται εύκολα λάθος, ενώ το <b>AF</b> είναι σύντομο και καθαρό. Οι υπολογιστές συνεχίζουν να δουλεύουν στο δυαδικό. Το δεκαεξαδικό είναι απλώς ένας βολικός τρόπος για να γράφουν οι άνθρωποι τα δυαδικά και χρησιμοποιείται για κωδικούς χρωμάτων, κωδικούς σφαλμάτων και διευθύνσεις μνήμης.</p>
+  </section>
+
+  <!-- ============ CONVERT ============ -->
+  <section class="panel" id="conv" role="tabpanel" aria-labelledby="t-conv">
+    <h2>Μετάτρεψέ το</h2>
+    <div class="row">
+      <div class="seg" role="group" aria-label="Είδος ερώτησης">
+        <button data-m="mix" aria-pressed="true">Ανάμεικτες</button>
+        <button data-m="hd" aria-pressed="false">Hex → δεκαδικό</button>
+        <button data-m="dh" aria-pressed="false">Δεκαδικό → hex</button>
+        <button data-m="bh" aria-pressed="false">Δυαδικό ↔ hex</button>
+      </div>
+    </div>
+    <p class="muted"><span class="score" id="cScore">Βαθμός: 0</span> · <span id="cCount"></span></p>
+    <div class="bar" aria-hidden="true"><i id="cBar"></i></div>
+    <div id="cBox">
+      <p class="q" id="cQ"></p>
+      <div class="big" id="cVal"></div>
+      <div class="row" style="justify-content:center">
+        <input type="text" id="cIn" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Η απάντησή σου">
+        <button class="btn" id="cCheck">Έλεγχος</button>
+      </div>
+      <div class="fb center" id="cFb" aria-live="polite"></div>
+      <p class="why center" id="cWhy"></p>
+      <div class="center"><button class="btn" id="cNext" style="display:none">Επόμενο →</button></div>
+    </div>
+    <div id="cEnd" style="display:none">
+      <p class="q" id="cEndText"></p>
+      <button class="btn" id="cAgain">Παίξε ξανά</button>
+    </div>
+    <p class="tip"><b>Μέθοδοι:</b> Hex → δεκαδικό: πρώτο ψηφίο × 16, συν το δεύτερο ψηφίο. Δεκαδικό → hex: διαίρεσε με το 16· το πηλίκο είναι το πρώτο ψηφίο και το υπόλοιπο το δεύτερο. Δυαδικό ↔ hex: δούλεψε σε ομάδες των 4 bit.</p>
+  </section>
+
+  <!-- ============ COLOURS ============ -->
+  <section class="panel" id="col" role="tabpanel" aria-labelledby="t-col">
+    <h2>Μίξερ χρωμάτων hex</h2>
+    <p>Κάθε χρώμα σε μια οθόνη είναι ανάμειξη από <b style="color:#FF7A7A">κόκκινο</b>, <b style="color:#6EE07A">πράσινο</b> και <b style="color:#7AB8FF">μπλε</b> φως. Το καθένα πηγαίνει από 0 (καθόλου) ως 255 (στο φουλ), δηλαδή ένα byte ή δύο δεκαεξαδικά ψηφία. Οι σχεδιαστές ιστοσελίδων γράφουν τα χρώματα ως <span class="mono">#RRGGBB</span>.</p>
+    <div class="mix">
+      <div>
+        <div class="ch"><label for="rR"><span class="r">Κόκκινο</span><span class="mono" id="rV"></span></label><input type="range" id="rR" min="0" max="255" value="244"></div>
+        <div class="ch"><label for="rG"><span class="g">Πράσινο</span><span class="mono" id="gV"></span></label><input type="range" id="rG" min="0" max="255" value="185"></div>
+        <div class="ch"><label for="rB"><span class="bl">Μπλε</span><span class="mono" id="bV"></span></label><input type="range" id="rB" min="0" max="255" value="66"></div>
+        <div class="presets" id="presets" aria-label="Έτοιμα χρώματα"></div>
+      </div>
+      <div class="swatch" id="swatch"><span id="code"></span></div>
+    </div>
+    <h3 style="margin-top:20px">Διάβασε τον κωδικό 🎨</h3>
+    <p>Ποιο δείγμα ταιριάζει με τον κωδικό hex; Σκέψου πόσο κόκκινο, πράσινο και μπλε δίνει κάθε ζευγάρι ψηφίων. <span class="score" id="kScore">Βαθμός: 0</span> · <span id="kCount"></span></p>
+    <div id="kBox">
+      <div class="big mono" id="kCode"></div>
+      <div class="sws" id="kSws"></div>
+      <div class="fb center" id="kFb" aria-live="polite"></div>
+      <p class="why center" id="kWhy"></p>
+      <div class="center"><button class="btn" id="kNext" style="display:none">Επόμενος κωδικός →</button></div>
+    </div>
+    <div id="kEnd" style="display:none" class="center">
+      <p class="q" id="kEndText"></p>
+      <button class="btn" id="kAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Κουίζ Δεκαεξαδικού</h2>
+    <p class="muted">10 ερωτήσεις. <span class="score" id="qScore">Βαθμός: 0</span> · <span id="qCount">Ερώτηση 1 από 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Επόμενη ερώτηση →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Πρώτη φορά με το δυαδικό;</b> Ξεκίνα με το <a href="https://classroom.ellisknowledgestudio.com/it/binary/el/">Δυαδικό σύστημα: 1 και 0</a> και μετά γύρνα εδώ.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function rnd(lo,hi){return lo+Math.floor(Math.random()*(hi-lo+1));}
+  function pad(s,n){s=String(s);while(s.length<n)s="0"+s;return s;}
+  function hx(n,d){return pad(n.toString(16).toUpperCase(),d||2);}
+  function bn(n,d){return pad(n.toString(2),d||8);}
+
+  /* ---------- explorer ---------- */
+  var ref=$("eRef");
+  for(var i=0;i<16;i++){
+    var d=document.createElement("div");
+    d.innerHTML="<b>"+hx(i,1)+"</b><span>"+i+"</span><i>"+bn(i,4)+"</i>";
+    ref.appendChild(d);
+  }
+  function showE(n){
+    n=Math.max(0,Math.min(255,n));
+    $("eRange").value=n;
+    var hi=n>>4,lo=n&15,b=bn(n);
+    $("eDec").textContent=n;
+    $("eBin").innerHTML='<span class="hi">'+b.substr(0,4)+'</span> <span class="lo">'+b.substr(4)+'</span>';
+    $("eHex").innerHTML='<span class="hi">'+hx(hi,1)+'</span><span class="lo">'+hx(lo,1)+'</span>';
+    $("eN1").textContent=b.substr(0,4);$("eN2").textContent=b.substr(4);
+    $("eN1v").textContent="= "+hi+" ↓";$("eN2v").textContent="= "+lo+" ↓";
+    $("eH1").textContent=hx(hi,1);$("eH2").textContent=hx(lo,1);
+    $("eWork").textContent=hx(n)+" = "+hx(hi,1)+" × 16 + "+hx(lo,1)+" × 1 = "+(hi*16)+" + "+lo+" = "+n;
+    var cs=ref.children;
+    for(var k=0;k<16;k++)cs[k].className=(k===hi?"u1 ":"")+(k===lo?"u2":"");
+  }
+  $("eRange").addEventListener("input",function(){showE(parseInt(this.value,10));});
+  $("eUp").addEventListener("click",function(){showE(parseInt($("eRange").value,10)+1);});
+  $("eDown").addEventListener("click",function(){showE(parseInt($("eRange").value,10)-1);});
+  $("eRand").addEventListener("click",function(){showE(rnd(0,255));});
+  showE(175);
+
+  /* ---------- convert ---------- */
+  var CN=10,cMode="mix",cList=[],ci=0,cRight=0,cDone=false;
+  function makeQ(type){
+    var n=rnd(10,255),hi=n>>4,lo=n&15;
+    if(type==="hd")return {type:type,q:"Πόσο είναι αυτός ο δεκαεξαδικός αριθμός στο δεκαδικό;",show:hx(n),mono:false,ans:String(n),kind:"dec",
+      why:hx(n)+" = "+hx(hi,1)+" × 16 + "+hx(lo,1)+" = "+(hi*16)+" + "+lo+" = "+n};
+    if(type==="dh")return {type:type,q:"Γράψε αυτόν τον δεκαδικό αριθμό στο δεκαεξαδικό.",show:String(n),mono:false,ans:hx(n),kind:"hex",
+      why:n+" ÷ 16 = "+hi+" υπόλοιπο "+lo+" → "+hx(hi,1)+" και "+hx(lo,1)+" → "+hx(n)};
+    if(type==="bh")return {type:type,q:"Γράψε αυτό το δυαδικό byte στο δεκαεξαδικό.",show:bn(n).substr(0,4)+" "+bn(n).substr(4),mono:true,ans:hx(n),kind:"hex",
+      why:bn(n).substr(0,4)+" = "+hi+" = "+hx(hi,1)+", "+bn(n).substr(4)+" = "+lo+" = "+hx(lo,1)+" → "+hx(n)};
+    return {type:type,q:"Γράψε αυτόν τον δεκαεξαδικό αριθμό ως δυαδικό byte 8 bit.",show:hx(n),mono:false,ans:bn(n),kind:"bin",
+      why:hx(hi,1)+" = "+bn(hi,4)+", "+hx(lo,1)+" = "+bn(lo,4)+" → "+bn(n)};
+  }
+  function norm(s,kind){
+    s=String(s).toUpperCase().replace(/\s+/g,"").replace(/^#/,"").replace(/^0X/,"");
+    if(kind==="dec"){return /^\d+$/.test(s)?String(parseInt(s,10)):s;}
+    if(kind==="hex"){return /^[0-9A-F]+$/.test(s)?hx(parseInt(s,16)):s;}
+    return /^[01]+$/.test(s)?bn(parseInt(s,2)):s;
+  }
+  function showC(){
+    var it=cList[ci];cDone=false;
+    $("cCount").textContent="Ερώτηση "+(ci+1)+" από "+CN;
+    $("cBar").style.width=(ci/CN*100)+"%";
+    $("cQ").textContent=it.q;
+    $("cVal").textContent=it.show;$("cVal").className="big"+(it.mono?" mono":"");
+    $("cIn").value="";$("cIn").disabled=false;$("cCheck").disabled=false;
+    $("cIn").setAttribute("inputmode",it.kind==="dec"||it.kind==="bin"?"numeric":"text");
+    $("cIn").setAttribute("placeholder",it.kind==="dec"?"π.χ. 42":it.kind==="hex"?"π.χ. 2A":"π.χ. 00101010");
+    $("cFb").textContent="";$("cFb").className="fb center";$("cWhy").textContent="";$("cNext").style.display="none";
+  }
+  function checkC(){
+    if(cDone)return;
+    var it=cList[ci],g=$("cIn").value;
+    if(!g.replace(/\s/g,"")){$("cFb").textContent="Γράψε πρώτα μια απάντηση.";$("cFb").className="fb center";return;}
+    cDone=true;$("cIn").disabled=true;$("cCheck").disabled=true;
+    if(norm(g,it.kind)===it.ans){cRight++;$("cFb").textContent="✓ Σωστό!";$("cFb").className="fb center ok";}
+    else{$("cFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι "+it.ans+".";$("cFb").className="fb center no";}
+    $("cWhy").textContent=it.why;$("cScore").textContent="Βαθμός: "+cRight;
+    $("cNext").style.display="";$("cNext").focus({preventScroll:true});
+  }
+  $("cCheck").addEventListener("click",checkC);
+  $("cIn").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkC();}});
+  $("cNext").addEventListener("click",function(){
+    ci++;
+    if(ci>=CN){
+      $("cBar").style.width="100%";$("cBox").style.display="none";$("cEnd").style.display="";
+      var msg=cRight===CN?"Ήρωας του hex! ":cRight>=7?"Εξαιρετικές μετατροπές! ":cRight>=4?"Μπράβο! ":"Συνέχισε την εξάσκηση! ";
+      $("cEndText").textContent=msg+"Βρήκες σωστά "+cRight+" από "+CN+".";
+      $("cAgain").focus({preventScroll:true});
+    } else showC();
+  });
+  function startC(){
+    cList=[];
+    for(var i=0;i<CN;i++){
+      var t=cMode==="mix"?["hd","dh","bh","hb"][i%4]:cMode==="bh"?(i%2?"hb":"bh"):cMode;
+      cList.push(makeQ(t));
+    }
+    cList=shuffle(cList);ci=0;cRight=0;$("cScore").textContent="Βαθμός: 0";
+    $("cEnd").style.display="none";$("cBox").style.display="";showC();
+  }
+  $("cAgain").addEventListener("click",startC);
+  (function(){
+    var bs=document.querySelectorAll("#conv .seg button");
+    for(var i=0;i<bs.length;i++)bs[i].addEventListener("click",function(){
+      for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",bs[j]===this?"true":"false");
+      cMode=this.getAttribute("data-m");startC();
+    });
+  })();
+
+  /* ---------- colours ---------- */
+  function setMix(r,g,b){$("rR").value=r;$("rG").value=g;$("rB").value=b;showMix();}
+  function showMix(){
+    var r=+$("rR").value,g=+$("rG").value,b=+$("rB").value;
+    $("rV").textContent=r+" = "+hx(r);$("gV").textContent=g+" = "+hx(g);$("bV").textContent=b+" = "+hx(b);
+    var code="#"+hx(r)+hx(g)+hx(b);
+    $("swatch").style.background=code;
+    $("code").innerHTML='<span style="color:#FF7A7A">#'+hx(r)+'</span><span style="color:#6EE07A">'+hx(g)+'</span><span style="color:#7AB8FF">'+hx(b)+'</span>';
+    $("code").setAttribute("aria-label","Κωδικός hex "+code);
+  }
+  ["rR","rG","rB"].forEach(function(id){$(id).addEventListener("input",showMix);});
+  var PRESETS=[["Κόκκινο","FF0000"],["Πράσινο","00FF00"],["Μπλε","0000FF"],["Κίτρινο","FFFF00"],["Κυανό","00FFFF"],["Ματζέντα","FF00FF"],["Πορτοκαλί","FF8000"],["Μωβ","800080"],["Λευκό","FFFFFF"],["Γκρι","808080"],["Μαύρο","000000"],["Χρυσό Ellis","F4B942"],["Μπλε Ellis","0F1C3F"]];
+  PRESETS.forEach(function(p){
+    var b=document.createElement("button");
+    b.style.background="#"+p[1];b.title=p[0]+" #"+p[1];b.setAttribute("aria-label",p[0]+" #"+p[1]);
+    b.addEventListener("click",function(){setMix(parseInt(p[1].substr(0,2),16),parseInt(p[1].substr(2,2),16),parseInt(p[1].substr(4,2),16));});
+    $("presets").appendChild(b);
+  });
+  showMix();
+
+  var LV=["00","80","FF"],KN=8,kList=[],kUsed=[],ki=0,kRight=0;
+  function describe(code){
+    var names={"00":"καθόλου","80":"μισό","FF":"στο φουλ","33":"λίγο","99":"αρκετό","CC":"πολύ"};
+    var r=code.substr(0,2),g=code.substr(2,2),b=code.substr(4,2);
+    return "#"+code+": κόκκινο "+names[r]+", πράσινο "+names[g]+", μπλε "+names[b]+".";
+  }
+  function newK(round){
+    var lv=round<5?LV:["00","33","99","CC","FF"],code;
+    do{code=lv[rnd(0,lv.length-1)]+lv[rnd(0,lv.length-1)]+lv[rnd(0,lv.length-1)];}while(kUsed.indexOf(code)>=0);
+    kUsed.push(code);
+    var opts=[code],t=0;
+    while(opts.length<4&&t<200){
+      t++;
+      var ch=rnd(0,2),nv=lv[rnd(0,lv.length-1)];
+      var parts=[code.substr(0,2),code.substr(2,2),code.substr(4,2)];
+      if(t%3===0){parts=[parts[1],parts[2],parts[0]];}else parts[ch]=nv;
+      var o=parts.join("");
+      if(opts.indexOf(o)<0)opts.push(o);
+    }
+    return {code:code,opts:shuffle(opts)};
+  }
+  function showK(){
+    var it=kList[ki];
+    $("kCount").textContent="Κωδικός "+(ki+1)+" από "+KN;
+    $("kCode").textContent="#"+it.code;
+    $("kFb").textContent="";$("kFb").className="fb center";$("kWhy").textContent="";$("kNext").style.display="none";
+    var box=$("kSws");box.innerHTML="";
+    it.opts.forEach(function(o,idx){
+      var b=document.createElement("button");
+      b.className="sw";b.style.background="#"+o;b.setAttribute("data-c",o);
+      b.setAttribute("aria-label","Δείγμα "+(idx+1));
+      b.addEventListener("click",function(){answerK(o,b);});
+      box.appendChild(b);
+    });
+  }
+  function answerK(o,btn){
+    var it=kList[ki],bs=$("kSws").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].getAttribute("data-c")===it.code)bs[i].className="sw ok";}
+    if(o===it.code){kRight++;$("kFb").textContent="✓ Σωστό!";$("kFb").className="fb center ok";}
+    else{btn.className="sw no";$("kFb").textContent="✗ Όχι ακριβώς. Το πράσινο περίγραμμα δείχνει το σωστό.";$("kFb").className="fb center no";}
+    $("kWhy").textContent=describe(it.code);$("kScore").textContent="Βαθμός: "+kRight;
+    $("kNext").style.display="";$("kNext").focus({preventScroll:true});
+  }
+  $("kNext").addEventListener("click",function(){
+    ki++;
+    if(ki>=KN){
+      $("kBox").style.display="none";$("kEnd").style.display="";
+      $("kEndText").textContent=(kRight>=7?"Ειδικός στα χρώματα! ":kRight>=4?"Ωραία ανάμειξη! ":"Συνέχισε να κοιτάς τα ζευγάρια! ")+"Ταίριαξες "+kRight+" από τους "+KN+" κωδικούς.";
+      $("kAgain").focus({preventScroll:true});
+    } else showK();
+  });
+  function startK(){
+    kList=[];
+    kUsed=[];
+    for(var i=0;i<KN;i++)kList.push(newK(i));
+    ki=0;kRight=0;$("kScore").textContent="Βαθμός: 0";$("kEnd").style.display="none";$("kBox").style.display="";showK();
+  }
+  $("kAgain").addEventListener("click",startK);
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"Πόσα διαφορετικά ψηφία χρησιμοποιεί το δεκαεξαδικό;",a:"16",w:["10","2","8"],why:"0 έως 9 συν A έως F κάνουν 16 ψηφία."},
+    {q:"Ποια γράμματα χρησιμοποιούνται ως δεκαεξαδικά ψηφία;",a:"A έως F",w:["A έως Z","A έως J","X, Y και Z"],why:"Τα A έως F αντιστοιχούν στο 10 έως το 15."},
+    {q:"Πόσο είναι το δεκαεξαδικό ψηφίο F στο δεκαδικό;",a:"15",w:["16","6","Το F δεν είναι αριθμός"],why:"A = 10, B = 11, C = 12, D = 13, E = 14, F = 15."},
+    {q:"Πόσο είναι το δεκαεξαδικό ψηφίο B στο δεκαδικό;",a:"11",w:["2","12","10"],why:"A = 10, άρα B = 11."},
+    {q:"Πόσο είναι το hex 10 στο δεκαδικό;",a:"16",w:["10","2","1"],why:"1 × 16 + 0 = 16."},
+    {q:"Πόσο είναι το hex FF στο δεκαδικό;",a:"255",w:["30","256","1515"],why:"15 × 16 + 15 = 240 + 15 = 255."},
+    {q:"Πόσο είναι το hex 2A στο δεκαδικό;",a:"42",w:["210","32","26"],why:"2 × 16 + 10 = 32 + 10 = 42."},
+    {q:"Πώς γράφεται το δεκαδικό 100 στο hex;",a:"64",w:["100","A0","46"],why:"100 ÷ 16 = 6 υπόλοιπο 4, άρα 64."},
+    {q:"Σε πόσα bit αντιστοιχεί ένα δεκαεξαδικό ψηφίο;",a:"4",w:["8","2","16"],why:"Τα 4 bit φτιάχνουν 16 συνδυασμούς, έναν για κάθε δεκαεξαδικό ψηφίο."},
+    {q:"Πόσα δεκαεξαδικά ψηφία χρειάζεσαι για ένα byte;",a:"2",w:["1","4","8"],why:"Ένα byte είναι 8 bit, δηλαδή δύο ομάδες των 4."},
+    {q:"Ποιο δεκαεξαδικό ψηφίο είναι ίδιο με το δυαδικό 1010;",a:"A",w:["10","5","F"],why:"1010 = 8 + 2 = 10 και το 10 είναι A."},
+    {q:"Πώς γράφεται το δυαδικό byte 1111 0000 στο hex;",a:"F0",w:["0F","FF","150"],why:"1111 = F και 0000 = 0, άρα F0."},
+    {q:"Ποιο χρώμα είναι το #FF0000;",a:"Κόκκινο",w:["Πράσινο","Μπλε","Μαύρο"],why:"Κόκκινο στο φουλ, καθόλου πράσινο, καθόλου μπλε."},
+    {q:"Ποιο χρώμα είναι το #000000;",a:"Μαύρο",w:["Λευκό","Γκρι","Μπλε"],why:"Καθόλου κόκκινο, πράσινο ή μπλε φως."},
+    {q:"Ποιο χρώμα είναι το #FFFFFF;",a:"Λευκό",w:["Μαύρο","Κίτρινο","Κόκκινο"],why:"Κόκκινο, πράσινο και μπλε στο φουλ μαζί κάνουν λευκό."},
+    {q:"Γιατί οι προγραμματιστές χρησιμοποιούν το hex;",a:"Είναι ένας πιο σύντομος και καθαρός τρόπος να γράφεις δυαδικά",w:["Οι υπολογιστές δουλεύουν σε hex αντί για δυαδικό","Κάνει τους αριθμούς μεγαλύτερους","Χρησιμοποιείται μόνο στα μαθηματικά"],why:"Οι υπολογιστές εξακολουθούν να χρησιμοποιούν το δυαδικό. Το hex διαβάζεται και γράφεται πιο εύκολα από τους ανθρώπους."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];
+    $("qCount").textContent="Ερώτηση "+(qi+1)+" από "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;
+    $("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    shuffle([it.a].concat(it.w)).forEach(function(o){
+      var b=document.createElement("button");b.className="choice";b.textContent=o;
+      b.addEventListener("click",function(){answerQ(o,b);});
+      box.appendChild(b);
+    });
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Σωστό!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Βαθμός: "+qRight;
+    $("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      $("qEndText").textContent=(qRight===QN?"Ιδιοφυΐα του hex! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε την εξερεύνηση! ")+"Πέτυχες "+qRight+" από "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});
+    } else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Βαθμός: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+    var p=t.getAttribute("data-p");
+    if(p==="conv"&&!started.c){started.c=1;startC();}
+    if(p==="col"&&!started.k){started.k=1;startK();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__hex={BANK:BANK,cur:function(){return cList[ci];},kcur:function(){return kList[ki];},norm:norm};
+})();
+</script>
+</body>
+</html>

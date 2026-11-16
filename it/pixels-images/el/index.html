@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Πίξελ και Εικόνες: Ανάλυση, Βάθος Χρώματος και Μέγεθος Αρχείου, Δωρεάν Εργαλείο για Παιδιά | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό εργαλείο για πίξελ και εικόνες, για ηλικίες 9-13. Δες πώς η ανάλυση και το βάθος χρώματος αλλάζουν μια εικόνα, ζωγράφισε pixel art σε δυαδικό, αποκωδικοποίησε μυστικές εικόνες, υπολόγισε το μέγεθος αρχείων εικόνας και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/pixels-images/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/pixels-images/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/pixels-images/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/pixels-images/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,input:focus-visible,select:focus-visible,.seg button:focus-visible,.pal button:focus-visible,.cell:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.ctl{font-weight:700;margin:14px 0 4px;display:block}
+/* explorer */
+.exp{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+.cv{width:100%;max-width:440px;aspect-ratio:1;display:block;margin:0 auto;border-radius:12px;border:3px solid #2C3B72;image-rendering:pixelated;cursor:crosshair;touch-action:manipulation}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.stat{background:var(--navy);border-radius:12px;padding:8px 10px;text-align:center}
+.stat .lab{color:var(--muted);font-size:13px;font-weight:700}
+.stat .val{font:800 22px/1.2 "Baloo 2",sans-serif;color:var(--gold)}
+.work{background:var(--navy);border-radius:12px;padding:10px 14px;margin:10px 0;font-weight:700}
+.pix{background:var(--navy);border-radius:12px;padding:10px 14px;margin:10px 0;display:flex;gap:12px;align-items:center;min-height:62px}
+.pix .chip{width:40px;height:40px;border-radius:8px;border:2px solid #fff;flex:none}
+.swrow{display:flex;flex-wrap:wrap;gap:3px;margin:6px 0}
+.swrow i{width:18px;height:18px;border-radius:4px;border:1px solid #2C3B72;display:block}
+/* painter */
+.paint{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:stretch}
+.grid8{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;background:#2C3B72;padding:2px;border-radius:10px;width:min(100%,336px);touch-action:none;user-select:none}
+.cell{aspect-ratio:1;border:0;border-radius:3px;padding:0;cursor:pointer;min-width:0}
+.codes{font:700 17px/1.3 "DejaVu Sans Mono",Consolas,monospace;display:grid;grid-template-rows:repeat(8,1fr);padding:2px 0;height:100%}
+.codes div{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.codes span.n{color:var(--muted);font-size:12px;width:58px;flex:0 0 auto}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.pal button{display:flex;align-items:center;gap:6px;background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:10px;padding:4px 10px 4px 4px;font:700 14px "DejaVu Sans Mono",Consolas,monospace;cursor:pointer}
+.pal button i{width:26px;height:26px;border-radius:6px;border:1px solid #888;display:block}
+.pal button[aria-pressed="true"]{border-color:var(--gold)}
+.dcode{background:var(--navy);border-radius:12px;padding:6px 14px;font:700 18px/1.3 "DejaVu Sans Mono",Consolas,monospace;letter-spacing:.12em;display:grid;grid-template-rows:repeat(8,1fr);align-items:center;align-self:start;height:min(100%,336px)}
+.dcode div.done{color:var(--good)}
+.dcode div.bad{color:var(--bad)}
+/* file size + quiz */
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+input[type=number],select{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:8px 12px;font:700 18px "Nunito Sans",sans-serif}
+input[type=number]{width:120px}
+input.ans{width:100%;max-width:220px;font-size:22px}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.calc{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.calc label{display:flex;flex-direction:column;font-weight:700;gap:4px}
+.steps{display:grid;gap:8px;margin:14px 0}
+.steps div{background:var(--navy);border-radius:12px;padding:10px 14px}
+.steps b{color:var(--gold)}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:720px){.exp{grid-template-columns:1fr}.paint{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.codes{font-size:15px}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Πίξελ και Εικόνες</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/pixels-images/" lang="en" hreflang="en">English</a></div>
+  <h1>Πίξελ και Εικόνες 🖼️</h1>
+  <p class="lead">Κάθε εικόνα σε μια οθόνη αποτελείται από μικροσκοπικά τετράγωνα χρώματος που λέγονται πίξελ (εικονοστοιχεία) και κάθε πίξελ αποθηκεύεται σε δυαδική μορφή. Δες πώς η ανάλυση και το βάθος χρώματος αλλάζουν μια εικόνα, ζωγράφισε pixel art σε δυαδικό, αποκωδικοποίησε μυστικές εικόνες και υπολόγισε πόσο μεγάλο είναι ένα αρχείο εικόνας. <span style="white-space:nowrap">Ηλικίες 9-13.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες: Πίξελ και Εικόνες">
+    <button class="tab" role="tab" id="t-exp" aria-controls="exp" aria-selected="true" data-p="exp">Εξερευνητής Πίξελ</button>
+    <button class="tab" role="tab" id="t-paint" aria-controls="paint" aria-selected="false" tabindex="-1" data-p="paint">Ζωγράφος Πίξελ</button>
+    <button class="tab" role="tab" id="t-size" aria-controls="size" aria-selected="false" tabindex="-1" data-p="size">Μέγεθος Αρχείου</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
+  </div>
+
+  <!-- ============ EXPLORER ============ -->
+  <section class="panel on" id="exp" role="tabpanel" aria-labelledby="t-exp">
+    <h2>Ανάλυση και βάθος χρώματος</h2>
+    <p><b>Ανάλυση</b> είναι πόσα πίξελ αποτελούν την εικόνα. <b>Βάθος χρώματος</b> είναι πόσα bit χρησιμοποιούνται για να αποθηκευτεί το χρώμα κάθε πίξελ. Άλλαξέ τα και δες τι γίνεται στην εικόνα και στο μέγεθος του αρχείου.</p>
+    <div class="exp">
+      <div>
+        <canvas class="cv" id="eCv" width="512" height="512" aria-label="Η εικόνα με την ανάλυση και το βάθος χρώματος που διάλεξες. Πάτησε ένα πίξελ για να δεις πώς αποθηκεύεται."></canvas>
+        <p class="muted center" style="font-size:14px;margin:6px 0 0">Πάτησε οποιοδήποτε πίξελ για να δεις πώς αποθηκεύεται.</p>
+      </div>
+      <div>
+        <span class="ctl" id="eResL">Ανάλυση</span>
+        <div class="seg" role="group" aria-labelledby="eResL" id="eRes"></div>
+        <span class="ctl" id="eDepL">Βάθος χρώματος</span>
+        <div class="seg" role="group" aria-labelledby="eDepL" id="eDep"></div>
+        <div class="swrow" id="ePal" aria-hidden="true"></div>
+        <label class="row" style="margin:8px 0;font-weight:700"><input type="checkbox" id="eGrid" checked> Δείξε το πλέγμα των πίξελ</label>
+        <div class="stats" aria-live="polite">
+          <div class="stat"><div class="lab">Πίξελ</div><div class="val" id="sPix"></div></div>
+          <div class="stat"><div class="lab">Πιθανά χρώματα</div><div class="val" id="sCol"></div></div>
+          <div class="stat"><div class="lab">Μέγεθος αρχείου (bit)</div><div class="val" id="sBits"></div></div>
+          <div class="stat"><div class="lab">Μέγεθος αρχείου (byte)</div><div class="val" id="sBytes"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="work" id="eWork"></div>
+    <div class="pix" id="ePix" aria-live="polite"><span class="muted">Πάτησε ένα πίξελ στην εικόνα.</span></div>
+    <p class="tip"><b>Το αντάλλαγμα:</b> περισσότερα πίξελ και περισσότερα bit ανά πίξελ δίνουν πιο καθαρή και πιο ρεαλιστική εικόνα, αλλά και μεγαλύτερο αρχείο, που πιάνει περισσότερο χώρο και αργεί περισσότερο να σταλεί.</p>
+  </section>
+
+  <!-- ============ PAINTER ============ -->
+  <section class="panel" id="paint" role="tabpanel" aria-labelledby="t-paint">
+    <h2>Ζωγράφισε σε δυαδικό</h2>
+    <p>Διάλεξε ένα χρώμα και μετά πάτησε ή σύρε το δάχτυλο πάνω στο πλέγμα. Ο υπολογιστής αποθηκεύει κάθε σειρά ως μια γραμμή δυαδικών ψηφίων. Με χρώμα <b>1 bit</b> κάθε πίξελ είναι ένα bit (0 ή 1). Με χρώμα <b>2 bit</b> κάθε πίξελ χρειάζεται δύο bit, οπότε έχεις 4 χρώματα.</p>
+    <div class="row">
+      <div class="seg" role="group" aria-label="Βάθος χρώματος" id="pDep">
+        <button data-d="1" aria-pressed="true">1 bit: 2 χρώματα</button>
+        <button data-d="2" aria-pressed="false">2 bit: 4 χρώματα</button>
+      </div>
+    </div>
+    <div class="pal" id="pPal" role="group" aria-label="Χρώμα ζωγραφικής"></div>
+    <div class="paint">
+      <div class="grid8" id="pGrid" aria-label="Πλέγμα 8 επί 8 πίξελ"></div>
+      <div class="codes" id="pCodes" aria-live="polite"></div>
+    </div>
+    <div class="row">
+      <button class="btn ghost sm" id="pClear">Καθαρισμός</button>
+      <button class="btn ghost sm" id="pInvert">Αντιστροφή χρωμάτων</button>
+    </div>
+    <p class="work" id="pSize"></p>
+
+    <h3 style="margin-top:22px">Αποκωδικοποίησε την εικόνα 🔍</h3>
+    <p>Κάθε γραμμή δυαδικών ψηφίων είναι μια σειρά από πίξελ: <b class="mono">1</b> = μαύρο, <b class="mono">0</b> = λευκό. Ζωγράφισε το πλέγμα ώστε να ταιριάζει με τον κώδικα και μετά πάτησε Έλεγχος.</p>
+    <p class="muted"><span class="score" id="dScore">Λυμένα: 0</span> · <span id="dCount"></span></p>
+    <div class="paint">
+      <div class="grid8" id="dGrid" aria-label="Πλέγμα 8 επί 8 για την αποκωδικοποίηση"></div>
+      <div class="dcode" id="dCode" aria-label="Δυαδικός κώδικας της εικόνας"></div>
+    </div>
+    <div class="row">
+      <button class="btn" id="dCheck">Έλεγχος</button>
+      <button class="btn ghost sm" id="dClear">Καθαρισμός</button>
+      <button class="btn ghost sm" id="dShow">Δείξε την απάντηση</button>
+      <button class="btn sm" id="dNext" style="display:none">Επόμενη εικόνα →</button>
+    </div>
+    <div class="fb" id="dFb" aria-live="polite"></div>
+  </section>
+
+  <!-- ============ FILE SIZE ============ -->
+  <section class="panel" id="size" role="tabpanel" aria-labelledby="t-size">
+    <h2>Υπολόγισε το μέγεθος του αρχείου</h2>
+    <p>Για να βρεις πόσο χώρο χρειάζεται μια εικόνα: <b>πλάτος × ύψος × βάθος χρώματος = μέγεθος σε bit</b>. Μετά διαίρεσε με το 8 για να βρεις τα byte.</p>
+    <div class="calc">
+      <label for="fW">Πλάτος (πίξελ)<input type="number" id="fW" min="1" max="10000" value="20"></label>
+      <label for="fH">Ύψος (πίξελ)<input type="number" id="fH" min="1" max="10000" value="10"></label>
+      <label for="fD">Βάθος χρώματος
+        <select id="fD">
+          <option value="1">1 bit (2 χρώματα)</option>
+          <option value="2">2 bit (4 χρώματα)</option>
+          <option value="4">4 bit (16 χρώματα)</option>
+          <option value="8" selected>8 bit (256 χρώματα)</option>
+          <option value="16">16 bit (65.536 χρώματα)</option>
+          <option value="24">24 bit (16,7 εκατομμύρια χρώματα)</option>
+        </select>
+      </label>
+    </div>
+    <div class="steps" id="fSteps" aria-live="polite"></div>
+    <p class="tip"><b>Μονάδες:</b> 8 bit = 1 byte. 1.000 byte = 1 kilobyte (KB). 1.000 KB = 1 megabyte (MB). Κάποιοι υπολογιστές μετράνε 1.024 αντί για 1.000, οπότε μπορεί να δεις και τα δύο.</p>
+
+    <h3 style="margin-top:22px">Ερωτήσεις εξάσκησης</h3>
+    <div class="row">
+      <div class="seg" role="group" aria-label="Επίπεδο ερωτήσεων">
+        <button data-l="1" aria-pressed="true">Αρχάριο</button>
+        <button data-l="2" aria-pressed="false">Πιο δύσκολο</button>
+      </div>
+    </div>
+    <p class="muted"><span class="score" id="pqScore">Βαθμός: 0</span> · <span id="pqCount"></span></p>
+    <div class="bar" aria-hidden="true"><i id="pqBar"></i></div>
+    <div id="pqBox">
+      <p class="q" id="pqText"></p>
+      <div class="row">
+        <input type="number" class="ans" id="pqIn" inputmode="numeric" aria-label="Η απάντησή σου" placeholder="Η απάντησή σου">
+        <button class="btn" id="pqCheck">Έλεγχος</button>
+      </div>
+      <div class="fb" id="pqFb" aria-live="polite"></div>
+      <p class="why" id="pqWhy"></p>
+      <button class="btn" id="pqNext" style="display:none">Επόμενο →</button>
+    </div>
+    <div id="pqEnd" style="display:none">
+      <p class="q" id="pqEndText"></p>
+      <button class="btn" id="pqAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Κουίζ: Πίξελ και Εικόνες</h2>
+    <p class="muted">10 ερωτήσεις. <span class="score" id="qScore">Βαθμός: 0</span> · <span id="qCount">Ερώτηση 1 από 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <p class="why" id="qWhy"></p>
+      <button class="btn" id="qNext" style="display:none">Επόμενη ερώτηση →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Θέλεις να μάθεις περισσότερα;</b> Τα πίξελ αποθηκεύονται σε δυαδική μορφή, οπότε δοκίμασε το <a href="https://classroom.ellisknowledgestudio.com/it/binary/el/">Δυαδικό σύστημα: 1 και 0</a>. Για να δεις πώς τα χρώματα των 24 bit γράφονται ως κωδικοί όπως το #F4B942, δοκίμασε το <a href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/el/">Δεκαεξαδικό: Μετράμε σε 16άδες</a>.</p>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function rnd(lo,hi){return lo+Math.floor(Math.random()*(hi-lo+1));}
+  function pick(a){return a[rnd(0,a.length-1)];}
+  function pad(s,n){s=String(s);while(s.length<n)s="0"+s;return s;}
+  function hx(n){return pad(n.toString(16).toUpperCase(),2);}
+  function fmt(n){return n.toLocaleString("el-GR");}
+  function segInit(box,items,cur,cb){
+    box.innerHTML="";
+    items.forEach(function(it){
+      var b=document.createElement("button");b.textContent=it[1];b.setAttribute("data-v",it[0]);
+      b.setAttribute("aria-pressed",String(it[0]===cur));
+      b.addEventListener("click",function(){
+        var bs=box.children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",bs[i]===b?"true":"false");
+        cb(it[0]);
+      });
+      box.appendChild(b);
+    });
+  }
+
+  /* ---------- explorer ---------- */
+  var SRC=256,src=document.createElement("canvas");src.width=SRC;src.height=SRC;
+  (function draw(){
+    var c=src.getContext("2d");
+    var g=c.createLinearGradient(0,0,0,170);g.addColorStop(0,"#2E7FE0");g.addColorStop(1,"#6EC3FF");
+    c.fillStyle=g;c.fillRect(0,0,SRC,SRC);
+    c.fillStyle="#FFD23F";c.beginPath();c.arc(200,52,28,0,Math.PI*2);c.fill();
+    c.fillStyle="#FFFFFF";[[40,46,18],[62,40,22],[86,48,16]].forEach(function(p){c.beginPath();c.arc(p[0],p[1],p[2],0,Math.PI*2);c.fill();});
+    c.fillStyle="#5DBB4F";c.beginPath();c.moveTo(0,190);c.quadraticCurveTo(80,140,170,180);c.quadraticCurveTo(220,200,256,170);c.lineTo(256,256);c.lineTo(0,256);c.fill();
+    c.fillStyle="#1E9A2E";c.fillRect(0,215,256,41);
+    c.fillStyle="#D9483B";c.fillRect(70,150,80,64);
+    c.fillStyle="#7A3E1D";c.beginPath();c.moveTo(60,152);c.lineTo(110,112);c.lineTo(160,152);c.fill();
+    c.fillStyle="#5A2E12";c.fillRect(100,180,20,34);
+    c.fillStyle="#FFF4B0";c.fillRect(78,162,16,14);c.fillRect(128,162,16,14);
+    c.fillStyle="#6B4423";c.fillRect(196,150,12,64);
+    c.fillStyle="#129A28";c.beginPath();c.arc(202,138,26,0,Math.PI*2);c.fill();
+    c.fillStyle="#E85D9A";[[30,232],[48,240],[226,236],[240,228]].forEach(function(p){c.beginPath();c.arc(p[0],p[1],4,0,Math.PI*2);c.fill();});
+  })();
+  var srcData=src.getContext("2d").getImageData(0,0,SRC,SRC).data;
+  var EGA=["000000","0000AA","00AA00","00AAAA","AA0000","AA00AA","AA5500","AAAAAA","555555","5555FF","55FF55","55FFFF","FF5555","FF55FF","FFFF55","FFFFFF"];
+  var PALS={1:["000000","FFFFFF"],2:["000000","555555","AAAAAA","FFFFFF"],4:EGA};
+  function toRGB(h){return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)];}
+  var PALRGB={};for(var pk in PALS)PALRGB[pk]=PALS[pk].map(toRGB);
+  function quant(r,g,b,d){
+    if(d===24)return {rgb:[r,g,b],code:pad((r*65536+g*256+b).toString(2),24),idx:-1};
+    if(d===8){var r3=Math.round(r/255*7),g3=Math.round(g/255*7),b2=Math.round(b/255*3);
+      return {rgb:[Math.round(r3*255/7),Math.round(g3*255/7),Math.round(b2*255/3)],code:pad(r3.toString(2),3)+pad(g3.toString(2),3)+pad(b2.toString(2),2),idx:r3*32+g3*4+b2};}
+    var pal=PALRGB[d],best=0,bd=1e9;
+    for(var i=0;i<pal.length;i++){var dr=r-pal[i][0],dg=g-pal[i][1],db=b-pal[i][2],dd=dr*dr+dg*dg+db*db;if(dd<bd){bd=dd;best=i;}}
+    return {rgb:pal[best],code:pad(best.toString(2),d),idx:best};
+  }
+  var eN=16,eD=24,eCells=[];
+  function renderE(){
+    var blk=SRC/eN;eCells=[];
+    for(var y=0;y<eN;y++)for(var x=0;x<eN;x++){
+      var r=0,g=0,b=0,n=0;
+      for(var yy=y*blk;yy<(y+1)*blk;yy++)for(var xx=x*blk;xx<(x+1)*blk;xx++){var o=(yy*SRC+xx)*4;r+=srcData[o];g+=srcData[o+1];b+=srcData[o+2];n++;}
+      eCells.push(quant(Math.round(r/n),Math.round(g/n),Math.round(b/n),eD));
+    }
+    var cv=$("eCv"),c=cv.getContext("2d"),s=512/eN;
+    for(var i=0;i<eCells.length;i++){var q=eCells[i].rgb;c.fillStyle="rgb("+q[0]+","+q[1]+","+q[2]+")";c.fillRect((i%eN)*s,Math.floor(i/eN)*s,Math.ceil(s),Math.ceil(s));}
+    if($("eGrid").checked&&eN<=64){
+      c.strokeStyle="rgba(15,28,63,.45)";c.lineWidth=eN<=16?2:1;c.beginPath();
+      for(var k=1;k<eN;k++){c.moveTo(k*s,0);c.lineTo(k*s,512);c.moveTo(0,k*s);c.lineTo(512,k*s);}
+      c.stroke();
+    }
+    var pix=eN*eN,bits=pix*eD,cols=Math.pow(2,eD);
+    $("sPix").textContent=fmt(pix);
+    $("sCol").textContent=eD===24?"16,7 εκατ.":fmt(cols);
+    $("sBits").textContent=fmt(bits);
+    $("sBytes").textContent=fmt(bits/8);
+    $("eWork").textContent=eN+" × "+eN+" πίξελ × "+eD+" bit = "+fmt(bits)+" bit ÷ 8 = "+fmt(bits/8)+" byte";
+    var pr=$("ePal");pr.innerHTML="";
+    if(PALS[eD])PALS[eD].forEach(function(h){var i=document.createElement("i");i.style.background="#"+h;pr.appendChild(i);});
+    else{var t=document.createElement("span");t.className="muted";t.style.fontSize="14px";t.textContent=eD===8?"256 χρώματα: 3 bit κόκκινο, 3 bit πράσινο, 2 bit μπλε":"Κάθε απόχρωση κόκκινου, πράσινου και μπλε: 8 bit το καθένα";pr.appendChild(t);}
+    $("ePix").innerHTML='<span class="muted">Πάτησε ένα πίξελ στην εικόνα.</span>';
+  }
+  segInit($("eRes"),[[4,"4×4"],[8,"8×8"],[16,"16×16"],[32,"32×32"],[64,"64×64"],[128,"128×128"]],eN,function(v){eN=v;renderE();});
+  segInit($("eDep"),[[1,"1 bit"],[2,"2 bit"],[4,"4 bit"],[8,"8 bit"],[24,"24 bit"]],eD,function(v){eD=v;renderE();});
+  $("eGrid").addEventListener("change",renderE);
+  function tapE(cx,cy){
+    var cv=$("eCv"),r=cv.getBoundingClientRect();
+    var x=Math.floor((cx-r.left)/r.width*eN),y=Math.floor((cy-r.top)/r.height*eN);
+    if(x<0||y<0||x>=eN||y>=eN)return;
+    var q=eCells[y*eN+x],h="#"+hx(q.rgb[0])+hx(q.rgb[1])+hx(q.rgb[2]);
+    var code=q.code.replace(/(\d{8})(?=\d)/g,"$1 ");
+    var extra=eD===24?" (κωδικός χρώματος "+h+")":eD===8?" (χρώμα αριθμός "+q.idx+" από 256)":" (χρώμα αριθμός "+q.idx+" στην παλέτα)";
+    $("ePix").innerHTML='<span class="chip" style="background:'+h+'"></span><span>Το πίξελ στη στήλη '+(x+1)+', σειρά '+(y+1)+' αποθηκεύεται ως <b class="mono">'+code+'</b>'+extra+'. Δηλαδή '+eD+' bit.</span>';
+  }
+  $("eCv").addEventListener("click",function(e){tapE(e.clientX,e.clientY);});
+  renderE();
+
+  /* ---------- painter ---------- */
+  var PCOL={1:[["0","FFFFFF","λευκό"],["1","000000","μαύρο"]],2:[["00","FFFFFF","λευκό"],["01","F4B942","χρυσό"],["10","3B8DE0","μπλε"],["11","000000","μαύρο"]]};
+  var pD=1,pCur=1,pCells=[],painting=false,paintVal=0;
+  function buildGrid(box,onPaint){
+    box.innerHTML="";var cells=[];
+    for(var i=0;i<64;i++){
+      var b=document.createElement("button");b.className="cell";b.setAttribute("data-i",i);
+      b.setAttribute("aria-label","Σειρά "+(Math.floor(i/8)+1)+", στήλη "+(i%8+1));
+      box.appendChild(b);cells.push(b);
+    }
+    function idxAt(e){var t=document.elementFromPoint(e.clientX,e.clientY);return t&&t.parentNode===box&&t.hasAttribute("data-i")?+t.getAttribute("data-i"):-1;}
+    box.addEventListener("pointerdown",function(e){var i=idxAt(e);if(i<0)return;e.preventDefault();painting=box;onPaint(i,true);});
+    box.addEventListener("pointermove",function(e){if(painting!==box)return;var i=idxAt(e);if(i>=0)onPaint(i,false);});
+    box.addEventListener("keydown",function(e){
+      if(!e.target.hasAttribute("data-i"))return;var i=+e.target.getAttribute("data-i"),n=-1;
+      if(e.key===" "||e.key==="Enter"){e.preventDefault();onPaint(i,true);return;}
+      if(e.key==="ArrowRight"&&i%8<7)n=i+1;if(e.key==="ArrowLeft"&&i%8>0)n=i-1;if(e.key==="ArrowDown"&&i<56)n=i+8;if(e.key==="ArrowUp"&&i>7)n=i-8;
+      if(n>=0){e.preventDefault();cells[n].focus();}
+    });
+    return cells;
+  }
+  window.addEventListener("pointerup",function(){painting=false;});
+  window.addEventListener("pointercancel",function(){painting=false;});
+  var pBtns=buildGrid($("pGrid"),function(i,first){
+    if(first)paintVal=(pCells[i]===pCur&&pCur!==0)?0:pCur;
+    pCells[i]=paintVal;drawP();
+  });
+  function drawP(){
+    var pal=PCOL[pD],codes=$("pCodes");codes.innerHTML="";
+    for(var i=0;i<64;i++){pBtns[i].style.background="#"+pal[pCells[i]][1];pBtns[i].setAttribute("aria-label","Σειρά "+(Math.floor(i/8)+1)+", στήλη "+(i%8+1)+": "+pal[pCells[i]][2]);}
+    for(var y=0;y<8;y++){
+      var s="";for(var x=0;x<8;x++)s+=pal[pCells[y*8+x]][0]+(pD===2&&x<7?" ":"");
+      var d=document.createElement("div");d.innerHTML='<span class="n">Σειρά '+(y+1)+'</span>'+s;codes.appendChild(d);
+    }
+    $("pSize").textContent="8 × 8 πίξελ × "+pD+" bit = "+(64*pD)+" bit = "+(8*pD)+" byte";
+  }
+  function drawPal(){
+    var box=$("pPal");box.innerHTML="";
+    PCOL[pD].forEach(function(c,idx){
+      var b=document.createElement("button");b.setAttribute("aria-pressed",String(idx===pCur));
+      b.setAttribute("aria-label","Ζωγράφισε με "+c[2]+", αποθηκεύεται ως "+c[0]);
+      b.innerHTML='<i style="background:#'+c[1]+'"></i>'+c[0];
+      b.addEventListener("click",function(){pCur=idx;drawPal();});
+      box.appendChild(b);
+    });
+  }
+  var SMILE=["00111100","01000010","10100101","10000001","10100101","10011001","01000010","00111100"];
+  function setDepth(d){
+    pD=d;pCur=1;
+    pCells=[];for(var y=0;y<8;y++)for(var x=0;x<8;x++)pCells.push(SMILE[y][x]==="1"?(d===1?1:3):(d===2&&y>0&&y<7&&x>0&&x<7?1:0));
+    drawPal();drawP();
+  }
+  (function(){var bs=document.querySelectorAll("#pDep button");for(var i=0;i<bs.length;i++)bs[i].addEventListener("click",function(){
+    for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",bs[j]===this?"true":"false");setDepth(+this.getAttribute("data-d"));});})();
+  $("pClear").addEventListener("click",function(){for(var i=0;i<64;i++)pCells[i]=0;drawP();});
+  $("pInvert").addEventListener("click",function(){var m=PCOL[pD].length-1;for(var i=0;i<64;i++)pCells[i]=m-pCells[i];drawP();});
+  setDepth(1);
+
+  /* ---------- decode ---------- */
+  var PICS=[
+    ["μια καρδιά",["00000000","01100110","11111111","11111111","01111110","00111100","00011000","00000000"]],
+    ["ένα σπίτι",["00011000","00111100","01111110","11111111","01000010","01011010","01011010","01111110"]],
+    ["ένα βέλος",["00011000","00111100","01111110","11011011","00011000","00011000","00011000","00011000"]],
+    ["το γράμμα A",["00011000","00100100","01000010","01000010","01111110","01000010","01000010","01000010"]],
+    ["ένα πρόσωπο γάτας",["10000001","11000011","11111111","10011001","11111111","11100111","01111110","00111100"]],
+    ["ένα χαμογελαστό πρόσωπο",SMILE],
+    ["ένα δέντρο",["00011000","00111100","01111110","11111111","01111110","00011000","00011000","00111100"]],
+    ["ένας πύραυλος",["00011000","00111100","00111100","00111100","01111110","11111111","00100100","01000010"]]
+  ];
+  var dOrder=[],di=0,dCells=[],dSolved=0,dDone=false;
+  var dBtns=buildGrid($("dGrid"),function(i,first){
+    if(dDone)return;
+    if(first)paintVal=dCells[i]?0:1;
+    dCells[i]=paintVal;drawD();
+  });
+  function drawD(){
+    var pic=PICS[dOrder[di]][1],rows=$("dCode").children;
+    for(var i=0;i<64;i++){dBtns[i].style.background=dCells[i]?"#000000":"#FFFFFF";dBtns[i].setAttribute("aria-label","Σειρά "+(Math.floor(i/8)+1)+", στήλη "+(i%8+1)+": "+(dCells[i]?"μαύρο":"λευκό"));}
+    for(var y=0;y<8;y++){var ok=true;for(var x=0;x<8;x++)if(String(dCells[y*8+x])!==pic[y][x])ok=false;rows[y].className=ok?"done":"";}
+  }
+  function showD(){
+    var pic=PICS[dOrder[di]][1];dDone=false;
+    $("dCount").textContent="Εικόνα "+(di+1)+" από "+PICS.length;
+    var box=$("dCode");box.innerHTML="";
+    pic.forEach(function(r){var d=document.createElement("div");d.textContent=r;box.appendChild(d);});
+    dCells=[];for(var i=0;i<64;i++)dCells.push(0);
+    $("dFb").textContent="";$("dFb").className="fb";
+    $("dNext").style.display="none";$("dCheck").disabled=false;$("dShow").disabled=false;$("dClear").disabled=false;
+    drawD();
+  }
+  function finishD(msg,cls){dDone=true;$("dFb").textContent=msg;$("dFb").className="fb "+cls;$("dCheck").disabled=true;$("dShow").disabled=true;$("dClear").disabled=true;$("dNext").style.display="";$("dNext").textContent=di<PICS.length-1?"Επόμενη εικόνα →":"Από την αρχή →";}
+  $("dCheck").addEventListener("click",function(){
+    var pic=PICS[dOrder[di]][1],wrong=0,badRows=0;
+    for(var y=0;y<8;y++){var rb=false;for(var x=0;x<8;x++)if(String(dCells[y*8+x])!==pic[y][x]){wrong++;rb=true;}if(rb)badRows++;}
+    if(!wrong){dSolved++;$("dScore").textContent="Λυμένα: "+dSolved;finishD("✓ Σωστό! Είναι "+PICS[dOrder[di]][0]+".","ok");$("dNext").focus({preventScroll:true});}
+    else{var rows=$("dCode").children;for(var y2=0;y2<8;y2++)if(rows[y2].className!=="done")rows[y2].className="bad";
+      $("dFb").textContent="✗ "+wrong+" πίξελ "+(wrong>1?"είναι λάθος":"είναι λάθος")+", σε "+badRows+(badRows>1?" σειρές":" σειρά")+". Οι κόκκινες σειρές χρειάζονται διόρθωση.";$("dFb").className="fb no";}
+  });
+  $("dClear").addEventListener("click",function(){if(dDone)return;for(var i=0;i<64;i++)dCells[i]=0;drawD();});
+  $("dShow").addEventListener("click",function(){
+    var pic=PICS[dOrder[di]][1];for(var i=0;i<64;i++)dCells[i]=+pic[Math.floor(i/8)][i%8];drawD();
+    finishD("Ορίστε: "+PICS[dOrder[di]][0]+". Δοκίμασε την επόμενη!","");
+  });
+  $("dNext").addEventListener("click",function(){
+    di++;if(di>=PICS.length){dOrder=shuffle(dOrder);di=0;dSolved=0;$("dScore").textContent="Λυμένα: 0";}
+    showD();
+  });
+  function startD(){dOrder=shuffle(PICS.map(function(p,i){return i;}));di=0;dSolved=0;$("dScore").textContent="Λυμένα: 0";showD();}
+
+  /* ---------- file size ---------- */
+  function calcF(){
+    var w=Math.max(1,Math.min(10000,parseInt($("fW").value,10)||1)),h=Math.max(1,Math.min(10000,parseInt($("fH").value,10)||1)),d=+$("fD").value;
+    var pix=w*h,bits=pix*d,bytes=bits/8,kb=bytes/1000;
+    var by=bytes%1===0?fmt(bytes):bytes.toLocaleString("el-GR",{maximumFractionDigits:3});
+    var html='<div><b>Βήμα 1: πίξελ</b> '+fmt(w)+' × '+fmt(h)+' = '+fmt(pix)+' πίξελ</div>'+
+      '<div><b>Βήμα 2: bit</b> '+fmt(pix)+' πίξελ × '+d+' bit = '+fmt(bits)+' bit</div>'+
+      '<div><b>Βήμα 3: byte</b> '+fmt(bits)+' ÷ 8 = '+by+' byte</div>';
+    if(bytes>=1000)html+='<div><b>Βήμα 4: kilobyte</b> '+by+' ÷ 1.000 = '+kb.toLocaleString("el-GR",{maximumFractionDigits:2})+' KB'+(kb>=1000?' = '+(kb/1000).toLocaleString("el-GR",{maximumFractionDigits:2})+' MB':'')+'</div>';
+    $("fSteps").innerHTML=html;
+  }
+  ["fW","fH","fD"].forEach(function(id){$(id).addEventListener("input",calcF);$(id).addEventListener("change",calcF);});
+  calcF();
+
+  var PQN=8,pqLevel=1,pqList=[],pqi=0,pqRight=0,pqDone=false;
+  function makePQ(type,lv){
+    var w,h,d,bits;
+    if(type==="pix"){w=lv===1?pick([4,5,6,8,10]):pick([12,16,20,25,30]);h=lv===1?pick([3,4,5,6,8]):pick([10,12,15,20]);
+      return {q:"Μια εικόνα έχει πλάτος "+w+" πίξελ και ύψος "+h+" πίξελ. Πόσα πίξελ έχει;",a:w*h,why:w+" × "+h+" = "+(w*h)+" πίξελ."};}
+    if(type==="col"){d=lv===1?pick([1,2,3,4]):pick([5,6,7,8]);
+      return {q:"Μια εικόνα έχει βάθος χρώματος "+d+" bit. Πόσα διαφορετικά χρώματα μπορεί να έχει κάθε πίξελ;",a:Math.pow(2,d),why:"2 στη δύναμη "+d+" = "+Array(d+1).join("2 × ").replace(/ × $/,"")+" = "+Math.pow(2,d)+" χρώματα."};}
+    if(type==="need"){var opts=lv===1?[[2,1],[3,2],[4,2],[5,3],[8,3],[10,4],[16,4]]:[[20,5],[32,5],[50,6],[64,6],[100,7],[128,7],[200,8],[256,8]],o=pick(opts);
+      return {q:"Ένας καλλιτέχνης χρειάζεται "+o[0]+" διαφορετικά χρώματα. Ποιο είναι το μικρότερο βάθος χρώματος (σε bit) που μπορεί να χρησιμοποιήσει;",a:o[1],why:o[1]+(o[1]>1?" bit δίνουν ":" bit δίνει ")+Math.pow(2,o[1])+" χρώματα"+(o[1]>1?", ενώ "+(o[1]-1)+(o[1]>2?" bit δίνουν μόνο ":" bit δίνει μόνο ")+Math.pow(2,o[1]-1):"")+"."};}
+    if(type==="bits"){w=lv===1?pick([4,5,6,8,10]):pick([10,12,16,20]);h=lv===1?pick([3,4,5,8]):pick([8,10,12,15]);d=lv===1?pick([1,2]):pick([2,4,8]);bits=w*h*d;
+      return {q:"Μια εικόνα είναι "+w+" × "+h+" πίξελ με βάθος χρώματος "+d+" bit. Ποιο είναι το μέγεθος του αρχείου σε bit;",a:bits,why:w+" × "+h+" = "+(w*h)+" πίξελ, × "+d+" = "+bits+" bit."};}
+    do{w=lv===1?pick([4,8,10,16]):pick([16,20,24,32,40,50]);h=lv===1?pick([2,4,8]):pick([10,16,20,25]);d=lv===1?pick([1,2,4]):pick([1,2,4,8,24]);bits=w*h*d;}while(bits%8);
+    return {q:"Μια εικόνα είναι "+w+" × "+h+" πίξελ με βάθος χρώματος "+d+" bit. Ποιο είναι το μέγεθος του αρχείου σε byte;",a:bits/8,why:w+" × "+h+" × "+d+" = "+bits+" bit, ÷ 8 = "+(bits/8)+" byte."};
+  }
+  function showPQ(){
+    var it=pqList[pqi];pqDone=false;
+    $("pqCount").textContent="Ερώτηση "+(pqi+1)+" από "+PQN;$("pqBar").style.width=(pqi/PQN*100)+"%";
+    $("pqText").textContent=it.q;$("pqIn").value="";$("pqIn").disabled=false;$("pqCheck").disabled=false;
+    $("pqFb").textContent="";$("pqFb").className="fb";$("pqWhy").textContent="";$("pqNext").style.display="none";
+  }
+  function checkPQ(){
+    if(pqDone)return;var it=pqList[pqi],g=$("pqIn").value.replace(/[\s,]/g,"");
+    if(g===""){$("pqFb").textContent="Γράψε πρώτα μια απάντηση.";$("pqFb").className="fb";return;}
+    pqDone=true;$("pqIn").disabled=true;$("pqCheck").disabled=true;
+    if(Number(g)===it.a){pqRight++;$("pqFb").textContent="✓ Σωστό!";$("pqFb").className="fb ok";}
+    else{$("pqFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι "+fmt(it.a)+".";$("pqFb").className="fb no";}
+    $("pqWhy").textContent=it.why;$("pqScore").textContent="Βαθμός: "+pqRight;
+    $("pqNext").style.display="";$("pqNext").focus({preventScroll:true});
+  }
+  $("pqCheck").addEventListener("click",checkPQ);
+  $("pqIn").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkPQ();}});
+  $("pqNext").addEventListener("click",function(){
+    pqi++;
+    if(pqi>=PQN){$("pqBar").style.width="100%";$("pqBox").style.display="none";$("pqEnd").style.display="";
+      $("pqEndText").textContent=(pqRight===PQN?"Πρωταθλητής στα μεγέθη αρχείων! ":pqRight>=6?"Εξαιρετικοί υπολογισμοί! ":pqRight>=3?"Μπράβο! ":"Συνέχισε την εξάσκηση! ")+"Βρήκες σωστά "+pqRight+" από "+PQN+".";
+      $("pqAgain").focus({preventScroll:true});}
+    else showPQ();
+  });
+  function startPQ(){
+    var types=pqLevel===1?["pix","col","bits","bytes","pix","col","bits","need"]:["pix","col","need","bits","bytes","bytes","need","bits"];
+    pqList=shuffle(types).map(function(t){return makePQ(t,pqLevel);});
+    pqi=0;pqRight=0;$("pqScore").textContent="Βαθμός: 0";$("pqEnd").style.display="none";$("pqBox").style.display="";showPQ();
+  }
+  $("pqAgain").addEventListener("click",startPQ);
+  (function(){var bs=document.querySelectorAll("#size .seg button");for(var i=0;i<bs.length;i++)bs[i].addEventListener("click",function(){
+    for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",bs[j]===this?"true":"false");pqLevel=+this.getAttribute("data-l");startPQ();});})();
+
+  /* ---------- quiz ---------- */
+  var BANK=[
+    {q:"Τι είναι ένα πίξελ;",a:"Ένα μικροσκοπικό τετράγωνο χρώματος σε μια εικόνα",w:["Ένα είδος κάμερας","Ένα είδος ιού υπολογιστή","Η κορνίζα γύρω από μια φωτογραφία"],why:"Η λέξη pixel προέρχεται από το picture element (εικονοστοιχείο): η μικρότερη κουκκίδα χρώματος σε μια ψηφιακή εικόνα."},
+    {q:"Τι σημαίνει ανάλυση;",a:"Ο αριθμός των πίξελ σε μια εικόνα",w:["Πόσο φωτεινή είναι η οθόνη","Ο αριθμός των χρωμάτων που χρησιμοποιούνται","Πόσο γρήγορα φορτώνει η εικόνα"],why:"Η ανάλυση είναι πλάτος × ύψος σε πίξελ."},
+    {q:"Τι σημαίνει βάθος χρώματος;",a:"Ο αριθμός των bit που χρησιμοποιούνται για κάθε πίξελ",w:["Πόσο σκούρα είναι τα χρώματα","Ο αριθμός των πίξελ σε μια σειρά","Πόσο παχιά είναι η μπογιά"],why:"Βάθος χρώματος είναι ο αριθμός των bit που χρησιμοποιούνται για να αποθηκευτεί το χρώμα κάθε πίξελ."},
+    {q:"Με βάθος χρώματος 1 bit, πόσα χρώματα μπορεί να έχει κάθε πίξελ;",a:"2",w:["1","8","16"],why:"Ένα bit είναι 0 ή 1, άρα 2 χρώματα, για παράδειγμα μαύρο και λευκό."},
+    {q:"Με βάθος χρώματος 2 bit, πόσα χρώματα μπορεί να έχει κάθε πίξελ;",a:"4",w:["2","3","8"],why:"Τα 00, 01, 10 και 11 κάνουν 4 χρώματα."},
+    {q:"Με βάθος χρώματος 4 bit, πόσα χρώματα μπορεί να έχει κάθε πίξελ;",a:"16",w:["4","8","32"],why:"2 × 2 × 2 × 2 = 16 χρώματα."},
+    {q:"Με βάθος χρώματος 8 bit, πόσα χρώματα μπορεί να έχει κάθε πίξελ;",a:"256",w:["8","64","1.000"],why:"2 στη δύναμη 8 κάνει 256."},
+    {q:"Πόσα πίξελ έχει μια εικόνα με πλάτος 10 πίξελ και ύψος 6 πίξελ;",a:"60",w:["16","106","600"],why:"10 × 6 = 60 πίξελ."},
+    {q:"Μια εικόνα είναι 8 × 8 πίξελ με χρώμα 1 bit. Πόσα bit είναι;",a:"64",w:["16","8","128"],why:"8 × 8 = 64 πίξελ, × 1 bit = 64 bit."},
+    {q:"Μια εικόνα είναι 4 × 4 πίξελ με χρώμα 2 bit. Πόσα bit είναι;",a:"32",w:["16","8","64"],why:"4 × 4 = 16 πίξελ, × 2 bit = 32 bit."},
+    {q:"Πόσα bit έχει ένα byte;",a:"8",w:["2","10","16"],why:"Ένα byte είναι μια ομάδα από 8 bit."},
+    {q:"Τι γίνεται με το μέγεθος του αρχείου αν διπλασιάσεις το βάθος χρώματος;",a:"Διπλασιάζεται",w:["Μειώνεται στο μισό","Μένει ίδιο","Αυξάνεται κατά 1 bit"],why:"Κάθε πίξελ χρειάζεται τώρα διπλάσια bit, οπότε όλο το αρχείο διπλασιάζεται."},
+    {q:"Γιατί μια μεγαλύτερη ανάλυση κάνει την εικόνα να φαίνεται πιο καθαρή;",a:"Χρησιμοποιεί περισσότερα και μικρότερα πίξελ",w:["Χρησιμοποιεί λιγότερα και μεγαλύτερα πίξελ","Κάνει τα χρώματα πιο φωτεινά","Αφαιρεί τα πίξελ"],why:"Περισσότερα πίξελ μπορούν να δείξουν πιο λεπτές λεπτομέρειες, οπότε οι άκρες φαίνονται πιο ομαλές."},
+    {q:"Ποιο είναι το βασικό μειονέκτημα της μεγάλης ανάλυσης και του μεγάλου βάθους χρώματος;",a:"Το αρχείο είναι μεγαλύτερο",w:["Η εικόνα φαίνεται χειρότερη","Τα χρώματα ξεθωριάζουν","Η εικόνα δεν μπορεί να εκτυπωθεί"],why:"Περισσότερα πίξελ και περισσότερα bit ανά πίξελ σημαίνουν περισσότερα δεδομένα για αποθήκευση και αποστολή."},
+    {q:"Σε μια εικόνα 1 bit όπου 1 = μαύρο και 0 = λευκό, πώς φαίνεται η σειρά 11110000;",a:"4 μαύρα πίξελ και μετά 4 λευκά",w:["4 λευκά πίξελ και μετά 4 μαύρα","8 μαύρα πίξελ","Μαύρες και λευκές ρίγες"],why:"Κάθε 1 είναι ένα μαύρο πίξελ και κάθε 0 ένα λευκό, διαβάζοντας από αριστερά προς τα δεξιά."},
+    {q:"Ένα βάθος χρώματος 24 bit χρησιμοποιεί πόσα bit για το κόκκινο, το πράσινο και το μπλε το καθένα;",a:"8",w:["3","24","12"],why:"24 ÷ 3 = 8 bit το καθένα, δηλαδή 256 επίπεδα κόκκινου, πράσινου και μπλε."}
+  ];
+  var QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){
+    var it=qList[qi];
+    $("qCount").textContent="Ερώτηση "+(qi+1)+" από "+QN;$("qBar").style.width=(qi/QN*100)+"%";
+    $("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";
+    shuffle([it.a].concat(it.w)).forEach(function(o){
+      var b=document.createElement("button");b.className="choice";b.textContent=o;
+      b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);
+    });
+  }
+  function answerQ(o,btn){
+    var it=qList[qi],bs=$("qChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent="✓ Σωστό!";$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι: "+it.a;$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent="Βαθμός: "+qRight;
+    $("qNext").style.display="";$("qNext").focus({preventScroll:true});
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      $("qEndText").textContent=(qRight===QN?"Τέλεια μέχρι το τελευταίο πίξελ! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε την εξερεύνηση! ")+"Πέτυχες "+qRight+" από "+QN+". "+stars;
+      $("qAgain").focus({preventScroll:true});}
+    else showQ();
+  });
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent="Βαθμός: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+    var p=t.getAttribute("data-p");
+    if(p==="paint"&&!started.d){started.d=1;startD();}
+    if(p==="size"&&!started.s){started.s=1;startPQ();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}
+    });
+  }
+  window.__pix={BANK:BANK,PICS:PICS,dcur:function(){return PICS[dOrder[di]];},pqcur:function(){return pqList[pqi];},cells:function(){return eCells;},pcells:function(){return pCells;}};
+})();
+</script>
+</body>
+</html>
