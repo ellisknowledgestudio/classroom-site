@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Διαδραστικά Διαγράμματα Ματιού, Αυτιού, Μύτης, Γλώσσας και Δέρματος για το Γυμνάσιο | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικά διαγράμματα των αισθητηρίων οργάνων για ηλικίες 11-14. Πάτησε τα μέρη του ματιού, του αυτιού, της μύτης, της γλώσσας και του δέρματος, ακολούθησε το φως και τον ήχο ως τον εγκέφαλο και δες πώς λειτουργούν οι κόρες των ματιών και η ακοή.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/senses/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/senses/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/senses/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/senses/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Noto Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Manrope",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Noto Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Manrope",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Noto Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Noto Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Manrope",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Manrope",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Noto Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Manrope",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Manrope",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* skeleton */
+.figbox{height:auto;padding:6px}
+#fig{height:auto;max-height:min(88vh,860px);margin:0 auto}
+#fig .s-skin{fill:#1B2B5C;stroke:#1B2B5C}
+#fig .s-skino{fill:#1B2B5C;stroke:#6F84C4}
+.kind.protect{background:#9CC3F5}.kind.support{background:#F6E7BD}.kind.arm{background:#8FD3A0}.kind.leg{background:#F0A696}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round;stroke-linejoin:round}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.55)}
+.hit:not(.hitv):focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.16)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.25)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .s-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .s-dot{fill:#F4B942}
+#fig .s-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins .pins,#fig.journey .pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:4.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 2px}
+.asay{text-align:center;margin:8px 0 0;min-height:3em}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+
+/* senses */
+.figbox{background:#F5F7FF;padding:6px}
+#fig{max-height:min(78vh,620px)}
+.org{display:none}.org.on{display:block}
+.viewbar .seg{padding:7px 12px}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.42);stroke:#C77700;stroke-width:3.5}
+.hitv.on{stroke:rgba(244,185,66,.62)}
+.hit:not(.hitv):focus-visible{stroke:#0F1C3F;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(15,28,63,.4)}
+@media (hover:hover){.hit:hover{fill:rgba(15,28,63,.12)}.hitv:hover{fill:none;stroke:rgba(15,28,63,.16)}.hit.on:hover{fill:rgba(244,185,66,.42)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.7)}}
+#cell{fill:#F4B942;stroke:#0F1C3F;stroke-width:3}
+#fig.journey .hit:not(.hitv).on{fill:rgba(244,185,66,.24)}
+.axis div span:first-child{transform:none}.axis div span:last-child{transform:translateX(-100%)}
+#cell.sig{fill:#4CC38A}
+.kind.gather{background:#9CC3F5}.kind.detect{background:#F6C86B}.kind.signal{background:#F2E08A}.kind.support{background:#F0A696}.kind.brain{background:#F3B8C8}
+.light svg{max-width:420px}
+.bars{display:grid;gap:9px;margin:12px 0;background:var(--navy);border-radius:16px;padding:14px 16px}
+.bar{display:grid;grid-template-columns:92px minmax(0,1fr);gap:4px 10px;align-items:center;font-size:15px}
+.bar b{font-weight:700}
+.bar .trk{position:relative;height:16px;background:var(--navy3);border-radius:999px}
+.bar .fill{position:absolute;top:0;bottom:0;border-radius:999px;background:var(--gold)}
+.bar.h .fill{background:var(--good)}
+.bar small{grid-column:2;color:var(--muted);font-size:13px}
+.axis{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;font-size:12px;color:var(--muted)}
+.axis div{position:relative;height:16px}
+.axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.db .fill.hot{background:#F08A7A}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Φυσικές Επιστήμες</a> › Εξερευνητής Αισθήσεων</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/senses/" lang="en" hreflang="en">English</a></div>
+  <h1>Εξερευνητής Αισθήσεων</h1>
+  <p class="lead">Τα αισθητήρια όργανα ενημερώνουν τον εγκέφαλό σου για ό,τι συμβαίνει γύρω σου. Διάλεξε ένα αισθητήριο όργανο και πάτησε ένα μέρος του για να δεις τι κάνει. Μετά ακολούθησε το φως, τον ήχο, τις οσμές, τις γεύσεις και το άγγιγμα ως τον εγκέφαλο. Ηλικίες 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες του Εξερευνητή Αισθήσεων">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε τα αισθητήρια όργανα</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Από τον κόσμο στον εγκέφαλο</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Οι αισθήσεις στην πράξη</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Μέρη αυτού του αισθητηρίου οργάνου"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" id="viewbar"><span id="orgbar" role="group" aria-label="Διάλεξε αισθητήριο όργανο" style="display:contents"><button class="seg" data-g="eye" aria-pressed="true">Μάτι</button><button class="seg" data-g="ear" aria-pressed="false">Αυτί</button><button class="seg" data-g="nose" aria-pressed="false">Μύτη και γλώσσα</button><button class="seg" data-g="skin" aria-pressed="false">Δέρμα</button></span>
+            <button class="seg r" id="pinBtn" aria-pressed="true">Αριθμοί</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Διάγραμμα του ματιού σε τομή, με έξι αριθμημένα μέρη"><g class="org on" id="g-eye"><path d="M480 262L616 301" fill="none" stroke="#B8860B" stroke-width="40"/><path d="M478 261.4L618 301.6" fill="none" stroke="#F2C94C" stroke-width="33"/><circle cx="330" cy="240" r="170" fill="#FBF7EE" stroke="#6B7390" stroke-width="4"/><circle cx="330" cy="240" r="151" fill="#E4F1FB"/><path d="M240.5 112.2A156 156 0 1 1 240.5 367.8" fill="none" stroke="#E07B39" stroke-width="11" stroke-linecap="round"/><path d="M183 155Q104 240 183 325L198 318L198 162Z" fill="#D5ECFA"/><path d="M183 155Q104 240 183 325" fill="none" stroke="#3F8FC4" stroke-width="7" stroke-linecap="round"/><path d="M232 190L206 160M232 290L206 320" fill="none" stroke="#9AA3BF" stroke-width="2.5"/><circle cx="203" cy="157" r="8" fill="#D98B8B" stroke="#A85C5C" stroke-width="1.5"/><circle cx="203" cy="323" r="8" fill="#D98B8B" stroke="#A85C5C" stroke-width="1.5"/><path d="M190 166L198 214M198 266L190 314" fill="none" stroke="#5A3A18" stroke-width="14" stroke-linecap="round"/><path d="M190 166L198 214M198 266L190 314" fill="none" stroke="#9A6A35" stroke-width="10" stroke-linecap="round"/><ellipse cx="233" cy="240" rx="24" ry="50" fill="#FFF3B8" stroke="#C9A227" stroke-width="3"/><g><path class="hit" data-o="cornea" tabindex="0" role="button" aria-label="Κερατοειδής χιτώνας" d="M183 155Q104 240 183 325Q152 240 183 155Z"/><path data-o="iris" tabindex="0" role="button" aria-label="Ίριδα" class="hit hitv" stroke-width="22" d="M190 166L198 214M198 266L190 314"/><ellipse class="hit" data-o="pupil" tabindex="0" role="button" aria-label="Κόρη" cx="197" cy="240" rx="12" ry="23"/><ellipse class="hit" data-o="lens" tabindex="0" role="button" aria-label="Φακός" cx="233" cy="240" rx="24" ry="50"/><path data-o="retina" tabindex="0" role="button" aria-label="Αμφιβληστροειδής χιτώνας" class="hit hitv" stroke-width="22" d="M240.5 112.2A156 156 0 1 1 240.5 367.8"/><path data-o="optic" tabindex="0" role="button" aria-label="Οπτικό νεύρο" class="hit hitv" stroke-width="40" d="M500 268L616 301"/></g><g id="pins-eye" class="pins"><g class="pin" data-o="cornea"><path d="M40 150L146 222" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="146" cy="222" r="4" fill="#0F1C3F"/><circle cx="40" cy="150" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="156.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">1</text></g><g class="pin" data-o="iris"><path d="M96 52L192 188" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="192" cy="188" r="4" fill="#0F1C3F"/><circle cx="96" cy="52" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="96" y="58.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">2</text></g><g class="pin" data-o="pupil"><path d="M40 330L197 242" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="197" cy="242" r="4" fill="#0F1C3F"/><circle cx="40" cy="330" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="336.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">3</text></g><g class="pin" data-o="lens"><path d="M300 34L238 206" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="238" cy="206" r="4" fill="#0F1C3F"/><circle cx="300" cy="34" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="300" y="40.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">4</text></g><g class="pin" data-o="retina"><path d="M600 96L465 162" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="465" cy="162" r="4" fill="#0F1C3F"/><circle cx="600" cy="96" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="102.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">5</text></g><g class="pin" data-o="optic"><path d="M600 410L566 287" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="566" cy="287" r="4" fill="#0F1C3F"/><circle cx="600" cy="410" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="416.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">6</text></g></g></g><g class="org" id="g-ear"><path d="M168 44H640V456H168Z" fill="#F6D9C9"/><path d="M300 44H640V456H300Z" fill="#F3E6CC"/><path d="M176 112C120 58 34 112 46 226C54 300 92 378 150 392C176 396 186 366 176 330Z" fill="#F1C3A8" stroke="#A8674A" stroke-width="3.5" stroke-linejoin="round"/><path d="M152 142C108 118 74 172 82 232C88 286 112 334 146 350" fill="none" stroke="#A8674A" stroke-width="3" stroke-linecap="round"/><path d="M150 190C122 190 112 226 126 250" fill="none" stroke="#A8674A" stroke-width="3" stroke-linecap="round"/><path d="M132 226C200 216 270 240 334 228L334 280C270 288 200 266 132 280Z" fill="none" stroke="#A8674A" stroke-width="6" stroke-linejoin="round"/><path d="M334 214C350 190 420 186 440 206C452 226 452 270 440 290C420 306 350 304 334 290Z" fill="none" stroke="#A8674A" stroke-width="6" stroke-linejoin="round"/><path d="M132 226C200 216 270 240 334 228L334 280C270 288 200 266 132 280Z" fill="#FFF9F2"/><path d="M334 214C350 190 420 186 440 206C452 226 452 270 440 290C420 306 350 304 334 290Z" fill="#FFF9F2"/><path d="M130 224L130 282" stroke="#F1C3A8" stroke-width="9"/><path d="M520 318C560 336 600 340 640 338" fill="none" stroke="#B8860B" stroke-width="26"/><path d="M518 317C560 336 600 340 642 338" fill="none" stroke="#F2C94C" stroke-width="20"/><ellipse cx="452" cy="150" rx="26" ry="40" transform="rotate(-24 452 150)" fill="none" stroke="#6B4FA8" stroke-width="15"/><ellipse cx="506" cy="142" rx="36" ry="30" transform="rotate(14 506 142)" fill="none" stroke="#6B4FA8" stroke-width="15"/><ellipse cx="486" cy="186" rx="46" ry="15" transform="rotate(-6 486 186)" fill="none" stroke="#6B4FA8" stroke-width="15"/><ellipse cx="474" cy="232" rx="30" ry="24" fill="#C9B3EE" stroke="#6B4FA8" stroke-width="3"/><ellipse cx="452" cy="150" rx="26" ry="40" transform="rotate(-24 452 150)" fill="none" stroke="#C9B3EE" stroke-width="9"/><ellipse cx="506" cy="142" rx="36" ry="30" transform="rotate(14 506 142)" fill="none" stroke="#C9B3EE" stroke-width="9"/><ellipse cx="486" cy="186" rx="46" ry="15" transform="rotate(-6 486 186)" fill="none" stroke="#C9B3EE" stroke-width="9"/><path d="M449.3 281.5L453.9 272.9L459.9 265.4L467.2 259.2L475.4 254.4L484.2 251.2L493.3 249.7L502.5 249.9L511.3 251.7L519.7 255L527.2 259.7L533.6 265.7L538.8 272.6L542.6 280.3L544.9 288.5L545.7 296.8L545 305L542.8 312.9L539.3 320.2L534.6 326.6L528.8 332L522.3 336.3L515.2 339.2L507.8 340.7L500.3 340.9L493 339.8L486.1 337.3L479.9 333.8L474.5 329.2L470.1 323.7L466.7 317.7L464.6 311.2L463.7 304.6L464 298L465.5 291.7L468.1 285.8L471.6 280.6L476 276.1L481 272.6L486.5 270.2L492.2 268.7L498 268.4L503.7 269.1L509 270.8L513.9 273.4L518.2 276.8L521.7 280.8L524.3 285.3L526.1 290.1L526.9 295.1L526.8 300L525.8 304.7L524 309.1L521.5 313L518.4 316.3L514.8 319L510.9 320.8L506.8 321.9L502.7 322.3L498.6 321.8L494.8 320.7L491.4 318.9L488.4 316.6L486 313.9L484.2 310.8L483 307.6L482.4 304.2L482.5 301L483.2 297.9L484.3 295L486 292.5L488 290.5L490.3 288.9L492.7 287.8L495.2 287.1L497.7 287L500.1 287.4L502.3 288.1L504.2 289.2L505.8 290.6L507 292.2L507.8 294L508.3 295.7L508.4 297.5L508.2 299.1L507.7 300.5L507 301.8L506 302.8L505 303.5L503.9 304L502.8 304.1" fill="none" stroke="#6B4FA8" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/><path d="M449.3 281.5L453.9 272.9L459.9 265.4L467.2 259.2L475.4 254.4L484.2 251.2L493.3 249.7L502.5 249.9L511.3 251.7L519.7 255L527.2 259.7L533.6 265.7L538.8 272.6L542.6 280.3L544.9 288.5L545.7 296.8L545 305L542.8 312.9L539.3 320.2L534.6 326.6L528.8 332L522.3 336.3L515.2 339.2L507.8 340.7L500.3 340.9L493 339.8L486.1 337.3L479.9 333.8L474.5 329.2L470.1 323.7L466.7 317.7L464.6 311.2L463.7 304.6L464 298L465.5 291.7L468.1 285.8L471.6 280.6L476 276.1L481 272.6L486.5 270.2L492.2 268.7L498 268.4L503.7 269.1L509 270.8L513.9 273.4L518.2 276.8L521.7 280.8L524.3 285.3L526.1 290.1L526.9 295.1L526.8 300L525.8 304.7L524 309.1L521.5 313L518.4 316.3L514.8 319L510.9 320.8L506.8 321.9L502.7 322.3L498.6 321.8L494.8 320.7L491.4 318.9L488.4 316.6L486 313.9L484.2 310.8L483 307.6L482.4 304.2L482.5 301L483.2 297.9L484.3 295L486 292.5L488 290.5L490.3 288.9L492.7 287.8L495.2 287.1L497.7 287L500.1 287.4L502.3 288.1L504.2 289.2L505.8 290.6L507 292.2L507.8 294L508.3 295.7L508.4 297.5L508.2 299.1L507.7 300.5L507 301.8L506 302.8L505 303.5L503.9 304L502.8 304.1" fill="none" stroke="#C9B3EE" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="470" cy="236" rx="24" ry="18" fill="#C9B3EE"/><path d="M331 226L337 282" stroke="#B5524F" stroke-width="7" stroke-linecap="round"/><path d="M342 254L366 216M362 220L396 238M394 240L412 232L436 240L412 250Z" fill="none" stroke="#7A6540" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/><path d="M342 254L366 216M362 220L396 238M394 240L412 232L436 240L412 250Z" fill="none" stroke="#F7EFD9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><g><path class="hit" data-o="pinna" tabindex="0" role="button" aria-label="Πτερύγιο του αυτιού" d="M176 112C120 58 34 112 46 226C54 300 92 378 150 392C176 396 186 366 176 330L170 284L130 282L130 224L172 220Z"/><path class="hit" data-o="canal" tabindex="0" role="button" aria-label="Ακουστικός πόρος" d="M132 226C200 216 270 240 334 228L334 280C270 288 200 266 132 280Z"/><path data-o="drum" tabindex="0" role="button" aria-label="Τύμπανο" class="hit hitv" stroke-width="20" d="M331 222L337 286"/><path data-o="bones" tabindex="0" role="button" aria-label="Ακουστικά οστάρια" class="hit hitv" stroke-width="24" d="M344 254L366 216L396 238L436 240"/><circle class="hit" data-o="cochlea" tabindex="0" role="button" aria-label="Κοχλίας" cx="500" cy="300" r="62"/><path data-o="anerve" tabindex="0" role="button" aria-label="Ακουστικό νεύρο" class="hit hitv" stroke-width="30" d="M566 334C596 340 620 340 640 338"/><path class="hit" data-o="canals" tabindex="0" role="button" aria-label="Ημικύκλιοι σωλήνες" d="M420 124C432 92 500 96 548 120C560 150 540 200 500 208C460 206 418 180 420 124Z"/></g><g id="pins-ear" class="pins"><g class="pin" data-o="pinna"><path d="M40 60L84 180" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="84" cy="180" r="4" fill="#0F1C3F"/><circle cx="40" cy="60" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="66.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">1</text></g><g class="pin" data-o="canal"><path d="M232 446L236 262" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="236" cy="262" r="4" fill="#0F1C3F"/><circle cx="232" cy="446" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="232" y="452.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">2</text></g><g class="pin" data-o="drum"><path d="M330 446L335 276" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="335" cy="276" r="4" fill="#0F1C3F"/><circle cx="330" cy="446" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="330" y="452.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">3</text></g><g class="pin" data-o="bones"><path d="M356 34L380 226" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="380" cy="226" r="4" fill="#0F1C3F"/><circle cx="356" cy="34" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="356" y="40.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">4</text></g><g class="pin" data-o="cochlea"><path d="M500 446L498 352" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="498" cy="352" r="4" fill="#0F1C3F"/><circle cx="500" cy="446" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="500" y="452.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">5</text></g><g class="pin" data-o="anerve"><path d="M600 420L598 338" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="598" cy="338" r="4" fill="#0F1C3F"/><circle cx="600" cy="420" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="426.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">6</text></g><g class="pin" data-o="canals"><path d="M600 60L528 130" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="528" cy="130" r="4" fill="#0F1C3F"/><circle cx="600" cy="60" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="66.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">7</text></g></g></g><g class="org" id="g-nose"><path d="M252 0C232 50 214 110 208 158C196 186 150 222 144 238C140 252 166 258 188 262C178 272 166 284 168 292C170 300 180 302 186 306C178 312 168 318 170 328C174 340 188 344 190 356C188 376 182 392 196 410C220 432 262 430 290 440L296 480H640V0Z" fill="#F6D9C9" stroke="#A8674A" stroke-width="3.5" stroke-linejoin="round"/><path d="M396 132C384 70 440 22 520 20C580 20 640 40 640 40V214C590 222 500 214 452 196C420 184 400 162 396 132Z" fill="#F3B8C8" stroke="#B56B85" stroke-width="3"/><path d="M430 96C460 70 490 96 520 74C550 56 580 84 612 70M440 150C470 132 500 160 532 140C560 124 590 150 622 136" fill="none" stroke="#B56B85" stroke-width="2.5" stroke-linecap="round"/><path d="M170 254C190 232 214 190 262 178C320 166 386 184 404 232C408 250 404 262 392 268L204 268C190 266 176 262 170 254Z" fill="none" stroke="#A8674A" stroke-width="6" stroke-linejoin="round"/><path d="M380 264C410 256 440 270 446 320C450 380 444 430 446 480L404 480C402 430 410 380 404 350L392 296C394 284 392 272 380 264Z" fill="none" stroke="#A8674A" stroke-width="6" stroke-linejoin="round"/><path d="M186 306C230 290 330 286 392 292C416 300 424 330 420 362C380 380 260 382 204 364C194 348 190 326 186 306Z" fill="none" stroke="#A8674A" stroke-width="6" stroke-linejoin="round"/><path d="M170 254C190 232 214 190 262 178C320 166 386 184 404 232C408 250 404 262 392 268L204 268C190 266 176 262 170 254Z" fill="#FFF9F2"/><path d="M380 264C410 256 440 270 446 320C450 380 444 430 446 480L404 480C402 430 410 380 404 350L392 296C394 284 392 272 380 264Z" fill="#FFF9F2"/><path d="M186 306C230 290 330 286 392 292C416 300 424 330 420 362C380 380 260 382 204 364C194 348 190 326 186 306Z" fill="#F9E3DA"/><path d="M168 255L186 262" stroke="#FFF9F2" stroke-width="7" stroke-linecap="round"/><path d="M183 306L192 304" stroke="#F9E3DA" stroke-width="7" stroke-linecap="round"/><path d="M366 148C380 146 392 142 402 138" fill="none" stroke="#B8860B" stroke-width="12"/><ellipse cx="322" cy="150" rx="50" ry="12" fill="#F2C94C" stroke="#B8860B" stroke-width="3"/><path d="M364 148C380 146 392 142 404 137" fill="none" stroke="#F2C94C" stroke-width="6"/><path d="M284 160L282 178M297 160L295 178M310 160L308 178M323 160L321 178M336 160L334 178M349 160L347 178M362 160L360 178" fill="none" stroke="#B8860B" stroke-width="2.5"/><path d="M270 180C300 172 340 174 366 186" fill="none" stroke="#E07B39" stroke-width="9" stroke-linecap="round"/><path d="M280 182L279 195M296 180L295 193M312 179L311 192M328 180L327 193M344 183L343 196M358 187L357 200" fill="none" stroke="#E07B39" stroke-width="2.5" stroke-linecap="round"/><path d="M206 338C236 304 336 300 392 322C412 334 414 364 398 376C340 390 254 388 216 370C202 362 200 348 206 338Z" fill="#EE9A9A" stroke="#B5524F" stroke-width="3" stroke-linejoin="round"/><circle cx="228" cy="326" r="4.5" fill="#C9504D"/><circle cx="246" cy="318" r="4.5" fill="#C9504D"/><circle cx="266" cy="312" r="4.5" fill="#C9504D"/><circle cx="286" cy="309" r="4.5" fill="#C9504D"/><circle cx="306" cy="308" r="4.5" fill="#C9504D"/><circle cx="326" cy="309" r="4.5" fill="#C9504D"/><circle cx="346" cy="312" r="4.5" fill="#C9504D"/><circle cx="366" cy="317" r="4.5" fill="#C9504D"/><circle cx="384" cy="324" r="4.5" fill="#C9504D"/><path d="M392 356C450 372 500 320 512 214" fill="none" stroke="#B8860B" stroke-width="11" stroke-linecap="round"/><path d="M392 356C450 372 500 320 512 214" fill="none" stroke="#F2C94C" stroke-width="6" stroke-linecap="round"/><g><path class="hit" data-o="cavity" tabindex="0" role="button" aria-label="Ρινική κοιλότητα" d="M170 254C190 232 214 190 262 178C320 166 386 184 404 232C408 250 404 262 392 268L204 268C190 266 176 262 170 254Z"/><path data-o="smell" tabindex="0" role="button" aria-label="Οσφρητικοί υποδοχείς" class="hit hitv" stroke-width="26" d="M270 186C300 178 340 180 366 192"/><path class="hit" data-o="onerve" tabindex="0" role="button" aria-label="Οσφρητικό νεύρο" d="M270 150C270 130 372 130 404 128L406 148C380 158 340 166 322 164C290 164 270 160 270 150Z"/><path class="hit" data-o="tongue" tabindex="0" role="button" aria-label="Γλώσσα" d="M206 344C240 330 340 326 398 340C412 350 412 366 398 376C340 390 254 388 216 370C202 362 200 352 206 344Z"/><path data-o="buds" tabindex="0" role="button" aria-label="Γευστικοί κάλυκες" class="hit hitv" stroke-width="22" d="M226 326C270 304 340 304 386 324"/><path data-o="tnerve" tabindex="0" role="button" aria-label="Γευστικά νεύρα" class="hit hitv" stroke-width="24" d="M420 362C460 360 500 320 512 222"/><path class="hit" data-o="brain" tabindex="0" role="button" aria-label="Εγκέφαλος" d="M408 126C400 70 440 22 520 20C580 20 640 40 640 40V214C590 222 536 214 500 206C440 190 412 162 408 126Z"/></g><g id="pins-nose" class="pins"><g class="pin" data-o="cavity"><path d="M40 190L236 232" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="236" cy="232" r="4" fill="#0F1C3F"/><circle cx="40" cy="190" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="196.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">1</text></g><g class="pin" data-o="smell"><path d="M70 70L290 177" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="290" cy="177" r="4" fill="#0F1C3F"/><circle cx="70" cy="70" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="70" y="76.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">2</text></g><g class="pin" data-o="onerve"><path d="M320 34L326 142" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="326" cy="142" r="4" fill="#0F1C3F"/><circle cx="320" cy="34" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="320" y="40.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">3</text></g><g class="pin" data-o="tongue"><path d="M60 440L300 360" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="300" cy="360" r="4" fill="#0F1C3F"/><circle cx="60" cy="440" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="60" y="446.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">4</text></g><g class="pin" data-o="buds"><path d="M40 340L247 318" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="247" cy="318" r="4" fill="#0F1C3F"/><circle cx="40" cy="340" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="346.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">5</text></g><g class="pin" data-o="tnerve"><path d="M600 400L486 318" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="486" cy="318" r="4" fill="#0F1C3F"/><circle cx="600" cy="400" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="406.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">6</text></g><g class="pin" data-o="brain"><path d="M600 60L560 110" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="560" cy="110" r="4" fill="#0F1C3F"/><circle cx="600" cy="60" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="66.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">7</text></g></g></g><g class="org" id="g-skin"><path d="M96 338H544V424H96Z" fill="#FBE7A4"/><ellipse cx="130" cy="384" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="190" cy="392" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="250" cy="382" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="312" cy="392" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="372" cy="384" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="434" cy="392" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="494" cy="384" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="160" cy="356" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="282" cy="356" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="404" cy="358" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><ellipse cx="520" cy="358" rx="27" ry="19" fill="#FFF3C4" stroke="#D9B84A" stroke-width="2"/><path d="M96 171.6L102 173L108 171.4L114 167.3L120 162.1L126 157.5L132 155.1L138 155.7L144 159.1L150 164.2L156 169.1L162 172.4L168 172.8L174 170.2L180 165.6L186 160.4L192 156.4L198 155L204 156.6L210 160.7L216 165.9L222 170.5L228 172.9L234 172.3L240 168.9L246 163.8L252 158.9L258 155.6L264 155.2L270 157.8L276 162.4L282 167.6L288 171.6L294 173L300 171.4L306 167.3L312 162.1L318 157.5L324 155.1L330 155.7L336 159.1L342 164.2L348 169.1L354 172.4L360 172.8L366 170.2L372 165.6L378 160.4L384 156.4L390 155L396 156.6L402 160.7L408 165.9L414 170.5L420 172.9L426 172.3L432 168.9L438 163.8L444 158.9L450 155.6L456 155.2L462 157.8L468 162.4L474 167.6L480 171.6L486 173L492 171.4L498 167.3L504 162.1L510 157.5L516 155.1L522 155.7L528 159.1L534 164.2L540 169.1 L544 338L96 338Z" fill="#F6D9C9"/><path d="M96 112L102 113.5L108 114.6L114 115L120 114.5L126 113.3L132 111.7L138 110.2L144 109.2L150 109L156 109.7L162 110.9L168 112.5L174 114L180 114.9L186 114.9L192 114.2L198 112.8L204 111.2L210 109.8L216 109.1L222 109.1L228 110L234 111.5L240 113.1L246 114.3L252 115L258 114.8L264 113.8L270 112.3L276 110.7L282 109.5L288 109L294 109.4L300 110.5L306 112L312 113.5L318 114.6L324 115L330 114.5L336 113.3L342 111.7L348 110.2L354 109.2L360 109L366 109.7L372 110.9L378 112.5L384 114L390 114.9L396 114.9L402 114.2L408 112.8L414 111.2L420 109.8L426 109.1L432 109.1L438 110L444 111.5L450 113.1L456 114.3L462 115L468 114.8L474 113.8L480 112.3L486 110.7L492 109.5L498 109L504 109.4L510 110.5L516 112L522 113.5L528 114.6L534 115L540 114.5 L540 169.1L534 164.2L528 159.1L522 155.7L516 155.1L510 157.5L504 162.1L498 167.3L492 171.4L486 173L480 171.6L474 167.6L468 162.4L462 157.8L456 155.2L450 155.6L444 158.9L438 163.8L432 168.9L426 172.3L420 172.9L414 170.5L408 165.9L402 160.7L396 156.6L390 155L384 156.4L378 160.4L372 165.6L366 170.2L360 172.8L354 172.4L348 169.1L342 164.2L336 159.1L330 155.7L324 155.1L318 157.5L312 162.1L306 167.3L300 171.4L294 173L288 171.6L282 167.6L276 162.4L270 157.8L264 155.2L258 155.6L252 158.9L246 163.8L240 168.9L234 172.3L228 172.9L222 170.5L216 165.9L210 160.7L204 156.6L198 155L192 156.4L186 160.4L180 165.6L174 170.2L168 172.8L162 172.4L156 169.1L150 164.2L144 159.1L138 155.7L132 155.1L126 157.5L120 162.1L114 167.3L108 171.4L102 173L96 171.6 Z" fill="#E2A77E"/><path d="M96 171.6L102 173L108 171.4L114 167.3L120 162.1L126 157.5L132 155.1L138 155.7L144 159.1L150 164.2L156 169.1L162 172.4L168 172.8L174 170.2L180 165.6L186 160.4L192 156.4L198 155L204 156.6L210 160.7L216 165.9L222 170.5L228 172.9L234 172.3L240 168.9L246 163.8L252 158.9L258 155.6L264 155.2L270 157.8L276 162.4L282 167.6L288 171.6L294 173L300 171.4L306 167.3L312 162.1L318 157.5L324 155.1L330 155.7L336 159.1L342 164.2L348 169.1L354 172.4L360 172.8L366 170.2L372 165.6L378 160.4L384 156.4L390 155L396 156.6L402 160.7L408 165.9L414 170.5L420 172.9L426 172.3L432 168.9L438 163.8L444 158.9L450 155.6L456 155.2L462 157.8L468 162.4L474 167.6L480 171.6L486 173L492 171.4L498 167.3L504 162.1L510 157.5L516 155.1L522 155.7L528 159.1L534 164.2L540 169.1" fill="none" stroke="#B5764E" stroke-width="2.5"/><path d="M96 330C200 322 440 338 544 328" fill="none" stroke="#B8860B" stroke-width="11" stroke-linecap="round"/><path d="M330 328C332 290 330 240 330 206M150 326C150 318 152 308 152 300M470 330C476 280 492 220 500 172" fill="none" stroke="#B8860B" stroke-width="7" stroke-linecap="round"/><path d="M500 172C494 156 488 142 484 126M500 172C502 154 504 140 506 124M500 172C512 158 520 146 526 130" fill="none" stroke="#B8860B" stroke-width="5" stroke-linecap="round"/><path d="M96 330C200 322 440 338 544 328" fill="none" stroke="#F2C94C" stroke-width="6" stroke-linecap="round"/><path d="M330 328C332 290 330 240 330 206M150 326C150 318 152 308 152 300M470 330C476 280 492 220 500 172" fill="none" stroke="#F2C94C" stroke-width="3" stroke-linecap="round"/><path d="M500 172C494 156 488 142 484 126M500 172C502 154 504 140 506 124M500 172C512 158 520 146 526 130" fill="none" stroke="#F2C94C" stroke-width="2" stroke-linecap="round"/><ellipse cx="330" cy="192" rx="11" ry="17" fill="#C9B3EE" stroke="#6B4FA8" stroke-width="3"/><path d="M321 186H339M320 192H340M321 198H339" stroke="#6B4FA8" stroke-width="2"/><ellipse cx="152" cy="282" rx="17" ry="24" fill="#C9B3EE" stroke="#6B4FA8" stroke-width="3"/><ellipse cx="152" cy="282" rx="10" ry="16" fill="none" stroke="#6B4FA8" stroke-width="2"/><ellipse cx="152" cy="282" rx="4" ry="8" fill="#6B4FA8"/><path d="M246 318C240 270 228 210 218 150" fill="none" stroke="#C98F6B" stroke-width="20" stroke-linecap="round"/><circle cx="246" cy="318" r="13" fill="#C98F6B"/><path d="M246 318C238 250 222 150 196 34" fill="none" stroke="#4A3524" stroke-width="6" stroke-linecap="round"/><path d="M418 300C404 284 432 270 444 286C456 302 430 318 420 304C412 292 432 284 438 296" fill="none" stroke="#2F6E9E" stroke-width="9" stroke-linecap="round"/><path d="M438 296C452 262 420 236 436 204C448 180 424 150 432 109.1" fill="none" stroke="#2F6E9E" stroke-width="7" stroke-linecap="round"/><path d="M418 300C404 284 432 270 444 286C456 302 430 318 420 304C412 292 432 284 438 296" fill="none" stroke="#8CC4EA" stroke-width="4.5" stroke-linecap="round"/><path d="M438 296C452 262 420 236 436 204C448 180 424 150 432 109.1" fill="none" stroke="#8CC4EA" stroke-width="3" stroke-linecap="round"/><path d="M96 112L102 113.5L108 114.6L114 115L120 114.5L126 113.3L132 111.7L138 110.2L144 109.2L150 109L156 109.7L162 110.9L168 112.5L174 114L180 114.9L186 114.9L192 114.2L198 112.8L204 111.2L210 109.8L216 109.1L222 109.1L228 110L234 111.5L240 113.1L246 114.3L252 115L258 114.8L264 113.8L270 112.3L276 110.7L282 109.5L288 109L294 109.4L300 110.5L306 112L312 113.5L318 114.6L324 115L330 114.5L336 113.3L342 111.7L348 110.2L354 109.2L360 109L366 109.7L372 110.9L378 112.5L384 114L390 114.9L396 114.9L402 114.2L408 112.8L414 111.2L420 109.8L426 109.1L432 109.1L438 110L444 111.5L450 113.1L456 114.3L462 115L468 114.8L474 113.8L480 112.3L486 110.7L492 109.5L498 109L504 109.4L510 110.5L516 112L522 113.5L528 114.6L534 115L540 114.5" fill="none" stroke="#8A5A3A" stroke-width="3.5"/><path d="M96 112V424H544V112" fill="none" stroke="#8A5A3A" stroke-width="3"/><g><path class="hit" data-o="epi" tabindex="0" role="button" aria-label="Επιδερμίδα" d="M96 112L102 113.5L108 114.6L114 115L120 114.5L126 113.3L132 111.7L138 110.2L144 109.2L150 109L156 109.7L162 110.9L168 112.5L174 114L180 114.9L186 114.9L192 114.2L198 112.8L204 111.2L210 109.8L216 109.1L222 109.1L228 110L234 111.5L240 113.1L246 114.3L252 115L258 114.8L264 113.8L270 112.3L276 110.7L282 109.5L288 109L294 109.4L300 110.5L306 112L312 113.5L318 114.6L324 115L330 114.5L336 113.3L342 111.7L348 110.2L354 109.2L360 109L366 109.7L372 110.9L378 112.5L384 114L390 114.9L396 114.9L402 114.2L408 112.8L414 111.2L420 109.8L426 109.1L432 109.1L438 110L444 111.5L450 113.1L456 114.3L462 115L468 114.8L474 113.8L480 112.3L486 110.7L492 109.5L498 109L504 109.4L510 110.5L516 112L522 113.5L528 114.6L534 115L540 114.5 L540 169.1L534 164.2L528 159.1L522 155.7L516 155.1L510 157.5L504 162.1L498 167.3L492 171.4L486 173L480 171.6L474 167.6L468 162.4L462 157.8L456 155.2L450 155.6L444 158.9L438 163.8L432 168.9L426 172.3L420 172.9L414 170.5L408 165.9L402 160.7L396 156.6L390 155L384 156.4L378 160.4L372 165.6L366 170.2L360 172.8L354 172.4L348 169.1L342 164.2L336 159.1L330 155.7L324 155.1L318 157.5L312 162.1L306 167.3L300 171.4L294 173L288 171.6L282 167.6L276 162.4L270 157.8L264 155.2L258 155.6L252 158.9L246 163.8L240 168.9L234 172.3L228 172.9L222 170.5L216 165.9L210 160.7L204 156.6L198 155L192 156.4L186 160.4L180 165.6L174 170.2L168 172.8L162 172.4L156 169.1L150 164.2L144 159.1L138 155.7L132 155.1L126 157.5L120 162.1L114 167.3L108 171.4L102 173L96 171.6 Z"/><path class="hit" data-o="dermis" tabindex="0" role="button" aria-label="Χόριο" d="M96 171.6L102 173L108 171.4L114 167.3L120 162.1L126 157.5L132 155.1L138 155.7L144 159.1L150 164.2L156 169.1L162 172.4L168 172.8L174 170.2L180 165.6L186 160.4L192 156.4L198 155L204 156.6L210 160.7L216 165.9L222 170.5L228 172.9L234 172.3L240 168.9L246 163.8L252 158.9L258 155.6L264 155.2L270 157.8L276 162.4L282 167.6L288 171.6L294 173L300 171.4L306 167.3L312 162.1L318 157.5L324 155.1L330 155.7L336 159.1L342 164.2L348 169.1L354 172.4L360 172.8L366 170.2L372 165.6L378 160.4L384 156.4L390 155L396 156.6L402 160.7L408 165.9L414 170.5L420 172.9L426 172.3L432 168.9L438 163.8L444 158.9L450 155.6L456 155.2L462 157.8L468 162.4L474 167.6L480 171.6L486 173L492 171.4L498 167.3L504 162.1L510 157.5L516 155.1L522 155.7L528 159.1L534 164.2L540 169.1 L544 338L96 338Z"/><path data-o="hair" tabindex="0" role="button" aria-label="Τρίχα" class="hit hitv" stroke-width="22" d="M246 318C238 250 222 150 196 34"/><path data-o="sweat" tabindex="0" role="button" aria-label="Ιδρωτοποιός αδένας" class="hit hitv" stroke-width="22" d="M428 300C452 262 420 236 436 204C448 180 424 150 432 114"/><circle class="hit" data-o="sweat" aria-hidden="true" cx="430" cy="294" r="24"/><ellipse class="hit" data-o="touch" tabindex="0" role="button" aria-label="Υποδοχείς αφής και πίεσης" cx="330" cy="192" rx="17" ry="23"/><ellipse class="hit" data-o="touch" aria-hidden="true" cx="152" cy="282" rx="22" ry="29"/><path class="hit" data-o="pain" tabindex="0" role="button" aria-label="Υποδοχείς πόνου και θερμοκρασίας" d="M474 118H536L512 182H490Z"/><path data-o="snerve" tabindex="0" role="button" aria-label="Αισθητικό νεύρο" class="hit hitv" stroke-width="22" d="M96 330C200 322 440 338 544 328"/></g><g id="pins-skin" class="pins"><g class="pin" data-o="epi"><path d="M40 130L118 138" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="118" cy="138" r="4" fill="#0F1C3F"/><circle cx="40" cy="130" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="136.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">1</text></g><g class="pin" data-o="dermis"><path d="M40 240L118 240" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="118" cy="240" r="4" fill="#0F1C3F"/><circle cx="40" cy="240" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="40" y="246.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">2</text></g><g class="pin" data-o="hair"><path d="M110 40L200 52" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="200" cy="52" r="4" fill="#0F1C3F"/><circle cx="110" cy="40" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="110" y="46.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">3</text></g><g class="pin" data-o="sweat"><path d="M600 280L446 290" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="446" cy="290" r="4" fill="#0F1C3F"/><circle cx="600" cy="280" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="286.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">4</text></g><g class="pin" data-o="touch"><path d="M330 40L330 180" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="330" cy="180" r="4" fill="#0F1C3F"/><circle cx="330" cy="40" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="330" y="46.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">5</text></g><g class="pin" data-o="pain"><path d="M600 110L512 140" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="512" cy="140" r="4" fill="#0F1C3F"/><circle cx="600" cy="110" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="116.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">6</text></g><g class="pin" data-o="snerve"><path d="M600 400L520 331" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="520" cy="331" r="4" fill="#0F1C3F"/><circle cx="600" cy="400" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="600" y="406.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">7</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="13" cx="20" cy="240"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Πίσω</button>
+            <button class="btn" id="jNext">Επόμενο</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Αναπαραγωγή</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2>Οι πέντε αισθήσεις</h2><p>Κάθε αίσθηση έχει ένα αισθητήριο όργανο, ένα ερέθισμα που ανιχνεύει και τα δικά της κύτταρα-υποδοχείς.</p><div class="cards"><div class="ecard"><h3>Όραση</h3><div class="eq">Μάτι</div><dl><dt>Ερέθισμα</dt><dd>Φως</dd><dt>Υποδοχείς</dt><dd>Ραβδία και κωνία στον αμφιβληστροειδή</dd></dl></div><div class="ecard"><h3>Ακοή</h3><div class="eq">Αυτί</div><dl><dt>Ερέθισμα</dt><dd>Ήχος (δονήσεις)</dd><dt>Υποδοχείς</dt><dd>Τριχωτά κύτταρα στον κοχλία</dd></dl></div><div class="ecard"><h3>Όσφρηση</h3><div class="eq">Μύτη</div><dl><dt>Ερέθισμα</dt><dd>Χημικές ουσίες στον αέρα</dd><dt>Υποδοχείς</dt><dd>Οσφρητικοί υποδοχείς στη ρινική κοιλότητα</dd></dl></div><div class="ecard"><h3>Γεύση</h3><div class="eq">Γλώσσα</div><dl><dt>Ερέθισμα</dt><dd>Χημικές ουσίες στα τρόφιμα και στα ποτά</dd><dt>Υποδοχείς</dt><dd>Γευστικοί κάλυκες</dd></dl></div><div class="ecard"><h3>Αφή</h3><div class="eq">Δέρμα</div><dl><dt>Ερέθισμα</dt><dd>Άγγιγμα, πίεση, πόνος, ζέστη και κρύο</dd><dt>Υποδοχείς</dt><dd>Υποδοχείς στο χόριο</dd></dl></div></div><p class="muted">Οι επιστήμονες μετρούν περισσότερες από πέντε αισθήσεις. Την ισορροπία την ανιχνεύουν οι ημικύκλιοι σωλήνες του αυτιού, και το δέρμα έχει ξεχωριστούς υποδοχείς για το άγγιγμα, τον πόνο και τη θερμοκρασία.</p><h2 id="pupil">Οι κόρες των ματιών αλλάζουν μέγεθος</h2><p>Η ίριδα είναι ένας δακτύλιος από μυ. Αλλάζει το μέγεθος της κόρης για να ελέγχει πόσο φως φτάνει στον αμφιβληστροειδή. Πάτησε ένα κουμπί και παρατήρησε.</p><div class="vgrid"><div><div class="light"><svg id="peye" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ένα μάτι από μπροστά. Η κόρη μικραίνει ή μεγαλώνει όταν πατάς ένα κουμπί."><path d="M40 170C150 40 450 40 560 170C450 300 150 300 40 170Z" fill="#fff" stroke="#0F1C3F" stroke-width="5" stroke-linejoin="round"/><circle cx="300" cy="170" r="98" fill="#9A6A35" stroke="#5A3A18" stroke-width="5"/><circle cx="300" cy="170" r="84" fill="none" stroke="#B98850" stroke-width="10" stroke-dasharray="4 9"/><circle id="ppl" cx="300" cy="170" r="30" fill="#0F1C3F"/><circle cx="268" cy="136" r="11" fill="#fff" opacity=".85"/><path d="M300 22L300 160" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="300" cy="160" r="4" fill="#0F1C3F"/><circle cx="300" cy="22" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="300" y="28.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">1</text><path d="M470 40L362 120" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="362" cy="120" r="4" fill="#0F1C3F"/><circle cx="470" cy="40" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="470" y="46.46" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">2</text><path d="M90 60L150 150" fill="none" stroke="#0F1C3F" stroke-width="1.8"/><circle cx="150" cy="150" r="4" fill="#0F1C3F"/><circle cx="90" cy="60" r="17" fill="#F4B942" stroke="#0F1C3F" stroke-width="2.2"/><text x="90" y="66.46000000000001" text-anchor="middle" font-family="'Manrope',Arial,sans-serif" font-size="19" font-weight="800" fill="#0F1C3F">3</text></svg></div><div class="brbtns"><button class="seg" id="pBright" aria-pressed="true">Δυνατό φως</button><button class="seg" id="pDim" aria-pressed="false">Λίγο φως</button></div><p class="asay" id="pSay" aria-live="polite"></p><ol class="vlist"><li><span class="num">1</span><span>Κόρη</span></li><li><span class="num">2</span><span>Ίριδα</span></li><li><span class="num">3</span><span>Το άσπρο του ματιού</span></li></ol></div><div class="cards"><div class="ecard"><h3>Στο δυνατό φως</h3><div class="eq">Η κόρη μικραίνει</div><dl><dt>Ίριδα</dt><dd>Κλείνει γύρω από την κόρη.</dd><dt>Φως</dt><dd>Μπαίνει λιγότερο φως στο μάτι.</dd><dt>Γιατί</dt><dd>Το πολύ φως μπορεί να βλάψει τον αμφιβληστροειδή.</dd></dl></div><div class="ecard"><h3>Στο λίγο φως</h3><div class="eq">Η κόρη μεγαλώνει</div><dl><dt>Ίριδα</dt><dd>Ανοίγει γύρω από την κόρη.</dd><dt>Φως</dt><dd>Μπαίνει περισσότερο φως στο μάτι.</dd><dt>Γιατί</dt><dd>Ο αμφιβληστροειδής χρειάζεται αρκετό φως για να σχηματιστεί καθαρή εικόνα.</dd></dl></div></div></div><p class="muted">Αυτό είναι αντανακλαστικό. Γίνεται αυτόματα, χωρίς να το σκεφτείς.</p><h2 id="hearing">Τι μπορείς να ακούσεις;</h2><p>Το πόσο ψηλός ή χαμηλός είναι ένας ήχος εξαρτάται από τη συχνότητά του. Η συχνότητα είναι ο αριθμός των δονήσεων σε κάθε δευτερόλεπτο και μετριέται σε χερτζ (Hz). Το εύρος των συχνοτήτων που ακούει ένα ζώο λέγεται εύρος ακοής. Οι τιμές είναι κατά προσέγγιση.</p><div class="bars" role="img" aria-label="Ραβδόγραμμα με το εύρος ακοής έξι ζώων"><div class="bar"><b>Ελέφαντας</b><div class="trk"><div class="fill" style="left:4.7%;width:66.8%"></div></div><small>16 Hz έως 12.000 Hz</small></div><div class="bar h"><b>Άνθρωπος</b><div class="trk"><div class="fill" style="left:7.0%;width:69.8%"></div></div><small>20 Hz έως 20.000 Hz</small></div><div class="bar"><b>Σκύλος</b><div class="trk"><div class="fill" style="left:19.2%;width:65.7%"></div></div><small>67 Hz έως 45.000 Hz</small></div><div class="bar"><b>Γάτα</b><div class="trk"><div class="fill" style="left:15.2%;width:73.3%"></div></div><small>45 Hz έως 64.000 Hz</small></div><div class="bar"><b>Νυχτερίδα</b><div class="trk"><div class="fill" style="left:53.5%;width:40.5%"></div></div><small>2.000 Hz έως 110.000 Hz</small></div><div class="bar"><b>Δελφίνι</b><div class="trk"><div class="fill" style="left:20.3%;width:76.7%"></div></div><small>75 Hz έως 150.000 Hz</small></div><div class="axis"><i></i><div><span style="left:0.0%">10 Hz</span><span style="left:23.3%">100 Hz</span><span style="left:46.5%">1.000 Hz</span><span style="left:69.8%">10.000 Hz</span><span style="left:100.0%">200.000 Hz</span></div></div></div><p class="muted">Ο άνθρωπος ακούει από περίπου 20 Hz έως 20.000 Hz. Οι ήχοι πάνω από 20.000 Hz λέγονται υπέρηχοι. Οι ήχοι κάτω από 20 Hz λέγονται υπόηχοι. Το ανώτερο όριο της ακοής σου χαμηλώνει όσο μεγαλώνεις.</p><div class="cards"><div class="ecard"><h3>Τονικό ύψος</h3><div class="eq">Πόσο ψηλός ή χαμηλός είναι ένας ήχος</div><dl><dt>Εξαρτάται από</dt><dd>Τη συχνότητα</dd><dt>Μονάδα</dt><dd>Χερτζ (Hz)</dd><dt>Κανόνας</dt><dd>Μεγαλύτερη συχνότητα, πιο ψηλός ήχος</dd></dl></div><div class="ecard"><h3>Ένταση</h3><div class="eq">Πόσο δυνατός ή σιγανός είναι ένας ήχος</div><dl><dt>Εξαρτάται από</dt><dd>Το μέγεθος των δονήσεων (πλάτος)</dd><dt>Μονάδα</dt><dd>Ντεσιμπέλ (dB)</dd><dt>Κανόνας</dt><dd>Μεγαλύτερες δονήσεις, πιο δυνατός ήχος</dd></dl></div></div><h2>Πόσο δυνατά είναι υπερβολικά δυνατά;</h2><div class="bars db"><div class="bar"><b>Ψίθυρος</b><div class="trk"><div class="fill" style="left:0;width:25.0%"></div></div><small>30 dB</small></div><div class="bar"><b>Ομιλία</b><div class="trk"><div class="fill" style="left:0;width:50.0%"></div></div><small>60 dB</small></div><div class="bar"><b>Δρόμος με κίνηση</b><div class="trk"><div class="fill" style="left:0;width:66.7%"></div></div><small>80 dB</small></div><div class="bar"><b>Χλοοκοπτικό</b><div class="trk"><div class="fill hot" style="left:0;width:75.0%"></div></div><small>90 dB</small></div><div class="bar"><b>Ροκ συναυλία</b><div class="trk"><div class="fill hot" style="left:0;width:91.7%"></div></div><small>110 dB</small></div></div><p class="muted">Αν ακούς για πολλή ώρα ήχους πάνω από περίπου 85 dB, μπορεί να καταστραφούν τα τριχωτά κύτταρα του κοχλία. Η βλάβη είναι μόνιμη. Οι ωτοασπίδες και η χαμηλότερη ένταση στα ακουστικά προστατεύουν την ακοή σου.</p><h2 id="flavour">Η γεύση και η όσφρηση συνεργάζονται</h2><p>Οι γευστικοί κάλυκες ανιχνεύουν μόνο πέντε βασικές γεύσεις. Όλα τα υπόλοιπα που ξεχωρίζεις σε ένα φαγητό προέρχονται από την όσφρηση.</p><div class="cards"><div class="ecard"><h3>Γλυκό</h3><dl><dt>Παράδειγμα</dt><dd>Ζάχαρη, ώριμα φρούτα</dd></dl></div><div class="ecard"><h3>Ξινό</h3><dl><dt>Παράδειγμα</dt><dd>Χυμός λεμονιού, ξίδι</dd></dl></div><div class="ecard"><h3>Αλμυρό</h3><dl><dt>Παράδειγμα</dt><dd>Αλάτι, πατατάκια</dd></dl></div><div class="ecard"><h3>Πικρό</h3><dl><dt>Παράδειγμα</dt><dd>Καφές, μαύρη σοκολάτα</dd></dl></div><div class="ecard"><h3>Ουμάμι</h3><dl><dt>Παράδειγμα</dt><dd>Τρόφιμα όπως το τυρί, το κρέας και τα μανιτάρια</dd></dl></div></div><p class="muted">Δοκίμασε: κλείσε τη μύτη σου και φάε ένα κομμάτι μήλο, και μετά άφησέ τη. Με κλειστή μύτη νιώθεις μόνο γλυκό και ξινό. Παλιότερα πίστευαν ότι κάθε περιοχή της γλώσσας ανιχνεύει μία μόνο γεύση. Αυτό δεν ισχύει.</p><h2 id="touchtest">Ποιο δέρμα είναι πιο ευαίσθητο;</h2><p>Άγγιξε απαλά το δέρμα ενός φίλου με δύο αμβλείες άκρες ταυτόχρονα. Αν οι άκρες είναι κοντά η μία στην άλλη, μπορεί να μοιάζουν με ένα σημείο. Η απόσταση στην οποία γίνονται αισθητά δύο σημεία δείχνει πόσο κοντά βρίσκονται μεταξύ τους οι υποδοχείς αφής.</p><div class="cards"><div class="ecard"><h3>Άκρη δαχτύλου</h3><div class="eq">Δύο σημεία σε απόσταση περίπου 2 έως 3 mm</div><dl><dt>Υποδοχείς</dt><dd>Πάρα πολλοί, πολύ κοντά μεταξύ τους</dd><dt>Άρα</dt><dd>Πολύ ευαίσθητη</dd></dl></div><div class="ecard"><h3>Παλάμη</h3><div class="eq">Δύο σημεία σε απόσταση περίπου 10 mm</div><dl><dt>Υποδοχείς</dt><dd>Λιγότεροι από την άκρη του δαχτύλου</dd><dt>Άρα</dt><dd>Λιγότερο ευαίσθητη</dd></dl></div><div class="ecard"><h3>Πλάτη</h3><div class="eq">Δύο σημεία σε απόσταση περίπου 40 mm</div><dl><dt>Υποδοχείς</dt><dd>Λίγοι, μακριά ο ένας από τον άλλον</dd><dt>Άρα</dt><dd>Η λιγότερο ευαίσθητη</dd></dl></div></div><p class="muted">Οι αποστάσεις είναι συνηθισμένες τιμές. Διαφέρουν από άνθρωπο σε άνθρωπο.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Βρες εκτυπώσιμα πακέτα φυσικών επιστημών στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"tapTitle": "Πάτησε ένα μέρος", "tapText": "Διάλεξε το μάτι, το αυτί, τη μύτη και τη γλώσσα ή το δέρμα. Μετά πάτησε ένα μέρος του διαγράμματος ή διάλεξε ένα από την αριθμημένη λίστα.", "key": [["Όλες οι αισθήσεις λειτουργούν με τον ίδιο τρόπο.", "Ένα ερέθισμα φτάνει στα κύτταρα-υποδοχείς, οι υποδοχείς στέλνουν ηλεκτρικά σήματα από ένα νεύρο και ο εγκέφαλος τα ερμηνεύει."], ["Ερέθισμα", "είναι μια αλλαγή που μπορεί να ανιχνεύσει το σώμα σου, όπως το φως, ο ήχος ή μια χημική ουσία."], ["Υποδοχέας", "είναι ένα κύτταρο που ανιχνεύει ένα ερέθισμα. Κάθε αισθητήριο όργανο έχει το δικό του είδος."], ["Τα σχέδια είναι τομές.", "Το καθένα δείχνει το όργανο κομμένο, για να δεις το εσωτερικό του."]], "kinds": {"gather": "Συλλέγει ή οδηγεί", "detect": "Ανιχνεύει: έχει υποδοχείς", "signal": "Μεταφέρει σήματα", "support": "Προστατεύει και στηρίζει", "brain": "Ερμηνεύει τα σήματα"}, "facts": "Βασικά στοιχεία", "works": "Συνεργάζεται με", "words": "Λέξεις-κλειδιά:", "more": {"pupil": "Δες την κόρη να αλλάζει μέγεθος", "hearing": "Δες τι ακούν διάφορα ζώα", "flavour": "Δες πώς συνεργάζονται γεύση και όσφρηση", "touchtest": "Δες ποιο δέρμα είναι πιο ευαίσθητο"}, "step": "Βήμα", "of": "από", "back": "Πίσω", "next": "Επόμενο", "again": "Από την αρχή", "play": "Αναπαραγωγή", "pause": "Παύση", "happens": "Τι συμβαίνει εδώ", "stim": "Ερέθισμα", "rec": "Υποδοχείς", "away": {"light": "Φως", "sound": "Ηχητικό κύμα", "vib": "Δόνηση", "sig": "Ηλεκτρικό σήμα", "chem": "Χημικές ουσίες", "press": "Άγγιγμα"}, "stims": {"light": ["Φως", "Ραβδία και κωνία στον αμφιβληστροειδή"], "sound": ["Ήχος", "Τριχωτά κύτταρα στον κοχλία"], "air": ["Χημικές ουσίες στον αέρα", "Οσφρητικοί υποδοχείς στη μύτη"], "food": ["Χημικές ουσίες στα τρόφιμα και στα ποτά", "Γευστικοί κάλυκες στη γλώσσα"], "touch": ["Άγγιγμα και πίεση", "Υποδοχείς αφής στο δέρμα"]}, "brightSay": "Δυνατό φως: η ίριδα κάνει την κόρη μικρότερη. Μπαίνει λιγότερο φως και έτσι προστατεύεται ο αμφιβληστροειδής.", "dimSay": "Λίγο φως: η ίριδα κάνει την κόρη μεγαλύτερη. Μπαίνει περισσότερο φως και έτσι βλέπεις καλύτερα."};
+  var ORGS={"eye": {"name": "Μάτι", "aria": "Διάγραμμα του ματιού σε τομή, με έξι αριθμημένα μέρη"}, "ear": {"name": "Αυτί", "aria": "Διάγραμμα του αυτιού σε τομή, με επτά αριθμημένα μέρη"}, "nose": {"name": "Μύτη και γλώσσα", "aria": "Διάγραμμα της μύτης, του στόματος και του εγκεφάλου από το πλάι, με επτά αριθμημένα μέρη"}, "skin": {"name": "Δέρμα", "aria": "Διάγραμμα μιας τομής του δέρματος, με επτά αριθμημένα μέρη"}};
+  var PARTS=[{"id": "cornea", "org": "eye", "n": 1, "kind": "gather", "chip": "Κερατοειδής", "name": "Κερατοειδής χιτώνας", "job": "Το διάφανο, κυρτό «παράθυρο» στο μπροστινό μέρος του ματιού. Αφήνει το φως να μπει και το κάμπτει.", "facts": ["Η κάμψη του φωτός λέγεται διάθλαση. Το μεγαλύτερο μέρος της γίνεται στον κερατοειδή.", "Δεν έχει αιμοφόρα αγγεία, γι' αυτό μένει διάφανος.", "Τα δάκρυα τον κρατούν καθαρό και υγρό."], "links": [["pupil", "Το φως περνά από τον κερατοειδή και μετά από την κόρη."], ["lens", "Ο φακός ολοκληρώνει την εστίαση που ξεκινά ο κερατοειδής."]], "words": "κερατοειδής, διάθλαση, διάφανος"}, {"id": "iris", "org": "eye", "n": 2, "kind": "gather", "chip": "Ίριδα", "name": "Ίριδα", "job": "Ο χρωματιστός δακτύλιος γύρω από την κόρη. Είναι ένας δακτύλιος από μυ που ελέγχει πόσο φως μπαίνει.", "facts": ["Στο δυνατό φως κάνει την κόρη μικρότερη. Στο λίγο φως την κάνει μεγαλύτερη.", "Αυτό γίνεται χωρίς να το σκεφτείς. Είναι αντανακλαστικό.", "Το χρώμα των ματιών σου είναι το χρώμα της ίριδας."], "links": [["pupil", "Η κόρη είναι η τρύπα στο κέντρο της ίριδας."], ["retina", "Προστατεύει τον αμφιβληστροειδή από το πολύ φως."]], "words": "ίριδα, μυς, αντανακλαστικό", "more": "pupil"}, {"id": "pupil", "org": "eye", "n": 3, "kind": "gather", "chip": "Κόρη", "name": "Κόρη", "job": "Η τρύπα στο κέντρο της ίριδας. Από εκεί περνά το φως για να μπει στο μάτι.", "facts": ["Φαίνεται μαύρη επειδή σχεδόν καθόλου φως δεν βγαίνει ξανά από το μάτι.", "Μικραίνει στο δυνατό φως και μεγαλώνει στο λίγο φως.", "Δεν είναι κάτι που μπορείς να αγγίξεις. Είναι ένα άνοιγμα."], "links": [["iris", "Η ίριδα αλλάζει το μέγεθός της."], ["lens", "Ο φακός βρίσκεται ακριβώς πίσω της."]], "words": "κόρη, δυνατό φως, λίγο φως", "more": "pupil"}, {"id": "lens", "org": "eye", "n": 4, "kind": "gather", "chip": "Φακός", "name": "Φακός", "job": "Ένας διάφανος, εύκαμπτος δίσκος πίσω από την κόρη. Εστιάζει το φως πάνω στον αμφιβληστροειδή.", "facts": ["Αλλάζει σχήμα για να εστιάσει. Γίνεται πιο παχύς για τα κοντινά αντικείμενα και πιο λεπτός για τα μακρινά.", "Μικροί μύες γύρω του τού δίνουν το σωστό σχήμα.", "Το είδωλο που σχηματίζει στον αμφιβληστροειδή είναι ανάποδο. Ο εγκέφαλος το γυρίζει σωστά."], "links": [["cornea", "Πρώτα κάμπτει το φως ο κερατοειδής."], ["retina", "Εστιάζει το φως στον αμφιβληστροειδή."]], "words": "φακός, εστίαση, είδωλο"}, {"id": "retina", "org": "eye", "n": 5, "kind": "detect", "chip": "Αμφιβληστροειδής", "name": "Αμφιβληστροειδής χιτώνας", "job": "Το στρώμα στο πίσω μέρος του ματιού που ανιχνεύει το φως.", "facts": ["Περιέχει εκατομμύρια κύτταρα-υποδοχείς του φωτός.", "Τα ραβδία λειτουργούν στο λίγο φως. Τα κωνία ανιχνεύουν τα χρώματα.", "Όταν το φως πέσει σε έναν υποδοχέα, το κύτταρο στέλνει ένα ηλεκτρικό σήμα."], "links": [["lens", "Ο φακός εστιάζει το φως πάνω του."], ["optic", "Τα σήματά του φεύγουν από το οπτικό νεύρο."]], "words": "αμφιβληστροειδής, υποδοχέας, ραβδία, κωνία"}, {"id": "optic", "org": "eye", "n": 6, "kind": "signal", "chip": "Οπτικό νεύρο", "name": "Οπτικό νεύρο", "job": "Μια δέσμη από νευρικές ίνες που μεταφέρει σήματα από τον αμφιβληστροειδή στον εγκέφαλο.", "facts": ["Περιέχει περίπου ένα εκατομμύριο νευρικές ίνες.", "Στο σημείο όπου βγαίνει από το μάτι δεν υπάρχουν υποδοχείς. Αυτό λέγεται τυφλό σημείο.", "Ο εγκέφαλος μετατρέπει τα σήματα στην εικόνα που βλέπεις."], "links": [["retina", "Ξεκινά από τον αμφιβληστροειδή."], ["brain", "Καταλήγει στον εγκέφαλο."]], "words": "οπτικό νεύρο, νευρική ώση, τυφλό σημείο"}, {"id": "pinna", "org": "ear", "n": 1, "kind": "gather", "chip": "Πτερύγιο", "name": "Πτερύγιο του αυτιού", "job": "Το μέρος του αυτιού που φαίνεται. Συλλέγει τα ηχητικά κύματα και τα οδηγεί στον ακουστικό πόρο.", "facts": ["Αποτελείται από δέρμα και εύκαμπτο χόνδρο.", "Το σχήμα του σε βοηθά να καταλάβεις από πού έρχεται ένας ήχος.", "Πολλά ζώα μπορούν να στρέψουν τα πτερύγια των αυτιών τους προς τον ήχο."], "links": [["canal", "Οδηγεί στον ακουστικό πόρο."]], "words": "πτερύγιο, ηχητικό κύμα, χόνδρος"}, {"id": "canal", "org": "ear", "n": 2, "kind": "gather", "chip": "Ακουστικός πόρος", "name": "Ακουστικός πόρος", "job": "Ένας κοντός σωλήνας που μεταφέρει τα ηχητικά κύματα στο τύμπανο.", "facts": ["Έχει μήκος περίπου 2,5 cm.", "Το κερί και οι μικρές τρίχες παγιδεύουν σκόνη και μικρόβια."], "links": [["pinna", "Ο ήχος μπαίνει από το πτερύγιο."], ["drum", "Τελειώνει στο τύμπανο."]], "words": "ακουστικός πόρος, ηχητικό κύμα, κερί"}, {"id": "drum", "org": "ear", "n": 3, "kind": "gather", "chip": "Τύμπανο", "name": "Τύμπανο", "job": "Μια λεπτή, τεντωμένη μεμβράνη στο τέλος του ακουστικού πόρου. Τα ηχητικά κύματα την κάνουν να δονείται.", "facts": ["Οι δυνατοί ήχοι προκαλούν μεγαλύτερες δονήσεις. Οι ψηλοί (οξείς) ήχοι προκαλούν πιο γρήγορες δονήσεις.", "Χωρίζει το έξω αυτί από το μέσο αυτί.", "Οι πολύ δυνατοί ήχοι, ή αντικείμενα που βάζεις στο αυτί, μπορούν να το τραυματίσουν."], "links": [["canal", "Τα ηχητικά κύματα φτάνουν σε αυτό από τον ακουστικό πόρο."], ["bones", "Μεταδίδει τις δονήσεις του στα ακουστικά οστάρια."]], "words": "τύμπανο, δόνηση, δονείται"}, {"id": "bones", "org": "ear", "n": 4, "kind": "gather", "chip": "Ακουστικά οστάρια", "name": "Ακουστικά οστάρια", "job": "Τρία μικροσκοπικά οστά που μεταφέρουν τις δονήσεις από το τύμπανο στον κοχλία.", "facts": ["Λέγονται σφύρα, άκμονας και αναβολέας.", "Κάνουν τις δονήσεις πιο ισχυρές. Αυτό λέγεται ενίσχυση.", "Ο αναβολέας είναι το μικρότερο οστό του σώματός σου."], "links": [["drum", "Το πρώτο οστάριο ενώνεται με το τύμπανο."], ["cochlea", "Το τελευταίο οστάριο πιέζει τον κοχλία."]], "words": "οστάρια, ενίσχυση, μέσο αυτί"}, {"id": "cochlea", "org": "ear", "n": 5, "kind": "detect", "chip": "Κοχλίας", "name": "Κοχλίας", "job": "Ένας σωλήνας τυλιγμένος σαν σαλιγκάρι, γεμάτος υγρό. Μετατρέπει τις δονήσεις σε ηλεκτρικά σήματα.", "facts": ["Οι δονήσεις κάνουν το υγρό μέσα του να κινείται.", "Το υγρό που κινείται λυγίζει μικροσκοπικά τριχωτά κύτταρα. Αυτά είναι οι υποδοχείς του ήχου.", "Οι πολύ δυνατοί ήχοι μπορούν να καταστρέψουν τα τριχωτά κύτταρα, και αυτά δεν ξαναφυτρώνουν."], "links": [["bones", "Τα ακουστικά οστάρια τού μεταδίδουν τις δονήσεις."], ["anerve", "Τα σήματά του φεύγουν από το ακουστικό νεύρο."]], "words": "κοχλίας, τριχωτά κύτταρα, υποδοχέας", "more": "hearing"}, {"id": "anerve", "org": "ear", "n": 6, "kind": "signal", "chip": "Ακουστικό νεύρο", "name": "Ακουστικό νεύρο", "job": "Μεταφέρει σήματα από τον κοχλία στον εγκέφαλο.", "facts": ["Ο εγκέφαλος μετατρέπει τα σήματα στους ήχους που ακούς.", "Μεταφέρει επίσης σήματα για την ισορροπία από τους ημικύκλιους σωλήνες."], "links": [["cochlea", "Ξεκινά από τον κοχλία."], ["brain", "Καταλήγει στον εγκέφαλο."]], "words": "ακουστικό νεύρο, νευρική ώση"}, {"id": "canals", "org": "ear", "n": 7, "kind": "detect", "chip": "Ημικύκλιοι σωλήνες", "name": "Ημικύκλιοι σωλήνες", "job": "Τρεις καμπύλοι σωλήνες γεμάτοι υγρό. Σε βοηθούν να κρατάς την ισορροπία σου.", "facts": ["Δεν συμμετέχουν στην ακοή.", "Όταν κινείται το κεφάλι σου, το υγρό κινείται και λυγίζει μικροσκοπικά τριχωτά κύτταρα.", "Αν γυρίσεις γύρω γύρω και σταματήσεις, το υγρό συνεχίζει για λίγο να κινείται. Γι' αυτό ζαλίζεσαι."], "links": [["cochlea", "Ενώνονται με τον κοχλία στο έσω αυτί."], ["anerve", "Τα σήματά τους ταξιδεύουν δίπλα στα σήματα της ακοής."]], "words": "ημικύκλιοι σωλήνες, ισορροπία, έσω αυτί"}, {"id": "cavity", "org": "nose", "n": 1, "kind": "gather", "chip": "Ρινική κοιλότητα", "name": "Ρινική κοιλότητα", "job": "Ο χώρος πίσω από τη μύτη σου. Ο αέρας περνά από εκεί όταν εισπνέεις και φέρνει μαζί του τις χημικές ουσίες των οσμών.", "facts": ["Ζεσταίνει, υγραίνει και καθαρίζει τον αέρα.", "Οι ουσίες των οσμών διαλύονται στο υγρό τοίχωμα πριν ανιχνευτούν.", "Όταν μυρίζεις δυνατά, περισσότερος αέρας φτάνει στους οσφρητικούς υποδοχείς."], "links": [["smell", "Οι οσφρητικοί υποδοχείς βρίσκονται στην οροφή της."], ["tongue", "Ενώνεται με το στόμα στο πίσω μέρος του λαιμού."]], "words": "ρινική κοιλότητα, χημική ουσία, διαλύεται"}, {"id": "smell", "org": "nose", "n": 2, "kind": "detect", "chip": "Οσφρητικοί υποδοχείς", "name": "Οσφρητικοί υποδοχείς", "job": "Μια περιοχή με κύτταρα-υποδοχείς στην οροφή της ρινικής κοιλότητας. Ανιχνεύουν χημικές ουσίες στον αέρα.", "facts": ["Έχεις εκατομμύρια, περίπου 400 διαφορετικών τύπων.", "Κάθε οσμή ενεργοποιεί διαφορετικό συνδυασμό υποδοχέων.", "Με βουλωμένη μύτη, ο αέρας δεν φτάνει σε αυτούς. Γι' αυτό το φαγητό μοιάζει άνοστο."], "links": [["cavity", "Ο αέρας φτάνει σε αυτούς από τη ρινική κοιλότητα."], ["onerve", "Τα σήματά τους φεύγουν από το οσφρητικό νεύρο."]], "words": "υποδοχέας, χημική ουσία, όσφρηση"}, {"id": "onerve", "org": "nose", "n": 3, "kind": "signal", "chip": "Οσφρητικό νεύρο", "name": "Οσφρητικό νεύρο", "job": "Μεταφέρει σήματα από τους οσφρητικούς υποδοχείς στον εγκέφαλο.", "facts": ["Οσφρητικό σημαίνει ότι έχει σχέση με την όσφρηση.", "Είναι πολύ κοντό, επειδή οι οσφρητικοί υποδοχείς βρίσκονται κοντά στον εγκέφαλο."], "links": [["smell", "Ξεκινά από τους οσφρητικούς υποδοχείς."], ["brain", "Καταλήγει στον εγκέφαλο."]], "words": "οσφρητικό νεύρο, νευρική ώση"}, {"id": "tongue", "org": "nose", "n": 4, "kind": "gather", "chip": "Γλώσσα", "name": "Γλώσσα", "job": "Ένας μυς σκεπασμένος με μικρά εξογκώματα. Μετακινεί την τροφή στο στόμα και έχει πάνω του τους γευστικούς κάλυκες.", "facts": ["Τα εξογκώματα που βλέπεις λέγονται θηλές. Οι γευστικοί κάλυκες βρίσκονται μέσα σε αυτές.", "Το σάλιο διαλύει την τροφή ώστε οι χημικές ουσίες της να φτάσουν στους γευστικούς κάλυκες.", "Σε βοηθά επίσης να μιλάς και να καταπίνεις."], "links": [["buds", "Οι γευστικοί κάλυκες βρίσκονται στην επιφάνειά της."]], "words": "γλώσσα, θηλές, σάλιο"}, {"id": "buds", "org": "nose", "n": 5, "kind": "detect", "chip": "Γευστικοί κάλυκες", "name": "Γευστικοί κάλυκες", "job": "Μικροσκοπικές ομάδες από κύτταρα-υποδοχείς που ανιχνεύουν χημικές ουσίες στα τρόφιμα και στα ποτά.", "facts": ["Υπάρχουν πέντε βασικές γεύσεις: γλυκό, ξινό, αλμυρό, πικρό και ουμάμι.", "Έχεις αρκετές χιλιάδες γευστικούς κάλυκες.", "Κάθε περιοχή της γλώσσας που έχει γευστικούς κάλυκες μπορεί να ανιχνεύσει και τις πέντε γεύσεις."], "links": [["tongue", "Βρίσκονται στις θηλές της γλώσσας."], ["tnerve", "Τα σήματά τους φεύγουν από τα γευστικά νεύρα."]], "words": "γευστικός κάλυκας, υποδοχέας, ουμάμι", "more": "flavour"}, {"id": "tnerve", "org": "nose", "n": 6, "kind": "signal", "chip": "Γευστικά νεύρα", "name": "Γευστικά νεύρα", "job": "Μεταφέρουν σήματα από τους γευστικούς κάλυκες στον εγκέφαλο.", "facts": ["Ο εγκέφαλος συνδυάζει τη γεύση και την όσφρηση για να καταλάβεις τι τρως.", "Προσθέτει ακόμη σήματα για το πόσο ζεστή ή κρύα είναι η τροφή και για την υφή της."], "links": [["buds", "Ξεκινούν από τους γευστικούς κάλυκες."], ["brain", "Καταλήγουν στον εγκέφαλο."]], "words": "γεύση, όσφρηση, νευρική ώση", "more": "flavour"}, {"id": "brain", "org": "nose", "n": 7, "kind": "brain", "chip": "Εγκέφαλος", "name": "Εγκέφαλος", "job": "Δέχεται σήματα από όλα τα αισθητήρια όργανα και τα ερμηνεύει.", "facts": ["Διαφορετικές περιοχές του εγκεφάλου ασχολούνται με διαφορετικές αισθήσεις.", "Βλέπεις, ακούς, μυρίζεις, γεύεσαι ή νιώθεις κάτι μόνο όταν τα σήματα φτάσουν στον εγκέφαλό σου.", "Συγκρίνει τα σήματα με τις αναμνήσεις σου. Έτσι αναγνωρίζεις μια φωνή ή μια μυρωδιά."], "links": [["optic", "Το οπτικό νεύρο φέρνει σήματα από τα μάτια."], ["anerve", "Το ακουστικό νεύρο φέρνει σήματα από τα αυτιά."], ["snerve", "Τα αισθητικά νεύρα φέρνουν σήματα από το δέρμα."]], "words": "εγκέφαλος, αισθητήριο όργανο, νευρική ώση"}, {"id": "epi", "org": "skin", "n": 1, "kind": "support", "chip": "Επιδερμίδα", "name": "Επιδερμίδα", "job": "Το λεπτό εξωτερικό στρώμα του δέρματος. Είναι ανθεκτικό και αδιάβροχο και κρατά έξω τα μικρόβια.", "facts": ["Η επιφάνειά της αποτελείται από νεκρά κύτταρα που πέφτουν συνεχώς.", "Νέα κύτταρα φτιάχνονται στο κάτω μέρος του στρώματος.", "Οι άκρες ορισμένων υποδοχέων πόνου φτάνουν μέχρι εκεί."], "links": [["dermis", "Το χόριο βρίσκεται από κάτω της."], ["pain", "Οι υποδοχείς πόνου καταλήγουν κοντά στην επιφάνεια."]], "words": "επιδερμίδα, αδιάβροχο, προστασία"}, {"id": "dermis", "org": "skin", "n": 2, "kind": "support", "chip": "Χόριο", "name": "Χόριο", "job": "Το πιο παχύ στρώμα κάτω από την επιδερμίδα. Εδώ βρίσκονται οι περισσότεροι υποδοχείς του δέρματος.", "facts": ["Περιέχει επίσης αιμοφόρα αγγεία, ιδρωτοποιούς αδένες και τις ρίζες των τριχών.", "Κάτω του υπάρχει ένα στρώμα λίπους. Το λίπος σε κρατά ζεστό και απορροφά τα χτυπήματα."], "links": [["epi", "Η επιδερμίδα το σκεπάζει."], ["touch", "Οι υποδοχείς αφής βρίσκονται μέσα του."]], "words": "χόριο, υποδοχέας, στρώμα λίπους"}, {"id": "hair", "org": "skin", "n": 3, "kind": "gather", "chip": "Τρίχα", "name": "Τρίχα", "job": "Φυτρώνει από έναν θύλακα στο χόριο. Σε βοηθά να νιώθεις το πολύ ελαφρύ άγγιγμα.", "facts": ["Γύρω από τη ρίζα κάθε τρίχας τυλίγονται νευρικές απολήξεις.", "Όταν κάτι κουνήσει την τρίχα, οι νευρικές απολήξεις στέλνουν σήμα.", "Έτσι νιώθεις ένα έντομο που περπατά στο χέρι σου."], "links": [["snerve", "Το σήμα ταξιδεύει από ένα αισθητικό νεύρο."], ["dermis", "Η ρίζα της βρίσκεται στο χόριο."]], "words": "τρίχα, νευρική απόληξη, ελαφρύ άγγιγμα"}, {"id": "sweat", "org": "skin", "n": 4, "kind": "support", "chip": "Ιδρωτοποιός αδένας", "name": "Ιδρωτοποιός αδένας", "job": "Ένας κουλουριασμένος σωλήνας που παράγει ιδρώτα. Ο ιδρώτας σε δροσίζει καθώς εξατμίζεται.", "facts": ["Ο ιδρώτας ανεβαίνει από έναν στενό σωλήνα ως έναν πόρο στην επιφάνεια.", "Δεν είναι υποδοχέας. Οι υποδοχείς θερμοκρασίας ενημερώνουν τον εγκέφαλο ότι ζεσταίνεσαι, και ο εγκέφαλος δίνει εντολή στους ιδρωτοποιούς αδένες να δουλέψουν."], "links": [["pain", "Οι υποδοχείς θερμοκρασίας ανιχνεύουν ότι ζεσταίνεσαι."], ["dermis", "Βρίσκεται στο χόριο."]], "words": "ιδρωτοποιός αδένας, πόρος, εξάτμιση"}, {"id": "touch", "org": "skin", "n": 5, "kind": "detect", "chip": "Υποδοχείς αφής", "name": "Υποδοχείς αφής και πίεσης", "job": "Υποδοχείς στο χόριο που ανιχνεύουν το άγγιγμα και την πίεση.", "facts": ["Όσοι βρίσκονται κοντά στην επιφάνεια ανιχνεύουν το ελαφρύ άγγιγμα. Όσοι βρίσκονται βαθύτερα ανιχνεύουν τη δυνατή πίεση και τις δονήσεις.", "Οι άκρες των δαχτύλων και τα χείλη έχουν πολλούς, πολύ κοντά τον έναν στον άλλον. Γι' αυτό είναι πολύ ευαίσθητα.", "Το δέρμα της πλάτης έχει πολύ λιγότερους."], "links": [["snerve", "Τα σήματά τους ταξιδεύουν από ένα αισθητικό νεύρο."], ["dermis", "Βρίσκονται στο χόριο."]], "words": "υποδοχέας, πίεση, ευαίσθητο", "more": "touchtest"}, {"id": "pain", "org": "skin", "n": 6, "kind": "detect", "chip": "Πόνος και θερμοκρασία", "name": "Υποδοχείς πόνου και θερμοκρασίας", "job": "Γυμνές νευρικές απολήξεις κοντά στην επιφάνεια του δέρματος. Κάποιες ανιχνεύουν τον πόνο, κάποιες τη ζέστη και κάποιες το κρύο.", "facts": ["Ο πόνος προειδοποιεί ότι το σώμα παθαίνει ζημιά.", "Οι υποδοχείς θερμοκρασίας ανιχνεύουν τις αλλαγές της θερμοκρασίας. Δεν τη μετρούν όπως ένα θερμόμετρο.", "Αν αγγίξεις κάτι πολύ ζεστό, ένα αντανακλαστικό τραβά το χέρι σου πριν καν νιώσεις τον πόνο."], "links": [["epi", "Οι άκρες τους φτάνουν ως την επιδερμίδα."], ["snerve", "Τα σήματά τους ταξιδεύουν από ένα αισθητικό νεύρο."]], "words": "νευρική απόληξη, πόνος, θερμοκρασία, αντανακλαστικό"}, {"id": "snerve", "org": "skin", "n": 7, "kind": "signal", "chip": "Αισθητικό νεύρο", "name": "Αισθητικό νεύρο", "job": "Μεταφέρει σήματα από τους υποδοχείς του δέρματος στον νωτιαίο μυελό και στον εγκέφαλο.", "facts": ["Τα σήματα είναι ηλεκτρικά. Λέγονται νευρικές ώσεις.", "Ένα σήμα από την άκρη του δαχτύλου σου φτάνει στον εγκέφαλο σε κλάσμα του δευτερολέπτου."], "links": [["touch", "Συγκεντρώνει σήματα από τους υποδοχείς αφής."], ["brain", "Τα σήματα καταλήγουν στον εγκέφαλο."]], "words": "αισθητικό νεύρο, νευρική ώση, νωτιαίος μυελός"}];
+  var STEPS=[{"fig": "eye", "on": ["cornea"], "st": "light", "away": "light", "path": "M14 240L146 240", "dur": 1100, "title": "Όραση: το φως φτάνει στον κερατοειδή", "sum": "Το φως από ένα αντικείμενο ταξιδεύει ως το μάτι σου. Ο διάφανος κερατοειδής κάμπτει το φως καθώς μπαίνει.", "pts": ["Το φως ταξιδεύει σε ευθείες γραμμές.", "Η κάμψη του φωτός λέγεται διάθλαση."]}, {"fig": "eye", "on": ["iris", "pupil"], "st": "light", "away": "light", "path": "M146 240L197 240", "dur": 700, "title": "Μέσα από την κόρη", "sum": "Το φως περνά από την κόρη. Η ίριδα ελέγχει πόσο μεγάλη είναι η κόρη.", "pts": ["Στο δυνατό φως η κόρη μικραίνει και μπαίνει λιγότερο φως.", "Στο λίγο φως η κόρη μεγαλώνει και μπαίνει περισσότερο φως."]}, {"fig": "eye", "on": ["lens"], "st": "light", "away": "light", "path": "M197 240L240 240", "dur": 700, "title": "Ο φακός εστιάζει το φως", "sum": "Ο φακός κάμπτει το φως λίγο ακόμη, ώστε να συγκεντρωθεί σε ένα σημείο πάνω στον αμφιβληστροειδή.", "pts": ["Ο φακός παχαίνει για να εστιάσει στα κοντινά αντικείμενα και λεπταίνει για τα μακρινά.", "Το είδωλο στον αμφιβληστροειδή είναι ανάποδο."]}, {"fig": "eye", "on": ["retina"], "st": "light", "away": "light", "path": "M240 240L484 248", "dur": 1400, "title": "Ο αμφιβληστροειδής ανιχνεύει το φως", "sum": "Το φως διασχίζει το μάτι και πέφτει στον αμφιβληστροειδή. Εκεί το ανιχνεύουν τα κύτταρα-υποδοχείς.", "pts": ["Τα ραβδία λειτουργούν στο λίγο φως. Τα κωνία ανιχνεύουν τα χρώματα.", "Κάθε υποδοχέας μετατρέπει το φως σε ηλεκτρικό σήμα."]}, {"fig": "eye", "on": ["optic"], "st": "light", "away": "sig", "path": "M484 248L500 267L622 302", "dur": 1300, "title": "Το οπτικό νεύρο μεταφέρει το σήμα", "sum": "Τα ηλεκτρικά σήματα ταξιδεύουν από το οπτικό νεύρο στον εγκέφαλο. Ο εγκέφαλος φτιάχνει την εικόνα που βλέπεις.", "pts": ["Ο εγκέφαλος γυρίζει σωστά το ανάποδο είδωλο.", "Ενώνει τις εικόνες από τα δύο μάτια σου σε μία."]}, {"fig": "ear", "on": ["pinna", "canal"], "st": "sound", "away": "sound", "path": "M14 252L326 254", "dur": 1500, "title": "Ακοή: τα ηχητικά κύματα μπαίνουν στο αυτί", "sum": "Ο ήχος είναι μια δόνηση που ταξιδεύει στον αέρα σαν κύμα. Το πτερύγιο τον συλλέγει και ο ακουστικός πόρος τον οδηγεί προς τα μέσα.", "pts": ["Ο ήχος χρειάζεται ένα υλικό για να ταξιδέψει, όπως αέρα, νερό ή ένα στερεό.", "Ο ήχος δεν μπορεί να ταξιδέψει στο κενό."]}, {"fig": "ear", "on": ["drum"], "st": "sound", "away": "vib", "path": "M326 254L338 254", "dur": 500, "title": "Το τύμπανο δονείται", "sum": "Τα ηχητικά κύματα χτυπούν το τύμπανο και το κάνουν να δονείται.", "pts": ["Ένας πιο δυνατός ήχος προκαλεί μεγαλύτερη δόνηση.", "Ένας πιο ψηλός (οξύς) ήχος προκαλεί πιο γρήγορη δόνηση."]}, {"fig": "ear", "on": ["bones"], "st": "sound", "away": "vib", "path": "M342 254L366 216L396 238L436 240", "dur": 1200, "title": "Τα ακουστικά οστάρια τη μεταδίδουν", "sum": "Τρία μικροσκοπικά οστά μεταφέρουν τη δόνηση μέσα από το μέσο αυτί και την ενισχύουν.", "pts": ["Τα οστάρια είναι η σφύρα, ο άκμονας και ο αναβολέας.", "Ο αναβολέας πιέζει τον κοχλία."]}, {"fig": "ear", "on": ["cochlea"], "st": "sound", "away": "vib", "path": "M436 240L470 240L500 300", "dur": 1200, "title": "Ο κοχλίας ανιχνεύει τη δόνηση", "sum": "Η δόνηση κάνει το υγρό του κοχλία να κινείται. Μικροσκοπικά τριχωτά κύτταρα ανιχνεύουν την κίνηση.", "pts": ["Τα τριχωτά κύτταρα είναι οι υποδοχείς του ήχου.", "Κάθε τριχωτό κύτταρο μετατρέπει την κίνηση σε ηλεκτρικό σήμα."]}, {"fig": "ear", "on": ["anerve"], "st": "sound", "away": "sig", "path": "M500 300L520 318C560 336 600 340 630 338", "dur": 1300, "title": "Το ακουστικό νεύρο μεταφέρει το σήμα", "sum": "Τα ηλεκτρικά σήματα ταξιδεύουν από το ακουστικό νεύρο στον εγκέφαλο. Ο εγκέφαλος καταλαβαίνει τι ήχος είναι.", "pts": ["Ο εγκέφαλος συγκρίνει τα σήματα από τα δύο αυτιά σου για να βρει από πού ήρθε ο ήχος."]}, {"fig": "nose", "on": ["cavity", "smell", "onerve", "brain"], "st": "air", "away": "chem", "path": "M150 252C200 240 250 200 318 186L322 150C360 150 390 142 430 130", "dur": 2200, "title": "Όσφρηση: χημικές ουσίες στον αέρα", "sum": "Εισπνέεις αέρα που περιέχει τις χημικές ουσίες των οσμών. Υποδοχείς στην οροφή της ρινικής κοιλότητας τις ανιχνεύουν και στέλνουν σήματα στον εγκέφαλο.", "pts": ["Οι ουσίες πρώτα διαλύονται στο υγρό τοίχωμα της μύτης.", "Το οσφρητικό νεύρο είναι πολύ κοντό, γι' αυτό τα σήματα της όσφρησης φτάνουν γρήγορα."]}, {"fig": "nose", "on": ["tongue", "buds", "tnerve", "brain"], "st": "food", "away": "chem", "path": "M196 300L306 310L392 356C450 372 500 320 512 214", "dur": 2200, "title": "Γεύση: χημικές ουσίες στην τροφή", "sum": "Οι χημικές ουσίες της τροφής διαλύονται στο σάλιο. Οι γευστικοί κάλυκες της γλώσσας τις ανιχνεύουν και στέλνουν σήματα στον εγκέφαλο.", "pts": ["Οι πέντε βασικές γεύσεις είναι το γλυκό, το ξινό, το αλμυρό, το πικρό και το ουμάμι.", "Η μυρωδιά της τροφής που έχεις στο στόμα φτάνει στη μύτη από το πίσω μέρος του λαιμού. Γεύση και όσφρηση μαζί σου λένε τι τρως."]}, {"fig": "skin", "on": ["touch", "snerve"], "st": "touch", "away": "press", "path": "M330 60L330 192", "dur": 900, "then": ["sig", "M330 192L330 328C400 332 470 334 540 328", 1400], "title": "Αφή: πίεση στο δέρμα", "sum": "Κάτι πιέζει το δέρμα σου. Ένας υποδοχέας αφής στο χόριο το ανιχνεύει και ένα αισθητικό νεύρο μεταφέρει το σήμα.", "pts": ["Το σήμα ταξιδεύει στον νωτιαίο μυελό και μετά ανεβαίνει στον εγκέφαλο.", "Άλλοι υποδοχείς του δέρματος ανιχνεύουν τον πόνο, τη ζέστη και το κρύο."]}];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away"),orgbar=$("orgbar");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",org="eye",exOrg="eye",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- organ switch ---------- */
+  function setOrg(o){
+    org=o;
+    var a,gs=fig.querySelectorAll(".org"),bs=orgbar.querySelectorAll("[data-g]");
+    for(a=0;a<gs.length;a++){if(gs[a].id==="g-"+o)gs[a].classList.add("on");else gs[a].classList.remove("on");}
+    for(a=0;a<bs.length;a++)bs[a].setAttribute("aria-pressed",bs[a].getAttribute("data-g")===o?"true":"false");
+    fig.setAttribute("aria-label",ORGS[o].aria);
+    var h="";
+    for(a=0;a<PARTS.length;a++)if(PARTS[a].org===o)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  }
+  orgbar.onclick=function(e){
+    var b=e.target.closest?e.target.closest("[data-g]"):null;
+    if(!b)return;
+    exOrg=b.getAttribute("data-g");
+    setOrg(exOrg);select(null);
+  };
+
+  /* ---------- explore ---------- */
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+(t.org===o.org?t.n+" ":"")+esc(t.chip)+(t.org===o.org?"":" ("+esc(ORGS[t.org].name)+")")+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more)h+="<p><button class=\"btn ghost\" id=\"toMore\" data-to=\""+o.more+"\">"+esc(L.more[o.more])+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    if(id&&BY[id].org!==org){exOrg=BY[id].org;setOrg(exOrg);}
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toMore"){show("more");var v=$(b.getAttribute("data-to"));if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function bubble(k){
+    away.textContent=L.away[k];away.classList.add("show");
+    if(k==="sig")cell.classList.add("sig");else cell.classList.remove("sig");
+  }
+  function run(d,dur,done){
+    jpath.setAttribute("d",d);
+    place(0);
+    var t0=null;
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),q=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(q);
+      if(k<1)jRaf=requestAnimationFrame(tick);else done();
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    if(s.fig!==org)setOrg(s.fig);
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.stim)+"</b>"+esc(L.stims[s.st][0])+"</span><span><b>"+esc(L.rec)+"</b>"+esc(L.stims[s.st][1])+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    cell.classList.add("show");
+    function end(){if(playing)jTimer=setTimeout(adv,1900);}
+    if(!anim||reduce){
+      var last=s.then?s.then:[s.away,s.path];
+      bubble(last[0]);jpath.setAttribute("d",last[1]);place(1);
+      if(playing)jTimer=setTimeout(adv,3000);
+      return;
+    }
+    bubble(s.away);
+    run(s.path,s.dur,function(){
+      if(!s.then){end();return;}
+      bubble(s.then[0]);
+      run(s.then[1],s.then[2],end);
+    });
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("viewbar").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      if(org!==exOrg)setOrg(exOrg);
+      select(selected);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- pupil model ---------- */
+  (function(){
+    var R0=24,R1=62,k=0,raf=0,p=$("ppl");
+    function draw(v){k=v;p.setAttribute("r",(R0+(R1-R0)*v).toFixed(1));}
+    function go(to){
+      cancelAnimationFrame(raf);
+      $("pBright").setAttribute("aria-pressed",to?"false":"true");
+      $("pDim").setAttribute("aria-pressed",to?"true":"false");
+      $("pSay").textContent=to?L.dimSay:L.brightSay;
+      if(reduce){draw(to);return;}
+      var from=k,t0=null;
+      function tick(ts){
+        if(t0===null)t0=ts;
+        var q=Math.min(1,(ts-t0)/900),m=q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2;
+        draw(from+(to-from)*m);
+        if(q<1)raf=requestAnimationFrame(tick);
+      }
+      raf=requestAnimationFrame(tick);
+    }
+    $("pBright").onclick=function(){go(0);};
+    $("pDim").onclick=function(){go(1);};
+    draw(0);$("pSay").textContent=L.brightSay;
+    window.SensesPupil={go:go,k:function(){return k;}};
+  })();
+
+  setOrg("eye");
+  select(null);
+
+  /* exposed for checking */
+  window.SensesLab={PARTS:PARTS,STEPS:STEPS,ORGS:ORGS,select:select,show:show,jGo:jGo,setOrg:setOrg,
+    state:function(){return {mode:mode,org:org,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
