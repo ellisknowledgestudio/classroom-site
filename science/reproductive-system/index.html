@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Reproductive System Diagram for KS3 | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive diagram of the human reproductive system for ages 11-14. Tap each organ of the female and male reproductive systems to learn its name and job, follow the journey from egg to baby, and explore puberty, the menstrual cycle and pregnancy.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Baloo 2",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Baloo 2",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Nunito Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Baloo 2",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Baloo 2",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* reproductive system */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+#fig .r-skin{fill:#1B2B5C;stroke:#6F84C4}
+#fig.vm #gF,#fig:not(.vm) #gM{display:none}
+.kind.cells{background:#F6E7BD}.kind.tube{background:#F0A696}.kind.organ{background:#F4A9A6}.kind.gland{background:#8FD3A0}.kind.layer{background:#E79A93}.kind.muscle{background:#9CC3F5}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round;stroke-linejoin:round}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.34);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.6)}
+g[data-o]{outline:none}
+g[data-o]:focus-visible .hit:not(.hitv),.hit:not(.hitv):focus-visible{stroke:#fff;stroke-width:3.5}
+g[data-o]:focus-visible .hitv{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:not(.hitv):hover{fill:rgba(255,255,255,.2)}.hitv:hover{stroke:rgba(255,255,255,.28)}.hit:not(.hitv).on:hover{fill:rgba(244,185,66,.34)}.hitv.on:hover{stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .r-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .r-dot{fill:#F4B942}
+#fig .r-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins .pins,#fig.journey .pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:#FFF3D0;stroke:#0F1C3F;stroke-width:2.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+#emb{display:none;pointer-events:none}
+#fig.grow #emb{display:block}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid{margin:12px 0}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 2px}
+.asay{text-align:center;margin:8px 0 0;min-height:4.5em}
+.cap{font-size:14px;color:var(--muted);text-align:center;margin:6px 0 0}
+#cy .cb{opacity:.3;transition:opacity .3s}
+#cy.s1 .b1,#cy.s2 .b2,#cy.s3 .b3,#cy.s4 .b4{opacity:1}
+#more h2{margin-top:1em}
+#more h2:first-child{margin-top:.3em}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin,#cy .cb{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › Reproductive System Explorer</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Reproductive System Explorer</h1>
+  <p class="lead">Your reproductive system is the set of organs that can make a baby. Tap any part to see what it does, then follow the journey from an egg cell to a newborn baby. Ages 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Reproductive System Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the organs</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">From egg to baby</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Puberty, cycle and pregnancy</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Parts of the reproductive system"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" id="viewbar" role="group" aria-label="Diagram options">
+            <button class="seg" id="vF" aria-pressed="true">Female</button>
+            <button class="seg" id="vM" aria-pressed="false">Male</button>
+            <button class="seg r" id="pinBtn" aria-pressed="true">Numbers</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="0 0 640 600" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Diagrams of the human reproductive systems, seen from the front. Female: ovaries, oviducts, uterus, cervix and vagina. Male: testes, scrotum, sperm ducts, glands, urethra and penis."><style>.r-skin{fill:#EEF1F8;stroke:#8E9AC0;stroke-width:2.5;stroke-linejoin:round}.r-wall{fill:#EFA9A0;stroke:#7A3038;stroke-width:3.5;stroke-linejoin:round}.r-lin{fill:#C0606A;stroke:#7A3038;stroke-width:1.5;stroke-linejoin:round}.r-cav{fill:#FBE9E4;stroke:#7A3038;stroke-width:1.5;stroke-linejoin:round}.r-cx{fill:#D98890;stroke:#7A3038;stroke-width:3;stroke-linejoin:round}.r-tu{fill:none;stroke:#7A3038;stroke-linecap:round;stroke-linejoin:round}.r-t{fill:none;stroke:#F4B6A8;stroke-linecap:round;stroke-linejoin:round}.r-ov{fill:#F6D9A8;stroke:#A8873A;stroke-width:3}.r-fol{fill:#fff;stroke:#A8873A;stroke-width:1.5}.r-lig{fill:none;stroke:#B98A70;stroke-width:4;stroke-linecap:round}.r-bl{fill:#D9DDEA;stroke:#8E9AC0;stroke-width:3;stroke-linejoin:round}.r-gl{fill:#A9D8B8;stroke:#3F7F5A;stroke-width:3;stroke-linejoin:round}.r-du{fill:none;stroke:#5B3F8A;stroke-linecap:round;stroke-linejoin:round}.r-d{fill:none;stroke:#CDB4EC;stroke-linecap:round;stroke-linejoin:round}.r-uu{fill:none;stroke:#A8873A;stroke-linecap:round}.r-u{fill:none;stroke:#F3D676;stroke-linecap:round}.r-sk{fill:#F7DCCB;stroke:#B98A70;stroke-width:3;stroke-linejoin:round}.r-te{fill:#F2C7A5;stroke:#8A5A3C;stroke-width:3}.r-hl{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.45}.r-lead{stroke:#0F1C3F;stroke-width:1.6;fill:none}.r-dot{fill:#0F1C3F}.r-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}.r-pin text{font:800 17px "Baloo 2",Arial,sans-serif;fill:#0F1C3F;text-anchor:middle}.r-fl{fill:#D6ECF8;stroke:#6FA8C8;stroke-width:2}.r-pl{fill:#A8434C;stroke:#6B2630;stroke-width:2.5;stroke-linejoin:round}.r-cord{fill:none;stroke:#8A5A3C;stroke-linecap:round}.r-cordi{fill:none;stroke:#E9B7A0;stroke-linecap:round}.r-baby{fill:#F2C7A5;stroke:#8A5A3C;stroke-width:2.5;stroke-linejoin:round}.r-nuc{fill:#6C4FA3;stroke:#3D2A66;stroke-width:2}.r-cyt{fill:#FBE3B4;stroke:#A8873A;stroke-width:2.5}.r-jel{fill:#EAF3FB;stroke:#6FA8C8;stroke-width:2.5;stroke-dasharray:5 4}.r-sp{fill:#CFE0F7;stroke:#2F568F;stroke-width:2.5;stroke-linejoin:round}.r-mit{fill:#F0A696;stroke:#7A3038;stroke-width:1.5}</style><g id="gF"><path class="r-skin" d="M150 0C150 120 120 220 100 330L100 600L540 600L540 330C520 220 490 120 490 0Z"/><path class="r-lig" d="M402 250L488 270"/><path class="r-tu" stroke-width="17" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><path class="r-tu" stroke-width="4" d="M550 236l-12 14M550 236l2 17M550 236l13 11"/><path class="r-t" stroke-width="10" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><ellipse class="r-ov" cx="520" cy="274" rx="36" ry="25"/><circle class="r-fol" cx="506" cy="270" r="6"/><circle class="r-fol" cx="524" cy="282" r="5"/><circle class="r-fol" cx="536" cy="268" r="7"/><circle class="r-fol" cx="520" cy="262" r="3.5"/><g transform="translate(640 0) scale(-1 1)"><path class="r-lig" d="M402 250L488 270"/><path class="r-tu" stroke-width="17" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><path class="r-tu" stroke-width="4" d="M550 236l-12 14M550 236l2 17M550 236l13 11"/><path class="r-t" stroke-width="10" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><ellipse class="r-ov" cx="520" cy="274" rx="36" ry="25"/><circle class="r-fol" cx="506" cy="270" r="6"/><circle class="r-fol" cx="524" cy="282" r="5"/><circle class="r-fol" cx="536" cy="268" r="7"/><circle class="r-fol" cx="520" cy="262" r="3.5"/></g><path class="r-wall" d="M286 404L354 404L354 548Q354 556 346 556L294 556Q286 556 286 548Z"/><path class="r-cav" d="M304 414L336 414L336 556L304 556Z"/><path class="r-wall" d="M320 180C380 180 410 200 404 240C398 290 356 330 350 372L290 372C284 330 242 290 236 240C230 200 260 180 320 180Z"/><path class="r-lin" d="M320 204C362 204 384 216 380 242C374 282 342 318 338 366L302 366C298 318 266 282 260 242C256 216 278 204 320 204Z"/><path class="r-cav" d="M320 220C348 220 364 228 360 244C354 276 330 312 328 366L312 366C310 312 286 276 280 244C276 228 292 220 320 220Z"/><path class="r-cx" d="M288 370L352 370C352 392 346 406 342 416L298 416C294 406 288 392 288 370Z"/><path class="r-cav" d="M314 366L326 366L326 418L314 418Z" stroke="none"/><path class="r-hl" d="M250 232C250 210 270 196 296 192"/><g id="emb"><ellipse class="r-baby" cx="322" cy="262" rx="17" ry="22"/><circle class="r-baby" cx="318" cy="292" r="14"/></g><path class="hit" data-o="vagina" tabindex="0" role="button" aria-label="Vagina" d="M286 418L354 418L354 556L286 556Z"/><path class="hit" data-o="uterus" tabindex="0" role="button" aria-label="Uterus" d="M320 180C380 180 410 200 404 240C398 290 356 330 350 372L290 372C284 330 242 290 236 240C230 200 260 180 320 180Z"/><path class="hit" data-o="lining" tabindex="0" role="button" aria-label="Uterus lining" fill-rule="evenodd" d="M320 204C362 204 384 216 380 242C374 282 342 318 338 366L302 366C298 318 266 282 260 242C256 216 278 204 320 204Z M320 220C348 220 364 228 360 244C354 276 330 312 328 366L312 366C310 312 286 276 280 244C276 228 292 220 320 220Z"/><path class="hit" data-o="cervix" tabindex="0" role="button" aria-label="Cervix" d="M288 370L352 370C352 392 346 406 342 416L298 416C294 406 288 392 288 370Z"/><g tabindex="0" role="button" aria-label="Oviduct" data-o="oviduct"><path class="hit hitv" data-o="oviduct" stroke-width="26" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><g transform="translate(640 0) scale(-1 1)"><path class="hit hitv" data-o="oviduct" stroke-width="26" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/></g></g><g tabindex="0" role="button" aria-label="Ovary" data-o="ovary"><ellipse class="hit" data-o="ovary" cx="520" cy="274" rx="38" ry="27"/><g transform="translate(640 0) scale(-1 1)"><ellipse class="hit" data-o="ovary" cx="520" cy="274" rx="38" ry="27"/></g></g><g class="pins"><g class="pin" data-o="ovary"><path class="r-lead" d="M606 274L544 274"/><circle class="r-dot" cx="544" cy="274" r="4"/><g class="r-pin" transform="translate(606 274) scale(1.3)"><circle r="16"/><text y="6">1</text></g></g><g class="pin" data-o="oviduct"><path class="r-lead" d="M34 150L148 168"/><circle class="r-dot" cx="148" cy="168" r="4"/><g class="r-pin" transform="translate(34 150) scale(1.3)"><circle r="16"/><text y="6">2</text></g></g><g class="pin" data-o="uterus"><path class="r-lead" d="M34 250L246 250"/><circle class="r-dot" cx="246" cy="250" r="4"/><g class="r-pin" transform="translate(34 250) scale(1.3)"><circle r="16"/><text y="6">3</text></g></g><g class="pin" data-o="lining"><path class="r-lead" d="M606 350L371 252"/><circle class="r-dot" cx="371" cy="252" r="4"/><g class="r-pin" transform="translate(606 350) scale(1.3)"><circle r="16"/><text y="6">4</text></g></g><g class="pin" data-o="cervix"><path class="r-lead" d="M34 392L298 392"/><circle class="r-dot" cx="298" cy="392" r="4"/><g class="r-pin" transform="translate(34 392) scale(1.3)"><circle r="16"/><text y="6">5</text></g></g><g class="pin" data-o="vagina"><path class="r-lead" d="M606 480L346 480"/><circle class="r-dot" cx="346" cy="480" r="4"/><g class="r-pin" transform="translate(606 480) scale(1.3)"><circle r="16"/><text y="6">6</text></g></g></g></g><g id="gM"><path class="r-skin" d="M140 0C142 140 130 260 120 360L120 600L520 600L520 360C510 260 498 140 500 0Z"/><path class="r-bl" d="M320 96C372 96 392 130 384 166C378 196 344 214 320 214C296 214 262 196 256 166C248 130 268 96 320 96Z"/><path class="r-sk" d="M226 440C200 470 204 548 262 566C290 574 350 574 378 566C436 548 440 470 414 440C380 420 260 420 226 440Z"/><ellipse class="r-te" cx="386" cy="500" rx="30" ry="40"/><path class="r-hl" d="M372 478C366 490 366 506 370 518"/><g transform="translate(640 0) scale(-1 1)"><ellipse class="r-te" cx="386" cy="500" rx="30" ry="40"/><path class="r-hl" d="M372 478C366 490 366 506 370 518"/></g><path class="r-du" stroke-width="13" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><path class="r-d" stroke-width="7" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><g transform="translate(640 0) scale(-1 1)"><path class="r-du" stroke-width="13" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><path class="r-d" stroke-width="7" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/></g><ellipse class="r-gl" cx="378" cy="216" rx="27" ry="13" transform="rotate(24 378 216)"/><g transform="translate(640 0) scale(-1 1)"><ellipse class="r-gl" cx="378" cy="216" rx="27" ry="13" transform="rotate(24 378 216)"/></g><ellipse class="r-gl" cx="320" cy="246" rx="34" ry="27"/><path class="r-sk" d="M288 286L352 286L352 452Q352 484 320 484Q288 484 288 452Z"/><path class="r-uu" stroke-width="12" d="M320 208L320 476"/><path class="r-u" stroke-width="6" d="M320 208L320 476"/><g tabindex="0" role="button" aria-label="Scrotum" data-o="scrotum"><path data-o="scrotum" class="hit" d="M226 440C200 470 204 548 262 566C290 574 350 574 378 566C436 548 440 470 414 440C380 420 260 420 226 440Z"/></g><g tabindex="0" role="button" aria-label="Testis" data-o="testis"><ellipse data-o="testis" class="hit" cx="386" cy="500" rx="32" ry="42"/><g transform="translate(640 0) scale(-1 1)"><ellipse data-o="testis" class="hit" cx="386" cy="500" rx="32" ry="42"/></g></g><g tabindex="0" role="button" aria-label="Sperm duct" data-o="spermduct"><path data-o="spermduct" class="hit hitv" stroke-width="24" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><g transform="translate(640 0) scale(-1 1)"><path data-o="spermduct" class="hit hitv" stroke-width="24" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/></g></g><g tabindex="0" role="button" aria-label="Glands" data-o="glands"><ellipse data-o="glands" class="hit" cx="378" cy="216" rx="29" ry="15" transform="rotate(24 378 216)"/><g transform="translate(640 0) scale(-1 1)"><ellipse data-o="glands" class="hit" cx="378" cy="216" rx="29" ry="15" transform="rotate(24 378 216)"/></g><ellipse data-o="glands" class="hit" cx="320" cy="246" rx="36" ry="29"/></g><g tabindex="0" role="button" aria-label="Penis" data-o="penis"><path data-o="penis" class="hit" d="M288 286L352 286L352 452Q352 484 320 484Q288 484 288 452Z"/></g><g tabindex="0" role="button" aria-label="Urethra" data-o="urethra"><path data-o="urethra" class="hit hitv" stroke-width="18" d="M320 208L320 476"/></g><g class="pins"><g class="pin" data-o="testis"><path class="r-lead" d="M606 508L410 504"/><circle class="r-dot" cx="410" cy="504" r="4"/><g class="r-pin" transform="translate(606 508) scale(1.3)"><circle r="16"/><text y="6">1</text></g></g><g class="pin" data-o="scrotum"><path class="r-lead" d="M34 556L300 560"/><circle class="r-dot" cx="300" cy="560" r="4"/><g class="r-pin" transform="translate(34 556) scale(1.3)"><circle r="16"/><text y="6">2</text></g></g><g class="pin" data-o="spermduct"><path class="r-lead" d="M34 300L185 300"/><circle class="r-dot" cx="185" cy="300" r="4"/><g class="r-pin" transform="translate(34 300) scale(1.3)"><circle r="16"/><text y="6">3</text></g></g><g class="pin" data-o="glands"><path class="r-lead" d="M606 226L352 250"/><circle class="r-dot" cx="352" cy="250" r="4"/><g class="r-pin" transform="translate(606 226) scale(1.3)"><circle r="16"/><text y="6">4</text></g></g><g class="pin" data-o="urethra"><path class="r-lead" d="M34 410L318 410"/><circle class="r-dot" cx="318" cy="410" r="4"/><g class="r-pin" transform="translate(34 410) scale(1.3)"><circle r="16"/><text y="6">5</text></g></g><g class="pin" data-o="penis"><path class="r-lead" d="M606 340L346 340"/><circle class="r-dot" cx="346" cy="340" r="4"/><g class="r-pin" transform="translate(606 340) scale(1.3)"><circle r="16"/><text y="6">6</text></g></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="9" cx="522" cy="268"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Back</button>
+            <button class="btn" id="jNext">Next</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Play all</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="gametes">Sex cells</h2><p>Sex cells are also called gametes. The male gamete is the sperm cell. The female gamete is the egg cell. Each one is a specialised cell, with a shape that suits its job.</p><div class="vgrid"><div class="light"><svg role="img" aria-label="A sperm cell with a head, a middle piece and a tail, next to a much larger egg cell with a nucleus, cytoplasm and a jelly coat" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg"><path d="M150 110C190 96 214 126 252 110C270 102 280 108 290 112" fill="none" stroke="#2F568F" stroke-width="5" stroke-linecap="round"/><rect class="r-sp" x="100" y="99" width="52" height="22" rx="10"/><ellipse class="r-mit" cx="110" cy="110" rx="4" ry="7"/><ellipse class="r-mit" cx="122" cy="110" rx="4" ry="7"/><ellipse class="r-mit" cx="134" cy="110" rx="4" ry="7"/><path class="r-sp" d="M102 110C102 86 70 82 48 96C38 102 38 118 48 124C70 138 102 134 102 110Z"/><ellipse class="r-nuc" cx="74" cy="110" rx="20" ry="13"/><path class="r-lead" d="M74 40L74 104"/><circle class="r-dot" cx="74" cy="104" r="3.5"/><g class="r-pin" transform="translate(74 40) scale(1.3)"><circle r="14"/><text y="6">1</text></g><path class="r-lead" d="M126 190L126 116"/><circle class="r-dot" cx="126" cy="116" r="3.5"/><g class="r-pin" transform="translate(126 190) scale(1.3)"><circle r="14"/><text y="6">2</text></g><path class="r-lead" d="M232 50L226 112"/><circle class="r-dot" cx="226" cy="112" r="3.5"/><g class="r-pin" transform="translate(232 50) scale(1.3)"><circle r="14"/><text y="6">3</text></g><circle class="r-jel" cx="446" cy="150" r="128"/><circle class="r-cyt" cx="446" cy="150" r="104"/><circle cx="392" cy="104" r="5" fill="#F4B942" opacity=".7"/><circle cx="500" cy="112" r="5" fill="#F4B942" opacity=".7"/><circle cx="412" cy="206" r="5" fill="#F4B942" opacity=".7"/><circle cx="492" cy="200" r="5" fill="#F4B942" opacity=".7"/><circle cx="446" cy="76" r="5" fill="#F4B942" opacity=".7"/><circle cx="378" cy="156" r="5" fill="#F4B942" opacity=".7"/><circle cx="516" cy="160" r="5" fill="#F4B942" opacity=".7"/><circle class="r-nuc" cx="446" cy="150" r="30"/><path class="r-lead" d="M322 262L430 160"/><circle class="r-dot" cx="430" cy="160" r="3.5"/><g class="r-pin" transform="translate(322 262) scale(1.3)"><circle r="14"/><text y="6">4</text></g><path class="r-lead" d="M300 180L378 176"/><circle class="r-dot" cx="378" cy="176" r="3.5"/><g class="r-pin" transform="translate(300 180) scale(1.3)"><circle r="14"/><text y="6">5</text></g><path class="r-lead" d="M574 36L540 66"/><circle class="r-dot" cx="540" cy="66" r="3.5"/><g class="r-pin" transform="translate(574 36) scale(1.3)"><circle r="14"/><text y="6">6</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Head.</b> Contains the nucleus, which carries genetic information from the father. The tip has enzymes that help the sperm get into the egg.</span></li><li><span class="num">2</span><span><b>Middle piece.</b> Packed with mitochondria. They release the energy the sperm needs to swim.</span></li><li><span class="num">3</span><span><b>Tail.</b> Whips from side to side to push the sperm along.</span></li><li><span class="num">4</span><span><b>Nucleus.</b> Carries genetic information from the mother.</span></li><li><span class="num">5</span><span><b>Cytoplasm.</b> Contains a store of food for the first few cell divisions.</span></li><li><span class="num">6</span><span><b>Jelly coat.</b> A layer round the egg. It changes after one sperm gets in, so no others can follow.</span></li></ol></div><p class="muted">Not drawn to scale. An egg is about 0.1 mm across, which is just big enough to see. A sperm is about 0.05 mm long, and most of that is tail.</p><h2 id="puberty">Puberty</h2><p>Puberty is the time when a child&#x27;s body changes into an adult&#x27;s body and the reproductive system starts to work. It is started by hormones. It often begins between the ages of 8 and 14, and everyone develops at their own pace.</p><div class="cards"><div class="ecard"><h3>Boys</h3><div class="eq">Main hormone: testosterone</div><dl><dt>Made in</dt><dd>The testes</dd><dt>Voice</dt><dd>Breaks and gets deeper</dd><dt>Hair</dt><dd>Grows on the face, chest, underarms and around the penis</dd><dt>Body</dt><dd>Shoulders broaden and muscles develop</dd><dt>Reproductive system</dt><dd>Testes and penis grow. Testes start to make sperm</dd></dl></div><div class="ecard"><h3>Girls</h3><div class="eq">Main hormone: oestrogen</div><dl><dt>Made in</dt><dd>The ovaries</dd><dt>Breasts</dt><dd>Develop</dd><dt>Hips</dt><dd>Widen</dd><dt>Hair</dt><dd>Grows under the arms and around the vagina</dd><dt>Reproductive system</dt><dd>Ovaries start to release eggs. Periods begin</dd></dl></div><div class="ecard"><h3>Everyone</h3><div class="eq">Changes for all</div><dl><dt>Height</dt><dd>A growth spurt</dd><dt>Skin</dt><dd>Gets oilier, so spots are common</dd><dt>Sweat</dt><dd>More of it, with a stronger smell</dd><dt>Feelings</dt><dd>Emotions can change quickly</dd></dl></div><div class="ecard"><h3>Hormones</h3><div class="eq">Chemical messengers</div><dl><dt>What they are</dt><dd>Chemicals made by glands</dd><dt>How they travel</dt><dd>In the blood</dd><dt>What starts puberty</dt><dd>A gland in the brain, the pituitary, signals the testes or ovaries</dd></dl></div></div><h2 id="cycle">The menstrual cycle</h2><p>From puberty, the lining of the uterus gets ready for a pregnancy about once a month. If no egg is fertilised, the lining is lost and the cycle starts again. A cycle lasts about 28 days, but it varies from person to person.</p><div class="vgrid"><div><div class="light"><svg role="img" aria-label="A chart of the 28 days of the menstrual cycle. It shows how thick the lining of the uterus is on each day, and an egg released on day 14." id="cy" viewBox="0 0 620 206" xmlns="http://www.w3.org/2000/svg"><rect class="cb b1" x="40.0" y="24" width="96.4" height="146" fill="#F3B2B8"/><rect class="cb b2" x="136.4" y="24" width="154.3" height="146" fill="#FBE3B4"/><rect class="cb b3" x="290.7" y="24" width="19.3" height="146" fill="#F4B942"/><rect class="cb b4" x="310.0" y="24" width="270.0" height="146" fill="#CFE0F7"/><path d="M40.0 170L40.0 96.8L78.6 131.0L136.4 155.4L194.3 128.5L252.1 89.5L300.4 70.0L367.9 60.2L502.9 57.8L560.7 62.6L580.0 89.5L580.0 170Z" fill="#C0606A" stroke="#7A3038" stroke-width="2.5" stroke-linejoin="round"/><path d="M40 170L580 170" stroke="#0F1C3F" stroke-width="2.5"/><path d="M49.6 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="49.6" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">1</text><path d="M68.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M88.2 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M107.5 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M126.8 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="126.8" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">5</text><path d="M146.1 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M165.4 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M184.6 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M203.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M223.2 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="223.2" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">10</text><path d="M242.5 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M261.8 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M281.1 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M300.4 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="300.4" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">14</text><path d="M319.6 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M338.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M358.2 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M377.5 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M396.8 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M416.1 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="416.1" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">20</text><path d="M435.4 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M454.6 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M473.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M493.2 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M512.5 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="512.5" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">25</text><path d="M531.8 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M551.1 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M570.4 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="570.4" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">28</text><circle cx="300.4" cy="46" r="9" fill="#FBE3B4" stroke="#A8873A" stroke-width="2.5"/><circle cx="300.4" cy="46" r="3.5" fill="#6C4FA3"/><g class="r-pin" transform="translate(88 14) scale(1.3)"><circle r="12"/><text y="6">1</text></g><g class="r-pin" transform="translate(213 14) scale(1.3)"><circle r="12"/><text y="6">2</text></g><path class="r-lead" d="M300.4 24L334.4 12"/><g class="r-pin" transform="translate(334 14) scale(1.3)"><circle r="12"/><text y="6">3</text></g><g class="r-pin" transform="translate(445 14) scale(1.3)"><circle r="12"/><text y="6">4</text></g></svg></div><p class="cap">Day of the cycle. The dark red shape shows how thick the lining of the uterus is.</p><div class="brbtns" id="cyBtns"><button class="seg" data-s="1" aria-pressed="false">Days 1 to 5</button><button class="seg" data-s="2" aria-pressed="false">Days 6 to 13</button><button class="seg" data-s="3" aria-pressed="false">Day 14</button><button class="seg" data-s="4" aria-pressed="false">Days 15 to 28</button></div><p class="asay" id="cySay" aria-live="polite"></p></div><ol class="vlist"><li><span class="num">1</span><span><b>Period.</b> The lining of the uterus breaks down. It leaves through the vagina with a little blood. This is menstruation.</span></li><li><span class="num">2</span><span><b>The lining builds up.</b> It grows thick and spongy, with lots of blood vessels. An egg gets ready in an ovary.</span></li><li><span class="num">3</span><span><b>Ovulation.</b> An ovary releases an egg into the oviduct.</span></li><li><span class="num">4</span><span><b>The lining stays thick.</b> It is ready for an embryo. If no embryo arrives, the lining breaks down and the next cycle begins.</span></li></ol></div><p class="muted">Hormones control the cycle. Oestrogen makes the lining build up, and progesterone keeps it thick. Periods usually start between the ages of 10 and 15. They stop for good at the menopause, at around the age of 50.</p><h2 id="fetus">A baby in the uterus</h2><p>From about 8 weeks until birth, a developing baby is called a fetus. Everything it needs comes from its mother through the placenta.</p><div class="vgrid"><div class="light"><svg role="img" aria-label="A fetus curled up, head down, inside the uterus. It is joined to the placenta by the umbilical cord and surrounded by amniotic fluid." viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"><path class="r-wall" d="M300 14C424 14 478 100 478 184C478 276 388 322 346 336L346 392L254 392L254 336C212 322 122 276 122 184C122 100 176 14 300 14Z"/><path class="r-fl" d="M300 40C404 40 452 112 452 184C452 258 372 300 322 316L278 316C228 300 148 258 148 184C148 112 196 40 300 40Z"/><path class="r-cx" d="M276 314L324 314L330 368L270 368Z"/><path class="r-cav" stroke="none" d="M294 366L306 366L306 392L294 392Z"/><path class="r-pl" d="M160 150C170 96 214 56 276 44C262 62 250 70 228 86C202 106 190 126 184 168C172 166 162 160 160 150Z"/><path class="r-cord" stroke-width="10" d="M214 104C250 110 236 150 262 160C282 168 280 190 298 196"/><path class="r-cordi" stroke-width="5" d="M214 104C250 110 236 150 262 160C282 168 280 190 298 196"/><path class="r-baby" d="M300 150C352 138 396 170 392 222C390 252 370 270 344 270C352 250 344 236 330 232C316 246 300 262 290 270C262 262 254 220 266 190C272 170 284 156 300 150Z"/><path class="r-baby" d="M372 176C404 170 420 196 408 218C398 236 372 236 356 226"/><circle class="r-baby" cx="306" cy="270" r="36"/><path class="r-baby" d="M318 196C304 204 300 220 310 232" fill="none"/><path d="M292 280q6 4 12 0" fill="none" stroke="#8A5A3C" stroke-width="2" stroke-linecap="round"/><path class="r-lead" d="M40 70L196 110"/><circle class="r-dot" cx="196" cy="110" r="3.5"/><g class="r-pin" transform="translate(40 70) scale(1.3)"><circle r="14"/><text y="6">1</text></g><path class="r-lead" d="M40 150L248 148"/><circle class="r-dot" cx="248" cy="148" r="3.5"/><g class="r-pin" transform="translate(40 150) scale(1.3)"><circle r="14"/><text y="6">2</text></g><path class="r-lead" d="M560 110L420 120"/><circle class="r-dot" cx="420" cy="120" r="3.5"/><g class="r-pin" transform="translate(560 110) scale(1.3)"><circle r="14"/><text y="6">3</text></g><path class="r-lead" d="M560 200L384 210"/><circle class="r-dot" cx="384" cy="210" r="3.5"/><g class="r-pin" transform="translate(560 200) scale(1.3)"><circle r="14"/><text y="6">4</text></g><path class="r-lead" d="M40 260L134 220"/><circle class="r-dot" cx="134" cy="220" r="3.5"/><g class="r-pin" transform="translate(40 260) scale(1.3)"><circle r="14"/><text y="6">5</text></g><path class="r-lead" d="M560 344L322 344"/><circle class="r-dot" cx="322" cy="344" r="3.5"/><g class="r-pin" transform="translate(560 344) scale(1.3)"><circle r="14"/><text y="6">6</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Placenta.</b> An organ that grows in the lining of the uterus. Substances pass between the mother&#x27;s blood and the fetus&#x27;s blood here.</span></li><li><span class="num">2</span><span><b>Umbilical cord.</b> Joins the fetus to the placenta. Blood vessels run through it.</span></li><li><span class="num">3</span><span><b>Amniotic fluid.</b> A bag of watery liquid that cushions the fetus from bumps.</span></li><li><span class="num">4</span><span><b>Fetus.</b> By the end of pregnancy it usually lies with its head down, ready to be born.</span></li><li><span class="num">5</span><span><b>Uterus wall.</b> Thick muscle. It contracts during birth.</span></li><li><span class="num">6</span><span><b>Cervix.</b> A ring of muscle that stays closed until birth.</span></li></ol></div><h2>What crosses the placenta</h2><div class="cards"><div class="ecard"><h3>Mother to fetus</h3><div class="eq">Needed to grow</div><dl><dt>Oxygen</dt><dd>For respiration</dd><dt>Glucose and other nutrients</dt><dd>For energy and growth</dd><dt>Antibodies</dt><dd>Give some protection from disease</dd></dl></div><div class="ecard"><h3>Fetus to mother</h3><div class="eq">Waste to remove</div><dl><dt>Carbon dioxide</dt><dd>Made in respiration</dd><dt>Urea</dt><dd>The mother&#x27;s kidneys remove it</dd></dl></div><div class="ecard"><h3>Can cross and cause harm</h3><div class="eq">Things to avoid in pregnancy</div><dl><dt>Alcohol</dt><dd>Can damage the developing brain and organs</dd><dt>Smoking</dt><dd>Nicotine and carbon monoxide cross. The fetus gets less oxygen, so babies are often smaller</dd><dt>Some drugs and viruses</dt><dd>Such as the rubella virus</dd></dl></div></div><p class="muted">The mother&#x27;s blood and the fetus&#x27;s blood flow very close together in the placenta, but they do not mix.</p><h2>Forty weeks</h2><div class="cards"><div class="ecard"><h3>About 8 weeks</h3><div class="eq">Now called a fetus</div><dl><dt>Organs</dt><dd>All the main organs have started to form</dd><dt>Heart</dt><dd>Already beating</dd></dl></div><div class="ecard"><h3>About 20 weeks</h3><div class="eq">Halfway</div><dl><dt>Movement</dt><dd>The mother can feel kicks</dd><dt>Mass</dt><dd>About 300 g</dd></dl></div><div class="ecard"><h3>About 40 weeks</h3><div class="eq">Ready to be born</div><dl><dt>Mass</dt><dd>About 3.4 kg on average</dd><dt>Length</dt><dd>About 50 cm</dd></dl></div></div><p class="muted">Pregnancy is also called gestation. The 40 weeks are counted from the first day of the mother&#x27;s last period.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find printable science packs in our shop →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Parts of the reproductive system", "numbers": "Numbers", "view": "Diagram options", "female": "Female", "male": "Male", "tapTitle": "Tap a part", "tapText": "Tap any part of the diagram, or pick one from the numbered list. Use the Female and Male buttons to swap diagrams.", "keyF": [["Front view.", "You are looking at the organs from the front. They sit low down in the abdomen, between the hips."], ["Cut open.", "The uterus and vagina are drawn cut open so you can see inside."], ["Two of each.", "There are two ovaries and two oviducts, one on each side."]], "keyM": [["Front view.", "You are looking at the organs from the front. The diagram is simplified so every tube can be seen."], ["The grey organ", "is the bladder. It stores urine and is part of the urinary system, but it shows where the tubes go."], ["Two of each.", "There are two testes and two sperm ducts, one on each side."]], "kinds": {"cells": "Makes sex cells", "tube": "Tube", "organ": "Organ", "gland": "Gland", "layer": "Lining", "muscle": "Ring of muscle"}, "facts": "Key facts", "works": "Works with", "words": "Key words:", "more": {"gametes": "See the sex cells", "cycle": "See the menstrual cycle", "fetus": "See a baby in the uterus"}, "step": "Step", "of": "of", "back": "Back", "next": "Next", "again": "Start again", "play": "Play all", "pause": "Pause", "happens": "What happens", "moving": "What to watch", "away": {"grow": "About 40 weeks of growing"}, "cySay": ["Days 1 to 5: the lining of the uterus breaks down and leaves the body. This is a period.", "Days 6 to 13: the lining grows thick again. An egg gets ready in an ovary.", "About day 14: an ovary releases an egg. This is ovulation.", "Days 15 to 28: the lining stays thick. If no embryo arrives, it breaks down and a new cycle starts."]};
+  var PARTS=[{"id": "ovary", "d": "f", "n": 1, "chip": "Ovary", "name": "Ovary", "kind": "cells", "more": "gametes", "job": "There are two ovaries. They store egg cells and, from puberty, release one about every 28 days. They also make the hormone oestrogen.", "facts": ["Each ovary is about the size of an almond.", "A baby girl is born with all of her egg cells already in her ovaries.", "Releasing an egg is called ovulation."], "links": [["oviduct", "A released egg is swept into the oviduct."], ["lining", "Hormones from the ovaries make the lining of the uterus thicken."]], "words": "egg cell, ovulation, oestrogen"}, {"id": "oviduct", "d": "f", "n": 2, "chip": "Oviduct", "name": "Oviduct", "kind": "tube", "job": "A narrow tube that carries an egg from an ovary to the uterus. Fertilisation happens here.", "facts": ["Also called the fallopian tube or egg tube.", "It is about 10 cm long.", "An egg cannot swim. Tiny hairs called cilia line the tube and sweep the egg along.", "The journey to the uterus takes several days."], "links": [["ovary", "It catches the egg released by the ovary."], ["uterus", "It opens into the top of the uterus."]], "words": "oviduct, cilia, fertilisation"}, {"id": "uterus", "d": "f", "n": 3, "chip": "Uterus", "name": "Uterus", "kind": "organ", "more": "fetus", "job": "A muscular organ, also called the womb. This is where a baby develops during pregnancy.", "facts": ["It is about the size and shape of an upside-down pear.", "Its wall is strong muscle that stretches as the baby grows.", "During birth, the muscle contracts to push the baby out."], "links": [["lining", "Its soft inner lining is where an embryo settles."], ["cervix", "The cervix closes the bottom of the uterus."]], "words": "uterus, womb, muscle, contract"}, {"id": "lining", "d": "f", "n": 4, "chip": "Uterus lining", "name": "Uterus lining", "kind": "layer", "more": "cycle", "job": "The soft inner layer of the uterus. It has a rich blood supply. An embryo settles into it and grows.", "facts": ["It grows thick each month, ready for a fertilised egg.", "If no egg is fertilised, the lining breaks down and leaves through the vagina. This is a period, or menstruation.", "During pregnancy, the placenta forms in the lining."], "links": [["uterus", "It lines the inside of the uterus."], ["vagina", "During a period, it leaves the body through the vagina."]], "words": "lining, period, menstruation, implantation"}, {"id": "cervix", "d": "f", "n": 5, "chip": "Cervix", "name": "Cervix", "kind": "muscle", "job": "A ring of muscle at the bottom of the uterus. It is sometimes called the neck of the uterus.", "facts": ["It stays closed during pregnancy and helps to keep the baby in the uterus.", "A narrow opening lets sperm in and lets menstrual blood out.", "During birth it widens to about 10 cm to let the baby through."], "links": [["uterus", "It closes the bottom of the uterus."], ["vagina", "It opens into the top of the vagina."]], "words": "cervix, ring of muscle"}, {"id": "vagina", "d": "f", "n": 6, "chip": "Vagina", "name": "Vagina", "kind": "tube", "job": "A muscular tube that leads from the cervix to the outside of the body.", "facts": ["Sperm are released here during sexual intercourse.", "Menstrual blood leaves the body through it.", "A baby passes through it during birth, so it is also called the birth canal. Its wall can stretch.", "It is separate from the urethra, which carries urine."], "links": [["cervix", "The cervix is at the top of the vagina."], ["lining", "The uterus lining leaves this way during a period."]], "words": "vagina, birth canal"}, {"id": "testis", "d": "m", "n": 1, "chip": "Testis", "name": "Testis", "kind": "cells", "more": "gametes", "job": "There are two testes. From puberty, they make sperm cells. They also make the hormone testosterone.", "facts": ["One is a testis. Two are testes. They are also called testicles.", "From puberty they make sperm all the time: millions every day.", "Each testis is packed with tiny coiled tubes where the sperm are made."], "links": [["scrotum", "The testes hang in the scrotum."], ["spermduct", "Sperm leave each testis along a sperm duct."]], "words": "testis, sperm cell, testosterone"}, {"id": "scrotum", "d": "m", "n": 2, "chip": "Scrotum", "name": "Scrotum", "kind": "organ", "job": "A bag of skin that holds the two testes outside the main part of the body.", "facts": ["Sperm develop best a little below body temperature, at about 35 °C.", "Hanging outside the body keeps the testes cooler than the 37 °C inside.", "Muscles pull the testes closer to the body when it is cold."], "links": [["testis", "It holds and protects the testes."]], "words": "scrotum, temperature"}, {"id": "spermduct", "d": "m", "n": 3, "chip": "Sperm duct", "name": "Sperm duct", "kind": "tube", "job": "A tube that carries sperm from a testis towards the urethra. There are two, one from each testis.", "facts": ["It loops up and round the bladder.", "Muscle in its wall squeezes the sperm along.", "Its scientific name is the vas deferens."], "links": [["testis", "It collects sperm from a testis."], ["glands", "Glands add fluid to the sperm as they pass."], ["urethra", "It joins the urethra."]], "words": "sperm duct, vas deferens"}, {"id": "glands", "d": "m", "n": 4, "chip": "Glands", "name": "Glands", "kind": "gland", "job": "The glands add a fluid to the sperm. The mixture of sperm and fluid is called semen.", "facts": ["The fluid contains sugars. These give the sperm energy for swimming.", "The fluid also lets the sperm swim freely.", "The main glands are the prostate gland and the two seminal vesicles."], "links": [["spermduct", "The sperm ducts bring sperm to the glands."], ["urethra", "Semen passes into the urethra."]], "words": "gland, semen, prostate"}, {"id": "urethra", "d": "m", "n": 5, "chip": "Urethra", "name": "Urethra", "kind": "tube", "job": "A tube that runs through the penis. It carries semen out of the body. It also carries urine from the bladder, but never both at the same time.", "facts": ["A ring of muscle closes the exit from the bladder while semen is passing.", "In males, the urethra is part of two systems: the urinary system and the reproductive system.", "In females, the urethra only carries urine."], "links": [["glands", "Semen enters it near the glands."], ["penis", "It runs along the inside of the penis."]], "words": "urethra, semen, urine"}, {"id": "penis", "d": "m", "n": 6, "chip": "Penis", "name": "Penis", "kind": "organ", "job": "Passes urine out of the body. During sexual intercourse it passes semen into the vagina.", "facts": ["It contains spongy tissue that can fill with blood. This makes it firm, which is called an erection.", "The release of semen is called ejaculation.", "The tip is covered by a fold of skin called the foreskin. Some people have had it removed."], "links": [["urethra", "The urethra runs through the middle of it."]], "words": "penis, erection, ejaculation, foreskin"}];
+  var STEPS=[{"title": "An egg is released", "sum": "About once every 28 days, an ovary releases an egg cell. This is called ovulation.", "on": ["ovary", "oviduct"], "ox": "egg", "pts": ["The egg is swept into the funnel-shaped end of the oviduct.", "Tiny hairs called cilia move it along, because an egg cannot swim.", "An egg lives for about a day unless it is fertilised."]}, {"title": "Sperm arrive", "sum": "During sexual intercourse, semen is released into the vagina. It contains millions of sperm cells.", "on": ["vagina", "cervix", "uterus"], "ox": "sperm", "pts": ["The sperm swim through the cervix, across the uterus and into the oviducts.", "Most do not make it. Only a few hundred get near the egg.", "Sperm can survive for a few days inside the female body."]}, {"title": "Fertilisation", "sum": "In the oviduct, one sperm gets into the egg. The nucleus of the sperm joins with the nucleus of the egg.", "on": ["oviduct"], "ox": "zyg", "pts": ["This is fertilisation.", "The fertilised egg has genetic information from both parents.", "As soon as one sperm is in, the outer layer of the egg changes so that no more can enter."]}, {"title": "The embryo divides", "sum": "The fertilised egg divides into two cells, then four, then eight, and keeps going. It is now called an embryo.", "on": ["oviduct", "uterus"], "ox": "emb", "pts": ["Cilia sweep the embryo along the oviduct towards the uterus.", "The journey takes several days.", "By the time it arrives, it is a tiny ball of cells."]}, {"title": "Implantation", "sum": "The embryo settles into the thick lining of the uterus. This is called implantation.", "on": ["lining"], "ox": "emb", "pts": ["The lining gives the embryo the food and oxygen it needs.", "The placenta starts to form.", "The pregnancy has begun, so the lining is not lost and periods stop."]}, {"title": "Growing in the uterus", "sum": "The embryo grows and its cells specialise to form organs. After about 8 weeks it is called a fetus.", "on": ["uterus"], "ox": "fet", "away": "grow", "grow": true, "pts": ["The placenta passes oxygen and food from the mother's blood to the fetus, and takes waste away.", "The umbilical cord joins the fetus to the placenta.", "A bag of amniotic fluid cushions the fetus.", "Pregnancy lasts about 40 weeks, which is about 9 months."]}, {"title": "Birth", "sum": "The muscle in the wall of the uterus contracts. The cervix widens and the baby is pushed out through the vagina.", "on": ["uterus", "cervix", "vagina"], "ox": "baby", "pts": ["This stage is called labour.", "The baby starts to breathe air. The umbilical cord is clamped and cut. Your navel shows where yours was.", "Afterwards the placenta comes out too. It is called the afterbirth."]}];
+  var OX={"egg": "An egg cell", "sperm": "Sperm cells swimming to the egg", "zyg": "A fertilised egg", "emb": "An embryo: a ball of dividing cells", "fet": "A fetus growing in the uterus", "baby": "A baby being born"},PATHS=["M522 268L550 240C558 222 558 200 552 188", "M320 540L320 380C320 300 322 250 392 222C436 206 470 150 524 164", "M524 164L520 163", "M520 163C470 150 436 206 392 222L352 236", "M352 236L369 256", null, "M320 300L320 552"],DUR=[1600, 3600, 400, 2800, 1000, 0, 2400];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",view="f",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  function drawChips(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)if(PARTS[a].d===view)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\""+(PARTS[a].id===selected?"true":"false")+"\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  }
+  function setView(v){
+    view=v;
+    if(v==="m")fig.classList.add("vm");else fig.classList.remove("vm");
+    $("vF").setAttribute("aria-pressed",v==="f"?"true":"false");
+    $("vM").setAttribute("aria-pressed",v==="m"?"true":"false");
+    drawChips();
+  }
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var k=view==="f"?L.keyF:L.keyM;
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<k.length;a++)h+="<div><b>"+esc(k[a][0])+"</b> "+esc(k[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more)h+="<p><button class=\"btn ghost\" data-more=\""+o.more+"\">"+esc(L.more[o.more])+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    if(id&&BY[id].d!==view)setView(BY[id].d);
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    var m=b.getAttribute("data-more");
+    if(m){show("more");var v=$(m);if(v&&v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+  $("vF").onclick=function(){if(view!=="f"){setView("f");select(null);}};
+  $("vM").onclick=function(){if(view!=="m"){setView("m");select(null);}};
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.moving)+"</b>"+esc(OX[s.ox])+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.grow)fig.classList.add("grow");else fig.classList.remove("grow");
+    if(s.away){away.textContent=L.away[s.away];away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1800);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),exView="f";
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");fig.classList.remove("grow");away.classList.remove("show");cell.classList.remove("show");}
+    if(mode==="explore"&&id!=="explore")exView=view;
+    mode=id;
+    $("viewbar").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      setView(exView);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      setView("f");
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- menstrual cycle model ---------- */
+  var cyStage=1;
+  function setCy(n){
+    cyStage=n;
+    var c=$("cy"),bs=document.querySelectorAll("#cyBtns .seg");
+    c.setAttribute("class","s"+n);
+    for(var a=0;a<bs.length;a++)bs[a].setAttribute("aria-pressed",a===n-1?"true":"false");
+    $("cySay").textContent=L.cySay[n-1];
+  }
+  $("cyBtns").onclick=function(e){
+    var b=e.target.closest?e.target.closest(".seg"):null;
+    if(b)setCy(parseInt(b.getAttribute("data-s"),10));
+  };
+  setCy(1);
+
+  setView("f");
+  select(null);
+
+  /* exposed for checking */
+  window.ReproLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,setView:setView,setCy:setCy,
+    state:function(){return {mode:mode,view:view,selected:selected,step:ji,playing:playing,cycle:cyStage};}};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Διαδραστικό Διάγραμμα Αναπαραγωγικού Συστήματος για το Γυμνάσιο | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό διάγραμμα του αναπαραγωγικού συστήματος του ανθρώπου για ηλικίες 11-14. Πάτησε κάθε όργανο του γυναικείου και του ανδρικού αναπαραγωγικού συστήματος για να μάθεις το όνομα και τον ρόλο του, ακολούθησε τη διαδρομή από το ωάριο ως το μωρό και εξερεύνησε την εφηβεία, τον έμμηνο κύκλο και την εγκυμοσύνη.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Noto Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Manrope",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Noto Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Manrope",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Noto Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Noto Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Manrope",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Manrope",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Noto Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Manrope",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Manrope",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* reproductive system */
+.figbox{height:auto;padding:6px}
+#fig{height:auto}
+#fig .r-skin{fill:#1B2B5C;stroke:#6F84C4}
+#fig.vm #gF,#fig:not(.vm) #gM{display:none}
+.kind.cells{background:#F6E7BD}.kind.tube{background:#F0A696}.kind.organ{background:#F4A9A6}.kind.gland{background:#8FD3A0}.kind.layer{background:#E79A93}.kind.muscle{background:#9CC3F5}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round;stroke-linejoin:round}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.34);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.6)}
+g[data-o]{outline:none}
+g[data-o]:focus-visible .hit:not(.hitv),.hit:not(.hitv):focus-visible{stroke:#fff;stroke-width:3.5}
+g[data-o]:focus-visible .hitv{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:not(.hitv):hover{fill:rgba(255,255,255,.2)}.hitv:hover{stroke:rgba(255,255,255,.28)}.hit:not(.hitv).on:hover{fill:rgba(244,185,66,.34)}.hitv.on:hover{stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .r-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .r-dot{fill:#F4B942}
+#fig .r-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins .pins,#fig.journey .pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:#FFF3D0;stroke:#0F1C3F;stroke-width:2.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+#emb{display:none;pointer-events:none}
+#fig.grow #emb{display:block}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid{margin:12px 0}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 2px}
+.asay{text-align:center;margin:8px 0 0;min-height:4.5em}
+.cap{font-size:14px;color:var(--muted);text-align:center;margin:6px 0 0}
+#cy .cb{opacity:.3;transition:opacity .3s}
+#cy.s1 .b1,#cy.s2 .b2,#cy.s3 .b3,#cy.s4 .b4{opacity:1}
+#more h2{margin-top:1em}
+#more h2:first-child{margin-top:.3em}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin,#cy .cb{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+.chip{font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Φυσικές Επιστήμες</a> › Εξερευνητής Αναπαραγωγικού Συστήματος</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/reproductive-system/" lang="en" hreflang="en">English</a></div>
+  <h1>Εξερευνητής Αναπαραγωγικού Συστήματος</h1>
+  <p class="lead">Το αναπαραγωγικό σου σύστημα είναι τα όργανα που μπορούν να δημιουργήσουν ένα μωρό. Πάτησε ένα μέρος για να δεις τι κάνει, και μετά ακολούθησε τη διαδρομή από ένα ωάριο ως ένα νεογέννητο μωρό. Ηλικίες 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες του Εξερευνητή Αναπαραγωγικού Συστήματος">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε τα όργανα</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Από το ωάριο στο μωρό</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Εφηβεία, κύκλος και εγκυμοσύνη</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Μέρη του αναπαραγωγικού συστήματος"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" id="viewbar" role="group" aria-label="Επιλογές διαγράμματος">
+            <button class="seg" id="vF" aria-pressed="true">Γυναικείο</button>
+            <button class="seg" id="vM" aria-pressed="false">Ανδρικό</button>
+            <button class="seg r" id="pinBtn" aria-pressed="true">Αριθμοί</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="0 0 640 600" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Διαγράμματα του αναπαραγωγικού συστήματος του ανθρώπου, από μπροστά. Γυναικείο: ωοθήκες, ωαγωγοί, μήτρα, τράχηλος και κόλπος. Ανδρικό: όρχεις, όσχεο, σπερματικοί πόροι, αδένες, ουρήθρα και πέος."><style>.r-skin{fill:#EEF1F8;stroke:#8E9AC0;stroke-width:2.5;stroke-linejoin:round}.r-wall{fill:#EFA9A0;stroke:#7A3038;stroke-width:3.5;stroke-linejoin:round}.r-lin{fill:#C0606A;stroke:#7A3038;stroke-width:1.5;stroke-linejoin:round}.r-cav{fill:#FBE9E4;stroke:#7A3038;stroke-width:1.5;stroke-linejoin:round}.r-cx{fill:#D98890;stroke:#7A3038;stroke-width:3;stroke-linejoin:round}.r-tu{fill:none;stroke:#7A3038;stroke-linecap:round;stroke-linejoin:round}.r-t{fill:none;stroke:#F4B6A8;stroke-linecap:round;stroke-linejoin:round}.r-ov{fill:#F6D9A8;stroke:#A8873A;stroke-width:3}.r-fol{fill:#fff;stroke:#A8873A;stroke-width:1.5}.r-lig{fill:none;stroke:#B98A70;stroke-width:4;stroke-linecap:round}.r-bl{fill:#D9DDEA;stroke:#8E9AC0;stroke-width:3;stroke-linejoin:round}.r-gl{fill:#A9D8B8;stroke:#3F7F5A;stroke-width:3;stroke-linejoin:round}.r-du{fill:none;stroke:#5B3F8A;stroke-linecap:round;stroke-linejoin:round}.r-d{fill:none;stroke:#CDB4EC;stroke-linecap:round;stroke-linejoin:round}.r-uu{fill:none;stroke:#A8873A;stroke-linecap:round}.r-u{fill:none;stroke:#F3D676;stroke-linecap:round}.r-sk{fill:#F7DCCB;stroke:#B98A70;stroke-width:3;stroke-linejoin:round}.r-te{fill:#F2C7A5;stroke:#8A5A3C;stroke-width:3}.r-hl{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;opacity:.45}.r-lead{stroke:#0F1C3F;stroke-width:1.6;fill:none}.r-dot{fill:#0F1C3F}.r-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}.r-pin text{font:800 17px "Baloo 2",Arial,sans-serif;fill:#0F1C3F;text-anchor:middle}.r-fl{fill:#D6ECF8;stroke:#6FA8C8;stroke-width:2}.r-pl{fill:#A8434C;stroke:#6B2630;stroke-width:2.5;stroke-linejoin:round}.r-cord{fill:none;stroke:#8A5A3C;stroke-linecap:round}.r-cordi{fill:none;stroke:#E9B7A0;stroke-linecap:round}.r-baby{fill:#F2C7A5;stroke:#8A5A3C;stroke-width:2.5;stroke-linejoin:round}.r-nuc{fill:#6C4FA3;stroke:#3D2A66;stroke-width:2}.r-cyt{fill:#FBE3B4;stroke:#A8873A;stroke-width:2.5}.r-jel{fill:#EAF3FB;stroke:#6FA8C8;stroke-width:2.5;stroke-dasharray:5 4}.r-sp{fill:#CFE0F7;stroke:#2F568F;stroke-width:2.5;stroke-linejoin:round}.r-mit{fill:#F0A696;stroke:#7A3038;stroke-width:1.5}</style><g id="gF"><path class="r-skin" d="M150 0C150 120 120 220 100 330L100 600L540 600L540 330C520 220 490 120 490 0Z"/><path class="r-lig" d="M402 250L488 270"/><path class="r-tu" stroke-width="17" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><path class="r-tu" stroke-width="4" d="M550 236l-12 14M550 236l2 17M550 236l13 11"/><path class="r-t" stroke-width="10" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><ellipse class="r-ov" cx="520" cy="274" rx="36" ry="25"/><circle class="r-fol" cx="506" cy="270" r="6"/><circle class="r-fol" cx="524" cy="282" r="5"/><circle class="r-fol" cx="536" cy="268" r="7"/><circle class="r-fol" cx="520" cy="262" r="3.5"/><g transform="translate(640 0) scale(-1 1)"><path class="r-lig" d="M402 250L488 270"/><path class="r-tu" stroke-width="17" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><path class="r-tu" stroke-width="4" d="M550 236l-12 14M550 236l2 17M550 236l13 11"/><path class="r-t" stroke-width="10" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><ellipse class="r-ov" cx="520" cy="274" rx="36" ry="25"/><circle class="r-fol" cx="506" cy="270" r="6"/><circle class="r-fol" cx="524" cy="282" r="5"/><circle class="r-fol" cx="536" cy="268" r="7"/><circle class="r-fol" cx="520" cy="262" r="3.5"/></g><path class="r-wall" d="M286 404L354 404L354 548Q354 556 346 556L294 556Q286 556 286 548Z"/><path class="r-cav" d="M304 414L336 414L336 556L304 556Z"/><path class="r-wall" d="M320 180C380 180 410 200 404 240C398 290 356 330 350 372L290 372C284 330 242 290 236 240C230 200 260 180 320 180Z"/><path class="r-lin" d="M320 204C362 204 384 216 380 242C374 282 342 318 338 366L302 366C298 318 266 282 260 242C256 216 278 204 320 204Z"/><path class="r-cav" d="M320 220C348 220 364 228 360 244C354 276 330 312 328 366L312 366C310 312 286 276 280 244C276 228 292 220 320 220Z"/><path class="r-cx" d="M288 370L352 370C352 392 346 406 342 416L298 416C294 406 288 392 288 370Z"/><path class="r-cav" d="M314 366L326 366L326 418L314 418Z" stroke="none"/><path class="r-hl" d="M250 232C250 210 270 196 296 192"/><g id="emb"><ellipse class="r-baby" cx="322" cy="262" rx="17" ry="22"/><circle class="r-baby" cx="318" cy="292" r="14"/></g><path class="hit" data-o="vagina" tabindex="0" role="button" aria-label="Κόλπος" d="M286 418L354 418L354 556L286 556Z"/><path class="hit" data-o="uterus" tabindex="0" role="button" aria-label="Μήτρα" d="M320 180C380 180 410 200 404 240C398 290 356 330 350 372L290 372C284 330 242 290 236 240C230 200 260 180 320 180Z"/><path class="hit" data-o="lining" tabindex="0" role="button" aria-label="Ενδομήτριο" fill-rule="evenodd" d="M320 204C362 204 384 216 380 242C374 282 342 318 338 366L302 366C298 318 266 282 260 242C256 216 278 204 320 204Z M320 220C348 220 364 228 360 244C354 276 330 312 328 366L312 366C310 312 286 276 280 244C276 228 292 220 320 220Z"/><path class="hit" data-o="cervix" tabindex="0" role="button" aria-label="Τράχηλος της μήτρας" d="M288 370L352 370C352 392 346 406 342 416L298 416C294 406 288 392 288 370Z"/><g tabindex="0" role="button" aria-label="Ωαγωγός" data-o="oviduct"><path class="hit hitv" data-o="oviduct" stroke-width="26" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/><g transform="translate(640 0) scale(-1 1)"><path class="hit hitv" data-o="oviduct" stroke-width="26" d="M392 222C436 206 470 150 524 164C556 172 562 208 550 236"/></g></g><g tabindex="0" role="button" aria-label="Ωοθήκη" data-o="ovary"><ellipse class="hit" data-o="ovary" cx="520" cy="274" rx="38" ry="27"/><g transform="translate(640 0) scale(-1 1)"><ellipse class="hit" data-o="ovary" cx="520" cy="274" rx="38" ry="27"/></g></g><g class="pins"><g class="pin" data-o="ovary"><path class="r-lead" d="M606 274L544 274"/><circle class="r-dot" cx="544" cy="274" r="4"/><g class="r-pin" transform="translate(606 274) scale(1.3)"><circle r="16"/><text y="6">1</text></g></g><g class="pin" data-o="oviduct"><path class="r-lead" d="M34 150L148 168"/><circle class="r-dot" cx="148" cy="168" r="4"/><g class="r-pin" transform="translate(34 150) scale(1.3)"><circle r="16"/><text y="6">2</text></g></g><g class="pin" data-o="uterus"><path class="r-lead" d="M34 250L246 250"/><circle class="r-dot" cx="246" cy="250" r="4"/><g class="r-pin" transform="translate(34 250) scale(1.3)"><circle r="16"/><text y="6">3</text></g></g><g class="pin" data-o="lining"><path class="r-lead" d="M606 350L371 252"/><circle class="r-dot" cx="371" cy="252" r="4"/><g class="r-pin" transform="translate(606 350) scale(1.3)"><circle r="16"/><text y="6">4</text></g></g><g class="pin" data-o="cervix"><path class="r-lead" d="M34 392L298 392"/><circle class="r-dot" cx="298" cy="392" r="4"/><g class="r-pin" transform="translate(34 392) scale(1.3)"><circle r="16"/><text y="6">5</text></g></g><g class="pin" data-o="vagina"><path class="r-lead" d="M606 480L346 480"/><circle class="r-dot" cx="346" cy="480" r="4"/><g class="r-pin" transform="translate(606 480) scale(1.3)"><circle r="16"/><text y="6">6</text></g></g></g></g><g id="gM"><path class="r-skin" d="M140 0C142 140 130 260 120 360L120 600L520 600L520 360C510 260 498 140 500 0Z"/><path class="r-bl" d="M320 96C372 96 392 130 384 166C378 196 344 214 320 214C296 214 262 196 256 166C248 130 268 96 320 96Z"/><path class="r-sk" d="M226 440C200 470 204 548 262 566C290 574 350 574 378 566C436 548 440 470 414 440C380 420 260 420 226 440Z"/><ellipse class="r-te" cx="386" cy="500" rx="30" ry="40"/><path class="r-hl" d="M372 478C366 490 366 506 370 518"/><g transform="translate(640 0) scale(-1 1)"><ellipse class="r-te" cx="386" cy="500" rx="30" ry="40"/><path class="r-hl" d="M372 478C366 490 366 506 370 518"/></g><path class="r-du" stroke-width="13" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><path class="r-d" stroke-width="7" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><g transform="translate(640 0) scale(-1 1)"><path class="r-du" stroke-width="13" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><path class="r-d" stroke-width="7" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/></g><ellipse class="r-gl" cx="378" cy="216" rx="27" ry="13" transform="rotate(24 378 216)"/><g transform="translate(640 0) scale(-1 1)"><ellipse class="r-gl" cx="378" cy="216" rx="27" ry="13" transform="rotate(24 378 216)"/></g><ellipse class="r-gl" cx="320" cy="246" rx="34" ry="27"/><path class="r-sk" d="M288 286L352 286L352 452Q352 484 320 484Q288 484 288 452Z"/><path class="r-uu" stroke-width="12" d="M320 208L320 476"/><path class="r-u" stroke-width="6" d="M320 208L320 476"/><g tabindex="0" role="button" aria-label="Όσχεο" data-o="scrotum"><path data-o="scrotum" class="hit" d="M226 440C200 470 204 548 262 566C290 574 350 574 378 566C436 548 440 470 414 440C380 420 260 420 226 440Z"/></g><g tabindex="0" role="button" aria-label="Όρχις" data-o="testis"><ellipse data-o="testis" class="hit" cx="386" cy="500" rx="32" ry="42"/><g transform="translate(640 0) scale(-1 1)"><ellipse data-o="testis" class="hit" cx="386" cy="500" rx="32" ry="42"/></g></g><g tabindex="0" role="button" aria-label="Σπερματικός πόρος" data-o="spermduct"><path data-o="spermduct" class="hit hitv" stroke-width="24" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/><g transform="translate(640 0) scale(-1 1)"><path data-o="spermduct" class="hit hitv" stroke-width="24" d="M386 462C392 420 452 360 456 280C460 200 430 150 400 160C380 168 384 200 372 222L350 240"/></g></g><g tabindex="0" role="button" aria-label="Αδένες" data-o="glands"><ellipse data-o="glands" class="hit" cx="378" cy="216" rx="29" ry="15" transform="rotate(24 378 216)"/><g transform="translate(640 0) scale(-1 1)"><ellipse data-o="glands" class="hit" cx="378" cy="216" rx="29" ry="15" transform="rotate(24 378 216)"/></g><ellipse data-o="glands" class="hit" cx="320" cy="246" rx="36" ry="29"/></g><g tabindex="0" role="button" aria-label="Πέος" data-o="penis"><path data-o="penis" class="hit" d="M288 286L352 286L352 452Q352 484 320 484Q288 484 288 452Z"/></g><g tabindex="0" role="button" aria-label="Ουρήθρα" data-o="urethra"><path data-o="urethra" class="hit hitv" stroke-width="18" d="M320 208L320 476"/></g><g class="pins"><g class="pin" data-o="testis"><path class="r-lead" d="M606 508L410 504"/><circle class="r-dot" cx="410" cy="504" r="4"/><g class="r-pin" transform="translate(606 508) scale(1.3)"><circle r="16"/><text y="6">1</text></g></g><g class="pin" data-o="scrotum"><path class="r-lead" d="M34 556L300 560"/><circle class="r-dot" cx="300" cy="560" r="4"/><g class="r-pin" transform="translate(34 556) scale(1.3)"><circle r="16"/><text y="6">2</text></g></g><g class="pin" data-o="spermduct"><path class="r-lead" d="M34 300L185 300"/><circle class="r-dot" cx="185" cy="300" r="4"/><g class="r-pin" transform="translate(34 300) scale(1.3)"><circle r="16"/><text y="6">3</text></g></g><g class="pin" data-o="glands"><path class="r-lead" d="M606 226L352 250"/><circle class="r-dot" cx="352" cy="250" r="4"/><g class="r-pin" transform="translate(606 226) scale(1.3)"><circle r="16"/><text y="6">4</text></g></g><g class="pin" data-o="urethra"><path class="r-lead" d="M34 410L318 410"/><circle class="r-dot" cx="318" cy="410" r="4"/><g class="r-pin" transform="translate(34 410) scale(1.3)"><circle r="16"/><text y="6">5</text></g></g><g class="pin" data-o="penis"><path class="r-lead" d="M606 340L346 340"/><circle class="r-dot" cx="346" cy="340" r="4"/><g class="r-pin" transform="translate(606 340) scale(1.3)"><circle r="16"/><text y="6">6</text></g></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="9" cx="522" cy="268"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Πίσω</button>
+            <button class="btn" id="jNext">Επόμενο</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Αναπαραγωγή</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="gametes">Γεννητικά κύτταρα</h2><p>Τα γεννητικά κύτταρα λέγονται και γαμέτες. Ο αρσενικός γαμέτης είναι το σπερματοζωάριο. Ο θηλυκός γαμέτης είναι το ωάριο. Το καθένα είναι ένα εξειδικευμένο κύτταρο, με σχήμα που ταιριάζει στη δουλειά του.</p><div class="vgrid"><div class="light"><svg role="img" aria-label="Ένα σπερματοζωάριο με κεφαλή, μέσο τμήμα και ουρά, δίπλα σε ένα πολύ μεγαλύτερο ωάριο με πυρήνα, κυτταρόπλασμα και προστατευτικό περίβλημα" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg"><path d="M150 110C190 96 214 126 252 110C270 102 280 108 290 112" fill="none" stroke="#2F568F" stroke-width="5" stroke-linecap="round"/><rect class="r-sp" x="100" y="99" width="52" height="22" rx="10"/><ellipse class="r-mit" cx="110" cy="110" rx="4" ry="7"/><ellipse class="r-mit" cx="122" cy="110" rx="4" ry="7"/><ellipse class="r-mit" cx="134" cy="110" rx="4" ry="7"/><path class="r-sp" d="M102 110C102 86 70 82 48 96C38 102 38 118 48 124C70 138 102 134 102 110Z"/><ellipse class="r-nuc" cx="74" cy="110" rx="20" ry="13"/><path class="r-lead" d="M74 40L74 104"/><circle class="r-dot" cx="74" cy="104" r="3.5"/><g class="r-pin" transform="translate(74 40) scale(1.3)"><circle r="14"/><text y="6">1</text></g><path class="r-lead" d="M126 190L126 116"/><circle class="r-dot" cx="126" cy="116" r="3.5"/><g class="r-pin" transform="translate(126 190) scale(1.3)"><circle r="14"/><text y="6">2</text></g><path class="r-lead" d="M232 50L226 112"/><circle class="r-dot" cx="226" cy="112" r="3.5"/><g class="r-pin" transform="translate(232 50) scale(1.3)"><circle r="14"/><text y="6">3</text></g><circle class="r-jel" cx="446" cy="150" r="128"/><circle class="r-cyt" cx="446" cy="150" r="104"/><circle cx="392" cy="104" r="5" fill="#F4B942" opacity=".7"/><circle cx="500" cy="112" r="5" fill="#F4B942" opacity=".7"/><circle cx="412" cy="206" r="5" fill="#F4B942" opacity=".7"/><circle cx="492" cy="200" r="5" fill="#F4B942" opacity=".7"/><circle cx="446" cy="76" r="5" fill="#F4B942" opacity=".7"/><circle cx="378" cy="156" r="5" fill="#F4B942" opacity=".7"/><circle cx="516" cy="160" r="5" fill="#F4B942" opacity=".7"/><circle class="r-nuc" cx="446" cy="150" r="30"/><path class="r-lead" d="M322 262L430 160"/><circle class="r-dot" cx="430" cy="160" r="3.5"/><g class="r-pin" transform="translate(322 262) scale(1.3)"><circle r="14"/><text y="6">4</text></g><path class="r-lead" d="M300 180L378 176"/><circle class="r-dot" cx="378" cy="176" r="3.5"/><g class="r-pin" transform="translate(300 180) scale(1.3)"><circle r="14"/><text y="6">5</text></g><path class="r-lead" d="M574 36L540 66"/><circle class="r-dot" cx="540" cy="66" r="3.5"/><g class="r-pin" transform="translate(574 36) scale(1.3)"><circle r="14"/><text y="6">6</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Κεφαλή.</b> Περιέχει τον πυρήνα, που μεταφέρει γενετικές πληροφορίες από τον πατέρα. Η άκρη της έχει ένζυμα που βοηθούν το σπερματοζωάριο να μπει στο ωάριο.</span></li><li><span class="num">2</span><span><b>Μέσο τμήμα.</b> Γεμάτο μιτοχόνδρια. Αυτά απελευθερώνουν την ενέργεια που χρειάζεται το σπερματοζωάριο για να κολυμπά.</span></li><li><span class="num">3</span><span><b>Ουρά.</b> Κινείται δεξιά-αριστερά και σπρώχνει το σπερματοζωάριο μπροστά.</span></li><li><span class="num">4</span><span><b>Πυρήνας.</b> Μεταφέρει γενετικές πληροφορίες από τη μητέρα.</span></li><li><span class="num">5</span><span><b>Κυτταρόπλασμα.</b> Περιέχει αποθήκη τροφής για τις πρώτες κυτταρικές διαιρέσεις.</span></li><li><span class="num">6</span><span><b>Προστατευτικό περίβλημα.</b> Ένα στρώμα γύρω από το ωάριο. Αλλάζει μόλις μπει ένα σπερματοζωάριο, ώστε να μην ακολουθήσει άλλο.</span></li></ol></div><p class="muted">Το σχέδιο δεν είναι σε κλίμακα. Το ωάριο έχει διάμετρο περίπου 0,1 mm, μόλις που φαίνεται με γυμνό μάτι. Το σπερματοζωάριο έχει μήκος περίπου 0,05 mm, και το μεγαλύτερο μέρος του είναι ουρά.</p><h2 id="puberty">Εφηβεία</h2><p>Η εφηβεία είναι η περίοδος όπου το σώμα ενός παιδιού αλλάζει και γίνεται σώμα ενήλικα, και το αναπαραγωγικό σύστημα αρχίζει να λειτουργεί. Την ξεκινούν οι ορμόνες. Συχνά αρχίζει ανάμεσα στα 8 και τα 14, και ο καθένας αναπτύσσεται με τον δικό του ρυθμό.</p><div class="cards"><div class="ecard"><h3>Αγόρια</h3><div class="eq">Κύρια ορμόνη: τεστοστερόνη</div><dl><dt>Παράγεται</dt><dd>Στους όρχεις</dd><dt>Φωνή</dt><dd>Αλλάζει και γίνεται πιο βαθιά</dd><dt>Τρίχες</dt><dd>Στο πρόσωπο, στο στήθος, στις μασχάλες και γύρω από το πέος</dd><dt>Σώμα</dt><dd>Οι ώμοι φαρδαίνουν και οι μύες αναπτύσσονται</dd><dt>Αναπαραγωγικό σύστημα</dt><dd>Οι όρχεις και το πέος μεγαλώνουν. Οι όρχεις αρχίζουν να παράγουν σπερματοζωάρια</dd></dl></div><div class="ecard"><h3>Κορίτσια</h3><div class="eq">Κύρια ορμόνη: οιστρογόνα</div><dl><dt>Παράγονται</dt><dd>Στις ωοθήκες</dd><dt>Στήθος</dt><dd>Αναπτύσσεται</dd><dt>Γοφοί</dt><dd>Φαρδαίνουν</dd><dt>Τρίχες</dt><dd>Στις μασχάλες και γύρω από τον κόλπο</dd><dt>Αναπαραγωγικό σύστημα</dt><dd>Οι ωοθήκες αρχίζουν να απελευθερώνουν ωάρια. Αρχίζει η περίοδος</dd></dl></div><div class="ecard"><h3>Όλοι</h3><div class="eq">Αλλαγές για όλους</div><dl><dt>Ύψος</dt><dd>Απότομη ανάπτυξη</dd><dt>Δέρμα</dt><dd>Γίνεται πιο λιπαρό, γι&#x27; αυτό τα σπυράκια είναι συνηθισμένα</dd><dt>Ιδρώτας</dt><dd>Περισσότερος, με πιο έντονη μυρωδιά</dd><dt>Συναισθήματα</dt><dd>Μπορεί να αλλάζουν γρήγορα</dd></dl></div><div class="ecard"><h3>Ορμόνες</h3><div class="eq">Χημικοί αγγελιοφόροι</div><dl><dt>Τι είναι</dt><dd>Χημικές ουσίες που παράγονται από αδένες</dd><dt>Πώς ταξιδεύουν</dt><dd>Με το αίμα</dd><dt>Τι ξεκινά την εφηβεία</dt><dd>Ένας αδένας στον εγκέφαλο, η υπόφυση, δίνει σήμα στους όρχεις ή στις ωοθήκες</dd></dl></div></div><h2 id="cycle">Ο έμμηνος κύκλος</h2><p>Από την εφηβεία, το ενδομήτριο ετοιμάζεται για εγκυμοσύνη περίπου μία φορά τον μήνα. Αν δεν γονιμοποιηθεί ωάριο, το ενδομήτριο αποβάλλεται και ο κύκλος αρχίζει ξανά. Ένας κύκλος διαρκεί περίπου 28 ημέρες, αλλά διαφέρει από άνθρωπο σε άνθρωπο.</p><div class="vgrid"><div><div class="light"><svg role="img" aria-label="Διάγραμμα με τις 28 ημέρες του έμμηνου κύκλου. Δείχνει πόσο παχύ είναι το ενδομήτριο κάθε ημέρα και ένα ωάριο που απελευθερώνεται την ημέρα 14." id="cy" viewBox="0 0 620 206" xmlns="http://www.w3.org/2000/svg"><rect class="cb b1" x="40.0" y="24" width="96.4" height="146" fill="#F3B2B8"/><rect class="cb b2" x="136.4" y="24" width="154.3" height="146" fill="#FBE3B4"/><rect class="cb b3" x="290.7" y="24" width="19.3" height="146" fill="#F4B942"/><rect class="cb b4" x="310.0" y="24" width="270.0" height="146" fill="#CFE0F7"/><path d="M40.0 170L40.0 96.8L78.6 131.0L136.4 155.4L194.3 128.5L252.1 89.5L300.4 70.0L367.9 60.2L502.9 57.8L560.7 62.6L580.0 89.5L580.0 170Z" fill="#C0606A" stroke="#7A3038" stroke-width="2.5" stroke-linejoin="round"/><path d="M40 170L580 170" stroke="#0F1C3F" stroke-width="2.5"/><path d="M49.6 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="49.6" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">1</text><path d="M68.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M88.2 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M107.5 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M126.8 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="126.8" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">5</text><path d="M146.1 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M165.4 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M184.6 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M203.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M223.2 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="223.2" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">10</text><path d="M242.5 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M261.8 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M281.1 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M300.4 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="300.4" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">14</text><path d="M319.6 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M338.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M358.2 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M377.5 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M396.8 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M416.1 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="416.1" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">20</text><path d="M435.4 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M454.6 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M473.9 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M493.2 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M512.5 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="512.5" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">25</text><path d="M531.8 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M551.1 170v4" stroke="#0F1C3F" stroke-width="1"/><path d="M570.4 170v8" stroke="#0F1C3F" stroke-width="1.8"/><text x="570.4" y="195" text-anchor="middle" font-family="Nunito Sans,Arial,sans-serif" font-size="15" font-weight="700" fill="#0F1C3F">28</text><circle cx="300.4" cy="46" r="9" fill="#FBE3B4" stroke="#A8873A" stroke-width="2.5"/><circle cx="300.4" cy="46" r="3.5" fill="#6C4FA3"/><g class="r-pin" transform="translate(88 14) scale(1.3)"><circle r="12"/><text y="6">1</text></g><g class="r-pin" transform="translate(213 14) scale(1.3)"><circle r="12"/><text y="6">2</text></g><path class="r-lead" d="M300.4 24L334.4 12"/><g class="r-pin" transform="translate(334 14) scale(1.3)"><circle r="12"/><text y="6">3</text></g><g class="r-pin" transform="translate(445 14) scale(1.3)"><circle r="12"/><text y="6">4</text></g></svg></div><p class="cap">Ημέρα του κύκλου. Το σκούρο κόκκινο σχήμα δείχνει πόσο παχύ είναι το ενδομήτριο.</p><div class="brbtns" id="cyBtns"><button class="seg" data-s="1" aria-pressed="false">Ημέρες 1 ως 5</button><button class="seg" data-s="2" aria-pressed="false">Ημέρες 6 ως 13</button><button class="seg" data-s="3" aria-pressed="false">Ημέρα 14</button><button class="seg" data-s="4" aria-pressed="false">Ημέρες 15 ως 28</button></div><p class="asay" id="cySay" aria-live="polite"></p></div><ol class="vlist"><li><span class="num">1</span><span><b>Περίοδος.</b> Το ενδομήτριο αποβάλλεται. Βγαίνει από τον κόλπο μαζί με λίγο αίμα. Αυτή είναι η έμμηνη ρύση.</span></li><li><span class="num">2</span><span><b>Το ενδομήτριο ξαναχτίζεται.</b> Γίνεται παχύ και σπογγώδες, με πολλά αιμοφόρα αγγεία. Ένα ωάριο ωριμάζει σε μια ωοθήκη.</span></li><li><span class="num">3</span><span><b>Ωορρηξία.</b> Μια ωοθήκη απελευθερώνει ένα ωάριο στον ωαγωγό.</span></li><li><span class="num">4</span><span><b>Το ενδομήτριο μένει παχύ.</b> Είναι έτοιμο να δεχτεί ένα έμβρυο. Αν δεν φτάσει έμβρυο, το ενδομήτριο αποβάλλεται και αρχίζει ο επόμενος κύκλος.</span></li></ol></div><p class="muted">Τον κύκλο τον ελέγχουν ορμόνες. Τα οιστρογόνα κάνουν το ενδομήτριο να παχύνει και η προγεστερόνη το κρατά παχύ. Η περίοδος αρχίζει συνήθως ανάμεσα στα 10 και τα 15. Σταματά οριστικά στην εμμηνόπαυση, γύρω στα 50.</p><h2 id="fetus">Ένα μωρό μέσα στη μήτρα</h2><p>Από τις 8 εβδομάδες περίπου ως τη γέννηση, οι γιατροί ονομάζουν το έμβρυο κύημα. Στην καθημερινή γλώσσα λέμε έμβρυο σε όλη την εγκυμοσύνη. Ό,τι χρειάζεται το παίρνει από τη μητέρα του μέσα από τον πλακούντα.</p><div class="vgrid"><div class="light"><svg role="img" aria-label="Ένα έμβρυο κουλουριασμένο, με το κεφάλι προς τα κάτω, μέσα στη μήτρα. Ενώνεται με τον πλακούντα με τον ομφάλιο λώρο και περιβάλλεται από αμνιακό υγρό." viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg"><path class="r-wall" d="M300 14C424 14 478 100 478 184C478 276 388 322 346 336L346 392L254 392L254 336C212 322 122 276 122 184C122 100 176 14 300 14Z"/><path class="r-fl" d="M300 40C404 40 452 112 452 184C452 258 372 300 322 316L278 316C228 300 148 258 148 184C148 112 196 40 300 40Z"/><path class="r-cx" d="M276 314L324 314L330 368L270 368Z"/><path class="r-cav" stroke="none" d="M294 366L306 366L306 392L294 392Z"/><path class="r-pl" d="M160 150C170 96 214 56 276 44C262 62 250 70 228 86C202 106 190 126 184 168C172 166 162 160 160 150Z"/><path class="r-cord" stroke-width="10" d="M214 104C250 110 236 150 262 160C282 168 280 190 298 196"/><path class="r-cordi" stroke-width="5" d="M214 104C250 110 236 150 262 160C282 168 280 190 298 196"/><path class="r-baby" d="M300 150C352 138 396 170 392 222C390 252 370 270 344 270C352 250 344 236 330 232C316 246 300 262 290 270C262 262 254 220 266 190C272 170 284 156 300 150Z"/><path class="r-baby" d="M372 176C404 170 420 196 408 218C398 236 372 236 356 226"/><circle class="r-baby" cx="306" cy="270" r="36"/><path class="r-baby" d="M318 196C304 204 300 220 310 232" fill="none"/><path d="M292 280q6 4 12 0" fill="none" stroke="#8A5A3C" stroke-width="2" stroke-linecap="round"/><path class="r-lead" d="M40 70L196 110"/><circle class="r-dot" cx="196" cy="110" r="3.5"/><g class="r-pin" transform="translate(40 70) scale(1.3)"><circle r="14"/><text y="6">1</text></g><path class="r-lead" d="M40 150L248 148"/><circle class="r-dot" cx="248" cy="148" r="3.5"/><g class="r-pin" transform="translate(40 150) scale(1.3)"><circle r="14"/><text y="6">2</text></g><path class="r-lead" d="M560 110L420 120"/><circle class="r-dot" cx="420" cy="120" r="3.5"/><g class="r-pin" transform="translate(560 110) scale(1.3)"><circle r="14"/><text y="6">3</text></g><path class="r-lead" d="M560 200L384 210"/><circle class="r-dot" cx="384" cy="210" r="3.5"/><g class="r-pin" transform="translate(560 200) scale(1.3)"><circle r="14"/><text y="6">4</text></g><path class="r-lead" d="M40 260L134 220"/><circle class="r-dot" cx="134" cy="220" r="3.5"/><g class="r-pin" transform="translate(40 260) scale(1.3)"><circle r="14"/><text y="6">5</text></g><path class="r-lead" d="M560 344L322 344"/><circle class="r-dot" cx="322" cy="344" r="3.5"/><g class="r-pin" transform="translate(560 344) scale(1.3)"><circle r="14"/><text y="6">6</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Πλακούντας.</b> Ένα όργανο που αναπτύσσεται στο ενδομήτριο. Εδώ περνούν ουσίες ανάμεσα στο αίμα της μητέρας και στο αίμα του εμβρύου.</span></li><li><span class="num">2</span><span><b>Ομφάλιος λώρος.</b> Ενώνει το έμβρυο με τον πλακούντα. Μέσα του περνούν αιμοφόρα αγγεία.</span></li><li><span class="num">3</span><span><b>Αμνιακό υγρό.</b> Ένας σάκος με υδαρές υγρό που προστατεύει το έμβρυο από τα χτυπήματα.</span></li><li><span class="num">4</span><span><b>Έμβρυο.</b> Στο τέλος της εγκυμοσύνης έχει συνήθως το κεφάλι προς τα κάτω, έτοιμο να γεννηθεί.</span></li><li><span class="num">5</span><span><b>Τοίχωμα της μήτρας.</b> Παχύς μυς. Συσπάται στον τοκετό.</span></li><li><span class="num">6</span><span><b>Τράχηλος.</b> Ένας δακτύλιος μυός που μένει κλειστός ως τον τοκετό.</span></li></ol></div><h2>Τι περνά από τον πλακούντα</h2><div class="cards"><div class="ecard"><h3>Από τη μητέρα στο έμβρυο</h3><div class="eq">Χρειάζονται για την ανάπτυξη</div><dl><dt>Οξυγόνο</dt><dd>Για την αναπνοή των κυττάρων</dd><dt>Γλυκόζη και άλλα θρεπτικά συστατικά</dt><dd>Για ενέργεια και ανάπτυξη</dd><dt>Αντισώματα</dt><dd>Δίνουν κάποια προστασία από ασθένειες</dd></dl></div><div class="ecard"><h3>Από το έμβρυο στη μητέρα</h3><div class="eq">Άχρηστες ουσίες</div><dl><dt>Διοξείδιο του άνθρακα</dt><dd>Παράγεται στην κυτταρική αναπνοή</dd><dt>Ουρία</dt><dd>Την απομακρύνουν οι νεφροί της μητέρας</dd></dl></div><div class="ecard"><h3>Περνούν και μπορεί να βλάψουν</h3><div class="eq">Τι να αποφεύγεται στην εγκυμοσύνη</div><dl><dt>Αλκοόλ</dt><dd>Μπορεί να βλάψει τον εγκέφαλο και τα όργανα που αναπτύσσονται</dd><dt>Κάπνισμα</dt><dd>Η νικοτίνη και το μονοξείδιο του άνθρακα περνούν. Το έμβρυο παίρνει λιγότερο οξυγόνο, γι&#x27; αυτό τα μωρά είναι συχνά μικρότερα</dd><dt>Κάποια φάρμακα και ιοί</dt><dd>Όπως ο ιός της ερυθράς</dd></dl></div></div><p class="muted">Το αίμα της μητέρας και το αίμα του εμβρύου κυλούν πολύ κοντά το ένα στο άλλο μέσα στον πλακούντα, αλλά δεν αναμειγνύονται.</p><h2>Σαράντα εβδομάδες</h2><div class="cards"><div class="ecard"><h3>Περίπου 8 εβδομάδες</h3><div class="eq">Τα όργανα σχηματίζονται</div><dl><dt>Όργανα</dt><dd>Έχουν αρχίσει να σχηματίζονται όλα τα βασικά όργανα</dd><dt>Καρδιά</dt><dd>Χτυπά ήδη</dd></dl></div><div class="ecard"><h3>Περίπου 20 εβδομάδες</h3><div class="eq">Στη μέση</div><dl><dt>Κίνηση</dt><dd>Η μητέρα νιώθει κλοτσιές</dd><dt>Μάζα</dt><dd>Περίπου 300 g</dd></dl></div><div class="ecard"><h3>Περίπου 40 εβδομάδες</h3><div class="eq">Έτοιμο να γεννηθεί</div><dl><dt>Μάζα</dt><dd>Περίπου 3,4 kg κατά μέσο όρο</dd><dt>Μήκος</dt><dd>Περίπου 50 cm</dd></dl></div></div><p class="muted">Η εγκυμοσύνη λέγεται και κύηση. Οι 40 εβδομάδες μετριούνται από την πρώτη ημέρα της τελευταίας περιόδου της μητέρας.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Βρες εκτυπώσιμα πακέτα επιστήμης στο κατάστημα →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Μέρη του αναπαραγωγικού συστήματος", "numbers": "Αριθμοί", "view": "Επιλογές διαγράμματος", "female": "Γυναικείο", "male": "Ανδρικό", "tapTitle": "Πάτησε ένα μέρος", "tapText": "Πάτησε οποιοδήποτε μέρος στο διάγραμμα ή διάλεξε ένα από την αριθμημένη λίστα. Με τα κουμπιά Γυναικείο και Ανδρικό αλλάζεις διάγραμμα.", "keyF": [["Όψη από μπροστά.", "Βλέπεις τα όργανα από μπροστά. Βρίσκονται χαμηλά στην κοιλιά, ανάμεσα στους γοφούς."], ["Σε τομή.", "Η μήτρα και ο κόλπος είναι σχεδιασμένα σε τομή, για να δεις το εσωτερικό τους."], ["Δύο από το καθένα.", "Υπάρχουν δύο ωοθήκες και δύο ωαγωγοί, ένας σε κάθε πλευρά."]], "keyM": [["Όψη από μπροστά.", "Βλέπεις τα όργανα από μπροστά. Το διάγραμμα είναι απλοποιημένο, για να φαίνονται όλοι οι σωλήνες."], ["Το γκρι όργανο", "είναι η ουροδόχος κύστη. Αποθηκεύει τα ούρα και ανήκει στο ουροποιητικό σύστημα, αλλά δείχνει από πού περνούν οι σωλήνες."], ["Δύο από το καθένα.", "Υπάρχουν δύο όρχεις και δύο σπερματικοί πόροι, ένας σε κάθε πλευρά."]], "kinds": {"cells": "Φτιάχνει γεννητικά κύτταρα", "tube": "Σωλήνας", "organ": "Όργανο", "gland": "Αδένας", "layer": "Εσωτερικό τοίχωμα", "muscle": "Δακτύλιος μυός"}, "facts": "Βασικά στοιχεία", "works": "Συνεργάζεται με", "words": "Λέξεις-κλειδιά:", "more": {"gametes": "Δες τα γεννητικά κύτταρα", "cycle": "Δες τον έμμηνο κύκλο", "fetus": "Δες ένα μωρό μέσα στη μήτρα"}, "step": "Βήμα", "of": "από", "back": "Πίσω", "next": "Επόμενο", "again": "Από την αρχή", "play": "Αναπαραγωγή", "pause": "Παύση", "happens": "Τι συμβαίνει", "moving": "Τι να προσέξεις", "away": {"grow": "Περίπου 40 εβδομάδες ανάπτυξης"}, "cySay": ["Ημέρες 1 ως 5: το ενδομήτριο αποβάλλεται και βγαίνει από το σώμα. Αυτή είναι η περίοδος.", "Ημέρες 6 ως 13: το ενδομήτριο παχαίνει ξανά. Ένα ωάριο ωριμάζει σε μια ωοθήκη.", "Γύρω στην ημέρα 14: μια ωοθήκη απελευθερώνει ένα ωάριο. Αυτή είναι η ωορρηξία.", "Ημέρες 15 ως 28: το ενδομήτριο μένει παχύ. Αν δεν φτάσει έμβρυο, αποβάλλεται και αρχίζει νέος κύκλος."]};
+  var PARTS=[{"id": "ovary", "d": "f", "n": 1, "chip": "Ωοθήκη", "name": "Ωοθήκη", "kind": "cells", "more": "gametes", "job": "Υπάρχουν δύο ωοθήκες. Αποθηκεύουν τα ωάρια και, από την εφηβεία, απελευθερώνουν ένα περίπου κάθε 28 ημέρες. Παράγουν επίσης ορμόνες, τα οιστρογόνα.", "facts": ["Κάθε ωοθήκη έχει περίπου το μέγεθος ενός αμυγδάλου.", "Ένα κορίτσι γεννιέται έχοντας ήδη όλα τα ωάριά του μέσα στις ωοθήκες.", "Η απελευθέρωση ενός ωαρίου λέγεται ωορρηξία."], "links": [["oviduct", "Το ωάριο που απελευθερώνεται περνά στον ωαγωγό."], ["lining", "Οι ορμόνες των ωοθηκών κάνουν το ενδομήτριο να παχύνει."]], "words": "ωάριο, ωορρηξία, οιστρογόνα"}, {"id": "oviduct", "d": "f", "n": 2, "chip": "Ωαγωγός", "name": "Ωαγωγός", "kind": "tube", "job": "Ένας στενός σωλήνας που μεταφέρει το ωάριο από την ωοθήκη στη μήτρα. Εδώ γίνεται η γονιμοποίηση.", "facts": ["Λέγεται και σάλπιγγα.", "Έχει μήκος περίπου 10 cm.", "Το ωάριο δεν μπορεί να κολυμπήσει. Μικροσκοπικές τρίχες, οι βλεφαρίδες, το σπρώχνουν κατά μήκος του σωλήνα.", "Το ταξίδι ως τη μήτρα διαρκεί αρκετές ημέρες."], "links": [["ovary", "Πιάνει το ωάριο που απελευθερώνει η ωοθήκη."], ["uterus", "Καταλήγει στο πάνω μέρος της μήτρας."]], "words": "ωαγωγός, σάλπιγγα, βλεφαρίδες, γονιμοποίηση"}, {"id": "uterus", "d": "f", "n": 3, "chip": "Μήτρα", "name": "Μήτρα", "kind": "organ", "more": "fetus", "job": "Ένα μυώδες όργανο. Εδώ αναπτύσσεται το μωρό στη διάρκεια της εγκυμοσύνης.", "facts": ["Έχει περίπου το μέγεθος και το σχήμα ενός ανάποδου αχλαδιού.", "Το τοίχωμά της είναι δυνατός μυς που τεντώνεται καθώς μεγαλώνει το μωρό.", "Στον τοκετό, ο μυς συσπάται για να σπρώξει το μωρό προς τα έξω."], "links": [["lining", "Στο μαλακό εσωτερικό της τοίχωμα εγκαθίσταται το έμβρυο."], ["cervix", "Ο τράχηλος κλείνει το κάτω μέρος της μήτρας."]], "words": "μήτρα, μυς, σύσπαση"}, {"id": "lining", "d": "f", "n": 4, "chip": "Ενδομήτριο", "name": "Ενδομήτριο", "kind": "layer", "more": "cycle", "job": "Το μαλακό εσωτερικό στρώμα της μήτρας. Έχει πολλά αιμοφόρα αγγεία. Το έμβρυο εγκαθίσταται μέσα του και αναπτύσσεται.", "facts": ["Παχαίνει κάθε μήνα, για να είναι έτοιμο να δεχτεί ένα γονιμοποιημένο ωάριο.", "Αν δεν γονιμοποιηθεί ωάριο, το ενδομήτριο αποβάλλεται και βγαίνει από τον κόλπο. Αυτή είναι η περίοδος ή έμμηνη ρύση.", "Στην εγκυμοσύνη, ο πλακούντας σχηματίζεται στο ενδομήτριο."], "links": [["uterus", "Καλύπτει το εσωτερικό της μήτρας."], ["vagina", "Στην περίοδο βγαίνει από το σώμα μέσα από τον κόλπο."]], "words": "ενδομήτριο, περίοδος, έμμηνη ρύση, εμφύτευση"}, {"id": "cervix", "d": "f", "n": 5, "chip": "Τράχηλος", "name": "Τράχηλος της μήτρας", "kind": "muscle", "job": "Ένας δακτύλιος μυός στο κάτω μέρος της μήτρας. Είναι ο «λαιμός» της μήτρας.", "facts": ["Μένει κλειστός στην εγκυμοσύνη και βοηθά να κρατηθεί το μωρό μέσα στη μήτρα.", "Ένα στενό άνοιγμα αφήνει τα σπερματοζωάρια να μπουν και το αίμα της περιόδου να βγει.", "Στον τοκετό ανοίγει περίπου 10 cm για να περάσει το μωρό."], "links": [["uterus", "Κλείνει το κάτω μέρος της μήτρας."], ["vagina", "Ανοίγει στο πάνω μέρος του κόλπου."]], "words": "τράχηλος, δακτύλιος μυός"}, {"id": "vagina", "d": "f", "n": 6, "chip": "Κόλπος", "name": "Κόλπος", "kind": "tube", "job": "Ένας μυώδης σωλήνας που οδηγεί από τον τράχηλο στο εξωτερικό του σώματος.", "facts": ["Εδώ απελευθερώνονται τα σπερματοζωάρια στη σεξουαλική επαφή.", "Από εδώ βγαίνει το αίμα της περιόδου.", "Το μωρό περνά από εδώ όταν γεννιέται. Το τοίχωμά του μπορεί να τεντωθεί.", "Είναι ξεχωριστός από την ουρήθρα, που μεταφέρει τα ούρα."], "links": [["cervix", "Ο τράχηλος βρίσκεται στο πάνω μέρος του κόλπου."], ["lining", "Το ενδομήτριο βγαίνει από εδώ στην περίοδο."]], "words": "κόλπος, τοκετός"}, {"id": "testis", "d": "m", "n": 1, "chip": "Όρχις", "name": "Όρχις", "kind": "cells", "more": "gametes", "job": "Υπάρχουν δύο όρχεις. Από την εφηβεία παράγουν σπερματοζωάρια. Παράγουν επίσης την ορμόνη τεστοστερόνη.", "facts": ["Ο ένας λέγεται όρχις, οι δύο όρχεις.", "Από την εφηβεία παράγουν σπερματοζωάρια συνεχώς: εκατομμύρια κάθε μέρα.", "Κάθε όρχις είναι γεμάτος μικροσκοπικά κουλουριασμένα σωληνάρια, όπου φτιάχνονται τα σπερματοζωάρια."], "links": [["scrotum", "Οι όρχεις βρίσκονται μέσα στο όσχεο."], ["spermduct", "Τα σπερματοζωάρια φεύγουν από κάθε όρχι μέσα από έναν σπερματικό πόρο."]], "words": "όρχις, σπερματοζωάριο, τεστοστερόνη"}, {"id": "scrotum", "d": "m", "n": 2, "chip": "Όσχεο", "name": "Όσχεο", "kind": "organ", "job": "Ένας σάκος από δέρμα που κρατά τους δύο όρχεις έξω από το κύριο μέρος του σώματος.", "facts": ["Τα σπερματοζωάρια αναπτύσσονται καλύτερα λίγο κάτω από τη θερμοκρασία του σώματος, στους 35 °C περίπου.", "Επειδή κρέμονται έξω από το σώμα, οι όρχεις μένουν πιο δροσεροί από τους 37 °C του εσωτερικού.", "Όταν κάνει κρύο, μύες τραβούν τους όρχεις πιο κοντά στο σώμα."], "links": [["testis", "Κρατά και προστατεύει τους όρχεις."]], "words": "όσχεο, θερμοκρασία"}, {"id": "spermduct", "d": "m", "n": 3, "chip": "Σπερματικός πόρος", "name": "Σπερματικός πόρος", "kind": "tube", "job": "Ένας σωλήνας που μεταφέρει τα σπερματοζωάρια από τον όρχι προς την ουρήθρα. Υπάρχουν δύο, ένας από κάθε όρχι.", "facts": ["Ανεβαίνει και περνά γύρω από την ουροδόχο κύστη.", "Οι μύες στο τοίχωμά του σπρώχνουν τα σπερματοζωάρια.", "Λέγεται και σπερματαγωγός."], "links": [["testis", "Παίρνει τα σπερματοζωάρια από τον όρχι."], ["glands", "Οι αδένες προσθέτουν υγρό στα σπερματοζωάρια καθώς περνούν."], ["urethra", "Ενώνεται με την ουρήθρα."]], "words": "σπερματικός πόρος, σπερματαγωγός"}, {"id": "glands", "d": "m", "n": 4, "chip": "Αδένες", "name": "Αδένες", "kind": "gland", "job": "Οι αδένες προσθέτουν ένα υγρό στα σπερματοζωάρια. Το μείγμα σπερματοζωαρίων και υγρού λέγεται σπέρμα.", "facts": ["Το υγρό περιέχει σάκχαρα. Αυτά δίνουν στα σπερματοζωάρια ενέργεια για να κολυμπούν.", "Το υγρό επιτρέπει επίσης στα σπερματοζωάρια να κολυμπούν ελεύθερα.", "Οι κύριοι αδένες είναι ο προστάτης και οι δύο σπερματοδόχες κύστεις."], "links": [["spermduct", "Οι σπερματικοί πόροι φέρνουν τα σπερματοζωάρια στους αδένες."], ["urethra", "Το σπέρμα περνά στην ουρήθρα."]], "words": "αδένας, σπέρμα, προστάτης"}, {"id": "urethra", "d": "m", "n": 5, "chip": "Ουρήθρα", "name": "Ουρήθρα", "kind": "tube", "job": "Ένας σωλήνας που περνά μέσα από το πέος. Μεταφέρει το σπέρμα έξω από το σώμα. Μεταφέρει και τα ούρα από την ουροδόχο κύστη, αλλά ποτέ και τα δύο ταυτόχρονα.", "facts": ["Ένας δακτύλιος μυός κλείνει την έξοδο της κύστης όσο περνά το σπέρμα.", "Στους άνδρες η ουρήθρα ανήκει σε δύο συστήματα: το ουροποιητικό και το αναπαραγωγικό.", "Στις γυναίκες η ουρήθρα μεταφέρει μόνο ούρα."], "links": [["glands", "Το σπέρμα μπαίνει σε αυτήν κοντά στους αδένες."], ["penis", "Περνά από το εσωτερικό του πέους."]], "words": "ουρήθρα, σπέρμα, ούρα"}, {"id": "penis", "d": "m", "n": 6, "chip": "Πέος", "name": "Πέος", "kind": "organ", "job": "Βγάζει τα ούρα από το σώμα. Στη σεξουαλική επαφή μεταφέρει το σπέρμα στον κόλπο.", "facts": ["Περιέχει σπογγώδη ιστό που μπορεί να γεμίσει με αίμα. Έτσι σκληραίνει, και αυτό λέγεται στύση.", "Η απελευθέρωση του σπέρματος λέγεται εκσπερμάτιση.", "Η άκρη του καλύπτεται από μια πτυχή δέρματος, την ακροποσθία. Σε κάποιους ανθρώπους έχει αφαιρεθεί."], "links": [["urethra", "Η ουρήθρα περνά από το κέντρο του."]], "words": "πέος, στύση, εκσπερμάτιση, ακροποσθία"}];
+  var STEPS=[{"title": "Απελευθερώνεται ένα ωάριο", "sum": "Περίπου μία φορά κάθε 28 ημέρες, μια ωοθήκη απελευθερώνει ένα ωάριο. Αυτό λέγεται ωορρηξία.", "on": ["ovary", "oviduct"], "ox": "egg", "pts": ["Το ωάριο περνά στο άκρο του ωαγωγού, που μοιάζει με χωνί.", "Οι βλεφαρίδες το σπρώχνουν, γιατί το ωάριο δεν μπορεί να κολυμπήσει.", "Ένα ωάριο ζει περίπου μία ημέρα, εκτός αν γονιμοποιηθεί."]}, {"title": "Φτάνουν τα σπερματοζωάρια", "sum": "Στη σεξουαλική επαφή, το σπέρμα απελευθερώνεται στον κόλπο. Περιέχει εκατομμύρια σπερματοζωάρια.", "on": ["vagina", "cervix", "uterus"], "ox": "sperm", "pts": ["Τα σπερματοζωάρια κολυμπούν μέσα από τον τράχηλο και τη μήτρα και μπαίνουν στους ωαγωγούς.", "Τα περισσότερα δεν τα καταφέρνουν. Μόνο μερικές εκατοντάδες φτάνουν κοντά στο ωάριο.", "Τα σπερματοζωάρια μπορούν να ζήσουν λίγες ημέρες μέσα στο σώμα της γυναίκας."]}, {"title": "Γονιμοποίηση", "sum": "Στον ωαγωγό, ένα σπερματοζωάριο μπαίνει στο ωάριο. Ο πυρήνας του σπερματοζωαρίου ενώνεται με τον πυρήνα του ωαρίου.", "on": ["oviduct"], "ox": "zyg", "pts": ["Αυτή είναι η γονιμοποίηση.", "Το γονιμοποιημένο ωάριο έχει γενετικές πληροφορίες και από τους δύο γονείς.", "Μόλις μπει ένα σπερματοζωάριο, το εξωτερικό στρώμα του ωαρίου αλλάζει και δεν μπορεί να μπει άλλο."]}, {"title": "Το έμβρυο διαιρείται", "sum": "Το γονιμοποιημένο ωάριο διαιρείται σε δύο κύτταρα, μετά σε τέσσερα, μετά σε οκτώ, και συνεχίζει. Τώρα λέγεται έμβρυο.", "on": ["oviduct", "uterus"], "ox": "emb", "pts": ["Οι βλεφαρίδες σπρώχνουν το έμβρυο μέσα στον ωαγωγό προς τη μήτρα.", "Το ταξίδι διαρκεί αρκετές ημέρες.", "Όταν φτάσει, είναι μια μικροσκοπική σφαίρα από κύτταρα."]}, {"title": "Εμφύτευση", "sum": "Το έμβρυο εγκαθίσταται στο παχύ ενδομήτριο. Αυτό λέγεται εμφύτευση.", "on": ["lining"], "ox": "emb", "pts": ["Το ενδομήτριο δίνει στο έμβρυο την τροφή και το οξυγόνο που χρειάζεται.", "Αρχίζει να σχηματίζεται ο πλακούντας.", "Η εγκυμοσύνη έχει αρχίσει, γι' αυτό το ενδομήτριο δεν αποβάλλεται και η περίοδος σταματά."]}, {"title": "Ανάπτυξη μέσα στη μήτρα", "sum": "Το έμβρυο μεγαλώνει και τα κύτταρά του εξειδικεύονται για να σχηματίσουν όργανα. Ως τις 8 εβδομάδες περίπου έχουν αρχίσει να σχηματίζονται όλα τα βασικά όργανα.", "on": ["uterus"], "ox": "fet", "away": "grow", "grow": true, "pts": ["Ο πλακούντας περνά οξυγόνο και τροφή από το αίμα της μητέρας στο έμβρυο και απομακρύνει τις άχρηστες ουσίες.", "Ο ομφάλιος λώρος ενώνει το έμβρυο με τον πλακούντα.", "Ένας σάκος με αμνιακό υγρό προστατεύει το έμβρυο από τα χτυπήματα.", "Η εγκυμοσύνη διαρκεί περίπου 40 εβδομάδες, δηλαδή περίπου 9 μήνες."]}, {"title": "Τοκετός", "sum": "Ο μυς στο τοίχωμα της μήτρας συσπάται. Ο τράχηλος ανοίγει και το μωρό σπρώχνεται έξω μέσα από τον κόλπο.", "on": ["uterus", "cervix", "vagina"], "ox": "baby", "pts": ["Αυτό το στάδιο λέγεται τοκετός.", "Το μωρό αρχίζει να αναπνέει αέρα. Ο ομφάλιος λώρος δένεται και κόβεται. Ο αφαλός σου δείχνει πού ήταν ο δικός σου.", "Μετά βγαίνει και ο πλακούντας."]}];
+  var OX={"egg": "Ένα ωάριο", "sperm": "Σπερματοζωάρια που κολυμπούν προς το ωάριο", "zyg": "Ένα γονιμοποιημένο ωάριο", "emb": "Ένα έμβρυο: μια σφαίρα από κύτταρα που διαιρούνται", "fet": "Ένα έμβρυο που μεγαλώνει στη μήτρα", "baby": "Ένα μωρό που γεννιέται"},PATHS=["M522 268L550 240C558 222 558 200 552 188", "M320 540L320 380C320 300 322 250 392 222C436 206 470 150 524 164", "M524 164L520 163", "M520 163C470 150 436 206 392 222L352 236", "M352 236L369 256", null, "M320 300L320 552"],DUR=[1600, 3600, 400, 2800, 1000, 0, 2400];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",view="f",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  function drawChips(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)if(PARTS[a].d===view)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\""+(PARTS[a].id===selected?"true":"false")+"\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  }
+  function setView(v){
+    view=v;
+    if(v==="m")fig.classList.add("vm");else fig.classList.remove("vm");
+    $("vF").setAttribute("aria-pressed",v==="f"?"true":"false");
+    $("vM").setAttribute("aria-pressed",v==="m"?"true":"false");
+    drawChips();
+  }
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var k=view==="f"?L.keyF:L.keyM;
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<k.length;a++)h+="<div><b>"+esc(k[a][0])+"</b> "+esc(k[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more)h+="<p><button class=\"btn ghost\" data-more=\""+o.more+"\">"+esc(L.more[o.more])+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    if(id&&BY[id].d!==view)setView(BY[id].d);
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    var m=b.getAttribute("data-more");
+    if(m){show("more");var v=$(m);if(v&&v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+  $("vF").onclick=function(){if(view!=="f"){setView("f");select(null);}};
+  $("vM").onclick=function(){if(view!=="m"){setView("m");select(null);}};
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.moving)+"</b>"+esc(OX[s.ox])+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.grow)fig.classList.add("grow");else fig.classList.remove("grow");
+    if(s.away){away.textContent=L.away[s.away];away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1800);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab"),exView="f";
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");fig.classList.remove("grow");away.classList.remove("show");cell.classList.remove("show");}
+    if(mode==="explore"&&id!=="explore")exView=view;
+    mode=id;
+    $("viewbar").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      setView(exView);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      setView("f");
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- menstrual cycle model ---------- */
+  var cyStage=1;
+  function setCy(n){
+    cyStage=n;
+    var c=$("cy"),bs=document.querySelectorAll("#cyBtns .seg");
+    c.setAttribute("class","s"+n);
+    for(var a=0;a<bs.length;a++)bs[a].setAttribute("aria-pressed",a===n-1?"true":"false");
+    $("cySay").textContent=L.cySay[n-1];
+  }
+  $("cyBtns").onclick=function(e){
+    var b=e.target.closest?e.target.closest(".seg"):null;
+    if(b)setCy(parseInt(b.getAttribute("data-s"),10));
+  };
+  setCy(1);
+
+  setView("f");
+  select(null);
+
+  /* exposed for checking */
+  window.ReproLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,setView:setView,setCy:setCy,
+    state:function(){return {mode:mode,view:view,selected:selected,step:ji,playing:playing,cycle:cyStage};}};
+})();
+</script>
+</body>
+</html>
