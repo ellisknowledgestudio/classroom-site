@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Διαδραστικό Διάγραμμα Εγκεφάλου και Νευρικού Συστήματος για το Γυμνάσιο | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό διάγραμμα του νευρικού συστήματος για ηλικίες 11-14. Πάτησε τον εγκέφαλο, τον νωτιαίο μυελό, τα νεύρα και τους νευρώνες για να μάθεις τι κάνει κάθε μέρος, ακολούθησε ένα αντανακλαστικό από τη φλόγα ως τον μυ που τραβά το χέρι σου και μέτρησε τον δικό σου χρόνο αντίδρασης.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/nervous-system/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/nervous-system/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/nervous-system/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/nervous-system/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Noto Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Manrope",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Noto Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Manrope",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Noto Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Noto Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Manrope",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Manrope",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Noto Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Manrope",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Manrope",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* nervous system */
+.figbox{height:auto;padding:6px}
+#fig{height:auto;max-height:min(88vh,860px);margin:0 auto}
+#fig .s-skin{fill:#1B2B5C;stroke:#1B2B5C}
+#fig .s-skino{fill:#1B2B5C;stroke:#6F84C4}
+#fig .s-face{stroke:#6F84C4}
+#fig .s-seno{stroke:#0A1330}
+.kind.brain{background:#F2B3A6}.kind.cns{background:#F3D27A}.kind.pns{background:#F6E7BD}.kind.arc{background:#8FD3A0}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round;stroke-linejoin:round}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.55)}
+.hit:not(.hitv):focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.16)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.25)}.hit.on:hover{fill:rgba(244,185,66,.3)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .s-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .s-dot{fill:#F4B942}
+#fig .s-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins,#fig.journey #pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:rgba(255,255,255,.85);stroke:#F4B942;stroke-width:5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.vgrid{margin:12px 0}
+.eq{font-size:17px}
+.rt{background:var(--navy);border-radius:16px;padding:16px;margin:12px 0}
+.rtb{display:flex;align-items:center;justify-content:center;text-align:center;width:min(100%,250px);aspect-ratio:1;border-radius:50%;margin:0 auto;border:5px solid var(--navy3);background:var(--navy2);color:var(--ink);font:800 21px "Manrope",sans-serif;line-height:1.25;cursor:pointer;padding:22px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.rtb.wait{background:var(--navy3);color:var(--muted)}
+.rtb.go{background:var(--gold);color:var(--navy);border-color:#fff}
+.rtb.early{border-color:var(--tube)}
+.rtb.done{border-color:var(--good)}
+.rtm{justify-content:center;align-items:center;margin:14px 0 0}
+.rtm span{min-width:84px;text-align:center}
+.rtm i{font-style:normal;font-weight:700}
+/* areas of the brain */
+.bfigs{padding:8px 10px 12px}
+.bfigs svg{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.bfigs .btop{max-width:310px}
+.bcap{font:800 14px "Manrope",sans-serif;color:#0F1C3F;text-transform:uppercase;letter-spacing:.06em;margin:4px 2px 2px}
+.bcap+svg+.bcap{margin-top:10px;border-top:2px solid #DDE3F3;padding-top:10px}
+.bfigs [data-b]{cursor:pointer;outline:none}
+.bfigs .b-r,.bfigs .b-p{transition:fill .2s,opacity .2s}
+.bfigs .b-r.dim{fill:#E6EAF4;stroke:#A9B2CC}
+.bfigs .b-p.dim{opacity:.28}
+.bfigs .b-hl.on{display:block}
+.bfigs .b-r:focus-visible{stroke:#B5483A;stroke-width:5}
+.bfigs .b-p.on .b-pin circle{fill:#F4B942}
+.kind.lobe{background:#F6CF6B}.kind.under{background:#C9A8F0}.kind.half{background:#8DB9F2}
+@media (hover:hover){.bfigs .b-r:hover{filter:brightness(1.07)}}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin,.bfigs .b-r,.bfigs .b-p{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+.chip{font-size:13.5px}
+.rtb{font-size:19px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Φυσικές Επιστήμες</a> › Εξερευνητής Νευρικού Συστήματος</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/nervous-system/" lang="en" hreflang="en">English</a></div>
+  <h1>Εξερευνητής Νευρικού Συστήματος</h1>
+  <p class="lead">Με το νευρικό σου σύστημα αισθάνεσαι τον κόσμο, σκέφτεσαι και κινείσαι. Πάτησε ένα μέρος για να δεις τι κάνει, και μετά ακολούθησε ένα αντανακλαστικό από το δάχτυλο ως τον μυ του χεριού και μέτρησε τον χρόνο αντίδρασής σου. Ηλικίες 11-14.</p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες του Εξερευνητή Νευρικού Συστήματος">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Εξερεύνησε το νευρικό σύστημα</button>
+    <button class="tab" role="tab" id="t-brain" aria-controls="brain" aria-selected="false" tabindex="-1" data-p="brain">Περιοχές του εγκεφάλου</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">Η διαδρομή ενός αντανακλαστικού</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Νευρώνες και αντιδράσεις</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Μέρη του νευρικού συστήματος"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Επιλογές διαγράμματος">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Αριθμοί</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="-48 4 696 888" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Διάγραμμα ανθρώπου από το πλάι, με τον εγκέφαλο, τον νωτιαίο μυελό, τα νεύρα και τη διαδρομή ενός αντανακλαστικού από το δάχτυλο που αγγίζει τη φλόγα ενός κεριού ως τον δικέφαλο μυ, με δέκα αριθμημένα μέρη"><style>
+.s-skin{fill:#EEF1F8;stroke:#EEF1F8;stroke-linecap:round;stroke-linejoin:round}
+.s-skino{fill:#EEF1F8;stroke:#8E9AC0;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.s-face{fill:none;stroke:#8E9AC0;stroke-width:2.6;stroke-linecap:round}
+.s-cer{fill:#F2B3A6;stroke:#A85546;stroke-width:3;stroke-linejoin:round}
+.s-fold{fill:none;stroke:#C77565;stroke-width:2.6;stroke-linecap:round}
+.s-cbl{fill:#E3907F;stroke:#A85546;stroke-width:3;stroke-linejoin:round}
+.s-cblf{fill:none;stroke:#A85546;stroke-width:1.8;stroke-linecap:round}
+.s-stem{fill:#F3D27A;stroke:#9C7A1E;stroke-width:3;stroke-linejoin:round}
+.s-cordo{fill:none;stroke:#9C7A1E;stroke-width:15;stroke-linecap:round}
+.s-cord{fill:none;stroke:#F3D27A;stroke-width:10;stroke-linecap:round}
+.s-nrvo{fill:none;stroke:#9C7A1E;stroke-width:6.4;stroke-linecap:round}
+.s-nrv{fill:none;stroke:#F3D27A;stroke-width:3.4;stroke-linecap:round}
+.s-mus{fill:#D9705F;stroke:#8C3A2D;stroke-width:2.6;stroke-linejoin:round}
+.s-musl{fill:none;stroke:#8C3A2D;stroke-width:1.4;stroke-linecap:round}
+.s-tend{fill:none;stroke:#C9B98F;stroke-width:5;stroke-linecap:round}
+.s-seno{fill:none;stroke:#0F1C3F;stroke-width:8.4;stroke-linecap:round;stroke-linejoin:round}
+.s-sen{fill:none;stroke:#3F8FE6;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.s-mot{fill:none;stroke:#2FA36B;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.s-rel{fill:#B07BE6;stroke:#0F1C3F;stroke-width:2.2}
+.s-rec{fill:#3F8FE6;stroke:#0F1C3F;stroke-width:2.2}
+.s-wax{fill:#F7EFD9;stroke:#7A6540;stroke-width:2.4;stroke-linejoin:round}
+.s-hold{fill:#B8C2E0;stroke:#5B6890;stroke-width:2.4;stroke-linejoin:round}
+.s-fl1{fill:#F4902F;stroke:#B85A12;stroke-width:2;stroke-linejoin:round}
+.s-fl2{fill:#FFD95A}
+.s-wick{fill:none;stroke:#3A3024;stroke-width:2.4;stroke-linecap:round}
+.s-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.s-dot{fill:#0F1C3F}
+.s-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.s-pin text{font:800 16px "Manrope",Arial,sans-serif;fill:#0F1C3F}
+</style><g class="s-skino"><path d="M176 884L168 520C164 440 176 380 200 326C180 300 160 250 160 190C154 100 220 38 300 38C370 38 412 84 414 140L416 168L440 212L420 220L424 236L416 244L422 256L414 264C420 284 408 298 386 298L350 296C344 318 346 336 356 350C384 380 396 430 394 500C392 620 374 760 370 884Z"/><path fill="none" stroke-width="77" d="M282 396L306 582"/><path fill="none" stroke-width="59" d="M306 582L486 606"/><path fill="none" stroke-width="45" d="M486 606L522 602"/><path fill="none" stroke-width="18" d="M516 598L546 596"/><path fill="none" stroke-width="18" d="M500 618L522 624"/></g><g class="s-skin"><path d="M176 884L168 520C164 440 176 380 200 326C180 300 160 250 160 190C154 100 220 38 300 38C370 38 412 84 414 140L416 168L440 212L420 220L424 236L416 244L422 256L414 264C420 284 408 298 386 298L350 296C344 318 346 336 356 350C384 380 396 430 394 500C392 620 374 760 370 884Z"/></g><path class="s-face" d="M388 172C394 166 402 166 406 172"/><path class="s-face" d="M404 250L416 250"/><path class="s-cordo" d="M244 300C228 332 212 356 208 420L204 874"/><path class="s-cord" d="M244 300C228 332 212 356 208 420L204 874"/><path class="s-nrvo" d="M207 500C240 504 262 512 282 530"/><path class="s-nrvo" d="M206 640C250 648 300 670 358 702"/><path class="s-nrvo" d="M205 722C250 732 300 762 354 792"/><path class="s-nrvo" d="M204 802C240 814 290 842 344 876"/><path class="s-nrv" d="M207 500C240 504 262 512 282 530"/><path class="s-nrv" d="M206 640C250 648 300 670 358 702"/><path class="s-nrv" d="M205 722C250 732 300 762 354 792"/><path class="s-nrv" d="M204 802C240 814 290 842 344 876"/><path class="s-stem" d="M266 200L306 204C302 240 276 272 258 306L232 298C248 262 266 236 266 200Z"/><path class="s-cbl" d="M190 222C190 200 222 196 246 204C266 212 266 242 242 250C214 258 190 246 190 222Z"/><path class="s-cblf" d="M200 214C216 206 236 208 252 218"/><path class="s-cblf" d="M196 226C214 218 240 220 258 230"/><path class="s-cblf" d="M202 240C218 232 238 234 250 242"/><path class="s-cer" d="M204 196C176 150 196 84 262 64C320 46 390 78 396 132C400 166 380 192 348 196C334 198 322 208 304 208L268 206C244 200 222 208 204 196Z"/><path class="s-fold" d="M222 118C240 100 262 110 256 132C250 152 270 160 286 148"/><path class="s-fold" d="M270 80C288 92 282 112 302 114C322 116 326 96 344 100"/><path class="s-fold" d="M214 160C230 150 246 162 240 178"/><path class="s-fold" d="M300 150C316 138 336 146 334 164C332 180 350 184 362 172"/><path class="s-fold" d="M352 122C366 112 382 122 378 140"/><path class="s-fold" d="M268 176C282 170 294 178 292 192"/><path class="s-fold" d="M226 88C236 82 246 84 252 92"/><g class="s-skino"><path fill="none" stroke-width="77" d="M282 396L306 582"/><path fill="none" stroke-width="59" d="M306 582L486 606"/><path fill="none" stroke-width="45" d="M486 606L522 602"/><path fill="none" stroke-width="18" d="M516 598L546 596"/><path fill="none" stroke-width="18" d="M500 618L522 624"/></g><g class="s-skin"><path fill="none" stroke-width="72" d="M282 396L306 582"/><path fill="none" stroke-width="54" d="M306 582L486 606"/><path fill="none" stroke-width="40" d="M486 606L522 602"/><path fill="none" stroke-width="13" d="M516 598L546 596"/><path fill="none" stroke-width="13" d="M500 618L522 624"/></g><path class="s-hold" d="M538 772h60v14h-60z"/><path class="s-wax" d="M556 618h24v154h-24z"/><path class="s-wick" d="M568 618L568 606"/><path class="s-fl1" d="M568 562C582 580 584 598 568 610C552 598 554 580 568 562Z"/><path class="s-fl2" d="M568 580C575 590 576 600 568 606C560 600 561 590 568 580Z"/><path class="s-tend" d="M304 404L308 424M326 558L332 584"/><path class="s-mus" d="M306 420C336 446 342 522 326 560C312 524 304 474 306 420Z"/><path class="s-musl" d="M312 446C322 474 324 510 322 540M318 440C330 470 332 512 326 548"/><path class="s-seno" d="M543 596L486 603L322 582C298 579 286 562 283 540L268 424C265 400 250 392 208 392"/><path class="s-seno" d="M207 414C250 414 284 420 292 444L312 484"/><path class="s-seno" d="M312 484L320 478M312 484L322 490M312 484L316 496"/><path class="s-sen" d="M543 596L486 603L322 582C298 579 286 562 283 540L268 424C265 400 250 392 208 392"/><path class="s-mot" d="M207 414C250 414 284 420 292 444L312 484"/><path class="s-mot" d="M312 484L320 478M312 484L322 490M312 484L316 496"/><circle class="s-rel" cx="207.5" cy="403" r="8.5"/><circle class="s-rec" cx="543" cy="596" r="7.5"/><g id="hits"><path class="hit hitv" stroke-width="24" d="M236 316C224 340 212 364 209 420" data-o="cord" tabindex="0" role="button" aria-label="Νωτιαίος μυελός"/><path class="hit hitv" stroke-width="24" d="M207 428L204 874" data-o="cord" aria-hidden="true"/><path class="hit hitv" stroke-width="18" d="M207 500C240 504 262 512 282 530" data-o="nerves" aria-hidden="true"/><path class="hit hitv" stroke-width="18" d="M206 640C250 648 300 670 358 702" data-o="nerves" tabindex="0" role="button" aria-label="Νεύρα"/><path class="hit hitv" stroke-width="18" d="M205 722C250 732 300 762 354 792" data-o="nerves" aria-hidden="true"/><path class="hit hitv" stroke-width="18" d="M204 802C240 814 290 842 344 876" data-o="nerves" aria-hidden="true"/><path class="hit" d="M266 200L306 204C302 240 276 272 258 306L232 298C248 262 266 236 266 200Z" data-o="stem" tabindex="0" role="button" aria-label="Εγκεφαλικό στέλεχος"/><path class="hit" d="M190 222C190 200 222 196 246 204C266 212 266 242 242 250C214 258 190 246 190 222Z" data-o="cerebellum" tabindex="0" role="button" aria-label="Παρεγκεφαλίδα"/><path class="hit" d="M204 196C176 150 196 84 262 64C320 46 390 78 396 132C400 166 380 192 348 196C334 198 322 208 304 208L268 206C244 200 222 208 204 196Z" data-o="cerebrum" tabindex="0" role="button" aria-label="Εγκεφαλικά ημισφαίρια"/><path class="hit" d="M306 420C336 446 342 522 326 560C312 524 304 474 306 420Z" data-o="effector" tabindex="0" role="button" aria-label="Εκτελεστικό όργανο (μυς)"/><path class="hit hitv" stroke-width="18" d="M526 598L486 603L322 582C298 579 286 562 283 540L268 424C265 400 250 392 224 392" data-o="sensory" tabindex="0" role="button" aria-label="Αισθητικός νευρώνας"/><path class="hit hitv" stroke-width="18" d="M226 415C256 416 284 422 292 444L310 480" data-o="motor" tabindex="0" role="button" aria-label="Κινητικός νευρώνας"/><circle class="hit" cx="207.5" cy="403" r="15" data-o="relay" tabindex="0" role="button" aria-label="Ενδιάμεσος νευρώνας"/><circle class="hit" cx="543" cy="596" r="16" data-o="receptor" tabindex="0" role="button" aria-label="Υποδοχέας"/></g><g id="pins"><g class="pin" data-o="cerebrum"><path class="s-lead" d="M614 70L352 112"/><circle class="s-dot" cx="352" cy="112" r="3.4"/><g class="s-pin" transform="translate(614 70) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="pin" data-o="cerebellum"><path class="s-lead" d="M-14 190L206 224"/><circle class="s-dot" cx="206" cy="224" r="3.4"/><g class="s-pin" transform="translate(-14 190) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="pin" data-o="stem"><path class="s-lead" d="M-14 282L250 270"/><circle class="s-dot" cx="250" cy="270" r="3.4"/><g class="s-pin" transform="translate(-14 282) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="pin" data-o="cord"><path class="s-lead" d="M-14 540L206 540"/><circle class="s-dot" cx="206" cy="540" r="3.4"/><g class="s-pin" transform="translate(-14 540) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="pin" data-o="nerves"><path class="s-lead" d="M-14 690L262 652"/><circle class="s-dot" cx="262" cy="652" r="3.4"/><g class="s-pin" transform="translate(-14 690) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="pin" data-o="receptor"><path class="s-lead" d="M614 540L545 597"/><circle class="s-dot" cx="545" cy="597" r="3.4"/><g class="s-pin" transform="translate(614 540) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">6</text></g></g><g class="pin" data-o="sensory"><path class="s-lead" d="M614 440L430 596"/><circle class="s-dot" cx="430" cy="596" r="3.4"/><g class="s-pin" transform="translate(614 440) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">7</text></g></g><g class="pin" data-o="relay"><path class="s-lead" d="M-14 372L205 402"/><circle class="s-dot" cx="205" cy="402" r="3.4"/><g class="s-pin" transform="translate(-14 372) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="pin" data-o="motor"><path class="s-lead" d="M614 235L290 432"/><circle class="s-dot" cx="290" cy="432" r="3.4"/><g class="s-pin" transform="translate(614 235) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">9</text></g></g><g class="pin" data-o="effector"><path class="s-lead" d="M614 340L328 500"/><circle class="s-dot" cx="328" cy="500" r="3.4"/><g class="s-pin" transform="translate(614 340) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">10</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="15" cx="543" cy="596"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="brain" role="tabpanel" aria-labelledby="t-brain">
+    <div class="stage" id="brStage">
+      <div class="chipsw"><div class="chips" id="bchips" role="group" aria-label="Περιοχές του εγκεφάλου"></div></div>
+      <div class="slot">
+        <div class="light bfigs" id="bfigs"><p class="bcap">Πλάγια όψη</p><svg class="bside" viewBox="0 -24 640 484" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Ο εγκέφαλος από το πλάι, με το μπροστινό μέρος του κεφαλιού δεξιά. Έξι αριθμημένες περιοχές: ο μετωπιαίος λοβός, ο βρεγματικός λοβός, ο κροταφικός λοβός, ο ινιακός λοβός, η παρεγκεφαλίδα και το εγκεφαλικό στέλεχος."><style>
+.b-fr{fill:#F4A08F}.b-pa{fill:#F6CF6B}.b-te{fill:#93D6A6}.b-oc{fill:#8DB9F2}.b-cb{fill:#C9A8F0}.b-st{fill:#E6D3A3}
+.b-r{stroke:#16213F;stroke-width:2.6;stroke-linejoin:round}
+.b-out{fill:none;stroke:#16213F;stroke-width:3.4;stroke-linejoin:round;pointer-events:none}
+.b-fold{fill:none;stroke:#16213F;stroke-opacity:.26;stroke-width:2.6;stroke-linecap:round;pointer-events:none}
+.b-gap{fill:none;stroke:#16213F;stroke-width:3;stroke-linecap:round;pointer-events:none}
+.b-t{font:700 15px "Noto Sans",Arial,sans-serif;fill:#5B6890}
+.b-lead{stroke:#16213F;stroke-width:1.5;fill:none;pointer-events:none}
+.b-dot{fill:#16213F;pointer-events:none}
+.b-pin circle{fill:#fff;stroke:#16213F;stroke-width:2}
+.b-pin text{font:800 16px "Manrope",Arial,sans-serif;fill:#16213F}
+.b-hl{fill:none;stroke:#F4B942;stroke-width:7;stroke-linejoin:round;pointer-events:none;display:none}
+</style><defs><clipPath id="bs-c"><path d="M96 262C52 214 58 118 140 74C226 28 372 24 462 62C548 98 596 170 574 228C562 258 528 266 498 258C480 300 424 326 372 314C330 332 276 322 246 300C196 304 130 296 96 262Z"/></clipPath></defs><text class="b-t" x="70" y="-4">← Πίσω</text><text class="b-t" x="560" y="-4" text-anchor="end">Μπροστά →</text><path class="b-r b-st" d="M286 296L352 304C348 350 332 390 324 432L276 432C284 388 292 350 286 296Z" data-b="stem" tabindex="0" role="button" aria-label="Εγκεφαλικό στέλεχος"/><path class="b-r b-cb" d="M150 304C150 272 200 262 250 278C300 292 300 352 250 368C196 382 150 352 150 304Z" data-b="cerebellum" tabindex="0" role="button" aria-label="Παρεγκεφαλίδα"/><path class="b-fold" d="M168 300C200 290 244 294 276 310"/><path class="b-fold" d="M160 320C198 310 248 316 284 334"/><path class="b-fold" d="M172 342C204 334 240 338 266 352"/><g clip-path="url(#bs-c)"><path class="b-r b-fr" d="M96 262C52 214 58 118 140 74C226 28 372 24 462 62C548 98 596 170 574 228C562 258 528 266 498 258C480 300 424 326 372 314C330 332 276 322 246 300C196 304 130 296 96 262Z" data-b="frontal" tabindex="0" role="button" aria-label="Μετωπιαίος λοβός"/><path class="b-r b-pa" d="M306 0C296 60 326 130 344 215L100 340L0 340L0 0Z" data-b="parietal" tabindex="0" role="button" aria-label="Βρεγματικός λοβός"/><path class="b-r b-oc" d="M178 0C160 80 168 150 212 214L214 340L0 340L0 0Z" data-b="occipital" tabindex="0" role="button" aria-label="Ινιακός λοβός"/><path class="b-r b-te" d="M498 258C450 232 400 206 340 196C290 188 240 192 210 214C196 240 200 280 214 330L520 360L540 270Z" data-b="temporal" tabindex="0" role="button" aria-label="Κροταφικός λοβός"/><path class="b-fold" d="M420 96C446 108 440 134 464 140C488 146 498 126 520 134"/><path class="b-fold" d="M400 160C424 150 446 162 440 184C436 200 456 208 474 198"/><path class="b-fold" d="M500 180C516 172 534 180 532 198"/><path class="b-fold" d="M270 150C284 160 280 176 296 180"/><path class="b-fold" d="M222 120C244 110 266 122 260 144C256 160 276 168 294 158"/><path class="b-fold" d="M196 78C208 90 204 104 216 110"/><path class="b-fold" d="M110 150C126 142 142 152 138 170"/><path class="b-fold" d="M104 214C124 206 144 216 146 234"/><path class="b-fold" d="M290 236C316 228 344 236 366 250"/><path class="b-fold" d="M250 262C282 256 312 264 336 282"/><path class="b-fold" d="M400 250C420 252 440 262 452 276"/></g><path class="b-out" d="M96 262C52 214 58 118 140 74C226 28 372 24 462 62C548 98 596 170 574 228C562 258 528 266 498 258C480 300 424 326 372 314C330 332 276 322 246 300C196 304 130 296 96 262Z"/><g class="b-pins"><g class="b-p" data-b="frontal"><path class="b-lead" d="M604 46L478 126"/><circle class="b-dot" cx="478" cy="126" r="3.4"/><g class="b-pin" transform="translate(604 46) scale(1.4)"><circle r="17"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="b-p" data-b="parietal"><path class="b-lead" d="M250 6L250 104"/><circle class="b-dot" cx="250" cy="104" r="3.4"/><g class="b-pin" transform="translate(250 6) scale(1.4)"><circle r="17"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="b-p" data-b="temporal"><path class="b-lead" d="M486 386L384 268"/><circle class="b-dot" cx="384" cy="268" r="3.4"/><g class="b-pin" transform="translate(486 386) scale(1.4)"><circle r="17"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="b-p" data-b="occipital"><path class="b-lead" d="M30 92L128 178"/><circle class="b-dot" cx="128" cy="178" r="3.4"/><g class="b-pin" transform="translate(30 92) scale(1.4)"><circle r="17"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="b-p" data-b="cerebellum"><path class="b-lead" d="M52 384L190 326"/><circle class="b-dot" cx="190" cy="326" r="3.4"/><g class="b-pin" transform="translate(52 384) scale(1.4)"><circle r="17"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="b-p" data-b="stem"><path class="b-lead" d="M420 428L314 386"/><circle class="b-dot" cx="314" cy="386" r="3.4"/><g class="b-pin" transform="translate(420 428) scale(1.4)"><circle r="17"/><text y="5.5" text-anchor="middle">6</text></g></g></g></svg><p class="bcap">Όψη από πάνω</p><svg class="btop" viewBox="0 -24 420 496" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Ο εγκέφαλος από πάνω, με το μπροστινό μέρος του κεφαλιού προς τα πάνω. Φαίνονται το αριστερό και το δεξί ημισφαίριο, το καθένα με μετωπιαίο, βρεγματικό και ινιακό λοβό."><style>
+.b-fr{fill:#F4A08F}.b-pa{fill:#F6CF6B}.b-te{fill:#93D6A6}.b-oc{fill:#8DB9F2}.b-cb{fill:#C9A8F0}.b-st{fill:#E6D3A3}
+.b-r{stroke:#16213F;stroke-width:2.6;stroke-linejoin:round}
+.b-out{fill:none;stroke:#16213F;stroke-width:3.4;stroke-linejoin:round;pointer-events:none}
+.b-fold{fill:none;stroke:#16213F;stroke-opacity:.26;stroke-width:2.6;stroke-linecap:round;pointer-events:none}
+.b-gap{fill:none;stroke:#16213F;stroke-width:3;stroke-linecap:round;pointer-events:none}
+.b-t{font:700 15px "Noto Sans",Arial,sans-serif;fill:#5B6890}
+.b-lead{stroke:#16213F;stroke-width:1.5;fill:none;pointer-events:none}
+.b-dot{fill:#16213F;pointer-events:none}
+.b-pin circle{fill:#fff;stroke:#16213F;stroke-width:2}
+.b-pin text{font:800 16px "Manrope",Arial,sans-serif;fill:#16213F}
+.b-hl{fill:none;stroke:#F4B942;stroke-width:7;stroke-linejoin:round;pointer-events:none;display:none}
+</style><defs><clipPath id="bt-l"><path d="M204 44C130 36 62 120 58 236C54 340 112 428 204 432Z"/></clipPath><clipPath id="bt-r"><path d="M216 44C290 36 358 120 362 236C366 340 308 428 216 432Z"/></clipPath></defs><text class="b-t" x="210" y="-4" text-anchor="middle">↑ Μπροστά</text><text class="b-t" x="210" y="462" text-anchor="middle">↓ Πίσω</text><g clip-path="url(#bt-l)"><path class="b-r b-fr" d="M204 44C130 36 62 120 58 236C54 340 112 428 204 432Z" data-b="frontal" data-h="L"/><path class="b-r b-pa" d="M210 226C160 222 110 200 30 196L30 480L210 480Z" data-b="parietal" data-h="L"/><path class="b-r b-oc" d="M210 372C170 366 120 372 50 394L50 480L210 480Z" data-b="occipital" data-h="L"/><path class="b-fold" d="M184 80C160 92 166 116 142 122"/><path class="b-fold" d="M176 150C150 144 130 158 136 180"/><path class="b-fold" d="M110 150C96 162 100 180 86 188"/><path class="b-fold" d="M186 270C160 262 138 274 144 296"/><path class="b-fold" d="M120 250C102 256 96 274 104 290"/><path class="b-fold" d="M180 330C156 326 138 338 140 356"/><path class="b-fold" d="M100 330C112 344 108 360 120 368"/><path class="b-fold" d="M176 400C160 396 148 402 142 412"/></g><path class="b-out" d="M204 44C130 36 62 120 58 236C54 340 112 428 204 432Z"/><path class="b-hl" data-h="L" d="M204 44C130 36 62 120 58 236C54 340 112 428 204 432Z"/><g clip-path="url(#bt-r)"><path class="b-r b-fr" d="M216 44C290 36 358 120 362 236C366 340 308 428 216 432Z" data-b="frontal" data-h="R"/><path class="b-r b-pa" d="M210 226C260 222 310 200 390 196L390 480L210 480Z" data-b="parietal" data-h="R"/><path class="b-r b-oc" d="M210 372C250 366 300 372 370 394L370 480L210 480Z" data-b="occipital" data-h="R"/><path class="b-fold" d="M 236 80 C 260 92 254 116 278 122"/><path class="b-fold" d="M 244 150 C 270 144 290 158 284 180"/><path class="b-fold" d="M 310 150 C 324 162 320 180 334 188"/><path class="b-fold" d="M 234 270 C 260 262 282 274 276 296"/><path class="b-fold" d="M 300 250 C 318 256 324 274 316 290"/><path class="b-fold" d="M 240 330 C 264 326 282 338 280 356"/><path class="b-fold" d="M 320 330 C 308 344 312 360 300 368"/><path class="b-fold" d="M 244 400 C 260 396 272 402 278 412"/></g><path class="b-out" d="M216 44C290 36 358 120 362 236C366 340 308 428 216 432Z"/><path class="b-hl" data-h="R" d="M216 44C290 36 358 120 362 236C366 340 308 428 216 432Z"/><g class="b-pins"><g class="b-p" data-b="frontal"><path class="b-lead" d="M356 22L286 104"/><circle class="b-dot" cx="286" cy="104" r="3.4"/><g class="b-pin" transform="translate(356 22) scale(1.0)"><circle r="17"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="b-p" data-b="right"><path class="b-lead" d="M396 150L340 172"/><circle class="b-dot" cx="340" cy="172" r="3.4"/><g class="b-pin" transform="translate(396 150) scale(1.0)"><circle r="17"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="b-p" data-b="parietal"><path class="b-lead" d="M396 290L304 290"/><circle class="b-dot" cx="304" cy="290" r="3.4"/><g class="b-pin" transform="translate(396 290) scale(1.0)"><circle r="17"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="b-p" data-b="occipital"><path class="b-lead" d="M396 424L282 404"/><circle class="b-dot" cx="282" cy="404" r="3.4"/><g class="b-pin" transform="translate(396 424) scale(1.0)"><circle r="17"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="b-p" data-b="left"><path class="b-lead" d="M24 200L82 222"/><circle class="b-dot" cx="82" cy="222" r="3.4"/><g class="b-pin" transform="translate(24 200) scale(1.0)"><circle r="17"/><text y="5.5" text-anchor="middle">7</text></g></g></g></svg></div>
+      </div>
+      <div class="infow"><div class="info" id="binfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Πίσω</button>
+            <button class="btn" id="jNext">Επόμενο</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Αυτόματα</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="reaction">Μέτρησε τον χρόνο αντίδρασής σου</h2>
+    <p>Όταν αποφασίζεις εσύ να αντιδράσεις σε κάτι, η ώση πρέπει να φτάσει στον εγκέφαλο και να αποφασίσεις τι θα κάνεις. Αυτό διαρκεί περισσότερο από ένα αντανακλαστικό. Πάτησε τον κύκλο για να αρχίσεις, περίμενε να γίνει χρυσός και ξαναπάτησέ τον όσο πιο γρήγορα μπορείς.</p>
+    <div class="rt" role="group" aria-label="Χρονόμετρο αντίδρασης"><button class="rtb" id="rtB" aria-live="polite">Πάτησε για να αρχίσεις</button><div class="meta rtm"><span><b>Τελευταίος</b><i id="rtLast">-</i></span><span><b>Καλύτερος</b><i id="rtBest">-</i></span><span><b>Μέσος όρος</b><i id="rtMean">-</i></span><span><b>Προσπάθειες</b><i id="rtTries">0</i></span><button class="seg" id="rtReset">Μηδενισμός</button></div></div>
+    <p class="muted">Οι περισσότεροι άνθρωποι χρειάζονται περίπου 0,2 ως 0,3 δευτερόλεπτα. Δοκίμασε πέντε φορές. Γίνεσαι πιο γρήγορος με την εξάσκηση;</p>
+    <h2 id="neurone">Ένας νευρώνας από κοντά</h2>
+    <p>Ο νευρώνας είναι ένα νευρικό κύτταρο. Είναι εξειδικευμένο κύτταρο με μακρύ και λεπτό σχήμα, για να μεταφέρει ηλεκτρικές ώσεις σε μεγάλες αποστάσεις. Αυτός εδώ είναι κινητικός νευρώνας.</p>
+    <div class="vgrid"><div class="light"><svg class="neu" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ένας κινητικός νευρώνας με έξι αριθμημένα μέρη: το κυτταρικό σώμα, τον πυρήνα, τους δενδρίτες, τον νευράξονα, το λιπαρό περίβλημα και τις απολήξεις. Ένα βέλος δείχνει την ώση να απομακρύνεται από το κυτταρικό σώμα."><style>
+.n-b{fill:#F6D58A;stroke:#7A5A12;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.n-bl{fill:none;stroke:#7A5A12;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.n-bf{fill:none;stroke:#F6D58A;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+.n-nu{fill:#B07BE6;stroke:#4B2A7A;stroke-width:2.4}
+.n-my{fill:#BFD8F7;stroke:#2F5E99;stroke-width:2.4}
+.n-mu{fill:#D9705F;stroke:#8C3A2D;stroke-width:2.4;stroke-linejoin:round}
+.n-ar{fill:none;stroke:#0F1C3F;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.n-ch{fill:#2FA36B;stroke:#0F1C3F;stroke-width:1.2}
+.n-gap{fill:#DDE6FA}
+.n-t{font:700 15px "Noto Sans",Arial,sans-serif;fill:#0F1C3F}
+.n-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.n-dot{fill:#0F1C3F}
+.n-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.n-pin text{font:800 16px "Manrope",Arial,sans-serif;fill:#0F1C3F}
+</style><path class="n-bl" d="M118 196L60 120L36 110M60 120L58 88"/><path class="n-bl" d="M118 196L52 204L26 190M52 204L34 228"/><path class="n-bl" d="M118 196L74 268L48 280M74 268L78 300"/><path class="n-bl" d="M118 196L132 116L116 88M132 116L156 96"/><path class="n-bl" d="M118 196L150 272L140 304M150 272L176 290"/><path class="n-bl" d="M118 196L176 150L196 126"/><path class="n-bl" d="M150 196L470 196"/><path class="n-bl" d="M470 196L520 160L548 156M520 160L536 136"/><path class="n-bl" d="M470 196L528 196L556 190"/><path class="n-bl" d="M470 196L520 232L548 236M520 232L536 258"/><circle class="n-b" cx="118" cy="196" r="34"/><path class="n-bf" d="M118 196L60 120L36 110M60 120L58 88"/><path class="n-bf" d="M118 196L52 204L26 190M52 204L34 228"/><path class="n-bf" d="M118 196L74 268L48 280M74 268L78 300"/><path class="n-bf" d="M118 196L132 116L116 88M132 116L156 96"/><path class="n-bf" d="M118 196L150 272L140 304M150 272L176 290"/><path class="n-bf" d="M118 196L176 150L196 126"/><path class="n-bf" d="M150 196L470 196"/><path class="n-bf" d="M470 196L520 160L548 156M520 160L536 136"/><path class="n-bf" d="M470 196L528 196L556 190"/><path class="n-bf" d="M470 196L520 232L548 236M520 232L536 258"/><circle cx="118" cy="196" r="31" fill="#F6D58A"/><rect class="n-my" x="196" y="182" width="56" height="28" rx="14"/><rect class="n-my" x="262" y="182" width="56" height="28" rx="14"/><rect class="n-my" x="328" y="182" width="56" height="28" rx="14"/><rect class="n-my" x="394" y="182" width="56" height="28" rx="14"/><circle class="n-nu" cx="118" cy="196" r="13"/><circle class="n-b" cx="550" cy="156" r="5.5"/><circle class="n-b" cx="538" cy="135" r="5.5"/><circle class="n-b" cx="558" cy="190" r="5.5"/><circle class="n-b" cx="550" cy="236" r="5.5"/><circle class="n-b" cx="538" cy="259" r="5.5"/><path class="n-ar" d="M214 330L420 330M404 318L420 330L404 342"/><text class="n-t" x="317" y="358" text-anchor="middle">Κατεύθυνση της ώσης</text><path class="n-lead" d="M226 44L136 172"/><circle class="n-dot" cx="136" cy="172" r="3.2"/><g class="n-pin" transform="translate(226 44)"><circle r="15"/><text y="5.5" text-anchor="middle">1</text></g><path class="n-lead" d="M40 340L112 202"/><circle class="n-dot" cx="112" cy="202" r="3.2"/><g class="n-pin" transform="translate(40 340)"><circle r="15"/><text y="5.5" text-anchor="middle">2</text></g><path class="n-lead" d="M28 44L60 118"/><circle class="n-dot" cx="60" cy="118" r="3.2"/><g class="n-pin" transform="translate(28 44)"><circle r="15"/><text y="5.5" text-anchor="middle">3</text></g><path class="n-lead" d="M300 274L258 198"/><circle class="n-dot" cx="258" cy="198" r="3.2"/><g class="n-pin" transform="translate(300 274)"><circle r="15"/><text y="5.5" text-anchor="middle">4</text></g><path class="n-lead" d="M380 100L354 184"/><circle class="n-dot" cx="354" cy="184" r="3.2"/><g class="n-pin" transform="translate(380 100)"><circle r="15"/><text y="5.5" text-anchor="middle">5</text></g><path class="n-lead" d="M500 60L522 160"/><circle class="n-dot" cx="522" cy="160" r="3.2"/><g class="n-pin" transform="translate(500 60)"><circle r="15"/><text y="5.5" text-anchor="middle">6</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span><b>Κυτταρικό σώμα.</b> Περιέχει τον πυρήνα και το μεγαλύτερο μέρος του κυτταροπλάσματος.</span></li><li><span class="num">2</span><span><b>Πυρήνας.</b> Ελέγχει το κύτταρο.</span></li><li><span class="num">3</span><span><b>Δενδρίτες.</b> Κοντές διακλαδώσεις που δέχονται σήματα από άλλους νευρώνες.</span></li><li><span class="num">4</span><span><b>Νευράξονας.</b> Μια μακριά ίνα που μεταφέρει την ώση μακριά από το κυτταρικό σώμα.</span></li><li><span class="num">5</span><span><b>Λιπαρό περίβλημα (μυελίνη).</b> Μονώνει τον νευράξονα και κάνει την ώση πιο γρήγορη.</span></li><li><span class="num">6</span><span><b>Απολήξεις.</b> Δίνουν το σήμα σε έναν μυ ή σε άλλον νευρώνα.</span></li></ol></div>
+    <h2>Τρία είδη νευρώνων</h2>
+    <div class="cards"><div class="ecard"><h3>Αισθητικός νευρώνας</h3><div class="eq">Υποδοχέας → ΚΝΣ</div><dl><dt>Μεταφέρει ώσεις</dt><dd>Από έναν υποδοχέα προς τον νωτιαίο μυελό ή τον εγκέφαλο</dd><dt>Στο διάγραμμα</dt><dd>Μπλε</dd></dl></div><div class="ecard"><h3>Ενδιάμεσος νευρώνας</h3><div class="eq">Μέσα στο ΚΝΣ</div><dl><dt>Μεταφέρει ώσεις</dt><dd>Από έναν αισθητικό νευρώνα σε έναν κινητικό</dd><dt>Στο διάγραμμα</dt><dd>Μοβ</dd></dl></div><div class="ecard"><h3>Κινητικός νευρώνας</h3><div class="eq">ΚΝΣ → εκτελεστικό όργανο</div><dl><dt>Μεταφέρει ώσεις</dt><dd>Από τον νωτιαίο μυελό ή τον εγκέφαλο σε έναν μυ ή έναν αδένα</dd><dt>Στο διάγραμμα</dt><dd>Πράσινος</dd></dl></div></div>
+    <h2 id="synapse">Το πέρασμα του κενού</h2>
+    <p>Δύο νευρώνες δεν ακουμπούν ακριβώς ο ένας τον άλλον. Το πολύ μικρό κενό ανάμεσά τους λέγεται σύναψη.</p>
+    <div class="vgrid"><div class="light"><svg class="syn" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Μια σύναψη: η άκρη ενός νευρώνα, ένα μικρό κενό και η αρχή του επόμενου νευρώνα. Κουκκίδες μιας χημικής ουσίας περνούν το κενό."><style>
+.n-b{fill:#F6D58A;stroke:#7A5A12;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.n-bl{fill:none;stroke:#7A5A12;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.n-bf{fill:none;stroke:#F6D58A;stroke-width:4.6;stroke-linecap:round;stroke-linejoin:round}
+.n-nu{fill:#B07BE6;stroke:#4B2A7A;stroke-width:2.4}
+.n-my{fill:#BFD8F7;stroke:#2F5E99;stroke-width:2.4}
+.n-mu{fill:#D9705F;stroke:#8C3A2D;stroke-width:2.4;stroke-linejoin:round}
+.n-ar{fill:none;stroke:#0F1C3F;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.n-ch{fill:#2FA36B;stroke:#0F1C3F;stroke-width:1.2}
+.n-gap{fill:#DDE6FA}
+.n-t{font:700 15px "Noto Sans",Arial,sans-serif;fill:#0F1C3F}
+.n-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.n-dot{fill:#0F1C3F}
+.n-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.n-pin text{font:800 16px "Manrope",Arial,sans-serif;fill:#0F1C3F}
+</style><rect class="n-gap" x="276" y="40" width="48" height="220" rx="10"/><path class="n-b" d="M20 128L196 128C226 96 276 104 276 150C276 196 226 204 196 172L20 172Z"/><path class="n-b" d="M580 96L372 96C340 96 324 120 324 150C324 180 340 204 372 204L580 204Z"/><circle class="n-ch" cx="250" cy="132" r="5.5"/><circle class="n-ch" cx="236" cy="152" r="5.5"/><circle class="n-ch" cx="254" cy="168" r="5.5"/><circle class="n-ch" cx="224" cy="136" r="5.5"/><circle class="n-ch" cx="240" cy="172" r="5.5"/><circle class="n-ch" cx="290" cy="128" r="5.5"/><circle class="n-ch" cx="304" cy="150" r="5.5"/><circle class="n-ch" cx="292" cy="172" r="5.5"/><circle class="n-ch" cx="312" cy="134" r="5.5"/><circle class="n-ch" cx="310" cy="170" r="5.5"/><path class="n-ar" d="M60 150L170 150M156 139L170 150L156 161"/><path class="n-ar" d="M400 150L540 150M526 139L540 150L526 161"/><path class="n-lead" d="M110 56L130 130"/><circle class="n-dot" cx="130" cy="130" r="3.2"/><g class="n-pin" transform="translate(110 56)"><circle r="15"/><text y="5.5" text-anchor="middle">1</text></g><path class="n-lead" d="M300 24L300 60"/><circle class="n-dot" cx="300" cy="60" r="3.2"/><g class="n-pin" transform="translate(300 24)"><circle r="15"/><text y="5.5" text-anchor="middle">2</text></g><path class="n-lead" d="M240 264L248 170"/><circle class="n-dot" cx="248" cy="170" r="3.2"/><g class="n-pin" transform="translate(240 264)"><circle r="15"/><text y="5.5" text-anchor="middle">3</text></g><path class="n-lead" d="M470 250L450 202"/><circle class="n-dot" cx="450" cy="202" r="3.2"/><g class="n-pin" transform="translate(470 250)"><circle r="15"/><text y="5.5" text-anchor="middle">4</text></g></svg></div><ol class="vlist"><li><span class="num">1</span><span>Η ώση φτάνει στην άκρη του πρώτου νευρώνα.</span></li><li><span class="num">2</span><span>Η σύναψη είναι το κενό ανάμεσα στους δύο νευρώνες.</span></li><li><span class="num">3</span><span>Απελευθερώνεται μια χημική ουσία. Απλώνεται στο κενό με διάχυση.</span></li><li><span class="num">4</span><span>Η χημική ουσία ξεκινά μια νέα ώση στον επόμενο νευρώνα.</span></li></ol></div>
+    <h2 id="reflex">Αντανακλαστική ή εκούσια;</h2>
+    <div class="cards"><div class="ecard"><h3>Αντανακλαστική κίνηση</h3><div class="eq">Γρήγορη και αυτόματη</div><dl><dt>Τη συντονίζει</dt><dd>Ο νωτιαίος μυελός ή ένα μέρος του εγκεφάλου που δεν το ελέγχεις</dd><dt>Γιατί</dt><dd>Προστατεύει το σώμα από βλάβες</dd><dt>Παραδείγματα</dt><dd>Τραβάς το χέρι από κάτι καυτό, ανοιγοκλείνεις τα μάτια, το αντανακλαστικό του γονάτου</dd></dl></div><div class="ecard"><h3>Εκούσια κίνηση</h3><div class="eq">Αποφασίζεις εσύ να την κάνεις</div><dl><dt>Τη συντονίζουν</dt><dd>Τα εγκεφαλικά ημισφαίρια, το μέρος του εγκεφάλου με το οποίο σκέφτεσαι</dd><dt>Ταχύτητα</dt><dd>Πιο αργή, γιατί πρώτα πρέπει να σκεφτείς</dd><dt>Παραδείγματα</dt><dd>Πιάνεις μια μπάλα, γράφεις, μιλάς</dd></dl></div></div>
+    <p class="muted">Η διαδρομή ενός αντανακλαστικού λέγεται αντανακλαστικό τόξο: ερέθισμα → υποδοχέας → αισθητικός νευρώνας → ενδιάμεσος νευρώνας → κινητικός νευρώνας → εκτελεστικό όργανο → απόκριση.</p>
+    <h2 id="senses">Τα αισθητήρια όργανα και οι υποδοχείς τους</h2>
+    <div class="cards"><div class="ecard"><h3>Μάτι</h3><div class="eq">Φως</div><dl><dt>Αίσθηση</dt><dd>Όραση</dd></dl></div><div class="ecard"><h3>Αυτί</h3><div class="eq">Ήχος</div><dl><dt>Αίσθηση</dt><dd>Ακοή. Το αυτί βοηθά και στην ισορροπία</dd></dl></div><div class="ecard"><h3>Δέρμα</h3><div class="eq">Άγγιγμα, πίεση, πόνος, θερμοκρασία</div><dl><dt>Αίσθηση</dt><dd>Αφή</dd></dl></div><div class="ecard"><h3>Γλώσσα</h3><div class="eq">Χημικές ουσίες στην τροφή</div><dl><dt>Αίσθηση</dt><dd>Γεύση</dd></dl></div><div class="ecard"><h3>Μύτη</h3><div class="eq">Χημικές ουσίες στον αέρα</div><dl><dt>Αίσθηση</dt><dd>Όσφρηση</dd></dl></div></div>
+    <h2>Τα δύο μέρη του νευρικού συστήματος</h2>
+    <div class="cards"><div class="ecard"><h3>Κεντρικό νευρικό σύστημα (ΚΝΣ)</h3><div class="eq">Εγκέφαλος και νωτιαίος μυελός</div><dl><dt>Δουλειά</dt><dd>Δέχεται πληροφορίες, αποφασίζει τι θα γίνει και στέλνει εντολές</dd></dl></div><div class="ecard"><h3>Περιφερικό νευρικό σύστημα</h3><div class="eq">Όλα τα νεύρα</div><dl><dt>Δουλειά</dt><dd>Μεταφέρει ώσεις ανάμεσα στο ΚΝΣ και το υπόλοιπο σώμα</dd></dl></div></div>
+    <p class="muted">Ο εγκέφαλός σου έχει περίπου 86 δισεκατομμύρια νευρώνες. Χρησιμοποιεί περίπου το ένα πέμπτο της ενέργειας που χρειάζεται το σώμα σου.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Βρες εκτυπώσιμα πακέτα φυσικών επιστημών στο κατάστημα →</a></p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Μέρη του νευρικού συστήματος", "numbers": "Αριθμοί", "view": "Επιλογές διαγράμματος", "tapTitle": "Πάτησε ένα μέρος", "tapText": "Πάτησε ένα μέρος στο διάγραμμα ή διάλεξε ένα από την αριθμημένη λίστα.", "key": [["Δύο μέρη.", "Ο εγκέφαλος και ο νωτιαίος μυελός αποτελούν το κεντρικό νευρικό σύστημα (ΚΝΣ). Τα νεύρα αποτελούν το περιφερικό νευρικό σύστημα."], ["Οι αριθμοί 1 ως 5", "είναι τα κύρια μέρη του νευρικού συστήματος."], ["Οι αριθμοί 6 ως 10", "ακολουθούν μια νευρική ώση από το δάχτυλο ως τον μυ του χεριού. Η διαδρομή αυτή λέγεται αντανακλαστικό τόξο."], ["Χρώματα.", "Ο αισθητικός νευρώνας είναι μπλε, ο ενδιάμεσος μοβ και ο κινητικός πράσινος."]], "kinds": {"brain": "Μέρος του εγκεφάλου", "cns": "Κεντρικό νευρικό σύστημα", "pns": "Περιφερικό νευρικό σύστημα", "arc": "Αντανακλαστικό τόξο"}, "facts": "Βασικά στοιχεία", "works": "Συνεργάζεται με", "words": "Λέξεις-κλειδιά:", "more": {"reaction": "Μέτρησε τον χρόνο αντίδρασής σου", "neurone": "Δες έναν νευρώνα από κοντά", "synapse": "Δες πώς περνά το μήνυμα το κενό", "reflex": "Σύγκρινε αντανακλαστικές και εκούσιες κινήσεις", "senses": "Δες τα αισθητήρια όργανα", "brain": "Δες τις περιοχές του εγκεφάλου"}, "step": "Βήμα", "of": "από", "back": "Πίσω", "next": "Επόμενο", "again": "Από την αρχή", "play": "Αυτόματα", "pause": "Παύση", "happens": "Τι συμβαίνει εδώ", "stage": "Στάδιο", "signal": "Σήμα", "rt": {"start": "Πάτησε για να αρχίσεις", "wait": "Περίμενε το χρυσό...", "go": "Πάτησε τώρα!", "early": "Πολύ νωρίς! Πάτησε για να ξαναδοκιμάσεις.", "again": "Πάτησε για άλλη μία", "sec": "s", "last": "Τελευταίος", "best": "Καλύτερος", "mean": "Μέσος όρος", "tries": "Προσπάθειες", "reset": "Μηδενισμός", "none": "-"}, "comma": true};
+  var PARTS=[{"id": "cerebrum", "chip": "Ημισφαίρια", "name": "Εγκεφαλικά ημισφαίρια", "kind": "brain", "job": "Το μεγαλύτερο μέρος του εγκεφάλου. Εδώ σκέφτεσαι, θυμάσαι, αισθάνεσαι και αποφασίζεις να κινηθείς.", "facts": ["Είναι δύο. Το αριστερό ημισφαίριο ελέγχει τη δεξιά πλευρά του σώματος και το δεξί την αριστερή.", "Η εξωτερική τους στιβάδα, ο φλοιός, έχει πολλές πτυχές. Έτσι μια μεγάλη επιφάνεια χωρά σε μικρό χώρο.", "Διαφορετικές περιοχές ασχολούνται με την όραση, την ακοή, την αφή, την ομιλία και την κίνηση."], "words": "εγκεφαλικά ημισφαίρια, φλοιός, μνήμη, εκούσια κίνηση", "links": [["cerebellum", "Η παρεγκεφαλίδα βρίσκεται από κάτω τους, στο πίσω μέρος."], ["stem", "Το εγκεφαλικό στέλεχος τα συνδέει με τον νωτιαίο μυελό."]], "meta": ["Ελέγχουν", "Τη σκέψη, τη μνήμη, τις αισθήσεις και τις κινήσεις που αποφασίζεις να κάνεις"], "more": "brain", "n": 1}, {"id": "cerebellum", "chip": "Παρεγκεφαλίδα", "name": "Παρεγκεφαλίδα", "kind": "brain", "job": "Ένα μικρότερο μέρος στο πίσω μέρος του εγκεφάλου, κάτω από τα ημισφαίρια. Ελέγχει την ισορροπία και κάνει τις κινήσεις σου ομαλές και ακριβείς.", "facts": ["Χάρη σε αυτήν στέκεσαι, περπατάς, κάνεις ποδήλατο και πιάνεις μια μπάλα χωρίς να σκέφτεσαι κάθε μυ.", "Συγκρίνει αυτό που κάνει το σώμα με αυτό που σχεδίασε ο εγκέφαλος και το διορθώνει.", "Το όνομά της σημαίνει «δίπλα στον εγκέφαλο»."], "words": "παρεγκεφαλίδα, ισορροπία, συντονισμός", "links": [["cerebrum", "Τελειοποιεί τις κινήσεις που ξεκινούν τα ημισφαίρια."], ["stem", "Συνδέεται με το εγκεφαλικό στέλεχος."]], "meta": ["Ελέγχει", "Την ισορροπία και τον συντονισμό των κινήσεων"], "n": 2, "more": "brain"}, {"id": "stem", "chip": "Στέλεχος", "name": "Εγκεφαλικό στέλεχος", "kind": "brain", "job": "Ο μίσχος στη βάση του εγκεφάλου. Συνδέει τον εγκέφαλο με τον νωτιαίο μυελό και ελέγχει όσα κάνει το σώμα σου αυτόματα.", "facts": ["Σε κρατά να αναπνέεις και κρατά την καρδιά σου να χτυπά, ακόμη και όταν κοιμάσαι.", "Ελέγχει επίσης την κατάποση, τον βήχα και το ανοιγοκλείσιμο των ματιών.", "Κάθε νευρική ώση ανάμεσα στον εγκέφαλο και το σώμα περνά από εδώ.", "Το κατώτερο μέρος του λέγεται προμήκης μυελός."], "words": "εγκεφαλικό στέλεχος, προμήκης μυελός, αυτόματες λειτουργίες", "links": [["cord", "Συνεχίζει προς τα κάτω ως νωτιαίος μυελός."], ["cerebrum", "Συνδέει τα ημισφαίρια με το υπόλοιπο σώμα."]], "meta": ["Ελέγχει", "Την αναπνοή, τον ρυθμό της καρδιάς και άλλες αυτόματες λειτουργίες"], "n": 3, "more": "brain"}, {"id": "cord", "chip": "Νωτιαίος μυελός", "name": "Νωτιαίος μυελός", "kind": "cns", "job": "Μια χοντρή δέσμη νευρώνων που κατεβαίνει μέσα στη σπονδυλική στήλη. Μεταφέρει νευρικές ώσεις ανάμεσα στον εγκέφαλο και το υπόλοιπο σώμα.", "facts": ["Μαζί με τον εγκέφαλο αποτελεί το κεντρικό νευρικό σύστημα (ΚΝΣ).", "Τον προστατεύουν τα οστά της σπονδυλικής στήλης (οι σπόνδυλοι).", "Σε έναν ενήλικα έχει μήκος περίπου 45 cm και πάχος περίπου όσο ένα δάχτυλο.", "Μπορεί να συντονίσει μόνος του μια αντανακλαστική κίνηση, χωρίς να περιμένει τον εγκέφαλο."], "words": "νωτιαίος μυελός, κεντρικό νευρικό σύστημα, σπόνδυλοι", "links": [["stem", "Ενώνεται με τον εγκέφαλο στο εγκεφαλικό στέλεχος."], ["nerves", "Από αυτόν ξεκινούν νεύρα για κάθε μέρος του σώματος."], ["relay", "Μέσα του βρίσκονται ενδιάμεσοι νευρώνες."]], "meta": ["Ανήκει", "Στο κεντρικό νευρικό σύστημα (ΚΝΣ)"], "more": "reflex", "n": 4}, {"id": "nerves", "chip": "Νεύρα", "name": "Νεύρα", "kind": "pns", "job": "Δέσμες νευρώνων που συνδέουν το κεντρικό νευρικό σύστημα με κάθε μέρος του σώματος.", "facts": ["Από τον νωτιαίο μυελό ξεκινούν 31 ζεύγη νεύρων. Άλλα 12 ζεύγη ξεκινούν απευθείας από τον εγκέφαλο.", "Ένα νεύρο μοιάζει με καλώδιο. Περιέχει εκατοντάδες ή χιλιάδες νευρώνες τυλιγμένους μαζί.", "Κάποιοι νευρώνες ενός νεύρου φέρνουν ώσεις προς τον νωτιαίο μυελό. Άλλοι στέλνουν ώσεις προς τους μυς.", "Όλα μαζί τα νεύρα λέγονται περιφερικό νευρικό σύστημα."], "words": "νεύρο, νευρώνας, περιφερικό νευρικό σύστημα", "links": [["cord", "Ενώνονται με τον νωτιαίο μυελό."], ["sensory", "Μέσα τους περνούν αισθητικοί νευρώνες."], ["motor", "Μέσα τους περνούν και κινητικοί νευρώνες."]], "meta": ["Ανήκουν", "Στο περιφερικό νευρικό σύστημα"], "n": 5}, {"id": "receptor", "chip": "Υποδοχέας", "name": "Υποδοχέας", "kind": "arc", "job": "Μια ομάδα κυττάρων που ανιχνεύει ένα ερέθισμα. Ερέθισμα είναι μια αλλαγή στο περιβάλλον σου, όπως η θερμότητα, το φως ή ο ήχος.", "facts": ["Οι υποδοχείς του δέρματος ανιχνεύουν το άγγιγμα, την πίεση, τον πόνο και τη θερμοκρασία.", "Τα μάτια έχουν υποδοχείς για το φως. Τα αυτιά έχουν υποδοχείς για τον ήχο. Η μύτη και η γλώσσα έχουν υποδοχείς για χημικές ουσίες.", "Όταν ένας υποδοχέας ανιχνεύσει ένα ερέθισμα, ξεκινά μια ηλεκτρική ώση."], "words": "υποδοχέας, ερέθισμα, αισθητήριο όργανο", "links": [["sensory", "Δίνει την ώση σε έναν αισθητικό νευρώνα."]], "meta": ["Στο διάγραμμα", "Υποδοχείς θερμότητας και πόνου στο δέρμα του δαχτύλου"], "more": "senses", "n": 6}, {"id": "sensory", "chip": "Αισθητικός νευρώνας", "name": "Αισθητικός νευρώνας", "kind": "arc", "job": "Ένα νευρικό κύτταρο που μεταφέρει ώσεις από έναν υποδοχέα προς το κεντρικό νευρικό σύστημα.", "facts": ["Η νευρική ώση είναι ένα πολύ μικρό ηλεκτρικό σήμα.", "Ένας αισθητικός νευρώνας μπορεί να έχει μήκος ως και ένα μέτρο, από την άκρη ενός δαχτύλου ως τον νωτιαίο μυελό.", "Οι πιο γρήγορες ώσεις ταξιδεύουν με περίπου 100 μέτρα το δευτερόλεπτο."], "words": "αισθητικός νευρώνας, νευρική ώση", "links": [["receptor", "Η ώση ξεκινά από τον υποδοχέα."], ["relay", "Δίνει την ώση σε έναν ενδιάμεσο νευρώνα στον νωτιαίο μυελό."]], "meta": ["Μεταφέρει ώσεις", "Από έναν υποδοχέα προς τον νωτιαίο μυελό ή τον εγκέφαλο"], "more": "neurone", "n": 7}, {"id": "relay", "chip": "Ενδιάμεσος νευρώνας", "name": "Ενδιάμεσος νευρώνας", "kind": "arc", "job": "Ένα κοντό νευρικό κύτταρο μέσα στο κεντρικό νευρικό σύστημα. Συνδέει έναν αισθητικό νευρώνα με έναν κινητικό.", "facts": ["Ενδιάμεσοι νευρώνες υπάρχουν μόνο στον εγκέφαλο και στον νωτιαίο μυελό.", "Οι νευρώνες δεν ακουμπούν ακριβώς ο ένας τον άλλον. Ανάμεσά τους υπάρχει ένα πολύ μικρό κενό που λέγεται σύναψη.", "Μια χημική ουσία περνά το σήμα από τη μία πλευρά της σύναψης στην άλλη."], "words": "ενδιάμεσος νευρώνας, σύναψη", "links": [["sensory", "Παίρνει την ώση από τον αισθητικό νευρώνα."], ["motor", "Δίνει την ώση στον κινητικό νευρώνα."], ["cord", "Βρίσκεται μέσα στον νωτιαίο μυελό."]], "meta": ["Μεταφέρει ώσεις", "Από έναν αισθητικό νευρώνα σε έναν κινητικό"], "more": "synapse", "n": 8}, {"id": "motor", "chip": "Κινητικός νευρώνας", "name": "Κινητικός νευρώνας", "kind": "arc", "job": "Ένα νευρικό κύτταρο που μεταφέρει ώσεις από το κεντρικό νευρικό σύστημα σε ένα εκτελεστικό όργανο, όπως ένας μυς.", "facts": ["Το κυτταρικό του σώμα βρίσκεται στον νωτιαίο μυελό ή στον εγκέφαλο.", "Η μακριά του ίνα (ο νευράξονας) καλύπτεται από ένα λιπαρό περίβλημα. Αυτό τη μονώνει και κάνει την ώση πιο γρήγορη.", "Οι διακλαδισμένες απολήξεις του δίνουν το σήμα στον μυ."], "words": "κινητικός νευρώνας, νευράξονας, εκτελεστικό όργανο", "links": [["relay", "Παίρνει την ώση από τον ενδιάμεσο νευρώνα."], ["effector", "Μεταφέρει την ώση στον μυ."]], "meta": ["Μεταφέρει ώσεις", "Από τον νωτιαίο μυελό ή τον εγκέφαλο σε έναν μυ ή έναν αδένα"], "more": "neurone", "n": 9}, {"id": "effector", "chip": "Εκτελεστικό όργανο", "name": "Εκτελεστικό όργανο (μυς)", "kind": "arc", "job": "Το μέρος του σώματος που κάνει την απόκριση. Εδώ είναι ο δικέφαλος μυς στο πάνω μέρος του χεριού.", "facts": ["Εκτελεστικό όργανο είναι ένας μυς ή ένας αδένας.", "Ένας μυς αποκρίνεται με σύσπαση. Ένας αδένας αποκρίνεται εκκρίνοντας μια ουσία, όπως ιδρώτα, σάλιο ή μια ορμόνη.", "Όταν ο δικέφαλος συσπάται, λυγίζει το χέρι και τραβά την παλάμη μακριά από τη φλόγα."], "words": "εκτελεστικό όργανο, απόκριση, μυς, αδένας", "links": [["motor", "Ένας κινητικός νευρώνας φέρνει την ώση."]], "meta": ["Στο διάγραμμα", "Ο δικέφαλος μυς"], "more": "reflex", "n": 10}];
+  var STEPS=[{"title": "Ερέθισμα: μια καυτή φλόγα", "sum": "Η άκρη του δαχτύλου σου αγγίζει τη φλόγα ενός κεριού. Η θερμότητα είναι το ερέθισμα.", "pts": ["Ερέθισμα είναι μια αλλαγή στο περιβάλλον σου που το σώμα σου μπορεί να ανιχνεύσει.", "Αυτό το ερέθισμα είναι επικίνδυνο. Το σώμα σου πρέπει να αποκριθεί πριν καεί άσχημα το δέρμα."], "on": ["receptor"], "stage": "Ερέθισμα", "signal": "Θερμότητα", "away": "Ερέθισμα: θερμότητα"}, {"title": "Υποδοχέας: το δέρμα ανιχνεύει τη θερμότητα", "sum": "Υποδοχείς στο δέρμα του δαχτύλου σου ανιχνεύουν το ερέθισμα.", "pts": ["Οι υποδοχείς μετατρέπουν το ερέθισμα σε ηλεκτρική ώση.", "Κάθε είδος υποδοχέα ανιχνεύει ένα είδος ερεθίσματος."], "on": ["receptor"], "stage": "Υποδοχέας", "signal": "Ξεκινά μια ηλεκτρική ώση", "away": "Υποδοχέας"}, {"title": "Αισθητικός νευρώνας: προς τον νωτιαίο μυελό", "sum": "Η ώση ταξιδεύει σε έναν αισθητικό νευρώνα, ανεβαίνει το χέρι και μπαίνει στον νωτιαίο μυελό.", "pts": ["Ο αισθητικός νευρώνας είναι μέρος ενός νεύρου του χεριού.", "Οι ώσεις ταξιδεύουν πολύ γρήγορα, οπότε αυτό διαρκεί ένα κλάσμα του δευτερολέπτου."], "on": ["sensory"], "stage": "Αισθητικός νευρώνας", "signal": "Ηλεκτρική ώση", "away": "Αισθητικός νευρώνας"}, {"title": "Ενδιάμεσος νευρώνας: μέσα στον νωτιαίο μυελό", "sum": "Στον νωτιαίο μυελό η ώση περνά σε έναν ενδιάμεσο νευρώνα και μετά σε έναν κινητικό.", "pts": ["Κάθε φορά που το σήμα περνά από έναν νευρώνα στον επόμενο, διασχίζει ένα πολύ μικρό κενό, τη σύναψη. Το μεταφέρει μια χημική ουσία.", "Την απόκριση αυτή τη συντονίζει ο νωτιαίος μυελός. Η ώση δεν χρειάζεται να ανέβει πρώτα στον εγκέφαλο."], "on": ["relay", "cord"], "stage": "Συντονιστής (νωτιαίος μυελός)", "signal": "Μια χημική ουσία περνά κάθε σύναψη", "away": "Ενδιάμεσος νευρώνας"}, {"title": "Κινητικός νευρώνας: προς τον μυ", "sum": "Η ώση ταξιδεύει σε έναν κινητικό νευρώνα, από τον νωτιαίο μυελό ως τον δικέφαλο μυ.", "pts": ["Οι κινητικοί νευρώνες μεταφέρουν ώσεις από το κεντρικό νευρικό σύστημα προς τα έξω.", "Οι απολήξεις του κινητικού νευρώνα δίνουν το σήμα στον μυ."], "on": ["motor"], "stage": "Κινητικός νευρώνας", "signal": "Ηλεκτρική ώση", "away": "Κινητικός νευρώνας"}, {"title": "Εκτελεστικό όργανο: ο μυς συσπάται", "sum": "Ο δικέφαλος συσπάται. Το χέρι σου λυγίζει και η παλάμη απομακρύνεται από τη φλόγα. Αυτή είναι η απόκριση.", "pts": ["Ο μυς είναι το εκτελεστικό όργανο. Αυτός κάνει την απόκριση.", "Όλο το αντανακλαστικό τελειώνει σε ένα κλάσμα του δευτερολέπτου, πριν προλάβεις να σκεφτείς."], "on": ["effector"], "stage": "Εκτελεστικό όργανο και απόκριση", "signal": "Ο μυς συσπάται", "away": "Απόκριση: το χέρι τραβιέται"}, {"title": "Εγκέφαλος: νιώθεις τον πόνο", "sum": "Στο μεταξύ μια άλλη ώση ανεβαίνει από τον νωτιαίο μυελό στον εγκέφαλο. Μια στιγμή αργότερα νιώθεις τον πόνο.", "pts": ["Το αντανακλαστικό δεν περίμενε τον εγκέφαλο. Γι' αυτό είναι τόσο γρήγορο.", "Τώρα τα εγκεφαλικά ημισφαίρια μπορούν να αποφασίσουν τι θα κάνεις μετά, για παράδειγμα να βάλεις το δάχτυλο κάτω από κρύο νερό."], "on": ["cord", "stem", "cerebrum"], "stage": "Εγκέφαλος", "signal": "Ηλεκτρική ώση", "away": "Το μαθαίνει ο εγκέφαλος"}];
+  var B={"tab": "Περιοχές του εγκεφάλου", "chipsAria": "Περιοχές του εγκεφάλου", "sideCap": "Πλάγια όψη", "topCap": "Όψη από πάνω", "front": "Μπροστά", "back": "Πίσω", "sideAria": "Ο εγκέφαλος από το πλάι, με το μπροστινό μέρος του κεφαλιού δεξιά. Έξι αριθμημένες περιοχές: ο μετωπιαίος λοβός, ο βρεγματικός λοβός, ο κροταφικός λοβός, ο ινιακός λοβός, η παρεγκεφαλίδα και το εγκεφαλικό στέλεχος.", "topAria": "Ο εγκέφαλος από πάνω, με το μπροστινό μέρος του κεφαλιού προς τα πάνω. Φαίνονται το αριστερό και το δεξί ημισφαίριο, το καθένα με μετωπιαίο, βρεγματικό και ινιακό λοβό.", "tapTitle": "Πάτησε μια περιοχή", "tapText": "Πάτησε μια περιοχή σε όποιο από τα δύο σχέδια θέλεις, ή διάλεξε μία από την αριθμημένη λίστα, για να δεις με τι ασχολείται.", "key": [["Τέσσερις λοβοί.", "Κάθε εγκεφαλικό ημισφαίριο χωρίζεται σε τέσσερις περιοχές που λέγονται λοβοί (αριθμοί 1 ως 4). Κάθε λοβός έχει τις δικές του κύριες δουλειές."], ["Από κάτω", "βρίσκονται η παρεγκεφαλίδα (5) και το εγκεφαλικό στέλεχος (6)."], ["Δύο ημισφαίρια.", "Από πάνω φαίνεται ότι υπάρχει ένα αριστερό ημισφαίριο (7) και ένα δεξί (8). Το καθένα έχει τους δικούς του λοβούς."], ["Ομαδική δουλειά.", "Καμία περιοχή δεν δουλεύει μόνη της. Ακόμη και κάτι απλό, όπως το να πιάσεις μια μπάλα, χρειάζεται πολλές περιοχές μαζί."]], "kinds": {"lobe": "Λοβός των ημισφαιρίων", "under": "Κάτω από τα ημισφαίρια", "half": "Ημισφαίριο"}, "where": "Πού βρίσκεται", "does": "Με τι ασχολείται", "eg": "Παραδείγματα", "facts": "Βασικά στοιχεία", "words": "Λέξεις-κλειδιά:", "toBody": "Βρες το στο διάγραμμα του σώματος", "fromBody": "Δες τις περιοχές του εγκεφάλου", "AREAS": [{"id": "frontal", "chip": "Μετωπιαίος λοβός", "name": "Μετωπιαίος λοβός", "kind": "lobe", "body": "cerebrum", "where": "Μπροστά, πίσω από το μέτωπό σου.", "job": "Ο μεγαλύτερος λοβός. Ασχολείται με τη σκέψη και τον σχεδιασμό, και ξεκινά τις κινήσεις που αποφασίζεις να κάνεις.", "does": ["Σκέψη, σχεδιασμός και λύση προβλημάτων", "Αποφάσεις και έλεγχος της συμπεριφοράς", "Ξεκίνημα των εκούσιων κινήσεων. Η λωρίδα στο πίσω μέρος του λοβού λέγεται κινητική περιοχή", "Παραγωγή της ομιλίας"], "eg": "Σχεδιάζεις το διάβασμά σου, αποφασίζεις τι θα πεις, κλοτσάς μια μπάλα", "facts": ["Είναι το τελευταίο μέρος του εγκεφάλου που ολοκληρώνει την ανάπτυξή του. Συνεχίζει να αλλάζει ως τα 25 σου περίπου.", "Κάθε σημείο της κινητικής περιοχής ελέγχει τους μυς ενός μέρους του σώματος."], "words": "μετωπιαίος λοβός, κινητική περιοχή, εκούσια κίνηση"}, {"id": "parietal", "chip": "Βρεγματικός λοβός", "name": "Βρεγματικός λοβός", "kind": "lobe", "body": "cerebrum", "where": "Στην κορυφή του κεφαλιού, πίσω από τον μετωπιαίο λοβό.", "job": "Ασχολείται με την αφή και με το πού βρίσκεται το σώμα σου στον χώρο.", "does": ["Αίσθηση του αγγίγματος, της πίεσης, του πόνου και της θερμοκρασίας. Η λωρίδα στο μπροστινό μέρος του λοβού λέγεται αισθητική περιοχή", "Ξέρεις πού βρίσκονται τα μέρη του σώματός σου χωρίς να κοιτάξεις", "Εκτίμηση του χώρου, της απόστασης και της κατεύθυνσης"], "eg": "Νιώθεις ένα κέρμα στην τσέπη σου, πιάνεις μια μπάλα, διαβάζεις έναν χάρτη", "facts": ["Εδώ καταλήγουν οι ώσεις από τους υποδοχείς του δέρματος.", "Τα ευαίσθητα μέρη του σώματος, όπως οι άκρες των δαχτύλων και τα χείλη, έχουν μεγάλο μερίδιο της αισθητικής περιοχής."], "words": "βρεγματικός λοβός, αισθητική περιοχή, αφή"}, {"id": "temporal", "chip": "Κροταφικός λοβός", "name": "Κροταφικός λοβός", "kind": "lobe", "body": "cerebrum", "where": "Στο πλάι του κεφαλιού, λίγο πάνω από το αυτί. Δεν φαίνεται στην όψη από πάνω.", "job": "Ασχολείται με την ακοή, με την κατανόηση της γλώσσας και με τη μνήμη.", "does": ["Ακοή: δέχεται ώσεις από τα αυτιά", "Κατανόηση της ομιλίας και της γλώσσας", "Αποθήκευση αναμνήσεων", "Αναγνώριση προσώπων και αντικειμένων"], "eg": "Ακούς μουσική, παρακολουθείς μια συζήτηση, θυμάσαι το όνομα ενός φίλου", "facts": ["Υπάρχει ένας κροταφικός λοβός σε κάθε πλευρά του κεφαλιού.", "Ένα μικρό μέρος βαθιά μέσα του, ο ιππόκαμπος, βοηθά να σχηματίζονται νέες αναμνήσεις."], "words": "κροταφικός λοβός, ακοή, μνήμη"}, {"id": "occipital", "chip": "Ινιακός λοβός", "name": "Ινιακός λοβός", "kind": "lobe", "body": "cerebrum", "where": "Στο πίσω μέρος του κεφαλιού.", "job": "Ασχολείται με την όραση.", "does": ["Όραση: δέχεται ώσεις από τα μάτια", "Επεξεργασία του χρώματος, του σχήματος και της κίνησης"], "eg": "Διαβάζεις, ξεχωρίζεις το κόκκινο από το πράσινο, βλέπεις μια μπάλα να έρχεται προς το μέρος σου", "facts": ["Τα μάτια σου είναι στο μπροστινό μέρος του κεφαλιού, αλλά το μέρος του εγκεφάλου που βλέπει είναι στο πίσω.", "Είναι ο μικρότερος από τους τέσσερις λοβούς."], "words": "ινιακός λοβός, όραση"}, {"id": "cerebellum", "chip": "Παρεγκεφαλίδα", "name": "Παρεγκεφαλίδα", "kind": "under", "body": "cerebellum", "where": "Στο πίσω μέρος, κάτω από τα ημισφαίρια. Δεν φαίνεται στην όψη από πάνω.", "job": "Ασχολείται με την ισορροπία και κάνει τις κινήσεις σου ομαλές και ακριβείς.", "does": ["Ισορροπία και στάση του σώματος", "Συντονισμός: ομαλές και ακριβείς κινήσεις", "Δεξιότητες που με την εξάσκηση γίνονται αυτόματες, όπως το ποδήλατο"], "eg": "Στέκεσαι στο ένα πόδι, γράφεις καθαρά, κάνεις ποδήλατο", "facts": ["Είναι πολύ μικρότερη από τα ημισφαίρια, αλλά περιέχει πάνω από τους μισούς νευρώνες του εγκεφάλου.", "Το όνομά της σημαίνει «δίπλα στον εγκέφαλο»."], "words": "παρεγκεφαλίδα, ισορροπία, συντονισμός"}, {"id": "stem", "chip": "Στέλεχος", "name": "Εγκεφαλικό στέλεχος", "kind": "under", "body": "stem", "where": "Στη βάση του εγκεφάλου. Συνδέει τον εγκέφαλο με τον νωτιαίο μυελό. Δεν φαίνεται στην όψη από πάνω.", "job": "Ασχολείται με όσα κάνει το σώμα σου αυτόματα για να μένεις ζωντανός.", "does": ["Αναπνοή", "Ρυθμός της καρδιάς και πίεση του αίματος", "Κατάποση, βήχας και ανοιγοκλείσιμο των ματιών", "Μεταφορά ώσεων ανάμεσα στον εγκέφαλο και τον νωτιαίο μυελό"], "eg": "Αναπνέεις όταν κοιμάσαι, καταπίνεις την τροφή σου", "facts": ["Δουλεύει συνέχεια, χωρίς να το σκέφτεσαι.", "Το κατώτερο μέρος του λέγεται προμήκης μυελός."], "words": "εγκεφαλικό στέλεχος, προμήκης μυελός, αυτόματες λειτουργίες"}, {"id": "left", "chip": "Αριστερό ημισφαίριο", "name": "Αριστερό ημισφαίριο", "kind": "half", "body": "cerebrum", "where": "Η αριστερή πλευρά του εγκεφάλου, όπως φαίνεται από πάνω.", "job": "Ελέγχει τους μυς της δεξιάς πλευράς του σώματος και δέχεται τις αισθήσεις από τη δεξιά πλευρά.", "does": ["Κίνηση και αίσθηση της δεξιάς πλευράς του σώματος", "Στους περισσότερους ανθρώπους, το μεγαλύτερο μέρος της δουλειάς για την ομιλία και τη γλώσσα"], "eg": "Γράφεις με το δεξί χέρι, μιλάς", "facts": ["Οι νευρικές οδοί διασταυρώνονται στη διαδρομή ανάμεσα στον εγκέφαλο και το σώμα. Γι' αυτό κάθε ημισφαίριο ασχολείται με την απέναντι πλευρά.", "Μια χοντρή δέσμη νευρικών ινών, το μεσολόβιο, ενώνει τα δύο ημισφαίρια. Έτσι ανταλλάσσουν πληροφορίες συνέχεια.", "Η ιδέα ότι κάποιος είναι «αριστερού» ή «δεξιού εγκεφάλου» είναι μύθος. Τα δύο ημισφαίρια συνεργάζονται σε ό,τι κάνεις."], "words": "ημισφαίριο, μεσολόβιο, αριστερό, δεξί"}, {"id": "right", "chip": "Δεξί ημισφαίριο", "name": "Δεξί ημισφαίριο", "kind": "half", "body": "cerebrum", "where": "Η δεξιά πλευρά του εγκεφάλου, όπως φαίνεται από πάνω.", "job": "Ελέγχει τους μυς της αριστερής πλευράς του σώματος και δέχεται τις αισθήσεις από την αριστερή πλευρά.", "does": ["Κίνηση και αίσθηση της αριστερής πλευράς του σώματος", "Στους περισσότερους ανθρώπους, περισσότερη από τη δουλειά για τον χώρο, τα σχήματα και την αναγνώριση προσώπων"], "eg": "Κλοτσάς με το αριστερό πόδι, φτιάχνεις ένα παζλ", "facts": ["Η πλάγια όψη σε αυτή τη σελίδα δείχνει το δεξί ημισφαίριο, όπως φαίνεται από τα δεξιά.", "Ένας τραυματισμός στο δεξί ημισφαίριο μπορεί να αδυνατίσει την αριστερή πλευρά του σώματος.", "Και τα δύο ημισφαίρια έχουν τους ίδιους τέσσερις λοβούς."], "words": "ημισφαίριο, μεσολόβιο, αριστερό, δεξί"}]};
+  var PATHS=["M543 595L543 596", "M543 595L543 596", "M543 596L486 603L322 582C298 579 286 562 283 540L268 424C265 400 250 392 208 392", "M208 392L207.5 414", "M207 414C250 414 284 420 292 444L312 484", "M312 483L312 484", "M208 400C212 356 228 332 244 300L286 206L292 150"],DUR=[300, 300, 1900, 800, 1200, 300, 1900];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.meta)h+="<div class=\"meta\"><span><b>"+esc(o.meta[0])+"</b>"+esc(o.meta[1])+"</span></div>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more)h+="<p><button class=\"btn ghost\" id=\"toMore\" data-to=\""+o.more+"\">"+esc(L.more[o.more])+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toMore"){
+      var to=b.getAttribute("data-to");
+      if(to==="brain"){show("brain");Brain.select(selected==="cerebrum"?null:selected);$("t-brain").scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+      show("more");var v=$(to);if(v&&v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;
+    }
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- areas of the brain ---------- */
+  var Brain=(function(){
+    var box=$("bfigs"),bchips=$("bchips"),binfo=$("binfo"),A=B.AREAS,AB={},cur=null,a,h="";
+    for(a=0;a<A.length;a++){A[a].n=a+1;AB[A[a].id]=A[a];}
+    for(a=0;a<A.length;a++)h+="<button class=\"chip\" data-b=\""+A[a].id+"\" aria-pressed=\"false\"><b>"+A[a].n+"</b>"+esc(A[a].chip)+"</button>";
+    bchips.innerHTML=h;
+    function paint(id){
+      var half=id==="left"?"L":(id==="right"?"R":""),els=box.querySelectorAll(".b-r"),i,on;
+      for(i=0;i<els.length;i++){
+        var eh=els[i].getAttribute("data-h");
+        on=!id||(half?(!eh||eh===half):els[i].getAttribute("data-b")===id);
+        if(on)els[i].classList.remove("dim");else els[i].classList.add("dim");
+      }
+      els=box.querySelectorAll(".b-p");
+      for(i=0;i<els.length;i++){
+        on=els[i].getAttribute("data-b")===id;
+        if(!id||on)els[i].classList.remove("dim");else els[i].classList.add("dim");
+        if(on)els[i].classList.add("on");else els[i].classList.remove("on");
+      }
+      els=box.querySelectorAll(".b-hl");
+      for(i=0;i<els.length;i++){
+        if(half&&els[i].getAttribute("data-h")===half)els[i].classList.add("on");else els[i].classList.remove("on");
+      }
+    }
+    function intro(){
+      var t="<h2>"+esc(B.tapTitle)+"</h2><p>"+esc(B.tapText)+"</p><div class=\"keybox\">";
+      for(var i=0;i<B.key.length;i++)t+="<div><b>"+esc(B.key[i][0])+"</b> "+esc(B.key[i][1])+"</div>";
+      return t+"</div>";
+    }
+    function card(o){
+      var i,t="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+      t+="<span class=\"kind "+o.kind+"\">"+esc(B.kinds[o.kind])+"</span>";
+      t+="<p>"+esc(o.job)+"</p>";
+      t+="<div class=\"meta\"><span><b>"+esc(B.where)+"</b>"+esc(o.where)+"</span></div>";
+      t+="<h3>"+esc(B.does)+"</h3><ul>";
+      for(i=0;i<o.does.length;i++)t+="<li>"+esc(o.does[i])+"</li>";
+      t+="</ul><div class=\"meta\"><span><b>"+esc(B.eg)+"</b>"+esc(o.eg)+"</span></div>";
+      t+="<h3>"+esc(B.facts)+"</h3><ul>";
+      for(i=0;i<o.facts.length;i++)t+="<li>"+esc(o.facts[i])+"</li>";
+      t+="</ul><p><button class=\"btn ghost\" id=\"toBody\" data-o=\""+o.body+"\">"+esc(B.toBody)+"</button></p>";
+      t+="<p class=\"words\"><b>"+esc(B.words)+"</b> "+esc(o.words)+"</p>";
+      return t;
+    }
+    function bsel(id,from){
+      if(id&&!AB[id])id=null;
+      cur=id;
+      var i,cs=bchips.querySelectorAll(".chip");
+      for(i=0;i<cs.length;i++){
+        var on=cs[i].getAttribute("data-b")===id;
+        cs[i].setAttribute("aria-pressed",on?"true":"false");
+        if(on&&bchips.scrollWidth>bchips.clientWidth)bchips.scrollLeft=Math.max(0,cs[i].offsetLeft-bchips.clientWidth/2+cs[i].offsetWidth/2);
+      }
+      paint(id);
+      binfo.innerHTML=id?card(AB[id]):intro();
+      if(id&&from==="fig"&&window.innerWidth<780){
+        var r=binfo.getBoundingClientRect();
+        if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+      }
+    }
+    bchips.onclick=function(e){
+      var b=e.target.closest?e.target.closest(".chip"):null;
+      if(b)bsel(b.getAttribute("data-b"),"chip");
+    };
+    function pick(e){
+      var t=e.target.closest?e.target.closest("[data-b]"):null;
+      if(t)bsel(t.getAttribute("data-b"),"fig");
+    }
+    box.addEventListener("click",pick);
+    box.addEventListener("keydown",function(e){
+      if(e.key==="Enter"||e.key===" "){
+        var t=e.target.closest?e.target.closest("[data-b]"):null;
+        if(t){e.preventDefault();pick(e);}
+      }
+    });
+    binfo.onclick=function(e){
+      var b=e.target.closest?e.target.closest("#toBody"):null;
+      if(!b)return;
+      show("explore");select(b.getAttribute("data-o"),"link");
+      $("t-explore").scrollIntoView({behavior:reduce?"auto":"smooth"});
+    };
+    bsel(null);
+    return {select:bsel,AREAS:A,state:function(){return cur;}};
+  })();
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.stage)+"</b>"+esc(s.stage)+"</span><span><b>"+esc(L.signal)+"</b>"+esc(s.signal)+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.away){away.textContent=s.away;away.classList.add("show");}
+    else away.classList.remove("show");
+    jpath.setAttribute("d",PATHS[n]);
+    cell.classList.add("show");
+    var dur=DUR[n];
+    if(!anim||reduce||dur<400){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2800);
+      return;
+    }
+    place(0);
+    var t0=null;
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1800);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("pinBtn").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- reaction timer ---------- */
+  var RT=(function(){
+    var b=$("rtB"),R=L.rt,st="idle",t0=0,timer=0,times=[],lastDown=0;
+    function now(){return (window.performance&&performance.now)?performance.now():Date.now();}
+    function fmt(ms){
+      var s=(ms/1000).toFixed(3);
+      if(L.comma)s=s.replace(".",",");
+      return s+" "+R.sec;
+    }
+    function set(s,text){
+      st=s;
+      b.className="rtb"+(s==="idle"?"":" "+s);
+      b.textContent=text;
+    }
+    function stats(){
+      var n=times.length,a,sum=0,best=Infinity;
+      for(a=0;a<n;a++){sum+=times[a];if(times[a]<best)best=times[a];}
+      $("rtLast").textContent=n?fmt(times[n-1]):R.none;
+      $("rtBest").textContent=n?fmt(best):R.none;
+      $("rtMean").textContent=n?fmt(sum/n):R.none;
+      $("rtTries").textContent=String(n);
+    }
+    function go(){t0=now();set("go",R.go);}
+    function press(){
+      if(st==="idle"||st==="done"||st==="early"){
+        set("wait",R.wait);
+        clearTimeout(timer);
+        timer=setTimeout(go,1500+Math.random()*2500);
+      }else if(st==="wait"){
+        clearTimeout(timer);
+        set("early",R.early);
+      }else if(st==="go"){
+        var ms=now()-t0;
+        times.push(ms);
+        stats();
+        set("done",fmt(ms)+" - "+R.again);
+      }
+    }
+    if(window.PointerEvent){
+      b.addEventListener("pointerdown",function(e){
+        if(e.button)return;
+        lastDown=now();press();
+      });
+    }
+    b.addEventListener("click",function(){
+      if(now()-lastDown<700)return;
+      press();
+    });
+    $("rtReset").onclick=function(){clearTimeout(timer);times=[];stats();set("idle",R.start);};
+    stats();set("idle",R.start);
+    return {press:press,state:function(){return st;},times:function(){return times.slice();},fire:function(){clearTimeout(timer);go();}};
+  })();
+
+  select(null);
+
+  /* exposed for checking */
+  window.NervLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,RT:RT,Brain:Brain,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
