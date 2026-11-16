@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Teeth Diagram for KS2 | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive teeth diagram for ages 7-11. Tap each tooth to learn the four types and their jobs, look inside a tooth, follow a bite of apple from the incisors to the molars, and see how tooth decay happens.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/science/teeth/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/science/teeth/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/science/teeth/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/science/teeth/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--navy3:#24356A;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--tube:#F0A696;--acc:#8FD3A0;--fh:min(64vh,640px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:1020px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none;border:2px solid var(--navy3);border-radius:999px;padding:3px 12px}
+.lang:hover{border-color:var(--gold)}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0;line-height:1.2}
+h1{font-size:clamp(28px,6vw,42px)}
+h2{font-size:clamp(22px,4.6vw,28px)}
+h3{font-size:19px;color:var(--gold)}
+.lead{color:var(--muted);margin-top:0;max-width:62ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:16px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:9px 16px;font:800 16px "Baloo 2",sans-serif;cursor:pointer;line-height:1.2}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold);padding:7px 14px}
+.btn:disabled{opacity:.4;cursor:default}
+button:focus-visible,.organ:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.muted{color:var(--muted)}
+/* layout */
+.stage{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);grid-template-areas:"chips" "fig" "info"}
+.stage.j{grid-template-areas:"head" "fig" "info"}
+.slot{grid-area:fig;min-width:0}
+.chipsw{grid-area:chips;min-width:0}
+.infow{grid-area:info;min-width:0}
+.jheadw{grid-area:head;min-width:0}
+.figbox{position:relative;height:var(--fh);background:var(--navy);border-radius:16px;overflow:hidden}
+#fig{display:block;width:100%;height:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.viewbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.seg{background:var(--navy);color:var(--muted);border:2px solid transparent;border-radius:10px;padding:6px 9px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg[aria-pressed="true"]{color:var(--gold);border-color:var(--gold)}
+.seg.r{margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin}
+.chip{flex:0 0 auto;display:flex;align-items:center;gap:7px;background:var(--navy);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:5px 12px 5px 5px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer;white-space:nowrap}
+.chip b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 13px "Baloo 2",sans-serif}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.info{background:var(--navy);border-radius:16px;padding:16px}
+.info h2{margin-top:0;display:flex;align-items:center;gap:10px}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);font:800 18px "Baloo 2",sans-serif}
+.kind{display:inline-block;border-radius:999px;padding:2px 12px;font-size:13px;font-weight:700;color:var(--navy);margin:0 0 8px}
+.kind.tube{background:var(--tube)}
+.kind.acc{background:var(--acc)}
+.kind.flap{background:#F6E7BD}
+.info ul{margin:6px 0 10px;padding-left:20px}
+.info li{margin:5px 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.meta span{background:var(--navy2);border-radius:10px;padding:6px 10px;font-size:14px}
+.meta b{display:block;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.link{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:9px 12px;margin:6px 0;font:400 15px "Nunito Sans",sans-serif;cursor:pointer}
+.link b{color:var(--gold);white-space:nowrap}
+.link:hover{border-color:var(--gold)}
+.words{font-size:14px;color:var(--muted);margin:10px 0 0}
+.keybox{display:grid;gap:8px;margin:10px 0}
+.keybox div{background:var(--navy2);border-radius:12px;padding:9px 12px;font-size:15px}
+.keybox b{color:var(--gold)}
+/* journey */
+.jhead{background:var(--navy);border-radius:16px;padding:14px 16px}
+.jstep{font-size:13px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.05em}
+.jhead h2{margin:0 0 4px}
+.jsum{margin:0 0 10px}
+.jctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.dots{display:flex;gap:5px;margin-left:auto}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--navy3)}
+.dots i.done{background:var(--muted)}
+.dots i.now{background:var(--gold)}
+.meter{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;margin:8px 0;font-size:15px}
+.meter .mname{font-weight:700}
+.meter .mto{font-weight:400;color:var(--muted)}
+.meter .mstat{color:var(--muted);font-size:14px;text-align:right}
+.mbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.mbar i{height:9px;border-radius:999px;background:var(--navy3)}
+.mbar i.f{background:var(--good)}
+/* enzymes */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}
+.ecard{background:var(--navy);border-radius:16px;padding:14px 16px}
+.ecard h3{margin:0}
+.eq{font:800 18px "Baloo 2",sans-serif;margin:6px 0 8px;line-height:1.3}
+.eq span{color:var(--gold)}
+.ecard dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:15px}
+.ecard dt{color:var(--muted)}
+.ecard dd{margin:0}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.ph div{background:var(--navy);border-radius:14px;padding:10px 14px}
+.ph b{display:block;font:800 22px "Baloo 2",sans-serif}
+.ph i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px}
+.vgrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);align-items:start}
+.vbox{background:var(--navy);border-radius:16px;padding:10px}
+#vil{display:block;width:100%;height:auto}
+.vlist{list-style:none;margin:0;padding:0}
+.vlist li{display:flex;gap:10px;align-items:flex-start;margin:0 0 10px}
+.vlist .num{width:28px;height:28px;font-size:15px}
+.shop{margin:24px 0;text-align:center}
+@media (min-width:780px){
+  :root{--fh:min(82vh,730px)}
+  .panel{padding:20px}
+  .stage{grid-template-columns:calc(var(--fh) * .5607) minmax(0,1fr);grid-template-areas:"fig chips" "fig info";grid-template-rows:auto 1fr;gap:14px 20px}
+  .stage.j{grid-template-areas:"fig head" "fig info"}
+  .slot{position:sticky;top:12px;align-self:start}
+  .chips{flex-wrap:wrap;overflow:visible;padding-bottom:0}
+  .vgrid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+}
+/* teeth */
+.figbox{height:auto;padding:6px}
+#fig{height:auto;max-height:min(88vh,860px);margin:0 auto}
+.kind.type{background:#F6E7BD}.kind.zone{background:#9CC3F5}.kind.layer{background:#8FD3A0}.kind.hold{background:#F0A696}
+.hit{fill:transparent;cursor:pointer;outline:none}
+.hitv{fill:none;stroke:transparent;pointer-events:stroke;stroke-linecap:round;stroke-linejoin:round}
+.hit:not(.hitv).on{fill:rgba(244,185,66,.42);stroke:#F4B942;stroke-width:3.5;stroke-linejoin:round}
+.hitv.on{fill:none;stroke:rgba(244,185,66,.55)}
+.hit:not(.hitv):focus-visible{stroke:#fff;stroke-width:3.5}
+.hitv:focus-visible{stroke:rgba(255,255,255,.55)}
+@media (hover:hover){.hit:hover{fill:rgba(255,255,255,.22)}.hitv:hover{fill:none;stroke:rgba(255,255,255,.25)}.hit.on:hover{fill:rgba(244,185,66,.42)}.hitv.on:hover{fill:none;stroke:rgba(244,185,66,.6)}}
+.pin{cursor:pointer;transition:opacity .25s}
+#fig .s-lead{stroke:#F4B942;stroke-width:1.6}
+#fig .s-dot{fill:#F4B942}
+#fig .s-pin circle{fill:#F4B942;stroke:#0F1C3F;stroke-width:1.5}
+#fig.sel .pin{opacity:.3}
+#fig.sel .pin.on{opacity:1}
+#fig.nopins #pins,#fig.journey #pins{display:none}
+.jp{fill:none;stroke:none}
+#cell{fill:rgba(244,185,66,.3);stroke:#F4B942;stroke-width:4.5;display:none;pointer-events:none}
+#fig.journey #cell.show{display:block}
+#fig.journey .hit{cursor:default}
+.away{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;border-radius:999px;padding:6px 14px;font-size:14px;white-space:nowrap;display:none;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.away.show{display:block}
+.light{background:#F5F7FF;border-radius:16px;padding:10px}
+.light svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+.vgrid .cards{grid-template-columns:minmax(0,1fr);margin:0}
+.eq{font-size:17px}
+.brbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0 2px}
+.asay{text-align:center;margin:8px 0 0;min-height:4.5em}
+@media (min-width:780px){
+  .stage{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+  .vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+}
+@media (prefers-reduced-motion:reduce){.pin{transition:none}}
+@media print{.tabs,.viewbar,.jctl,.shop,.crumbs{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/science/">Science</a> › Teeth Explorer</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/science/teeth/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Teeth Explorer</h1>
+  <p class="lead">Your teeth cut, tear, crush and grind your food. Tap any tooth to see what it does, look inside a tooth, then follow a bite of apple and find out how to stop tooth decay. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Teeth Explorer modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Explore the teeth</button>
+    <button class="tab" role="tab" id="t-journey" aria-controls="journey" aria-selected="false" tabindex="-1" data-p="journey">A bite of apple</button>
+    <button class="tab" role="tab" id="t-more" aria-controls="more" aria-selected="false" tabindex="-1" data-p="more">Decay and care</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <div class="stage" id="exStage">
+      <div class="chipsw"><div class="chips" id="chips" role="group" aria-label="Teeth and parts of a tooth"></div></div>
+      <div class="slot" id="slotA">
+        <div id="figcol">
+          <div class="viewbar" role="group" aria-label="Diagram options">
+            <button class="seg r" id="pinBtn" aria-pressed="true">Numbers</button>
+          </div>
+          <div class="figbox"><svg id="fig" viewBox="-48 4 696 888" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Diagram of an adult&#x27;s teeth seen inside an open mouth, and a molar cut in half to show its layers, with eleven numbered parts"><style>
+.t-lip{fill:#E58A8F;stroke:#A8454F;stroke-width:3}
+.t-cav{fill:#7A2A38}
+.t-pal{fill:#C4606A}
+.t-thr{fill:#5A1C28}
+.t-ton{fill:#EE8C96;stroke:#C45E6C;stroke-width:2}
+.t-tl{fill:none;stroke:#C45E6C;stroke-width:2;stroke-linecap:round}
+.t-gring{fill:none;stroke:#F3AFAC;stroke-width:48;stroke-linecap:round}
+.t-th{fill:#FBF8EC;stroke:#8A7A55;stroke-width:1.6;stroke-linejoin:round}
+.t-gr{fill:none;stroke:#B9AB85;stroke-width:1.6;stroke-linecap:round}
+.t-gum{fill:#F3AFAC;stroke:#C9707A;stroke-width:2.5;stroke-linejoin:round}
+.t-bone{fill:#EFE0B8;stroke:#B9A26E;stroke-width:2.5;stroke-linejoin:round}
+.t-hole{fill:#DCC692}
+.t-cem{fill:#D9B77A;stroke:#7A6540;stroke-width:2.5;stroke-linejoin:round}
+.t-en{fill:#FDFDF8;stroke:#7A6540;stroke-width:2.5;stroke-linejoin:round}
+.t-den{fill:#F3DC9A;stroke:#B99A52;stroke-width:1.8;stroke-linejoin:round}
+.t-pulp{fill:#EE98A0;stroke:#B9505C;stroke-width:1.8;stroke-linejoin:round}
+.t-art{fill:none;stroke:#D63A3A;stroke-width:2.4;stroke-linecap:round}
+.t-vein{fill:none;stroke:#3F6FC4;stroke-width:2.4;stroke-linecap:round}
+.t-nerve{fill:none;stroke:#E2B11E;stroke-width:2.4;stroke-linecap:round}
+.t-br{fill:none;stroke:#8E9AC0;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.s-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.s-dot{fill:#0F1C3F}
+.s-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.s-pin text{font:800 16px "Baloo 2",Arial,sans-serif;fill:#0F1C3F}
+</style><ellipse class="t-lip" cx="300" cy="222" rx="204" ry="216"/><ellipse class="t-cav" cx="300" cy="222" rx="180" ry="196"/><ellipse class="t-pal" cx="300" cy="222" rx="118" ry="146"/><ellipse class="t-thr" cx="300" cy="196" rx="46" ry="26"/><path class="t-ton" d="M218 262C218 226 258 214 300 214C342 214 382 226 382 262C382 322 348 366 300 366C252 366 218 322 218 262Z"/><path class="t-tl" d="M300 236L300 338"/><path class="t-gring" d="M163.0 201.8A138 166 0 0 1 437.0 201.8"/><path class="t-gring" d="M163.0 242.2A138 166 0 0 0 437.0 242.2"/><rect class="t-th" x="-14.4" y="-14.5" width="28.7" height="29" rx="9" transform="translate(165.2 186.5) rotate(-79.6)"/><path class="t-gr" d="M-8.4 0L8.4 0M0 -7.5L0 7.5" transform="translate(165.2 186.5) rotate(-79.6)"/><rect class="t-th" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(173.6 155.4) rotate(-69.9)"/><path class="t-gr" d="M-9.2 0L9.2 0M0 -7.5L0 7.5" transform="translate(173.6 155.4) rotate(-69.9)"/><rect class="t-th" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(187.9 125.2) rotate(-59.2)"/><path class="t-gr" d="M-9.2 0L9.2 0M0 -7.5L0 7.5" transform="translate(187.9 125.2) rotate(-59.2)"/><ellipse class="t-th" rx="10.5" ry="13.5" transform="translate(204.5 102.2) rotate(-49.1)"/><path class="t-gr" d="M-5.2 0L5.2 0" transform="translate(204.5 102.2) rotate(-49.1)"/><ellipse class="t-th" rx="10.5" ry="13.5" transform="translate(220.9 85.9) rotate(-40.1)"/><path class="t-gr" d="M-5.2 0L5.2 0" transform="translate(220.9 85.9) rotate(-40.1)"/><ellipse class="t-th" rx="11.1" ry="11" transform="translate(240.4 72.3) rotate(-29.9)"/><circle class="t-gr" r="2.2" transform="translate(240.4 72.3) rotate(-29.9)"/><rect class="t-th" x="-10.2" y="-7" width="20.3" height="14" rx="5" transform="translate(261.8 62.5) rotate(-19.2)"/><rect class="t-th" x="-12.7" y="-7" width="25.5" height="14" rx="5" transform="translate(286.2 56.8) rotate(-6.8)"/><rect class="t-th" x="-12.7" y="-7" width="25.5" height="14" rx="5" transform="translate(313.8 56.8) rotate(6.8)"/><rect class="t-th" x="-10.2" y="-7" width="20.3" height="14" rx="5" transform="translate(338.2 62.5) rotate(19.2)"/><ellipse class="t-th" rx="11.1" ry="11" transform="translate(359.6 72.3) rotate(29.9)"/><circle class="t-gr" r="2.2" transform="translate(359.6 72.3) rotate(29.9)"/><ellipse class="t-th" rx="10.5" ry="13.5" transform="translate(379.1 85.9) rotate(40.1)"/><path class="t-gr" d="M-5.2 0L5.2 0" transform="translate(379.1 85.9) rotate(40.1)"/><ellipse class="t-th" rx="10.5" ry="13.5" transform="translate(395.5 102.2) rotate(49.1)"/><path class="t-gr" d="M-5.2 0L5.2 0" transform="translate(395.5 102.2) rotate(49.1)"/><rect class="t-th" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(412.1 125.2) rotate(59.2)"/><path class="t-gr" d="M-9.2 0L9.2 0M0 -7.5L0 7.5" transform="translate(412.1 125.2) rotate(59.2)"/><rect class="t-th" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(426.4 155.4) rotate(69.9)"/><path class="t-gr" d="M-9.2 0L9.2 0M0 -7.5L0 7.5" transform="translate(426.4 155.4) rotate(69.9)"/><rect class="t-th" x="-14.4" y="-14.5" width="28.7" height="29" rx="9" transform="translate(434.8 186.5) rotate(79.6)"/><path class="t-gr" d="M-8.4 0L8.4 0M0 -7.5L0 7.5" transform="translate(434.8 186.5) rotate(79.6)"/><rect class="t-th" x="-14.9" y="-14.5" width="29.8" height="29" rx="9" transform="translate(165.3 258.1) rotate(79.4)"/><path class="t-gr" d="M-8.8 0L8.8 0M0 -7.5L0 7.5" transform="translate(165.3 258.1) rotate(79.4)"/><rect class="t-th" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(174.2 290.2) rotate(69.4)"/><path class="t-gr" d="M-9.6 0L9.6 0M0 -7.5L0 7.5" transform="translate(174.2 290.2) rotate(69.4)"/><rect class="t-th" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(189.4 321.4) rotate(58.2)"/><path class="t-gr" d="M-9.6 0L9.6 0M0 -7.5L0 7.5" transform="translate(189.4 321.4) rotate(58.2)"/><ellipse class="t-th" rx="10.9" ry="13.5" transform="translate(207.1 344.8) rotate(47.5)"/><path class="t-gr" d="M-5.5 0L5.5 0" transform="translate(207.1 344.8) rotate(47.5)"/><ellipse class="t-th" rx="10.9" ry="13.5" transform="translate(224.7 361.1) rotate(38.1)"/><path class="t-gr" d="M-5.5 0L5.5 0" transform="translate(224.7 361.1) rotate(38.1)"/><ellipse class="t-th" rx="11.6" ry="11" transform="translate(245.4 374.5) rotate(27.5)"/><circle class="t-gr" r="2.2" transform="translate(245.4 374.5) rotate(27.5)"/><rect class="t-th" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(267.4 383.3) rotate(16.3)"/><rect class="t-th" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(289.0 387.5) rotate(5.5)"/><rect class="t-th" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(311.0 387.5) rotate(-5.5)"/><rect class="t-th" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(332.6 383.3) rotate(-16.3)"/><ellipse class="t-th" rx="11.6" ry="11" transform="translate(354.6 374.5) rotate(-27.5)"/><circle class="t-gr" r="2.2" transform="translate(354.6 374.5) rotate(-27.5)"/><ellipse class="t-th" rx="10.9" ry="13.5" transform="translate(375.3 361.1) rotate(-38.1)"/><path class="t-gr" d="M-5.5 0L5.5 0" transform="translate(375.3 361.1) rotate(-38.1)"/><ellipse class="t-th" rx="10.9" ry="13.5" transform="translate(392.9 344.8) rotate(-47.5)"/><path class="t-gr" d="M-5.5 0L5.5 0" transform="translate(392.9 344.8) rotate(-47.5)"/><rect class="t-th" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(410.6 321.4) rotate(-58.2)"/><path class="t-gr" d="M-9.6 0L9.6 0M0 -7.5L0 7.5" transform="translate(410.6 321.4) rotate(-58.2)"/><rect class="t-th" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(425.8 290.2) rotate(-69.4)"/><path class="t-gr" d="M-9.6 0L9.6 0M0 -7.5L0 7.5" transform="translate(425.8 290.2) rotate(-69.4)"/><rect class="t-th" x="-14.9" y="-14.5" width="29.8" height="29" rx="9" transform="translate(434.7 258.1) rotate(-79.4)"/><path class="t-gr" d="M-8.8 0L8.8 0M0 -7.5L0 7.5" transform="translate(434.7 258.1) rotate(-79.4)"/><clipPath id="tc-en"><rect x="150" y="440" width="300" height="206"/></clipPath><clipPath id="tc-cem"><rect x="150" y="646" width="300" height="260"/></clipPath><path class="t-gum" d="M130 672C160 668 186 660 201 632L399 632C414 660 440 668 470 672L470 720L130 720Z"/><path class="t-bone" d="M130 700L470 700L470 868Q470 880 458 880L142 880Q130 880 130 868Z"/><ellipse class="t-hole" cx="244" cy="735" rx="5.3" ry="2.4"/><ellipse class="t-hole" cx="311" cy="764" rx="3.2" ry="3.3"/><ellipse class="t-hole" cx="154" cy="773" rx="3.2" ry="2.4"/><ellipse class="t-hole" cx="276" cy="826" rx="3.4" ry="2.7"/><ellipse class="t-hole" cx="340" cy="843" rx="5.0" ry="3.1"/><ellipse class="t-hole" cx="450" cy="720" rx="6.0" ry="2.8"/><ellipse class="t-hole" cx="188" cy="730" rx="4.1" ry="4.0"/><ellipse class="t-hole" cx="199" cy="793" rx="5.2" ry="3.0"/><ellipse class="t-hole" cx="315" cy="723" rx="3.2" ry="2.7"/><ellipse class="t-hole" cx="357" cy="772" rx="4.1" ry="3.5"/><ellipse class="t-hole" cx="285" cy="755" rx="5.8" ry="3.7"/><ellipse class="t-hole" cx="219" cy="792" rx="4.8" ry="4.1"/><ellipse class="t-hole" cx="373" cy="753" rx="6.4" ry="2.5"/><ellipse class="t-hole" cx="274" cy="817" rx="3.5" ry="3.3"/><ellipse class="t-hole" cx="154" cy="805" rx="5.7" ry="3.5"/><ellipse class="t-hole" cx="419" cy="757" rx="5.4" ry="3.5"/><ellipse class="t-hole" cx="325" cy="776" rx="5.9" ry="4.3"/><ellipse class="t-hole" cx="292" cy="804" rx="3.2" ry="3.7"/><ellipse class="t-hole" cx="346" cy="849" rx="5.9" ry="2.8"/><ellipse class="t-hole" cx="264" cy="805" rx="3.1" ry="3.2"/><ellipse class="t-hole" cx="195" cy="730" rx="3.2" ry="3.9"/><ellipse class="t-hole" cx="183" cy="748" rx="4.4" ry="4.1"/><ellipse class="t-hole" cx="167" cy="775" rx="4.9" ry="4.1"/><ellipse class="t-hole" cx="401" cy="832" rx="4.0" ry="3.1"/><ellipse class="t-hole" cx="255" cy="834" rx="6.4" ry="2.5"/><ellipse class="t-hole" cx="198" cy="746" rx="3.8" ry="3.3"/><ellipse class="t-hole" cx="328" cy="750" rx="3.0" ry="3.1"/><ellipse class="t-hole" cx="259" cy="791" rx="6.3" ry="3.7"/><ellipse class="t-hole" cx="305" cy="798" rx="5.4" ry="2.3"/><ellipse class="t-hole" cx="426" cy="820" rx="6.1" ry="4.0"/><ellipse class="t-hole" cx="266" cy="768" rx="3.4" ry="3.6"/><ellipse class="t-hole" cx="162" cy="723" rx="3.7" ry="2.6"/><ellipse class="t-hole" cx="249" cy="721" rx="3.0" ry="2.5"/><ellipse class="t-hole" cx="174" cy="763" rx="3.1" ry="4.1"/><ellipse class="t-hole" cx="336" cy="734" rx="3.9" ry="3.0"/><ellipse class="t-hole" cx="257" cy="731" rx="6.0" ry="4.4"/><ellipse class="t-hole" cx="289" cy="780" rx="3.3" ry="2.4"/><ellipse class="t-hole" cx="250" cy="750" rx="5.9" ry="2.6"/><ellipse class="t-hole" cx="149" cy="843" rx="4.8" ry="2.5"/><ellipse class="t-hole" cx="314" cy="718" rx="4.8" ry="4.4"/><ellipse class="t-hole" cx="415" cy="809" rx="3.9" ry="3.0"/><ellipse class="t-hole" cx="195" cy="819" rx="4.9" ry="3.9"/><ellipse class="t-hole" cx="246" cy="744" rx="5.8" ry="4.4"/><ellipse class="t-hole" cx="411" cy="824" rx="5.9" ry="3.8"/><ellipse class="t-hole" cx="214" cy="784" rx="4.2" ry="2.3"/><ellipse class="t-hole" cx="151" cy="752" rx="3.9" ry="3.7"/><path class="t-cem" d="M196 560C186 500 210 468 250 470C272 471 284 486 300 486C316 486 328 471 350 470C390 468 414 500 404 560C400 600 396 630 392 660C388 720 380 800 366 846C360 862 346 860 342 842C336 800 330 740 318 706C310 690 290 690 282 706C270 740 264 800 258 842C254 860 240 862 234 846C220 800 212 720 208 660C204 630 200 600 196 560Z" clip-path="url(#tc-cem)"/><path class="t-en" d="M196 560C186 500 210 468 250 470C272 471 284 486 300 486C316 486 328 471 350 470C390 468 414 500 404 560C400 600 396 630 392 660C388 720 380 800 366 846C360 862 346 860 342 842C336 800 330 740 318 706C310 690 290 690 282 706C270 740 264 800 258 842C254 860 240 862 234 846C220 800 212 720 208 660C204 630 200 600 196 560Z" clip-path="url(#tc-en)"/><path class="t-den" d="M220 560C214 520 228 494 252 494C272 494 284 510 300 510C316 510 328 494 348 494C372 494 386 520 380 560C378 600 388 630 385 660C381 720 374 795 362 838C358 848 350 846 348 838C342 800 336 736 324 700C314 680 286 680 276 700C264 736 258 800 252 838C250 846 242 848 238 838C226 795 219 720 215 660C212 630 222 600 220 560Z"/><path class="t-pulp" d="M262 585C256 552 278 538 300 550C322 538 344 552 338 585C337 612 350 632 356 660C364 720 364 790 358 836L353 836C352 790 350 720 338 672C330 650 270 650 262 672C250 720 248 790 247 836L242 836C236 790 236 720 244 660C250 632 263 612 262 585Z"/><path class="t-art" d="M130 862L470 862"/><path class="t-art" d="M241.3 862C237.8 800 239.8 730 248.8 668C254.8 640 268.8 610 274.2 578"/><path class="t-art" d="M358.7 862C362.2 800 360.2 730 351.2 668C345.2 640 331.2 610 325.8 578"/><path class="t-vein" d="M130 867L470 867"/><path class="t-vein" d="M244.5 867C241.0 800 243.0 730 252.0 668C258.0 640 272.0 610 280.0 578"/><path class="t-vein" d="M355.5 867C359.0 800 357.0 730 348.0 668C342.0 640 328.0 610 320.0 578"/><path class="t-nerve" d="M130 872L470 872"/><path class="t-nerve" d="M247.7 872C244.2 800 246.2 730 255.2 668C261.2 640 275.2 610 285.8 578"/><path class="t-nerve" d="M352.3 872C355.8 800 353.8 730 344.8 668C338.8 640 324.8 610 314.2 578"/><path class="t-br" d="M114 474L102 474L102 642L114 642"/><path class="t-br" d="M114 654L102 654L102 856L114 856"/><g id="hits"><path class="hit" d="M130 700L470 700L470 868Q470 880 458 880L142 880Q130 880 130 868Z" data-o="jaw" tabindex="0" role="button" aria-label="Jawbone"/><path class="hit" d="M130 672C160 668 186 660 201 632L399 632C414 660 440 668 470 672L470 700L130 700Z" data-o="gum" tabindex="0" role="button" aria-label="Gum"/><path class="hit" d="M196 560C186 500 210 468 250 470C272 471 284 486 300 486C316 486 328 471 350 470C390 468 414 500 404 560C400 600 396 630 392 660C388 720 380 800 366 846C360 862 346 860 342 842C336 800 330 740 318 706C310 690 290 690 282 706C270 740 264 800 258 842C254 860 240 862 234 846C220 800 212 720 208 660C204 630 200 600 196 560Z" clip-path="url(#tc-cem)" data-o="root" tabindex="0" role="button" aria-label="Root"/><path class="hit hitv" stroke-width="26" d="M114 654L102 654L102 856L114 856" data-o="root" aria-hidden="true"/><path class="hit hitv" stroke-width="26" d="M114 474L102 474L102 642L114 642" data-o="crown" tabindex="0" role="button" aria-label="Crown"/><path class="hit" d="M196 560C186 500 210 468 250 470C272 471 284 486 300 486C316 486 328 471 350 470C390 468 414 500 404 560C400 600 396 630 392 660C388 720 380 800 366 846C360 862 346 860 342 842C336 800 330 740 318 706C310 690 290 690 282 706C270 740 264 800 258 842C254 860 240 862 234 846C220 800 212 720 208 660C204 630 200 600 196 560Z" clip-path="url(#tc-en)" data-o="enamel" tabindex="0" role="button" aria-label="Enamel"/><path class="hit" d="M220 560C214 520 228 494 252 494C272 494 284 510 300 510C316 510 328 494 348 494C372 494 386 520 380 560C378 600 388 630 385 660C381 720 374 795 362 838C358 848 350 846 348 838C342 800 336 736 324 700C314 680 286 680 276 700C264 736 258 800 252 838C250 846 242 848 238 838C226 795 219 720 215 660C212 630 222 600 220 560Z" data-o="dentine" tabindex="0" role="button" aria-label="Dentine"/><path class="hit" d="M262 585C256 552 278 538 300 550C322 538 344 552 338 585C337 612 350 632 356 660C364 720 364 790 358 836L353 836C352 790 350 720 338 672C330 650 270 650 262 672C250 720 248 790 247 836L242 836C236 790 236 720 244 660C250 632 263 612 262 585Z" data-o="pulp" tabindex="0" role="button" aria-label="Pulp"/><rect class="hit" x="-10.2" y="-7" width="20.3" height="14" rx="5" transform="translate(261.8 62.5) rotate(-19.2)" data-o="incisors" tabindex="0" role="button" aria-label="Incisors"/><rect class="hit" x="-12.7" y="-7" width="25.5" height="14" rx="5" transform="translate(286.2 56.8) rotate(-6.8)" data-o="incisors" aria-hidden="true"/><rect class="hit" x="-12.7" y="-7" width="25.5" height="14" rx="5" transform="translate(313.8 56.8) rotate(6.8)" data-o="incisors" aria-hidden="true"/><rect class="hit" x="-10.2" y="-7" width="20.3" height="14" rx="5" transform="translate(338.2 62.5) rotate(19.2)" data-o="incisors" aria-hidden="true"/><rect class="hit" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(267.4 383.3) rotate(16.3)" data-o="incisors" aria-hidden="true"/><rect class="hit" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(289.0 387.5) rotate(5.5)" data-o="incisors" aria-hidden="true"/><rect class="hit" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(311.0 387.5) rotate(-5.5)" data-o="incisors" aria-hidden="true"/><rect class="hit" x="-9.9" y="-7" width="19.8" height="14" rx="5" transform="translate(332.6 383.3) rotate(-16.3)" data-o="incisors" aria-hidden="true"/><ellipse class="hit" rx="11.1" ry="11" transform="translate(240.4 72.3) rotate(-29.9)" data-o="canines" tabindex="0" role="button" aria-label="Canines"/><ellipse class="hit" rx="11.1" ry="11" transform="translate(359.6 72.3) rotate(29.9)" data-o="canines" aria-hidden="true"/><ellipse class="hit" rx="11.6" ry="11" transform="translate(245.4 374.5) rotate(27.5)" data-o="canines" aria-hidden="true"/><ellipse class="hit" rx="11.6" ry="11" transform="translate(354.6 374.5) rotate(-27.5)" data-o="canines" aria-hidden="true"/><ellipse class="hit" rx="10.5" ry="13.5" transform="translate(204.5 102.2) rotate(-49.1)" data-o="premolars" tabindex="0" role="button" aria-label="Premolars"/><ellipse class="hit" rx="10.5" ry="13.5" transform="translate(220.9 85.9) rotate(-40.1)" data-o="premolars" aria-hidden="true"/><ellipse class="hit" rx="10.5" ry="13.5" transform="translate(379.1 85.9) rotate(40.1)" data-o="premolars" aria-hidden="true"/><ellipse class="hit" rx="10.5" ry="13.5" transform="translate(395.5 102.2) rotate(49.1)" data-o="premolars" aria-hidden="true"/><ellipse class="hit" rx="10.9" ry="13.5" transform="translate(207.1 344.8) rotate(47.5)" data-o="premolars" aria-hidden="true"/><ellipse class="hit" rx="10.9" ry="13.5" transform="translate(224.7 361.1) rotate(38.1)" data-o="premolars" aria-hidden="true"/><ellipse class="hit" rx="10.9" ry="13.5" transform="translate(375.3 361.1) rotate(-38.1)" data-o="premolars" aria-hidden="true"/><ellipse class="hit" rx="10.9" ry="13.5" transform="translate(392.9 344.8) rotate(-47.5)" data-o="premolars" aria-hidden="true"/><rect class="hit" x="-14.4" y="-14.5" width="28.7" height="29" rx="9" transform="translate(165.2 186.5) rotate(-79.6)" data-o="molars" tabindex="0" role="button" aria-label="Molars"/><rect class="hit" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(173.6 155.4) rotate(-69.9)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(187.9 125.2) rotate(-59.2)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(412.1 125.2) rotate(59.2)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-15.6" y="-14.5" width="31.3" height="29" rx="9" transform="translate(426.4 155.4) rotate(69.9)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-14.4" y="-14.5" width="28.7" height="29" rx="9" transform="translate(434.8 186.5) rotate(79.6)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-14.9" y="-14.5" width="29.8" height="29" rx="9" transform="translate(165.3 258.1) rotate(79.4)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(174.2 290.2) rotate(69.4)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(189.4 321.4) rotate(58.2)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(410.6 321.4) rotate(-58.2)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-16.3" y="-14.5" width="32.5" height="29" rx="9" transform="translate(425.8 290.2) rotate(-69.4)" data-o="molars" aria-hidden="true"/><rect class="hit" x="-14.9" y="-14.5" width="29.8" height="29" rx="9" transform="translate(434.7 258.1) rotate(-79.4)" data-o="molars" aria-hidden="true"/></g><g id="pins"><g class="pin" data-o="incisors"><path class="s-lead" d="M-14 40L286 57"/><circle class="s-dot" cx="286" cy="57" r="3.4"/><g class="s-pin" transform="translate(-14 40) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">1</text></g></g><g class="pin" data-o="canines"><path class="s-lead" d="M614 56L360 72"/><circle class="s-dot" cx="360" cy="72" r="3.4"/><g class="s-pin" transform="translate(614 56) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">2</text></g></g><g class="pin" data-o="premolars"><path class="s-lead" d="M-14 150L204 102"/><circle class="s-dot" cx="204" cy="102" r="3.4"/><g class="s-pin" transform="translate(-14 150) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">3</text></g></g><g class="pin" data-o="molars"><path class="s-lead" d="M614 190L426 155"/><circle class="s-dot" cx="426" cy="155" r="3.4"/><g class="s-pin" transform="translate(614 190) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">4</text></g></g><g class="pin" data-o="crown"><path class="s-lead" d="M-14 540L102 558"/><circle class="s-dot" cx="102" cy="558" r="3.4"/><g class="s-pin" transform="translate(-14 540) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">5</text></g></g><g class="pin" data-o="enamel"><path class="s-lead" d="M614 468L388 508"/><circle class="s-dot" cx="388" cy="508" r="3.4"/><g class="s-pin" transform="translate(614 468) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">6</text></g></g><g class="pin" data-o="dentine"><path class="s-lead" d="M614 556L362 592"/><circle class="s-dot" cx="362" cy="592" r="3.4"/><g class="s-pin" transform="translate(614 556) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">7</text></g></g><g class="pin" data-o="pulp"><path class="s-lead" d="M614 644L312 604"/><circle class="s-dot" cx="312" cy="604" r="3.4"/><g class="s-pin" transform="translate(614 644) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">8</text></g></g><g class="pin" data-o="gum"><path class="s-lead" d="M614 734L440 686"/><circle class="s-dot" cx="440" cy="686" r="3.4"/><g class="s-pin" transform="translate(614 734) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">9</text></g></g><g class="pin" data-o="root"><path class="s-lead" d="M-14 770L102 755"/><circle class="s-dot" cx="102" cy="755" r="3.4"/><g class="s-pin" transform="translate(-14 770) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">10</text></g></g><g class="pin" data-o="jaw"><path class="s-lead" d="M614 826L424 790"/><circle class="s-dot" cx="424" cy="790" r="3.4"/><g class="s-pin" transform="translate(614 826) scale(1.35)"><circle r="16"/><text y="5.5" text-anchor="middle">11</text></g></g></g><path id="jpath" class="jp" d="M0 0"/><circle id="cell" r="20" cx="300" cy="56"/></svg><div class="away" id="away"></div></div>
+        </div>
+      </div>
+      <div class="infow"><div class="info" id="info" aria-live="polite"></div></div>
+    </div>
+  </section>
+
+  <section class="panel" id="journey" role="tabpanel" aria-labelledby="t-journey">
+    <div class="stage j" id="jStage">
+      <div class="jheadw">
+        <div class="jhead">
+          <div class="jstep" id="jStep"></div>
+          <h2 id="jTitle"></h2>
+          <p class="jsum" id="jSum"></p>
+          <div class="jctl">
+            <button class="btn ghost" id="jBack">Back</button>
+            <button class="btn" id="jNext">Next</button>
+            <button class="btn ghost" id="jPlay" aria-pressed="false">Play all</button>
+            <div class="dots" id="jDots" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+      <div class="slot" id="slotB"></div>
+      <div class="infow"><div class="info" id="jInfo" aria-live="polite"></div></div>
+    </div>
+  </section>
+  <section class="panel" id="more" role="tabpanel" aria-labelledby="t-more">
+    <h2 id="decay">How a tooth decays</h2><p>Tiny living things called bacteria live in your mouth. They form a sticky layer on your teeth called plaque. When you eat or drink something sugary, the bacteria turn the sugar into acid. Tap the buttons to see what the acid does.</p><div class="vgrid"><div><div class="light"><svg class="decay" id="decayfig" viewBox="0 0 600 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A tooth cut in half. The picture changes to show each stage of tooth decay when you choose a button."><style>
+.t-lip{fill:#E58A8F;stroke:#A8454F;stroke-width:3}
+.t-cav{fill:#7A2A38}
+.t-pal{fill:#C4606A}
+.t-thr{fill:#5A1C28}
+.t-ton{fill:#EE8C96;stroke:#C45E6C;stroke-width:2}
+.t-tl{fill:none;stroke:#C45E6C;stroke-width:2;stroke-linecap:round}
+.t-gring{fill:none;stroke:#F3AFAC;stroke-width:48;stroke-linecap:round}
+.t-th{fill:#FBF8EC;stroke:#8A7A55;stroke-width:1.6;stroke-linejoin:round}
+.t-gr{fill:none;stroke:#B9AB85;stroke-width:1.6;stroke-linecap:round}
+.t-gum{fill:#F3AFAC;stroke:#C9707A;stroke-width:2.5;stroke-linejoin:round}
+.t-bone{fill:#EFE0B8;stroke:#B9A26E;stroke-width:2.5;stroke-linejoin:round}
+.t-hole{fill:#DCC692}
+.t-cem{fill:#D9B77A;stroke:#7A6540;stroke-width:2.5;stroke-linejoin:round}
+.t-en{fill:#FDFDF8;stroke:#7A6540;stroke-width:2.5;stroke-linejoin:round}
+.t-den{fill:#F3DC9A;stroke:#B99A52;stroke-width:1.8;stroke-linejoin:round}
+.t-pulp{fill:#EE98A0;stroke:#B9505C;stroke-width:1.8;stroke-linejoin:round}
+.t-art{fill:none;stroke:#D63A3A;stroke-width:2.4;stroke-linecap:round}
+.t-vein{fill:none;stroke:#3F6FC4;stroke-width:2.4;stroke-linecap:round}
+.t-nerve{fill:none;stroke:#E2B11E;stroke-width:2.4;stroke-linecap:round}
+.t-br{fill:none;stroke:#8E9AC0;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.s-lead{stroke:#0F1C3F;stroke-width:1.5;fill:none}
+.s-dot{fill:#0F1C3F}
+.s-pin circle{fill:#fff;stroke:#0F1C3F;stroke-width:2}
+.s-pin text{font:800 16px "Baloo 2",Arial,sans-serif;fill:#0F1C3F}
+</style><g transform="translate(30 -388) scale(.9)"><clipPath id="tc-en"><rect x="150" y="440" width="300" height="206"/></clipPath><clipPath id="tc-cem"><rect x="150" y="646" width="300" height="260"/></clipPath><path class="t-gum" d="M130 672C160 668 186 660 201 632L399 632C414 660 440 668 470 672L470 720L130 720Z"/><path class="t-bone" d="M130 700L470 700L470 868Q470 880 458 880L142 880Q130 880 130 868Z"/><ellipse class="t-hole" cx="244" cy="735" rx="5.3" ry="2.4"/><ellipse class="t-hole" cx="311" cy="764" rx="3.2" ry="3.3"/><ellipse class="t-hole" cx="154" cy="773" rx="3.2" ry="2.4"/><ellipse class="t-hole" cx="276" cy="826" rx="3.4" ry="2.7"/><ellipse class="t-hole" cx="340" cy="843" rx="5.0" ry="3.1"/><ellipse class="t-hole" cx="450" cy="720" rx="6.0" ry="2.8"/><ellipse class="t-hole" cx="188" cy="730" rx="4.1" ry="4.0"/><ellipse class="t-hole" cx="199" cy="793" rx="5.2" ry="3.0"/><ellipse class="t-hole" cx="315" cy="723" rx="3.2" ry="2.7"/><ellipse class="t-hole" cx="357" cy="772" rx="4.1" ry="3.5"/><ellipse class="t-hole" cx="285" cy="755" rx="5.8" ry="3.7"/><ellipse class="t-hole" cx="219" cy="792" rx="4.8" ry="4.1"/><ellipse class="t-hole" cx="373" cy="753" rx="6.4" ry="2.5"/><ellipse class="t-hole" cx="274" cy="817" rx="3.5" ry="3.3"/><ellipse class="t-hole" cx="154" cy="805" rx="5.7" ry="3.5"/><ellipse class="t-hole" cx="419" cy="757" rx="5.4" ry="3.5"/><ellipse class="t-hole" cx="325" cy="776" rx="5.9" ry="4.3"/><ellipse class="t-hole" cx="292" cy="804" rx="3.2" ry="3.7"/><ellipse class="t-hole" cx="346" cy="849" rx="5.9" ry="2.8"/><ellipse class="t-hole" cx="264" cy="805" rx="3.1" ry="3.2"/><ellipse class="t-hole" cx="195" cy="730" rx="3.2" ry="3.9"/><ellipse class="t-hole" cx="183" cy="748" rx="4.4" ry="4.1"/><ellipse class="t-hole" cx="167" cy="775" rx="4.9" ry="4.1"/><ellipse class="t-hole" cx="401" cy="832" rx="4.0" ry="3.1"/><ellipse class="t-hole" cx="255" cy="834" rx="6.4" ry="2.5"/><ellipse class="t-hole" cx="198" cy="746" rx="3.8" ry="3.3"/><ellipse class="t-hole" cx="328" cy="750" rx="3.0" ry="3.1"/><ellipse class="t-hole" cx="259" cy="791" rx="6.3" ry="3.7"/><ellipse class="t-hole" cx="305" cy="798" rx="5.4" ry="2.3"/><ellipse class="t-hole" cx="426" cy="820" rx="6.1" ry="4.0"/><ellipse class="t-hole" cx="266" cy="768" rx="3.4" ry="3.6"/><ellipse class="t-hole" cx="162" cy="723" rx="3.7" ry="2.6"/><ellipse class="t-hole" cx="249" cy="721" rx="3.0" ry="2.5"/><ellipse class="t-hole" cx="174" cy="763" rx="3.1" ry="4.1"/><ellipse class="t-hole" cx="336" cy="734" rx="3.9" ry="3.0"/><ellipse class="t-hole" cx="257" cy="731" rx="6.0" ry="4.4"/><ellipse class="t-hole" cx="289" cy="780" rx="3.3" ry="2.4"/><ellipse class="t-hole" cx="250" cy="750" rx="5.9" ry="2.6"/><ellipse class="t-hole" cx="149" cy="843" rx="4.8" ry="2.5"/><ellipse class="t-hole" cx="314" cy="718" rx="4.8" ry="4.4"/><ellipse class="t-hole" cx="415" cy="809" rx="3.9" ry="3.0"/><ellipse class="t-hole" cx="195" cy="819" rx="4.9" ry="3.9"/><ellipse class="t-hole" cx="246" cy="744" rx="5.8" ry="4.4"/><ellipse class="t-hole" cx="411" cy="824" rx="5.9" ry="3.8"/><ellipse class="t-hole" cx="214" cy="784" rx="4.2" ry="2.3"/><ellipse class="t-hole" cx="151" cy="752" rx="3.9" ry="3.7"/><path class="t-cem" d="M196 560C186 500 210 468 250 470C272 471 284 486 300 486C316 486 328 471 350 470C390 468 414 500 404 560C400 600 396 630 392 660C388 720 380 800 366 846C360 862 346 860 342 842C336 800 330 740 318 706C310 690 290 690 282 706C270 740 264 800 258 842C254 860 240 862 234 846C220 800 212 720 208 660C204 630 200 600 196 560Z" clip-path="url(#tc-cem)"/><path class="t-en" d="M196 560C186 500 210 468 250 470C272 471 284 486 300 486C316 486 328 471 350 470C390 468 414 500 404 560C400 600 396 630 392 660C388 720 380 800 366 846C360 862 346 860 342 842C336 800 330 740 318 706C310 690 290 690 282 706C270 740 264 800 258 842C254 860 240 862 234 846C220 800 212 720 208 660C204 630 200 600 196 560Z" clip-path="url(#tc-en)"/><path class="t-den" d="M220 560C214 520 228 494 252 494C272 494 284 510 300 510C316 510 328 494 348 494C372 494 386 520 380 560C378 600 388 630 385 660C381 720 374 795 362 838C358 848 350 846 348 838C342 800 336 736 324 700C314 680 286 680 276 700C264 736 258 800 252 838C250 846 242 848 238 838C226 795 219 720 215 660C212 630 222 600 220 560Z"/><path class="t-pulp" d="M262 585C256 552 278 538 300 550C322 538 344 552 338 585C337 612 350 632 356 660C364 720 364 790 358 836L353 836C352 790 350 720 338 672C330 650 270 650 262 672C250 720 248 790 247 836L242 836C236 790 236 720 244 660C250 632 263 612 262 585Z"/><path class="t-art" d="M130 862L470 862"/><path class="t-art" d="M241.3 862C237.8 800 239.8 730 248.8 668C254.8 640 268.8 610 274.2 578"/><path class="t-art" d="M358.7 862C362.2 800 360.2 730 351.2 668C345.2 640 331.2 610 325.8 578"/><path class="t-vein" d="M130 867L470 867"/><path class="t-vein" d="M244.5 867C241.0 800 243.0 730 252.0 668C258.0 640 272.0 610 280.0 578"/><path class="t-vein" d="M355.5 867C359.0 800 357.0 730 348.0 668C342.0 640 328.0 610 320.0 578"/><path class="t-nerve" d="M130 872L470 872"/><path class="t-nerve" d="M247.7 872C244.2 800 246.2 730 255.2 668C261.2 640 275.2 610 285.8 578"/><path class="t-nerve" d="M352.3 872C355.8 800 353.8 730 344.8 668C338.8 640 324.8 610 314.2 578"/><g id="ds1" style="display:none"><path d="M212 506C218 478 246 462 270 472C284 480 290 489 300 489C310 489 316 480 330 472C354 462 382 478 388 506" fill="none" stroke="#C9B52E" stroke-width="9" stroke-linecap="round" opacity=".9"/><circle cx="236" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="262" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="338" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="364" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="300" cy="484" r="2.6" fill="#5E8C2A"/><circle cx="222" cy="488" r="2.6" fill="#5E8C2A"/><circle cx="378" cy="488" r="2.6" fill="#5E8C2A"/><rect x="232" y="440" width="11" height="11" rx="2" fill="#fff" stroke="#8E9AC0" stroke-width="1.6" transform="rotate(12 237 445)"/><rect x="300" y="452" width="11" height="11" rx="2" fill="#fff" stroke="#8E9AC0" stroke-width="1.6" transform="rotate(-8 305 457)"/><rect x="366" y="438" width="11" height="11" rx="2" fill="#fff" stroke="#8E9AC0" stroke-width="1.6" transform="rotate(20 371 443)"/></g><g id="ds2" style="display:none"><path d="M212 506C218 478 246 462 270 472C284 480 290 489 300 489C310 489 316 480 330 472C354 462 382 478 388 506" fill="none" stroke="#C9B52E" stroke-width="9" stroke-linecap="round" opacity=".9"/><circle cx="236" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="262" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="338" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="364" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="300" cy="484" r="2.6" fill="#5E8C2A"/><circle cx="222" cy="488" r="2.6" fill="#5E8C2A"/><circle cx="378" cy="488" r="2.6" fill="#5E8C2A"/><path d="M287 482C291 500 309 500 313 482C306 489 294 489 287 482Z" fill="#4A3A22" stroke="#2E2414" stroke-width="2" stroke-linejoin="round"/></g><g id="ds3" style="display:none"><path d="M212 506C218 478 246 462 270 472C284 480 290 489 300 489C310 489 316 480 330 472C354 462 382 478 388 506" fill="none" stroke="#C9B52E" stroke-width="9" stroke-linecap="round" opacity=".9"/><circle cx="236" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="262" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="338" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="364" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="300" cy="484" r="2.6" fill="#5E8C2A"/><circle cx="222" cy="488" r="2.6" fill="#5E8C2A"/><circle cx="378" cy="488" r="2.6" fill="#5E8C2A"/><path d="M281 480C274 520 288 541 300 541C312 541 326 520 319 480C310 491 290 491 281 480Z" fill="#4A3A22" stroke="#2E2414" stroke-width="2" stroke-linejoin="round"/></g><g id="ds4" style="display:none"><path d="M212 506C218 478 246 462 270 472C284 480 290 489 300 489C310 489 316 480 330 472C354 462 382 478 388 506" fill="none" stroke="#C9B52E" stroke-width="9" stroke-linecap="round" opacity=".9"/><circle cx="236" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="262" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="338" cy="466" r="2.6" fill="#5E8C2A"/><circle cx="364" cy="470" r="2.6" fill="#5E8C2A"/><circle cx="300" cy="484" r="2.6" fill="#5E8C2A"/><circle cx="222" cy="488" r="2.6" fill="#5E8C2A"/><circle cx="378" cy="488" r="2.6" fill="#5E8C2A"/><path d="M277 478C264 530 284 568 300 570C316 568 336 530 323 478C312 491 288 491 277 478Z" fill="#4A3A22" stroke="#2E2414" stroke-width="2" stroke-linejoin="round"/><path d="M262 585C256 552 278 538 300 550C322 538 344 552 338 585C337 612 350 632 356 660C364 720 364 790 358 836L353 836C352 790 350 720 338 672C330 650 270 650 262 672C250 720 248 790 247 836L242 836C236 790 236 720 244 660C250 632 263 612 262 585Z" fill="#D63A3A" opacity=".55"/><path d="M150 520L166 532L158 528L176 544" fill="none" stroke="#D63A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M140 570L156 580L148 576L166 590" fill="none" stroke="#D63A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M450 520L434 532L442 528L424 544" fill="none" stroke="#D63A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M460 570L444 580L452 576L434 590" fill="none" stroke="#D63A3A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g><g id="ds5" style="display:none"><path d="M281 480C274 520 288 541 300 541C312 541 326 520 319 480C310 491 290 491 281 480Z" fill="#C9D1E6" stroke="#5A6688" stroke-width="2.5" stroke-linejoin="round"/></g></g></svg></div><div class="brbtns" id="dBtns"><button class="seg" data-s="0" aria-pressed="true">Healthy</button><button class="seg" data-s="1" aria-pressed="false">Plaque</button><button class="seg" data-s="2" aria-pressed="false">Enamel</button><button class="seg" data-s="3" aria-pressed="false">Dentine</button><button class="seg" data-s="4" aria-pressed="false">Pulp</button><button class="seg" data-s="5" aria-pressed="false">Filling</button></div><p class="asay" id="aSay" aria-live="polite"></p></div><div class="cards"><div class="ecard"><h3>The decay recipe</h3><div class="eq">Sugar + bacteria → acid</div><dl><dt>Plaque</dt><dd>A sticky layer of bacteria on your teeth</dd><dt>Acid</dt><dd>Dissolves the enamel</dd><dt>Cavity</dt><dd>A hole in a tooth</dd></dl></div><div class="ecard"><h3>Stopping decay</h3><div class="eq">Brush the plaque away</div><dl><dt>Brushing</dt><dd>Removes plaque before it can do harm</dd><dt>Fluoride</dt><dd>Makes enamel stronger. It is in most toothpastes</dd><dt>Dentist</dt><dd>Finds small holes early and fills them</dd></dl></div></div></div><h2 id="sets">Two sets of teeth</h2><div class="cards"><div class="ecard"><h3>Milk teeth</h3><div class="eq">20 teeth</div><dl><dt>Also called</dt><dd>Baby teeth</dd><dt>Arrive</dt><dd>From about 6 months old</dd><dt>Fall out</dt><dd>From about the age of 6</dd><dt>Types</dt><dd>8 incisors, 4 canines, 8 molars</dd></dl></div><div class="ecard"><h3>Adult teeth</h3><div class="eq">32 teeth</div><dl><dt>Also called</dt><dd>Permanent teeth</dd><dt>Arrive</dt><dd>From about the age of 6</dd><dt>Must last</dt><dd>The rest of your life</dd><dt>Types</dt><dd>8 incisors, 4 canines, 8 premolars, 12 molars</dd></dl></div></div><p class="muted">The last four molars are the wisdom teeth. Some people never get them, so an adult may have 28 teeth.</p><h2 id="care">Looking after your teeth</h2><div class="cards"><div class="ecard"><h3>Brush</h3><div class="eq">Twice a day, for two minutes</div><dl><dt>When</dt><dd>Last thing at night and one other time</dd><dt>With</dt><dd>Fluoride toothpaste</dd><dt>Why</dt><dd>It removes plaque</dd></dl></div><div class="ecard"><h3>Sugar</h3><div class="eq">Less sugar, less often</div><dl><dt>Limit</dt><dd>Sweets, biscuits and fizzy drinks</dd><dt>Tip</dt><dd>Keep sugary treats to mealtimes</dd><dt>Why</dt><dd>Every sugary snack starts a new acid attack</dd></dl></div><div class="ecard"><h3>Drinks</h3><div class="eq">Water and milk are best</div><dl><dt>Why</dt><dd>They do not harm your teeth</dd><dt>Take care</dt><dd>Fruit juice and fizzy drinks are sugary and acidic</dd></dl></div><div class="ecard"><h3>Dentist</h3><div class="eq">Go for regular check-ups</div><dl><dt>Why</dt><dd>A dentist can spot a problem while it is small</dd><dt>Tell them</dt><dd>If a tooth hurts or feels sensitive</dd></dl></div></div><h2 id="animals">Animal teeth</h2><p>You can often tell what an animal eats by looking at its teeth.</p><div class="cards"><div class="ecard"><h3>Herbivore</h3><div class="eq">Eats plants</div><dl><dt>Examples</dt><dd>Cow, sheep, rabbit, horse</dd><dt>Teeth</dt><dd>Wide, flat molars for grinding tough plants. Sharp incisors for snipping</dd></dl></div><div class="ecard"><h3>Carnivore</h3><div class="eq">Eats other animals</div><dl><dt>Examples</dt><dd>Cat, lion, wolf</dd><dt>Teeth</dt><dd>Long, pointed canines to grip prey. Sharp back teeth that slice like scissors</dd></dl></div><div class="ecard"><h3>Omnivore</h3><div class="eq">Eats plants and animals</div><dl><dt>Examples</dt><dd>Human, bear, pig</dd><dt>Teeth</dt><dd>A mixture: incisors, canines and molars</dd></dl></div></div><p class="muted">Humans are omnivores. That is why you have teeth for cutting, tearing, crushing and grinding.</p>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Find printable science packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  "use strict";
+  function $(id){return document.getElementById(id);}
+  var L={"parts": "Teeth and parts of a tooth", "numbers": "Numbers", "view": "Diagram options", "tapTitle": "Tap a tooth", "tapText": "Tap any tooth or part on the diagram, or pick one from the numbered list.", "key": [["Four types of teeth.", "Incisors, canines, premolars and molars. Each type has its own shape and its own job."], ["Tap one, see them all.", "Every tooth of the same type lights up together."], ["A full adult set.", "The mouth shows 16 teeth in the top jaw and 16 in the bottom jaw."], ["Inside a tooth.", "The lower drawing is a molar cut in half, so you can see its layers."]], "kinds": {"type": "Type of tooth", "zone": "Part of a tooth", "layer": "Layer of a tooth", "hold": "Holds the tooth"}, "facts": "Key facts", "works": "Linked to", "words": "Key words:", "more": {"decay": "See how a tooth decays", "animals": "Compare animal teeth", "sets": "See the two sets of teeth", "care": "See how to look after your teeth"}, "step": "Step", "of": "of", "back": "Back", "next": "Next", "again": "Start again", "play": "Play all", "pause": "Pause", "happens": "What happens here", "oxygen": "Shape", "move": "Job", "blood": "How many", "away": {"cut": "Cut", "tear": "Grip and tear", "crush": "Crush", "grind": "Grind", "swallow": "Swallow"}, "decay": ["Healthy tooth. The enamel is smooth and whole. It protects the layers underneath.", "Plaque builds up. Bacteria in the plaque feed on sugar and make acid.", "Hole in the enamel. The acid slowly dissolves the enamel and a small hole forms. It does not hurt yet, because enamel has no nerves.", "Hole in the dentine. The hole gets deeper and reaches the dentine. The tooth may feel sensitive to hot, cold or sweet things.", "Hole reaches the pulp. The decay reaches the nerves in the pulp. This causes toothache.", "Filling. A dentist cleans out the decay and fills the hole. The filling stops the hole from getting bigger."]};
+  var PARTS=[{"id": "incisors", "chip": "Incisors", "name": "Incisors", "kind": "type", "job": "The flat, sharp teeth at the front of your mouth. They cut and slice food.", "facts": ["They have a thin, straight edge, like a chisel.", "You use them to bite off a piece of apple or sandwich.", "They are usually the first teeth a baby gets."], "words": "incisor, cut, bite", "n": 1, "links": [["canines", "A canine sits next to the incisors on each side."]], "meta": "8 in an adult: 4 at the top and 4 at the bottom"}, {"id": "canines", "chip": "Canines", "name": "Canines", "kind": "type", "job": "The pointed teeth next to the incisors. They grip and tear food.", "facts": ["Each one has a single sharp point.", "They have the longest roots of all your teeth.", "Meat-eating animals such as cats and wolves have very long canines."], "words": "canine, grip, tear", "n": 2, "links": [["incisors", "The incisors are in front of them."], ["premolars", "The premolars are behind them."]], "meta": "4 in an adult: 2 at the top and 2 at the bottom", "more": "animals"}, {"id": "premolars", "chip": "Premolars", "name": "Premolars", "kind": "type", "job": "The teeth between the canines and the molars. They crush food.", "facts": ["Each one has two bumps on top. The bumps are called cusps.", "They hold food and break it into smaller pieces.", "Young children have no premolars. They only grow in the adult set."], "words": "premolar, crush, cusp", "n": 3, "links": [["canines", "The canines are in front of them."], ["molars", "They pass food back to the molars."]], "meta": "8 in an adult: 4 at the top and 4 at the bottom", "more": "sets"}, {"id": "molars", "chip": "Molars", "name": "Molars", "kind": "type", "job": "The big, wide teeth at the back of your mouth. They grind food until it is small enough to swallow.", "facts": ["They have a broad top with four or five cusps.", "They have two or three roots to hold them firmly in the jaw.", "The four at the very back are called wisdom teeth. They come through last, often after the age of 17."], "words": "molar, grind, chew, wisdom tooth", "n": 4, "links": [["premolars", "The premolars are in front of them."]], "meta": "12 in an adult: 6 at the top and 6 at the bottom", "more": "sets"}, {"id": "crown", "chip": "Crown", "name": "Crown", "kind": "zone", "job": "The part of a tooth that you can see above the gum.", "facts": ["It is covered in enamel.", "Its shape depends on the job of the tooth: sharp for cutting or wide for grinding.", "This is the part you clean when you brush."], "words": "crown, enamel", "n": 5, "links": [["enamel", "Enamel covers the crown."], ["root", "The root is the hidden part below it."], ["gum", "The gum fits tightly around its base."]]}, {"id": "enamel", "chip": "Enamel", "name": "Enamel", "kind": "layer", "job": "The hard, white outer layer of the crown. It protects the tooth.", "facts": ["It is the hardest material in your body.", "It has no nerves, so it cannot feel anything.", "It is not alive, so it cannot grow back. Acid can make holes in it."], "words": "enamel, protect, acid", "n": 6, "links": [["dentine", "Dentine lies under it."], ["crown", "It covers the whole crown."]], "more": "decay"}, {"id": "dentine", "chip": "Dentine", "name": "Dentine", "kind": "layer", "job": "The layer under the enamel. It makes up most of the tooth.", "facts": ["It is hard, like bone, but softer than enamel.", "It is pale yellow.", "It is alive. Tiny tubes run through it to the pulp, so it can feel hot, cold and pain."], "words": "dentine, layer", "n": 7, "links": [["enamel", "Enamel protects it."], ["pulp", "It surrounds the pulp."]], "more": "decay"}, {"id": "pulp", "chip": "Pulp", "name": "Pulp", "kind": "layer", "job": "The soft centre of the tooth. It keeps the tooth alive.", "facts": ["It contains blood vessels and nerves.", "The blood brings food and oxygen to the tooth.", "The nerves send messages to your brain. That is why a deep hole causes toothache."], "words": "pulp, nerve, blood vessel", "n": 8, "links": [["dentine", "Dentine surrounds it."], ["root", "Nerves and blood vessels reach it through the tip of each root."]], "more": "decay"}, {"id": "gum", "chip": "Gum", "name": "Gum", "kind": "hold", "job": "The firm pink skin around the bottom of each crown. It covers the jawbone.", "facts": ["It makes a tight seal around the neck of the tooth.", "Healthy gums are pink and do not bleed.", "Plaque left along the gum can make it red and sore."], "words": "gum, plaque", "n": 9, "links": [["crown", "The crown shows above it."], ["jaw", "It covers the jawbone."]], "more": "care"}, {"id": "root", "chip": "Root", "name": "Root", "kind": "zone", "job": "The part of a tooth hidden below the gum. It holds the tooth in the jawbone.", "facts": ["Incisors and canines have one root. Molars have two or three.", "A thin layer called cementum covers it.", "Tiny fibres tie the root to the bone.", "The root of a milk tooth slowly dissolves. That is why the tooth becomes wobbly."], "words": "root, cementum, jawbone", "n": 10, "links": [["crown", "The crown is the part above it."], ["pulp", "The pulp runs down inside it."], ["jaw", "It sits in a socket in the jawbone."]]}, {"id": "jaw", "chip": "Jawbone", "name": "Jawbone", "kind": "hold", "job": "The bone that holds your teeth. Each root sits in its own hole, called a socket.", "facts": ["The top teeth are fixed in the upper jaw, which is part of the skull.", "The bottom teeth are in the lower jaw. It is the only bone in your head that moves when you chew.", "Strong muscles pull the lower jaw up so you can bite and chew."], "words": "jaw, socket, bone", "n": 11, "links": [["root", "It holds every root in a socket."], ["gum", "The gum covers it."]]}];
+  var STEPS=[{"title": "Incisors: cut", "sum": "You bite into an apple. Your incisors slice off a piece.", "move": "Cutting", "pts": ["The top and bottom incisors close together like scissors.", "Your lips and tongue pull the piece into your mouth."], "on": ["incisors"], "ox": "cut", "away": "cut"}, {"title": "Canines: grip and tear", "sum": "Tough food needs a firm grip. Your pointed canines hold it and tear it.", "move": "Gripping and tearing", "pts": ["The sharp point digs into the food.", "You use them for chewy foods such as meat or crusty bread."], "on": ["canines"], "ox": "tear", "away": "tear"}, {"title": "Premolars: crush", "sum": "Your tongue pushes the food to the side. The premolars crush it into smaller pieces.", "move": "Crushing", "pts": ["The two cusps press into the food and break it.", "Saliva starts to mix in and make the food wet."], "on": ["premolars"], "ox": "crush", "away": "crush"}, {"title": "Molars: grind", "sum": "At the back, the molars grind the food until it is soft and mushy.", "move": "Grinding", "pts": ["The lower jaw moves up and down and from side to side.", "The bumpy tops of the molars rub the food between them."], "on": ["molars"], "ox": "grind", "away": "grind"}, {"title": "Tongue: swallow", "sum": "The food is now a soft ball mixed with saliva. Your tongue pushes it to the back of your mouth and you swallow.", "move": "Swallowing", "pts": ["Chewing makes food easier to swallow and easier to digest.", "The food now travels down to your stomach."], "on": [], "ox": "swallow", "away": "swallow"}];
+  var OX={"cut": "Thin, straight edge", "tear": "One sharp point", "crush": "Two cusps", "grind": "Wide top with four or five cusps", "swallow": "The tongue is a muscle"},PATHS=["M300 57 L300 57", "M300 57 L314 57 L338 63 L360 72", "M360 72 L379 86 L387 94", "M387 94 L412 125 L426 155", "M426 155 L300 290"],DUR=[300, 1200, 1100, 1300, 1500];
+  var fig=$("fig"),figcol=$("figcol"),info=$("info"),chips=$("chips"),cell=$("cell"),jpath=$("jpath"),away=$("away");
+  var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var BY={},i;
+  for(i=0;i<PARTS.length;i++)BY[PARTS[i].id]=PARTS[i];
+  var mode="explore",selected=null,ji=0,playing=false,jRaf=0,jTimer=0;
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  /* ---------- explore ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<PARTS.length;a++)h+="<button class=\"chip\" data-o=\""+PARTS[a].id+"\" aria-pressed=\"false\"><b>"+PARTS[a].n+"</b>"+esc(PARTS[a].chip)+"</button>";
+    chips.innerHTML=h;
+  })();
+  function light(ids){
+    var els=fig.querySelectorAll("[data-o]");
+    for(var a=0;a<els.length;a++){
+      var on=ids.indexOf(els[a].getAttribute("data-o"))>=0;
+      if(on)els[a].classList.add("on");else els[a].classList.remove("on");
+    }
+    if(ids.length)fig.classList.add("sel");else fig.classList.remove("sel");
+  }
+  function intro(){
+    var h="<h2>"+esc(L.tapTitle)+"</h2><p>"+esc(L.tapText)+"</p><div class=\"keybox\">";
+    for(var a=0;a<L.key.length;a++)h+="<div><b>"+esc(L.key[a][0])+"</b> "+esc(L.key[a][1])+"</div>";
+    return h+"</div>";
+  }
+  function card(o){
+    var a,h="<h2><span class=\"num\">"+o.n+"</span>"+esc(o.name)+"</h2>";
+    h+="<span class=\"kind "+o.kind+"\">"+esc(L.kinds[o.kind])+"</span>";
+    h+="<p>"+esc(o.job)+"</p>";
+    if(o.meta)h+="<div class=\"meta\"><span><b>"+esc(L.blood)+"</b>"+esc(o.meta)+"</span></div>";
+    h+="<h3>"+esc(L.facts)+"</h3><ul>";
+    for(a=0;a<o.facts.length;a++)h+="<li>"+esc(o.facts[a])+"</li>";
+    h+="</ul><h3>"+esc(L.works)+"</h3>";
+    for(a=0;a<o.links.length;a++){
+      var t=BY[o.links[a][0]];
+      h+="<button class=\"link\" data-o=\""+t.id+"\"><b>"+t.n+" "+esc(t.chip)+"</b><span>"+esc(o.links[a][1])+"</span></button>";
+    }
+    if(o.more)h+="<p><button class=\"btn ghost\" id=\"toVessels\" data-to=\""+o.more+"\">"+esc(L.more[o.more])+"</button></p>";
+    h+="<p class=\"words\"><b>"+esc(L.words)+"</b> "+esc(o.words)+"</p>";
+    return h;
+  }
+  function select(id,from){
+    selected=id;
+    var a,cs=chips.querySelectorAll(".chip");
+    for(a=0;a<cs.length;a++){
+      var on=cs[a].getAttribute("data-o")===id;
+      cs[a].setAttribute("aria-pressed",on?"true":"false");
+      if(on&&chips.scrollWidth>chips.clientWidth)chips.scrollLeft=Math.max(0,cs[a].offsetLeft-chips.clientWidth/2+cs[a].offsetWidth/2);
+    }
+    if(!id){light([]);info.innerHTML=intro();return;}
+    light([id]);
+    info.innerHTML=card(BY[id]);
+    if(from==="fig"&&window.innerWidth<780){
+      var r=info.getBoundingClientRect();
+      if(r.top>window.innerHeight-140)window.scrollBy({top:r.top-(window.innerHeight-200),behavior:reduce?"auto":"smooth"});
+    }
+  }
+  chips.onclick=function(e){
+    var b=e.target.closest?e.target.closest(".chip"):null;
+    if(b)select(b.getAttribute("data-o"),"chip");
+  };
+  info.onclick=function(e){
+    var b=e.target.closest?e.target.closest("button"):null;
+    if(!b)return;
+    if(b.id==="toVessels"){show("more");var v=$(b.getAttribute("data-to"));if(v.scrollIntoView)v.scrollIntoView({behavior:reduce?"auto":"smooth"});return;}
+    if(b.getAttribute("data-o"))select(b.getAttribute("data-o"),"link");
+  };
+  function figPick(e){
+    if(mode!=="explore")return;
+    var t=e.target.closest?e.target.closest("[data-o]"):null;
+    if(t)select(t.getAttribute("data-o"),"fig");
+  }
+  fig.addEventListener("click",figPick);
+  fig.addEventListener("keydown",function(e){
+    if(e.key==="Enter"||e.key===" "){
+      var t=e.target.closest?e.target.closest("[data-o]"):null;
+      if(t){e.preventDefault();figPick(e);}
+    }
+  });
+  $("pinBtn").onclick=function(){
+    var off=fig.classList.contains("nopins");
+    if(off)fig.classList.remove("nopins");else fig.classList.add("nopins");
+    this.setAttribute("aria-pressed",off?"true":"false");
+  };
+
+  /* ---------- journey ---------- */
+  (function(){
+    var h="";
+    for(var a=0;a<STEPS.length;a++)h+="<i></i>";
+    $("jDots").innerHTML=h;
+  })();
+  function jStop(){cancelAnimationFrame(jRaf);clearTimeout(jTimer);}
+  function place(k){
+    var p=jpath.getPointAtLength(jpath.getTotalLength()*k);
+    cell.setAttribute("cx",p.x.toFixed(1));cell.setAttribute("cy",p.y.toFixed(1));
+  }
+  function adv(){
+    if(ji===STEPS.length-1){setPlaying(false);return;}
+    jGo(ji+1,true);
+  }
+  function jGo(n,anim){
+    jStop();
+    ji=n;
+    var a,s=STEPS[n],ds=$("jDots").children;
+    $("jStep").textContent=L.step+" "+(n+1)+" "+L.of+" "+STEPS.length;
+    $("jTitle").textContent=s.title;
+    $("jSum").textContent=s.sum;
+    $("jBack").disabled=n===0;
+    $("jNext").textContent=n===STEPS.length-1?L.again:L.next;
+    for(a=0;a<ds.length;a++)ds[a].className=a<n?"done":(a===n?"now":"");
+    var h="<h3>"+esc(L.happens)+"</h3><ul>";
+    for(a=0;a<s.pts.length;a++)h+="<li>"+esc(s.pts[a])+"</li>";
+    h+="</ul><div class=\"meta\"><span><b>"+esc(L.oxygen)+"</b>"+esc(OX[s.ox])+"</span><span><b>"+esc(L.move)+"</b>"+esc(s.move)+"</span></div>";
+    $("jInfo").innerHTML=h;
+    light(s.on);
+    if(s.away){away.textContent=L.away[s.away];away.classList.add("show");}
+    else away.classList.remove("show");
+    var d=PATHS[n];
+    if(!d){
+      cell.classList.remove("show");
+      if(playing)jTimer=setTimeout(adv,3600);
+      return;
+    }
+    jpath.setAttribute("d",d);
+    cell.classList.add("show");
+    if(!anim||reduce){
+      place(1);
+      if(playing)jTimer=setTimeout(adv,2600);
+      return;
+    }
+    place(0);
+    var t0=null,dur=DUR[n];
+    function tick(ts){
+      if(t0===null)t0=ts;
+      var k=Math.min(1,(ts-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+      place(e);
+      if(k<1)jRaf=requestAnimationFrame(tick);
+      else if(playing)jTimer=setTimeout(adv,1600);
+    }
+    jRaf=requestAnimationFrame(tick);
+  }
+  function setPlaying(p){
+    playing=p;
+    $("jPlay").textContent=p?L.pause:L.play;
+    $("jPlay").setAttribute("aria-pressed",p?"true":"false");
+    if(!p)clearTimeout(jTimer);
+  }
+  $("jNext").onclick=function(){setPlaying(false);jGo(ji===STEPS.length-1?0:ji+1,true);};
+  $("jBack").onclick=function(){setPlaying(false);if(ji>0)jGo(ji-1,true);};
+  $("jPlay").onclick=function(){
+    if(playing){setPlaying(false);jStop();return;}
+    setPlaying(true);
+    jGo(ji===STEPS.length-1?0:ji,true);
+  };
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function show(id){
+    for(var a=0;a<tabs.length;a++){
+      var on=tabs[a].getAttribute("data-p")===id;
+      tabs[a].setAttribute("aria-selected",on?"true":"false");
+      tabs[a].tabIndex=on?0:-1;
+      var p=$(tabs[a].getAttribute("data-p"));
+      if(on)p.classList.add("on");else p.classList.remove("on");
+    }
+    if(mode==="journey"&&id!=="journey"){setPlaying(false);jStop();fig.classList.remove("journey");away.classList.remove("show");cell.classList.remove("show");}
+    mode=id;
+    $("pinBtn").style.display=id==="journey"?"none":"";
+    if(id==="explore"){
+      $("slotA").appendChild(figcol);
+      light(selected?[selected]:[]);
+    }else if(id==="journey"){
+      $("slotB").appendChild(figcol);
+      fig.classList.add("journey");
+      jGo(ji,false);
+    }
+  }
+  for(i=0;i<tabs.length;i++){
+    tabs[i].onclick=function(){show(this.getAttribute("data-p"));};
+    tabs[i].onkeydown=function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this),n=-1;
+      if(e.key==="ArrowRight")n=(idx+1)%tabs.length;
+      if(e.key==="ArrowLeft")n=(idx+tabs.length-1)%tabs.length;
+      if(n>=0){e.preventDefault();tabs[n].focus();show(tabs[n].getAttribute("data-p"));}
+    };
+  }
+
+  /* ---------- decay model ---------- */
+  (function(){
+    var st=0;
+    function set(n){
+      st=n;
+      var a,bs=$("dBtns").children;
+      for(a=1;a<=5;a++)$("ds"+a).style.display=a===n?"":"none";
+      for(a=0;a<bs.length;a++)bs[a].setAttribute("aria-pressed",a===n?"true":"false");
+      $("aSay").textContent=L.decay[n];
+    }
+    $("dBtns").onclick=function(e){
+      var b=e.target.closest?e.target.closest("button"):null;
+      if(b)set(+b.getAttribute("data-s"));
+    };
+    set(0);
+    window.TeethDecay={set:set,stage:function(){return st;}};
+  })();
+
+  select(null);
+
+  /* exposed for checking */
+  window.TeethLab={PARTS:PARTS,STEPS:STEPS,select:select,show:show,jGo:jGo,
+    state:function(){return {mode:mode,selected:selected,step:ji,playing:playing};}};
+})();
+</script>
+</body>
+</html>
