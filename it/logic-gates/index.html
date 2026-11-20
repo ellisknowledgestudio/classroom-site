@@ -3,12 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free How the Internet Works Tool for Kids: Packets, IP Addresses and Online Safety | Ellis Knowledge Studio</title>
-<meta name="description" content="Free interactive internet tool for ages 9-13. Send a message in packets through routers, see how DNS and IP addresses find a website, test password strength, spot online dangers and take an auto-marked quiz.">
-<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/">
-<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/">
-<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/el/">
-<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/">
+<title>Free Logic Gates Simulator for Kids: AND, OR, NOT and Truth Tables | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive logic gates tool for ages 11-14. Flip switches to light a bulb through AND, OR, NOT, XOR, NAND and NOR gates, complete truth tables, solve circuit puzzles and take an auto-marked quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/logic-gates/">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
 <script>
@@ -40,80 +37,55 @@ h1{font-size:clamp(28px,6vw,42px)}
 .btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
 .btn.sm{padding:6px 12px;font-size:14px}
 .btn:disabled{opacity:.5;cursor:default}
-.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,input:focus-visible,.seg button:focus-visible,.step:focus-visible,.site:focus-visible,.rt:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,.sw:focus-visible,.tcell:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
 .center{text-align:center}
 .muted{color:var(--muted)}
 .mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
 .tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
 .tip b{color:var(--ink)}
-input[type=text],input[type=password]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 18px "DejaVu Sans Mono",Consolas,monospace;width:100%;max-width:420px}
-label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer}
-/* network */
-.netwrap{overflow-x:auto;border-radius:14px}
-.net{width:100%;min-width:560px;height:auto;display:block;background:var(--navy);border-radius:14px;touch-action:manipulation}
-.net .edge{stroke:#2C3B72;stroke-width:4}
-.net .edge.dead{stroke:#4a1d27;stroke-dasharray:6 6}
-.net .rt{cursor:pointer}
-.net .rt circle{fill:#22356B;stroke:var(--hi);stroke-width:3}
-.net .rt.dead circle{fill:#4a1d27;stroke:var(--bad)}
-.net .rt text{fill:var(--ink);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle;pointer-events:none}
-.net .rt .x{fill:var(--bad);font-size:26px;display:none}
-.net .rt.dead .x{display:block}
-.net .end rect{fill:#22356B;stroke:var(--gold);stroke-width:3}
-.net .end text{fill:var(--ink);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle}
-.net .end .ip{fill:var(--muted);font:700 11px "DejaVu Sans Mono",Consolas,monospace}
-.net .pk circle{stroke:#fff;stroke-width:2}
-.net .pk text{fill:var(--navy);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle;dominant-baseline:central}
-.pkts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.pkt{background:var(--navy);border:2px solid #2C3B72;border-radius:12px;padding:6px 10px;min-width:96px;font-size:13px}
-.pkt .h{color:var(--muted);font-size:11px;font-family:"DejaVu Sans Mono",Consolas,monospace}
-.pkt .d{font:800 18px "DejaVu Sans Mono",Consolas,monospace;white-space:pre;color:var(--gold)}
-.pkt.got{border-color:var(--good)}
-.pkt.lost{border-color:var(--bad);opacity:.7}
-.pkt.wait .d{color:#44558C}
-.log{background:var(--navy);border-radius:12px;padding:8px 14px;min-height:40px;font-size:14px;color:var(--muted)}
-.log b{color:var(--ink)}
-.out{font:800 clamp(20px,5vw,28px) "DejaVu Sans Mono",Consolas,monospace;color:var(--good);min-height:40px;word-break:break-all}
-/* dns */
-.sites{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.site{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:12px;padding:6px 12px;font:700 15px "DejaVu Sans Mono",Consolas,monospace;cursor:pointer}
-.site[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
-.dns{width:100%;height:auto;display:block;background:var(--navy);border-radius:14px}
-.dns .bx rect{fill:#22356B;stroke:#2C3B72;stroke-width:3}
-.dns .bx.on rect{stroke:var(--gold);fill:#2A3F7C}
-.dns .bx text{fill:var(--ink);font:800 14px "Nunito Sans",sans-serif;text-anchor:middle}
-.dns .bx .s{font:400 12px "Nunito Sans",sans-serif;fill:var(--muted)}
-.dns .ar{stroke:#2C3B72;stroke-width:4;fill:none}
-.dns .ar.on{stroke:var(--gold)}
-.dns .msg{fill:var(--gold);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle}
-.stepbox{background:var(--navy);border-radius:12px;padding:12px 16px;margin:10px 0;min-height:92px}
-.stepbox .n{color:var(--gold);font:800 15px "Baloo 2",sans-serif}
-.stepbox .t{font-size:17px;font-weight:700}
-.dots{display:flex;gap:6px;justify-content:center;margin:6px 0}
-.dots i{width:10px;height:10px;border-radius:50%;background:#2C3B72;display:block}
-.dots i.on{background:var(--gold)}
-.order{display:grid;gap:8px;margin:10px 0}
-.step{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:12px;padding:10px 12px;text-align:left;font:700 15px "Nunito Sans",sans-serif;cursor:pointer;display:flex;gap:10px;align-items:center}
-.step .k{flex:none;width:30px;height:30px;border-radius:50%;background:#2C3B72;display:flex;align-items:center;justify-content:center;font:800 15px "Baloo 2",sans-serif}
-.step.done{border-color:var(--good);cursor:default}
-.step.done .k{background:var(--good);color:var(--navy)}
-.step.no{border-color:var(--bad)}
-/* safety */
-.meter{height:16px;background:var(--navy);border-radius:999px;overflow:hidden;margin:8px 0}
-.meter i{display:block;height:100%;width:0;transition:width .25s,background .25s}
-.pwres{font:800 22px "Baloo 2",sans-serif}
-.checks{list-style:none;padding:0;margin:8px 0;display:grid;gap:4px}
-.checks li{font-size:15px}
-.checks li.ok{color:var(--good)}.checks li.no{color:var(--muted)}
-.card{background:var(--navy);border-radius:14px;padding:16px;font-size:18px;font-weight:700;min-height:96px;display:flex;align-items:center}
-.sorts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+/* circuits */
+.circ{width:100%;height:auto;display:block;background:var(--navy);border-radius:14px}
+.circ .w{fill:none;stroke:#3A4B85;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.circ .w.on{stroke:var(--gold)}
+.circ .g{fill:#22356B;stroke:var(--hi);stroke-width:3}
+.circ .gl{fill:var(--ink);font:800 14px "Nunito Sans",sans-serif;text-anchor:middle;pointer-events:none}
+.circ .dot{fill:#3A4B85}.circ .dot.on{fill:var(--gold)}
+.circ .sw{cursor:pointer}
+.circ .sw rect{fill:#22356B;stroke:var(--muted);stroke-width:3}
+.circ .sw.on rect{fill:var(--gold);stroke:var(--gold)}
+.circ .sw text{font:800 20px "Baloo 2",sans-serif;text-anchor:middle;fill:var(--ink);pointer-events:none}
+.circ .sw.on text{fill:var(--navy)}
+.circ .sw .v{font:800 13px "DejaVu Sans Mono",Consolas,monospace}
+.circ .bulb circle.b{fill:#2C3B72;stroke:var(--muted);stroke-width:3;transition:fill .2s}
+.circ .bulb.on circle.b{fill:#FFE27A;stroke:#FFF3B0}
+.circ .bulb .glow{fill:#FFE27A;opacity:0;transition:opacity .2s}
+.circ .bulb.on .glow{opacity:.35}
+.circ .bulb text{font:800 13px "DejaVu Sans Mono",Consolas,monospace;fill:var(--ink);text-anchor:middle}
+.ex{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:start}
+.tt{border-collapse:collapse;margin:8px auto;font:700 18px "DejaVu Sans Mono",Consolas,monospace}
+.tt th{background:var(--navy);color:var(--muted);font:800 14px "Nunito Sans",sans-serif;padding:6px 14px}
+.tt td{border:2px solid #2C3B72;padding:6px 16px;text-align:center}
+.tt tr.cur td{background:#3A3216;border-color:var(--gold)}
+.tt td.o{color:var(--gold)}
+.desc{background:var(--navy);border-radius:12px;padding:10px 14px;margin:10px 0}
+.desc b.n{color:var(--gold);font:800 20px "Baloo 2",sans-serif}
+.tcell{background:var(--navy2);color:var(--ink);border:2px dashed var(--muted);border-radius:8px;width:48px;height:36px;font:800 18px "DejaVu Sans Mono",Consolas,monospace;cursor:pointer}
+.tcell.ok{border:2px solid var(--good);background:#1d4a3a}
+.tcell.no{border:2px solid var(--bad);background:#4a1d27}
+.tcell:disabled{cursor:default}
+.expr{font:800 20px "DejaVu Sans Mono",Consolas,monospace;color:var(--gold);text-align:center;margin:6px 0}
+.found{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 0;min-height:30px}
+.found span{background:#1d4a3a;border:2px solid var(--good);border-radius:8px;padding:2px 8px;font:700 14px "DejaVu Sans Mono",Consolas,monospace}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
 .choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
 .choice.ok{border-color:var(--good);background:#1d4a3a}
 .choice.no{border-color:var(--bad);background:#4a1d27}
 .choice:disabled{cursor:default}
-.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
 .fb{min-height:28px;font-weight:700}
 .fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
 .why{color:var(--muted);min-height:24px;margin:4px 0 14px}
@@ -121,110 +93,87 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
 .bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
 .bar i{display:block;height:100%;width:0;background:var(--gold)}
 .shop{margin:24px 0;text-align:center}
-@media (max-width:520px){.choices{grid-template-columns:1fr}.pkt{min-width:80px}}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+@media (max-width:720px){.ex{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › How the Internet Works</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/el/" lang="el" hreflang="el">Ελληνικά</a></div>
-  <h1>How the Internet Works 🌐</h1>
-  <p class="lead">The internet is a giant network of computers joined together. Send a message and watch it split into packets that race through routers, find out how your browser finds a website, test how strong a password is, and learn to stay safe online. <span style="white-space:nowrap">Ages 9-13.</span></p>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › Logic Gates</nav>
+  <h1>Logic Gates 💡</h1>
+  <p class="lead">Inside every computer chip are billions of tiny logic gates. Each gate takes inputs that are on (1) or off (0) and gives one output. Flip the switches to light the bulb, fill in truth tables and solve circuit puzzles. <span style="white-space:nowrap">Ages 11-14.</span></p>
 
-  <div class="tabs" role="tablist" aria-label="Internet modes">
-    <button class="tab" role="tab" id="t-pk" aria-controls="pk" aria-selected="true" data-p="pk">Send a Message</button>
-    <button class="tab" role="tab" id="t-dns" aria-controls="dns" aria-selected="false" tabindex="-1" data-p="dns">Visit a Website</button>
-    <button class="tab" role="tab" id="t-safe" aria-controls="safe" aria-selected="false" tabindex="-1" data-p="safe">Stay Safe Online</button>
+  <div class="tabs" role="tablist" aria-label="Logic gates modes">
+    <button class="tab" role="tab" id="t-ex" aria-controls="ex" aria-selected="true" data-p="ex">Gate Explorer</button>
+    <button class="tab" role="tab" id="t-tt" aria-controls="tt" aria-selected="false" tabindex="-1" data-p="tt">Truth Tables</button>
+    <button class="tab" role="tab" id="t-lb" aria-controls="lb" aria-selected="false" tabindex="-1" data-p="lb">Light the Bulb</button>
     <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
   </div>
 
-  <!-- ============ PACKETS ============ -->
-  <section class="panel on" id="pk" role="tabpanel" aria-labelledby="t-pk">
-    <h2>Messages travel in packets</h2>
-    <p>Data is not sent across the internet in one big piece. It is chopped into small <b>packets</b>. Each packet is labelled with where it is going, where it came from and its number. <b>Routers</b> pass the packets along, and each packet can take a different route.</p>
-    <label for="msg" class="muted" style="font-weight:700">Type a message (up to 24 letters)</label>
-    <div class="row" style="margin-top:4px">
-      <input type="text" id="msg" maxlength="24" value="MEET ME AT THE PARK" autocomplete="off" spellcheck="false">
-      <button class="btn" id="send">Send it! 🚀</button>
-    </div>
-    <div class="row">
-      <label class="chk"><input type="checkbox" id="lose"> Lose a packet on the way</label>
-      <button class="btn ghost sm" id="fix">Fix all routers</button>
-    </div>
-    <div class="netwrap"><svg class="net" id="net" viewBox="0 0 640 300" role="img" aria-label="A network: your computer on the left, seven routers in the middle and the server on the right. Tap a router to break or fix it."></svg></div>
-    <p class="muted center" style="font-size:14px;margin:6px 0">Tap a router to break it (or fix it again). Packets will find another way round.</p>
-    <h3>Packets</h3>
-    <div class="pkts" id="pkts"></div>
-    <div class="log" id="log" aria-live="polite">Press <b>Send it!</b> to send your message.</div>
-    <h3>Message received at the server</h3>
-    <div class="out" id="outMsg" aria-live="polite"></div>
-    <p class="tip"><b>Why packets?</b> Small packets share the network fairly, and if one gets lost only that packet has to be sent again. If a router breaks, packets simply go another way, so the internet keeps working.</p>
-  </section>
-
-  <!-- ============ DNS ============ -->
-  <section class="panel" id="dns" role="tabpanel" aria-labelledby="t-dns">
-    <h2>How your browser finds a website</h2>
-    <p>Every computer on the internet has an <b>IP address</b>: four numbers like <span class="mono">198.51.100.7</span>. People prefer names, so a <b>DNS server</b> works like the internet's phone book, turning a website name into its IP address.</p>
-    <p class="muted" style="margin-bottom:0">Choose a website to visit:</p>
-    <div class="sites" id="sites" role="group" aria-label="Websites"></div>
-    <svg class="dns" id="dnsSvg" viewBox="0 0 640 230" role="img" aria-label="Diagram of your device, a DNS server and a web server"></svg>
-    <div class="dots" id="dots" aria-hidden="true"></div>
-    <div class="stepbox" aria-live="polite"><div class="n" id="sN"></div><div class="t" id="sT"></div><div class="muted" id="sX"></div></div>
-    <div class="row" style="justify-content:center">
-      <button class="btn ghost sm" id="sPrev">← Back</button>
-      <button class="btn" id="sNext">Next step →</button>
-    </div>
-    <h3 style="margin-top:22px">Put it in order 🔢</h3>
-    <p>Tap the steps in the right order, from typing the address to seeing the page. <span class="score" id="oScore"></span></p>
-    <div class="order" id="order"></div>
-    <div class="fb" id="oFb" aria-live="polite"></div>
-    <button class="btn sm" id="oAgain">Shuffle again</button>
-    <p class="tip" style="margin-top:14px"><b>Did you know?</b> Each of the four numbers in an IP address goes from 0 to 255. That is exactly one byte, so an IP address like this is 32 bits long.</p>
-  </section>
-
-  <!-- ============ SAFETY ============ -->
-  <section class="panel" id="safe" role="tabpanel" aria-labelledby="t-safe">
-    <h2>Password power 🔐</h2>
-    <p>A strong password is long and hard to guess. Try some <b>made-up</b> passwords to see how long a computer would take to guess them. <b>Never type a real password here</b> or anywhere you don't trust. (This checker runs only on your device and nothing is sent anywhere.)</p>
-    <label for="pw" class="muted" style="font-weight:700">Try a made-up password</label>
-    <div class="row" style="margin-top:4px">
-      <input type="text" id="pw" autocomplete="off" spellcheck="false" placeholder="e.g. purple-tiger-cloud">
-    </div>
-    <div class="meter" aria-hidden="true"><i id="pwBar"></i></div>
-    <div class="pwres" id="pwRes" aria-live="polite">Type a password to test it.</div>
-    <div class="muted" id="pwTime"></div>
-    <ul class="checks" id="pwChecks"></ul>
-    <div class="row">
-      <span class="muted">Try:</span>
-      <button class="btn ghost sm" data-try="password">password</button>
-      <button class="btn ghost sm" data-try="Fluffy2015">Fluffy2015</button>
-      <button class="btn ghost sm" data-try="purple-tiger-cloud">purple-tiger-cloud</button>
-      <button class="btn ghost sm" data-try="Moon!Pickle7Rocket">Moon!Pickle7Rocket</button>
-    </div>
-    <p class="tip"><b>Top tip:</b> join three random words together, like <span class="mono">purple-tiger-cloud</span>. It is long, easy to remember and very hard to guess. Use a different password for each account, and never share it with friends.</p>
-
-    <h2 style="margin-top:24px">Safe or not safe? 🛡️</h2>
-    <p>Read each situation. Is it safe, or not safe? <span class="score" id="sfScore">Score: 0</span> · <span id="sfCount"></span></p>
-    <div id="sfBox">
-      <div class="card" id="sfCard"></div>
-      <div class="sorts">
-        <button class="choice" id="sfSafe">✅ Safe</button>
-        <button class="choice" id="sfNot">⛔ Not safe</button>
+  <!-- ============ EXPLORER ============ -->
+  <section class="panel on" id="ex" role="tabpanel" aria-labelledby="t-ex">
+    <h2>Meet the gates</h2>
+    <div class="row"><div class="seg" role="group" aria-label="Choose a gate" id="exGates"></div></div>
+    <div class="ex">
+      <div>
+        <svg class="circ" id="exSvg" viewBox="0 0 600 260" role="img" aria-label="A circuit with switches, a logic gate and a bulb"></svg>
+        <p class="muted center" style="font-size:14px;margin:6px 0">Tap the switches to turn them on (1) and off (0).</p>
       </div>
-      <div class="fb" id="sfFb" aria-live="polite"></div>
-      <p class="why" id="sfWhy"></p>
-      <button class="btn" id="sfNext" style="display:none">Next →</button>
+      <div>
+        <table class="tt" id="exTT" aria-label="Truth table"></table>
+      </div>
     </div>
-    <div id="sfEnd" style="display:none">
-      <p class="q" id="sfEndText"></p>
-      <button class="btn" id="sfAgain">Play again</button>
+    <div class="desc" id="exDesc" aria-live="polite"></div>
+    <p class="tip"><b>1 and 0:</b> in logic, 1 means on or true and 0 means off or false. This is the same 1 and 0 that binary uses, because inside a chip a gate is made from tiny transistor switches.</p>
+  </section>
+
+  <!-- ============ TRUTH TABLES ============ -->
+  <section class="panel" id="tt" role="tabpanel" aria-labelledby="t-tt">
+    <h2>Complete the truth table</h2>
+    <p>A <b>truth table</b> shows the output for every possible set of inputs. Tap each output box to choose 0 or 1, then press Check. <span class="score" id="fScore">Tables correct: 0</span></p>
+    <div class="row"><div class="seg" role="group" aria-label="Gate to complete" id="fGates"></div></div>
+    <div class="desc center" id="fName"></div>
+    <table class="tt" id="fTT"></table>
+    <div class="row" style="justify-content:center">
+      <button class="btn" id="fCheck">Check</button>
+      <button class="btn ghost sm" id="fNext">Next gate →</button>
     </div>
-    <p class="tip"><b>If something online worries you</b>, stop, don't reply, and tell a trusted adult such as a parent, carer or teacher.</p>
+    <div class="fb center" id="fFb" aria-live="polite"></div>
+
+    <h2 style="margin-top:24px">Mystery gate 🕵️</h2>
+    <p>Look at the truth table. Which gate is it? <span class="score" id="mScore">Score: 0</span> · <span id="mCount"></span></p>
+    <div id="mBox">
+      <table class="tt" id="mTT"></table>
+      <div class="choices" id="mChoices"></div>
+      <div class="fb" id="mFb" aria-live="polite"></div>
+      <p class="why" id="mWhy"></p>
+      <button class="btn" id="mNext" style="display:none">Next →</button>
+    </div>
+    <div id="mEnd" style="display:none">
+      <p class="q" id="mEndText"></p>
+      <button class="btn" id="mAgain">Play again</button>
+    </div>
+  </section>
+
+  <!-- ============ LIGHT THE BULB ============ -->
+  <section class="panel" id="lb" role="tabpanel" aria-labelledby="t-lb">
+    <h2>Light the bulb</h2>
+    <p>Each circuit joins two or three gates together. Flip the switches until the bulb lights up. Then try to find <b>every</b> way to light it. <span class="score" id="lScore"></span></p>
+    <div class="row" style="justify-content:space-between">
+      <span class="q" id="lTitle" style="margin:0"></span>
+      <span><button class="btn ghost sm" id="lPrev">← Back</button> <button class="btn sm" id="lNext">Next circuit →</button></span>
+    </div>
+    <div class="expr" id="lExpr"></div>
+    <svg class="circ" id="lSvg" viewBox="0 0 640 300" role="img" aria-label="Circuit puzzle"></svg>
+    <div class="fb center" id="lFb" aria-live="polite"></div>
+    <p class="muted center" style="margin:4px 0">Ways found that light the bulb:</p>
+    <div class="found" id="lFound"></div>
+    <p class="tip"><b>How to read it:</b> work from left to right. Find the output of the first gates, then use those as the inputs to the next gate. The expression above the circuit shows the same thing in words.</p>
   </section>
 
   <!-- ============ QUIZ ============ -->
   <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
-    <h2>How the Internet Works Quiz</h2>
+    <h2>Logic Gates Quiz</h2>
     <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
     <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
     <div id="qBox">
@@ -240,7 +189,7 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
     </div>
   </section>
 
-  <p class="tip" style="margin-top:18px"><b>Want to know more?</b> See what happens inside a computer with <a href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/">How Computers Work</a>, or find out how all data becomes 1s and 0s with <a href="https://classroom.ellisknowledgestudio.com/it/binary/">Binary: 1s and 0s</a>.</p>
+  <p class="tip" style="margin-top:18px"><b>Want to know more?</b> Logic gates work with 1s and 0s, so try <a href="https://classroom.ellisknowledgestudio.com/it/binary/">Binary: 1s and 0s</a>, then see how programmers write binary with <a href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/">Hexadecimal: Counting in 16s</a>.</p>
 
   <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
 </div>
@@ -248,303 +197,236 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
 (function(){
   function $(id){return document.getElementById(id);}
   function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-  function rnd(lo,hi){return lo+Math.floor(Math.random()*(hi-lo+1));}
   var NS="http://www.w3.org/2000/svg";
   function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
 
-  /* ---------- packets ---------- */
-  var MY_IP="203.0.113.25",SV_IP="198.51.100.7";
-  var N={PC:[58,150],R1:[180,70],R2:[180,230],R3:[320,45],R4:[320,150],R5:[320,255],R6:[460,90],R7:[460,210],SV:[585,150]};
-  var EDGES=[["PC","R1"],["PC","R2"],["R1","R3"],["R1","R4"],["R2","R4"],["R2","R5"],["R3","R6"],["R4","R6"],["R4","R7"],["R5","R7"],["R6","SV"],["R7","SV"]];
-  var PATHS=[["PC","R1","R3","R6","SV"],["PC","R1","R4","R6","SV"],["PC","R1","R4","R7","SV"],["PC","R2","R4","R6","SV"],["PC","R2","R4","R7","SV"],["PC","R2","R5","R7","SV"]];
-  var COLS=["#F4B942","#5AA9FF","#FF8FB1","#4CC38A","#C39BFF","#FF9F5A"];
-  var dead={},edgeEls={},rtEls={},svg=$("net"),pkLayer;
-  function drawNet(){
-    svg.innerHTML="";
-    EDGES.forEach(function(e){var a=N[e[0]],b=N[e[1]];edgeEls[e.join("-")]=el("line",{"class":"edge",x1:a[0],y1:a[1],x2:b[0],y2:b[1]},svg);});
-    ["PC","SV"].forEach(function(k){
-      var g=el("g",{"class":"end"},svg),p=N[k];
-      el("rect",{x:p[0]-52,y:p[1]-30,width:104,height:60,rx:12},g);
-      var t=el("text",{x:p[0],y:p[1]-4},g);t.textContent=k==="PC"?"💻 You":"🖥️ Server";
-      var ip=el("text",{"class":"ip",x:p[0],y:p[1]+16},g);ip.textContent=k==="PC"?MY_IP:SV_IP;
-    });
-    for(var i=1;i<=7;i++){
-      (function(k){
-        var g=el("g",{"class":"rt",tabindex:"0",role:"button","aria-label":"Router "+k.substr(1)+", working. Press to break it."},svg),p=N[k];
-        el("circle",{cx:p[0],cy:p[1],r:22},g);
-        var t=el("text",{x:p[0],y:p[1]+5},g);t.textContent=k;
-        var x=el("text",{"class":"x",x:p[0],y:p[1]+9},g);x.textContent="✕";
-        function tog(){if(busy)return;dead[k]=!dead[k];paintDead();}
-        g.addEventListener("click",tog);
-        g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();tog();}});
-        rtEls[k]=g;
-      })("R"+i);
-    }
-    pkLayer=el("g",{},svg);
-    paintDead();
-  }
-  function paintDead(){
-    for(var k in rtEls){
-      rtEls[k].setAttribute("class","rt"+(dead[k]?" dead":""));
-      rtEls[k].setAttribute("aria-label","Router "+k.substr(1)+", "+(dead[k]?"broken. Press to fix it.":"working. Press to break it."));
-    }
-    EDGES.forEach(function(e){edgeEls[e.join("-")].setAttribute("class","edge"+(dead[e[0]]||dead[e[1]]?" dead":""));});
-    var ok=livePaths().length;
-    if(!busy)$("log").innerHTML=ok?"Press <b>Send it!</b> to send your message."+(Object.keys(dead).some(function(k){return dead[k];})?" Some routers are broken, so packets will find another way.":""):"<b>Every route is blocked!</b> No packets can get through. Fix a router to open a route.";
-    $("send").disabled=!ok||busy;
-  }
-  function livePaths(){return PATHS.filter(function(p){return p.every(function(n){return !dead[n];});});}
-  function pathLen(p){var L=0;for(var i=1;i<p.length;i++){var a=N[p[i-1]],b=N[p[i]];L+=Math.hypot(b[0]-a[0],b[1]-a[1]);}return L;}
-  function posOn(p,d){
-    for(var i=1;i<p.length;i++){var a=N[p[i-1]],b=N[p[i]],s=Math.hypot(b[0]-a[0],b[1]-a[1]);
-      if(d<=s){var t=d/s;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];} d-=s;}
-    return N[p[p.length-1]];
-  }
-  var busy=false,pkts=[],arrived=[],order=[];
-  function split(m){var out=[];for(var i=0;i<m.length;i+=4)out.push(m.substr(i,4));return out;}
-  function drawCards(){
-    var box=$("pkts");box.innerHTML="";
-    pkts.forEach(function(p,i){
-      var d=document.createElement("div");
-      d.className="pkt"+(arrived[i]?" got":p.lost?" lost":" wait");
-      d.style.borderLeft="6px solid "+COLS[i%COLS.length];
-      d.innerHTML='<div class="h">#'+(i+1)+' of '+pkts.length+'</div><div class="h">to '+SV_IP+'</div><div class="h">from '+MY_IP+'</div><div class="d">'+p.data.replace(/ /g,"·")+'</div>';
-      box.appendChild(d);
-    });
-  }
-  function showOut(){
-    var s="";pkts.forEach(function(p,i){s+=arrived[i]?p.data:"____".substr(0,p.data.length);});
-    $("outMsg").textContent=s;
-  }
-  function launch(list,done){
-    var routes=livePaths(),movers=[];
-    list.forEach(function(idx,j){
-      var path=routes[rnd(0,routes.length-1)],len=pathLen(path);
-      var g=el("g",{"class":"pk"},pkLayer);
-      el("circle",{r:14,fill:COLS[idx%COLS.length]},g);
-      var t=el("text",{},g);t.textContent=idx+1;
-      movers.push({idx:idx,path:path,len:len,g:g,start:j*380+rnd(0,250),speed:0.09+Math.random()*0.08,lostAt:pkts[idx].lost?len*(0.35+Math.random()*0.3):-1,done:false});
-    });
-    var t0=null;
-    function frame(ts){
-      if(t0===null)t0=ts;
-      var el2=ts-t0,left=0;
-      movers.forEach(function(m){
-        if(m.done)return;
-        var d=Math.max(0,(el2-m.start)*m.speed);
-        if(m.lostAt>=0&&d>=m.lostAt){
-          m.done=true;m.g.style.transition="opacity .5s";m.g.style.opacity="0";
-          setTimeout(function(){m.g.remove();},600);
-          $("log").innerHTML="<b>Oh no! Packet "+(m.idx+1)+" was lost</b> on the way.";
-          drawCards();return;
-        }
-        if(d>=m.len){
-          m.done=true;m.g.remove();arrived[m.idx]=true;order.push(m.idx+1);
-          $("log").innerHTML="Packet <b>"+(m.idx+1)+"</b> arrived. Arrival order so far: <b>"+order.join(", ")+"</b>";
-          drawCards();showOut();return;
-        }
-        var p=posOn(m.path,d);m.g.setAttribute("transform","translate("+p[0]+","+p[1]+")");
-        m.g.style.opacity=el2<m.start?"0":"1";left++;
-      });
-      if(left>0)requestAnimationFrame(frame);else done();
-    }
-    requestAnimationFrame(frame);
-  }
-  function finish(){
-    var missing=[];pkts.forEach(function(p,i){if(!arrived[i])missing.push(i);});
-    if(missing.length){
-      $("log").innerHTML="The server put the packets in order and noticed <b>packet "+(missing[0]+1)+" is missing</b>. It asks your computer to send it again…";
-      setTimeout(function(){
-        missing.forEach(function(i){pkts[i].lost=false;});drawCards();
-        launch(missing,finish);
-      },1600);
-      return;
-    }
-    var inOrder=order.every(function(v,i){return i===0||v>order[i-1];});
-    busy=false;$("msg").disabled=false;paintDead();
-    $("log").innerHTML="✓ All "+pkts.length+" packets arrived"+(inOrder?" (in order this time!).":", in the order <b>"+order.join(", ")+"</b>. The server used the packet numbers to put them back in the right order.");
-    $("send").focus({preventScroll:true});
-  }
-  function send(){
-    if(busy)return;
-    var m=$("msg").value.toUpperCase().replace(/[^A-Z0-9 !?.,]/g,"").trim().substr(0,24);
-    if(!m){m="HELLO";}
-    $("msg").value=m;
-    if(!livePaths().length)return;
-    busy=true;$("send").disabled=true;$("msg").disabled=true;
-    pkts=split(m).map(function(d){return {data:d,lost:false};});
-    arrived=pkts.map(function(){return false;});order=[];
-    if($("lose").checked&&pkts.length>1)pkts[rnd(0,pkts.length-1)].lost=true;
-    drawCards();showOut();
-    $("log").innerHTML="Your message has been split into <b>"+pkts.length+" packets</b>. Off they go!";
-    launch(pkts.map(function(p,i){return i;}),finish);
-  }
-  $("send").addEventListener("click",send);
-  $("msg").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();send();}});
-  $("fix").addEventListener("click",function(){if(busy)return;dead={};paintDead();});
-  drawNet();
-  pkts=split("MEET ME AT THE PARK").map(function(d){return {data:d,lost:false};});arrived=pkts.map(function(){return false;});drawCards();showOut();
+  /* ---------- gate logic ---------- */
+  var G={
+    AND:{n:2,f:function(a,b){return a&b;},d:"The output is 1 only when <b>both</b> inputs are 1.",e:"A car only starts if the key is turned AND the brake is pressed."},
+    OR:{n:2,f:function(a,b){return a|b;},d:"The output is 1 when <b>at least one</b> input is 1.",e:"A doorbell rings if the front button OR the back button is pressed."},
+    NOT:{n:1,f:function(a){return a?0:1;},d:"The output is the <b>opposite</b> of the input. It is sometimes called an inverter.",e:"A night light turns on when it is NOT light outside."},
+    XOR:{n:2,f:function(a,b){return a^b;},d:"Exclusive OR: the output is 1 when the inputs are <b>different</b> (one or the other, but not both).",e:"Stair lights with a switch at the top and bottom: flipping either switch changes the light."},
+    NAND:{n:2,f:function(a,b){return (a&b)?0:1;},d:"NOT AND: the opposite of AND. The output is 0 only when both inputs are 1.",e:"Fun fact: you can build every other gate using only NAND gates."},
+    NOR:{n:2,f:function(a,b){return (a|b)?0:1;},d:"NOT OR: the opposite of OR. The output is 1 only when both inputs are 0.",e:"An alarm stays quiet unless a door OR a window is opened. The \"all clear\" light is a NOR."}
+  };
+  var ORDER=["AND","OR","NOT","XOR","NAND","NOR"];
+  function rows(n){return n===1?[[0],[1]]:[[0,0],[0,1],[1,0],[1,1]];}
 
-  /* ---------- DNS ---------- */
-  var SITES=[["www.happy-zoo.com","198.51.100.7"],["www.space-facts.org","203.0.113.88"],["www.pizza-planet.net","192.0.2.140"]];
-  var site=0,step=0;
-  function stepsFor(s){
-    var name=SITES[s][0],ip=SITES[s][1],short=name.replace(/^www\./,"");
-    return [
-      {on:["you"],arrow:null,msg:"",t:"You type "+name+" into your web browser and press Enter.",x:"Your browser knows the name, but it needs a number (an IP address) to find the right computer."},
-      {on:["you","dns"],arrow:"a1",msg:"Where is "+short+"?",t:"Your browser asks a DNS server: \"What is the IP address for "+short+"?\"",x:"DNS stands for Domain Name System. It is like a phone book for the internet."},
-      {on:["dns","you"],arrow:"a2",msg:"It's "+ip,t:"The DNS server looks up the name and replies: \""+ip+"\".",x:"Now your browser knows exactly which computer to contact."},
-      {on:["you","web"],arrow:"a3",msg:"Send the page please",t:"Your browser sends a request to "+ip+" asking for the web page.",x:"The request travels in packets, passed along by routers."},
-      {on:["web","you"],arrow:"a4",msg:"Here it is! (in packets)",t:"The web server at "+ip+" sends the page back, split into packets.",x:"Big things like pictures and videos need lots and lots of packets."},
-      {on:["you"],arrow:null,msg:"",t:"Your browser puts the packets back together and shows the page. 🎉",x:"All of this usually happens in less than a second!"}
-    ];
+  /* draw a gate with its left edge at x, centre y. Returns input points and output point */
+  function drawGate(svg,type,x,y,k){
+    k=k||1;function q(v){return v*k;}
+    var base=type==="NAND"?"AND":type==="NOR"?"OR":type,bub=(type==="NAND"||type==="NOR"||type==="NOT"),out,ins;
+    if(base==="AND"){el("path",{"class":"g",d:"M"+x+" "+(y-q(26))+" h"+q(34)+" a"+q(26)+" "+q(26)+" 0 0 1 0 "+q(52)+" h-"+q(34)+" z"},svg);out=x+q(60);ins=[[x,y-q(13)],[x,y+q(13)]];}
+    else if(base==="OR"||base==="XOR"){
+      var ox=base==="XOR"?x+q(8):x;
+      if(base==="XOR")el("path",{"class":"g",d:"M"+x+" "+(y-q(26))+" Q"+(x+q(14))+" "+y+" "+x+" "+(y+q(26)),style:"fill:none"},svg);
+      el("path",{"class":"g",d:"M"+ox+" "+(y-q(26))+" Q"+(ox+q(14))+" "+y+" "+ox+" "+(y+q(26))+" Q"+(ox+q(42))+" "+(y+q(26))+" "+(ox+q(62))+" "+y+" Q"+(ox+q(42))+" "+(y-q(26))+" "+ox+" "+(y-q(26))+" z"},svg);
+      out=ox+q(62);ins=[[ox+q(9),y-q(13)],[ox+q(9),y+q(13)]];
+    } else {el("path",{"class":"g",d:"M"+x+" "+(y-q(22))+" L"+(x+q(46))+" "+y+" L"+x+" "+(y+q(22))+" z"},svg);out=x+q(46);ins=[[x,y]];}
+    if(bub){el("circle",{"class":"g",cx:out+q(6),cy:y,r:q(6)},svg);out+=q(12);}
+    var lab=el("text",{"class":"gl",x:x+q(base==="NOT"?17:28),y:y+5,style:k>1?"font-size:"+Math.round(14*k*0.85)+"px":""},svg);lab.textContent=type;
+    return {ins:ins,out:[out,y]};
   }
-  var dsvg=$("dnsSvg"),bx={},ar={},msgEl;
+  function wire(svg,a,b,mx){
+    mx=mx===undefined?(a[0]+b[0])/2:mx;
+    return el("path",{"class":"w",d:"M"+a[0]+" "+a[1]+" H"+mx+" V"+b[1]+" H"+b[0]},svg);
+  }
+  function drawSwitch(svg,label,x,y,onToggle){
+    var g=el("g",{"class":"sw",tabindex:"0",role:"switch","aria-checked":"false","aria-label":"Switch "+label},svg);
+    el("rect",{x:x-28,y:y-24,width:56,height:48,rx:12},g);
+    var t=el("text",{x:x,y:y},g);t.textContent=label;
+    var v=el("text",{"class":"v",x:x,y:y+17},g);v.textContent="0";
+    g.addEventListener("click",onToggle);
+    g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();onToggle();}});
+    return {g:g,v:v,out:[x+28,y]};
+  }
+  function setSwitch(s,on){s.g.setAttribute("class","sw"+(on?" on":""));s.g.setAttribute("aria-checked",on?"true":"false");s.v.textContent=on?"1":"0";}
+  function drawBulb(svg,x,y){
+    var g=el("g",{"class":"bulb"},svg);
+    el("circle",{"class":"glow",cx:x,cy:y,r:44},g);
+    el("circle",{"class":"b",cx:x,cy:y,r:26},g);
+    el("path",{d:"M"+(x-10)+" "+(y+30)+" h20 v12 h-20 z",fill:"#8C97B8"},g);
+    var t=el("text",{x:x,y:y+62},g);t.textContent="Output 0";
+    return {g:g,t:t,in:[x-26,y]};
+  }
+  function setBulb(b,on){b.g.setAttribute("class","bulb"+(on?" on":""));b.t.textContent="Output "+(on?1:0);}
+
+  /* ---------- explorer ---------- */
+  var exGate="AND",exIn=[0,0],exParts=null;
+  function buildEx(){
+    var svg=$("exSvg");svg.innerHTML="";var n=G[exGate].n;
+    var sw=[],gp,bulb,wires=[];
+    var gy=130,gx=230;
+    gp=null;
+    var tmp=el("g",{},svg);
+    bulb=drawBulb(svg,520,gy);
+    gp=drawGate(svg,exGate,gx,gy,1.6);
+    if(n===1){
+      sw.push(drawSwitch(svg,"A",70,gy,function(){exIn[0]^=1;paintEx();}));
+      wires.push(wire(tmp,sw[0].out,gp.ins[0]));
+    } else {
+      sw.push(drawSwitch(svg,"A",70,70,function(){exIn[0]^=1;paintEx();}));
+      sw.push(drawSwitch(svg,"B",70,190,function(){exIn[1]^=1;paintEx();}));
+      wires.push(wire(tmp,sw[0].out,gp.ins[0],170));
+      wires.push(wire(tmp,sw[1].out,gp.ins[1],170));
+    }
+    var ow=wire(tmp,gp.out,bulb.in);
+    exParts={sw:sw,bulb:bulb,wires:wires,ow:ow};
+    paintEx();
+  }
+  function paintEx(){
+    var g=G[exGate],n=g.n,ins=exIn.slice(0,n),o=g.f.apply(null,ins);
+    exParts.sw.forEach(function(s,i){setSwitch(s,ins[i]);exParts.wires[i].setAttribute("class","w"+(ins[i]?" on":""));});
+    exParts.ow.setAttribute("class","w"+(o?" on":""));setBulb(exParts.bulb,o);
+    var t=$("exTT"),h="<tr>"+(n===1?"<th>A</th>":"<th>A</th><th>B</th>")+"<th>Output</th></tr>";
+    rows(n).forEach(function(r){var cur=r.every(function(v,i){return v===ins[i];});h+='<tr'+(cur?' class="cur"':'')+'>'+r.map(function(v){return "<td>"+v+"</td>";}).join("")+'<td class="o">'+g.f.apply(null,r)+"</td></tr>";});
+    t.innerHTML=h;
+    $("exDesc").innerHTML='<b class="n">'+exGate+' gate</b><br>'+g.d+'<br><span class="muted">Example: '+g.e+'</span><br>Right now: '+(n===1?"A = "+ins[0]:"A = "+ins[0]+", B = "+ins[1])+' → output <b>'+o+'</b>'+(o?" 💡":"");
+  }
   (function(){
-    function box(k,x,y,t1,t2){var g=el("g",{"class":"bx"},dsvg);el("rect",{x:x,y:y,width:150,height:70,rx:14},g);var a=el("text",{x:x+75,y:y+30},g);a.textContent=t1;var b=el("text",{"class":"s",x:x+75,y:y+50},g);b.textContent=t2;bx[k]=g;}
-    box("you",20,80,"💻 Your device","Web browser");
-    box("dns",245,10,"📖 DNS server","Names → IP addresses");
-    box("web",470,80,"🖥️ Web server","Stores the website");
-    ar.a1=el("path",{"class":"ar",d:"M120 78 Q150 30 240 40"},dsvg);
-    ar.a2=el("path",{"class":"ar",d:"M245 65 Q190 100 172 110"},dsvg);
-    ar.a3=el("path",{"class":"ar",d:"M172 125 L468 125"},dsvg);
-    ar.a4=el("path",{"class":"ar",d:"M468 145 Q320 200 172 145"},dsvg);
-    msgEl=el("text",{"class":"msg",x:320,y:215},dsvg);
+    var box=$("exGates");
+    ORDER.forEach(function(k){var b=document.createElement("button");b.textContent=k;b.setAttribute("aria-pressed",String(k===exGate));
+      b.addEventListener("click",function(){exGate=k;exIn=[0,0];var bs=box.children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",String(bs[i]===b));buildEx();});
+      box.appendChild(b);});
   })();
-  function showStep(){
-    var S=stepsFor(site),s=S[step];
-    for(var k in bx)bx[k].setAttribute("class","bx"+(s.on.indexOf(k)>=0?" on":""));
-    for(var a in ar)ar[a].setAttribute("class","ar"+(s.arrow===a?" on":""));
-    msgEl.textContent=s.msg?"“"+s.msg+"”":"";
-    $("sN").textContent="Step "+(step+1)+" of "+S.length;$("sT").textContent=s.t;$("sX").textContent=s.x;
-    var dots=$("dots");dots.innerHTML="";for(var i=0;i<S.length;i++){var d=document.createElement("i");if(i<=step)d.className="on";dots.appendChild(d);}
-    $("sPrev").disabled=step===0;$("sNext").textContent=step===S.length-1?"Start again ↺":"Next step →";
-  }
-  $("sNext").addEventListener("click",function(){step=(step+1)%stepsFor(site).length;showStep();});
-  $("sPrev").addEventListener("click",function(){if(step>0){step--;showStep();}});
-  SITES.forEach(function(s,i){
-    var b=document.createElement("button");b.className="site";b.textContent=s[0];b.setAttribute("aria-pressed",String(i===0));
-    b.addEventListener("click",function(){site=i;step=0;var bs=$("sites").children;for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",String(j===i));showStep();});
-    $("sites").appendChild(b);
-  });
-  showStep();
+  buildEx();
 
-  var ORDER=["You type the website name into the browser","The browser asks a DNS server for the IP address","The DNS server replies with the IP address","The browser sends a request to that IP address","The web server sends the page back in packets","The browser puts the packets together and shows the page"];
-  var oNext=0,oMiss=0;
-  function startO(){
-    oNext=0;oMiss=0;$("oFb").textContent="";$("oFb").className="fb";$("oScore").textContent="";
-    var box=$("order");box.innerHTML="";
-    shuffle(ORDER.map(function(t,i){return i;})).forEach(function(i){
-      var b=document.createElement("button");b.className="step";b.setAttribute("data-i",i);
-      b.innerHTML='<span class="k">?</span><span>'+ORDER[i]+'</span>';
-      b.addEventListener("click",function(){
-        if(b.classList.contains("done"))return;
-        if(i===oNext){b.className="step done";b.querySelector(".k").textContent=oNext+1;oNext++;
-          $("oFb").textContent=oNext===ORDER.length?(oMiss===0?"✓ Perfect! Every step in the right order.":"✓ Done! You got there with "+oMiss+" wrong tap"+(oMiss>1?"s":"")+"."):"✓ Correct. What comes next?";
-          $("oFb").className="fb ok";
-        } else {oMiss++;b.classList.add("no");setTimeout(function(){b.classList.remove("no");},500);
-          $("oFb").textContent="✗ Not that one yet. Think about what has to happen before it.";$("oFb").className="fb no";}
-      });
-      box.appendChild(b);
+  /* ---------- fill truth tables ---------- */
+  var fGate="AND",fVals=[],fDone=false,fRight=0,fSolved={};
+  function buildF(){
+    var g=G[fGate],R=rows(g.n);fVals=R.map(function(){return null;});fDone=false;
+    $("fName").innerHTML='<b class="n">'+fGate+'</b> &nbsp; <span class="muted">'+g.d.replace(/<[^>]+>/g,"")+'</span>';
+    var t=$("fTT"),h="<tr>"+(g.n===1?"<th>A</th>":"<th>A</th><th>B</th>")+"<th>Output</th></tr>";
+    R.forEach(function(r,i){h+="<tr>"+r.map(function(v){return "<td>"+v+"</td>";}).join("")+'<td><button class="tcell" data-i="'+i+'" aria-label="Output for row '+(i+1)+'">?</button></td></tr>';});
+    t.innerHTML=h;
+    var cs=t.querySelectorAll(".tcell");
+    for(var i=0;i<cs.length;i++)cs[i].addEventListener("click",function(){
+      if(fDone)return;var k=+this.getAttribute("data-i");fVals[k]=fVals[k]===null?0:fVals[k]?0:1;if(this.textContent==="?")fVals[k]=0;this.textContent=fVals[k];this.className="tcell";
     });
+    $("fFb").textContent="";$("fFb").className="fb center";$("fCheck").disabled=false;
   }
-  $("oAgain").addEventListener("click",startO);
-
-  /* ---------- password ---------- */
-  var COMMON=["password","123456","12345678","123456789","qwerty","abc123","password1","111111","iloveyou","letmein","football","monkey","dragon","admin","welcome","sunshine","princess","000000","1234","12345"];
-  function analyse(pw){
-    var lower=/[a-z]/.test(pw),upper=/[A-Z]/.test(pw),dig=/\d/.test(pw),sym=/[^A-Za-z0-9]/.test(pw);
-    var pool=(lower?26:0)+(upper?26:0)+(dig?10:0)+(sym?33:0);
-    var common=COMMON.indexOf(pw.toLowerCase())>=0;
-    var simple=/^(.)\1+$/.test(pw)||/^(0123|1234|2345|3456|4567|5678|6789|abcd|qwer)/i.test(pw);
-    var log10=pw.length*Math.log(pool||1)/Math.LN10;
-    if(common||simple)log10=Math.min(log10,3);
-    else if(/^[A-Z]?[a-z]+\d{1,4}$/.test(pw))log10=Math.min(log10,7); // word + numbers is a common pattern
-    return {len:pw.length,lower:lower,upper:upper,dig:dig,sym:sym,common:common,simple:simple,log10:log10};
-  }
-  function timeText(log10){
-    var secs=Math.pow(10,log10)/1e10/2; // 10 billion guesses a second, found halfway on average
-    if(secs<1)return "in less than a second";
-    var u=[[31536000*1e9,"billion years"],[31536000*1e6,"million years"],[31536000*1000,"thousand years"],[31536000,"years"],[86400,"days"],[3600,"hours"],[60,"minutes"],[1,"seconds"]];
-    if(secs>=31536000*1e12)return "in more than a trillion years";
-    for(var i=0;i<u.length;i++)if(secs>=u[i][0]){var v=Math.round(secs/u[i][0]);return "in about "+v.toLocaleString("en-GB")+" "+(v===1?u[i][1].replace(/s$/,""):u[i][1]);}
-  }
-  function showPw(){
-    var pw=$("pw").value;
-    if(!pw){$("pwRes").textContent="Type a password to test it.";$("pwTime").textContent="";$("pwBar").style.width="0";$("pwChecks").innerHTML="";return;}
-    var a=analyse(pw),lv;
-    if(a.log10<6)lv=["Very weak 😟","#FF6B6B",15];else if(a.log10<10)lv=["Weak 😕","#FF9F5A",35];else if(a.log10<14)lv=["OK 🙂","#F4B942",60];else if(a.log10<18)lv=["Strong 💪","#8BD36B",82];else lv=["Very strong 🦾","#4CC38A",100];
-    $("pwRes").textContent=lv[0];$("pwRes").style.color=lv[1];$("pwBar").style.width=lv[2]+"%";$("pwBar").style.background=lv[1];
-    $("pwTime").textContent=(a.common?"This is one of the most common passwords in the world! ":"")+"A fast computer could guess it "+timeText(a.log10)+".";
-    var ch=[[a.len>=12,"At least 12 characters long ("+a.len+" so far)"],[a.lower&&a.upper,"Uses capital and small letters"],[a.dig,"Includes a number"],[a.sym,"Includes a symbol like ! or -"],[!a.common&&!a.simple,"Not a common or simple pattern"]];
-    $("pwChecks").innerHTML=ch.map(function(c){return '<li class="'+(c[0]?"ok":"no")+'">'+(c[0]?"✓ ":"○ ")+c[1]+'</li>';}).join("");
-  }
-  $("pw").addEventListener("input",showPw);
-  var tries=document.querySelectorAll("[data-try]");
-  for(var ti0=0;ti0<tries.length;ti0++)tries[ti0].addEventListener("click",function(){$("pw").value=this.getAttribute("data-try");showPw();});
-
-  /* ---------- safe or not ---------- */
-  var SAFE=[
-    ["A pop-up says you have won a free tablet. You just need to click and type your home address.",false,"Prizes you never entered for are a trick to get your details. Close it and tell an adult."],
-    ["Your friend asks for your password so they can play your game for you.",false,"Never share passwords, even with friends. Friendships change, and they could lock you out."],
-    ["You use a different password for your school account and your games account.",true,"Good thinking! If one password is ever found out, your other accounts stay safe."],
-    ["Someone you only know from an online game asks to meet you at the park.",false,"People online may not be who they say they are. Never meet up, and tell a trusted adult straight away."],
-    ["You check with a parent or carer before downloading a new app.",true,"Great idea. Some apps contain harmful software or cost money."],
-    ["An email from someone you don't know has an attachment called prize.exe.",false,"Unexpected attachments, especially ones ending in .exe, can contain viruses. Don't open it."],
-    ["You keep your profile private so only people you know can see it.",true,"A private profile keeps your photos and information away from strangers."],
-    ["A website asks for your full name, school and date of birth to enter a competition.",false,"That is a lot of personal information. Ask an adult before giving any details online."],
-    ["You see a message that upsets you, so you take a screenshot and show a teacher.",true,"Exactly right. Keep a record, don't reply, and tell a trusted adult."],
-    ["You log out of your account when you finish on a shared school computer.",true,"Logging out stops the next person from using your account."],
-    ["A message says your account will be deleted unless you click a link and enter your password now.",false,"This is called phishing. Real companies don't ask for your password like this. Don't click."],
-    ["You post a photo of yourself in your school uniform with your street name in the background.",false,"This could show strangers where you live and go to school. Check photos before sharing."]
-  ];
-  var SFN=8,sfList=[],sfi=0,sfRight=0;
-  function showSf(){
-    var it=sfList[sfi];
-    $("sfCount").textContent="Card "+(sfi+1)+" of "+SFN;$("sfCard").textContent=it[0];
-    $("sfSafe").disabled=false;$("sfNot").disabled=false;$("sfSafe").className="choice";$("sfNot").className="choice";
-    $("sfFb").textContent="";$("sfFb").className="fb";$("sfWhy").textContent="";$("sfNext").style.display="none";
-  }
-  function answerSf(saidSafe){
-    var it=sfList[sfi],right=saidSafe===it[1];
-    $("sfSafe").disabled=true;$("sfNot").disabled=true;
-    (it[1]?$("sfSafe"):$("sfNot")).className="choice ok";
-    if(!right)(saidSafe?$("sfSafe"):$("sfNot")).className="choice no";
-    if(right)sfRight++;
-    $("sfFb").textContent=right?"✓ Correct!":"✗ Not quite. This one is "+(it[1]?"safe.":"not safe.");$("sfFb").className="fb "+(right?"ok":"no");
-    $("sfWhy").textContent=it[2];$("sfScore").textContent="Score: "+sfRight;
-    $("sfNext").style.display="";$("sfNext").focus({preventScroll:true});
-  }
-  $("sfSafe").addEventListener("click",function(){answerSf(true);});
-  $("sfNot").addEventListener("click",function(){answerSf(false);});
-  $("sfNext").addEventListener("click",function(){
-    sfi++;
-    if(sfi>=SFN){$("sfBox").style.display="none";$("sfEnd").style.display="";
-      $("sfEndText").textContent=(sfRight===SFN?"Internet safety star! ":sfRight>=6?"Great choices! ":sfRight>=4?"Good effort! ":"Keep learning! ")+"You got "+sfRight+" out of "+SFN+" right.";
-      $("sfAgain").focus({preventScroll:true});}
-    else showSf();
+  $("fCheck").addEventListener("click",function(){
+    if(fDone)return;
+    if(fVals.some(function(v){return v===null;})){$("fFb").textContent="Fill in every output box first.";$("fFb").className="fb center";return;}
+    var g=G[fGate],R=rows(g.n),cs=$("fTT").querySelectorAll(".tcell"),wrong=0;
+    R.forEach(function(r,i){var ok=fVals[i]===g.f.apply(null,r);if(!ok)wrong++;cs[i].className="tcell "+(ok?"ok":"no");});
+    if(!wrong){fDone=true;for(var i=0;i<cs.length;i++)cs[i].disabled=true;$("fCheck").disabled=true;
+      if(!fSolved[fGate]){fSolved[fGate]=1;fRight++;}$("fScore").textContent="Tables correct: "+fRight+" of 6";
+      $("fFb").textContent="✓ Perfect! That is the "+fGate+" truth table.";$("fFb").className="fb center ok";}
+    else{$("fFb").textContent="✗ "+wrong+" box"+(wrong>1?"es are":" is")+" wrong (shown in red). Change "+(wrong>1?"them":"it")+" and check again.";$("fFb").className="fb center no";}
   });
-  function startSf(){sfList=shuffle(SAFE).slice(0,SFN);sfi=0;sfRight=0;$("sfScore").textContent="Score: 0";$("sfEnd").style.display="none";$("sfBox").style.display="";showSf();}
-  $("sfAgain").addEventListener("click",startSf);
+  function setF(k){fGate=k;var bs=$("fGates").children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",String(bs[i].textContent===k));buildF();}
+  (function(){var box=$("fGates");ORDER.forEach(function(k){var b=document.createElement("button");b.textContent=k;b.setAttribute("aria-pressed",String(k===fGate));b.addEventListener("click",function(){setF(k);});box.appendChild(b);});})();
+  $("fNext").addEventListener("click",function(){setF(ORDER[(ORDER.indexOf(fGate)+1)%ORDER.length]);});
+
+  /* ---------- mystery gate ---------- */
+  var MN=6,mList=[],mi=0,mRight=0;
+  function showM(){
+    var k=mList[mi],g=G[k];
+    $("mCount").textContent="Gate "+(mi+1)+" of "+MN;
+    var h="<tr>"+(g.n===1?"<th>A</th>":"<th>A</th><th>B</th>")+"<th>Output</th></tr>";
+    rows(g.n).forEach(function(r){h+="<tr>"+r.map(function(v){return "<td>"+v+"</td>";}).join("")+'<td class="o">'+g.f.apply(null,r)+"</td></tr>";});
+    $("mTT").innerHTML=h;
+    var opts=g.n===1?["NOT","AND","OR","XOR"]:[k].concat(shuffle(ORDER.filter(function(x){return x!==k&&x!=="NOT";})).slice(0,3));
+    var box=$("mChoices");box.innerHTML="";
+    shuffle(opts).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerM(o,b);});box.appendChild(b);});
+    $("mFb").textContent="";$("mFb").className="fb";$("mWhy").textContent="";$("mNext").style.display="none";
+  }
+  function answerM(o,btn){
+    var k=mList[mi],bs=$("mChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===k)bs[i].className="choice ok";}
+    if(o===k){mRight++;$("mFb").textContent="✓ Correct!";$("mFb").className="fb ok";}
+    else{btn.className="choice no";$("mFb").textContent="✗ Not quite. It is the "+k+" gate.";$("mFb").className="fb no";}
+    $("mWhy").innerHTML=G[k].d;$("mScore").textContent="Score: "+mRight;$("mNext").style.display="";$("mNext").focus({preventScroll:true});
+  }
+  $("mNext").addEventListener("click",function(){mi++;if(mi>=MN){$("mBox").style.display="none";$("mEnd").style.display="";$("mEndText").textContent=(mRight===MN?"Logic detective! ":mRight>=4?"Great spotting! ":"Keep practising! ")+"You named "+mRight+" out of "+MN+" gates.";$("mAgain").focus({preventScroll:true});}else showM();});
+  function startM(){mList=shuffle(ORDER);mi=0;mRight=0;$("mScore").textContent="Score: 0";$("mEnd").style.display="none";$("mBox").style.display="";showM();}
+  $("mAgain").addEventListener("click",startM);
+
+  /* ---------- light the bulb ---------- */
+  /* nodes: inputs A,B,C at fixed spots; gates {id,type,in:[ids],x,y}; out: id of last gate */
+  var LEVELS=[
+    {t:"Both on",expr:"A AND B",inputs:["A","B"],gates:[{id:"g1",type:"AND",in:["A","B"],x:300,y:150}],out:"g1"},
+    {t:"Either one",expr:"A OR B",inputs:["A","B"],gates:[{id:"g1",type:"OR",in:["A","B"],x:300,y:150}],out:"g1"},
+    {t:"Opposite day",expr:"NOT A",inputs:["A"],gates:[{id:"g1",type:"NOT",in:["A"],x:300,y:150}],out:"g1"},
+    {t:"This but not that",expr:"A AND (NOT B)",inputs:["A","B"],gates:[{id:"n1",type:"NOT",in:["B"],x:200,y:205},{id:"g1",type:"AND",in:["A","n1"],x:380,y:150}],out:"g1"},
+    {t:"All quiet",expr:"NOT (A OR B)",inputs:["A","B"],gates:[{id:"o1",type:"OR",in:["A","B"],x:220,y:150},{id:"n1",type:"NOT",in:["o1"],x:400,y:150}],out:"n1"},
+    {t:"Two or one",expr:"(A AND B) OR C",inputs:["A","B","C"],gates:[{id:"a1",type:"AND",in:["A","B"],x:220,y:95},{id:"o1",type:"OR",in:["a1","C"],x:400,y:150}],out:"o1"},
+    {t:"Gatekeeper",expr:"(A OR B) AND C",inputs:["A","B","C"],gates:[{id:"o1",type:"OR",in:["A","B"],x:220,y:95},{id:"a1",type:"AND",in:["o1","C"],x:400,y:150}],out:"a1"},
+    {t:"Make your own XOR",expr:"(A OR B) AND NOT (A AND B)",inputs:["A","B"],gates:[{id:"o1",type:"OR",in:["A","B"],x:200,y:85},{id:"a1",type:"AND",in:["A","B"],x:200,y:215},{id:"n1",type:"NOT",in:["a1"],x:330,y:215},{id:"a2",type:"AND",in:["o1","n1"],x:460,y:150}],out:"a2"}
+  ];
+  var IPOS={A:[50,60],B:[50,150],C:[50,240]},IPOS2={A:[50,85],B:[50,215]},IPOS1={A:[50,150]};
+  var li=0,lIn={A:0,B:0,C:0},lParts=null,lFound={},lDone={};
+  function evalLevel(L,vals){
+    var v={};L.inputs.forEach(function(k){v[k]=vals[k];});
+    L.gates.forEach(function(g){v[g.id]=G[g.type].f.apply(null,g.in.map(function(i){return v[i];}));});
+    return v;
+  }
+  function combos(L){var n=L.inputs.length,out=[];for(var m=0;m<(1<<n);m++){var o={};L.inputs.forEach(function(k,i){o[k]=(m>>(n-1-i))&1;});out.push(o);}return out;}
+  function buildL(){
+    var L=LEVELS[li],svg=$("lSvg");svg.innerHTML="";lIn={A:0,B:0,C:0};
+    var pos=L.inputs.length===3?IPOS:L.inputs.length===2?IPOS2:IPOS1;
+    var wl=el("g",{},svg),pts={},gps={},sw={},wires=[];
+    L.gates.forEach(function(g){gps[g.id]=drawGate(svg,g.type,g.x,g.y);pts[g.id]=gps[g.id].out;});
+    L.inputs.forEach(function(k){sw[k]=drawSwitch(svg,k,pos[k][0]+18,pos[k][1],function(){lIn[k]^=1;paintL();});pts[k]=sw[k].out;});
+    var bulb=drawBulb(svg,585,150);
+    /* wires; fan-out from inputs gets a dot at the split */
+    var used={};
+    L.gates.forEach(function(g){
+      g.in.forEach(function(src,j){
+        var a=pts[src],b=gps[g.id].ins[j];
+        var mx=Math.max(a[0]+18,b[0]-26-(j*8));
+        if(L.inputs.indexOf(src)>=0&&L.gates.length>1)mx=Math.min(mx,a[0]+40+(used[src]||0)*14);
+        var w=wire(wl,a,b,mx);wires.push({w:w,src:src});
+        if(used[src]){var d=el("circle",{"class":"dot",cx:mx,cy:a[1],r:6},wl);wires.push({w:d,src:src,dot:1});}
+        used[src]=(used[src]||0)+1;
+      });
+    });
+    var ow=wire(wl,pts[L.out],bulb.in);wires.push({w:ow,src:L.out});
+    lParts={sw:sw,bulb:bulb,wires:wires};
+    if(evalLevel(L,lIn)[L.out])L.inputs.forEach(function(k){lIn[k]=1;});
+    if(!lFound[li])lFound[li]={};
+    $("lTitle").textContent="Circuit "+(li+1)+" of "+LEVELS.length+": "+L.t;
+    $("lExpr").textContent="Bulb = "+L.expr;
+    $("lPrev").disabled=li===0;$("lNext").textContent=li===LEVELS.length-1?"Back to circuit 1 ↺":"Next circuit →";
+    paintL();
+  }
+  function paintL(){
+    var L=LEVELS[li],v=evalLevel(L,lIn);
+    for(var k in lParts.sw)setSwitch(lParts.sw[k],lIn[k]);
+    lParts.wires.forEach(function(x){x.w.setAttribute("class",(x.dot?"dot":"w")+(v[x.src]?" on":""));});
+    var o=v[L.out];setBulb(lParts.bulb,o);
+    var all=combos(L),win=all.filter(function(c){return evalLevel(L,c)[L.out];});
+    var key=L.inputs.map(function(k){return k+"="+lIn[k];}).join(" ");
+    if(o)lFound[li][key]=1;
+    var nf=Object.keys(lFound[li]).length;
+    var fb=$("lFb");
+    if(o){fb.textContent=nf===win.length?"💡 Lit! You found all "+win.length+" way"+(win.length>1?"s":"")+" to light this bulb.":"💡 Lit! Can you find another way? ("+nf+" of "+win.length+" found)";fb.className="fb center ok";if(nf===win.length&&!lDone[li]){lDone[li]=1;}}
+    else{fb.textContent=nf?"Found "+nf+" of "+win.length+" ways so far.":"The bulb is off. Keep trying!";fb.className="fb center";}
+    $("lFound").innerHTML=Object.keys(lFound[li]).map(function(k){return "<span>"+k+"</span>";}).join("");
+    $("lScore").textContent="Circuits fully solved: "+Object.keys(lDone).length+" of "+LEVELS.length;
+  }
+  $("lNext").addEventListener("click",function(){li=(li+1)%LEVELS.length;buildL();});
+  $("lPrev").addEventListener("click",function(){if(li>0){li--;buildL();}});
 
   /* ---------- quiz ---------- */
   var BANK=[
-    {q:"What is the internet?",a:"A giant network of computers joined together",w:["A single huge computer","A type of web browser","A website for searching"],why:"The internet links billions of devices around the world."},
-    {q:"When data is sent across the internet, it is split into small pieces called…",a:"packets",w:["pixels","parcels","programs"],why:"Data travels in packets, which are put back together when they arrive."},
-    {q:"What does a router do?",a:"Passes packets along towards where they are going",w:["Stores all the websites","Checks your spelling","Makes the screen brighter"],why:"Routers read each packet's address and send it on the next step of its journey."},
-    {q:"Why does each packet have a number?",a:"So the packets can be put back in the right order",w:["So they travel faster","To show how much they cost","So they can be deleted"],why:"Packets can arrive out of order, so the numbers are used to rebuild the data."},
-    {q:"What happens if a router on the way breaks?",a:"Packets take a different route",w:["The whole internet stops","The message is sent by post","All packets are deleted"],why:"There are many routes, so packets simply go another way."},
-    {q:"What happens if a packet goes missing?",a:"It is sent again",w:["The message is lost forever","The other packets are thrown away","Nothing, it is not needed"],why:"The receiver notices the gap and asks for just that packet again."},
-    {q:"What is an IP address?",a:"A number that identifies a device on the internet",w:["The name of a website","A type of password","A street address"],why:"Every device on the internet has an IP address, like 198.51.100.7."},
-    {q:"What does a DNS server do?",a:"Turns website names into IP addresses",w:["Stores your photos","Blocks all adverts","Makes websites load slower"],why:"DNS is like the internet's phone book."},
-    {q:"Which of these is the strongest password?",a:"purple-tiger-cloud",w:["password","Fluffy2015","123456"],why:"Three random words make a long password that is hard to guess but easy to remember."},
-    {q:"Your friend asks for your password. What should you do?",a:"Keep it to yourself",w:["Tell them, they are your friend","Write it on their hand","Post it online"],why:"Never share passwords, even with friends."},
-    {q:"A message says you have won a prize and asks for your address. What should you do?",a:"Don't reply and tell a trusted adult",w:["Send your address quickly","Reply asking for a bigger prize","Share it with your friends"],why:"Messages like this are tricks to get your personal information."},
-    {q:"What is phishing?",a:"A trick message that tries to get your password or details",w:["A fishing game online","A type of computer cable","A way of speeding up the internet"],why:"Phishing messages pretend to be from real companies to trick you."},
-    {q:"Someone you only know from a game wants to meet up. What should you do?",a:"Say no and tell a trusted adult",w:["Meet them in a park","Give them your phone number","Meet them but don't tell anyone"],why:"People online may not be who they say they are."},
-    {q:"What is a web browser?",a:"A program you use to look at websites",w:["A person who builds the internet","A type of router","The cable that connects to the internet"],why:"Browsers request web pages and display them."},
-    {q:"Where is a website stored?",a:"On a web server",w:["Inside your keyboard","On the DNS server","In the router"],why:"A web server is a computer that stores websites and sends pages out when asked."},
-    {q:"Why is it a good idea to use a different password for each account?",a:"If one is found out, the others stay safe",w:["It makes the internet faster","Websites require it by law","So you can share them"],why:"Using the same password everywhere means one leak could unlock everything."}
+    {q:"What does a logic gate do?",a:"Takes inputs of 1 or 0 and gives one output",w:["Stores photos","Connects to the internet","Opens the computer case"],why:"A logic gate follows a rule to turn its inputs into a single output."},
+    {q:"In logic, what does 1 mean?",a:"On or true",w:["Off or false","Broken","Half on"],why:"1 is on/true and 0 is off/false."},
+    {q:"An AND gate has inputs 1 and 0. What is the output?",a:"0",w:["1","2","10"],why:"AND only gives 1 when both inputs are 1."},
+    {q:"An OR gate has inputs 1 and 0. What is the output?",a:"1",w:["0","2","10"],why:"OR gives 1 when at least one input is 1."},
+    {q:"A NOT gate has input 1. What is the output?",a:"0",w:["1","2","It has no output"],why:"NOT flips the input: 1 becomes 0."},
+    {q:"Which gate gives 1 only when both inputs are 1?",a:"AND",w:["OR","NOT","XOR"],why:"That is the AND rule."},
+    {q:"Which gate has only one input?",a:"NOT",w:["AND","OR","XOR"],why:"NOT just flips a single input."},
+    {q:"An XOR gate has inputs 1 and 1. What is the output?",a:"0",w:["1","2","11"],why:"XOR gives 1 only when the inputs are different."},
+    {q:"Which gate gives 1 when the inputs are different?",a:"XOR",w:["AND","NOR","NAND"],why:"XOR means exclusive OR: one or the other, not both."},
+    {q:"How many rows does a truth table for a 2-input gate have?",a:"4",w:["2","3","8"],why:"00, 01, 10 and 11: four possible input pairs."},
+    {q:"How many rows does a truth table for 3 inputs have?",a:"8",w:["3","6","9"],why:"Each extra input doubles the rows: 2 × 2 × 2 = 8."},
+    {q:"What is a NAND gate?",a:"An AND gate followed by a NOT",w:["An OR gate followed by a NOT","Two NOT gates","A gate with no inputs"],why:"NAND means NOT AND, so its output is the opposite of AND."},
+    {q:"A NOR gate has inputs 0 and 0. What is the output?",a:"1",w:["0","2","00"],why:"NOR is the opposite of OR. OR gives 0 here, so NOR gives 1."},
+    {q:"A doorbell rings if the front OR back button is pressed. Which gate is this?",a:"OR",w:["AND","NOT","NAND"],why:"Either button is enough, so it is OR."},
+    {q:"What are logic gates built from inside a chip?",a:"Tiny transistor switches",w:["Small light bulbs","Copper coins","Magnets"],why:"Billions of transistors act as switches to make the gates."},
+    {q:"For (A AND B) OR C, which inputs light the bulb?",a:"A = 0, B = 0, C = 1",w:["A = 1, B = 0, C = 0","A = 0, B = 1, C = 0","A = 0, B = 0, C = 0"],why:"C is 1, so the OR gate gives 1 whatever the AND gate gives."}
   ];
   var QN=10,qList=[],qi=0,qRight=0;
   function showQ(){
@@ -552,24 +434,20 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
     $("qCount").textContent="Question "+(qi+1)+" of "+QN;$("qBar").style.width=(qi/QN*100)+"%";
     $("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
     var box=$("qChoices");box.innerHTML="";
-    shuffle([it.a].concat(it.w)).forEach(function(o){
-      var b=document.createElement("button");b.className="choice";b.textContent=o;
-      b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);
-    });
+    shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});
   }
   function answerQ(o,btn){
     var it=qList[qi],bs=$("qChoices").children;
     for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
     if(o===it.a){qRight++;$("qFb").textContent="✓ Correct!";$("qFb").className="fb ok";}
     else{btn.className="choice no";$("qFb").textContent="✗ Not quite. The answer is: "+it.a;$("qFb").className="fb no";}
-    $("qWhy").textContent=it.why;$("qScore").textContent="Score: "+qRight;
-    $("qNext").style.display="";$("qNext").focus({preventScroll:true});
+    $("qWhy").textContent=it.why;$("qScore").textContent="Score: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});
   }
   $("qNext").addEventListener("click",function(){
     qi++;
     if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
       var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
-      $("qEndText").textContent=(qRight===QN?"Internet expert! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep exploring! ")+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qEndText").textContent=(qRight===QN?"Logic legend! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep exploring! ")+"You scored "+qRight+" out of "+QN+". "+stars;
       $("qAgain").focus({preventScroll:true});}
     else showQ();
   });
@@ -579,24 +457,17 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
   /* ---------- tabs ---------- */
   var tabs=document.querySelectorAll(".tab"),started={};
   function setTab(t){
-    for(var i=0;i<tabs.length;i++){
-      var on=tabs[i]===t;
-      tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");
-      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
-    }
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
     var p=t.getAttribute("data-p");
-    if(p==="dns"&&!started.o){started.o=1;startO();}
-    if(p==="safe"&&!started.s){started.s=1;startSf();}
+    if(p==="tt"&&!started.t){started.t=1;buildF();startM();}
+    if(p==="lb"&&!started.l){started.l=1;buildL();}
     if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
   }
   for(var ti=0;ti<tabs.length;ti++){
     tabs[ti].addEventListener("click",function(){setTab(this);});
-    tabs[ti].addEventListener("keydown",function(e){
-      var idx=Array.prototype.indexOf.call(tabs,this);
-      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}
-    });
+    tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});
   }
-  window.__net={BANK:BANK,SAFE:SAFE,ORDER:ORDER,analyse:analyse,timeText:timeText,state:function(){return {busy:busy,arrived:arrived.slice(),order:order.slice(),n:pkts.length};},live:function(){return livePaths().length;},sf:function(){return sfList[sfi];}};
+  window.__lg={G:G,ORDER:ORDER,LEVELS:LEVELS,evalLevel:evalLevel,combos:combos,BANK:BANK,ex:function(){return {gate:exGate,ins:exIn.slice()};},level:function(){return li;},found:function(){return Object.keys(lFound[li]||{}).length;},mcur:function(){return mList[mi];}};
 })();
 </script>
 </body>

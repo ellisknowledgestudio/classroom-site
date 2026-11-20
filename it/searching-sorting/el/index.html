@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Αλγόριθμοι Αναζήτησης και Ταξινόμησης: Γραμμική και Δυαδική Αναζήτηση, Ταξινόμηση Φυσαλίδας, Δωρεάν Εργαλείο για Παιδιά | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό εργαλείο αναζήτησης και ταξινόμησης, για ηλικίες 10-14. Ψάξε κάρτες μία-μία, βρες έναν αριθμό με λίγες μαντεψιές με τη δυαδική αναζήτηση, κάνε βήμα-βήμα ταξινόμηση φυσαλίδας, βάλε τρεις αλγόριθμους ταξινόμησης να αγωνιστούν και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,.cd:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+
+/* ---------- cards (search) ---------- */
+.target{display:inline-block;background:var(--navy);border:2px solid var(--gold);border-radius:14px;padding:6px 16px;font:800 24px "Baloo 2",sans-serif;color:var(--gold)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px;margin:14px 0}
+.cards.small{grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px}
+.cw{text-align:center}
+.cd{width:100%;aspect-ratio:3/4;border-radius:10px;border:2px solid #3B4F8F;background:repeating-linear-gradient(45deg,#24387A 0 8px,#2B4290 8px 16px);color:var(--ink);font:800 22px "Baloo 2",sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.cards.small .cd{font-size:17px}
+.cd:hover:not(:disabled){transform:translateY(-3px)}
+.cd.up{background:#F5F7FF;color:#16213F;border-color:#F5F7FF}
+.cd.hit{background:var(--good);border-color:var(--good);color:#0B2A1C;transform:scale(1.08)}
+.cd.out{opacity:.28}
+.cd.mid{outline:3px dashed var(--gold);outline-offset:2px}
+.cd:disabled{cursor:default}
+.ix{font-size:11px;color:var(--muted)}
+.stat{font-weight:700;color:var(--gold)}
+table.cmp{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px}
+table.cmp th,table.cmp td{padding:7px 10px;text-align:center;border-bottom:1px solid #2C3B72}
+table.cmp th{color:var(--gold);font-family:"Baloo 2",sans-serif;font-size:16px}
+table.cmp td.win{color:var(--good);font-weight:800}
+
+/* ---------- bars (sort) ---------- */
+.bars{display:flex;align-items:flex-end;gap:8px;height:220px;background:#0B1530;border-radius:14px;padding:12px 12px 0;margin:12px 0}
+.bb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;transition:transform .25s}
+.bb i{display:block;width:100%;border-radius:8px 8px 0 0;background:var(--hi);transition:height .25s,background .2s}
+.bb b{font:800 20px "Baloo 2",sans-serif;margin-bottom:2px}
+.bb.cmp i{background:var(--gold)}
+.bb.cmp b{color:var(--gold)}
+.bb.lock i{background:var(--good)}
+.bb.lock b{color:var(--good)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.lane{background:var(--navy);border-radius:14px;padding:10px}
+.lane h3{font-size:18px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:center}
+.lane .medal{font-size:24px}
+.lbars{display:flex;align-items:flex-end;gap:2px;height:130px;background:#0B1530;border-radius:10px;padding:6px 6px 0}
+.lbars i{flex:1;background:var(--hi);border-radius:3px 3px 0 0}
+.lbars i.c{background:var(--gold)}
+.lane.done .lbars i{background:var(--good)}
+.lane .cc{font-weight:700;color:var(--muted);font-size:14px;margin-top:4px}
+.lane .cc span{color:var(--ink)}
+.ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.ctl label{font-weight:700;color:var(--muted);margin-right:6px}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}.bars{height:180px}.bb b{font-size:16px}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Αναζήτηση και Ταξινόμηση</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/" lang="en" hreflang="en">English</a></div>
+  <h1>Αλγόριθμοι Αναζήτησης και Ταξινόμησης 🔍</h1>
+  <p class="lead">Οι υπολογιστές ψάχνουν και ταξινομούν λίστες συνέχεια, από το να βρουν μια επαφή στο κινητό σου ως το να κατατάξουν τις βαθμολογίες σε ένα παιχνίδι. Δοκίμασε τους ίδιους <b>αλγόριθμους</b> που χρησιμοποιεί ένας υπολογιστής: ψάξε σε μια σειρά από κάρτες, βρες έναν αριθμό με λίγες μόνο μαντεψιές, ταξινόμησε αριθμούς με την <b>ταξινόμηση φυσαλίδας</b> και μετά βάλε τρεις αλγόριθμους ταξινόμησης να αγωνιστούν για να δεις ποιος είναι ο πιο γρήγορος. <span style="white-space:nowrap">Ηλικίες 10-14.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες αναζήτησης και ταξινόμησης">
+    <button class="tab" role="tab" id="t-lin" aria-controls="p-lin" aria-selected="true" data-p="p-lin">Γραμμική αναζήτηση</button>
+    <button class="tab" role="tab" id="t-bin" aria-controls="p-bin" aria-selected="false" tabindex="-1" data-p="p-bin">Δυαδική αναζήτηση</button>
+    <button class="tab" role="tab" id="t-bub" aria-controls="p-bub" aria-selected="false" tabindex="-1" data-p="p-bub">Ταξινόμηση φυσαλίδας</button>
+    <button class="tab" role="tab" id="t-race" aria-controls="p-race" aria-selected="false" tabindex="-1" data-p="p-race">Αγώνας ταξινόμησης</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
+  </div>
+
+  <!-- ============ LINEAR SEARCH ============ -->
+  <section class="panel on" id="p-lin" role="tabpanel" aria-labelledby="t-lin">
+    <h2>Γραμμική αναζήτηση 🃏</h2>
+    <p>Στη <b>γραμμική αναζήτηση</b> ελέγχεις τα στοιχεία <b>ένα-ένα</b>, από την αρχή ως το τέλος, μέχρι να βρεις αυτό που θέλεις. Αυτές οι κάρτες <b>δεν είναι σε σειρά</b>. Πάτησε τις κάρτες για να τις γυρίσεις και βρες τον αριθμό-στόχο. Πρόσεχε: μερικές φορές ο αριθμός δεν υπάρχει καθόλου!</p>
+    <div class="row"><span class="target" id="lTarget"></span><span class="stat" id="lChecks"></span></div>
+    <div class="cards" id="lCards"></div>
+    <div class="fb" id="lFb" aria-live="polite"></div>
+    <div class="row"><button class="btn" id="lNot">Δεν είναι εδώ!</button><button class="btn ghost" id="lWatch">Δες τον υπολογιστή</button><button class="btn ghost" id="lNew">Νέες κάρτες</button></div>
+    <p class="score" id="lScore"></p>
+  </section>
+
+  <!-- ============ BINARY SEARCH ============ -->
+  <section class="panel" id="p-bin" role="tabpanel" aria-labelledby="t-bin">
+    <h2>Δυαδική αναζήτηση ✂️</h2>
+    <p>Αυτές οι κάρτες είναι <b>ταξινομημένες</b> από τη μικρότερη στη μεγαλύτερη. Στη <b>δυαδική αναζήτηση</b> ελέγχεις τη <b>μεσαία</b> κάρτα. Αν ο στόχος είναι μεγαλύτερος, αποκλείεις το αριστερό μισό. Αν είναι μικρότερος, αποκλείεις το δεξί μισό. Κάθε μαντεψιά κόβει τις κάρτες στη μέση!</p>
+    <div class="row"><span class="muted" style="font-weight:700">Κάρτες:</span><span class="seg" id="bSize"><button aria-pressed="true" data-n="15">15</button><button aria-pressed="false" data-n="31">31</button></span></div>
+    <div class="row"><span class="target" id="bTarget"></span><span class="stat" id="bGuesses"></span><span class="muted" id="bLeft"></span></div>
+    <div class="cards small" id="bCards"></div>
+    <div class="fb" id="bFb" aria-live="polite"></div>
+    <div class="row"><button class="btn ghost" id="bWatch">Δες τον υπολογιστή</button><button class="btn ghost" id="bNew">Νέες κάρτες</button></div>
+    <h3>Πόσοι έλεγχοι χρειάζονται στη χειρότερη περίπτωση;</h3>
+    <table class="cmp"><thead><tr><th>Στοιχεία στη λίστα</th><th>Γραμμική αναζήτηση</th><th>Δυαδική αναζήτηση</th></tr></thead>
+    <tbody><tr><td>10</td><td>10</td><td class="win">4</td></tr><tr><td>100</td><td>100</td><td class="win">7</td></tr><tr><td>1.000</td><td>1.000</td><td class="win">10</td></tr><tr><td>1.000.000</td><td>1.000.000</td><td class="win">20</td></tr></tbody></table>
+    <p class="tip"><b>Η δυαδική αναζήτηση είναι πολύ πιο γρήγορη</b>, αλλά δουλεύει μόνο αν η λίστα είναι πρώτα <b>ταξινομημένη</b>. Αυτός είναι ένας μεγάλος λόγος που οι υπολογιστές ταξινομούν πράγματα!</p>
+  </section>
+
+  <!-- ============ BUBBLE SORT ============ -->
+  <section class="panel" id="p-bub" role="tabpanel" aria-labelledby="t-bub">
+    <h2>Ταξινόμηση φυσαλίδας 🫧</h2>
+    <p>Η <b>ταξινόμηση φυσαλίδας</b> συγκρίνει δύο <b>γειτονικούς</b> αριθμούς κάθε φορά. Αν ο αριστερός είναι <b>μεγαλύτερος</b>, τους ανταλλάσσει. Μετά προχωράει ένα βήμα δεξιά. Μετά από κάθε <b>πέρασμα</b> της λίστας, ο μεγαλύτερος αταξινόμητος αριθμός έχει ανέβει σαν φυσαλίδα στο τέλος και κλειδώνει στη θέση του (πράσινο). Ταξινόμησε τους αριθμούς από τον μικρότερο στον μεγαλύτερο.</p>
+    <div class="row"><span class="muted" style="font-weight:700">Αριθμοί:</span><span class="seg" id="uSize"><button aria-pressed="true" data-n="6">6</button><button aria-pressed="false" data-n="8">8</button></span><span class="stat" id="uStats"></span></div>
+    <div class="bars" id="uBars"></div>
+    <p class="q" id="uQ" style="font-size:20px"></p>
+    <div class="row"><button class="btn" id="uSwap">⇄ Αντάλλαξέ τους</button><button class="btn" id="uLeave">Άφησέ τους</button><button class="btn ghost" id="uWatch">Δες τον υπολογιστή</button><button class="btn ghost" id="uNew">Νέοι αριθμοί</button></div>
+    <div class="fb" id="uFb" aria-live="polite"></div>
+  </section>
+
+  <!-- ============ RACE ============ -->
+  <section class="panel" id="p-race" role="tabpanel" aria-labelledby="t-race">
+    <h2>Αγώνας ταξινόμησης 🏁</h2>
+    <p>Τρεις αλγόριθμοι ταξινομούν τους ίδιους αριθμούς. Σε κάθε χτύπο, ο καθένας κάνει <b>μία σύγκριση</b>, οπότε κερδίζει ο αλγόριθμος που χρειάζεται τις λιγότερες συγκρίσεις. Η <b>ταξινόμηση με εισαγωγή</b> παίρνει κάθε αριθμό με τη σειρά και τον γλιστράει πίσω στη σωστή θέση. Η <b>ταξινόμηση με συγχώνευση</b> σπάει τη λίστα σε μικρά κομμάτια και μετά τα ενώνει ξανά με τη σωστή σειρά. Δοκίμασε διαφορετικές αρχικές σειρές και δες ποιος κερδίζει!</p>
+    <div class="ctl">
+      <span><label>Αριθμοί:</label><span class="seg" id="rSize"><button aria-pressed="false" data-n="8">8</button><button aria-pressed="true" data-n="16">16</button><button aria-pressed="false" data-n="32">32</button></span></span>
+      <span><label>Αρχική σειρά:</label><span class="seg" id="rOrder"><button aria-pressed="true" data-o="random">Τυχαία</button><button aria-pressed="false" data-o="nearly">Σχεδόν ταξινομημένη</button><button aria-pressed="false" data-o="reversed">Ανάποδα</button></span></span>
+    </div>
+    <div class="row"><button class="btn" id="rGo">▶ Ξεκίνα τον αγώνα</button><button class="btn ghost" id="rReset">Από την αρχή</button></div>
+    <div class="lanes" id="rLanes"></div>
+    <div class="fb" id="rFb" aria-live="polite" style="margin-top:10px"></div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Κουίζ Αναζήτησης και Ταξινόμησης</h2>
+    <p class="muted">10 ερωτήσεις. <span class="score" id="qScore"></span> · <span id="qCount"></span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox"><p class="q" id="qText"></p><div class="choices" id="qChoices"></div><div class="fb" id="qFb" aria-live="polite"></div><p class="why" id="qWhy"></p><button class="btn" id="qNext" style="display:none">Επόμενη ερώτηση →</button></div>
+    <div id="qEnd" style="display:none"><p class="q" id="qEndText"></p><button class="btn" id="qAgain">Παίξε ξανά</button></div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Θέλεις να μάθεις περισσότερα;</b> Γράψε τις δικές σου οδηγίες βήμα-βήμα στο <a href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/el/">Αλγόριθμοι: Προγραμμάτισε το Ρομπότ</a> και μετά μάθε για μεταβλητές, εάν και βρόχους στις <a href="https://classroom.ellisknowledgestudio.com/it/coding-basics/el/">Βασικές Αρχές Προγραμματισμού</a>.</p>
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
+</div>
+<script>
+(function(){
+  var T={"findTarget": "Βρες: {t}", "checked": "Κάρτες που έλεγξες: {n}", "cardAria": "Κάρτα {n}", "solved": "Γύροι που έλυσες: {n}", "checkWord": ["έλεγχο", "ελέγχους"], "guessWord": ["μαντεψιά", "μαντεψιές"], "linStart": "Πάτησε μια κάρτα για να την ελέγξεις.", "linNo": "Το {v} δεν είναι το {t}. Συνέχισε να ψάχνεις!", "linFound": "✓ Βρήκες το {t}! Χρειάστηκες {n} {w}. Με {total} κάρτες, μια γραμμική αναζήτηση μπορεί να χρειαστεί ως και {total} ελέγχους.", "linNotSure": "✗ Δεν μπορείς να είσαι σίγουρος ακόμα! Υπάρχουν κάρτες που δεν έχεις ελέγξει. Η γραμμική αναζήτηση πρέπει να κοιτάξει κάθε κάρτα πριν πει «δεν είναι εδώ».", "linNotHereOk": "✓ Σωστά: το {t} δεν υπάρχει στη λίστα. Χρειάστηκε να ελέγξεις και τις {total} κάρτες για να είσαι σίγουρος. Αυτή είναι η χειρότερη περίπτωση για τη γραμμική αναζήτηση.", "linWatch": "Ο υπολογιστής ελέγχει την κάρτα 1, μετά την κάρτα 2, μετά την κάρτα 3…", "linWatchEnd": "Ένας υπολογιστής κάνει ακριβώς αυτό, απλώς εκατομμύρια φορές πιο γρήγορα.", "guesses": "Μαντεψιές: {n} (το πολύ χρειάζονται: {max})", "binLeft": "Κάρτες που μένουν: {n}", "binStart": "Πάτησε όποια κάρτα θέλεις. Η έξυπνη κίνηση είναι η μεσαία!", "binLow": "Το {v} είναι πολύ μικρό, άρα το {t} είναι πιο δεξιά. Οι κάρτες στα αριστερά αποκλείονται.", "binHigh": "Το {v} είναι πολύ μεγάλο, άρα το {t} είναι πιο αριστερά. Οι κάρτες στα δεξιά αποκλείονται.", "binFound": "✓ Βρήκες το {t} με {n} {w}!", "binGood": "Η δυαδική αναζήτηση δεν χρειάζεται ποτέ πάνω από {max} μαντεψιές για {size} κάρτες.", "binSlow": "Αν διαλέγεις πάντα τη μεσαία κάρτα, είναι σίγουρο ότι θα το βρεις με {max} μαντεψιές ή λιγότερες. Δοκίμασε ξανά!", "binWatchNote": "Ο υπολογιστής διαλέγει τη μέση των καρτών {a} ως {b}: την κάρτα {m}.", "bubStats": "Πέρασμα {p} · Συγκρίσεις: {c} · Ανταλλαγές: {s}", "bubCompare": "Σύγκρινε το {a} και το {b}. Είναι μεγαλύτερος ο αριστερός;", "bubShouldSwap": "✗ Το {a} είναι μεγαλύτερο από το {b}, άρα πρέπει να ανταλλαχτούν. Ο μεγαλύτερος αριθμός πάει δεξιά.", "bubShouldLeave": "✗ Το {a} είναι μικρότερο από το {b}, άρα είναι ήδη στη σωστή σειρά. Άφησέ τους.", "bubSwapped": "✓ Ανταλλαγή: το {a} ήταν μεγαλύτερο από το {b}.", "bubLeft": "✓ Έμειναν όπως ήταν: το {a} είναι μικρότερο από το {b}.", "bubPassEnd": "Τέλος του περάσματος {p}: το {v} κλείδωσε στη θέση του.", "bubDoneEarly": "🎉 Ταξινομήθηκε! Στο πέρασμα {p} δεν έγινε καμία ανταλλαγή, οπότε ο υπολογιστής ξέρει ότι η λίστα είναι στη σειρά. Σύνολο: {c} συγκρίσεις και {s} ανταλλαγές.", "bubDone": "🎉 Ταξινομήθηκε μετά από {p} περάσματα, με {c} συγκρίσεις και {s} ανταλλαγές.", "alg": {"bubble": "Ταξινόμηση φυσαλίδας", "insertion": "Ταξινόμηση με εισαγωγή", "merge": "Ταξινόμηση με συγχώνευση"}, "algS": {"bubble": "ταξινόμηση φυσαλίδας", "insertion": "ταξινόμηση με εισαγωγή", "merge": "ταξινόμηση με συγχώνευση"}, "comps": "Συγκρίσεις: {n}", "raceReady": "Διάλεξε πόσους αριθμούς και την αρχική σειρά και μετά πάτησε «Ξεκίνα τον αγώνα».", "raceGo": "Ξεκίνησαν!", "raceWin": "Κερδίζει η {a} με {n} συγκρίσεις!", "raceTie": "Ισοπαλία ανάμεσα σε: {a}, με {n} συγκρίσεις η καθεμία!", "and": " και ", "raceTip": {"random": "Με ανακατεμένους αριθμούς, η ταξινόμηση με συγχώνευση είναι συνήθως η πιο γρήγορη, και το προβάδισμά της μεγαλώνει όσο μακραίνει η λίστα. Δοκίμασε 32 αριθμούς!", "nearly": "Όταν η λίστα είναι σχεδόν ταξινομημένη, η ταξινόμηση με εισαγωγή σχεδόν δεν χρειάζεται να μετακινήσει τίποτα, οπότε συνήθως κερδίζει. Και η ταξινόμηση φυσαλίδας μπορεί να σταματήσει νωρίς.", "reversed": "Μια ανάποδη λίστα είναι η χειρότερη περίπτωση για την ταξινόμηση φυσαλίδας και την ταξινόμηση με εισαγωγή, γιατί κάθε ζευγάρι είναι σε λάθος σειρά. Η ταξινόμηση με συγχώνευση δεν επηρεάζεται!"}, "qCount": "Ερώτηση {i} από {n}", "qScore": "Βαθμολογία: {n}", "qRight": "✓ Σωστά!", "qWrong": "✗ Όχι ακριβώς. Η σωστή απάντηση είναι: {a}", "qEnd": ["Άσος των αλγορίθμων!", "Εξαιρετική δουλειά!", "Καλή προσπάθεια!", "Συνέχισε την εξάσκηση!"], "qScored": "Πέτυχες {r} στα {n}.", "bank": [{"q": "Τι είναι η γραμμική αναζήτηση;", "a": "Έλεγχος των στοιχείων ένα-ένα από την αρχή", "w": ["Έλεγχος πάντα του μεσαίου στοιχείου", "Ταξινόμηση της λίστας πρώτα", "Μαντεψιά ενός τυχαίου στοιχείου"], "why": "Η γραμμική αναζήτηση περνάει τη λίστα με τη σειρά μέχρι να βρει τον στόχο ή να φτάσει στο τέλος."}, {"q": "Μια λίστα έχει 50 στοιχεία. Στη χειρότερη περίπτωση, πόσους ελέγχους χρειάζεται η γραμμική αναζήτηση;", "a": "50", "w": ["1", "25", "6"], "why": "Αν ο στόχος είναι τελευταίος, ή δεν υπάρχει καθόλου, πρέπει να ελεγχθεί κάθε στοιχείο."}, {"q": "Τι πρέπει να ισχύει για να χρησιμοποιήσεις δυαδική αναζήτηση;", "a": "Η λίστα πρέπει να είναι ταξινομημένη", "w": ["Η λίστα πρέπει να είναι μικρή", "Η λίστα πρέπει να έχει μόνο ζυγούς αριθμούς", "Ο στόχος πρέπει να είναι κοντά στην αρχή"], "why": "Η δυαδική αναζήτηση αποκλείει τη μισή λίστα κάθε φορά, κάτι που δουλεύει μόνο αν τα στοιχεία είναι στη σειρά."}, {"q": "Στη δυαδική αναζήτηση, ποιο στοιχείο ελέγχεις πρώτο;", "a": "Το μεσαίο", "w": ["Το πρώτο", "Το τελευταίο", "Ένα τυχαίο"], "why": "Ελέγχοντας το μεσαίο αποκλείεις αμέσως τη μισή λίστα."}, {"q": "Δυαδική αναζήτηση: ο στόχος είναι το 40 και το μεσαίο στοιχείο είναι το 25. Τι γίνεται μετά;", "a": "Αποκλείεις το αριστερό μισό και ψάχνεις στο δεξί", "w": ["Αποκλείεις το δεξί μισό", "Ξεκινάς ξανά από το πρώτο στοιχείο", "Σταματάς, γιατί το 40 δεν υπάρχει"], "why": "Το 40 είναι μεγαλύτερο από το 25, άρα σε ταξινομημένη λίστα βρίσκεται στα δεξιά."}, {"q": "Περίπου πόσους ελέγχους χρειάζεται η δυαδική αναζήτηση για 1.000 ταξινομημένα στοιχεία στη χειρότερη περίπτωση;", "a": "10", "w": ["500", "1.000", "100"], "why": "Αν κόβεις το 1.000 στη μέση ξανά και ξανά, φτάνεις σε 1 στοιχείο σε περίπου 10 βήματα."}, {"q": "Τι κάνει ένας αλγόριθμος ταξινόμησης;", "a": "Βάζει τα στοιχεία σε σειρά", "w": ["Βρίσκει ένα στοιχείο", "Σβήνει τα διπλά στοιχεία", "Προσθέτει αριθμούς"], "why": "Η ταξινόμηση βάζει τα στοιχεία σε σειρά, π.χ. από τον μικρότερο στον μεγαλύτερο ή από το Α ως το Ω."}, {"q": "Στην ταξινόμηση φυσαλίδας, ποια στοιχεία συγκρίνονται;", "a": "Δύο γειτονικά στοιχεία", "w": ["Το πρώτο και το τελευταίο", "Κάθε στοιχείο με το μεσαίο", "Μόνο στοιχεία σε ζυγές θέσεις"], "why": "Η ταξινόμηση φυσαλίδας συγκρίνει γείτονες και τους ανταλλάσσει αν είναι σε λάθος σειρά."}, {"q": "Η ταξινόμηση φυσαλίδας (από μικρό σε μεγάλο) συγκρίνει το 9 και το 4. Τι γίνεται;", "a": "Ανταλλάσσονται", "w": ["Τίποτα", "Σβήνεται το 9", "Η ταξινόμηση σταματά"], "why": "Το 9 είναι μεγαλύτερο από το 4 και βρίσκεται αριστερά, άρα είναι σε λάθος σειρά και ανταλλάσσονται."}, {"q": "Μετά το πρώτο πέρασμα της ταξινόμησης φυσαλίδας (από μικρό σε μεγάλο), πού είναι ο μεγαλύτερος αριθμός;", "a": "Στο τέλος", "w": ["Στην αρχή", "Στη μέση", "Μπορεί να είναι οπουδήποτε"], "why": "Ο μεγαλύτερος αριθμός κερδίζει κάθε σύγκριση, οπότε ανεβαίνει σαν φυσαλίδα μέχρι το τέλος."}, {"q": "Πώς ξέρει η ταξινόμηση φυσαλίδας ότι η λίστα ταξινομήθηκε;", "a": "Ένα ολόκληρο πέρασμα δεν είχε καμία ανταλλαγή", "w": ["Έχει κάνει 10 περάσματα", "Ο πρώτος αριθμός είναι ο μικρότερος", "Ελέγχει το μεσαίο στοιχείο"], "why": "Αν δεν χρειάστηκε καμία ανταλλαγή, όλοι οι γείτονες είναι ήδη στη σωστή σειρά."}, {"q": "Ποιος αλγόριθμος σπάει τη λίστα σε μικρά κομμάτια και μετά τα ενώνει ξανά με τη σωστή σειρά;", "a": "Ταξινόμηση με συγχώνευση", "w": ["Ταξινόμηση φυσαλίδας", "Γραμμική αναζήτηση", "Ταξινόμηση με εισαγωγή"], "why": "Η ταξινόμηση με συγχώνευση χωρίζει τη λίστα και μετά συγχωνεύει τα ταξινομημένα κομμάτια."}, {"q": "Ποιος αλγόριθμος παίρνει κάθε στοιχείο με τη σειρά και το γλιστράει πίσω στη σωστή θέση;", "a": "Ταξινόμηση με εισαγωγή", "w": ["Ταξινόμηση με συγχώνευση", "Δυαδική αναζήτηση", "Ταξινόμηση φυσαλίδας"], "why": "Η ταξινόμηση με εισαγωγή χτίζει ένα ταξινομημένο κομμάτι ένα στοιχείο τη φορά, όπως όταν τακτοποιείς τα χαρτιά στο χέρι σου."}, {"q": "Ποιος είναι συνήθως ο πιο γρήγορος για μια μεγάλη, ανακατεμένη λίστα;", "a": "Ταξινόμηση με συγχώνευση", "w": ["Ταξινόμηση φυσαλίδας", "Ταξινόμηση με εισαγωγή", "Είναι όλοι ίδιοι"], "why": "Η ταξινόμηση με συγχώνευση χρειάζεται πολύ λιγότερες συγκρίσεις από τις άλλες δύο σε μεγάλες τυχαίες λίστες."}, {"q": "Ταξινόμησε τα 3, 1, 2 από τον μικρότερο στον μεγαλύτερο.", "a": "1, 2, 3", "w": ["3, 2, 1", "2, 1, 3", "1, 3, 2"], "why": "Από τον μικρότερο στον μεγαλύτερο σημαίνει αύξουσα σειρά: 1, 2, 3."}, {"q": "Γιατί οι υπολογιστές κρατούν συχνά τα δεδομένα ταξινομημένα;", "a": "Για να μπορούν να κάνουν γρήγορες αναζητήσεις, όπως τη δυαδική", "w": ["Τα ταξινομημένα δεδομένα πιάνουν λιγότερο χώρο", "Για να φαίνεται πιο ωραία η οθόνη", "Οι υπολογιστές δεν διαβάζουν αταξινόμητα δεδομένα"], "why": "Μια ταξινομημένη λίστα μπορεί να ψαχτεί με δυαδική αναζήτηση, που είναι πολύ πιο γρήγορη από τον έλεγχο κάθε στοιχείου."}]};
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function fmt(s,o){return String(s).replace(/\{(\w+)\}/g,function(m,k){return o[k]!==undefined?o[k]:m;});}
+  function pl(n,w){return n===1?w[0]:w[1];}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function uniq(n,lo,hi){var pool=[];for(var i=lo;i<=hi;i++)pool.push(i);return shuffle(pool).slice(0,n);}
+  function segInit(id,cb){var bs=$(id).querySelectorAll("button");for(var i=0;i<bs.length;i++)bs[i].addEventListener("click",function(){for(var k=0;k<bs.length;k++)bs[k].setAttribute("aria-pressed",bs[k]===this?"true":"false");cb(this);});}
+  function setFb(id,html,cls){$(id).innerHTML=html;$(id).className="fb"+(cls?" "+cls:"");}
+
+  /* =================== LINEAR SEARCH =================== */
+  var LN=12,L={},lSolved=0,lTimer=null;
+  function newLinear(){
+    stopL();L.nums=uniq(LN,1,99);L.present=Math.random()<0.75;
+    if(L.present)L.target=L.nums[rnd(0,LN-1)];else{do{L.target=rnd(1,99);}while(L.nums.indexOf(L.target)>=0);}
+    L.up={};L.checks=0;L.done=false;drawL();setFb("lFb",T.linStart,"");
+  }
+  function drawL(){
+    $("lTarget").textContent=fmt(T.findTarget,{t:L.target});
+    $("lChecks").textContent=fmt(T.checked,{n:L.checks});
+    var h="";for(var i=0;i<LN;i++){var up=L.up[i],hit=up&&L.nums[i]===L.target;
+      h+='<div class="cw"><button class="cd'+(up?" up":"")+(hit?" hit":"")+'" data-i="'+i+'" aria-label="'+fmt(T.cardAria,{n:i+1})+(up?": "+L.nums[i]:"")+'"'+(up||L.done?" disabled":"")+'>'+(up?L.nums[i]:"?")+'</button><div class="ix">'+(i+1)+'</div></div>';}
+    $("lCards").innerHTML=h;
+    var bs=$("lCards").querySelectorAll(".cd");for(var k=0;k<bs.length;k++)bs[k].addEventListener("click",function(){stopL();flipL(+this.getAttribute("data-i"));});
+    $("lNot").disabled=L.done;$("lScore").textContent=fmt(T.solved,{n:lSolved});
+  }
+  function flipL(i){
+    if(L.done||L.up[i])return;L.up[i]=1;L.checks++;var v=L.nums[i];
+    if(v===L.target){L.done=true;lSolved++;setFb("lFb",fmt(T.linFound,{t:L.target,n:L.checks,w:pl(L.checks,T.checkWord),total:LN}),"ok");}
+    else if(Object.keys(L.up).length===LN){L.done=true;lSolved++;setFb("lFb",fmt(T.linNotHereOk,{t:L.target,total:LN}),"ok");}
+    else setFb("lFb",fmt(T.linNo,{v:v,t:L.target}),"");
+    drawL();
+  }
+  function stopL(){if(lTimer){clearInterval(lTimer);lTimer=null;}}
+  $("lNot").addEventListener("click",function(){stopL();if(L.done)return;setFb("lFb",T.linNotSure,"no");});
+  $("lNew").addEventListener("click",newLinear);
+  $("lWatch").addEventListener("click",function(){
+    stopL();L.up={};L.checks=0;if(L.done){L.done=false;lSolved=Math.max(0,lSolved-1);}drawL();setFb("lFb",T.linWatch,"");var i=0;
+    lTimer=setInterval(function(){if(L.done||i>=LN){stopL();return;}flipL(i);i++;if(L.done){stopL();$("lFb").innerHTML+=" "+T.linWatchEnd;}},550);
+  });
+
+  /* =================== BINARY SEARCH =================== */
+  var B={size:15},bTimer=null;
+  function newBinary(){
+    stopB();B.nums=uniq(B.size,1,B.size===15?60:99).sort(function(a,b){return a-b;});
+    B.target=B.nums[rnd(0,B.size-1)];B.lo=0;B.hi=B.size-1;B.up={};B.g=0;B.done=false;B.mid=-1;
+    B.max=Math.round(Math.log(B.size+1)/Math.LN2);drawB();setFb("bFb",T.binStart,"");
+  }
+  function drawB(){
+    $("bTarget").textContent=fmt(T.findTarget,{t:B.target});
+    $("bGuesses").textContent=fmt(T.guesses,{n:B.g,max:B.max});
+    $("bLeft").textContent=B.done?"":fmt(T.binLeft,{n:B.hi-B.lo+1});
+    var h="";for(var i=0;i<B.size;i++){var up=B.up[i],out=i<B.lo||i>B.hi,hit=up&&B.nums[i]===B.target;
+      h+='<div class="cw"><button class="cd'+(up?" up":"")+(hit?" hit":"")+(out&&!hit?" out":"")+(i===B.mid&&!up?" mid":"")+'" data-i="'+i+'" aria-label="'+fmt(T.cardAria,{n:i+1})+(up?": "+B.nums[i]:"")+'"'+(up||out||B.done?" disabled":"")+'>'+(up?B.nums[i]:"?")+'</button><div class="ix">'+(i+1)+'</div></div>';}
+    $("bCards").innerHTML=h;
+    var bs=$("bCards").querySelectorAll(".cd");for(var k=0;k<bs.length;k++)bs[k].addEventListener("click",function(){stopB();pickB(+this.getAttribute("data-i"));});
+  }
+  function pickB(i){
+    if(B.done||i<B.lo||i>B.hi||B.up[i])return;B.up[i]=1;B.g++;B.mid=-1;var v=B.nums[i];
+    if(v===B.target){B.done=true;setFb("bFb",fmt(T.binFound,{t:B.target,n:B.g,w:pl(B.g,T.guessWord)})+" "+fmt(B.g<=B.max?T.binGood:T.binSlow,{max:B.max,size:B.size}),B.g<=B.max?"ok":"");}
+    else if(v<B.target){B.lo=i+1;setFb("bFb",fmt(T.binLow,{v:v,t:B.target}),"");}
+    else{B.hi=i-1;setFb("bFb",fmt(T.binHigh,{v:v,t:B.target}),"");}
+    drawB();
+  }
+  function stopB(){if(bTimer){clearInterval(bTimer);bTimer=null;}}
+  $("bNew").addEventListener("click",newBinary);
+  segInit("bSize",function(b){B.size=+b.getAttribute("data-n");newBinary();});
+  $("bWatch").addEventListener("click",function(){
+    stopB();B.lo=0;B.hi=B.size-1;B.up={};B.g=0;B.done=false;B.mid=-1;drawB();var phase=0;
+    function tick(){if(B.done){stopB();return;}
+      if(phase===0){B.mid=Math.floor((B.lo+B.hi)/2);setFb("bFb",fmt(T.binWatchNote,{a:B.lo+1,b:B.hi+1,m:B.mid+1}),"");drawB();phase=1;}
+      else{var m=B.mid;phase=0;pickB(m);if(B.done)stopB();}}
+    tick();bTimer=setInterval(tick,900);
+  });
+
+  /* =================== BUBBLE SORT =================== */
+  var U={n:6},uTimer=null;
+  function newBubble(){
+    stopU();U.a=uniq(U.n,1,20);if(isSorted(U.a))U.a.reverse();
+    U.j=0;U.end=U.n;U.pass=1;U.sp=0;U.c=0;U.s=0;U.done=false;drawU();setFb("uFb","","");
+  }
+  function isSorted(a){for(var i=1;i<a.length;i++)if(a[i-1]>a[i])return false;return true;}
+  function drawU(){
+    var mx=20,h="";
+    for(var i=0;i<U.n;i++){var cls=U.done||i>=U.end?" lock":(!U.done&&(i===U.j||i===U.j+1)?" cmp":"");
+      h+='<div class="bb'+cls+'"><b>'+U.a[i]+'</b><i style="height:'+Math.round(U.a[i]/mx*82+8)+'%"></i></div>';}
+    $("uBars").innerHTML=h;
+    $("uStats").textContent=fmt(T.bubStats,{p:U.pass,c:U.c,s:U.s});
+    $("uQ").textContent=U.done?"":fmt(T.bubCompare,{a:U.a[U.j],b:U.a[U.j+1]});
+    $("uSwap").disabled=$("uLeave").disabled=U.done;
+  }
+  function decideU(swap){
+    if(U.done)return;var a=U.a[U.j],b=U.a[U.j+1],should=a>b;
+    if(swap!==should){setFb("uFb",fmt(should?T.bubShouldSwap:T.bubShouldLeave,{a:a,b:b}),"no");return;}
+    U.c++;var msg;
+    if(swap){U.a[U.j]=b;U.a[U.j+1]=a;U.s++;U.sp++;msg=fmt(T.bubSwapped,{a:a,b:b});}else msg=fmt(T.bubLeft,{a:a,b:b});
+    U.j++;
+    if(U.j>=U.end-1){
+      var locked=U.a[U.end-1];U.end--;
+      if(U.sp===0){U.done=true;msg=fmt(T.bubDoneEarly,{p:U.pass,c:U.c,s:U.s});}
+      else if(U.end<=1){U.done=true;msg=fmt(T.bubDone,{p:U.pass,c:U.c,s:U.s});}
+      else{msg+=" "+fmt(T.bubPassEnd,{p:U.pass,v:locked});U.pass++;U.j=0;U.sp=0;}
+    }
+    setFb("uFb",msg,U.done?"ok":"ok");drawU();
+  }
+  function stopU(){if(uTimer){clearInterval(uTimer);uTimer=null;}}
+  $("uSwap").addEventListener("click",function(){stopU();decideU(true);});
+  $("uLeave").addEventListener("click",function(){stopU();decideU(false);});
+  $("uNew").addEventListener("click",newBubble);
+  segInit("uSize",function(b){U.n=+b.getAttribute("data-n");newBubble();});
+  $("uWatch").addEventListener("click",function(){stopU();if(U.done)newBubble();uTimer=setInterval(function(){if(U.done){stopU();return;}decideU(U.a[U.j]>U.a[U.j+1]);},800);});
+
+  /* =================== RACE =================== */
+  function opsBubble(a){a=a.slice();var ops=[],n=a.length;
+    for(var end=n;end>1;end--){var sw=false;for(var j=0;j<end-1;j++){ops.push({c:[j,j+1]});if(a[j]>a[j+1]){var t=a[j];a[j]=a[j+1];a[j+1]=t;ops.push({s:[j,j+1]});sw=true;}}if(!sw)break;}return ops;}
+  function opsInsertion(a){a=a.slice();var ops=[];
+    for(var i=1;i<a.length;i++){for(var j=i;j>0;j--){ops.push({c:[j-1,j]});if(a[j-1]>a[j]){var t=a[j];a[j]=a[j-1];a[j-1]=t;ops.push({s:[j-1,j]});}else break;}}return ops;}
+  function opsMerge(a){a=a.slice();var ops=[];
+    function sort(lo,hi){if(hi<=lo)return;var mid=Math.floor((lo+hi)/2);sort(lo,mid);sort(mid+1,hi);
+      var aux=a.slice(lo,hi+1),i=lo,j=mid+1,k=lo;
+      while(i<=mid&&j<=hi){ops.push({c:[i,j]});if(aux[i-lo]<=aux[j-lo]){a[k]=aux[i-lo];i++;}else{a[k]=aux[j-lo];j++;}ops.push({w:[k,a[k]]});k++;}
+      while(i<=mid){a[k]=aux[i-lo];ops.push({w:[k,a[k]]});i++;k++;}
+      while(j<=hi){a[k]=aux[j-lo];ops.push({w:[k,a[k]]});j++;k++;}}
+    sort(0,a.length-1);return ops;}
+  var ALGS=[{k:"bubble",f:opsBubble},{k:"insertion",f:opsInsertion},{k:"merge",f:opsMerge}];
+  var R={n:16,order:"random"},rTimer=null;
+  function startArr(){var n=R.n,a=[];for(var i=1;i<=n;i++)a.push(i);
+    if(R.order==="random")return shuffle(a);
+    if(R.order==="reversed")return a.reverse();
+    var sw=Math.max(1,Math.round(n/8));for(var k=0;k<sw;k++){var p=rnd(0,n-2);var t=a[p];a[p]=a[p+1];a[p+1]=t;}return a;}
+  function resetRace(){
+    stopR();R.base=startArr();R.lanes=ALGS.map(function(al){return {k:al.k,a:R.base.slice(),ops:al.f(R.base),p:0,c:0,hl:[],done:false,rank:0};});R.finished=0;R.tick=0;
+    $("rLanes").innerHTML=R.lanes.map(function(l,i){return '<div class="lane" id="lane'+i+'"><h3>'+T.alg[l.k]+'<span class="medal"></span></h3><div class="lbars"></div><div class="cc">'+fmt(T.comps,{n:'<span>0</span>'})+'</div></div>';}).join("");
+    R.lanes.forEach(drawLane);setFb("rFb",T.raceReady,"");$("rGo").disabled=false;
+  }
+  function drawLane(l,i){if(i===undefined)i=R.lanes.indexOf(l);var el=$("lane"+i),h="";
+    for(var k=0;k<l.a.length;k++)h+='<i'+(l.hl.indexOf(k)>=0?' class="c"':'')+' style="height:'+Math.round(l.a[k]/R.n*92+6)+'%"></i>';
+    el.querySelector(".lbars").innerHTML=h;el.querySelector(".cc span").textContent=l.c;el.className="lane"+(l.done?" done":"");
+    el.querySelector(".medal").textContent=l.rank?["🥇","🥈","🥉"][l.rank-1]:"";}
+  function stepLane(l){
+    if(l.done)return false;var seen=false;l.hl=[];
+    while(l.p<l.ops.length){var o=l.ops[l.p];if(o.c){if(seen)break;seen=true;l.c++;l.hl=o.c.slice();}
+      else if(o.s){var t=l.a[o.s[0]];l.a[o.s[0]]=l.a[o.s[1]];l.a[o.s[1]]=t;}
+      else if(o.w){l.a[o.w[0]]=o.w[1];}
+      l.p++;}
+    if(l.p>=l.ops.length){l.done=true;l.hl=[];return true;}return false;}
+  function stopR(){if(rTimer){clearInterval(rTimer);rTimer=null;}}
+  function raceTick(){
+    R.tick++;var justDone=[];
+    R.lanes.forEach(function(l){if(stepLane(l))justDone.push(l);});
+    if(justDone.length){var rank=R.finished+1;justDone.forEach(function(l){l.rank=Math.min(rank,3);});R.finished+=justDone.length;}
+    R.lanes.forEach(function(l,i){drawLane(l,i);});
+    if(R.finished>=R.lanes.length){stopR();summary();}
+  }
+  function summary(){
+    var best=Math.min.apply(null,R.lanes.map(function(l){return l.c;}));
+    var winners=R.lanes.filter(function(l){return l.c===best;}).map(function(l){return (T.algS||T.alg)[l.k];});
+    var head=winners.length>1?fmt(T.raceTie,{a:winners.join(T.and),n:best}):fmt(T.raceWin,{a:winners[0],n:best});
+    var line=R.lanes.map(function(l){return T.alg[l.k]+": "+l.c;}).join(" · ");
+    setFb("rFb","🏁 "+head+" <span class='muted'>("+line+")</span><br>"+T.raceTip[R.order],"ok");
+  }
+  $("rGo").addEventListener("click",function(){
+    if(R.finished>=R.lanes.length||R.tick>0)resetRace();
+    $("rGo").disabled=true;setFb("rFb",T.raceGo,"");var sp=R.n===8?260:R.n===16?90:28;rTimer=setInterval(raceTick,sp);
+  });
+  $("rReset").addEventListener("click",resetRace);
+  segInit("rSize",function(b){R.n=+b.getAttribute("data-n");resetRace();});
+  segInit("rOrder",function(b){R.order=b.getAttribute("data-o");resetRace();});
+
+  /* =================== QUIZ =================== */
+  var BANK=T.bank,QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){var it=qList[qi];$("qCount").textContent=fmt(T.qCount,{i:qi+1,n:QN});$("qBar").style.width=(qi/QN*100)+"%";$("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});}
+  function answerQ(o,btn){var it=qList[qi],bs=$("qChoices").children;for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent=T.qRight;$("qFb").className="fb ok";}else{btn.className="choice no";$("qFb").textContent=fmt(T.qWrong,{a:it.a});$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent=fmt(T.qScore,{n:qRight});$("qNext").style.display="";$("qNext").focus({preventScroll:true});}
+  $("qNext").addEventListener("click",function(){qi++;if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+    $("qEndText").textContent=(qRight===QN?T.qEnd[0]:qRight>=7?T.qEnd[1]:qRight>=4?T.qEnd[2]:T.qEnd[3])+" "+fmt(T.qScored,{r:qRight,n:QN})+" "+stars;$("qAgain").focus({preventScroll:true});}else showQ();});
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent=fmt(T.qScore,{n:0});$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* =================== TABS =================== */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
+    var p=t.getAttribute("data-p");
+    if(p!=="p-lin")stopL();if(p!=="p-bin")stopB();if(p!=="p-bub")stopU();if(p!=="p-race")stopR();
+    if(p==="p-bin"&&!started.b){started.b=1;newBinary();}
+    if(p==="p-bub"&&!started.u){started.u=1;newBubble();}
+    if(p==="p-race"&&!started.r){started.r=1;resetRace();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){tabs[ti].addEventListener("click",function(){setTab(this);});tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});}
+  newLinear();
+  window.__ss={L:L,B:B,U:U,R:R,ops:{bubble:opsBubble,insertion:opsInsertion,merge:opsMerge},flipL:flipL,pickB:pickB,decideU:decideU,newBinary:newBinary,newBubble:newBubble,resetRace:resetRace,raceTick:raceTick,BANK:BANK};
+})();
+</script>
+</body>
+</html>

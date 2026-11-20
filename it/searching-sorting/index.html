@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Searching and Sorting Algorithms Tool for Kids: Linear Search, Binary Search and Bubble Sort | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive searching and sorting tool for ages 10-14. Search cards one by one, find a number in a few guesses with binary search, step through a bubble sort, race bubble, insertion and merge sort, and take an auto-marked quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B;--hi:#5AA9FF;--lo:#FF8FB1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,.cd:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.tip b{color:var(--ink)}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.why{color:var(--muted);min-height:24px;margin:4px 0 14px}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+
+/* ---------- cards (search) ---------- */
+.target{display:inline-block;background:var(--navy);border:2px solid var(--gold);border-radius:14px;padding:6px 16px;font:800 24px "Baloo 2",sans-serif;color:var(--gold)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px;margin:14px 0}
+.cards.small{grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px}
+.cw{text-align:center}
+.cd{width:100%;aspect-ratio:3/4;border-radius:10px;border:2px solid #3B4F8F;background:repeating-linear-gradient(45deg,#24387A 0 8px,#2B4290 8px 16px);color:var(--ink);font:800 22px "Baloo 2",sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+.cards.small .cd{font-size:17px}
+.cd:hover:not(:disabled){transform:translateY(-3px)}
+.cd.up{background:#F5F7FF;color:#16213F;border-color:#F5F7FF}
+.cd.hit{background:var(--good);border-color:var(--good);color:#0B2A1C;transform:scale(1.08)}
+.cd.out{opacity:.28}
+.cd.mid{outline:3px dashed var(--gold);outline-offset:2px}
+.cd:disabled{cursor:default}
+.ix{font-size:11px;color:var(--muted)}
+.stat{font-weight:700;color:var(--gold)}
+table.cmp{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px}
+table.cmp th,table.cmp td{padding:7px 10px;text-align:center;border-bottom:1px solid #2C3B72}
+table.cmp th{color:var(--gold);font-family:"Baloo 2",sans-serif;font-size:16px}
+table.cmp td.win{color:var(--good);font-weight:800}
+
+/* ---------- bars (sort) ---------- */
+.bars{display:flex;align-items:flex-end;gap:8px;height:220px;background:#0B1530;border-radius:14px;padding:12px 12px 0;margin:12px 0}
+.bb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;transition:transform .25s}
+.bb i{display:block;width:100%;border-radius:8px 8px 0 0;background:var(--hi);transition:height .25s,background .2s}
+.bb b{font:800 20px "Baloo 2",sans-serif;margin-bottom:2px}
+.bb.cmp i{background:var(--gold)}
+.bb.cmp b{color:var(--gold)}
+.bb.lock i{background:var(--good)}
+.bb.lock b{color:var(--good)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.lane{background:var(--navy);border-radius:14px;padding:10px}
+.lane h3{font-size:18px;margin:0 0 4px;display:flex;justify-content:space-between;align-items:center}
+.lane .medal{font-size:24px}
+.lbars{display:flex;align-items:flex-end;gap:2px;height:130px;background:#0B1530;border-radius:10px;padding:6px 6px 0}
+.lbars i{flex:1;background:var(--hi);border-radius:3px 3px 0 0}
+.lbars i.c{background:var(--gold)}
+.lane.done .lbars i{background:var(--good)}
+.lane .cc{font-weight:700;color:var(--muted);font-size:14px;margin-top:4px}
+.lane .cc span{color:var(--ink)}
+.ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.ctl label{font-weight:700;color:var(--muted);margin-right:6px}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}.bars{height:180px}.bb b{font-size:16px}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/it/">IT &amp; Computing</a> › Searching and Sorting</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/searching-sorting/el/" lang="el" hreflang="el">Ελληνικά</a></div>
+  <h1>Searching and Sorting Algorithms 🔍</h1>
+  <p class="lead">Computers search and sort lists all the time, from finding a contact in your phone to ranking the scores in a game. Try the same <b>algorithms</b> a computer uses: search a row of cards, find a number in just a few guesses, sort numbers with <b>bubble sort</b>, then race three sorting algorithms to see which is fastest. <span style="white-space:nowrap">Ages 10-14.</span></p>
+
+  <div class="tabs" role="tablist" aria-label="Searching and sorting modes">
+    <button class="tab" role="tab" id="t-lin" aria-controls="p-lin" aria-selected="true" data-p="p-lin">Linear Search</button>
+    <button class="tab" role="tab" id="t-bin" aria-controls="p-bin" aria-selected="false" tabindex="-1" data-p="p-bin">Binary Search</button>
+    <button class="tab" role="tab" id="t-bub" aria-controls="p-bub" aria-selected="false" tabindex="-1" data-p="p-bub">Bubble Sort</button>
+    <button class="tab" role="tab" id="t-race" aria-controls="p-race" aria-selected="false" tabindex="-1" data-p="p-race">Sorting Race</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Quiz</button>
+  </div>
+
+  <!-- ============ LINEAR SEARCH ============ -->
+  <section class="panel on" id="p-lin" role="tabpanel" aria-labelledby="t-lin">
+    <h2>Linear search 🃏</h2>
+    <p>In a <b>linear search</b> you check the items <b>one at a time</b>, from start to end, until you find what you want. These cards are in <b>no particular order</b>. Tap cards to turn them over and find the target. Watch out: sometimes the number isn't there at all!</p>
+    <div class="row"><span class="target" id="lTarget"></span><span class="stat" id="lChecks"></span></div>
+    <div class="cards" id="lCards"></div>
+    <div class="fb" id="lFb" aria-live="polite"></div>
+    <div class="row"><button class="btn" id="lNot">It's not here!</button><button class="btn ghost" id="lWatch">Watch the computer</button><button class="btn ghost" id="lNew">New cards</button></div>
+    <p class="score" id="lScore"></p>
+  </section>
+
+  <!-- ============ BINARY SEARCH ============ -->
+  <section class="panel" id="p-bin" role="tabpanel" aria-labelledby="t-bin">
+    <h2>Binary search ✂️</h2>
+    <p>These cards are <b>sorted</b> from smallest to largest. In a <b>binary search</b> you check the <b>middle</b> card. If the target is bigger, rule out the left half. If it is smaller, rule out the right half. Every guess cuts the cards in half!</p>
+    <div class="row"><span class="muted" style="font-weight:700">Cards:</span><span class="seg" id="bSize"><button aria-pressed="true" data-n="15">15</button><button aria-pressed="false" data-n="31">31</button></span></div>
+    <div class="row"><span class="target" id="bTarget"></span><span class="stat" id="bGuesses"></span><span class="muted" id="bLeft"></span></div>
+    <div class="cards small" id="bCards"></div>
+    <div class="fb" id="bFb" aria-live="polite"></div>
+    <div class="row"><button class="btn ghost" id="bWatch">Watch the computer</button><button class="btn ghost" id="bNew">New cards</button></div>
+    <h3>How many checks in the worst case?</h3>
+    <table class="cmp"><thead><tr><th>Items in the list</th><th>Linear search</th><th>Binary search</th></tr></thead>
+    <tbody><tr><td>10</td><td>10</td><td class="win">4</td></tr><tr><td>100</td><td>100</td><td class="win">7</td></tr><tr><td>1,000</td><td>1,000</td><td class="win">10</td></tr><tr><td>1,000,000</td><td>1,000,000</td><td class="win">20</td></tr></tbody></table>
+    <p class="tip"><b>Binary search is much faster</b>, but it only works if the list is <b>sorted</b> first. That's one big reason computers sort things!</p>
+  </section>
+
+  <!-- ============ BUBBLE SORT ============ -->
+  <section class="panel" id="p-bub" role="tabpanel" aria-labelledby="t-bub">
+    <h2>Bubble sort 🫧</h2>
+    <p><b>Bubble sort</b> compares two <b>neighbours</b> at a time. If the left one is <b>bigger</b>, swap them. Then move one step to the right. After each <b>pass</b> through the list, the biggest unsorted number has bubbled to the end and is locked in place (green). Sort the numbers from smallest to largest.</p>
+    <div class="row"><span class="muted" style="font-weight:700">Numbers:</span><span class="seg" id="uSize"><button aria-pressed="true" data-n="6">6</button><button aria-pressed="false" data-n="8">8</button></span><span class="stat" id="uStats"></span></div>
+    <div class="bars" id="uBars"></div>
+    <p class="q" id="uQ" style="font-size:20px"></p>
+    <div class="row"><button class="btn" id="uSwap">⇄ Swap</button><button class="btn" id="uLeave">Leave them</button><button class="btn ghost" id="uWatch">Watch the computer</button><button class="btn ghost" id="uNew">New numbers</button></div>
+    <div class="fb" id="uFb" aria-live="polite"></div>
+  </section>
+
+  <!-- ============ RACE ============ -->
+  <section class="panel" id="p-race" role="tabpanel" aria-labelledby="t-race">
+    <h2>Sorting race 🏁</h2>
+    <p>Three algorithms sort the same numbers. Every tick, each one makes <b>one comparison</b>, so the algorithm that needs the fewest comparisons wins. <b>Insertion sort</b> takes each number in turn and slides it back into the right place. <b>Merge sort</b> splits the list into tiny pieces, then merges them back together in order. Try different start orders and see who wins!</p>
+    <div class="ctl">
+      <span><label>Numbers:</label><span class="seg" id="rSize"><button aria-pressed="false" data-n="8">8</button><button aria-pressed="true" data-n="16">16</button><button aria-pressed="false" data-n="32">32</button></span></span>
+      <span><label>Start order:</label><span class="seg" id="rOrder"><button aria-pressed="true" data-o="random">Random</button><button aria-pressed="false" data-o="nearly">Nearly sorted</button><button aria-pressed="false" data-o="reversed">Reversed</button></span></span>
+    </div>
+    <div class="row"><button class="btn" id="rGo">▶ Start race</button><button class="btn ghost" id="rReset">Reset</button></div>
+    <div class="lanes" id="rLanes"></div>
+    <div class="fb" id="rFb" aria-live="polite" style="margin-top:10px"></div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Searching and Sorting Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore"></span> · <span id="qCount"></span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox"><p class="q" id="qText"></p><div class="choices" id="qChoices"></div><div class="fb" id="qFb" aria-live="polite"></div><p class="why" id="qWhy"></p><button class="btn" id="qNext" style="display:none">Next question →</button></div>
+    <div id="qEnd" style="display:none"><p class="q" id="qEndText"></p><button class="btn" id="qAgain">Play again</button></div>
+  </section>
+
+  <p class="tip" style="margin-top:18px"><b>Want to know more?</b> Write your own step-by-step instructions with <a href="https://classroom.ellisknowledgestudio.com/it/robot-algorithms/">Algorithms: Program the Robot</a>, then learn about variables, if and loops with <a href="https://classroom.ellisknowledgestudio.com/it/coding-basics/">Coding Basics</a>.</p>
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  var T={"findTarget": "Find: {t}", "checked": "Cards checked: {n}", "cardAria": "Card {n}", "solved": "Rounds solved: {n}", "checkWord": ["check", "checks"], "guessWord": ["guess", "guesses"], "linStart": "Tap a card to check it.", "linNo": "{v} is not {t}. Keep checking!", "linFound": "✓ Found {t}! It took {n} {w}. With {total} cards, a linear search could need up to {total} checks.", "linNotSure": "✗ You can't be sure yet! There are still cards you haven't checked. A linear search has to look at every card before it can say \"not here\".", "linNotHereOk": "✓ Right: {t} is not in the list. You had to check all {total} cards to be sure. That's the worst case for a linear search.", "linWatch": "The computer checks card 1, then card 2, then card 3…", "linWatchEnd": "A computer does exactly this, just millions of times faster.", "guesses": "Guesses: {n} (most ever needed: {max})", "binLeft": "Cards still possible: {n}", "binStart": "Tap any card. The smart move is the middle one!", "binLow": "{v} is too small, so {t} must be further right. The cards on the left are ruled out.", "binHigh": "{v} is too big, so {t} must be further left. The cards on the right are ruled out.", "binFound": "✓ Found {t} in {n} {w}!", "binGood": "Binary search never needs more than {max} guesses for {size} cards.", "binSlow": "Always picking the middle card guarantees you'll find it in {max} guesses or fewer. Try again!", "binWatchNote": "The computer picks the middle of cards {a} to {b}: card {m}.", "bubStats": "Pass {p} · Comparisons: {c} · Swaps: {s}", "bubCompare": "Compare {a} and {b}. Is the left one bigger?", "bubShouldSwap": "✗ {a} is bigger than {b}, so they should swap. The bigger number moves right.", "bubShouldLeave": "✗ {a} is smaller than {b}, so they are already in order. Leave them.", "bubSwapped": "✓ Swapped: {a} was bigger than {b}.", "bubLeft": "✓ Left alone: {a} is smaller than {b}.", "bubPassEnd": "End of pass {p}: {v} is now locked in place.", "bubDoneEarly": "🎉 Sorted! Pass {p} had no swaps, so the computer knows the list is in order. Total: {c} comparisons and {s} swaps.", "bubDone": "🎉 Sorted after {p} passes, with {c} comparisons and {s} swaps.", "alg": {"bubble": "Bubble sort", "insertion": "Insertion sort", "merge": "Merge sort"}, "comps": "Comparisons: {n}", "raceReady": "Choose how many numbers and the start order, then press Start race.", "raceGo": "And they're off!", "raceWin": "{a} wins with {n} comparisons!", "raceTie": "It's a tie between {a}, with {n} comparisons each!", "and": " and ", "raceTip": {"random": "With mixed-up numbers, merge sort is usually fastest, and its lead grows as the list gets longer. Try 32 numbers!", "nearly": "When the list is nearly sorted, insertion sort hardly has to move anything, so it usually wins. Bubble sort can also stop early.", "reversed": "A reversed list is the worst case for bubble sort and insertion sort, because every pair is in the wrong order. Merge sort doesn't mind!"}, "qCount": "Question {i} of {n}", "qScore": "Score: {n}", "qRight": "✓ Correct!", "qWrong": "✗ Not quite. The answer is: {a}", "qEnd": ["Algorithm ace!", "Brilliant work!", "Good effort!", "Keep practising!"], "qScored": "You scored {r} out of {n}.", "bank": [{"q": "What is a linear search?", "a": "Checking items one at a time from the start", "w": ["Always checking the middle item", "Sorting the list first", "Guessing a random item"], "why": "A linear search goes through the list in order until it finds the target or reaches the end."}, {"q": "A list has 50 items. In the worst case, how many checks does a linear search need?", "a": "50", "w": ["1", "25", "6"], "why": "If the target is last, or not there at all, every item must be checked."}, {"q": "What must be true before you can use a binary search?", "a": "The list must be sorted", "w": ["The list must be short", "The list must contain only even numbers", "The target must be near the start"], "why": "Binary search rules out half the list each time, which only works if the items are in order."}, {"q": "In a binary search, which item do you check first?", "a": "The middle one", "w": ["The first one", "The last one", "A random one"], "why": "Checking the middle lets you rule out half of the list straight away."}, {"q": "Binary search: the target is 40 and the middle item is 25. What happens next?", "a": "Rule out the left half and search the right half", "w": ["Rule out the right half", "Start again from the first item", "Stop, because 40 is not there"], "why": "40 is bigger than 25, so in a sorted list it must be to the right."}, {"q": "About how many checks does a binary search need for 1,000 sorted items in the worst case?", "a": "10", "w": ["500", "1,000", "100"], "why": "Halving 1,000 again and again gets down to 1 item in about 10 steps."}, {"q": "What does a sorting algorithm do?", "a": "Puts items in order", "w": ["Finds one item", "Deletes repeated items", "Adds numbers together"], "why": "Sorting arranges items in order, such as smallest to largest or A to Z."}, {"q": "In bubble sort, which items are compared?", "a": "Two neighbouring items", "w": ["The first and last items", "Every item with the middle item", "Only items in even positions"], "why": "Bubble sort compares neighbours and swaps them if they are in the wrong order."}, {"q": "Bubble sort (smallest to largest) compares 9 and 4. What happens?", "a": "They swap", "w": ["Nothing", "9 is deleted", "The sort stops"], "why": "9 is bigger than 4 and is on the left, so they are in the wrong order and swap."}, {"q": "After the first pass of bubble sort (smallest to largest), where is the biggest number?", "a": "At the end", "w": ["At the start", "In the middle", "It could be anywhere"], "why": "The biggest number keeps winning its comparisons, so it bubbles all the way to the end."}, {"q": "How does bubble sort know when the list is sorted?", "a": "A whole pass has no swaps", "w": ["It has done 10 passes", "The first number is the smallest", "It checks the middle item"], "why": "If nothing needed swapping, every neighbour is already in order."}, {"q": "Which algorithm splits the list into tiny pieces and then merges them back together in order?", "a": "Merge sort", "w": ["Bubble sort", "Linear search", "Insertion sort"], "why": "Merge sort divides the list up, then merges sorted pieces together."}, {"q": "Which algorithm takes each item in turn and slides it back into the right place?", "a": "Insertion sort", "w": ["Merge sort", "Binary search", "Bubble sort"], "why": "Insertion sort builds a sorted section one item at a time, a bit like sorting a hand of playing cards."}, {"q": "Which is usually fastest for a long, mixed-up list?", "a": "Merge sort", "w": ["Bubble sort", "Insertion sort", "They are all the same"], "why": "Merge sort needs far fewer comparisons than bubble or insertion sort on big random lists."}, {"q": "Sort 3, 1, 2 from smallest to largest.", "a": "1, 2, 3", "w": ["3, 2, 1", "2, 1, 3", "1, 3, 2"], "why": "Smallest to largest means ascending order: 1, 2, 3."}, {"q": "Why do computers often keep data sorted?", "a": "So they can use fast searches like binary search", "w": ["Sorted data takes up less space", "It makes the screen look nicer", "Computers can't read unsorted data"], "why": "A sorted list can be searched with binary search, which is much faster than checking every item."}]};
+  function $(id){return document.getElementById(id);}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function fmt(s,o){return String(s).replace(/\{(\w+)\}/g,function(m,k){return o[k]!==undefined?o[k]:m;});}
+  function pl(n,w){return n===1?w[0]:w[1];}
+  function rnd(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+  function uniq(n,lo,hi){var pool=[];for(var i=lo;i<=hi;i++)pool.push(i);return shuffle(pool).slice(0,n);}
+  function segInit(id,cb){var bs=$(id).querySelectorAll("button");for(var i=0;i<bs.length;i++)bs[i].addEventListener("click",function(){for(var k=0;k<bs.length;k++)bs[k].setAttribute("aria-pressed",bs[k]===this?"true":"false");cb(this);});}
+  function setFb(id,html,cls){$(id).innerHTML=html;$(id).className="fb"+(cls?" "+cls:"");}
+
+  /* =================== LINEAR SEARCH =================== */
+  var LN=12,L={},lSolved=0,lTimer=null;
+  function newLinear(){
+    stopL();L.nums=uniq(LN,1,99);L.present=Math.random()<0.75;
+    if(L.present)L.target=L.nums[rnd(0,LN-1)];else{do{L.target=rnd(1,99);}while(L.nums.indexOf(L.target)>=0);}
+    L.up={};L.checks=0;L.done=false;drawL();setFb("lFb",T.linStart,"");
+  }
+  function drawL(){
+    $("lTarget").textContent=fmt(T.findTarget,{t:L.target});
+    $("lChecks").textContent=fmt(T.checked,{n:L.checks});
+    var h="";for(var i=0;i<LN;i++){var up=L.up[i],hit=up&&L.nums[i]===L.target;
+      h+='<div class="cw"><button class="cd'+(up?" up":"")+(hit?" hit":"")+'" data-i="'+i+'" aria-label="'+fmt(T.cardAria,{n:i+1})+(up?": "+L.nums[i]:"")+'"'+(up||L.done?" disabled":"")+'>'+(up?L.nums[i]:"?")+'</button><div class="ix">'+(i+1)+'</div></div>';}
+    $("lCards").innerHTML=h;
+    var bs=$("lCards").querySelectorAll(".cd");for(var k=0;k<bs.length;k++)bs[k].addEventListener("click",function(){stopL();flipL(+this.getAttribute("data-i"));});
+    $("lNot").disabled=L.done;$("lScore").textContent=fmt(T.solved,{n:lSolved});
+  }
+  function flipL(i){
+    if(L.done||L.up[i])return;L.up[i]=1;L.checks++;var v=L.nums[i];
+    if(v===L.target){L.done=true;lSolved++;setFb("lFb",fmt(T.linFound,{t:L.target,n:L.checks,w:pl(L.checks,T.checkWord),total:LN}),"ok");}
+    else if(Object.keys(L.up).length===LN){L.done=true;lSolved++;setFb("lFb",fmt(T.linNotHereOk,{t:L.target,total:LN}),"ok");}
+    else setFb("lFb",fmt(T.linNo,{v:v,t:L.target}),"");
+    drawL();
+  }
+  function stopL(){if(lTimer){clearInterval(lTimer);lTimer=null;}}
+  $("lNot").addEventListener("click",function(){stopL();if(L.done)return;setFb("lFb",T.linNotSure,"no");});
+  $("lNew").addEventListener("click",newLinear);
+  $("lWatch").addEventListener("click",function(){
+    stopL();L.up={};L.checks=0;if(L.done){L.done=false;lSolved=Math.max(0,lSolved-1);}drawL();setFb("lFb",T.linWatch,"");var i=0;
+    lTimer=setInterval(function(){if(L.done||i>=LN){stopL();return;}flipL(i);i++;if(L.done){stopL();$("lFb").innerHTML+=" "+T.linWatchEnd;}},550);
+  });
+
+  /* =================== BINARY SEARCH =================== */
+  var B={size:15},bTimer=null;
+  function newBinary(){
+    stopB();B.nums=uniq(B.size,1,B.size===15?60:99).sort(function(a,b){return a-b;});
+    B.target=B.nums[rnd(0,B.size-1)];B.lo=0;B.hi=B.size-1;B.up={};B.g=0;B.done=false;B.mid=-1;
+    B.max=Math.round(Math.log(B.size+1)/Math.LN2);drawB();setFb("bFb",T.binStart,"");
+  }
+  function drawB(){
+    $("bTarget").textContent=fmt(T.findTarget,{t:B.target});
+    $("bGuesses").textContent=fmt(T.guesses,{n:B.g,max:B.max});
+    $("bLeft").textContent=B.done?"":fmt(T.binLeft,{n:B.hi-B.lo+1});
+    var h="";for(var i=0;i<B.size;i++){var up=B.up[i],out=i<B.lo||i>B.hi,hit=up&&B.nums[i]===B.target;
+      h+='<div class="cw"><button class="cd'+(up?" up":"")+(hit?" hit":"")+(out&&!hit?" out":"")+(i===B.mid&&!up?" mid":"")+'" data-i="'+i+'" aria-label="'+fmt(T.cardAria,{n:i+1})+(up?": "+B.nums[i]:"")+'"'+(up||out||B.done?" disabled":"")+'>'+(up?B.nums[i]:"?")+'</button><div class="ix">'+(i+1)+'</div></div>';}
+    $("bCards").innerHTML=h;
+    var bs=$("bCards").querySelectorAll(".cd");for(var k=0;k<bs.length;k++)bs[k].addEventListener("click",function(){stopB();pickB(+this.getAttribute("data-i"));});
+  }
+  function pickB(i){
+    if(B.done||i<B.lo||i>B.hi||B.up[i])return;B.up[i]=1;B.g++;B.mid=-1;var v=B.nums[i];
+    if(v===B.target){B.done=true;setFb("bFb",fmt(T.binFound,{t:B.target,n:B.g,w:pl(B.g,T.guessWord)})+" "+fmt(B.g<=B.max?T.binGood:T.binSlow,{max:B.max,size:B.size}),B.g<=B.max?"ok":"");}
+    else if(v<B.target){B.lo=i+1;setFb("bFb",fmt(T.binLow,{v:v,t:B.target}),"");}
+    else{B.hi=i-1;setFb("bFb",fmt(T.binHigh,{v:v,t:B.target}),"");}
+    drawB();
+  }
+  function stopB(){if(bTimer){clearInterval(bTimer);bTimer=null;}}
+  $("bNew").addEventListener("click",newBinary);
+  segInit("bSize",function(b){B.size=+b.getAttribute("data-n");newBinary();});
+  $("bWatch").addEventListener("click",function(){
+    stopB();B.lo=0;B.hi=B.size-1;B.up={};B.g=0;B.done=false;B.mid=-1;drawB();var phase=0;
+    function tick(){if(B.done){stopB();return;}
+      if(phase===0){B.mid=Math.floor((B.lo+B.hi)/2);setFb("bFb",fmt(T.binWatchNote,{a:B.lo+1,b:B.hi+1,m:B.mid+1}),"");drawB();phase=1;}
+      else{var m=B.mid;phase=0;pickB(m);if(B.done)stopB();}}
+    tick();bTimer=setInterval(tick,900);
+  });
+
+  /* =================== BUBBLE SORT =================== */
+  var U={n:6},uTimer=null;
+  function newBubble(){
+    stopU();U.a=uniq(U.n,1,20);if(isSorted(U.a))U.a.reverse();
+    U.j=0;U.end=U.n;U.pass=1;U.sp=0;U.c=0;U.s=0;U.done=false;drawU();setFb("uFb","","");
+  }
+  function isSorted(a){for(var i=1;i<a.length;i++)if(a[i-1]>a[i])return false;return true;}
+  function drawU(){
+    var mx=20,h="";
+    for(var i=0;i<U.n;i++){var cls=U.done||i>=U.end?" lock":(!U.done&&(i===U.j||i===U.j+1)?" cmp":"");
+      h+='<div class="bb'+cls+'"><b>'+U.a[i]+'</b><i style="height:'+Math.round(U.a[i]/mx*82+8)+'%"></i></div>';}
+    $("uBars").innerHTML=h;
+    $("uStats").textContent=fmt(T.bubStats,{p:U.pass,c:U.c,s:U.s});
+    $("uQ").textContent=U.done?"":fmt(T.bubCompare,{a:U.a[U.j],b:U.a[U.j+1]});
+    $("uSwap").disabled=$("uLeave").disabled=U.done;
+  }
+  function decideU(swap){
+    if(U.done)return;var a=U.a[U.j],b=U.a[U.j+1],should=a>b;
+    if(swap!==should){setFb("uFb",fmt(should?T.bubShouldSwap:T.bubShouldLeave,{a:a,b:b}),"no");return;}
+    U.c++;var msg;
+    if(swap){U.a[U.j]=b;U.a[U.j+1]=a;U.s++;U.sp++;msg=fmt(T.bubSwapped,{a:a,b:b});}else msg=fmt(T.bubLeft,{a:a,b:b});
+    U.j++;
+    if(U.j>=U.end-1){
+      var locked=U.a[U.end-1];U.end--;
+      if(U.sp===0){U.done=true;msg=fmt(T.bubDoneEarly,{p:U.pass,c:U.c,s:U.s});}
+      else if(U.end<=1){U.done=true;msg=fmt(T.bubDone,{p:U.pass,c:U.c,s:U.s});}
+      else{msg+=" "+fmt(T.bubPassEnd,{p:U.pass,v:locked});U.pass++;U.j=0;U.sp=0;}
+    }
+    setFb("uFb",msg,U.done?"ok":"ok");drawU();
+  }
+  function stopU(){if(uTimer){clearInterval(uTimer);uTimer=null;}}
+  $("uSwap").addEventListener("click",function(){stopU();decideU(true);});
+  $("uLeave").addEventListener("click",function(){stopU();decideU(false);});
+  $("uNew").addEventListener("click",newBubble);
+  segInit("uSize",function(b){U.n=+b.getAttribute("data-n");newBubble();});
+  $("uWatch").addEventListener("click",function(){stopU();if(U.done)newBubble();uTimer=setInterval(function(){if(U.done){stopU();return;}decideU(U.a[U.j]>U.a[U.j+1]);},800);});
+
+  /* =================== RACE =================== */
+  function opsBubble(a){a=a.slice();var ops=[],n=a.length;
+    for(var end=n;end>1;end--){var sw=false;for(var j=0;j<end-1;j++){ops.push({c:[j,j+1]});if(a[j]>a[j+1]){var t=a[j];a[j]=a[j+1];a[j+1]=t;ops.push({s:[j,j+1]});sw=true;}}if(!sw)break;}return ops;}
+  function opsInsertion(a){a=a.slice();var ops=[];
+    for(var i=1;i<a.length;i++){for(var j=i;j>0;j--){ops.push({c:[j-1,j]});if(a[j-1]>a[j]){var t=a[j];a[j]=a[j-1];a[j-1]=t;ops.push({s:[j-1,j]});}else break;}}return ops;}
+  function opsMerge(a){a=a.slice();var ops=[];
+    function sort(lo,hi){if(hi<=lo)return;var mid=Math.floor((lo+hi)/2);sort(lo,mid);sort(mid+1,hi);
+      var aux=a.slice(lo,hi+1),i=lo,j=mid+1,k=lo;
+      while(i<=mid&&j<=hi){ops.push({c:[i,j]});if(aux[i-lo]<=aux[j-lo]){a[k]=aux[i-lo];i++;}else{a[k]=aux[j-lo];j++;}ops.push({w:[k,a[k]]});k++;}
+      while(i<=mid){a[k]=aux[i-lo];ops.push({w:[k,a[k]]});i++;k++;}
+      while(j<=hi){a[k]=aux[j-lo];ops.push({w:[k,a[k]]});j++;k++;}}
+    sort(0,a.length-1);return ops;}
+  var ALGS=[{k:"bubble",f:opsBubble},{k:"insertion",f:opsInsertion},{k:"merge",f:opsMerge}];
+  var R={n:16,order:"random"},rTimer=null;
+  function startArr(){var n=R.n,a=[];for(var i=1;i<=n;i++)a.push(i);
+    if(R.order==="random")return shuffle(a);
+    if(R.order==="reversed")return a.reverse();
+    var sw=Math.max(1,Math.round(n/8));for(var k=0;k<sw;k++){var p=rnd(0,n-2);var t=a[p];a[p]=a[p+1];a[p+1]=t;}return a;}
+  function resetRace(){
+    stopR();R.base=startArr();R.lanes=ALGS.map(function(al){return {k:al.k,a:R.base.slice(),ops:al.f(R.base),p:0,c:0,hl:[],done:false,rank:0};});R.finished=0;R.tick=0;
+    $("rLanes").innerHTML=R.lanes.map(function(l,i){return '<div class="lane" id="lane'+i+'"><h3>'+T.alg[l.k]+'<span class="medal"></span></h3><div class="lbars"></div><div class="cc">'+fmt(T.comps,{n:'<span>0</span>'})+'</div></div>';}).join("");
+    R.lanes.forEach(drawLane);setFb("rFb",T.raceReady,"");$("rGo").disabled=false;
+  }
+  function drawLane(l,i){if(i===undefined)i=R.lanes.indexOf(l);var el=$("lane"+i),h="";
+    for(var k=0;k<l.a.length;k++)h+='<i'+(l.hl.indexOf(k)>=0?' class="c"':'')+' style="height:'+Math.round(l.a[k]/R.n*92+6)+'%"></i>';
+    el.querySelector(".lbars").innerHTML=h;el.querySelector(".cc span").textContent=l.c;el.className="lane"+(l.done?" done":"");
+    el.querySelector(".medal").textContent=l.rank?["🥇","🥈","🥉"][l.rank-1]:"";}
+  function stepLane(l){
+    if(l.done)return false;var seen=false;l.hl=[];
+    while(l.p<l.ops.length){var o=l.ops[l.p];if(o.c){if(seen)break;seen=true;l.c++;l.hl=o.c.slice();}
+      else if(o.s){var t=l.a[o.s[0]];l.a[o.s[0]]=l.a[o.s[1]];l.a[o.s[1]]=t;}
+      else if(o.w){l.a[o.w[0]]=o.w[1];}
+      l.p++;}
+    if(l.p>=l.ops.length){l.done=true;l.hl=[];return true;}return false;}
+  function stopR(){if(rTimer){clearInterval(rTimer);rTimer=null;}}
+  function raceTick(){
+    R.tick++;var justDone=[];
+    R.lanes.forEach(function(l){if(stepLane(l))justDone.push(l);});
+    if(justDone.length){var rank=R.finished+1;justDone.forEach(function(l){l.rank=Math.min(rank,3);});R.finished+=justDone.length;}
+    R.lanes.forEach(function(l,i){drawLane(l,i);});
+    if(R.finished>=R.lanes.length){stopR();summary();}
+  }
+  function summary(){
+    var best=Math.min.apply(null,R.lanes.map(function(l){return l.c;}));
+    var winners=R.lanes.filter(function(l){return l.c===best;}).map(function(l){return (T.algS||T.alg)[l.k];});
+    var head=winners.length>1?fmt(T.raceTie,{a:winners.join(T.and),n:best}):fmt(T.raceWin,{a:winners[0],n:best});
+    var line=R.lanes.map(function(l){return T.alg[l.k]+": "+l.c;}).join(" · ");
+    setFb("rFb","🏁 "+head+" <span class='muted'>("+line+")</span><br>"+T.raceTip[R.order],"ok");
+  }
+  $("rGo").addEventListener("click",function(){
+    if(R.finished>=R.lanes.length||R.tick>0)resetRace();
+    $("rGo").disabled=true;setFb("rFb",T.raceGo,"");var sp=R.n===8?260:R.n===16?90:28;rTimer=setInterval(raceTick,sp);
+  });
+  $("rReset").addEventListener("click",resetRace);
+  segInit("rSize",function(b){R.n=+b.getAttribute("data-n");resetRace();});
+  segInit("rOrder",function(b){R.order=b.getAttribute("data-o");resetRace();});
+
+  /* =================== QUIZ =================== */
+  var BANK=T.bank,QN=10,qList=[],qi=0,qRight=0;
+  function showQ(){var it=qList[qi];$("qCount").textContent=fmt(T.qCount,{i:qi+1,n:QN});$("qBar").style.width=(qi/QN*100)+"%";$("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
+    var box=$("qChoices");box.innerHTML="";shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});}
+  function answerQ(o,btn){var it=qList[qi],bs=$("qChoices").children;for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
+    if(o===it.a){qRight++;$("qFb").textContent=T.qRight;$("qFb").className="fb ok";}else{btn.className="choice no";$("qFb").textContent=fmt(T.qWrong,{a:it.a});$("qFb").className="fb no";}
+    $("qWhy").textContent=it.why;$("qScore").textContent=fmt(T.qScore,{n:qRight});$("qNext").style.display="";$("qNext").focus({preventScroll:true});}
+  $("qNext").addEventListener("click",function(){qi++;if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+    $("qEndText").textContent=(qRight===QN?T.qEnd[0]:qRight>=7?T.qEnd[1]:qRight>=4?T.qEnd[2]:T.qEnd[3])+" "+fmt(T.qScored,{r:qRight,n:QN})+" "+stars;$("qAgain").focus({preventScroll:true});}else showQ();});
+  function startQuiz(){qList=shuffle(BANK).slice(0,QN);qi=0;qRight=0;$("qScore").textContent=fmt(T.qScore,{n:0});$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+
+  /* =================== TABS =================== */
+  var tabs=document.querySelectorAll(".tab"),started={};
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
+    var p=t.getAttribute("data-p");
+    if(p!=="p-lin")stopL();if(p!=="p-bin")stopB();if(p!=="p-bub")stopU();if(p!=="p-race")stopR();
+    if(p==="p-bin"&&!started.b){started.b=1;newBinary();}
+    if(p==="p-bub"&&!started.u){started.u=1;newBubble();}
+    if(p==="p-race"&&!started.r){started.r=1;resetRace();}
+    if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
+  }
+  for(var ti=0;ti<tabs.length;ti++){tabs[ti].addEventListener("click",function(){setTab(this);});tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});}
+  newLinear();
+  window.__ss={L:L,B:B,U:U,R:R,ops:{bubble:opsBubble,insertion:opsInsertion,merge:opsMerge},flipL:flipL,pickB:pickB,decideU:decideU,newBinary:newBinary,newBubble:newBubble,resetRace:resetRace,raceTick:raceTick,BANK:BANK};
+})();
+</script>
+</body>
+</html>

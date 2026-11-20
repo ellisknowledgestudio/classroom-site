@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Πώς Λειτουργεί το Διαδίκτυο: Πακέτα, Διευθύνσεις IP και Ασφάλεια, Δωρεάν Εργαλείο για Παιδιά | Ellis Knowledge Studio</title>
-<meta name="description" content="Δωρεάν διαδραστικό εργαλείο για το διαδίκτυο, για ηλικίες 9-13. Στείλε ένα μήνυμα σε πακέτα μέσα από δρομολογητές, δες πώς το DNS και οι διευθύνσεις IP βρίσκουν μια ιστοσελίδα, δοκίμασε πόσο ισχυρός είναι ένας κωδικός, εντόπισε κινδύνους στο διαδίκτυο και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
-<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/el/">
-<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/">
-<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/el/">
-<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/">
+<title>Λογικές Πύλες: Δωρεάν Προσομοιωτής για Μαθητές, AND, OR, NOT και Πίνακες Αληθείας | Ellis Knowledge Studio</title>
+<meta name="description" content="Δωρεάν διαδραστικό εργαλείο για λογικές πύλες, για ηλικίες 11-14. Γύρισε διακόπτες για να ανάψεις μια λάμπα μέσα από πύλες AND, OR, NOT, XOR, NAND και NOR, συμπλήρωσε πίνακες αληθείας, λύσε γρίφους με κυκλώματα και κάνε ένα κουίζ που διορθώνεται αυτόματα.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/it/logic-gates/el/">
+<link rel="alternate" hreflang="en" href="https://classroom.ellisknowledgestudio.com/it/logic-gates/">
+<link rel="alternate" hreflang="el" href="https://classroom.ellisknowledgestudio.com/it/logic-gates/el/">
+<link rel="alternate" hreflang="x-default" href="https://classroom.ellisknowledgestudio.com/it/logic-gates/">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
 <script>
@@ -40,80 +40,55 @@ h1{font-size:clamp(28px,6vw,42px)}
 .btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
 .btn.sm{padding:6px 12px;font-size:14px}
 .btn:disabled{opacity:.5;cursor:default}
-.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,input:focus-visible,.seg button:focus-visible,.step:focus-visible,.site:focus-visible,.rt:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.seg button:focus-visible,.sw:focus-visible,.tcell:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
 .center{text-align:center}
 .muted{color:var(--muted)}
 .mono{font-family:"DejaVu Sans Mono",Consolas,monospace}
 .tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
 .tip b{color:var(--ink)}
-input[type=text],input[type=password]{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:12px;padding:10px 14px;font:700 18px "DejaVu Sans Mono",Consolas,monospace;width:100%;max-width:420px}
-label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer}
-/* network */
-.netwrap{overflow-x:auto;border-radius:14px}
-.net{width:100%;min-width:560px;height:auto;display:block;background:var(--navy);border-radius:14px;touch-action:manipulation}
-.net .edge{stroke:#2C3B72;stroke-width:4}
-.net .edge.dead{stroke:#4a1d27;stroke-dasharray:6 6}
-.net .rt{cursor:pointer}
-.net .rt circle{fill:#22356B;stroke:var(--hi);stroke-width:3}
-.net .rt.dead circle{fill:#4a1d27;stroke:var(--bad)}
-.net .rt text{fill:var(--ink);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle;pointer-events:none}
-.net .rt .x{fill:var(--bad);font-size:26px;display:none}
-.net .rt.dead .x{display:block}
-.net .end rect{fill:#22356B;stroke:var(--gold);stroke-width:3}
-.net .end text{fill:var(--ink);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle}
-.net .end .ip{fill:var(--muted);font:700 11px "DejaVu Sans Mono",Consolas,monospace}
-.net .pk circle{stroke:#fff;stroke-width:2}
-.net .pk text{fill:var(--navy);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle;dominant-baseline:central}
-.pkts{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.pkt{background:var(--navy);border:2px solid #2C3B72;border-radius:12px;padding:6px 10px;min-width:96px;font-size:13px}
-.pkt .h{color:var(--muted);font-size:11px;font-family:"DejaVu Sans Mono",Consolas,monospace}
-.pkt .d{font:800 18px "DejaVu Sans Mono",Consolas,monospace;white-space:pre;color:var(--gold)}
-.pkt.got{border-color:var(--good)}
-.pkt.lost{border-color:var(--bad);opacity:.7}
-.pkt.wait .d{color:#44558C}
-.log{background:var(--navy);border-radius:12px;padding:8px 14px;min-height:40px;font-size:14px;color:var(--muted)}
-.log b{color:var(--ink)}
-.out{font:800 clamp(20px,5vw,28px) "DejaVu Sans Mono",Consolas,monospace;color:var(--good);min-height:40px;word-break:break-all}
-/* dns */
-.sites{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.site{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:12px;padding:6px 12px;font:700 15px "DejaVu Sans Mono",Consolas,monospace;cursor:pointer}
-.site[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
-.dns{width:100%;height:auto;display:block;background:var(--navy);border-radius:14px}
-.dns .bx rect{fill:#22356B;stroke:#2C3B72;stroke-width:3}
-.dns .bx.on rect{stroke:var(--gold);fill:#2A3F7C}
-.dns .bx text{fill:var(--ink);font:800 14px "Nunito Sans",sans-serif;text-anchor:middle}
-.dns .bx .s{font:400 12px "Nunito Sans",sans-serif;fill:var(--muted)}
-.dns .ar{stroke:#2C3B72;stroke-width:4;fill:none}
-.dns .ar.on{stroke:var(--gold)}
-.dns .msg{fill:var(--gold);font:800 13px "Nunito Sans",sans-serif;text-anchor:middle}
-.stepbox{background:var(--navy);border-radius:12px;padding:12px 16px;margin:10px 0;min-height:92px}
-.stepbox .n{color:var(--gold);font:800 15px "Baloo 2",sans-serif}
-.stepbox .t{font-size:17px;font-weight:700}
-.dots{display:flex;gap:6px;justify-content:center;margin:6px 0}
-.dots i{width:10px;height:10px;border-radius:50%;background:#2C3B72;display:block}
-.dots i.on{background:var(--gold)}
-.order{display:grid;gap:8px;margin:10px 0}
-.step{background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:12px;padding:10px 12px;text-align:left;font:700 15px "Nunito Sans",sans-serif;cursor:pointer;display:flex;gap:10px;align-items:center}
-.step .k{flex:none;width:30px;height:30px;border-radius:50%;background:#2C3B72;display:flex;align-items:center;justify-content:center;font:800 15px "Baloo 2",sans-serif}
-.step.done{border-color:var(--good);cursor:default}
-.step.done .k{background:var(--good);color:var(--navy)}
-.step.no{border-color:var(--bad)}
-/* safety */
-.meter{height:16px;background:var(--navy);border-radius:999px;overflow:hidden;margin:8px 0}
-.meter i{display:block;height:100%;width:0;transition:width .25s,background .25s}
-.pwres{font:800 22px "Baloo 2",sans-serif}
-.checks{list-style:none;padding:0;margin:8px 0;display:grid;gap:4px}
-.checks li{font-size:15px}
-.checks li.ok{color:var(--good)}.checks li.no{color:var(--muted)}
-.card{background:var(--navy);border-radius:14px;padding:16px;font-size:18px;font-weight:700;min-height:96px;display:flex;align-items:center}
-.sorts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.seg{display:inline-flex;flex-wrap:wrap;background:var(--navy);border-radius:999px;padding:4px;gap:4px}
+.seg button{background:transparent;color:var(--muted);border:0;border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--navy)}
+/* circuits */
+.circ{width:100%;height:auto;display:block;background:var(--navy);border-radius:14px}
+.circ .w{fill:none;stroke:#3A4B85;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+.circ .w.on{stroke:var(--gold)}
+.circ .g{fill:#22356B;stroke:var(--hi);stroke-width:3}
+.circ .gl{fill:var(--ink);font:800 14px "Nunito Sans",sans-serif;text-anchor:middle;pointer-events:none}
+.circ .dot{fill:#3A4B85}.circ .dot.on{fill:var(--gold)}
+.circ .sw{cursor:pointer}
+.circ .sw rect{fill:#22356B;stroke:var(--muted);stroke-width:3}
+.circ .sw.on rect{fill:var(--gold);stroke:var(--gold)}
+.circ .sw text{font:800 20px "Baloo 2",sans-serif;text-anchor:middle;fill:var(--ink);pointer-events:none}
+.circ .sw.on text{fill:var(--navy)}
+.circ .sw .v{font:800 13px "DejaVu Sans Mono",Consolas,monospace}
+.circ .bulb circle.b{fill:#2C3B72;stroke:var(--muted);stroke-width:3;transition:fill .2s}
+.circ .bulb.on circle.b{fill:#FFE27A;stroke:#FFF3B0}
+.circ .bulb .glow{fill:#FFE27A;opacity:0;transition:opacity .2s}
+.circ .bulb.on .glow{opacity:.35}
+.circ .bulb text{font:800 13px "DejaVu Sans Mono",Consolas,monospace;fill:var(--ink);text-anchor:middle}
+.ex{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:start}
+.tt{border-collapse:collapse;margin:8px auto;font:700 18px "DejaVu Sans Mono",Consolas,monospace}
+.tt th{background:var(--navy);color:var(--muted);font:800 14px "Nunito Sans",sans-serif;padding:6px 14px}
+.tt td{border:2px solid #2C3B72;padding:6px 16px;text-align:center}
+.tt tr.cur td{background:#3A3216;border-color:var(--gold)}
+.tt td.o{color:var(--gold)}
+.desc{background:var(--navy);border-radius:12px;padding:10px 14px;margin:10px 0}
+.desc b.n{color:var(--gold);font:800 20px "Baloo 2",sans-serif}
+.tcell{background:var(--navy2);color:var(--ink);border:2px dashed var(--muted);border-radius:8px;width:48px;height:36px;font:800 18px "DejaVu Sans Mono",Consolas,monospace;cursor:pointer}
+.tcell.ok{border:2px solid var(--good);background:#1d4a3a}
+.tcell.no{border:2px solid var(--bad);background:#4a1d27}
+.tcell:disabled{cursor:default}
+.expr{font:800 20px "DejaVu Sans Mono",Consolas,monospace;color:var(--gold);text-align:center;margin:6px 0}
+.found{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 0;min-height:30px}
+.found span{background:#1d4a3a;border:2px solid var(--good);border-radius:8px;padding:2px 8px;font:700 14px "DejaVu Sans Mono",Consolas,monospace}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
 .choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
 .choice.ok{border-color:var(--good);background:#1d4a3a}
 .choice.no{border-color:var(--bad);background:#4a1d27}
 .choice:disabled{cursor:default}
-.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
 .fb{min-height:28px;font-weight:700}
 .fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
 .why{color:var(--muted);min-height:24px;margin:4px 0 14px}
@@ -121,110 +96,88 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
 .bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
 .bar i{display:block;height:100%;width:0;background:var(--gold)}
 .shop{margin:24px 0;text-align:center}
-@media (max-width:520px){.choices{grid-template-columns:1fr}.pkt{min-width:80px}}
+@media (max-width:720px){.ex{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Πώς Λειτουργεί το Διαδίκτυο</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/how-the-internet-works/" lang="en" hreflang="en">English</a></div>
-  <h1>Πώς Λειτουργεί το Διαδίκτυο 🌐</h1>
-  <p class="lead">Το διαδίκτυο είναι ένα τεράστιο δίκτυο από υπολογιστές συνδεδεμένους μεταξύ τους. Στείλε ένα μήνυμα και δες το να χωρίζεται σε πακέτα που τρέχουν μέσα από δρομολογητές, μάθε πώς ο φυλλομετρητής σου βρίσκει μια ιστοσελίδα, δοκίμασε πόσο ισχυρός είναι ένας κωδικός και μάθε να μένεις ασφαλής στο διαδίκτυο. <span style="white-space:nowrap">Ηλικίες 9-13.</span></p>
+  <div class="top"><nav class="crumbs" aria-label="Διαδρομή"><a href="https://classroom.ellisknowledgestudio.com/">Αρχική</a> › <a href="https://classroom.ellisknowledgestudio.com/it/el/">Πληροφορική</a> › Λογικές Πύλες</nav><a class="lang" href="https://classroom.ellisknowledgestudio.com/it/logic-gates/" lang="en" hreflang="en">English</a></div>
+  <h1>Λογικές Πύλες 💡</h1>
+  <p class="lead">Μέσα σε κάθε τσιπ υπολογιστή υπάρχουν δισεκατομμύρια μικροσκοπικές λογικές πύλες. Κάθε πύλη παίρνει εισόδους που είναι αναμμένες (1) ή σβηστές (0) και δίνει μία έξοδο. Γύρισε τους διακόπτες για να ανάψεις τη λάμπα, συμπλήρωσε πίνακες αληθείας και λύσε γρίφους με κυκλώματα. <span style="white-space:nowrap">Ηλικίες 11-14.</span></p>
 
-  <div class="tabs" role="tablist" aria-label="Λειτουργίες διαδικτύου">
-    <button class="tab" role="tab" id="t-pk" aria-controls="pk" aria-selected="true" data-p="pk">Στείλε Μήνυμα</button>
-    <button class="tab" role="tab" id="t-dns" aria-controls="dns" aria-selected="false" tabindex="-1" data-p="dns">Επισκέψου μια Ιστοσελίδα</button>
-    <button class="tab" role="tab" id="t-safe" aria-controls="safe" aria-selected="false" tabindex="-1" data-p="safe">Ασφάλεια στο Διαδίκτυο</button>
+  <div class="tabs" role="tablist" aria-label="Λειτουργίες λογικών πυλών">
+    <button class="tab" role="tab" id="t-ex" aria-controls="ex" aria-selected="true" data-p="ex">Εξερευνητής Πυλών</button>
+    <button class="tab" role="tab" id="t-tt" aria-controls="tt" aria-selected="false" tabindex="-1" data-p="tt">Πίνακες Αληθείας</button>
+    <button class="tab" role="tab" id="t-lb" aria-controls="lb" aria-selected="false" tabindex="-1" data-p="lb">Άναψε τη Λάμπα</button>
     <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Κουίζ</button>
   </div>
 
-  <!-- ============ PACKETS ============ -->
-  <section class="panel on" id="pk" role="tabpanel" aria-labelledby="t-pk">
-    <h2>Τα μηνύματα ταξιδεύουν σε πακέτα</h2>
-    <p>Τα δεδομένα δεν στέλνονται στο διαδίκτυο σε ένα μεγάλο κομμάτι. Κόβονται σε μικρά <b>πακέτα</b>. Κάθε πακέτο έχει ετικέτα με το πού πηγαίνει, από πού ήρθε και τον αριθμό του. Οι <b>δρομολογητές</b> (routers) προωθούν τα πακέτα και κάθε πακέτο μπορεί να πάρει διαφορετική διαδρομή.</p>
-    <label for="msg" class="muted" style="font-weight:700">Γράψε ένα μήνυμα (ως 24 γράμματα)</label>
-    <div class="row" style="margin-top:4px">
-      <input type="text" id="msg" maxlength="24" value="ΣΥΝΑΝΤΗΣΗ ΣΤΟ ΠΑΡΚΟ" autocomplete="off" spellcheck="false">
-      <button class="btn" id="send">Στείλ' το! 🚀</button>
-    </div>
-    <div class="row">
-      <label class="chk"><input type="checkbox" id="lose"> Χάσε ένα πακέτο στον δρόμο</label>
-      <button class="btn ghost sm" id="fix">Επισκεύασε όλους τους δρομολογητές</button>
-    </div>
-    <div class="netwrap"><svg class="net" id="net" viewBox="0 0 640 300" role="img" aria-label="Ένα δίκτυο: ο υπολογιστής σου αριστερά, επτά δρομολογητές στη μέση και ο διακομιστής δεξιά. Πάτησε έναν δρομολογητή για να τον χαλάσεις ή να τον επισκευάσεις."></svg></div>
-    <p class="muted center" style="font-size:14px;margin:6px 0">Πάτησε έναν δρομολογητή για να τον χαλάσεις (ή να τον επισκευάσεις ξανά). Τα πακέτα θα βρουν άλλο δρόμο.</p>
-    <h3>Πακέτα</h3>
-    <div class="pkts" id="pkts"></div>
-    <div class="log" id="log" aria-live="polite">Πάτησε <b>Στείλ' το!</b> για να στείλεις το μήνυμά σου.</div>
-    <h3>Μήνυμα που έφτασε στον διακομιστή</h3>
-    <div class="out" id="outMsg" aria-live="polite"></div>
-    <p class="tip"><b>Γιατί πακέτα;</b> Τα μικρά πακέτα μοιράζονται το δίκτυο δίκαια και, αν χαθεί ένα, μόνο αυτό το πακέτο πρέπει να ξανασταλεί. Αν χαλάσει ένας δρομολογητής, τα πακέτα απλώς πάνε από άλλο δρόμο, έτσι το διαδίκτυο συνεχίζει να λειτουργεί.</p>
-  </section>
-
-  <!-- ============ DNS ============ -->
-  <section class="panel" id="dns" role="tabpanel" aria-labelledby="t-dns">
-    <h2>Πώς ο φυλλομετρητής σου βρίσκει μια ιστοσελίδα</h2>
-    <p>Κάθε υπολογιστής στο διαδίκτυο έχει μια <b>διεύθυνση IP</b>: τέσσερις αριθμούς όπως <span class="mono">198.51.100.7</span>. Οι άνθρωποι προτιμούν τα ονόματα, γι' αυτό ένας <b>διακομιστής DNS</b> λειτουργεί σαν τον τηλεφωνικό κατάλογο του διαδικτύου και μετατρέπει το όνομα μιας ιστοσελίδας στη διεύθυνση IP της.</p>
-    <p class="muted" style="margin-bottom:0">Διάλεξε μια ιστοσελίδα για να επισκεφτείς:</p>
-    <div class="sites" id="sites" role="group" aria-label="Ιστοσελίδες"></div>
-    <svg class="dns" id="dnsSvg" viewBox="0 0 640 230" role="img" aria-label="Διάγραμμα με τη συσκευή σου, έναν διακομιστή DNS και έναν διακομιστή ιστού"></svg>
-    <div class="dots" id="dots" aria-hidden="true"></div>
-    <div class="stepbox" aria-live="polite"><div class="n" id="sN"></div><div class="t" id="sT"></div><div class="muted" id="sX"></div></div>
-    <div class="row" style="justify-content:center">
-      <button class="btn ghost sm" id="sPrev">← Πίσω</button>
-      <button class="btn" id="sNext">Επόμενο βήμα →</button>
-    </div>
-    <h3 style="margin-top:22px">Βάλ' τα σε σειρά 🔢</h3>
-    <p>Πάτησε τα βήματα με τη σωστή σειρά, από το να γράψεις τη διεύθυνση ως το να δεις τη σελίδα. <span class="score" id="oScore"></span></p>
-    <div class="order" id="order"></div>
-    <div class="fb" id="oFb" aria-live="polite"></div>
-    <button class="btn sm" id="oAgain">Ανακάτεμα ξανά</button>
-    <p class="tip" style="margin-top:14px"><b>Το ήξερες;</b> Καθένας από τους τέσσερις αριθμούς μιας διεύθυνσης IP πηγαίνει από 0 ως 255. Αυτό είναι ακριβώς ένα byte, οπότε μια τέτοια διεύθυνση IP έχει μήκος 32 bit.</p>
-  </section>
-
-  <!-- ============ SAFETY ============ -->
-  <section class="panel" id="safe" role="tabpanel" aria-labelledby="t-safe">
-    <h2>Η δύναμη του κωδικού 🔐</h2>
-    <p>Ένας ισχυρός κωδικός είναι μεγάλος και δύσκολος να μαντέψει κανείς. Δοκίμασε μερικούς <b>φανταστικούς</b> κωδικούς για να δεις πόσο θα χρειαζόταν ένας υπολογιστής για να τους μαντέψει. <b>Μη γράψεις ποτέ αληθινό κωδικό εδώ</b> ή οπουδήποτε δεν εμπιστεύεσαι. (Ο έλεγχος γίνεται μόνο στη συσκευή σου και τίποτα δεν στέλνεται πουθενά.)</p>
-    <label for="pw" class="muted" style="font-weight:700">Δοκίμασε έναν φανταστικό κωδικό</label>
-    <div class="row" style="margin-top:4px">
-      <input type="text" id="pw" autocomplete="off" spellcheck="false" placeholder="π.χ. mov-tigri-synnefo">
-    </div>
-    <div class="meter" aria-hidden="true"><i id="pwBar"></i></div>
-    <div class="pwres" id="pwRes" aria-live="polite">Γράψε έναν κωδικό για να τον δοκιμάσεις.</div>
-    <div class="muted" id="pwTime"></div>
-    <ul class="checks" id="pwChecks"></ul>
-    <div class="row">
-      <span class="muted">Δοκίμασε:</span>
-      <button class="btn ghost sm" data-try="password">password</button>
-      <button class="btn ghost sm" data-try="Fluffy2015">Fluffy2015</button>
-      <button class="btn ghost sm" data-try="mov-tigri-synnefo">mov-tigri-synnefo</button>
-      <button class="btn ghost sm" data-try="Fengari!Toursi7Pyravlos">Fengari!Toursi7Pyravlos</button>
-    </div>
-    <p class="tip"><b>Συμβουλή:</b> ένωσε τρεις τυχαίες λέξεις μεταξύ τους, όπως <span class="mono">mov-tigri-synnefo</span>. Είναι μεγάλος, εύκολος να τον θυμάσαι και πολύ δύσκολος να τον μαντέψει κανείς. Χρησιμοποίησε διαφορετικό κωδικό για κάθε λογαριασμό και μην τον πεις ποτέ σε φίλους.</p>
-
-    <h2 style="margin-top:24px">Ασφαλές ή όχι; 🛡️</h2>
-    <p>Διάβασε κάθε κατάσταση. Είναι ασφαλές ή όχι; <span class="score" id="sfScore">Βαθμός: 0</span> · <span id="sfCount"></span></p>
-    <div id="sfBox">
-      <div class="card" id="sfCard"></div>
-      <div class="sorts">
-        <button class="choice" id="sfSafe">✅ Ασφαλές</button>
-        <button class="choice" id="sfNot">⛔ Μη ασφαλές</button>
+  <!-- ============ EXPLORER ============ -->
+  <section class="panel on" id="ex" role="tabpanel" aria-labelledby="t-ex">
+    <h2>Γνώρισε τις πύλες</h2>
+    <div class="row"><div class="seg" role="group" aria-label="Διάλεξε πύλη" id="exGates"></div></div>
+    <div class="ex">
+      <div>
+        <svg class="circ" id="exSvg" viewBox="0 0 600 260" role="img" aria-label="Ένα κύκλωμα με διακόπτες, μια λογική πύλη και μια λάμπα"></svg>
+        <p class="muted center" style="font-size:14px;margin:6px 0">Πάτησε τους διακόπτες για να τους ανάψεις (1) και να τους σβήσεις (0).</p>
       </div>
-      <div class="fb" id="sfFb" aria-live="polite"></div>
-      <p class="why" id="sfWhy"></p>
-      <button class="btn" id="sfNext" style="display:none">Επόμενο →</button>
+      <div>
+        <table class="tt" id="exTT" aria-label="Πίνακας αληθείας"></table>
+      </div>
     </div>
-    <div id="sfEnd" style="display:none">
-      <p class="q" id="sfEndText"></p>
-      <button class="btn" id="sfAgain">Παίξε ξανά</button>
+    <div class="desc" id="exDesc" aria-live="polite"></div>
+    <p class="tip"><b>1 και 0:</b> στη λογική, το 1 σημαίνει αναμμένο ή αληθές και το 0 σβηστό ή ψευδές. Είναι το ίδιο 1 και 0 που χρησιμοποιεί το δυαδικό σύστημα, γιατί μέσα σε ένα τσιπ κάθε πύλη είναι φτιαγμένη από μικροσκοπικούς διακόπτες-τρανζίστορ.</p>
+  </section>
+
+  <!-- ============ TRUTH TABLES ============ -->
+  <section class="panel" id="tt" role="tabpanel" aria-labelledby="t-tt">
+    <h2>Συμπλήρωσε τον πίνακα αληθείας</h2>
+    <p>Ένας <b>πίνακας αληθείας</b> δείχνει την έξοδο για κάθε πιθανό συνδυασμό εισόδων. Πάτησε κάθε κουτί εξόδου για να διαλέξεις 0 ή 1 και μετά πάτησε Έλεγχος. <span class="score" id="fScore">Σωστοί πίνακες: 0</span></p>
+    <div class="row"><div class="seg" role="group" aria-label="Πύλη για συμπλήρωση" id="fGates"></div></div>
+    <div class="desc center" id="fName"></div>
+    <table class="tt" id="fTT"></table>
+    <div class="row" style="justify-content:center">
+      <button class="btn" id="fCheck">Έλεγχος</button>
+      <button class="btn ghost sm" id="fNext">Επόμενη πύλη →</button>
     </div>
-    <p class="tip"><b>Αν κάτι στο διαδίκτυο σε ανησυχεί</b>, σταμάτα, μην απαντήσεις και πες το σε έναν ενήλικα που εμπιστεύεσαι, όπως έναν γονιό, κηδεμόνα ή δάσκαλο.</p>
+    <div class="fb center" id="fFb" aria-live="polite"></div>
+
+    <h2 style="margin-top:24px">Η μυστηριώδης πύλη 🕵️</h2>
+    <p>Κοίτα τον πίνακα αληθείας. Ποια πύλη είναι; <span class="score" id="mScore">Βαθμός: 0</span> · <span id="mCount"></span></p>
+    <div id="mBox">
+      <table class="tt" id="mTT"></table>
+      <div class="choices" id="mChoices"></div>
+      <div class="fb" id="mFb" aria-live="polite"></div>
+      <p class="why" id="mWhy"></p>
+      <button class="btn" id="mNext" style="display:none">Επόμενο →</button>
+    </div>
+    <div id="mEnd" style="display:none">
+      <p class="q" id="mEndText"></p>
+      <button class="btn" id="mAgain">Παίξε ξανά</button>
+    </div>
+  </section>
+
+  <!-- ============ LIGHT THE BULB ============ -->
+  <section class="panel" id="lb" role="tabpanel" aria-labelledby="t-lb">
+    <h2>Άναψε τη λάμπα</h2>
+    <p>Κάθε κύκλωμα ενώνει δύο ή τρεις πύλες. Γύρισε τους διακόπτες ώσπου να ανάψει η λάμπα. Μετά προσπάθησε να βρεις <b>όλους</b> τους τρόπους να την ανάψεις. <span class="score" id="lScore"></span></p>
+    <div class="row" style="justify-content:space-between">
+      <span class="q" id="lTitle" style="margin:0"></span>
+      <span><button class="btn ghost sm" id="lPrev">← Πίσω</button> <button class="btn sm" id="lNext">Επόμενο κύκλωμα →</button></span>
+    </div>
+    <div class="expr" id="lExpr"></div>
+    <svg class="circ" id="lSvg" viewBox="0 0 640 300" role="img" aria-label="Γρίφος κυκλώματος"></svg>
+    <div class="fb center" id="lFb" aria-live="polite"></div>
+    <p class="muted center" style="margin:4px 0">Τρόποι που βρήκες για να ανάψει η λάμπα:</p>
+    <div class="found" id="lFound"></div>
+    <p class="tip"><b>Πώς το διαβάζεις:</b> δούλεψε από αριστερά προς τα δεξιά. Βρες την έξοδο των πρώτων πυλών και μετά χρησιμοποίησέ τες ως εισόδους στην επόμενη πύλη. Η έκφραση πάνω από το κύκλωμα δείχνει το ίδιο πράγμα με λέξεις.</p>
   </section>
 
   <!-- ============ QUIZ ============ -->
   <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
-    <h2>Κουίζ: Πώς Λειτουργεί το Διαδίκτυο</h2>
+    <h2>Κουίζ Λογικών Πυλών</h2>
     <p class="muted">10 ερωτήσεις. <span class="score" id="qScore">Βαθμός: 0</span> · <span id="qCount">Ερώτηση 1 από 10</span></p>
     <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
     <div id="qBox">
@@ -240,7 +193,7 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
     </div>
   </section>
 
-  <p class="tip" style="margin-top:18px"><b>Θέλεις να μάθεις περισσότερα;</b> Δες τι γίνεται μέσα σε έναν υπολογιστή στο <a href="https://classroom.ellisknowledgestudio.com/it/how-computers-work/el/">Πώς Λειτουργεί ένας Υπολογιστής</a> ή μάθε πώς όλα τα δεδομένα γίνονται 1 και 0 στο <a href="https://classroom.ellisknowledgestudio.com/it/binary/el/">Δυαδικό σύστημα: 1 και 0</a>.</p>
+  <p class="tip" style="margin-top:18px"><b>Θέλεις να μάθεις περισσότερα;</b> Οι λογικές πύλες δουλεύουν με 1 και 0, οπότε δοκίμασε το <a href="https://classroom.ellisknowledgestudio.com/it/binary/el/">Δυαδικό σύστημα: 1 και 0</a> και μετά δες πώς οι προγραμματιστές γράφουν τα δυαδικά στο <a href="https://classroom.ellisknowledgestudio.com/it/hexadecimal/el/">Δεκαεξαδικό: Μετράμε σε 16άδες</a>.</p>
 
   <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Δες τα εκτυπώσιμα πακέτα ασκήσεων στο κατάστημα →</a></p>
 </div>
@@ -248,303 +201,236 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
 (function(){
   function $(id){return document.getElementById(id);}
   function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-  function rnd(lo,hi){return lo+Math.floor(Math.random()*(hi-lo+1));}
   var NS="http://www.w3.org/2000/svg";
   function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
 
-  /* ---------- packets ---------- */
-  var MY_IP="203.0.113.25",SV_IP="198.51.100.7";
-  var N={PC:[58,150],R1:[180,70],R2:[180,230],R3:[320,45],R4:[320,150],R5:[320,255],R6:[460,90],R7:[460,210],SV:[585,150]};
-  var EDGES=[["PC","R1"],["PC","R2"],["R1","R3"],["R1","R4"],["R2","R4"],["R2","R5"],["R3","R6"],["R4","R6"],["R4","R7"],["R5","R7"],["R6","SV"],["R7","SV"]];
-  var PATHS=[["PC","R1","R3","R6","SV"],["PC","R1","R4","R6","SV"],["PC","R1","R4","R7","SV"],["PC","R2","R4","R6","SV"],["PC","R2","R4","R7","SV"],["PC","R2","R5","R7","SV"]];
-  var COLS=["#F4B942","#5AA9FF","#FF8FB1","#4CC38A","#C39BFF","#FF9F5A"];
-  var dead={},edgeEls={},rtEls={},svg=$("net"),pkLayer;
-  function drawNet(){
-    svg.innerHTML="";
-    EDGES.forEach(function(e){var a=N[e[0]],b=N[e[1]];edgeEls[e.join("-")]=el("line",{"class":"edge",x1:a[0],y1:a[1],x2:b[0],y2:b[1]},svg);});
-    ["PC","SV"].forEach(function(k){
-      var g=el("g",{"class":"end"},svg),p=N[k];
-      el("rect",{x:p[0]-52,y:p[1]-30,width:104,height:60,rx:12},g);
-      var t=el("text",{x:p[0],y:p[1]-4},g);t.textContent=k==="PC"?"💻 Εσύ":"🖥️ Διακομιστής";
-      var ip=el("text",{"class":"ip",x:p[0],y:p[1]+16},g);ip.textContent=k==="PC"?MY_IP:SV_IP;
-    });
-    for(var i=1;i<=7;i++){
-      (function(k){
-        var g=el("g",{"class":"rt",tabindex:"0",role:"button","aria-label":"Δρομολογητής "+k.substr(1)+", λειτουργεί. Πάτησε για να τον χαλάσεις."},svg),p=N[k];
-        el("circle",{cx:p[0],cy:p[1],r:22},g);
-        var t=el("text",{x:p[0],y:p[1]+5},g);t.textContent=k;
-        var x=el("text",{"class":"x",x:p[0],y:p[1]+9},g);x.textContent="✕";
-        function tog(){if(busy)return;dead[k]=!dead[k];paintDead();}
-        g.addEventListener("click",tog);
-        g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();tog();}});
-        rtEls[k]=g;
-      })("R"+i);
-    }
-    pkLayer=el("g",{},svg);
-    paintDead();
-  }
-  function paintDead(){
-    for(var k in rtEls){
-      rtEls[k].setAttribute("class","rt"+(dead[k]?" dead":""));
-      rtEls[k].setAttribute("aria-label","Δρομολογητής "+k.substr(1)+", "+(dead[k]?"χαλασμένος. Πάτησε για να τον επισκευάσεις.":"λειτουργεί. Πάτησε για να τον χαλάσεις."));
-    }
-    EDGES.forEach(function(e){edgeEls[e.join("-")].setAttribute("class","edge"+(dead[e[0]]||dead[e[1]]?" dead":""));});
-    var ok=livePaths().length;
-    if(!busy)$("log").innerHTML=ok?"Πάτησε <b>Στείλ' το!</b> για να στείλεις το μήνυμά σου."+(Object.keys(dead).some(function(k){return dead[k];})?" Κάποιοι δρομολογητές είναι χαλασμένοι, οπότε τα πακέτα θα βρουν άλλο δρόμο.":""):"<b>Όλες οι διαδρομές είναι κλειστές!</b> Κανένα πακέτο δεν μπορεί να περάσει. Επισκεύασε έναν δρομολογητή για να ανοίξει μια διαδρομή.";
-    $("send").disabled=!ok||busy;
-  }
-  function livePaths(){return PATHS.filter(function(p){return p.every(function(n){return !dead[n];});});}
-  function pathLen(p){var L=0;for(var i=1;i<p.length;i++){var a=N[p[i-1]],b=N[p[i]];L+=Math.hypot(b[0]-a[0],b[1]-a[1]);}return L;}
-  function posOn(p,d){
-    for(var i=1;i<p.length;i++){var a=N[p[i-1]],b=N[p[i]],s=Math.hypot(b[0]-a[0],b[1]-a[1]);
-      if(d<=s){var t=d/s;return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];} d-=s;}
-    return N[p[p.length-1]];
-  }
-  var busy=false,pkts=[],arrived=[],order=[];
-  function split(m){var out=[];for(var i=0;i<m.length;i+=4)out.push(m.substr(i,4));return out;}
-  function drawCards(){
-    var box=$("pkts");box.innerHTML="";
-    pkts.forEach(function(p,i){
-      var d=document.createElement("div");
-      d.className="pkt"+(arrived[i]?" got":p.lost?" lost":" wait");
-      d.style.borderLeft="6px solid "+COLS[i%COLS.length];
-      d.innerHTML='<div class="h">#'+(i+1)+' από '+pkts.length+'</div><div class="h">προς '+SV_IP+'</div><div class="h">από '+MY_IP+'</div><div class="d">'+p.data.replace(/ /g,"·")+'</div>';
-      box.appendChild(d);
-    });
-  }
-  function showOut(){
-    var s="";pkts.forEach(function(p,i){s+=arrived[i]?p.data:"____".substr(0,p.data.length);});
-    $("outMsg").textContent=s;
-  }
-  function launch(list,done){
-    var routes=livePaths(),movers=[];
-    list.forEach(function(idx,j){
-      var path=routes[rnd(0,routes.length-1)],len=pathLen(path);
-      var g=el("g",{"class":"pk"},pkLayer);
-      el("circle",{r:14,fill:COLS[idx%COLS.length]},g);
-      var t=el("text",{},g);t.textContent=idx+1;
-      movers.push({idx:idx,path:path,len:len,g:g,start:j*380+rnd(0,250),speed:0.09+Math.random()*0.08,lostAt:pkts[idx].lost?len*(0.35+Math.random()*0.3):-1,done:false});
-    });
-    var t0=null;
-    function frame(ts){
-      if(t0===null)t0=ts;
-      var el2=ts-t0,left=0;
-      movers.forEach(function(m){
-        if(m.done)return;
-        var d=Math.max(0,(el2-m.start)*m.speed);
-        if(m.lostAt>=0&&d>=m.lostAt){
-          m.done=true;m.g.style.transition="opacity .5s";m.g.style.opacity="0";
-          setTimeout(function(){m.g.remove();},600);
-          $("log").innerHTML="<b>Ωχ όχι! Το πακέτο "+(m.idx+1)+" χάθηκε</b> στον δρόμο.";
-          drawCards();return;
-        }
-        if(d>=m.len){
-          m.done=true;m.g.remove();arrived[m.idx]=true;order.push(m.idx+1);
-          $("log").innerHTML="Το πακέτο <b>"+(m.idx+1)+"</b> έφτασε. Σειρά άφιξης μέχρι τώρα: <b>"+order.join(", ")+"</b>";
-          drawCards();showOut();return;
-        }
-        var p=posOn(m.path,d);m.g.setAttribute("transform","translate("+p[0]+","+p[1]+")");
-        m.g.style.opacity=el2<m.start?"0":"1";left++;
-      });
-      if(left>0)requestAnimationFrame(frame);else done();
-    }
-    requestAnimationFrame(frame);
-  }
-  function finish(){
-    var missing=[];pkts.forEach(function(p,i){if(!arrived[i])missing.push(i);});
-    if(missing.length){
-      $("log").innerHTML="Ο διακομιστής έβαλε τα πακέτα σε σειρά και πρόσεξε ότι <b>λείπει το πακέτο "+(missing[0]+1)+"</b>. Ζητά από τον υπολογιστή σου να το ξαναστείλει…";
-      setTimeout(function(){
-        missing.forEach(function(i){pkts[i].lost=false;});drawCards();
-        launch(missing,finish);
-      },1600);
-      return;
-    }
-    var inOrder=order.every(function(v,i){return i===0||v>order[i-1];});
-    busy=false;$("msg").disabled=false;paintDead();
-    $("log").innerHTML="✓ Έφτασαν και τα "+pkts.length+" πακέτα"+(inOrder?" (αυτή τη φορά με τη σειρά!).":", με τη σειρά <b>"+order.join(", ")+"</b>. Ο διακομιστής χρησιμοποίησε τους αριθμούς των πακέτων για να τα ξαναβάλει στη σωστή σειρά.");
-    $("send").focus({preventScroll:true});
-  }
-  function send(){
-    if(busy)return;
-    var m=$("msg").value.toUpperCase().replace(/[^A-Z0-9\u0386-\u03AB !?.,]/g,"").trim().substr(0,24);
-    if(!m){m="ΓΕΙΑ ΣΟΥ";}
-    $("msg").value=m;
-    if(!livePaths().length)return;
-    busy=true;$("send").disabled=true;$("msg").disabled=true;
-    pkts=split(m).map(function(d){return {data:d,lost:false};});
-    arrived=pkts.map(function(){return false;});order=[];
-    if($("lose").checked&&pkts.length>1)pkts[rnd(0,pkts.length-1)].lost=true;
-    drawCards();showOut();
-    $("log").innerHTML="Το μήνυμά σου χωρίστηκε σε <b>"+pkts.length+" πακέτα</b>. Φύγανε!";
-    launch(pkts.map(function(p,i){return i;}),finish);
-  }
-  $("send").addEventListener("click",send);
-  $("msg").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();send();}});
-  $("fix").addEventListener("click",function(){if(busy)return;dead={};paintDead();});
-  drawNet();
-  pkts=split("ΣΥΝΑΝΤΗΣΗ ΣΤΟ ΠΑΡΚΟ").map(function(d){return {data:d,lost:false};});arrived=pkts.map(function(){return false;});drawCards();showOut();
+  /* ---------- gate logic ---------- */
+  var G={
+    AND:{n:2,f:function(a,b){return a&b;},d:"Η έξοδος είναι 1 μόνο όταν <b>και οι δύο</b> είσοδοι είναι 1.",e:"Ένα αυτοκίνητο ξεκινά μόνο αν γυρίσει το κλειδί ΚΑΙ πατηθεί το φρένο."},
+    OR:{n:2,f:function(a,b){return a|b;},d:"Η έξοδος είναι 1 όταν <b>τουλάχιστον μία</b> είσοδος είναι 1.",e:"Ένα κουδούνι χτυπά αν πατηθεί το κουμπί της μπροστινής Ή της πίσω πόρτας."},
+    NOT:{n:1,f:function(a){return a?0:1;},d:"Η έξοδος είναι το <b>αντίθετο</b> της εισόδου. Μερικές φορές λέγεται αντιστροφέας.",e:"Ένα φωτάκι νυκτός ανάβει όταν ΔΕΝ έχει φως έξω."},
+    XOR:{n:2,f:function(a,b){return a^b;},d:"Αποκλειστικό OR: η έξοδος είναι 1 όταν οι είσοδοι είναι <b>διαφορετικές</b> (η μία ή η άλλη, αλλά όχι και οι δύο).",e:"Τα φώτα της σκάλας με διακόπτη πάνω και κάτω: όποιον διακόπτη κι αν γυρίσεις, αλλάζει το φως."},
+    NAND:{n:2,f:function(a,b){return (a&b)?0:1;},d:"NOT AND: το αντίθετο του AND. Η έξοδος είναι 0 μόνο όταν και οι δύο είσοδοι είναι 1.",e:"Ενδιαφέρον γεγονός: μπορείς να φτιάξεις κάθε άλλη πύλη χρησιμοποιώντας μόνο πύλες NAND."},
+    NOR:{n:2,f:function(a,b){return (a|b)?0:1;},d:"NOT OR: το αντίθετο του OR. Η έξοδος είναι 1 μόνο όταν και οι δύο είσοδοι είναι 0.",e:"Ένας συναγερμός μένει ήσυχος εκτός αν ανοίξει μια πόρτα Ή ένα παράθυρο. Το φωτάκι «όλα εντάξει» είναι μια NOR."}
+  };
+  var ORDER=["AND","OR","NOT","XOR","NAND","NOR"];
+  function rows(n){return n===1?[[0],[1]]:[[0,0],[0,1],[1,0],[1,1]];}
 
-  /* ---------- DNS ---------- */
-  var SITES=[["www.happy-zoo.com","198.51.100.7"],["www.space-facts.org","203.0.113.88"],["www.pizza-planet.net","192.0.2.140"]];
-  var site=0,step=0;
-  function stepsFor(s){
-    var name=SITES[s][0],ip=SITES[s][1],short=name.replace(/^www\./,"");
-    return [
-      {on:["you"],arrow:null,msg:"",t:"Γράφεις "+name+" στον φυλλομετρητή σου και πατάς Enter.",x:"Ο φυλλομετρητής σου ξέρει το όνομα, αλλά χρειάζεται έναν αριθμό (μια διεύθυνση IP) για να βρει τον σωστό υπολογιστή."},
-      {on:["you","dns"],arrow:"a1",msg:"Πού είναι το "+short+";",t:"Ο φυλλομετρητής σου ρωτά έναν διακομιστή DNS: «Ποια είναι η διεύθυνση IP του "+short+";»",x:"DNS σημαίνει Domain Name System (Σύστημα Ονομάτων Τομέα). Είναι σαν τηλεφωνικός κατάλογος για το διαδίκτυο."},
-      {on:["dns","you"],arrow:"a2",msg:"Είναι "+ip,t:"Ο διακομιστής DNS βρίσκει το όνομα και απαντά: «"+ip+"».",x:"Τώρα ο φυλλομετρητής σου ξέρει ακριβώς με ποιον υπολογιστή να επικοινωνήσει."},
-      {on:["you","web"],arrow:"a3",msg:"Στείλε τη σελίδα, παρακαλώ",t:"Ο φυλλομετρητής σου στέλνει ένα αίτημα στο "+ip+" ζητώντας την ιστοσελίδα.",x:"Το αίτημα ταξιδεύει σε πακέτα, που τα προωθούν οι δρομολογητές."},
-      {on:["web","you"],arrow:"a4",msg:"Ορίστε! (σε πακέτα)",t:"Ο διακομιστής ιστού στο "+ip+" στέλνει πίσω τη σελίδα, χωρισμένη σε πακέτα.",x:"Μεγάλα πράγματα, όπως εικόνες και βίντεο, χρειάζονται πάρα πολλά πακέτα."},
-      {on:["you"],arrow:null,msg:"",t:"Ο φυλλομετρητής σου ενώνει ξανά τα πακέτα και δείχνει τη σελίδα. 🎉",x:"Όλα αυτά συνήθως γίνονται σε λιγότερο από ένα δευτερόλεπτο!"}
-    ];
+  /* draw a gate with its left edge at x, centre y. Returns input points and output point */
+  function drawGate(svg,type,x,y,k){
+    k=k||1;function q(v){return v*k;}
+    var base=type==="NAND"?"AND":type==="NOR"?"OR":type,bub=(type==="NAND"||type==="NOR"||type==="NOT"),out,ins;
+    if(base==="AND"){el("path",{"class":"g",d:"M"+x+" "+(y-q(26))+" h"+q(34)+" a"+q(26)+" "+q(26)+" 0 0 1 0 "+q(52)+" h-"+q(34)+" z"},svg);out=x+q(60);ins=[[x,y-q(13)],[x,y+q(13)]];}
+    else if(base==="OR"||base==="XOR"){
+      var ox=base==="XOR"?x+q(8):x;
+      if(base==="XOR")el("path",{"class":"g",d:"M"+x+" "+(y-q(26))+" Q"+(x+q(14))+" "+y+" "+x+" "+(y+q(26)),style:"fill:none"},svg);
+      el("path",{"class":"g",d:"M"+ox+" "+(y-q(26))+" Q"+(ox+q(14))+" "+y+" "+ox+" "+(y+q(26))+" Q"+(ox+q(42))+" "+(y+q(26))+" "+(ox+q(62))+" "+y+" Q"+(ox+q(42))+" "+(y-q(26))+" "+ox+" "+(y-q(26))+" z"},svg);
+      out=ox+q(62);ins=[[ox+q(9),y-q(13)],[ox+q(9),y+q(13)]];
+    } else {el("path",{"class":"g",d:"M"+x+" "+(y-q(22))+" L"+(x+q(46))+" "+y+" L"+x+" "+(y+q(22))+" z"},svg);out=x+q(46);ins=[[x,y]];}
+    if(bub){el("circle",{"class":"g",cx:out+q(6),cy:y,r:q(6)},svg);out+=q(12);}
+    var lab=el("text",{"class":"gl",x:x+q(base==="NOT"?17:28),y:y+5,style:k>1?"font-size:"+Math.round(14*k*0.85)+"px":""},svg);lab.textContent=type;
+    return {ins:ins,out:[out,y]};
   }
-  var dsvg=$("dnsSvg"),bx={},ar={},msgEl;
+  function wire(svg,a,b,mx){
+    mx=mx===undefined?(a[0]+b[0])/2:mx;
+    return el("path",{"class":"w",d:"M"+a[0]+" "+a[1]+" H"+mx+" V"+b[1]+" H"+b[0]},svg);
+  }
+  function drawSwitch(svg,label,x,y,onToggle){
+    var g=el("g",{"class":"sw",tabindex:"0",role:"switch","aria-checked":"false","aria-label":"Διακόπτης "+label},svg);
+    el("rect",{x:x-28,y:y-24,width:56,height:48,rx:12},g);
+    var t=el("text",{x:x,y:y},g);t.textContent=label;
+    var v=el("text",{"class":"v",x:x,y:y+17},g);v.textContent="0";
+    g.addEventListener("click",onToggle);
+    g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();onToggle();}});
+    return {g:g,v:v,out:[x+28,y]};
+  }
+  function setSwitch(s,on){s.g.setAttribute("class","sw"+(on?" on":""));s.g.setAttribute("aria-checked",on?"true":"false");s.v.textContent=on?"1":"0";}
+  function drawBulb(svg,x,y){
+    var g=el("g",{"class":"bulb"},svg);
+    el("circle",{"class":"glow",cx:x,cy:y,r:44},g);
+    el("circle",{"class":"b",cx:x,cy:y,r:26},g);
+    el("path",{d:"M"+(x-10)+" "+(y+30)+" h20 v12 h-20 z",fill:"#8C97B8"},g);
+    var t=el("text",{x:x,y:y+62},g);t.textContent="Έξοδος 0";
+    return {g:g,t:t,in:[x-26,y]};
+  }
+  function setBulb(b,on){b.g.setAttribute("class","bulb"+(on?" on":""));b.t.textContent="Έξοδος "+(on?1:0);}
+
+  /* ---------- explorer ---------- */
+  var exGate="AND",exIn=[0,0],exParts=null;
+  function buildEx(){
+    var svg=$("exSvg");svg.innerHTML="";var n=G[exGate].n;
+    var sw=[],gp,bulb,wires=[];
+    var gy=130,gx=230;
+    gp=null;
+    var tmp=el("g",{},svg);
+    bulb=drawBulb(svg,520,gy);
+    gp=drawGate(svg,exGate,gx,gy,1.6);
+    if(n===1){
+      sw.push(drawSwitch(svg,"A",70,gy,function(){exIn[0]^=1;paintEx();}));
+      wires.push(wire(tmp,sw[0].out,gp.ins[0]));
+    } else {
+      sw.push(drawSwitch(svg,"A",70,70,function(){exIn[0]^=1;paintEx();}));
+      sw.push(drawSwitch(svg,"B",70,190,function(){exIn[1]^=1;paintEx();}));
+      wires.push(wire(tmp,sw[0].out,gp.ins[0],170));
+      wires.push(wire(tmp,sw[1].out,gp.ins[1],170));
+    }
+    var ow=wire(tmp,gp.out,bulb.in);
+    exParts={sw:sw,bulb:bulb,wires:wires,ow:ow};
+    paintEx();
+  }
+  function paintEx(){
+    var g=G[exGate],n=g.n,ins=exIn.slice(0,n),o=g.f.apply(null,ins);
+    exParts.sw.forEach(function(s,i){setSwitch(s,ins[i]);exParts.wires[i].setAttribute("class","w"+(ins[i]?" on":""));});
+    exParts.ow.setAttribute("class","w"+(o?" on":""));setBulb(exParts.bulb,o);
+    var t=$("exTT"),h="<tr>"+(n===1?"<th>A</th>":"<th>A</th><th>B</th>")+"<th>Έξοδος</th></tr>";
+    rows(n).forEach(function(r){var cur=r.every(function(v,i){return v===ins[i];});h+='<tr'+(cur?' class="cur"':'')+'>'+r.map(function(v){return "<td>"+v+"</td>";}).join("")+'<td class="o">'+g.f.apply(null,r)+"</td></tr>";});
+    t.innerHTML=h;
+    $("exDesc").innerHTML='<b class="n">Πύλη '+exGate+'</b><br>'+g.d+'<br><span class="muted">Παράδειγμα: '+g.e+'</span><br>Τώρα: '+(n===1?"A = "+ins[0]:"A = "+ins[0]+", B = "+ins[1])+' → έξοδος <b>'+o+'</b>'+(o?" 💡":"");
+  }
   (function(){
-    function box(k,x,y,t1,t2){var g=el("g",{"class":"bx"},dsvg);el("rect",{x:x,y:y,width:150,height:70,rx:14},g);var a=el("text",{x:x+75,y:y+30},g);a.textContent=t1;var b=el("text",{"class":"s",x:x+75,y:y+50},g);b.textContent=t2;bx[k]=g;}
-    box("you",20,80,"💻 Η συσκευή σου","Φυλλομετρητής");
-    box("dns",245,10,"📖 Διακομιστής DNS","Ονόματα → διευθύνσεις IP");
-    box("web",470,80,"🖥️ Διακομιστής","Αποθηκεύει τη σελίδα");
-    ar.a1=el("path",{"class":"ar",d:"M120 78 Q150 30 240 40"},dsvg);
-    ar.a2=el("path",{"class":"ar",d:"M245 65 Q190 100 172 110"},dsvg);
-    ar.a3=el("path",{"class":"ar",d:"M172 125 L468 125"},dsvg);
-    ar.a4=el("path",{"class":"ar",d:"M468 145 Q320 200 172 145"},dsvg);
-    msgEl=el("text",{"class":"msg",x:320,y:215},dsvg);
+    var box=$("exGates");
+    ORDER.forEach(function(k){var b=document.createElement("button");b.textContent=k;b.setAttribute("aria-pressed",String(k===exGate));
+      b.addEventListener("click",function(){exGate=k;exIn=[0,0];var bs=box.children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",String(bs[i]===b));buildEx();});
+      box.appendChild(b);});
   })();
-  function showStep(){
-    var S=stepsFor(site),s=S[step];
-    for(var k in bx)bx[k].setAttribute("class","bx"+(s.on.indexOf(k)>=0?" on":""));
-    for(var a in ar)ar[a].setAttribute("class","ar"+(s.arrow===a?" on":""));
-    msgEl.textContent=s.msg?"“"+s.msg+"”":"";
-    $("sN").textContent="Βήμα "+(step+1)+" από "+S.length;$("sT").textContent=s.t;$("sX").textContent=s.x;
-    var dots=$("dots");dots.innerHTML="";for(var i=0;i<S.length;i++){var d=document.createElement("i");if(i<=step)d.className="on";dots.appendChild(d);}
-    $("sPrev").disabled=step===0;$("sNext").textContent=step===S.length-1?"Από την αρχή ↺":"Επόμενο βήμα →";
-  }
-  $("sNext").addEventListener("click",function(){step=(step+1)%stepsFor(site).length;showStep();});
-  $("sPrev").addEventListener("click",function(){if(step>0){step--;showStep();}});
-  SITES.forEach(function(s,i){
-    var b=document.createElement("button");b.className="site";b.textContent=s[0];b.setAttribute("aria-pressed",String(i===0));
-    b.addEventListener("click",function(){site=i;step=0;var bs=$("sites").children;for(var j=0;j<bs.length;j++)bs[j].setAttribute("aria-pressed",String(j===i));showStep();});
-    $("sites").appendChild(b);
-  });
-  showStep();
+  buildEx();
 
-  var ORDER=["Γράφεις το όνομα της ιστοσελίδας στον φυλλομετρητή","Ο φυλλομετρητής ζητά από έναν διακομιστή DNS τη διεύθυνση IP","Ο διακομιστής DNS απαντά με τη διεύθυνση IP","Ο φυλλομετρητής στέλνει αίτημα σε αυτή τη διεύθυνση IP","Ο διακομιστής ιστού στέλνει πίσω τη σελίδα σε πακέτα","Ο φυλλομετρητής ενώνει τα πακέτα και δείχνει τη σελίδα"];
-  var oNext=0,oMiss=0;
-  function startO(){
-    oNext=0;oMiss=0;$("oFb").textContent="";$("oFb").className="fb";$("oScore").textContent="";
-    var box=$("order");box.innerHTML="";
-    shuffle(ORDER.map(function(t,i){return i;})).forEach(function(i){
-      var b=document.createElement("button");b.className="step";b.setAttribute("data-i",i);
-      b.innerHTML='<span class="k">?</span><span>'+ORDER[i]+'</span>';
-      b.addEventListener("click",function(){
-        if(b.classList.contains("done"))return;
-        if(i===oNext){b.className="step done";b.querySelector(".k").textContent=oNext+1;oNext++;
-          $("oFb").textContent=oNext===ORDER.length?(oMiss===0?"✓ Τέλεια! Όλα τα βήματα στη σωστή σειρά.":"✓ Έτοιμο! Τα κατάφερες με "+oMiss+(oMiss>1?" λάθος πατήματα.":" λάθος πάτημα.")):"✓ Σωστό. Τι ακολουθεί;";
-          $("oFb").className="fb ok";
-        } else {oMiss++;b.classList.add("no");setTimeout(function(){b.classList.remove("no");},500);
-          $("oFb").textContent="✗ Όχι αυτό ακόμα. Σκέψου τι πρέπει να γίνει πριν από αυτό.";$("oFb").className="fb no";}
-      });
-      box.appendChild(b);
+  /* ---------- fill truth tables ---------- */
+  var fGate="AND",fVals=[],fDone=false,fRight=0,fSolved={};
+  function buildF(){
+    var g=G[fGate],R=rows(g.n);fVals=R.map(function(){return null;});fDone=false;
+    $("fName").innerHTML='<b class="n">'+fGate+'</b> &nbsp; <span class="muted">'+g.d.replace(/<[^>]+>/g,"")+'</span>';
+    var t=$("fTT"),h="<tr>"+(g.n===1?"<th>A</th>":"<th>A</th><th>B</th>")+"<th>Έξοδος</th></tr>";
+    R.forEach(function(r,i){h+="<tr>"+r.map(function(v){return "<td>"+v+"</td>";}).join("")+'<td><button class="tcell" data-i="'+i+'" aria-label="Έξοδος για τη σειρά '+(i+1)+'">?</button></td></tr>';});
+    t.innerHTML=h;
+    var cs=t.querySelectorAll(".tcell");
+    for(var i=0;i<cs.length;i++)cs[i].addEventListener("click",function(){
+      if(fDone)return;var k=+this.getAttribute("data-i");fVals[k]=fVals[k]===null?0:fVals[k]?0:1;if(this.textContent==="?")fVals[k]=0;this.textContent=fVals[k];this.className="tcell";
     });
+    $("fFb").textContent="";$("fFb").className="fb center";$("fCheck").disabled=false;
   }
-  $("oAgain").addEventListener("click",startO);
-
-  /* ---------- password ---------- */
-  var COMMON=["password","123456","12345678","123456789","qwerty","abc123","password1","111111","iloveyou","letmein","football","monkey","dragon","admin","welcome","sunshine","princess","000000","1234","12345"];
-  function analyse(pw){
-    var lower=/[a-z]/.test(pw),upper=/[A-Z]/.test(pw),dig=/\d/.test(pw),sym=/[^A-Za-z0-9]/.test(pw);
-    var pool=(lower?26:0)+(upper?26:0)+(dig?10:0)+(sym?33:0);
-    var common=COMMON.indexOf(pw.toLowerCase())>=0;
-    var simple=/^(.)\1+$/.test(pw)||/^(0123|1234|2345|3456|4567|5678|6789|abcd|qwer)/i.test(pw);
-    var log10=pw.length*Math.log(pool||1)/Math.LN10;
-    if(common||simple)log10=Math.min(log10,3);
-    else if(/^[A-Z]?[a-z]+\d{1,4}$/.test(pw))log10=Math.min(log10,7); // word + numbers is a common pattern
-    return {len:pw.length,lower:lower,upper:upper,dig:dig,sym:sym,common:common,simple:simple,log10:log10};
-  }
-  function timeText(log10){
-    var secs=Math.pow(10,log10)/1e10/2; // 10 billion guesses a second, found halfway on average
-    if(secs<1)return "σε λιγότερο από ένα δευτερόλεπτο";
-    var u=[[31536000*1e9,"δισεκατομμύρια χρόνια","δισεκατομμύριο χρόνια"],[31536000*1e6,"εκατομμύρια χρόνια","εκατομμύριο χρόνια"],[31536000*1000,"χιλιάδες χρόνια","χιλιάδα χρόνια"],[31536000,"χρόνια","χρόνο"],[86400,"μέρες","μέρα"],[3600,"ώρες","ώρα"],[60,"λεπτά","λεπτό"],[1,"δευτερόλεπτα","δευτερόλεπτο"]];
-    if(secs>=31536000*1e12)return "σε περισσότερα από ένα τρισεκατομμύριο χρόνια";
-    for(var i=0;i<u.length;i++)if(secs>=u[i][0]){var v=Math.round(secs/u[i][0]);return "σε περίπου "+v.toLocaleString("el-GR")+" "+(v===1?u[i][2]:u[i][1]);}
-  }
-  function showPw(){
-    var pw=$("pw").value;
-    if(!pw){$("pwRes").textContent="Γράψε έναν κωδικό για να τον δοκιμάσεις.";$("pwTime").textContent="";$("pwBar").style.width="0";$("pwChecks").innerHTML="";return;}
-    var a=analyse(pw),lv;
-    if(a.log10<6)lv=["Πολύ αδύναμος 😟","#FF6B6B",15];else if(a.log10<10)lv=["Αδύναμος 😕","#FF9F5A",35];else if(a.log10<14)lv=["Μέτριος 🙂","#F4B942",60];else if(a.log10<18)lv=["Ισχυρός 💪","#8BD36B",82];else lv=["Πολύ ισχυρός 🦾","#4CC38A",100];
-    $("pwRes").textContent=lv[0];$("pwRes").style.color=lv[1];$("pwBar").style.width=lv[2]+"%";$("pwBar").style.background=lv[1];
-    $("pwTime").textContent=(a.common?"Αυτός είναι από τους πιο συνηθισμένους κωδικούς στον κόσμο! ":"")+"Ένας γρήγορος υπολογιστής θα μπορούσε να τον μαντέψει "+timeText(a.log10)+".";
-    var ch=[[a.len>=12,"Τουλάχιστον 12 χαρακτήρες ("+a.len+" μέχρι τώρα)"],[a.lower&&a.upper,"Έχει κεφαλαία και πεζά γράμματα"],[a.dig,"Έχει αριθμό"],[a.sym,"Έχει σύμβολο όπως ! ή -"],[!a.common&&!a.simple,"Δεν είναι συνηθισμένο ή απλό μοτίβο"]];
-    $("pwChecks").innerHTML=ch.map(function(c){return '<li class="'+(c[0]?"ok":"no")+'">'+(c[0]?"✓ ":"○ ")+c[1]+'</li>';}).join("");
-  }
-  $("pw").addEventListener("input",showPw);
-  var tries=document.querySelectorAll("[data-try]");
-  for(var ti0=0;ti0<tries.length;ti0++)tries[ti0].addEventListener("click",function(){$("pw").value=this.getAttribute("data-try");showPw();});
-
-  /* ---------- safe or not ---------- */
-  var SAFE=[
-    ["Ένα αναδυόμενο παράθυρο λέει ότι κέρδισες ένα δωρεάν τάμπλετ. Πρέπει μόνο να κάνεις κλικ και να γράψεις τη διεύθυνση του σπιτιού σου.",false,"Βραβεία σε διαγωνισμούς που δεν έλαβες ποτέ μέρος είναι κόλπο για να πάρουν τα στοιχεία σου. Κλείσ' το και πες το σε έναν ενήλικα."],
-    ["Ένας φίλος σου ζητά τον κωδικό σου για να παίξει το παιχνίδι σου για σένα.",false,"Μη δίνεις ποτέ τους κωδικούς σου, ούτε σε φίλους. Οι φιλίες αλλάζουν και θα μπορούσαν να σε κλειδώσουν έξω."],
-    ["Χρησιμοποιείς διαφορετικό κωδικό για τον σχολικό σου λογαριασμό και για τον λογαριασμό των παιχνιδιών σου.",true,"Έξυπνο! Αν κάποτε βρεθεί ένας κωδικός, οι άλλοι λογαριασμοί σου μένουν ασφαλείς."],
-    ["Κάποιος που ξέρεις μόνο από ένα διαδικτυακό παιχνίδι ζητά να σε συναντήσει στο πάρκο.",false,"Οι άνθρωποι στο διαδίκτυο μπορεί να μην είναι αυτοί που λένε. Μη συναντηθείς ποτέ και πες το αμέσως σε έναν ενήλικα που εμπιστεύεσαι."],
-    ["Ρωτάς έναν γονιό ή κηδεμόνα πριν κατεβάσεις μια νέα εφαρμογή.",true,"Πολύ καλή ιδέα. Κάποιες εφαρμογές περιέχουν επιβλαβές λογισμικό ή κοστίζουν χρήματα."],
-    ["Ένα email από κάποιον που δεν ξέρεις έχει συνημμένο με όνομα prize.exe.",false,"Τα απροσδόκητα συνημμένα, ειδικά όσα τελειώνουν σε .exe, μπορεί να περιέχουν ιούς. Μην το ανοίξεις."],
-    ["Έχεις το προφίλ σου ιδιωτικό, ώστε να το βλέπουν μόνο άτομα που ξέρεις.",true,"Ένα ιδιωτικό προφίλ κρατά τις φωτογραφίες και τις πληροφορίες σου μακριά από αγνώστους."],
-    ["Μια ιστοσελίδα ζητά το ονοματεπώνυμό σου, το σχολείο σου και την ημερομηνία γέννησής σου για να μπεις σε έναν διαγωνισμό.",false,"Αυτές είναι πολλές προσωπικές πληροφορίες. Ρώτα έναν ενήλικα πριν δώσεις οποιαδήποτε στοιχεία στο διαδίκτυο."],
-    ["Βλέπεις ένα μήνυμα που σε στενοχωρεί, οπότε τραβάς ένα στιγμιότυπο οθόνης και το δείχνεις σε έναν δάσκαλο.",true,"Ακριβώς έτσι. Κράτα ένα αρχείο, μην απαντήσεις και πες το σε έναν ενήλικα που εμπιστεύεσαι."],
-    ["Αποσυνδέεσαι από τον λογαριασμό σου όταν τελειώνεις σε έναν κοινόχρηστο υπολογιστή του σχολείου.",true,"Η αποσύνδεση εμποδίζει τον επόμενο να χρησιμοποιήσει τον λογαριασμό σου."],
-    ["Ένα μήνυμα λέει ότι ο λογαριασμός σου θα διαγραφεί αν δεν κάνεις κλικ σε έναν σύνδεσμο και δεν γράψεις τώρα τον κωδικό σου.",false,"Αυτό λέγεται ηλεκτρονικό ψάρεμα (phishing). Οι αληθινές εταιρείες δεν ζητούν τον κωδικό σου με αυτόν τον τρόπο. Μην κάνεις κλικ."],
-    ["Ανεβάζεις μια φωτογραφία σου με τη σχολική στολή και το όνομα του δρόμου σου να φαίνεται στο βάθος.",false,"Αυτό θα μπορούσε να δείξει σε αγνώστους πού μένεις και πού πας σχολείο. Έλεγχε τις φωτογραφίες πριν τις μοιραστείς."]
-  ];
-  var SFN=8,sfList=[],sfi=0,sfRight=0;
-  function showSf(){
-    var it=sfList[sfi];
-    $("sfCount").textContent="Κάρτα "+(sfi+1)+" από "+SFN;$("sfCard").textContent=it[0];
-    $("sfSafe").disabled=false;$("sfNot").disabled=false;$("sfSafe").className="choice";$("sfNot").className="choice";
-    $("sfFb").textContent="";$("sfFb").className="fb";$("sfWhy").textContent="";$("sfNext").style.display="none";
-  }
-  function answerSf(saidSafe){
-    var it=sfList[sfi],right=saidSafe===it[1];
-    $("sfSafe").disabled=true;$("sfNot").disabled=true;
-    (it[1]?$("sfSafe"):$("sfNot")).className="choice ok";
-    if(!right)(saidSafe?$("sfSafe"):$("sfNot")).className="choice no";
-    if(right)sfRight++;
-    $("sfFb").textContent=right?"✓ Σωστό!":"✗ Όχι ακριβώς. Αυτό είναι "+(it[1]?"ασφαλές.":"μη ασφαλές.");$("sfFb").className="fb "+(right?"ok":"no");
-    $("sfWhy").textContent=it[2];$("sfScore").textContent="Βαθμός: "+sfRight;
-    $("sfNext").style.display="";$("sfNext").focus({preventScroll:true});
-  }
-  $("sfSafe").addEventListener("click",function(){answerSf(true);});
-  $("sfNot").addEventListener("click",function(){answerSf(false);});
-  $("sfNext").addEventListener("click",function(){
-    sfi++;
-    if(sfi>=SFN){$("sfBox").style.display="none";$("sfEnd").style.display="";
-      $("sfEndText").textContent=(sfRight===SFN?"Αστέρι της ασφάλειας στο διαδίκτυο! ":sfRight>=6?"Πολύ καλές επιλογές! ":sfRight>=4?"Καλή προσπάθεια! ":"Συνέχισε να μαθαίνεις! ")+"Βρήκες σωστά "+sfRight+" από "+SFN+".";
-      $("sfAgain").focus({preventScroll:true});}
-    else showSf();
+  $("fCheck").addEventListener("click",function(){
+    if(fDone)return;
+    if(fVals.some(function(v){return v===null;})){$("fFb").textContent="Συμπλήρωσε πρώτα όλα τα κουτιά εξόδου.";$("fFb").className="fb center";return;}
+    var g=G[fGate],R=rows(g.n),cs=$("fTT").querySelectorAll(".tcell"),wrong=0;
+    R.forEach(function(r,i){var ok=fVals[i]===g.f.apply(null,r);if(!ok)wrong++;cs[i].className="tcell "+(ok?"ok":"no");});
+    if(!wrong){fDone=true;for(var i=0;i<cs.length;i++)cs[i].disabled=true;$("fCheck").disabled=true;
+      if(!fSolved[fGate]){fSolved[fGate]=1;fRight++;}$("fScore").textContent="Σωστοί πίνακες: "+fRight+" από 6";
+      $("fFb").textContent="✓ Τέλεια! Αυτός είναι ο πίνακας αληθείας της "+fGate+".";$("fFb").className="fb center ok";}
+    else{$("fFb").textContent="✗ "+wrong+(wrong>1?" κουτιά είναι λάθος":" κουτί είναι λάθος")+" (με κόκκινο). Άλλαξέ "+(wrong>1?"τα":"το")+" και έλεγξε ξανά.";$("fFb").className="fb center no";}
   });
-  function startSf(){sfList=shuffle(SAFE).slice(0,SFN);sfi=0;sfRight=0;$("sfScore").textContent="Βαθμός: 0";$("sfEnd").style.display="none";$("sfBox").style.display="";showSf();}
-  $("sfAgain").addEventListener("click",startSf);
+  function setF(k){fGate=k;var bs=$("fGates").children;for(var i=0;i<bs.length;i++)bs[i].setAttribute("aria-pressed",String(bs[i].textContent===k));buildF();}
+  (function(){var box=$("fGates");ORDER.forEach(function(k){var b=document.createElement("button");b.textContent=k;b.setAttribute("aria-pressed",String(k===fGate));b.addEventListener("click",function(){setF(k);});box.appendChild(b);});})();
+  $("fNext").addEventListener("click",function(){setF(ORDER[(ORDER.indexOf(fGate)+1)%ORDER.length]);});
+
+  /* ---------- mystery gate ---------- */
+  var MN=6,mList=[],mi=0,mRight=0;
+  function showM(){
+    var k=mList[mi],g=G[k];
+    $("mCount").textContent="Πύλη "+(mi+1)+" από "+MN;
+    var h="<tr>"+(g.n===1?"<th>A</th>":"<th>A</th><th>B</th>")+"<th>Έξοδος</th></tr>";
+    rows(g.n).forEach(function(r){h+="<tr>"+r.map(function(v){return "<td>"+v+"</td>";}).join("")+'<td class="o">'+g.f.apply(null,r)+"</td></tr>";});
+    $("mTT").innerHTML=h;
+    var opts=g.n===1?["NOT","AND","OR","XOR"]:[k].concat(shuffle(ORDER.filter(function(x){return x!==k&&x!=="NOT";})).slice(0,3));
+    var box=$("mChoices");box.innerHTML="";
+    shuffle(opts).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerM(o,b);});box.appendChild(b);});
+    $("mFb").textContent="";$("mFb").className="fb";$("mWhy").textContent="";$("mNext").style.display="none";
+  }
+  function answerM(o,btn){
+    var k=mList[mi],bs=$("mChoices").children;
+    for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===k)bs[i].className="choice ok";}
+    if(o===k){mRight++;$("mFb").textContent="✓ Σωστό!";$("mFb").className="fb ok";}
+    else{btn.className="choice no";$("mFb").textContent="✗ Όχι ακριβώς. Είναι η πύλη "+k+".";$("mFb").className="fb no";}
+    $("mWhy").innerHTML=G[k].d;$("mScore").textContent="Βαθμός: "+mRight;$("mNext").style.display="";$("mNext").focus({preventScroll:true});
+  }
+  $("mNext").addEventListener("click",function(){mi++;if(mi>=MN){$("mBox").style.display="none";$("mEnd").style.display="";$("mEndText").textContent=(mRight===MN?"Ντετέκτιβ της λογικής! ":mRight>=4?"Πολύ καλό μάτι! ":"Συνέχισε την εξάσκηση! ")+"Αναγνώρισες "+mRight+" από "+MN+" πύλες.";$("mAgain").focus({preventScroll:true});}else showM();});
+  function startM(){mList=shuffle(ORDER);mi=0;mRight=0;$("mScore").textContent="Βαθμός: 0";$("mEnd").style.display="none";$("mBox").style.display="";showM();}
+  $("mAgain").addEventListener("click",startM);
+
+  /* ---------- light the bulb ---------- */
+  /* nodes: inputs A,B,C at fixed spots; gates {id,type,in:[ids],x,y}; out: id of last gate */
+  var LEVELS=[
+    {t:"Και τα δύο αναμμένα",expr:"A AND B",inputs:["A","B"],gates:[{id:"g1",type:"AND",in:["A","B"],x:300,y:150}],out:"g1"},
+    {t:"Οποιοδήποτε από τα δύο",expr:"A OR B",inputs:["A","B"],gates:[{id:"g1",type:"OR",in:["A","B"],x:300,y:150}],out:"g1"},
+    {t:"Η μέρα των αντιθέτων",expr:"NOT A",inputs:["A"],gates:[{id:"g1",type:"NOT",in:["A"],x:300,y:150}],out:"g1"},
+    {t:"Αυτό αλλά όχι εκείνο",expr:"A AND (NOT B)",inputs:["A","B"],gates:[{id:"n1",type:"NOT",in:["B"],x:200,y:205},{id:"g1",type:"AND",in:["A","n1"],x:380,y:150}],out:"g1"},
+    {t:"Απόλυτη ησυχία",expr:"NOT (A OR B)",inputs:["A","B"],gates:[{id:"o1",type:"OR",in:["A","B"],x:220,y:150},{id:"n1",type:"NOT",in:["o1"],x:400,y:150}],out:"n1"},
+    {t:"Δύο ή ένα",expr:"(A AND B) OR C",inputs:["A","B","C"],gates:[{id:"a1",type:"AND",in:["A","B"],x:220,y:95},{id:"o1",type:"OR",in:["a1","C"],x:400,y:150}],out:"o1"},
+    {t:"Ο φύλακας της πύλης",expr:"(A OR B) AND C",inputs:["A","B","C"],gates:[{id:"o1",type:"OR",in:["A","B"],x:220,y:95},{id:"a1",type:"AND",in:["o1","C"],x:400,y:150}],out:"a1"},
+    {t:"Φτιάξε τη δική σου XOR",expr:"(A OR B) AND NOT (A AND B)",inputs:["A","B"],gates:[{id:"o1",type:"OR",in:["A","B"],x:200,y:85},{id:"a1",type:"AND",in:["A","B"],x:200,y:215},{id:"n1",type:"NOT",in:["a1"],x:330,y:215},{id:"a2",type:"AND",in:["o1","n1"],x:460,y:150}],out:"a2"}
+  ];
+  var IPOS={A:[50,60],B:[50,150],C:[50,240]},IPOS2={A:[50,85],B:[50,215]},IPOS1={A:[50,150]};
+  var li=0,lIn={A:0,B:0,C:0},lParts=null,lFound={},lDone={};
+  function evalLevel(L,vals){
+    var v={};L.inputs.forEach(function(k){v[k]=vals[k];});
+    L.gates.forEach(function(g){v[g.id]=G[g.type].f.apply(null,g.in.map(function(i){return v[i];}));});
+    return v;
+  }
+  function combos(L){var n=L.inputs.length,out=[];for(var m=0;m<(1<<n);m++){var o={};L.inputs.forEach(function(k,i){o[k]=(m>>(n-1-i))&1;});out.push(o);}return out;}
+  function buildL(){
+    var L=LEVELS[li],svg=$("lSvg");svg.innerHTML="";lIn={A:0,B:0,C:0};
+    var pos=L.inputs.length===3?IPOS:L.inputs.length===2?IPOS2:IPOS1;
+    var wl=el("g",{},svg),pts={},gps={},sw={},wires=[];
+    L.gates.forEach(function(g){gps[g.id]=drawGate(svg,g.type,g.x,g.y);pts[g.id]=gps[g.id].out;});
+    L.inputs.forEach(function(k){sw[k]=drawSwitch(svg,k,pos[k][0]+18,pos[k][1],function(){lIn[k]^=1;paintL();});pts[k]=sw[k].out;});
+    var bulb=drawBulb(svg,585,150);
+    /* wires; fan-out from inputs gets a dot at the split */
+    var used={};
+    L.gates.forEach(function(g){
+      g.in.forEach(function(src,j){
+        var a=pts[src],b=gps[g.id].ins[j];
+        var mx=Math.max(a[0]+18,b[0]-26-(j*8));
+        if(L.inputs.indexOf(src)>=0&&L.gates.length>1)mx=Math.min(mx,a[0]+40+(used[src]||0)*14);
+        var w=wire(wl,a,b,mx);wires.push({w:w,src:src});
+        if(used[src]){var d=el("circle",{"class":"dot",cx:mx,cy:a[1],r:6},wl);wires.push({w:d,src:src,dot:1});}
+        used[src]=(used[src]||0)+1;
+      });
+    });
+    var ow=wire(wl,pts[L.out],bulb.in);wires.push({w:ow,src:L.out});
+    lParts={sw:sw,bulb:bulb,wires:wires};
+    if(evalLevel(L,lIn)[L.out])L.inputs.forEach(function(k){lIn[k]=1;});
+    if(!lFound[li])lFound[li]={};
+    $("lTitle").textContent="Κύκλωμα "+(li+1)+" από "+LEVELS.length+": "+L.t;
+    $("lExpr").textContent="Λάμπα = "+L.expr;
+    $("lPrev").disabled=li===0;$("lNext").textContent=li===LEVELS.length-1?"Πίσω στο κύκλωμα 1 ↺":"Επόμενο κύκλωμα →";
+    paintL();
+  }
+  function paintL(){
+    var L=LEVELS[li],v=evalLevel(L,lIn);
+    for(var k in lParts.sw)setSwitch(lParts.sw[k],lIn[k]);
+    lParts.wires.forEach(function(x){x.w.setAttribute("class",(x.dot?"dot":"w")+(v[x.src]?" on":""));});
+    var o=v[L.out];setBulb(lParts.bulb,o);
+    var all=combos(L),win=all.filter(function(c){return evalLevel(L,c)[L.out];});
+    var key=L.inputs.map(function(k){return k+"="+lIn[k];}).join(" ");
+    if(o)lFound[li][key]=1;
+    var nf=Object.keys(lFound[li]).length;
+    var fb=$("lFb");
+    if(o){fb.textContent=nf===win.length?"💡 Άναψε! Βρήκες "+(win.length>1?"και τους "+win.length+" τρόπους":"τον μοναδικό τρόπο")+" να ανάψει αυτή η λάμπα.":"💡 Άναψε! Μπορείς να βρεις άλλον τρόπο; (βρέθηκαν "+nf+" από "+win.length+")";fb.className="fb center ok";if(nf===win.length&&!lDone[li]){lDone[li]=1;}}
+    else{fb.textContent=nf?"Βρήκες "+nf+" από "+win.length+" τρόπους μέχρι τώρα.":"Η λάμπα είναι σβηστή. Συνέχισε να προσπαθείς!";fb.className="fb center";}
+    $("lFound").innerHTML=Object.keys(lFound[li]).map(function(k){return "<span>"+k+"</span>";}).join("");
+    $("lScore").textContent="Κυκλώματα που λύθηκαν πλήρως: "+Object.keys(lDone).length+" από "+LEVELS.length;
+  }
+  $("lNext").addEventListener("click",function(){li=(li+1)%LEVELS.length;buildL();});
+  $("lPrev").addEventListener("click",function(){if(li>0){li--;buildL();}});
 
   /* ---------- quiz ---------- */
   var BANK=[
-    {q:"Τι είναι το διαδίκτυο;",a:"Ένα τεράστιο δίκτυο από συνδεδεμένους υπολογιστές",w:["Ένας μόνο τεράστιος υπολογιστής","Ένα είδος φυλλομετρητή","Μια ιστοσελίδα για αναζήτηση"],why:"Το διαδίκτυο συνδέει δισεκατομμύρια συσκευές σε όλο τον κόσμο."},
-    {q:"Όταν τα δεδομένα στέλνονται στο διαδίκτυο, χωρίζονται σε μικρά κομμάτια που λέγονται…",a:"πακέτα",w:["πίξελ","δέματα","προγράμματα"],why:"Τα δεδομένα ταξιδεύουν σε πακέτα, που ενώνονται ξανά όταν φτάσουν."},
-    {q:"Τι κάνει ένας δρομολογητής;",a:"Προωθεί τα πακέτα προς τον προορισμό τους",w:["Αποθηκεύει όλες τις ιστοσελίδες","Ελέγχει την ορθογραφία σου","Κάνει την οθόνη πιο φωτεινή"],why:"Οι δρομολογητές διαβάζουν τη διεύθυνση κάθε πακέτου και το στέλνουν στο επόμενο βήμα του ταξιδιού του."},
-    {q:"Γιατί κάθε πακέτο έχει έναν αριθμό;",a:"Για να μπουν ξανά τα πακέτα στη σωστή σειρά",w:["Για να ταξιδεύουν πιο γρήγορα","Για να δείχνει πόσο κοστίζουν","Για να μπορούν να διαγραφούν"],why:"Τα πακέτα μπορεί να φτάσουν ανακατεμένα, οπότε οι αριθμοί χρησιμοποιούνται για να ξαναφτιαχτούν τα δεδομένα."},
-    {q:"Τι γίνεται αν χαλάσει ένας δρομολογητής στον δρόμο;",a:"Τα πακέτα παίρνουν άλλη διαδρομή",w:["Σταματά όλο το διαδίκτυο","Το μήνυμα στέλνεται με το ταχυδρομείο","Όλα τα πακέτα διαγράφονται"],why:"Υπάρχουν πολλές διαδρομές, οπότε τα πακέτα απλώς πάνε από άλλο δρόμο."},
-    {q:"Τι γίνεται αν χαθεί ένα πακέτο;",a:"Ξαναστέλνεται",w:["Το μήνυμα χάνεται για πάντα","Τα άλλα πακέτα πετιούνται","Τίποτα, δεν χρειάζεται"],why:"Ο παραλήπτης βλέπει το κενό και ζητά ξανά μόνο εκείνο το πακέτο."},
-    {q:"Τι είναι μια διεύθυνση IP;",a:"Ένας αριθμός που αναγνωρίζει μια συσκευή στο διαδίκτυο",w:["Το όνομα μιας ιστοσελίδας","Ένα είδος κωδικού","Μια ταχυδρομική διεύθυνση"],why:"Κάθε συσκευή στο διαδίκτυο έχει μια διεύθυνση IP, όπως 198.51.100.7."},
-    {q:"Τι κάνει ένας διακομιστής DNS;",a:"Μετατρέπει τα ονόματα ιστοσελίδων σε διευθύνσεις IP",w:["Αποθηκεύει τις φωτογραφίες σου","Μπλοκάρει όλες τις διαφημίσεις","Κάνει τις ιστοσελίδες να φορτώνουν πιο αργά"],why:"Το DNS είναι σαν τον τηλεφωνικό κατάλογο του διαδικτύου."},
-    {q:"Ποιος από αυτούς είναι ο πιο ισχυρός κωδικός;",a:"mov-tigri-synnefo",w:["password","Fluffy2015","123456"],why:"Τρεις τυχαίες λέξεις φτιάχνουν έναν μεγάλο κωδικό που μαντεύεται δύσκολα αλλά θυμάται εύκολα."},
-    {q:"Ένας φίλος σου ζητά τον κωδικό σου. Τι πρέπει να κάνεις;",a:"Να τον κρατήσεις για τον εαυτό σου",w:["Να του τον πεις, είναι φίλος σου","Να του τον γράψεις στο χέρι","Να τον ανεβάσεις στο διαδίκτυο"],why:"Μη δίνεις ποτέ τους κωδικούς σου, ούτε σε φίλους."},
-    {q:"Ένα μήνυμα λέει ότι κέρδισες ένα βραβείο και ζητά τη διεύθυνσή σου. Τι πρέπει να κάνεις;",a:"Να μην απαντήσεις και να το πεις σε έναν ενήλικα που εμπιστεύεσαι",w:["Να στείλεις γρήγορα τη διεύθυνσή σου","Να απαντήσεις ζητώντας μεγαλύτερο βραβείο","Να το μοιραστείς με τους φίλους σου"],why:"Τέτοια μηνύματα είναι κόλπα για να πάρουν τις προσωπικές σου πληροφορίες."},
-    {q:"Τι είναι το phishing (ηλεκτρονικό ψάρεμα);",a:"Ένα παραπλανητικό μήνυμα που προσπαθεί να πάρει τον κωδικό ή τα στοιχεία σου",w:["Ένα διαδικτυακό παιχνίδι ψαρέματος","Ένα είδος καλωδίου υπολογιστή","Ένας τρόπος να γίνει πιο γρήγορο το διαδίκτυο"],why:"Τα μηνύματα phishing προσποιούνται ότι έρχονται από αληθινές εταιρείες για να σε ξεγελάσουν."},
-    {q:"Κάποιος που ξέρεις μόνο από ένα παιχνίδι θέλει να συναντηθείτε. Τι πρέπει να κάνεις;",a:"Να πεις όχι και να το πεις σε έναν ενήλικα που εμπιστεύεσαι",w:["Να τον συναντήσεις σε ένα πάρκο","Να του δώσεις το τηλέφωνό σου","Να τον συναντήσεις χωρίς να το πεις σε κανέναν"],why:"Οι άνθρωποι στο διαδίκτυο μπορεί να μην είναι αυτοί που λένε."},
-    {q:"Τι είναι ένας φυλλομετρητής (browser);",a:"Ένα πρόγραμμα που χρησιμοποιείς για να βλέπεις ιστοσελίδες",w:["Ένας άνθρωπος που φτιάχνει το διαδίκτυο","Ένα είδος δρομολογητή","Το καλώδιο που συνδέεται στο διαδίκτυο"],why:"Οι φυλλομετρητές ζητούν ιστοσελίδες και τις εμφανίζουν."},
-    {q:"Πού αποθηκεύεται μια ιστοσελίδα;",a:"Σε έναν διακομιστή ιστού",w:["Μέσα στο πληκτρολόγιό σου","Στον διακομιστή DNS","Στον δρομολογητή"],why:"Ο διακομιστής ιστού είναι ένας υπολογιστής που αποθηκεύει ιστοσελίδες και στέλνει σελίδες όταν του ζητηθούν."},
-    {q:"Γιατί είναι καλή ιδέα να έχεις διαφορετικό κωδικό για κάθε λογαριασμό;",a:"Αν βρεθεί ένας, οι άλλοι μένουν ασφαλείς",w:["Κάνει το διαδίκτυο πιο γρήγορο","Το απαιτεί ο νόμος από τις ιστοσελίδες","Για να μπορείς να τους μοιράζεσαι"],why:"Αν έχεις τον ίδιο κωδικό παντού, μία διαρροή θα μπορούσε να ξεκλειδώσει τα πάντα."}
+    {q:"Τι κάνει μια λογική πύλη;",a:"Παίρνει εισόδους 1 ή 0 και δίνει μία έξοδο",w:["Αποθηκεύει φωτογραφίες","Συνδέεται στο διαδίκτυο","Ανοίγει το κουτί του υπολογιστή"],why:"Μια λογική πύλη ακολουθεί έναν κανόνα για να μετατρέψει τις εισόδους της σε μία έξοδο."},
+    {q:"Στη λογική, τι σημαίνει το 1;",a:"Αναμμένο ή αληθές",w:["Σβηστό ή ψευδές","Χαλασμένο","Μισοαναμμένο"],why:"Το 1 είναι αναμμένο/αληθές και το 0 σβηστό/ψευδές."},
+    {q:"Μια πύλη AND έχει εισόδους 1 και 0. Ποια είναι η έξοδος;",a:"0",w:["1","2","10"],why:"Η AND δίνει 1 μόνο όταν και οι δύο είσοδοι είναι 1."},
+    {q:"Μια πύλη OR έχει εισόδους 1 και 0. Ποια είναι η έξοδος;",a:"1",w:["0","2","10"],why:"Η OR δίνει 1 όταν τουλάχιστον μία είσοδος είναι 1."},
+    {q:"Μια πύλη NOT έχει είσοδο 1. Ποια είναι η έξοδος;",a:"0",w:["1","2","Δεν έχει έξοδο"],why:"Η NOT αντιστρέφει την είσοδο: το 1 γίνεται 0."},
+    {q:"Ποια πύλη δίνει 1 μόνο όταν και οι δύο είσοδοι είναι 1;",a:"AND",w:["OR","NOT","XOR"],why:"Αυτός είναι ο κανόνας της AND."},
+    {q:"Ποια πύλη έχει μόνο μία είσοδο;",a:"NOT",w:["AND","OR","XOR"],why:"Η NOT απλώς αντιστρέφει μία είσοδο."},
+    {q:"Μια πύλη XOR έχει εισόδους 1 και 1. Ποια είναι η έξοδος;",a:"0",w:["1","2","11"],why:"Η XOR δίνει 1 μόνο όταν οι είσοδοι είναι διαφορετικές."},
+    {q:"Ποια πύλη δίνει 1 όταν οι είσοδοι είναι διαφορετικές;",a:"XOR",w:["AND","NOR","NAND"],why:"XOR σημαίνει αποκλειστικό OR: η μία ή η άλλη, όχι και οι δύο."},
+    {q:"Πόσες σειρές έχει ο πίνακας αληθείας μιας πύλης με 2 εισόδους;",a:"4",w:["2","3","8"],why:"00, 01, 10 και 11: τέσσερα πιθανά ζευγάρια εισόδων."},
+    {q:"Πόσες σειρές έχει ένας πίνακας αληθείας με 3 εισόδους;",a:"8",w:["3","6","9"],why:"Κάθε επιπλέον είσοδος διπλασιάζει τις σειρές: 2 × 2 × 2 = 8."},
+    {q:"Τι είναι μια πύλη NAND;",a:"Μια πύλη AND που ακολουθείται από μια NOT",w:["Μια πύλη OR που ακολουθείται από μια NOT","Δύο πύλες NOT","Μια πύλη χωρίς εισόδους"],why:"NAND σημαίνει NOT AND, οπότε η έξοδός της είναι το αντίθετο της AND."},
+    {q:"Μια πύλη NOR έχει εισόδους 0 και 0. Ποια είναι η έξοδος;",a:"1",w:["0","2","00"],why:"Η NOR είναι το αντίθετο της OR. Η OR εδώ δίνει 0, άρα η NOR δίνει 1."},
+    {q:"Ένα κουδούνι χτυπά αν πατηθεί το μπροστινό Ή το πίσω κουμπί. Ποια πύλη είναι αυτή;",a:"OR",w:["AND","NOT","NAND"],why:"Αρκεί οποιοδήποτε από τα δύο κουμπιά, άρα είναι OR."},
+    {q:"Από τι είναι φτιαγμένες οι λογικές πύλες μέσα σε ένα τσιπ;",a:"Από μικροσκοπικούς διακόπτες-τρανζίστορ",w:["Από μικρές λάμπες","Από χάλκινα νομίσματα","Από μαγνήτες"],why:"Δισεκατομμύρια τρανζίστορ λειτουργούν ως διακόπτες για να φτιάξουν τις πύλες."},
+    {q:"Για το (A AND B) OR C, ποιες είσοδοι ανάβουν τη λάμπα;",a:"A = 0, B = 0, C = 1",w:["A = 1, B = 0, C = 0","A = 0, B = 1, C = 0","A = 0, B = 0, C = 0"],why:"Το C είναι 1, οπότε η πύλη OR δίνει 1 ό,τι κι αν δίνει η πύλη AND."}
   ];
   var QN=10,qList=[],qi=0,qRight=0;
   function showQ(){
@@ -552,24 +438,20 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
     $("qCount").textContent="Ερώτηση "+(qi+1)+" από "+QN;$("qBar").style.width=(qi/QN*100)+"%";
     $("qText").textContent=it.q;$("qFb").textContent="";$("qFb").className="fb";$("qWhy").textContent="";$("qNext").style.display="none";
     var box=$("qChoices");box.innerHTML="";
-    shuffle([it.a].concat(it.w)).forEach(function(o){
-      var b=document.createElement("button");b.className="choice";b.textContent=o;
-      b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);
-    });
+    shuffle([it.a].concat(it.w)).forEach(function(o){var b=document.createElement("button");b.className="choice";b.textContent=o;b.addEventListener("click",function(){answerQ(o,b);});box.appendChild(b);});
   }
   function answerQ(o,btn){
     var it=qList[qi],bs=$("qChoices").children;
     for(var i=0;i<bs.length;i++){bs[i].disabled=true;if(bs[i].textContent===it.a)bs[i].className="choice ok";}
     if(o===it.a){qRight++;$("qFb").textContent="✓ Σωστό!";$("qFb").className="fb ok";}
     else{btn.className="choice no";$("qFb").textContent="✗ Όχι ακριβώς. Η απάντηση είναι: "+it.a;$("qFb").className="fb no";}
-    $("qWhy").textContent=it.why;$("qScore").textContent="Βαθμός: "+qRight;
-    $("qNext").style.display="";$("qNext").focus({preventScroll:true});
+    $("qWhy").textContent=it.why;$("qScore").textContent="Βαθμός: "+qRight;$("qNext").style.display="";$("qNext").focus({preventScroll:true});
   }
   $("qNext").addEventListener("click",function(){
     qi++;
     if(qi>=QN){$("qBar").style.width="100%";$("qBox").style.display="none";$("qEnd").style.display="";
       var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
-      $("qEndText").textContent=(qRight===QN?"Ειδικός του διαδικτύου! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε την εξερεύνηση! ")+"Πέτυχες "+qRight+" από "+QN+". "+stars;
+      $("qEndText").textContent=(qRight===QN?"Θρύλος της λογικής! ":qRight>=7?"Εξαιρετική δουλειά! ":qRight>=4?"Καλή προσπάθεια! ":"Συνέχισε την εξερεύνηση! ")+"Πέτυχες "+qRight+" από "+QN+". "+stars;
       $("qAgain").focus({preventScroll:true});}
     else showQ();
   });
@@ -579,24 +461,17 @@ label.chk{display:flex;gap:8px;align-items:center;font-weight:700;cursor:pointer
   /* ---------- tabs ---------- */
   var tabs=document.querySelectorAll(".tab"),started={};
   function setTab(t){
-    for(var i=0;i<tabs.length;i++){
-      var on=tabs[i]===t;
-      tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");
-      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
-    }
+    for(var i=0;i<tabs.length;i++){var on=tabs[i]===t;tabs[i].setAttribute("aria-selected",on?"true":"false");tabs[i].setAttribute("tabindex",on?"0":"-1");$(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");}
     var p=t.getAttribute("data-p");
-    if(p==="dns"&&!started.o){started.o=1;startO();}
-    if(p==="safe"&&!started.s){started.s=1;startSf();}
+    if(p==="tt"&&!started.t){started.t=1;buildF();startM();}
+    if(p==="lb"&&!started.l){started.l=1;buildL();}
     if(p==="quiz"&&!started.q){started.q=1;startQuiz();}
   }
   for(var ti=0;ti<tabs.length;ti++){
     tabs[ti].addEventListener("click",function(){setTab(this);});
-    tabs[ti].addEventListener("keydown",function(e){
-      var idx=Array.prototype.indexOf.call(tabs,this);
-      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}
-    });
+    tabs[ti].addEventListener("keydown",function(e){var idx=Array.prototype.indexOf.call(tabs,this);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;setTab(tabs[n]);tabs[n].focus();e.preventDefault();}});
   }
-  window.__net={BANK:BANK,SAFE:SAFE,ORDER:ORDER,analyse:analyse,timeText:timeText,state:function(){return {busy:busy,arrived:arrived.slice(),order:order.slice(),n:pkts.length};},live:function(){return livePaths().length;},sf:function(){return sfList[sfi];}};
+  window.__lg={G:G,ORDER:ORDER,LEVELS:LEVELS,evalLevel:evalLevel,combos:combos,BANK:BANK,ex:function(){return {gate:exGate,ins:exIn.slice()};},level:function(){return li;},found:function(){return Object.keys(lFound[li]||{}).length;},mcur:function(){return mList[mi];}};
 })();
 </script>
 </body>
