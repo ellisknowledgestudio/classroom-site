@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Day and Night Explorer and Quiz for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive day and night tool for ages 7-11. Spin the Earth to see why we have day and night, watch the Sun rise in the east and set in the west, then take an auto-marked day and night quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/space/day-and-night/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn.sm{padding:6px 12px;font-size:15px}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.view{background:var(--navy);border-radius:16px;padding:12px}
+.view h3{font-size:18px;margin:0 0 6px}
+.view svg{width:100%;height:auto;display:block}
+.status{background:var(--navy);border-radius:16px;padding:14px 16px;margin-top:14px}
+.tag{display:inline-block;background:var(--gold);color:var(--navy);border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px}
+.tag.night{background:#5A6896;color:var(--ink)}
+input[type=range]{width:100%;accent-color:#F4B942;height:30px}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.qpic{width:220px;max-width:100%;margin:6px 0}
+.qpic svg{width:100%;height:auto;display:block}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:620px){.views{grid-template-columns:1fr}}
+@media (max-width:520px){.choices{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/space/">Space</a> › Day and Night</nav>
+  <h1>Day and Night ☀️🌙</h1>
+  <p class="lead">Why does the Sun seem to move across the sky? Spin the Earth through one whole day to see how day turns into night, then test yourself with the quiz. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Day and Night modes">
+    <button class="tab" role="tab" id="t-explore" aria-controls="explore" aria-selected="true" data-p="explore">Spin the Earth</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Day and Night Quiz</button>
+  </div>
+
+  <section class="panel on" id="explore" role="tabpanel" aria-labelledby="t-explore">
+    <h2>Spin the Earth</h2>
+    <p>Move the slider to turn the Earth. Watch the little explorer standing on the Earth. Are they on the sunny side or the dark side?</p>
+    <label for="hour" class="muted">Time for the explorer: <b id="clock" class="score">12:00</b></label>
+    <input type="range" id="hour" min="0" max="24" step="0.25" value="12" aria-describedby="tName">
+    <div class="row">
+      <button class="btn sm" type="button" id="play" aria-pressed="false">▶ Spin</button>
+      <button class="btn sm ghost" type="button" data-h="6">Sunrise</button>
+      <button class="btn sm ghost" type="button" data-h="12">Midday</button>
+      <button class="btn sm ghost" type="button" data-h="18">Sunset</button>
+      <button class="btn sm ghost" type="button" data-h="0">Midnight</button>
+    </div>
+    <div class="views">
+      <div class="view"><h3>Looking down on the North Pole</h3><div id="space"></div></div>
+      <div class="view"><h3>What the explorer sees</h3><div id="sky"></div></div>
+    </div>
+    <div class="status" aria-live="polite">
+      <h3 id="tName" style="font-size:26px">Midday</h3>
+      <span class="tag" id="dn">Day</span>
+      <p id="tText"></p>
+    </div>
+    <p class="tip"><b>Why does it happen?</b> The Earth is always spinning on its axis, an imaginary line through the North and South Poles. It takes about 24 hours to spin round once. The half of the Earth facing the Sun has day, and the half facing away has night. The Sun is not really moving across the sky: we are spinning! The Earth spins from west to east, so the Sun seems to rise in the east and set in the west. (To keep things simple, sunrise here is at 6 am and sunset at 6 pm, like places near the equator. In the UK and USA the times change with the seasons.)</p>
+  </section>
+
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Day and Night Quiz</h2>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <div class="qpic" id="qPic"></div>
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <button class="btn" id="qNext" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain">Play again</button>
+    </div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Get the printable Solar System and Space pack in the shop →</a></p>
+</div>
+<script>
+(function(){
+  function $(id){return document.getElementById(id);}
+
+  /* ---------- the science ---------- */
+  /* simplified day: sunrise 6:00, sunset 18:00 */
+  function isDay(h){h=((h%24)+24)%24;return h>6&&h<18;}
+  function partOfDay(h){
+    h=((h%24)+24)%24;
+    if(h===0||h===24){return "Midnight";}
+    if(h===6){return "Sunrise";}
+    if(h===12){return "Midday";}
+    if(h===18){return "Sunset";}
+    if(h<6){return "Night";}
+    if(h<12){return "Morning";}
+    if(h<18){return "Afternoon";}
+    if(h<21){return "Evening";}
+    return "Night";
+  }
+  var TEXT={
+    "Midnight":"The explorer is on the side of the Earth facing right away from the Sun. It is the middle of the night.",
+    "Night":"The explorer is on the dark half of the Earth, facing away from the Sun. The sky is dark and we can see stars.",
+    "Sunrise":"The Earth's spin is carrying the explorer out of the dark half and into the sunlight. The Sun appears in the east.",
+    "Morning":"The explorer is on the sunny half. The Sun seems to climb higher in the sky as the Earth turns.",
+    "Midday":"The explorer is facing straight towards the Sun. The Sun is at its highest in the sky and shadows are at their shortest.",
+    "Afternoon":"The explorer is still on the sunny half, but the Earth is turning them away from the Sun. The Sun seems to sink lower.",
+    "Sunset":"The Earth's spin is carrying the explorer from the sunny half into the dark half. The Sun disappears in the west.",
+    "Evening":"The explorer has just moved onto the dark half of the Earth, so the sky is getting dark."
+  };
+  function clockText(h){
+    h=((h%24)+24)%24;var hh=Math.floor(h),mm=Math.round((h-hh)*60);
+    if(mm===60){hh=(hh+1)%24;mm=0;}
+    return (hh<10?"0":"")+hh+":"+(mm<10?"0":"")+mm;
+  }
+  /* angle of the explorer, viewed from above the North Pole, Sun on the left.
+     The Earth spins anticlockwise. Midday faces the Sun (180 deg). */
+  function explorerAngle(h){return 180+15*(h-12);}
+
+  /* ---------- drawings ---------- */
+  function spaceSVG(h,label){
+    var a=explorerAngle(h)*Math.PI/180, cx=125, cy=100, r=52;
+    var px=cx+Math.cos(a)*r, py=cy-Math.sin(a)*r;
+    var ox=cx+Math.cos(a)*(r+16), oy=cy-Math.sin(a)*(r+16);
+    var s='<svg viewBox="0 0 220 200" role="img" aria-label="'+label+'">';
+    s+='<rect width="220" height="200" fill="#0B1430"/>';
+    s+='<g fill="#fff" opacity=".7"><circle cx="190" cy="20" r="1.2"/><circle cx="205" cy="170" r="1"/><circle cx="160" cy="185" r="1.3"/><circle cx="200" cy="90" r="1"/><circle cx="170" cy="40" r="0.9"/></g>';
+    /* sun and rays */
+    s+='<circle cx="-10" cy="100" r="34" fill="#F4B942"/>';
+    s+='<g stroke="#F4B942" stroke-width="2" opacity=".45"><line x1="30" y1="60" x2="68" y2="60"/><line x1="30" y1="80" x2="70" y2="80"/><line x1="30" y1="100" x2="70" y2="100"/><line x1="30" y1="120" x2="70" y2="120"/><line x1="30" y1="140" x2="68" y2="140"/></g>';
+    s+='<text x="4" y="160" fill="#F4B942" font-size="12" font-family="Nunito Sans,sans-serif" font-weight="700">Sun</text>';
+    /* earth: lit left half, dark right half */
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="#2F7BD8"/>';
+    s+='<path d="M'+cx+','+(cy-r)+' A'+r+','+r+' 0 0 0 '+cx+','+(cy+r)+' Z" fill="#5FB0FF"/>';
+    s+='<g fill="#3FA65A" opacity=".85"><path d="M108 70 q10 -8 20 2 q4 10 -6 14 q-12 2 -14 -16z"/><path d="M140 110 q12 -4 16 8 q-2 12 -14 10 q-8 -6 -2 -18z"/><path d="M100 118 q8 2 6 12 q-8 4 -10 -4z"/></g>';
+    s+='<path d="M'+cx+','+(cy-r)+' A'+r+','+r+' 0 0 1 '+cx+','+(cy+r)+' Z" fill="#06102A" opacity=".62"/>';
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="#fff"/>';
+    s+='<text x="'+(cx+5)+'" y="'+(cy+4)+'" fill="#fff" font-size="9" font-family="Nunito Sans,sans-serif">N</text>';
+    /* spin arrow (anticlockwise) */
+    s+='<path d="M'+(cx+44)+','+(cy-58)+' A64,64 0 0 0 '+(cx-30)+','+(cy-62)+'" fill="none" stroke="#B8C2E0" stroke-width="2"/>';
+    s+='<path d="M'+(cx-30)+','+(cy-62)+' l9,-6 l-1,10 z" fill="#B8C2E0"/>';
+    /* explorer */
+    s+='<line x1="'+px.toFixed(1)+'" y1="'+py.toFixed(1)+'" x2="'+ox.toFixed(1)+'" y2="'+oy.toFixed(1)+'" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/>';
+    s+='<circle cx="'+ox.toFixed(1)+'" cy="'+oy.toFixed(1)+'" r="5.5" fill="#FF6B6B" stroke="#fff" stroke-width="1.5"/>';
+    return s+'</svg>';
+  }
+  function skySVG(h){
+    h=((h%24)+24)%24;
+    var day=isDay(h)||h===6||h===18;
+    var top=isDay(h)?"#5FB0FF":(h===6||h===18)?"#F29E6B":"#0B1430";
+    var bot=isDay(h)?"#BFE3FF":(h===6||h===18)?"#FFD8A8":"#1A2A55";
+    var s='<svg viewBox="0 0 220 140" role="img" aria-label="The sky at '+clockText(h)+'">';
+    s+='<defs><linearGradient id="skyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+top+'"/><stop offset="1" stop-color="'+bot+'"/></linearGradient></defs>';
+    s+='<rect width="220" height="140" fill="url(#skyg)"/>';
+    if(!day){s+='<g fill="#fff"><circle cx="30" cy="25" r="1.3"/><circle cx="70" cy="50" r="1"/><circle cx="120" cy="20" r="1.5"/><circle cx="160" cy="45" r="1.1"/><circle cx="195" cy="22" r="1.3"/><circle cx="95" cy="70" r="0.9"/><circle cx="45" cy="80" r="1"/></g>';}
+    if(day){ /* sun path from east (left) to west (right) */
+      var t=(h-6)/12, sx=20+t*180, sy=110-Math.sin(t*Math.PI)*90;
+      s+='<circle cx="'+sx.toFixed(1)+'" cy="'+sy.toFixed(1)+'" r="12" fill="#FFE07A" stroke="#F4B942" stroke-width="3"/>';
+    }
+    s+='<rect y="110" width="220" height="30" fill="#2E6B3A"/>';
+    s+='<g font-family="Nunito Sans,sans-serif" font-size="12" font-weight="700" fill="#fff"><text x="6" y="130">East</text><text x="98" y="130">South</text><text x="180" y="130">West</text></g>';
+    return s+'</svg>';
+  }
+
+  /* ---------- explore ---------- */
+  var slider=$("hour"), timer=null;
+  function showHour(h){
+    h=Math.max(0,Math.min(24,h));
+    slider.value=h;
+    var p=partOfDay(h), d=isDay(h);
+    $("clock").textContent=clockText(h);
+    $("space").innerHTML=spaceSVG(h,"The Earth seen from above the North Pole with the explorer at "+clockText(h));
+    $("sky").innerHTML=skySVG(h);
+    $("tName").textContent=p;
+    var dnText=d?"Day":(p==="Sunrise"||p==="Sunset")?"Day and night meet":"Night";
+    $("dn").textContent=dnText;
+    $("dn").className="tag"+(d?"":" night");
+    $("tText").textContent=TEXT[p];
+    slider.setAttribute("aria-valuetext",clockText(h)+", "+p);
+  }
+  slider.addEventListener("input",function(){showHour(parseFloat(slider.value));});
+  var presets=document.querySelectorAll("[data-h]");
+  for(var pi=0;pi<presets.length;pi++){
+    presets[pi].addEventListener("click",function(){stop();showHour(parseFloat(this.getAttribute("data-h")));});
+  }
+  function stop(){if(timer){clearInterval(timer);timer=null;}$("play").textContent="▶ Spin";$("play").setAttribute("aria-pressed","false");}
+  $("play").addEventListener("click",function(){
+    if(timer){stop();return;}
+    $("play").textContent="⏸ Stop";$("play").setAttribute("aria-pressed","true");
+    timer=setInterval(function(){var h=parseFloat(slider.value)+0.25;if(h>24){h=0;}showHour(h);},120);
+  });
+  showHour(12);
+
+  /* ---------- quiz ---------- */
+  var FACTS=[
+    {q:"Why do we have day and night?",a:"The Earth spins on its axis",o:["The Sun goes round the Earth","The Moon blocks the Sun","Clouds cover the Sun"]},
+    {q:"About how long does the Earth take to spin round once?",a:"24 hours",o:["12 hours","1 week","365 days"]},
+    {q:"In which direction does the Sun rise?",a:"East",o:["West","North","South"]},
+    {q:"In which direction does the Sun set?",a:"West",o:["East","North","South"]},
+    {q:"How much of the Earth has daytime at any moment?",a:"About half",o:["All of it","None of it","About a quarter"]},
+    {q:"When are shadows at their shortest?",a:"Around midday",o:["Early morning","Late evening","At midnight"]},
+    {q:"Which way does the Earth spin?",a:"From west to east",o:["From east to west","From north to south","It does not spin"]},
+    {q:"About how long does the Earth take to travel once round the Sun?",a:"About 365 days",o:["About 24 hours","About 30 days","About 100 years"]},
+    {q:"Does the Sun really move across our sky each day?",a:"No, the Earth is spinning",o:["Yes, it orbits the Earth daily","Yes, the wind pushes it","Only in summer"]},
+    {q:"What is the imaginary line the Earth spins around called?",a:"Its axis",o:["Its orbit","The equator","Its shadow"]}
+  ];
+  var DN_HOURS=[0,1,2,3,4,8,9,10,11,12,13,14,15,16,20,21,22,23];
+  var KEY_HOURS=[0,6,12,18];
+  var KEY_NAMES=["Midnight","Sunrise","Midday","Sunset"];
+  var QN=10, qi=0, qRight=0, cur=null, answered=false;
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  function makeQuestion(){
+    var type=Math.floor(Math.random()*5), q, h;
+    if(type<=1){
+      h=pick(DN_HOURS);
+      var ans=isDay(h)?"Day":"Night";
+      q={pic:h,text:"Is it day or night for the red explorer?",ans:ans,opts:[ans==="Day"?"Night":"Day"],
+         why:ans==="Day"?"The explorer is on the half of the Earth facing the Sun, so it is day.":"The explorer is on the half of the Earth facing away from the Sun, so it is night."};
+    } else if(type===2){
+      h=pick(KEY_HOURS);
+      var nm=partOfDay(h), others=[];
+      for(var k=0;k<KEY_NAMES.length;k++){if(KEY_NAMES[k]!==nm){others.push(KEY_NAMES[k]);}}
+      q={pic:h,text:"The Earth spins anticlockwise in this picture. What time of day is it for the red explorer?",ans:nm,opts:others,why:"It is "+nm.toLowerCase()+". "+TEXT[nm]};
+    } else {
+      var F=pick(FACTS);
+      q={pic:null,text:F.q,ans:F.a,opts:F.o.slice(0),why:"The answer is: "+F.a+"."};
+    }
+    q.opts.push(q.ans);shuffle(q.opts);
+    return q;
+  }
+  function showQ(){
+    answered=false;cur=makeQuestion();
+    $("qPic").innerHTML=cur.pic===null?"":spaceSVG(cur.pic,"The Earth seen from above the North Pole, with the Sun on the left and a red explorer standing on the Earth");
+    $("qPic").style.display=cur.pic===null?"none":"";
+    $("qText").textContent=cur.text;
+    $("qFb").textContent="";$("qFb").className="fb";
+    $("qNext").style.display="none";
+    $("qCount").textContent="Question "+(qi+1)+" of "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    var box=$("qChoices");box.innerHTML="";
+    for(var k=0;k<cur.opts.length;k++){
+      (function(opt){
+        var b=document.createElement("button");b.className="choice";b.type="button";b.textContent=opt;
+        b.addEventListener("click",function(){answer(b,opt);});
+        box.appendChild(b);
+      })(cur.opts[k]);
+    }
+  }
+  function answer(btn,opt){
+    if(answered){return;}
+    answered=true;
+    var bs=$("qChoices").getElementsByTagName("button");
+    for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(bs[k].textContent===cur.ans){bs[k].className="choice ok";}}
+    if(opt===cur.ans){qRight++;$("qFb").textContent="Correct! "+cur.why;$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="Not quite. "+cur.why;$("qFb").className="fb no";}
+    $("qScore").textContent="Score: "+qRight;
+    $("qNext").style.display="";$("qNext").focus();
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Out of this world! ":qRight>=7?"Brilliant space explorer! ":qRight>=4?"Good work! ":"Keep spinning and try again! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus();
+    } else {showQ();}
+  });
+  function startQuiz(){qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+  startQuiz();
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function setTab(t){
+    stop();
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__dn={isDay:isDay,partOfDay:partOfDay,explorerAngle:explorerAngle,makeQuestion:makeQuestion,FACTS:FACTS};
+})();
+</script>
+</body>
+</html>
