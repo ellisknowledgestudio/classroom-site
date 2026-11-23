@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Place Value Chart and Quiz for Kids | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive place value tool for ages 7-11. Build numbers up to a million on a place value chart, see each digit's value, expanded form and number words, then take an auto-marked place value quiz.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/math/place-value/">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tab{background:var(--navy2);color:var(--ink);border:2px solid transparent;border-radius:999px;padding:8px 16px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--gold);color:var(--gold)}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;display:none}
+.panel.on{display:block}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.btn:focus-visible,.tab:focus-visible,.choice:focus-visible,.step:focus-visible,.lvl:focus-visible,select:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.muted{color:var(--muted)}
+.tip{background:var(--navy);border-radius:12px;padding:10px 14px;color:var(--muted);font-size:15px}
+select{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:10px;padding:8px;font:700 15px "Nunito Sans",sans-serif}
+.chart{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:14px 0}
+.col{background:var(--navy);border-radius:12px;padding:6px 4px;text-align:center}
+.col.off{opacity:.3}
+.col.hi{outline:3px solid var(--gold)}
+.col h4{margin:0;font:700 11px "Nunito Sans",sans-serif;color:var(--muted);line-height:1.15;min-height:26px}
+.col .d{font:800 clamp(30px,8vw,48px) "Baloo 2",sans-serif;color:var(--gold);line-height:1.1}
+.step{background:var(--navy2);color:var(--ink);border:2px solid var(--muted);border-radius:10px;width:100%;max-width:44px;height:32px;font:800 18px "Baloo 2",sans-serif;cursor:pointer;padding:0}
+.big{font:800 clamp(28px,7vw,40px) "Baloo 2",sans-serif;color:var(--ink);margin:6px 0}
+.out p{margin:4px 0}
+.out b{color:var(--gold)}
+.q{font:800 clamp(20px,5vw,26px) "Baloo 2",sans-serif;line-height:1.25;margin:10px 0}
+.q u{color:var(--gold);text-decoration-thickness:3px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.choice{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:14px;padding:12px;font:800 19px "Baloo 2",sans-serif;cursor:pointer;min-height:56px}
+.choice.ok{border-color:var(--good);background:#1d4a3a}
+.choice.no{border-color:var(--bad);background:#4a1d27}
+.choice:disabled{cursor:default}
+.lvl{background:var(--navy);color:var(--ink);border:2px solid var(--muted);border-radius:999px;padding:6px 14px;font:700 14px "Nunito Sans",sans-serif;cursor:pointer}
+.lvl[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.fb{min-height:28px;font-weight:700}
+.fb.ok{color:var(--good)}.fb.no{color:var(--bad)}
+.score{color:var(--gold);font-weight:700}
+.bar{height:10px;background:var(--navy);border-radius:999px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+.shop{margin:24px 0;text-align:center}
+@media (max-width:520px){.choices{grid-template-columns:1fr}.chart{gap:3px}.col{padding:4px 1px}.col h4{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/math/">Math</a> › Place Value Lab</nav>
+  <h1>Place Value Lab 🔢</h1>
+  <p class="lead">Every digit has a job, and its job depends on where it sits. Build numbers on the place value chart, see what each digit is really worth, then test yourself in the quiz. Ages 7-11.</p>
+
+  <div class="tabs" role="tablist" aria-label="Place Value Lab modes">
+    <button class="tab" role="tab" id="t-build" aria-controls="build" aria-selected="true" data-p="build">Build a Number</button>
+    <button class="tab" role="tab" id="t-quiz" aria-controls="quiz" aria-selected="false" tabindex="-1" data-p="quiz">Place Value Quiz</button>
+  </div>
+
+  <section class="panel on" id="build" role="tabpanel" aria-labelledby="t-build">
+    <h2>Build a number</h2>
+    <p>Use the + and − buttons to change each digit, or press Surprise me. Tap a digit to see what it is worth.</p>
+    <div class="row">
+      <label for="size" class="muted">Numbers up to</label>
+      <select id="size">
+        <option value="3">999 (hundreds)</option>
+        <option value="4" selected>9,999 (thousands)</option>
+        <option value="5">99,999 (ten thousands)</option>
+        <option value="6">999,999 (hundred thousands)</option>
+      </select>
+      <button class="btn ghost" id="rand" type="button">Surprise me</button>
+    </div>
+    <div class="chart" id="chart" role="group" aria-label="Place value chart"></div>
+    <div class="out" aria-live="polite">
+      <p class="big" id="numBig">0</p>
+      <p><b>In words:</b> <span id="numWords"></span></p>
+      <p><b>Expanded form:</b> <span id="numExp"></span></p>
+      <p><b>Digit value:</b> <span id="numDigit"></span></p>
+    </div>
+    <p class="tip"><b>Remember:</b> each place is worth 10 times the place to its right. A 0 is a place holder: in 405 the 0 shows there are no tens, so the 4 still means 4 hundreds.</p>
+  </section>
+
+  <section class="panel" id="quiz" role="tabpanel" aria-labelledby="t-quiz">
+    <h2>Place Value Quiz</h2>
+    <div class="row" role="group" aria-label="Quiz level">
+      <button class="lvl" type="button" data-l="3" aria-pressed="false">Up to 999</button>
+      <button class="lvl" type="button" data-l="4" aria-pressed="true">Up to 9,999</button>
+      <button class="lvl" type="button" data-l="6" aria-pressed="false">Up to 999,999</button>
+    </div>
+    <p class="muted">10 questions. <span class="score" id="qScore">Score: 0</span> · <span id="qCount">Question 1 of 10</span></p>
+    <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+    <div id="qBox">
+      <p class="q" id="qText"></p>
+      <div class="choices" id="qChoices"></div>
+      <div class="fb" id="qFb" aria-live="polite"></div>
+      <button class="btn" id="qNext" type="button" style="display:none">Next question →</button>
+    </div>
+    <div id="qEnd" style="display:none">
+      <p class="q" id="qEndText"></p>
+      <button class="btn" id="qAgain" type="button">Play again</button>
+    </div>
+  </section>
+
+  <p class="shop"><a href="https://ellisknowledgestudio.com/educational-resources">Get printable maths practice packs in the shop →</a></p>
+</div>
+<script>
+(function(){
+  var PLACES=["ones","tens","hundreds","thousands","ten thousands","hundred thousands"];
+  var NAMES=["Ones","Tens","Hundreds","Thousands","Ten thousands","Hundred thousands"];
+  var ONES=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+  var TENS=["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+  function $(id){return document.getElementById(id);}
+  function pow10(p){var v=1;for(var i=0;i<p;i++){v*=10;}return v;}
+  function fmt(n){var s=String(n),o="";while(s.length>3){o=","+s.slice(-3)+o;s=s.slice(0,-3);}return s+o;}
+  function digitAt(n,p){return Math.floor(n/pow10(p))%10;}
+  function under100(n){if(n<20){return ONES[n];}return TENS[Math.floor(n/10)]+(n%10?"-"+ONES[n%10]:"");}
+  function under1000(n){
+    var h=Math.floor(n/100),r=n%100,s="";
+    if(h){s=ONES[h]+" hundred";if(r){s+=" and ";}}
+    if(r||!h){s+=under100(r);}
+    return s;
+  }
+  function words(n){
+    if(n===0){return "zero";}
+    var th=Math.floor(n/1000),r=n%1000,s="";
+    if(th){s=under1000(th)+" thousand";if(r){s+=(r<100?" and ":" ");}}
+    if(r){s+=under1000(r);}
+    return s;
+  }
+  function expanded(n){
+    var parts=[];
+    for(var p=5;p>=0;p--){var d=digitAt(n,p);if(d){parts.push(fmt(d*pow10(p)));}}
+    return parts.length?parts.join(" + "):"0";
+  }
+
+  /* ---------- build ---------- */
+  var size=4, num=3527, hiP=-1, cols=[];
+  function setNum(n){
+    num=Math.max(0,Math.min(n,pow10(size)-1));
+    for(var p=0;p<6;p++){
+      var c=cols[p], on=p<size;
+      c.box.className="col"+(on?"":" off")+(p===hiP&&on?" hi":"");
+      c.d.textContent=on?digitAt(num,p):"";
+      c.up.disabled=!on;c.dn.disabled=!on;c.d.disabled=!on;
+      c.d.setAttribute("aria-label",NAMES[p]+": "+(on?digitAt(num,p):"not used")+". Tap to see its value");
+    }
+    $("numBig").textContent=fmt(num);
+    $("numWords").textContent=words(num);
+    $("numExp").textContent=expanded(num);
+    if(hiP>=0&&hiP<size){
+      var d=digitAt(num,hiP);
+      $("numDigit").textContent="The "+d+" is in the "+PLACES[hiP]+" place, so it is worth "+fmt(d*pow10(hiP))+".";
+    } else {$("numDigit").textContent="Tap a digit in the chart.";}
+  }
+  function change(p,delta){
+    var d=digitAt(num,p), nd=(d+delta+10)%10;
+    hiP=p;setNum(num+(nd-d)*pow10(p));
+  }
+  var chart=$("chart");
+  for(var p=5;p>=0;p--){
+    (function(p){
+      var box=document.createElement("div");
+      var h=document.createElement("h4");h.textContent=NAMES[p];
+      var up=document.createElement("button");up.className="step";up.type="button";up.textContent="+";up.setAttribute("aria-label","Add 1 to the "+PLACES[p]+" digit");
+      var d=document.createElement("button");d.className="d";d.type="button";
+      d.style.cssText="background:none;border:0;width:100%;cursor:pointer;padding:0";
+      var dn=document.createElement("button");dn.className="step";dn.type="button";dn.textContent="−";dn.setAttribute("aria-label","Take 1 from the "+PLACES[p]+" digit");
+      up.addEventListener("click",function(){change(p,1);});
+      dn.addEventListener("click",function(){change(p,-1);});
+      d.addEventListener("click",function(){hiP=p;setNum(num);});
+      box.appendChild(h);box.appendChild(up);box.appendChild(d);box.appendChild(dn);
+      chart.appendChild(box);
+      cols[p]={box:box,d:d,up:up,dn:dn};
+    })(p);
+  }
+  function randNum(digits){var lo=pow10(digits-1);return lo+Math.floor(Math.random()*(pow10(digits)-lo));}
+  $("size").addEventListener("change",function(){size=parseInt(this.value,10);hiP=-1;setNum(randNum(size));});
+  $("rand").addEventListener("click",function(){hiP=-1;setNum(randNum(size));});
+  setNum(num);
+
+  /* ---------- quiz ---------- */
+  var QN=10, level=4, qi=0, qRight=0, cur=null, answered=false;
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function pick(a){return a[Math.floor(Math.random()*a.length)];}
+  /* a number with the given number of digits whose digit at place p is not 0 */
+  function numWithDigit(digits,p){
+    var n;do{n=randNum(digits);}while(digitAt(n,p)===0);return n;
+  }
+  function uniq(ans,cands,n){
+    var out=[],seen={};seen[ans]=1;
+    for(var i=0;i<cands.length&&out.length<n;i++){var c=cands[i];if(!seen[c]){seen[c]=1;out.push(c);}}
+    return out;
+  }
+  function underline(n,p){
+    var s=fmt(n),digitsSeen=0,out="";
+    for(var i=s.length-1;i>=0;i--){
+      var ch=s.charAt(i);
+      if(ch===","){out=ch+out;continue;}
+      out=(digitsSeen===p?"<u>"+ch+"</u>":ch)+out;digitsSeen++;
+    }
+    return out;
+  }
+  function makeQuestion(){
+    var digits=level===6?(Math.random()<0.5?5:6):level, type=Math.floor(Math.random()*5), q, p, n, d, i, c;
+    if(type===0){ /* value of underlined digit */
+      p=Math.floor(Math.random()*digits);n=numWithDigit(digits,p);d=digitAt(n,p);
+      c=[];for(i=0;i<digits;i++){if(i!==p){c.push(fmt(d*pow10(i)));}}c.push(String(d));c.push(fmt(d*pow10(p+1)));c.push(fmt(d*pow10(p+2)));c.push(fmt((d===9?8:d+1)*pow10(p)));
+      q={html:"What is the value of the underlined digit in "+underline(n,p)+"?",ans:fmt(d*pow10(p)),opts:uniq(fmt(d*pow10(p)),shuffle(c),3),
+        why:"The "+d+" is in the "+PLACES[p]+" place, so it is worth "+fmt(d*pow10(p))+"."};
+    } else if(type===1){ /* which place */
+      p=Math.floor(Math.random()*digits);n=numWithDigit(digits,p);d=digitAt(n,p);
+      c=[];for(i=0;i<Math.max(digits,4);i++){if(i!==p){c.push(PLACES[i]);}}
+      q={html:"In "+underline(n,p)+", which place is the underlined digit in?",ans:PLACES[p],opts:uniq(PLACES[p],shuffle(c),3),
+        why:"Counting from the right: ones, tens, hundreds... The "+d+" is in the "+PLACES[p]+" place."};
+    } else if(type===2){ /* expanded form to number */
+      n=randNum(digits);
+      if(digits>=4&&Math.random()<0.5){p=1+Math.floor(Math.random()*(digits-2));n=n-digitAt(n,p)*pow10(p);} /* put a zero in the middle */
+      c=[];
+      for(i=0;i<digits;i++){var dd=digitAt(n,i);if(dd!==0){c.push(fmt(n-dd*pow10(i)));}}
+      var s=String(n);c.push(fmt(parseInt(s.split("").reverse().join(""),10)));
+      c.push(fmt(n+pow10(Math.floor(Math.random()*digits))));c.push(fmt(n*10));
+      q={html:"Which number is "+expanded(n)+"?",ans:fmt(n),opts:uniq(fmt(n),shuffle(c),3),why:expanded(n)+" = "+fmt(n)+"."};
+    } else if(type===3){ /* words to digits */
+      n=randNum(digits);
+      c=[fmt(n+pow10(Math.floor(Math.random()*digits))),fmt(Math.max(1,n-pow10(Math.floor(Math.random()*digits)))),fmt(n*10),fmt(Math.floor(n/10))];
+      for(i=1;i<digits;i++){var a=digitAt(n,i),b=digitAt(n,i-1);if(a!==b){c.push(fmt(n+(b-a)*pow10(i)+(a-b)*pow10(i-1)));}}
+      q={html:"Which number is <span style=\"color:#F4B942\">"+words(n)+"</span>?",ans:fmt(n),opts:uniq(fmt(n),shuffle(c),3),why:words(n)+" is written "+fmt(n)+"."};
+    } else { /* 10/100/1000 more or less */
+      var steps=level===3?[10,100]:level===4?[10,100,1000]:[100,1000,10000];
+      var st=pick(steps), more=Math.random()<0.5;
+      do{n=randNum(digits);}while(more?n+st>=pow10(digits):n-st<pow10(digits-1));
+      var ans=more?n+st:n-st;
+      c=[fmt(more?n-st:n+st),fmt(more?n+st/10:n-st/10),fmt(more?n+st*10:n-st*10),fmt(more?n+1:n-1)];
+      q={html:"What is "+fmt(st)+" "+(more?"more":"less")+" than "+fmt(n)+"?",ans:fmt(ans),opts:uniq(fmt(ans),c,3),
+        why:fmt(n)+(more?" + ":" − ")+fmt(st)+" = "+fmt(ans)+"."};
+    }
+    q.type=type;q.n=n;q.p=p;
+    q.opts.push(q.ans);shuffle(q.opts);
+    return q;
+  }
+  function showQ(){
+    answered=false;cur=makeQuestion();
+    $("qText").innerHTML=cur.html;
+    $("qFb").textContent="";$("qFb").className="fb";
+    $("qNext").style.display="none";
+    $("qCount").textContent="Question "+(qi+1)+" of "+QN;
+    $("qBar").style.width=(qi/QN*100)+"%";
+    var box=$("qChoices");box.innerHTML="";
+    for(var k=0;k<cur.opts.length;k++){
+      (function(opt){
+        var b=document.createElement("button");b.className="choice";b.type="button";b.textContent=opt;
+        b.addEventListener("click",function(){answer(b,opt);});
+        box.appendChild(b);
+      })(cur.opts[k]);
+    }
+  }
+  function answer(btn,opt){
+    if(answered){return;}
+    answered=true;
+    var bs=$("qChoices").getElementsByTagName("button");
+    for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(bs[k].textContent===cur.ans){bs[k].className="choice ok";}}
+    if(opt===cur.ans){qRight++;$("qFb").textContent="Correct! "+cur.why;$("qFb").className="fb ok";}
+    else{btn.className="choice no";$("qFb").textContent="Not quite. "+cur.why;$("qFb").className="fb no";}
+    $("qScore").textContent="Score: "+qRight;
+    $("qNext").style.display="";$("qNext").focus();
+  }
+  $("qNext").addEventListener("click",function(){
+    qi++;
+    if(qi>=QN){
+      $("qBar").style.width="100%";
+      $("qBox").style.display="none";$("qEnd").style.display="";
+      var stars=qRight>=9?"🌟🌟🌟":qRight>=6?"🌟🌟":qRight>=3?"🌟":"";
+      var msg=qRight===QN?"Perfect place value! ":qRight>=7?"Brilliant work! ":qRight>=4?"Good effort! ":"Keep practising! ";
+      $("qEndText").textContent=msg+"You scored "+qRight+" out of "+QN+". "+stars;
+      $("qAgain").focus();
+    } else {showQ();}
+  });
+  function startQuiz(){qi=0;qRight=0;$("qScore").textContent="Score: 0";$("qEnd").style.display="none";$("qBox").style.display="";showQ();}
+  $("qAgain").addEventListener("click",startQuiz);
+  var lvls=document.querySelectorAll(".lvl");
+  for(var li=0;li<lvls.length;li++){
+    lvls[li].addEventListener("click",function(){
+      for(var j=0;j<lvls.length;j++){lvls[j].setAttribute("aria-pressed",lvls[j]===this?"true":"false");}
+      level=parseInt(this.getAttribute("data-l"),10);startQuiz();
+    });
+  }
+  startQuiz();
+
+  /* ---------- tabs ---------- */
+  var tabs=document.querySelectorAll(".tab");
+  function setTab(t){
+    for(var i=0;i<tabs.length;i++){
+      var on=tabs[i]===t;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].setAttribute("tabindex",on?"0":"-1");
+      $(tabs[i].getAttribute("data-p")).className="panel"+(on?" on":"");
+    }
+  }
+  for(var ti=0;ti<tabs.length;ti++){
+    tabs[ti].addEventListener("click",function(){setTab(this);});
+    tabs[ti].addEventListener("keydown",function(e){
+      var idx=Array.prototype.indexOf.call(tabs,this);
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){
+        var n=(idx+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;
+        setTab(tabs[n]);tabs[n].focus();e.preventDefault();
+      }
+    });
+  }
+  window.__pv={words:words,expanded:expanded,fmt:fmt,digitAt:digitAt,makeQuestion:makeQuestion,setLevel:function(l){level=l;},cur:function(){return cur;}};
+})();
+</script>
+</body>
+</html>
