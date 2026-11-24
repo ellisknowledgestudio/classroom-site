@@ -3,87 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What Is Electricity? Interactive KS2 Electricity for Ages 7-11 | Ellis Knowledge Studio</title>
-<meta name="description" content="Free interactive KS2 electricity tool: find out what electricity is, where it comes from, what runs on mains or batteries, how to stay safe, then take the quiz. Ages 7-11.">
-<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/electricity/what-is-electricity/">
+<title>Electricity &amp; Electronics for Kids: Interactive Circuits for KS2, KS3 &amp; GCSE | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive electricity tools for ages 7-16: build circuits, learn circuit symbols, compare series and parallel, and use Ohm's law. For KS2, KS3 and GCSE.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/electricity/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ellis Knowledge Studio Classroom">
 <meta property="og:locale" content="en_GB">
-<meta property="og:url" content="https://classroom.ellisknowledgestudio.com/electricity/what-is-electricity/">
-<meta property="og:title" content="What Is Electricity? Interactive KS2 Electricity">
-<meta property="og:description" content="Light a bulb, follow electricity from the power station to your plug, sort mains and battery appliances, learn to stay safe and take the quiz.">
+<meta property="og:url" content="https://classroom.ellisknowledgestudio.com/electricity/">
+<meta property="og:title" content="Electricity &amp; Electronics: Interactive Circuits for KS2, KS3 &amp; GCSE">
+<meta property="og:description" content="Electrical engineering for young learners. Free interactive tools for ages 7-16: build circuits, learn the symbols and discover how electricity works.">
+<!-- TODO (optional): add a 1200x630 share image, then uncomment:
+<meta property="og:image" content="https://classroom.ellisknowledgestudio.com/electricity/assets/share.png">
+-->
 <meta name="twitter:card" content="summary">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito+Sans:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;font-family:'Nunito Sans',sans-serif;background:#0F1C3F;color:#F7F9FC;padding:20px;line-height:1.5}
-  .wrap{max-width:820px;margin:0 auto}
-  h1{font-family:'Baloo 2',sans-serif;font-size:32px;margin:.3em 0}
-  h2,h3{font-family:'Baloo 2',sans-serif;color:#F4B942;margin:.4em 0}
-  .lead{color:#C7D2EE;margin:0}
-  .crumbs{font-size:14px;color:#C7D2EE}
-  .crumbs a{color:#C7D2EE;text-decoration:none}
-  a{color:#F4B942}
-  /* Tabs */
-  .wi-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
-  .wi-tab{font:800 16px 'Baloo 2',sans-serif;background:#16234E;color:#C7D2EE;border:2px solid #26356b;border-radius:999px;padding:6px 16px;cursor:pointer}
-  .wi-tab[aria-selected="true"]{background:#F4B942;color:#0F1C3F;border-color:#F4B942}
-  .wi-tab:focus-visible,.wi-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
-  .wi-panel{background:#16234E;border:1px solid #26356b;border-radius:14px;padding:20px;margin-top:14px}
-  .wi-panel[hidden]{display:none}
-  .wi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
-  .wi-card{background:#0F1C3F;border:1px solid #26356b;border-radius:12px;padding:14px}
-  .wi-card h3{margin:0 0 4px;font-size:18px}
-  .wi-card p{margin:0;font-size:14px;color:#C7D2EE}
-  .wi-emoji{font-size:30px;line-height:1}
-  .wi-tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 9px;margin-top:6px}
-  .wi-tag.ren{background:#1d4a3a;color:#4CC38A}.wi-tag.non{background:#4a3a1d;color:#F4B942}
-  .wi-btn{font:800 16px 'Baloo 2',sans-serif;background:#F4B942;color:#0F1C3F;border:0;border-radius:12px;padding:8px 16px;cursor:pointer}
-  .wi-btn.ghost{background:transparent;color:#F4B942;border:2px solid #F4B942}
-  .wi-btn[disabled]{opacity:.45;cursor:default}
-  .wi-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
-  .wi-status{font-weight:700;margin:10px 0 0;min-height:1.5em}
-  .wi-ok{color:#4CC38A}.wi-no{color:#FF6B6B}
-  /* Journey */
-  .wi-journey{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:12px 0}
-  .wi-step{background:#0F1C3F;border:2px solid #26356b;border-radius:12px;padding:8px 12px;text-align:center;opacity:.4;transition:opacity .3s,border-color .3s}
-  .wi-step.on{opacity:1;border-color:#F4B942}
-  .wi-step .wi-emoji{display:block}
-  .wi-arrow{color:#C7D2EE;font-weight:800}
-  .wi-explain{background:#0F1C3F;border-left:5px solid #F4B942;border-radius:8px;padding:12px 14px;min-height:3em}
-  /* Sort + safety games */
-  .wi-item{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#0F1C3F;border:2px solid #26356b;border-radius:12px;padding:10px 12px}
-  .wi-item .wi-name{flex:1 1 140px;font-weight:700}
-  .wi-item.right{border-color:#4CC38A}.wi-item.wrong{border-color:#FF6B6B}
-  .wi-item .wi-fb{flex-basis:100%;font-size:14px;color:#C7D2EE;margin:0}
-  .wi-list{display:grid;gap:10px;margin-top:12px}
-  .wi-score{font:800 20px 'Baloo 2',sans-serif}
-  /* Quiz */
-  .wi-q{font-weight:700;font-size:18px;margin:6px 0 10px}
-  .wi-opts{display:grid;gap:8px}
-  .wi-opt{text-align:left;font:700 16px 'Nunito Sans',sans-serif;background:#0F1C3F;color:#F7F9FC;border:2px solid #26356b;border-radius:12px;padding:10px 14px;cursor:pointer}
-  .wi-opt.right{border-color:#4CC38A;background:#1d4a3a}.wi-opt.wrong{border-color:#FF6B6B;background:#4a1d27}
-  .wi-opt[disabled]{cursor:default}
-  .wi-progress{color:#C7D2EE;font-size:14px}
-  .wi-facts{margin:14px 0 0;padding-left:20px;color:#C7D2EE}
+  body{margin:0;font-family:'Nunito Sans',sans-serif;background:#0F1C3F;color:#F7F9FC;padding:20px;}
+  .wrap{max-width:820px;margin:0 auto;}
+  h1{font-family:'Baloo 2',sans-serif;font-size:32px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:20px;}
+  .card{
+    background:#16234E;border:1px solid #26356b;border-radius:14px;padding:18px;
+    text-decoration:none;color:#F7F9FC;
+  }
+  .card h3{margin:0 0 6px;font-family:'Baloo 2',sans-serif;color:#F4B942;}
+  .card p{margin:0;font-size:13px;color:#C7D2EE;}
+  .lead{color:#C7D2EE;margin:0;}
+  .crumbs{font-size:14px;color:#C7D2EE;}
+  .crumbs a{color:#C7D2EE;text-decoration:none;}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.lang{flex:0 0 auto;font-size:14px;font-weight:700;color:#F4B942;text-decoration:none;border:2px solid #2C3B72;border-radius:999px;padding:3px 12px}.lang:hover{border-color:#F4B942}
 </style>
+<!-- Section styles: filter chips, age badges, safety panel (everything the block above does not cover) -->
 <link rel="stylesheet" href="/electricity/assets/electricity.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LearningResource",
-  "name": "What Is Electricity?",
-  "description": "Interactive KS2 introduction to electricity: what it is, where it comes from, mains and battery appliances, staying safe, and a quiz.",
-  "url": "https://classroom.ellisknowledgestudio.com/electricity/what-is-electricity/",
+  "@type": "CollectionPage",
+  "name": "Electricity & Electronics",
+  "headline": "Electricity & Electronics: electrical engineering for young learners",
+  "description": "Free interactive electricity and circuits tools for ages 7-16, covering KS2, KS3 and GCSE.",
+  "url": "https://classroom.ellisknowledgestudio.com/electricity/",
   "inLanguage": "en-GB",
   "isAccessibleForFree": true,
-  "learningResourceType": "Interactive simulation",
-  "typicalAgeRange": "7-11",
-  "educationalLevel": "KS2",
-  "teaches": "What electricity is, where it comes from, mains and battery appliances, and electrical safety",
-  "keywords": "what is electricity KS2, electricity for kids, mains or battery sorting, electrical safety KS2, Year 4 electricity",
+  "keywords": "electricity KS2, electricity KS3, interactive circuits, circuit builder, circuit symbols, series and parallel circuits, Ohm's law, GCSE physics electricity",
   "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
   "publisher": { "@type": "Organization", "name": "Ellis Knowledge Studio", "url": "https://ellisknowledgestudio.com/" },
-  "isPartOf": { "@type": "CollectionPage", "name": "Electricity & Electronics", "url": "https://classroom.ellisknowledgestudio.com/electricity/" }
+  "isPartOf": { "@type": "WebSite", "name": "Ellis Knowledge Studio Classroom", "url": "https://classroom.ellisknowledgestudio.com/" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": 10,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "LearningResource", "name": "What Is Electricity?", "url": "https://classroom.ellisknowledgestudio.com/electricity/what-is-electricity/", "learningResourceType": "Interactive simulation", "typicalAgeRange": "7-11", "educationalLevel": "KS2", "teaches": "What electricity is and how to use it safely" } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "LearningResource", "name": "Circuit Builder", "learningResourceType": "Interactive simulation", "typicalAgeRange": "8-11", "educationalLevel": "KS2", "teaches": "Building simple series circuits with cells, bulbs and switches" } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "LearningResource", "name": "Conductors & Insulators", "learningResourceType": "Interactive simulation", "typicalAgeRange": "7-10", "educationalLevel": "KS2", "teaches": "Electrical conductors and insulators" } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "LearningResource", "name": "Circuit Symbols", "learningResourceType": "Interactive simulation", "typicalAgeRange": "9-12", "educationalLevel": "KS2, KS3", "teaches": "Recognised circuit symbols and circuit diagrams" } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "LearningResource", "name": "Series vs Parallel", "learningResourceType": "Interactive simulation", "typicalAgeRange": "11-14", "educationalLevel": "KS3", "teaches": "Current and potential difference in series and parallel circuits" } },
+      { "@type": "ListItem", "position": 6, "item": { "@type": "LearningResource", "name": "Ohm's Law Lab", "learningResourceType": "Interactive simulation", "typicalAgeRange": "11-16", "educationalLevel": "KS3, GCSE", "teaches": "Ohm's law: potential difference = current x resistance" } },
+      { "@type": "ListItem", "position": 7, "item": { "@type": "LearningResource", "name": "Resistor Colour Codes", "learningResourceType": "Interactive simulation", "typicalAgeRange": "11-16", "educationalLevel": "KS3, GCSE", "teaches": "Reading resistor colour bands" } },
+      { "@type": "ListItem", "position": 8, "item": { "@type": "LearningResource", "name": "Power & Energy Bills", "learningResourceType": "Interactive simulation", "typicalAgeRange": "11-16", "educationalLevel": "KS3, GCSE", "teaches": "Electrical power, kilowatt-hours and the cost of energy" } },
+      { "@type": "ListItem", "position": 9, "item": { "@type": "LearningResource", "name": "Motors, Generators & AC/DC", "learningResourceType": "Interactive simulation", "typicalAgeRange": "13-16", "educationalLevel": "GCSE", "teaches": "The motor effect, generators, alternating and direct current" } },
+      { "@type": "ListItem", "position": 10, "item": { "@type": "LearningResource", "name": "The National Grid & Transformers", "learningResourceType": "Interactive simulation", "typicalAgeRange": "13-16", "educationalLevel": "GCSE", "teaches": "The National Grid and step-up and step-down transformers" } }
+    ]
+  }
 }
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "03967f8ff4584d3dad8f98556a0bd13f"}'></script><!-- End Cloudflare Web Analytics -->
@@ -98,324 +79,167 @@
 </head>
 <body>
 <div class="wrap">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/electricity/">Electricity &amp; Electronics</a> › What Is Electricity?</nav>
-  <h1>What Is Electricity?</h1>
-  <p class="lead">Light a bulb, follow electricity from the power station to your plug, sort the appliances and learn how to stay safe. <span class="ek-ages">Ages 7-11.</span></p>
+  <div class="top"><nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › Electricity &amp; Electronics</nav></div>
+  <h1>Electricity &amp; Electronics</h1>
+  <p class="lead">Build circuits, light bulbs, read meters and find out how electricity gets from a power station to your plug. <span class="ek-ages">Ages 7-16.</span></p>
+  <p class="ek-tagline">Electrical engineering for young learners</p>
 
-  <div class="wi-tabs" role="tablist" aria-label="What Is Electricity? sections">
-    <button class="wi-tab" role="tab" id="t-what" aria-controls="p-what" aria-selected="true">1. What is it?</button>
-    <button class="wi-tab" role="tab" id="t-where" aria-controls="p-where" aria-selected="false" tabindex="-1">2. Where from?</button>
-    <button class="wi-tab" role="tab" id="t-sort" aria-controls="p-sort" aria-selected="false" tabindex="-1">3. Mains or battery?</button>
-    <button class="wi-tab" role="tab" id="t-safe" aria-controls="p-safe" aria-selected="false" tabindex="-1">4. Stay safe</button>
-    <button class="wi-tab" role="tab" id="t-quiz" aria-controls="p-quiz" aria-selected="false" tabindex="-1">5. Quiz</button>
+  <div class="ek-chips" role="group" aria-label="Filter tools by age">
+    <button type="button" class="ek-chip" data-filter="all" aria-pressed="true">All</button>
+    <button type="button" class="ek-chip" data-filter="primary" aria-pressed="false">Primary (7-11)</button>
+    <button type="button" class="ek-chip" data-filter="secondary" aria-pressed="false">Secondary (11-16)</button>
+  </div>
+  <p class="ek-count" id="ekCount" aria-live="polite"></p>
+
+  <!--
+    HOW TO SWITCH A CARD FROM "COMING SOON" TO LIVE (three small edits):
+      1. Remove the word  soon  from  class="card soon".
+      2. Delete the  <span class="ek-badge">Coming soon</span>  line.
+      3. Wrap the title in a link, using the path noted in the comment on that card:
+           <h3><a href="/electricity/circuit-builder/">Circuit Builder</a></h3>
+    PRINTABLE PACK LINK (optional): each card has a hidden pack link. When the pack is on
+    Tes or TPT, replace href="#" with the product URL and delete the word  hidden.
+    When a tool goes live, also add  "url": "https://classroom.ellisknowledgestudio.com/electricity/<folder>/"
+    to its entry in the JSON-LD block in the <head>.
+    data-stage controls the filter chips: "primary", "secondary" or "primary secondary".
+  -->
+  <div class="grid ek-grid" id="ekGrid">
+    <!-- 1  /electricity/what-is-electricity/ -->
+    <article class="card" data-stage="primary">
+      <div class="ek-meta"><span class="ek-age">Ages 7-11</span>
+      </div>
+      <h3><a href="/electricity/what-is-electricity/">What Is Electricity?</a></h3>
+      <p>Find out what electricity is, where it comes from and what it powers at home and at school. Spot what runs on mains and what runs on batteries, learn to stay safe and take the quiz.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 2  /electricity/circuit-builder/ -->
+    <article class="card soon" data-stage="primary">
+      <div class="ek-meta"><span class="ek-age">Ages 8-11</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Circuit Builder</h3>
+      <p>Build your own circuits with cells, bulbs, switches and wires. Make the bulb light, find out why a circuit is not working, add more cells and solve the challenges.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 3  /electricity/conductors-insulators/ -->
+    <article class="card soon" data-stage="primary">
+      <div class="ek-meta"><span class="ek-age">Ages 7-10</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Conductors &amp; Insulators</h3>
+      <p>Put everyday objects into a circuit to test which materials let electricity through. Predict, test, sort them into conductors and insulators and take the quiz.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 4  /electricity/circuit-symbols/ -->
+    <article class="card soon" data-stage="primary secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 9-12</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Circuit Symbols</h3>
+      <p>Learn the symbols used to draw circuits: cell, battery, bulb, switch, motor, buzzer and more. Match pictures to symbols, read circuit diagrams and take the quiz.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 5  /electricity/series-parallel/ -->
+    <article class="card soon" data-stage="secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 11-14</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Series vs Parallel</h3>
+      <p>Build series and parallel circuits side by side. Compare bulb brightness, measure current and potential difference, and see what happens when one bulb is removed.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 6  /electricity/ohms-law/ -->
+    <article class="card soon" data-stage="secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 11-16</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Ohm's Law Lab</h3>
+      <p>Change the voltage and the resistance, read the ammeter and voltmeter, plot your results and use V = I × R to work out missing values.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 7  /electricity/resistor-colour-codes/ -->
+    <article class="card soon" data-stage="secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 11-16</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Resistor Colour Codes</h3>
+      <p>Read the coloured bands on a resistor to find its value in ohms. Build any resistor band by band, decode mystery resistors and take the quiz.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 8  /electricity/energy-bills/ -->
+    <article class="card soon" data-stage="secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 11-16</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Power &amp; Energy Bills</h3>
+      <p>Work out the power of an appliance, the energy it uses in kilowatt-hours and what it costs to run. Compare appliances and read an electricity bill.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 9  /electricity/motors-generators/ -->
+    <article class="card soon" data-stage="secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 13-16</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>Motors, Generators &amp; AC/DC</h3>
+      <p>See how a current in a magnetic field makes a motor spin and how a spinning coil generates electricity. Compare alternating and direct current.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
+
+    <!-- 10  /electricity/national-grid/ -->
+    <article class="card soon" data-stage="secondary">
+      <div class="ek-meta"><span class="ek-age">Ages 13-16</span>
+        <span class="ek-badge">Coming soon</span>
+      </div>
+      <h3>The National Grid &amp; Transformers</h3>
+      <p>Follow electricity from the power station to your home. Step the voltage up and down with transformers and see why high voltage wastes less energy.</p>
+      <a class="ek-pack" href="#" hidden>Get the printable pack →</a>
+    </article>
   </div>
 
-  <!-- 1. WHAT IS IT? -->
-  <section class="wi-panel" role="tabpanel" id="p-what" aria-labelledby="t-what">
-    <h2>Electricity is energy on the move</h2>
-    <p>Electricity is a kind of <strong>energy</strong>. It can make things light up, heat up, move and make sounds. Inside a metal wire are tiny particles called <strong>electrons</strong>. A cell (some people call it a battery) pushes them round, and they carry energy to the bulb.</p>
-    <p>Electricity only flows when there is a <strong>complete loop</strong> with no gaps. We call this loop a <strong>circuit</strong>. A switch makes a gap in the loop, or closes it.</p>
-    <p><strong>Try it:</strong> tap the switch to close the gap. Watch the dots show electricity flowing round the circuit.</p>
-    <div id="board"></div>
-    <p class="wi-status" id="whatStatus" role="status" aria-live="polite"></p>
-    <h3>Did you know?</h3>
-    <ul class="wi-facts">
-      <li>Lightning is a giant spark of electricity in the sky.</li>
-      <li>Your brain sends tiny electrical messages along your nerves to move your body.</li>
-      <li>Rub a balloon on your jumper and it sticks to the wall. That is <em>static</em> electricity.</li>
-    </ul>
-  </section>
+  <aside class="ek-safety" role="note" aria-label="Electrical safety">
+    <span class="ek-safety-icon" aria-hidden="true">⚠</span>
+    <p style="margin:0"><strong>Stay safe.</strong> Our tools use safe, battery-level circuits. Mains electricity can kill – never experiment with plugs, sockets or household wiring.</p>
+  </aside>
 
-  <!-- 2. WHERE FROM? -->
-  <section class="wi-panel" role="tabpanel" id="p-where" aria-labelledby="t-where" hidden>
-    <h2>Where does electricity come from?</h2>
-    <p>Most of our electricity is made in power stations and wind farms, then sent along cables to our homes. This is called <strong>mains electricity</strong>.</p>
-    <div class="wi-grid" id="sources"></div>
-    <h3 style="margin-top:20px">The journey to your plug</h3>
-    <p>Press <strong>Next</strong> to follow the electricity.</p>
-    <div class="wi-journey" id="journey" aria-hidden="true"></div>
-    <div class="wi-explain" id="journeyText" role="status" aria-live="polite"></div>
-    <div class="wi-row">
-      <button class="wi-btn ghost" id="jBack" type="button">← Back</button>
-      <button class="wi-btn" id="jNext" type="button">Next →</button>
-    </div>
-    <h3 style="margin-top:20px">And batteries?</h3>
-    <p>A cell stores <strong>chemical energy</strong> and turns it into electricity when it is in a circuit. Cells are small and portable, but they run out. Rechargeable cells, like the ones in phones and tablets, are filled up again from the mains.</p>
-  </section>
-
-  <!-- 3. MAINS OR BATTERY? -->
-  <section class="wi-panel" role="tabpanel" id="p-sort" aria-labelledby="t-sort" hidden>
-    <h2>Mains or battery?</h2>
-    <p>Does each one plug into a socket (<strong>mains</strong>) or run on <strong>batteries</strong>? Choose for each one.</p>
-    <p class="wi-score" id="sortScore" role="status" aria-live="polite"></p>
-    <div class="wi-list" id="sortList"></div>
-    <div class="wi-row"><button class="wi-btn ghost" id="sortReset" type="button">Start again</button></div>
-    <p style="color:#C7D2EE;font-size:14px">Some things use both! A phone or tablet runs on its battery, but you charge the battery from the mains.</p>
-  </section>
-
-  <!-- 4. STAY SAFE -->
-  <section class="wi-panel" role="tabpanel" id="p-safe" aria-labelledby="t-safe" hidden>
-    <h2>Safe or danger?</h2>
-    <p>Mains electricity is about <strong>230 volts</strong>. That is over 150 times more than a 1.5 V cell, and it can kill. Decide whether each one is safe or dangerous.</p>
-    <p class="wi-score" id="safeScore" role="status" aria-live="polite"></p>
-    <div class="wi-list" id="safeList"></div>
-    <div class="wi-row"><button class="wi-btn ghost" id="safeReset" type="button">Start again</button></div>
-    <aside class="ek-safety" role="note" aria-label="Electrical safety">
-      <span class="ek-safety-icon" aria-hidden="true">⚠</span>
-      <p style="margin:0"><strong>Golden rule:</strong> only experiment with cells and batteries. Never experiment with plugs, sockets or anything that plugs in.</p>
-    </aside>
-  </section>
-
-  <!-- 5. QUIZ -->
-  <section class="wi-panel" role="tabpanel" id="p-quiz" aria-labelledby="t-quiz" hidden>
-    <h2>Quiz</h2>
-    <p class="wi-progress" id="qProgress"></p>
-    <div id="qBox">
-      <p class="wi-q" id="qText"></p>
-      <div class="wi-opts" id="qOpts"></div>
-      <p class="wi-status" id="qFeedback" role="status" aria-live="polite"></p>
-      <div class="wi-row"><button class="wi-btn" id="qNext" type="button" hidden>Next question →</button></div>
-    </div>
-    <div id="qDone" hidden>
-      <p class="wi-score" id="qScore"></p>
-      <div class="wi-row"><button class="wi-btn" id="qAgain" type="button">Try again</button></div>
-    </div>
-  </section>
-
-  <section class="ek-also" aria-labelledby="ekNext">
-    <h2 id="ekNext">Try this next</h2>
-    <div class="ek-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:10px">
-      <article class="card" style="background:#16234E;border:1px solid #26356b;border-radius:14px;padding:18px">
-        <div class="ek-meta"><span class="ek-age">Ages 7-16</span></div>
-        <h3 style="margin:0 0 6px"><a href="/electricity/">All Electricity &amp; Electronics tools</a></h3>
-        <p style="margin:0;font-size:13px;color:#C7D2EE">Build circuits, learn the symbols, test conductors and more.</p>
+  <section class="ek-also" aria-labelledby="ekAlso">
+    <h2 id="ekAlso">Try this next</h2>
+    <div class="grid ek-grid" style="margin-top:10px">
+      <article class="card">
+        <div class="ek-meta"><span class="ek-age">Ages 11-14</span><span class="ek-age">IT &amp; Computing</span></div>
+        <h3><a href="/it/logic-gates/">Logic Gates</a></h3>
+        <p>Electronics meets computing: flip switches to light a bulb through AND, OR and NOT gates, fill in truth tables and solve circuit puzzles.</p>
       </article>
     </div>
   </section>
 
   <p class="ek-shop"><a href="https://ellisknowledgestudio.com/educational-resources">Browse printable worksheet packs in the shop →</a></p>
 </div>
-
-<script src="/electricity/assets/circuit-engine.js"></script>
-<script src="/electricity/assets/circuit-ui.js"></script>
 <script>
-(function () {
-  'use strict';
-  function $(id) { return document.getElementById(id); }
-  function track(name, params) { if (typeof gtag === 'function') { gtag('event', name, params || {}); } }
-  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) { e.className = cls; } if (text !== undefined) { e.textContent = text; } return e; }
-
-  /* ---------------- Tabs ---------------- */
-  var tabs = [].slice.call(document.querySelectorAll('.wi-tab'));
-  function showTab(tab, focus) {
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      $(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    if (focus) { tab.focus(); }
-    track('tool_tab', { tool: 'what-is-electricity', tab: tab.id });
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { showTab(t); });
-    t.addEventListener('keydown', function (e) {
-      var j = null;
-      if (e.key === 'ArrowRight') { j = (i + 1) % tabs.length; }
-      if (e.key === 'ArrowLeft') { j = (i - 1 + tabs.length) % tabs.length; }
-      if (e.key === 'Home') { j = 0; }
-      if (e.key === 'End') { j = tabs.length - 1; }
-      if (j !== null) { e.preventDefault(); showTab(tabs[j], true); }
-    });
-  });
-
-  /* ---------------- 1. Circuit: cell, switch, bulb (all locked) ---------------- */
-  var PRESET = { version: 1, cols: 8, rows: 5,
-    components: [
-      { id: 'cell1', type: 'cell', x: 4, y: 1, rot: 0, props: { emf: 1.5 }, locked: true },
-      { id: 'switch1', type: 'switch', x: 1, y: 2, rot: 1, props: { closed: false }, locked: true },
-      { id: 'bulb1', type: 'bulb', x: 4, y: 4, rot: 0, props: {}, locked: true }
-    ],
-    wires: [
-      { id: 'w1', from: { c: 'cell1', t: 0 }, to: { c: 'switch1', t: 0 } },
-      { id: 'w2', from: { c: 'switch1', t: 1 }, to: { c: 'bulb1', t: 0 } },
-      { id: 'w3', from: { c: 'bulb1', t: 1 }, to: { c: 'cell1', t: 1 } }
-    ] };
-  var wasLit = false;
-  function describe(result) {
-    var lit = result.summary.bulbsLit > 0;
-    var s = $('whatStatus');
-    s.textContent = lit ? 'The bulb is ON. The loop is complete, so electricity flows all the way round.'
-                        : 'The bulb is OFF. The switch makes a gap, so electricity cannot flow.';
-    s.className = 'wi-status ' + (lit ? 'wi-ok' : 'wi-no');
-    if (lit && !wasLit) { track('circuit_lit', { tool: 'what-is-electricity' }); }
-    wasLit = lit;
-  }
-  var board = window.board = CircuitUI.create('#board', {
-    tray: [], cols: 8, rows: 5, mode: 'picture', preset: PRESET,
-    onChange: describe
-  });
-  describe(board.getResult());
-
-  /* ---------------- 2. Where from? ---------------- */
-  var SOURCES = [
-    ['🏭', 'Gas power station', 'Burns gas to boil water. The steam spins a turbine, which turns a generator.', false],
-    ['⚛️', 'Nuclear power station', 'Splits tiny atoms to make heat. The heat boils water to spin a turbine.', false],
-    ['💨', 'Wind turbines', 'The wind turns the giant blades, which spin a generator.', true],
-    ['☀️', 'Solar panels', 'Turn sunlight straight into electricity, even on cloudy days.', true],
-    ['🌊', 'Hydroelectric', 'Flowing water from a dam spins a turbine.', true]
-  ];
-  SOURCES.forEach(function (s) {
-    var c = el('article', 'wi-card');
-    c.appendChild(el('div', 'wi-emoji', s[0]));
-    c.appendChild(el('h3', '', s[1]));
-    c.appendChild(el('p', '', s[2]));
-    c.appendChild(el('span', 'wi-tag ' + (s[3] ? 'ren' : 'non'), s[3] ? 'Renewable: will not run out' : 'Non-renewable: will run out'));
-    $('sources').appendChild(c);
-  });
-  var JOURNEY = [
-    ['🏭', 'Power station', 'Electricity is made at a power station or wind farm.'],
-    ['🗼', 'Pylons', 'Thick cables held up high by pylons carry it across the country. This network is called the National Grid.'],
-    ['🔌', 'Substation', 'A substation lowers the voltage so it is ready for homes. Never go inside one, even to get a ball.'],
-    ['🏠', 'Your home', 'Cables under the street bring it into your home, to the fuse box.'],
-    ['💡', 'Sockets and lights', 'Wires inside the walls take it to every socket and light. Now you can switch on!']
-  ];
-  var jStep = 0;
-  JOURNEY.forEach(function (j, i) {
-    if (i) { $('journey').appendChild(el('span', 'wi-arrow', '→')); }
-    var st = el('div', 'wi-step'); st.id = 'js' + i;
-    st.appendChild(el('span', 'wi-emoji', j[0])); st.appendChild(document.createTextNode(j[1]));
-    $('journey').appendChild(st);
-  });
-  function showJourney() {
-    JOURNEY.forEach(function (j, i) { $('js' + i).classList.toggle('on', i <= jStep); });
-    $('journeyText').textContent = 'Step ' + (jStep + 1) + ' of ' + JOURNEY.length + ': ' + JOURNEY[jStep][1] + '. ' + JOURNEY[jStep][2];
-    $('jBack').disabled = jStep === 0;
-    $('jNext').disabled = jStep === JOURNEY.length - 1;
-  }
-  $('jNext').addEventListener('click', function () { if (jStep < JOURNEY.length - 1) { jStep++; showJourney(); } });
-  $('jBack').addEventListener('click', function () { if (jStep > 0) { jStep--; showJourney(); } });
-  showJourney();
-
-  /* ---------------- 3 & 4. Two-choice sorting games ---------------- */
-  function makeGame(listId, scoreId, resetId, choices, items, eventName) {
-    var answered, right;
-    function score() {
-      $(scoreId).textContent = answered === items.length
-        ? 'You got ' + right + ' out of ' + items.length + '!' + (right === items.length ? ' Brilliant!' : ' Press "Start again" to have another go.')
-        : right + ' right so far (' + answered + ' of ' + items.length + ' done)';
-      if (answered === items.length) { track(eventName, { tool: 'what-is-electricity', score: right, total: items.length }); }
+/* Filter chips: show Primary, Secondary or All tool cards. */
+(function(){
+  var chips=document.querySelectorAll('.ek-chip');
+  var cards=document.querySelectorAll('#ekGrid .card');
+  var count=document.getElementById('ekCount');
+  function apply(filter){
+    var shown=0;
+    for(var i=0;i<cards.length;i++){
+      var stages=(cards[i].getAttribute('data-stage')||'').split(' ');
+      var show=filter==='all'||stages.indexOf(filter)>=0;
+      cards[i].hidden=!show;
+      if(show)shown++;
     }
-    function build() {
-      answered = 0; right = 0; $(listId).innerHTML = '';
-      items.forEach(function (it) {
-        var row = el('div', 'wi-item');
-        row.appendChild(el('span', 'wi-name', it[0]));
-        var btns = choices.map(function (ch, ci) {
-          var b = el('button', 'wi-btn ghost', ch); b.type = 'button';
-          b.addEventListener('click', function () {
-            var ok = ci === it[1];
-            answered++; if (ok) { right++; }
-            row.classList.add(ok ? 'right' : 'wrong');
-            btns.forEach(function (x) { x.disabled = true; });
-            row.appendChild(el('p', 'wi-fb', (ok ? '✓ Yes! ' : '✗ Not quite. ') + it[2]));
-            score();
-          });
-          row.appendChild(b); return b;
-        });
-        $(listId).appendChild(row);
-      });
-      score();
-    }
-    $(resetId).addEventListener('click', build);
-    build();
+    for(var j=0;j<chips.length;j++)chips[j].setAttribute('aria-pressed',chips[j].getAttribute('data-filter')===filter?'true':'false');
+    count.textContent=filter==='all'?'':'Showing '+shown+' of '+cards.length+' tools';
   }
-  var M = 0, B = 1;
-  makeGame('sortList', 'sortScore', 'sortReset', ['🔌 Mains', '🔋 Battery'], [
-    ['🫖 Kettle', M, 'A kettle needs lots of energy to boil water, so it plugs into the mains.'],
-    ['🔦 Torch', B, 'A torch runs on batteries so you can carry it anywhere.'],
-    ['🍞 Toaster', M, 'Toasters need lots of energy to heat up, so they plug in.'],
-    ['⌚ Watch', B, 'A watch uses a tiny button cell that lasts for years.'],
-    ['📺 Television', M, 'A TV plugs into the mains.'],
-    ['🎮 TV remote control', B, 'The remote runs on small batteries.'],
-    ['🧊 Fridge', M, 'A fridge is plugged in all day and all night.'],
-    ['🚗 Toy car', B, 'Most toy cars run on batteries.'],
-    ['💨 Hairdryer', M, 'A hairdryer heats air, so it needs the mains. Keep it away from water!'],
-    ['🧮 Calculator', B, 'A calculator uses a small cell (some also have a little solar panel).'],
-    ['🧺 Washing machine', M, 'A washing machine needs lots of energy to heat water and spin, so it plugs in.'],
-    ['⏰ Wall clock', B, 'Most wall clocks run on one AA battery.']
-  ], 'sort_complete');
-
-  var S = 0, D = 1;
-  makeGame('safeList', 'safeScore', 'safeReset', ['✅ Safe', '⚠️ Danger'], [
-    ['Pulling a plug out by its cable', D, 'Hold the plug itself. Pulling the cable can break the wires inside.'],
-    ['Drying your hands before touching a switch', S, 'Water lets electricity flow through you, so dry hands are safer.'],
-    ['Pushing a pencil into a plug socket', D, 'Never put anything into a socket. Mains electricity can kill.'],
-    ['Building a circuit with a cell and a bulb at school', S, 'Cells are low voltage, so they are safe to experiment with.'],
-    ['Flying a kite near overhead power lines', D, 'Fly kites in open spaces far away from power lines.'],
-    ['Plugging lots of adaptors into one socket', D, 'Overloaded sockets can overheat and start a fire.'],
-    ['Telling an adult when your ball goes over a substation fence', S, 'Never go in yourself. The adult can phone the number on the sign to get it back safely.'],
-    ['Using a hairdryer in the bathroom while the bath is running', D, 'Water and mains electricity are a deadly mix. Keep them apart.'],
-    ['Telling an adult about a cable with a split in it', S, 'Damaged cables are dangerous. An adult should stop using it.']
-  ], 'safety_complete');
-
-  /* ---------------- 5. Quiz ---------------- */
-  var QUIZ = [
-    ['What is a circuit?', ['A complete loop that electricity flows round', 'A type of battery', 'A light switch', 'A cable with a gap in it'], 0,
-     'Electricity needs a complete loop, with no gaps, to flow.'],
-    ['What happens when you open the switch in a circuit?', ['The bulb gets brighter', 'The bulb goes off because there is a gap', 'The cell gets bigger', 'Nothing changes'], 1,
-     'Opening the switch makes a gap, so electricity stops flowing.'],
-    ['Which of these plugs into the mains?', ['Torch', 'Watch', 'Kettle', 'TV remote'], 2,
-     'A kettle needs lots of energy, so it plugs into the mains.'],
-    ['Which of these runs on batteries?', ['Fridge', 'Torch', 'Washing machine', 'Toaster'], 1,
-     'A torch runs on batteries so you can carry it around.'],
-    ['Which way of making electricity is renewable?', ['Gas power station', 'Coal power station', 'Wind turbines', 'Burning oil'], 2,
-     'Wind will not run out, so wind power is renewable.'],
-    ['What are the tiny particles in a wire that carry electricity?', ['Electrons', 'Atoms of water', 'Sparks', 'Bubbles'], 0,
-     'Electrons are pushed round the circuit by the cell.'],
-    ['Why is it safe to experiment with cells but not with the mains?', ['Cells are made of plastic', 'Cells have a much lower voltage', 'Mains electricity is cold', 'Cells have no electricity'], 1,
-     'A cell is about 1.5 V. Mains electricity is about 230 V, which can kill.'],
-    ['What carries electricity across the country?', ['Rivers', 'The National Grid of pylons and cables', 'Lorries', 'Radio waves'], 1,
-     'Pylons and cables in the National Grid carry electricity everywhere.'],
-    ['Your hands are wet. What should you do before touching a light switch?', ['Touch it quickly', 'Dry your hands first', 'Use a wet cloth', 'Blow on it'], 1,
-     'Water lets electricity flow through you. Always dry your hands.'],
-    ['Where does the energy in a cell come from?', ['Chemicals inside it', 'The air', 'Sunlight only', 'The wire'], 0,
-     'A cell stores chemical energy and turns it into electricity.']
-  ];
-  var qi, qRight;
-  function startQuiz() { qi = 0; qRight = 0; $('qDone').hidden = true; $('qBox').hidden = false; showQ(); }
-  function showQ() {
-    var q = QUIZ[qi];
-    $('qProgress').textContent = 'Question ' + (qi + 1) + ' of ' + QUIZ.length;
-    $('qText').textContent = q[0];
-    $('qFeedback').textContent = ''; $('qFeedback').className = 'wi-status';
-    $('qNext').hidden = true;
-    var box = $('qOpts'); box.innerHTML = '';
-    var btns = q[1].map(function (txt, i) {
-      var b = el('button', 'wi-opt', txt); b.type = 'button';
-      b.addEventListener('click', function () {
-        var ok = i === q[2]; if (ok) { qRight++; }
-        btns.forEach(function (x, k) { x.disabled = true; if (k === q[2]) { x.classList.add('right'); } });
-        if (!ok) { b.classList.add('wrong'); }
-        $('qFeedback').textContent = (ok ? '✓ Correct! ' : '✗ Not quite. ') + q[3];
-        $('qFeedback').className = 'wi-status ' + (ok ? 'wi-ok' : 'wi-no');
-        $('qNext').textContent = qi === QUIZ.length - 1 ? 'See my score →' : 'Next question →';
-        $('qNext').hidden = false; $('qNext').focus();
-      });
-      box.appendChild(b); return b;
-    });
-  }
-  $('qNext').addEventListener('click', function () {
-    qi++;
-    if (qi < QUIZ.length) { showQ(); return; }
-    $('qBox').hidden = true; $('qDone').hidden = false;
-    $('qProgress').textContent = '';
-    $('qScore').textContent = 'You scored ' + qRight + ' out of ' + QUIZ.length + '. ' +
-      (qRight === QUIZ.length ? 'Electricity expert!' : qRight >= 7 ? 'Great work!' : 'Have another look at the tabs and try again.');
-    track('quiz_complete', { tool: 'what-is-electricity', score: qRight, total: QUIZ.length });
-  });
-  $('qAgain').addEventListener('click', startQuiz);
-  startQuiz();
+  for(var k=0;k<chips.length;k++)chips[k].addEventListener('click',function(){apply(this.getAttribute('data-filter'));});
 })();
 </script>
 </body>

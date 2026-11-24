@@ -1,0 +1,172 @@
+/*
+ * electricity.css  –  Ellis Knowledge Studio, Electricity & Electronics
+ * Path: /electricity/assets/electricity.css
+ *
+ * Shared styles for the Electricity section. The site has no global stylesheet
+ * (each page carries its own <style> block for body, .wrap, .card, .btn …), so this
+ * file ONLY adds what those blocks do not cover:
+ *   1. ek-*  hub extras: tagline, filter chips, age badges, safety panel
+ *   2. cb-*  the circuit board built by circuit-ui.js (tray, toolbar, board, symbols)
+ *
+ * Colours match the site palette: navy #0F1C3F, panel #16234E, gold #F4B942.
+ */
+
+/* ============================================================ 1. hub extras */
+.ek-tagline{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:#F4B942;margin:14px 0 0}
+.ek-ages{white-space:nowrap}
+
+.ek-chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0}
+.ek-chip{background:#16234E;color:#F7F9FC;border:2px solid #2C3B72;border-radius:999px;padding:8px 16px;
+  font:700 14px 'Nunito Sans',sans-serif;cursor:pointer;min-height:40px}
+.ek-chip:hover{border-color:#F4B942}
+.ek-chip[aria-pressed="true"]{border-color:#F4B942;color:#F4B942}
+.ek-chip:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ek-count{font-size:13px;color:#C7D2EE;margin:10px 0 0;min-height:18px}
+
+/* cards: same look as the other hubs, plus a badge row and an optional pack link */
+.ek-grid .card{position:relative;display:flex;flex-direction:column;gap:8px}
+.ek-grid .card h3{margin:0}
+.ek-grid .card h3 a{color:inherit;text-decoration:none}
+.ek-grid .card h3 a::after{content:"";position:absolute;inset:0;border-radius:14px}   /* whole card is clickable */
+.ek-grid .card h3 a:focus-visible::after{outline:3px solid #fff;outline-offset:2px}
+.ek-grid .card:not(.soon):hover{border-color:#F4B942}
+.ek-grid .card.soon{background:#121d42;border-style:dashed;border-color:#2C3B72}
+.ek-grid .card.soon h3{color:#E9D9A8}
+.ek-grid .card[hidden]{display:none}
+.ek-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ek-age{font-size:11px;font-weight:700;color:#C7D2EE;border:1px solid #2C3B72;border-radius:999px;padding:2px 8px}
+.ek-badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#0A1330;
+  background:#F4B942;padding:3px 8px;border-radius:999px}
+.ek-pack{position:relative;z-index:1;align-self:flex-start;margin-top:auto;font-size:13px;font-weight:700;color:#F4B942;text-decoration:none}
+.ek-pack:hover{text-decoration:underline}
+.ek-pack[hidden]{display:none}
+
+.ek-safety{display:flex;gap:12px;align-items:flex-start;margin:28px 0 0;background:#2a1a24;border:2px solid #FF6B6B;
+  border-radius:14px;padding:14px 16px;color:#F7F9FC;font-size:15px;line-height:1.45}
+.ek-safety .ek-safety-icon{font-size:24px;line-height:1.1;flex:0 0 auto}
+.ek-safety strong{color:#FFB4B4}
+.ek-also{margin:28px 0 0}
+.ek-also h2{font-family:'Baloo 2',sans-serif;font-size:20px;margin:0 0 4px}
+.ek-shop{margin:28px 0 8px;text-align:center}
+.ek-shop a{color:#F4B942}
+
+/* ====================================================== 2. circuit board UI */
+.cb{
+  --cb-ink:#F5F7FF; --cb-muted:#B8C2E0; --cb-gold:#F4B942; --cb-navy:#0F1C3F;
+  --cb-panel:#16234E; --cb-line:#2C3B72; --cb-good:#4CC38A; --cb-bad:#FF6B6B;
+  font-family:'Nunito Sans',sans-serif;color:var(--cb-ink);
+}
+.cb *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.cb [hidden]{display:none !important}
+
+/* ---- tray of parts ---- */
+.cb-tray{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.cb-tool{display:flex;flex-direction:column;align-items:center;gap:2px;width:92px;min-height:76px;padding:6px 4px;
+  background:var(--cb-panel);color:var(--cb-ink);border:2px solid var(--cb-line);border-radius:12px;
+  font:700 13px 'Nunito Sans',sans-serif;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.cb-tool:hover{border-color:var(--cb-gold)}
+.cb-tool:disabled{opacity:.4;cursor:default}
+.cb-tool .cb-icon{width:74px;height:46px;pointer-events:none}
+.cb-tool span{pointer-events:none}
+.cb-ghost{position:fixed;z-index:9999;width:120px;margin:-38px 0 0 -60px;pointer-events:none;opacity:.9}
+.cb-ghost .cb-icon{width:120px;height:76px}
+
+/* ---- toolbar ---- */
+.cb-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+.cb-btn{background:transparent;color:var(--cb-gold);border:2px solid var(--cb-gold);border-radius:12px;min-height:44px;
+  padding:8px 14px;font:800 15px 'Baloo 2','Nunito Sans',sans-serif;cursor:pointer}
+.cb-btn.cb-primary{background:var(--cb-gold);color:var(--cb-navy)}
+.cb-btn:disabled{opacity:.35;cursor:default}
+.cb-seg{display:inline-flex;background:var(--cb-panel);border-radius:999px;padding:4px;gap:4px}
+.cb-seg button{background:transparent;color:var(--cb-muted);border:0;border-radius:999px;min-height:36px;padding:6px 14px;
+  font:700 14px 'Nunito Sans',sans-serif;cursor:pointer}
+.cb-seg button[aria-pressed="true"]{background:var(--cb-gold);color:var(--cb-navy)}
+.cb-props{display:inline-flex;align-items:center;gap:8px;background:var(--cb-panel);border-radius:12px;padding:4px 8px}
+.cb-propval{font-weight:700;min-width:130px;text-align:center}
+.cb-step{min-width:44px;padding:4px 0;font-size:20px;line-height:1}
+.cb-btn:focus-visible,.cb-tool:focus-visible,.cb-seg button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+
+/* ---- the board ---- */
+.cb-boardwrap{background:var(--cb-panel);border:2px solid var(--cb-line);border-radius:18px;overflow:hidden}
+.cb[data-status="short"] .cb-boardwrap{border-color:var(--cb-bad)}
+.cb-board{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.cb-grid circle{fill:#3A4A80}
+.cb-board [tabindex]{outline:none}
+
+/* circuit symbols (SYMBOL mode gets every colour from here) */
+.cb-lead,.cb-stroke,.cb-thick{stroke:var(--cb-ink);stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cb-thick{stroke-width:7;stroke-linecap:butt}
+.cb-thin{stroke-width:2}
+.cb-dash{stroke-dasharray:4 5}
+.cb-fill{fill:var(--cb-ink)}
+.cb-meter{fill:var(--cb-panel)}
+.cb-glass{fill:var(--cb-gold);stroke:none}
+.cb-led{fill:var(--cb-bad)}
+.cb-halo{fill:url(#cbGlow)}
+.cb-halo-led{fill:url(#cbGlowLed)}
+.cb-letter{font:800 22px 'Baloo 2','Nunito Sans',sans-serif;fill:var(--cb-ink)}
+.cb-letter-dark{fill:#0F1C3F}
+.cb-label{font:700 14px 'Nunito Sans',sans-serif;fill:var(--cb-ink);paint-order:stroke;stroke:var(--cb-panel);stroke-width:4px}
+.cb-icon .cb-lead,.cb-icon .cb-stroke,.cb-icon .cb-thick{stroke:#F5F7FF}
+.cb-icon .cb-fill,.cb-icon .cb-letter{fill:#F5F7FF}
+.cb-icon .cb-meter{fill:none}
+.cb-icon .cb-letter-dark{fill:#0F1C3F}
+.cb-icon .cb-thin{stroke-width:2}
+
+/* parts on the board */
+.cb-body{pointer-events:none}
+.cb-comp{cursor:grab}
+.cb-comp.is-locked{cursor:default}
+.cb-comp.cb-switch{cursor:pointer}
+.cb-hit{fill:transparent;stroke:transparent;stroke-width:2.5;pointer-events:all}
+.cb-comp:hover .cb-hit{stroke:#4A5C9A}
+.cb-comp.is-sel .cb-hit{stroke:var(--cb-gold);stroke-dasharray:6 5}
+.cb-comp:focus-visible .cb-hit{stroke:#fff;stroke-dasharray:none;stroke-width:3.5}
+.cb-comp.is-drag{opacity:.75}
+.cb-comp.is-short .cb-lead,.cb-comp.is-short .cb-stroke,.cb-comp.is-short .cb-thick{stroke:var(--cb-bad)}
+
+/* wires */
+.cb-wire{cursor:pointer}
+.cb-wire-line{stroke:var(--cb-ink);stroke-width:3.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cb-wire-hit{stroke:transparent;stroke-width:24;fill:none;pointer-events:stroke}
+.cb-wire:hover .cb-wire-line{stroke:#fff;stroke-width:4.5}
+.cb-wire.is-sel .cb-wire-line{stroke:var(--cb-gold);stroke-width:5}
+.cb-wire:focus-visible .cb-wire-line{stroke:#fff;stroke-width:6}
+.cb-wire.is-short .cb-wire-line{stroke:var(--cb-bad);stroke-dasharray:9 6}
+.cb-band{stroke:var(--cb-gold);stroke-width:3;stroke-dasharray:7 6;stroke-linecap:round;pointer-events:none}
+
+/* terminals: hollow ring = loose end, solid dot = joined to something */
+.cb-term{cursor:crosshair}
+.cb-term-dot{fill:var(--cb-panel);stroke:var(--cb-ink);stroke-width:2.5}
+.cb-term.is-joined .cb-term-dot{fill:var(--cb-ink)}
+.cb-term-hit{fill:transparent;stroke:transparent;stroke-width:2.5;pointer-events:all}
+.cb-term:hover .cb-term-hit{stroke:var(--cb-gold);fill:rgba(244,185,66,.18)}
+.cb-term.is-pending .cb-term-hit{stroke:var(--cb-gold);fill:rgba(244,185,66,.35);stroke-dasharray:5 4}
+.cb-term.is-pending .cb-term-dot{fill:var(--cb-gold);stroke:var(--cb-gold)}
+.cb-term:focus-visible .cb-term-hit{stroke:#fff;stroke-width:3.5}
+.cb.is-wiring .cb-term-hit{stroke:var(--cb-gold);animation:cb-pulse 1s ease-in-out infinite}
+@keyframes cb-pulse{50%{stroke-opacity:.25}}
+
+/* moving current dots */
+.cb-flow{pointer-events:none}
+.cb-flow circle{fill:var(--cb-gold);stroke:var(--cb-navy);stroke-width:1.2}
+
+/* ---- messages ---- */
+.cb-status{margin:10px 0 0;min-height:24px;font-weight:700;color:var(--cb-muted);line-height:1.4}
+.cb-status.is-ok{color:var(--cb-good)}
+.cb-status.is-no{color:var(--cb-bad)}
+.cb-check{margin:6px 0 0;min-height:0;font-weight:700;line-height:1.4}
+.cb-check:empty{display:none}
+.cb-check.is-ok{color:var(--cb-good)}
+.cb-check.is-no{color:var(--cb-bad)}
+.cb-help{margin:8px 0 0;font-size:14px;color:var(--cb-muted);line-height:1.4}
+.cb-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:520px){
+  .cb-tool{width:calc(25% - 6px);min-width:72px}
+  .cb-tool .cb-icon{width:62px;height:40px}
+  .cb-btn{padding:8px 10px;font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .cb.is-wiring .cb-term-hit{animation:none}
+}

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuit Engine Tests | Ellis Knowledge Studio</title>
+<!-- Developer page: keep it out of search results. No analytics on purpose. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/electricity/assets/electricity.css">
+<style>
+:root{--navy:#0F1C3F;--navy2:#1A2A55;--gold:#F4B942;--ink:#F5F7FF;--muted:#B8C2E0;--good:#4CC38A;--bad:#FF6B6B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--ink);font-family:"Nunito Sans",sans-serif;line-height:1.5}
+a{color:var(--gold)}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+.crumbs{font-size:14px;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:none}
+h1,h2,h3{font-family:"Baloo 2",sans-serif;margin:.3em 0}
+h1{font-size:clamp(28px,6vw,42px)}
+.lead{color:var(--muted);margin-top:0}
+.panel{background:var(--navy2);border-radius:18px;padding:20px;margin:18px 0}
+.btn{background:var(--gold);color:var(--navy);border:0;border-radius:12px;padding:10px 18px;font:800 16px "Baloo 2",sans-serif;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.summary{font:800 22px "Baloo 2",sans-serif}
+.summary.ok{color:var(--good)}.summary.no{color:var(--bad)}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #2C3B72;vertical-align:top}
+th{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+tr.pass td:first-child{border-left:6px solid var(--good)}
+tr.fail td:first-child{border-left:6px solid var(--bad)}
+tr.fail{background:#4a1d27}
+.tag{display:inline-block;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.tag.pass{background:#1d4a3a;color:var(--good)}
+.tag.fail{background:#4a1d27;color:var(--bad)}
+code,textarea{font-family:ui-monospace,Menlo,Consolas,monospace}
+textarea{width:100%;min-height:120px;background:var(--navy);color:var(--ink);border:2px solid #2C3B72;border-radius:12px;padding:10px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/electricity/">Electricity &amp; Electronics</a> › Engine tests</nav>
+  <h1>Circuit engine tests</h1>
+  <p class="lead">Each row builds a circuit with a known textbook answer, runs it through <code>circuit-engine.js</code> and compares. Every row should be green before you push.</p>
+
+  <section class="panel">
+    <p class="summary" id="summary" role="status">Running…</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Test</th><th>Expected</th><th>Engine gave</th><th>Result</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Board sandbox</h2>
+    <p class="lead">Every component switched on, with editable values. Use it to try the board UI and to build preset circuits for the tools.</p>
+    <div id="board"></div>
+    <h3 style="margin-top:20px">Save / load a circuit</h3>
+    <div class="row">
+      <button class="btn" id="save">Show circuit as JSON</button>
+      <button class="btn ghost" id="load">Load JSON from the box</button>
+      <button class="btn ghost" id="demo">Load demo: two bulbs in parallel</button>
+    </div>
+    <textarea id="json" aria-label="Circuit JSON" spellcheck="false"></textarea>
+  </section>
+</div>
+
+<script src="/electricity/assets/circuit-engine.js"></script>
+<script src="/electricity/assets/circuit-ui.js"></script>
+<script>
+(function () {
+  var CE = window.CircuitEngine;
+
+  /* ---------- tiny test helpers ---------- */
+  function solve(list, opts) { return CE.solve({ components: list }, opts); }
+  function near(a, b, tol) { return Math.abs(a - b) <= (tol === undefined ? 1e-6 : tol); }
+  function A(x) { return CE.format(x, 'A'); }
+  function V(x) { return CE.format(x, 'V'); }
+  function hasWarning(r, type) { return r.warnings.some(function (w) { return w.type === type; }); }
+
+  /* Every test returns { expected, got, pass }.  Node names are just labels:
+     'top' / 'bot' are the two rails, 'mid' is a point between two parts. */
+  var TESTS = [
+    { name: 'One 1.5 V cell + one 3 Ω bulb', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', emf: 1.5, nodes: ['top', 'bot'] },
+          { id: 'bulb', type: 'bulb', resistance: 3, nodes: ['top', 'bot'] }]);
+        var b = r.components.bulb;
+        return { expected: 'I = V ÷ R = 1.5 ÷ 3 = 0.5 A; P = 0.75 W; status ok',
+          got: A(b.current) + '; ' + CE.format(b.power, 'W') + '; status ' + r.status,
+          pass: near(b.current, 0.5) && near(b.power, 0.75) && r.status === 'ok' && b.lit };
+      } },
+    { name: 'Two identical 3 Ω bulbs in SERIES on 1.5 V', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', emf: 1.5, nodes: ['top', 'bot'] },
+          { id: 'b1', type: 'bulb', resistance: 3, nodes: ['top', 'mid'] },
+          { id: 'b2', type: 'bulb', resistance: 3, nodes: ['mid', 'bot'] }]);
+        var b1 = r.components.b1, b2 = r.components.b2;
+        return { expected: 'I = 1.5 ÷ 6 = 0.25 A through both; 0.75 V across each',
+          got: A(b1.current) + ' and ' + A(b2.current) + '; ' + V(b1.voltage) + ' and ' + V(b2.voltage),
+          pass: near(b1.current, 0.25) && near(b2.current, 0.25) && near(b1.voltage, 0.75) && near(b2.voltage, 0.75) };
+      } },
+    { name: 'Two identical 3 Ω bulbs in PARALLEL on 1.5 V', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', emf: 1.5, nodes: ['top', 'bot'] },
+          { id: 'b1', type: 'bulb', resistance: 3, nodes: ['top', 'bot'] },
+          { id: 'b2', type: 'bulb', resistance: 3, nodes: ['top', 'bot'] }]);
+        var b1 = r.components.b1, c = r.components.cell;
+        return { expected: '0.5 A in each bulb; cell supplies 1 A; 1.5 V across each',
+          got: A(b1.current) + ' each; cell ' + A(c.current) + '; ' + V(b1.voltage),
+          pass: near(b1.current, 0.5) && near(r.components.b2.current, 0.5) && near(c.current, 1) && near(b1.voltage, 1.5) };
+      } },
+    { name: 'Series vs parallel: current and brightness compared', run: function () {
+        var s = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'b1', type: 'bulb', nodes: ['top', 'mid'] }, { id: 'b2', type: 'bulb', nodes: ['mid', 'bot'] }]);
+        var p = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'b1', type: 'bulb', nodes: ['top', 'bot'] }, { id: 'b2', type: 'bulb', nodes: ['top', 'bot'] }]);
+        var sb = s.components.b1, pb = p.components.b1;
+        return { expected: 'Series bulbs dimmer (¼ of the power each); parallel cell current is 4× the series cell current',
+          got: 'series brightness ' + sb.brightness + ' (' + sb.brightnessLabel + '), parallel ' + pb.brightness + ' (' + pb.brightnessLabel + '); cell current ' + A(s.components.cell.current) + ' vs ' + A(p.components.cell.current),
+          pass: sb.brightness < pb.brightness && near(sb.power * 4, pb.power) && near(p.components.cell.current, 4 * s.components.cell.current) && sb.lit && pb.lit };
+      } },
+    { name: '6 V across 2 Ω + 4 Ω in series', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 6, nodes: ['top', 'bot'] },
+          { id: 'r1', type: 'resistor', resistance: 2, nodes: ['top', 'mid'] },
+          { id: 'r2', type: 'resistor', resistance: 4, nodes: ['mid', 'bot'] }]);
+        var r1 = r.components.r1, r2 = r.components.r2;
+        return { expected: '1 A; 2 V across 2 Ω; 4 V across 4 Ω',
+          got: A(r1.current) + '; ' + V(r1.voltage) + '; ' + V(r2.voltage),
+          pass: near(r1.current, 1) && near(r2.current, 1) && near(r1.voltage, 2) && near(r2.voltage, 4) };
+      } },
+    { name: '6 V across 3 Ω ∥ 6 Ω', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 6, nodes: ['top', 'bot'] },
+          { id: 'r1', type: 'resistor', resistance: 3, nodes: ['top', 'bot'] },
+          { id: 'r2', type: 'resistor', resistance: 6, nodes: ['top', 'bot'] }]);
+        return { expected: '2 A + 1 A = 3 A total (combined resistance 2 Ω)',
+          got: A(r.components.r1.current) + ' + ' + A(r.components.r2.current) + ' = ' + A(r.components.bat.current) + ' total (' + CE.format(CE.parallel([3, 6]), 'Ω') + ')',
+          pass: near(r.components.r1.current, 2) && near(r.components.r2.current, 1) && near(r.components.bat.current, 3) && near(CE.parallel([3, 6]), 2) };
+      } },
+    { name: 'Open switch', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'sw', type: 'switch', closed: false, nodes: ['top', 'a'] },
+          { id: 'w', type: 'wire', nodes: ['a', 'b'] },
+          { id: 'bulb', type: 'bulb', nodes: ['b', 'bot'] }]);
+        var all0 = r.list.every(function (c) { return c.current === 0; });
+        return { expected: '0 A everywhere; status open; bulb off; full 1.5 V across the switch gap',
+          got: (all0 ? '0 A everywhere' : 'current found!') + '; status ' + r.status + '; bulb ' + (r.components.bulb.lit ? 'on' : 'off') + '; ' + V(r.components.sw.voltage) + ' across switch',
+          pass: all0 && r.status === 'open' && r.openCircuit && !r.components.bulb.lit && near(r.components.sw.voltage, 1.5) };
+      } },
+    { name: 'Same circuit with the switch closed', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'sw', type: 'switch', closed: true, nodes: ['top', 'a'] },
+          { id: 'w', type: 'wire', nodes: ['a', 'b'] },
+          { id: 'bulb', type: 'bulb', nodes: ['b', 'bot'] }]);
+        return { expected: '0.5 A in the bulb, the wire and the switch; status ok',
+          got: A(r.components.bulb.current) + ', ' + A(r.components.w.current) + ', ' + A(r.components.sw.current) + '; status ' + r.status,
+          pass: near(r.components.bulb.current, 0.5) && near(Math.abs(r.components.w.current), 0.5) && near(Math.abs(r.components.sw.current), 0.5) && r.status === 'ok' };
+      } },
+    { name: 'Short circuit: a wire straight across the cell', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'w', type: 'wire', nodes: ['top', 'bot'] },
+          { id: 'bulb', type: 'bulb', nodes: ['top', 'bot'] }]);
+        var finite = r.list.every(function (c) { return isFinite(c.current) && isFinite(c.power); });
+        return { expected: 'Warning raised (status short); no infinite numbers; bulb off because the wire bypasses it',
+          got: 'status ' + r.status + '; warning ' + (hasWarning(r, 'short') ? 'raised' : 'MISSING') + '; numbers ' + (finite ? 'finite' : 'INFINITE') + '; bulb ' + (r.components.bulb.lit ? 'on' : 'off'),
+          pass: r.status === 'short' && r.shortCircuit && hasWarning(r, 'short') && finite && r.components.cell.short && !r.components.bulb.lit };
+      } },
+    { name: 'Short circuit through two cells in series', run: function () {
+        var r = solve([
+          { id: 'c1', type: 'cell', nodes: ['a', 'b'] },
+          { id: 'c2', type: 'cell', nodes: ['b', 'c'] },
+          { id: 'w', type: 'wire', nodes: ['a', 'c'] }]);
+        return { expected: 'Warning raised; both cells flagged',
+          got: 'status ' + r.status + '; flagged: ' + (r.components.c1.short ? 'c1 ' : '') + (r.components.c2.short ? 'c2' : ''),
+          pass: r.status === 'short' && r.components.c1.short && r.components.c2.short };
+      } },
+    { name: 'Voltmeter wired in SERIES with a bulb', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'vm', type: 'voltmeter', nodes: ['top', 'mid'] },
+          { id: 'bulb', type: 'bulb', nodes: ['mid', 'bot'] }]);
+        var i = r.components.bulb.current;
+        return { expected: 'Near-zero current (1.5 V ÷ 10 MΩ = 0.00000015 A); bulb off; voltmeter reads about 1.5 V; hint given',
+          got: i.toExponential(2) + ' A (shown as ' + A(i) + '); bulb ' + (r.components.bulb.lit ? 'on' : 'off') + '; reads ' + V(r.components.vm.reading) + '; hint ' + (hasWarning(r, 'voltmeter-in-series') ? 'given' : 'MISSING'),
+          pass: i > 0 && i < 1e-6 && !r.components.bulb.lit && near(r.components.vm.reading, 1.5, 1e-4) && hasWarning(r, 'voltmeter-in-series') };
+      } },
+    { name: 'Ammeter in series, voltmeter in parallel (correct use)', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 6, nodes: ['top', 'bot'] },
+          { id: 'am', type: 'ammeter', nodes: ['top', 'a'] },
+          { id: 'res', type: 'resistor', resistance: 12, nodes: ['a', 'bot'] },
+          { id: 'vm', type: 'voltmeter', nodes: ['a', 'bot'] }]);
+        return { expected: 'Ammeter 0.5 A; voltmeter 6 V; R = V ÷ I = 12 Ω',
+          got: 'Ammeter ' + A(r.components.am.reading) + '; voltmeter ' + V(r.components.vm.reading) + '; ' + CE.format(r.components.vm.reading / r.components.am.reading, 'Ω'),
+          pass: near(r.components.am.reading, 0.5, 1e-5) && near(r.components.vm.reading, 6, 1e-6) };
+      } },
+    { name: 'LED the right way round: 3 V, 100 Ω resistor, 2 V LED', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 3, nodes: ['top', 'bot'] },
+          { id: 'res', type: 'resistor', resistance: 100, nodes: ['top', 'mid'] },
+          { id: 'led', type: 'led', nodes: ['mid', 'bot'] }]);
+        var l = r.components.led;
+        return { expected: 'LED on; I = (3 − 2) ÷ (100 + 10) = 9.09 mA',
+          got: 'LED ' + (l.on ? 'on' : 'off') + '; ' + A(l.current),
+          pass: l.on && near(l.current, 1 / 110, 1e-7) };
+      } },
+    { name: 'LED reversed', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 3, nodes: ['top', 'bot'] },
+          { id: 'res', type: 'resistor', resistance: 100, nodes: ['top', 'mid'] },
+          { id: 'led', type: 'led', nodes: ['bot', 'mid'] }]);
+        var l = r.components.led;
+        return { expected: 'No current; LED off; "wrong way round" hint; status open',
+          got: A(l.current) + ' in LED, ' + A(r.components.res.current) + ' in resistor; LED ' + (l.on ? 'on' : 'off') + '; hint ' + (hasWarning(r, 'led-reversed') ? 'given' : 'MISSING') + '; status ' + r.status,
+          pass: l.current === 0 && !l.on && Math.abs(r.components.res.current) < 1e-6 && hasWarning(r, 'led-reversed') && r.status === 'open' };
+      } },
+    { name: 'LED on a single 1.5 V cell (below its 2 V threshold)', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'led', type: 'led', nodes: ['top', 'bot'] }]);
+        return { expected: 'LED off; "not enough voltage" hint',
+          got: 'LED ' + (r.components.led.on ? 'on' : 'off') + '; hint ' + (hasWarning(r, 'led-below-threshold') ? 'given' : 'MISSING'),
+          pass: !r.components.led.on && hasWarning(r, 'led-below-threshold') };
+      } },
+    { name: 'Two cells in series double the voltage', run: function () {
+        var r = solve([
+          { id: 'c1', type: 'cell', nodes: ['top', 'm'] },
+          { id: 'c2', type: 'cell', nodes: ['m', 'bot'] },
+          { id: 'bulb', type: 'bulb', nodes: ['top', 'bot'] }]);
+        var b = r.components.bulb;
+        return { expected: '3 V across the bulb; 1 A; brighter than with one cell',
+          got: V(b.voltage) + '; ' + A(b.current) + '; ' + b.brightnessLabel,
+          pass: near(b.voltage, 3) && near(b.current, 1) && b.brightness > 0.5 };
+      } },
+    { name: 'Two cells in parallel share the current', run: function () {
+        var r = solve([
+          { id: 'c1', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'c2', type: 'cell', nodes: ['top', 'bot'] },
+          { id: 'bulb', type: 'bulb', nodes: ['top', 'bot'] }]);
+        return { expected: 'Bulb still 0.5 A (voltage unchanged); 0.25 A from each cell',
+          got: 'Bulb ' + A(r.components.bulb.current) + '; cells ' + A(r.components.c1.current) + ' and ' + A(r.components.c2.current) + '; status ' + r.status,
+          pass: near(r.components.bulb.current, 0.5, 1e-6) && near(r.components.c1.current, 0.25, 1e-6) && near(r.components.c2.current, 0.25, 1e-6) && r.status === 'ok' };
+      } },
+    { name: 'Cell with internal resistance: 1.5 V, 0.5 Ω inside, 2.5 Ω bulb', run: function () {
+        var r = solve([
+          { id: 'cell', type: 'cell', emf: 1.5, internalResistance: 0.5, nodes: ['top', 'bot'] },
+          { id: 'bulb', type: 'bulb', resistance: 2.5, nodes: ['top', 'bot'] }]);
+        return { expected: 'I = 1.5 ÷ (0.5 + 2.5) = 0.5 A; terminal p.d. = 1.25 V',
+          got: A(r.components.cell.current) + '; ' + V(r.components.cell.voltage),
+          pass: near(r.components.cell.current, 0.5) && near(r.components.cell.voltage, 1.25) };
+      } },
+    { name: 'Mixed network: 12 V, 4 Ω in series with (6 Ω ∥ 12 Ω)', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 12, nodes: ['top', 'bot'] },
+          { id: 'r1', type: 'resistor', resistance: 4, nodes: ['top', 'mid'] },
+          { id: 'r2', type: 'resistor', resistance: 6, nodes: ['mid', 'bot'] },
+          { id: 'r3', type: 'resistor', resistance: 12, nodes: ['mid', 'bot'] }]);
+        return { expected: 'Total R = 4 + 4 = 8 Ω → 1.5 A; 6 V across the pair; 1 A and 0.5 A in the branches',
+          got: A(r.components.bat.current) + '; ' + V(r.components.r2.voltage) + '; ' + A(r.components.r2.current) + ' and ' + A(r.components.r3.current),
+          pass: near(r.components.bat.current, 1.5) && near(r.components.r2.voltage, 6) && near(r.components.r2.current, 1) && near(r.components.r3.current, 0.5) };
+      } },
+    { name: 'Bridge network (not reducible to series/parallel): energy is conserved', run: function () {
+        var r = solve([
+          { id: 'bat', type: 'battery', emf: 10, nodes: ['t', 'g'] },
+          { id: 'r1', type: 'resistor', resistance: 1, nodes: ['t', 'l'] },
+          { id: 'r2', type: 'resistor', resistance: 2, nodes: ['t', 'r'] },
+          { id: 'r3', type: 'resistor', resistance: 3, nodes: ['l', 'g'] },
+          { id: 'r4', type: 'resistor', resistance: 4, nodes: ['r', 'g'] },
+          { id: 'r5', type: 'resistor', resistance: 5, nodes: ['l', 'r'] }]);
+        var c = r.components;
+        var kcl = c.r1.current - c.r3.current - c.r5.current;        // junction "l": in = out
+        return { expected: 'Cell supplies 71/17 = 4.18 A; power supplied = power used; current in = current out at the junction',
+          got: A(c.bat.current) + '; supplied ' + CE.format(c.bat.power, 'W') + ', used ' + CE.format(r.summary.totalPower, 'W') + '; junction imbalance ' + kcl.toExponential(1) + ' A',
+          pass: near(c.bat.current, 71 / 17, 1e-6) && near(c.bat.power, r.summary.totalPower, 1e-6) && Math.abs(kcl) < 1e-6 };
+      } },
+    { name: 'Loose ends and missing cell are reported', run: function () {
+        var a = solve([{ id: 'bulb', type: 'bulb', nodes: ['p', 'q'] }]);
+        var b = solve([{ id: 'cell', type: 'cell', nodes: ['top', 'bot'] }, { id: 'bulb', type: 'bulb', nodes: ['top', 'x'] }]);
+        return { expected: 'A bulb on its own: status no-source, not connected. A bulb joined at one end only: status open, one loose end',
+          got: 'status ' + a.status + ', connected ' + a.components.bulb.connected + '; status ' + b.status + ', loose ends on bulb: ' + b.components.bulb.danglingTerminals.length,
+          pass: a.status === 'no-source' && !a.components.bulb.connected && hasWarning(a, 'unconnected') && b.status === 'open' && b.components.bulb.danglingTerminals.length === 1 };
+      } },
+    { name: 'Formatting helper', run: function () {
+        var got = [CE.format(0.5, 'A'), CE.format(0.025, 'A'), CE.format(1.5, 'V'), CE.format(470, 'Ω'), CE.format(4700, 'Ω'), CE.format(2200000, 'Ω'), CE.format(0.02, 'W')].join(' | ');
+        var want = '0.5 A | 25 mA | 1.5 V | 470 Ω | 4.7 kΩ | 2.2 MΩ | 20 mW';
+        return { expected: want, got: got, pass: got === want };
+      } }
+  ];
+
+  /* ---------- run and show ---------- */
+  var rows = document.getElementById('rows'), passed = 0;
+  TESTS.forEach(function (t) {
+    var out;
+    try { out = t.run(); } catch (err) { out = { expected: '(no error)', got: 'ERROR: ' + err.message, pass: false }; }
+    if (out.pass) { passed++; }
+    var tr = document.createElement('tr');
+    tr.className = out.pass ? 'pass' : 'fail';
+    [t.name, out.expected, out.got].forEach(function (text) {
+      var td = document.createElement('td'); td.textContent = text; tr.appendChild(td);
+    });
+    var td = document.createElement('td');
+    var tag = document.createElement('span');
+    tag.className = 'tag ' + (out.pass ? 'pass' : 'fail');
+    tag.textContent = out.pass ? '✓ PASS' : '✗ FAIL';
+    td.appendChild(tag); tr.appendChild(td);
+    rows.appendChild(tr);
+  });
+  var sum = document.getElementById('summary');
+  sum.textContent = (passed === TESTS.length ? '✓ All ' : '✗ ') + passed + ' of ' + TESTS.length + ' tests passed';
+  sum.className = 'summary ' + (passed === TESTS.length ? 'ok' : 'no');
+  window.__engineTests = { passed: passed, total: TESTS.length };
+
+  /* ---------- sandbox board ---------- */
+  var DEMO = { version: 1, cols: 10, rows: 6,
+    components: [
+      { id: 'cell1', type: 'cell', x: 5, y: 1, rot: 0, props: { emf: 1.5 } },
+      { id: 'switch1', type: 'switch', x: 2, y: 1, rot: 0, props: { closed: true } },
+      { id: 'bulb1', type: 'bulb', x: 5, y: 3, rot: 0, props: {} },
+      { id: 'bulb2', type: 'bulb', x: 5, y: 5, rot: 0, props: {} }
+    ],
+    wires: [
+      { id: 'w1', from: { c: 'switch1', t: 1 }, to: { c: 'cell1', t: 0 } },
+      { id: 'w2', from: { c: 'switch1', t: 0 }, to: { c: 'bulb1', t: 0 } },
+      { id: 'w3', from: { c: 'bulb1', t: 0 }, to: { c: 'bulb2', t: 0 } },
+      { id: 'w4', from: { c: 'cell1', t: 1 }, to: { c: 'bulb1', t: 1 } },
+      { id: 'w5', from: { c: 'bulb1', t: 1 }, to: { c: 'bulb2', t: 1 } }
+    ] };
+  var board = window.board = CircuitUI.create('#board', {
+    tray: ['cell', 'battery', 'bulb', 'switch', 'resistor', 'ammeter', 'voltmeter', 'led', 'wire'],
+    editValues: true,
+    small: { cols: 6, rows: 8 },     // phones get a narrower, taller board with bigger parts
+    onCheck: function (b) {
+      var lit = b.getResult().summary.bulbsLit;
+      return { ok: lit >= 1, message: lit >= 1 ? 'At least one bulb is lit. (This is the example check hook.)' : 'No bulb is lit yet. (This is the example check hook.)' };
+    }
+  });
+  document.getElementById('save').addEventListener('click', function () {
+    document.getElementById('json').value = JSON.stringify(board.toJSON(), null, 1);
+  });
+  document.getElementById('load').addEventListener('click', function () {
+    try { board.load(document.getElementById('json').value); }
+    catch (err) { board.setMessage('That JSON could not be read: ' + err.message, 'no'); }
+  });
+  document.getElementById('demo').addEventListener('click', function () { board.load(DEMO); });
+})();
+</script>
+</body>
+</html>
