@@ -59,3 +59,18 @@ test('speeds ascend, craft are sourced, light speed is last', () => {
   assert.equal(s[s.length-1].kmh, E.C_KMH);
   assert.equal(s.filter(x => x.source && /nasa\.gov/.test(x.source)).length, 3);
 });
+test('descent readings inside, above and without an atmosphere', () => {
+  const b = planet('earth', 1);
+  b.atmosphere.layers = [{name:'Troposphere',bottomKm:0,topKm:10,tempBottomC:20,tempTopC:-40,pressureBottomBar:1,pressureTopBar:0.25,windKmh:40,madeOf:'air'}];
+  const mid = E.descentReadout(b, 5);
+  assert.equal(mid.layer, 'Troposphere');
+  assert.equal(mid.tempC, -10);
+  assert.ok(Math.abs(mid.pressureBar - 0.5) < 1e-9);
+  assert.equal(E.descentReadout(b, 50).aboveAtmosphere, true);
+  assert.equal(E.descentReadout(b, -5).tempC, 20);
+  const m = planet('moon', 1);
+  const r = E.descentReadout(m, 10);
+  assert.equal(r.airless, true);
+  assert.equal(r.pressureBar, null);
+  assert.equal(r.tempC, 1);
+});

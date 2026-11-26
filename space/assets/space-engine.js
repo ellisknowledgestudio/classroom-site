@@ -262,7 +262,43 @@
     return plural(big, UNITS[i][0]) + (small ? ' ' + plural(small, UNITS[i + 1][0]) : '');
   }
 
+  /* Readings for the dials at one altitude. Numbers are null when the body file has no figure. */
+  function descentReadout(body, altitudeKm) {
+    var out = { layer: null, tempC: null, pressureBar: null, windKmh: null, madeOf: null, note: null,
+                airless: false, aboveAtmosphere: false, altitudeKm: 0 };
+    var alt = Math.max(body.descent.endKm, Math.min(body.descent.startKm, altitudeKm));
+    out.altitudeKm = alt;
+    var layers = sortedLayers(body);
+    if (!layers.length) {
+      out.airless = true;
+      out.tempC = body.facts.temperature.value;
+      return out;
+    }
+    if (alt >= layers[layers.length - 1].topKm) { out.aboveAtmosphere = true; return out; }
+    for (var i = 0; i < layers.length; i++) {
+      var l = layers[i];
+      /* the lowest layer also covers anything beneath it, e.g. a descent that ends below its floor */
+      if ((alt >= l.bottomKm || i === 0) && alt < l.topKm) {
+        var f = Math.max(0, (alt - l.bottomKm) / (l.topKm - l.bottomKm));
+        out.layer = l.name;
+        out.madeOf = l.madeOf;
+        out.note = l.note || null;
+        out.windKmh = l.windKmh;
+        if (l.tempBottomC !== null && l.tempTopC !== null) {
+          out.tempC = l.tempBottomC + (l.tempTopC - l.tempBottomC) * f;
+        }
+        if (l.pressureBottomBar !== null && l.pressureTopBar !== null && l.pressureBottomBar > 0 && l.pressureTopBar > 0) {
+          out.pressureBar = Math.exp(Math.log(l.pressureBottomBar) +
+            (Math.log(l.pressureTopBar) - Math.log(l.pressureBottomBar)) * f);
+        }
+        return out;
+      }
+    }
+    return out;  /* in a gap between layers: no readings */
+  }
+
   return {
+    descentReadout: descentReadout,
     C_KMH: C_KMH,
     SPEEDS: SPEEDS,
     validate: validate,
