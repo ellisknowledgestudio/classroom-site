@@ -3,7 +3,7 @@
   var E = (typeof module !== 'undefined' && module.exports) ? require('../space-engine.js') : SpaceEngine;
   E.register({
     id: 'moon',
-    name: 'The Moon',
+    name: 'the Moon',
     type: 'moon',
     parent: 'earth',
     sunDistanceKm: null,
