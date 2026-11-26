@@ -134,7 +134,9 @@
     }
 
     f = feature(body, 'land');
-    if (f) {
+    if (f && f.shapes) {
+      outlines(ctx, cx, cy, R, f, rot);
+    } else if (f) {
       rand = rng(seedFrom(body.id + 'land'));
       ctx.fillStyle = f.colour;
       spots(ctx, cx, cy, R, rot, rand, Math.round(10 + f.amount * 40), 0.08, 0.3, function (x, yy, rx, ry, tilt) {
@@ -175,6 +177,39 @@
     ctx.restore();
 
     if (rings) { ringHalf(ctx, cx, cy, R, rings, false); }
+  }
+
+  /* Real outlines (continents) on the turning globe: north is up and the surface moves west to east.
+     A point round the back is slid to the edge of the disc, so an outline that wraps over the horizon
+     still closes cleanly along the limb. */
+  function outlines(ctx, cx, cy, R, f, rot) {
+    var RAD = Math.PI / 180;
+    for (var s = 0; s < f.shapes.length; s++) {
+      var pts = f.shapes[s].points, any = false, prevBack = false, prevAngle = 0;
+      ctx.beginPath();
+      for (var k = 0; k < pts.length; k += 2) {
+        var lon = pts[k] * RAD + rot, lat = pts[k + 1] * RAD;
+        var x = Math.cos(lat) * Math.sin(lon), y = -Math.sin(lat), z = Math.cos(lat) * Math.cos(lon);
+        var back = z <= 0, angle = Math.atan2(y, x);
+        if (back) { x = Math.cos(angle); y = Math.sin(angle); } else { any = true; }
+        if (k === 0) {
+          ctx.moveTo(cx + x * R, cy + y * R);
+        } else if (back && prevBack) {
+          /* both ends are round the back: follow the edge of the disc, the short way, not a chord across it */
+          var turn = angle - prevAngle;
+          while (turn > Math.PI) { turn -= TAU; }
+          while (turn < -Math.PI) { turn += TAU; }
+          ctx.arc(cx, cy, R, prevAngle, prevAngle + turn, turn < 0);
+        } else {
+          ctx.lineTo(cx + x * R, cy + y * R);
+        }
+        prevBack = back; prevAngle = angle;
+      }
+      if (!any) { continue; }
+      ctx.closePath();
+      ctx.fillStyle = f.shapes[s].colour || f.colour;
+      ctx.fill();
+    }
   }
 
   function ringHalf(ctx, cx, cy, R, f, back) {

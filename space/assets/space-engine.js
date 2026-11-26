@@ -36,6 +36,9 @@
  *     look: {                    // what space-draw.js paints
  *       base: '#1F5FAF', shade: '#0B2A5A',
  *       features: [ {kind: 'land'|'bands'|'craters'|'clouds'|'rings'|'glow', colour: '#4CAF6A', amount: 0.3} ]
+ *       // A 'land' feature may also carry real outlines, drawn in place of random patches:
+ *       //   shapes: [ {points: [lon, lat, lon, lat, ...]}, {colour: '#EEF3F8', points: [...]} ]
+ *       // Longitude -180..180 (east positive), latitude -90..90, at least three points per shape.
  *     },
  *     atmosphere: {
  *       summary: 'Mostly nitrogen and oxygen',
@@ -108,6 +111,20 @@
     return !!m && /(^|\.)nasa\.gov$/.test(m[1]);
   }
 
+  /* Real outlines for a feature: each shape is a closed outline as a flat list of longitude, latitude pairs. */
+  function shapesOk(shapes) {
+    if (!Array.isArray(shapes)) { return false; }
+    return shapes.every(function (sh) {
+      if (!isObj(sh) || !Array.isArray(sh.points) || sh.points.length < 6 || sh.points.length % 2) { return false; }
+      if (!(sh.colour === undefined || isStr(sh.colour))) { return false; }
+      for (var k = 0; k < sh.points.length; k += 2) {
+        if (!isNum(sh.points[k]) || !isNum(sh.points[k + 1]) ||
+            Math.abs(sh.points[k]) > 180 || Math.abs(sh.points[k + 1]) > 90) { return false; }
+      }
+      return true;
+    });
+  }
+
   function sortedLayers(body) {
     return body.atmosphere.layers.slice().sort(function (a, b) { return a.bottomKm - b.bottomKm; });
   }
@@ -146,6 +163,8 @@
         var ft = b.look.features[i];
         if (!isObj(ft) || FEATURE_KINDS.indexOf(ft.kind) < 0 || !isStr(ft.colour) || !isNum(ft.amount)) {
           p.push('look.features[' + i + '] must be {kind, colour, amount}');
+        } else if (ft.shapes !== undefined && !shapesOk(ft.shapes)) {
+          p.push('look.features[' + i + '].shapes must be a list of {points: [lon, lat, lon, lat, ...]} with at least three points each');
         }
       }
     }
