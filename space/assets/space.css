@@ -1,0 +1,42 @@
+/* Space Explorer cockpit. Path: /space/assets/space.css */
+.sx{--navy:#0F1C3F;--panel:#16234E;--line:#26356b;--gold:#F4B942;--ink:#F7F9FC;--muted:#C7D2EE}
+.sx *{box-sizing:border-box}
+.sx-window{position:relative;margin:16px 0 12px;border:3px solid var(--line);border-radius:22px;overflow:hidden;background:#02040C;
+  box-shadow:0 0 0 3px #0a1330, inset 0 0 40px rgba(0,0,0,.6)}
+.sx-window canvas{display:block;width:100%;height:min(56vw,460px);min-height:220px}
+.sx-place{position:absolute;left:12px;top:10px;margin:0;padding:4px 12px;border-radius:999px;background:rgba(15,28,63,.82);
+  color:var(--gold);font:800 16px 'Baloo 2',sans-serif}
+.sx-dials{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:0 0 12px}
+.sx-dial{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+.sx-dial-wide{grid-column:span 2}
+.sx-dial-label{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.sx-dial-value{display:block;font:800 19px/1.25 'Baloo 2',sans-serif;color:var(--ink);overflow-wrap:anywhere}
+.sx-dial-wide .sx-dial-value{font-size:17px}
+.sx-speed{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 12px}
+.sx-speed label{display:block;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.sx-speed input{width:100%;margin:8px 0 4px;accent-color:var(--gold);height:28px}
+.sx-speed output{display:block;font:800 18px 'Baloo 2',sans-serif;color:var(--gold)}
+.sx-route{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:0 0 14px}
+.sx-btn{display:block;width:100%;text-align:left;cursor:pointer;border:2px solid var(--gold);background:transparent;color:var(--gold);
+  border-radius:12px;padding:10px 14px;font:inherit;min-height:48px}
+.sx-btn-main{background:var(--gold);color:var(--navy)}
+.sx-btn:disabled{border-color:var(--line);color:var(--muted);background:transparent;cursor:not-allowed}
+.sx-btn:focus-visible,.sx-speed input:focus-visible,.sx-facts h2:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.sx-btn-label{display:block;font:800 17px/1.2 'Baloo 2',sans-serif}
+.sx-btn-sub{display:block;font-size:13px;margin-top:2px}
+.sx-note{grid-column:1/-1;margin:0;color:var(--muted)}
+.sx-facts{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:0 0 14px}
+.sx-facts h2{margin:0 0 8px}
+.sx-facts-list{display:grid;grid-template-columns:minmax(120px,34%) 1fr;gap:6px 14px;margin:0}
+.sx-facts-list dt{color:var(--muted);font-weight:700}
+.sx-facts-list dd{margin:0}
+.sx-sources{margin:0;padding-left:20px;font-size:13px;overflow-wrap:anywhere}
+.sx-about{color:var(--muted);font-size:14px}
+.sx-about summary{cursor:pointer;color:var(--gold);font-weight:700}
+.sx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:480px){
+  .sx-dial-wide{grid-column:1/-1}
+  .sx-dials{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sx-facts-list{grid-template-columns:1fr}
+  .sx-facts-list dd{margin-bottom:6px}
+}

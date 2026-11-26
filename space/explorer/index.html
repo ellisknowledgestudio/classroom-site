@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Explorer: Fly Through the Solar System | Ellis Knowledge Studio</title>
+<meta name="description" content="Free interactive spaceship journey for ages 7-14: fly from Earth to the Moon, see how long the trip really takes at different speeds, dive through the atmosphere and open the fact file.">
+<link rel="canonical" href="https://classroom.ellisknowledgestudio.com/space/explorer/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ellis Knowledge Studio Classroom">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://classroom.ellisknowledgestudio.com/space/explorer/">
+<meta property="og:title" content="Space Explorer: Fly Through the Solar System">
+<meta property="og:description" content="You are the spaceship. Fly from world to world, see how long each journey really takes, dive through the atmosphere and open the fact file.">
+<meta name="twitter:card" content="summary">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito+Sans:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:'Nunito Sans',sans-serif;background:#0F1C3F;color:#F7F9FC;padding:20px;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto}
+  h1{font-family:'Baloo 2',sans-serif;font-size:32px;margin:.3em 0}
+  h2,h3{font-family:'Baloo 2',sans-serif;color:#F4B942;margin:.4em 0}
+  .lead{color:#C7D2EE;margin:0}
+  .crumbs{font-size:14px;color:#C7D2EE}
+  .crumbs a{color:#C7D2EE;text-decoration:none}
+  a{color:#F4B942}
+  noscript p{background:#16234E;border:1px solid #26356b;border-radius:14px;padding:14px 18px}
+</style>
+<link rel="stylesheet" href="/space/assets/space.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Space Explorer",
+  "description": "Interactive spaceship journey through the solar system: real distances and journey times, a descent through each atmosphere and a fact file for every world visited.",
+  "url": "https://classroom.ellisknowledgestudio.com/space/explorer/",
+  "inLanguage": "en-GB",
+  "isAccessibleForFree": true,
+  "learningResourceType": "Interactive simulation",
+  "typicalAgeRange": "7-14",
+  "educationalLevel": "KS2, KS3",
+  "teaches": "Distances in the solar system, journey times at different speeds, layers of the atmosphere, facts about planets and moons",
+  "keywords": "solar system for kids, space KS2, Earth and space Year 5, how far is the Moon, layers of the atmosphere, space KS3",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "publisher": { "@type": "Organization", "name": "Ellis Knowledge Studio", "url": "https://ellisknowledgestudio.com/" },
+  "isPartOf": { "@type": "CollectionPage", "name": "Space", "url": "https://classroom.ellisknowledgestudio.com/space/" }
+}
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "03967f8ff4584d3dad8f98556a0bd13f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKF789W3RD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BKF789W3RD');
+</script>
+</head>
+<body>
+<div class="wrap sx" id="space-explorer">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="https://classroom.ellisknowledgestudio.com/">Home</a> › <a href="https://classroom.ellisknowledgestudio.com/space/">Space</a> › Space Explorer</nav>
+  <h1>Space Explorer</h1>
+  <p class="lead">You are the spaceship. Fly from world to world, see how long each journey would really take, then dive in and open the fact file. Ages 7-14.</p>
+
+  <noscript><p>Space Explorer needs JavaScript to fly. You can still read about the planets in <a href="/space/solar-system/">Planet Explorer</a>.</p></noscript>
+
+  <div class="sx-window">
+    <canvas data-sx="canvas" role="img" aria-label="View from the ship"></canvas>
+    <p class="sx-place" data-sx="place"></p>
+  </div>
+  <p class="sx-sr" data-sx="status" role="status" aria-live="polite"></p>
+
+  <div class="sx-dials" data-sx="dials"></div>
+
+  <div class="sx-speed">
+    <label for="sx-speed">Ship speed</label>
+    <input type="range" id="sx-speed" data-sx="speed" min="0" max="7" step="1" value="0">
+    <output for="sx-speed" data-sx="speed-out"></output>
+  </div>
+
+  <div class="sx-route" data-sx="route"></div>
+
+  <section class="sx-facts" data-sx="facts" aria-labelledby="sx-facts-title" hidden>
+    <h2 id="sx-facts-title" data-sx="facts-title" tabindex="-1">Fact file</h2>
+    <div data-sx="facts-body"></div>
+  </section>
+
+  <details class="sx-about">
+    <summary>About the numbers</summary>
+    <p>For a moon and its own planet, Space Explorer shows the <b>average distance</b> between them. Planets are different: they circle the Sun at different speeds, so the gap between two planets changes all the time. For those journeys the dial shows the <b>distance between their orbits</b>, which is about as close as the two worlds ever get. Most of the time they are much further apart.</p>
+    <p>The journey time is that distance divided by your ship's speed, as if you flew in a straight line without stopping.</p>
+    <p>All facts come from NASA. Each fact file lists its sources. The spacecraft speeds are the fastest crewed flight (<a href="https://www.nasa.gov/wp-content/uploads/static/history/SP-4029/Apollo_10a_Summary.htm" rel="noopener">Apollo 10</a>), <a href="https://science.nasa.gov/mission/voyager/voyager-1/" rel="noopener">Voyager 1</a> and the top speed of the <a href="https://blogs.nasa.gov/parkersolarprobe" rel="noopener">Parker Solar Probe</a>. Nothing can travel faster than light.</p>
+    <p>More worlds are on the way: first towards the Sun, then out to the edge of the solar system.</p>
+  </details>
+</div>
+
+<script src="/space/assets/space-engine.js"></script>
+<script src="/space/assets/bodies/earth.js"></script>
+<script src="/space/assets/bodies/moon.js"></script>
+<script src="/space/assets/space-draw.js"></script>
+<script src="/space/assets/space-ui.js"></script>
+<script>
+  SpaceUI.start(document.getElementById('space-explorer'));
+</script>
+</body>
+</html>
