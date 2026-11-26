@@ -133,29 +133,32 @@
       }
     }
 
-    f = feature(body, 'land');
-    if (f && f.shapes) {
-      outlines(ctx, cx, cy, R, f, rot);
-    } else if (f) {
-      rand = rng(seedFrom(body.id + 'land'));
-      ctx.fillStyle = f.colour;
-      spots(ctx, cx, cy, R, rot, rand, Math.round(10 + f.amount * 40), 0.08, 0.3, function (x, yy, rx, ry, tilt) {
-        ctx.beginPath(); ctx.ellipse(x, yy, rx, ry, tilt, 0, TAU); ctx.fill();
-      });
-    }
-
-    f = feature(body, 'craters');
-    if (f) {
-      rand = rng(seedFrom(body.id + 'craters'));
-      spots(ctx, cx, cy, R, rot, rand, Math.round(20 + f.amount * 70), 0.015, 0.09, function (x, yy, rx, ry) {
-        var r = Math.min(rx, ry * 1.2);
-        ctx.fillStyle = rgba(f.colour, 0.85);
-        ctx.beginPath(); ctx.ellipse(x, yy, rx, r, 0, 0, TAU); ctx.fill();
-        ctx.strokeStyle = 'rgba(255,255,255,0.28)';
-        ctx.lineWidth = Math.max(0.6, r * 0.18);
-        ctx.beginPath(); ctx.ellipse(x, yy, rx, r, 0, Math.PI * 0.9, Math.PI * 1.9); ctx.stroke();
-      });
-    }
+    /* land and craters, in the order the body file lists them. A feature with real shapes or spots is drawn
+       from its map; one without is scattered at random (used as fine texture, or until a map is added). */
+    body.look.features.forEach(function (ft, index) {
+      if (ft.kind !== 'land' && ft.kind !== 'craters') { return; }
+      var real = mappedFor(body, index);
+      if (real.length) {
+        outlines(ctx, cx, cy, R, real, ft.colour, rot, 0, ft.kind === 'craters');
+      } else if (ft.kind === 'land') {
+        rand = rng(seedFrom(body.id + 'land' + index));
+        ctx.fillStyle = ft.colour;
+        spots(ctx, cx, cy, R, -rot, rand, Math.round(10 + ft.amount * 40), 0.08, 0.3, function (x, yy, rx, ry, tilt) {
+          ctx.beginPath(); ctx.ellipse(x, yy, rx, ry, tilt, 0, TAU); ctx.fill();
+        });
+      } else {
+        rand = rng(seedFrom(body.id + 'craters' + index));
+        var fine = hasMap(body);                  /* beside a real map, random craters are only fine texture */
+        spots(ctx, cx, cy, R, -rot, rand, Math.round(20 + ft.amount * 70), fine ? 0.006 : 0.015, fine ? 0.028 : 0.09, function (x, yy, rx, ry) {
+          var r = Math.min(rx, ry * 1.2);
+          ctx.fillStyle = rgba(ft.colour, 0.85);
+          ctx.beginPath(); ctx.ellipse(x, yy, rx, r, 0, 0, TAU); ctx.fill();
+          ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+          ctx.lineWidth = Math.max(0.6, r * 0.18);
+          ctx.beginPath(); ctx.ellipse(x, yy, rx, r, 0, Math.PI * 0.9, Math.PI * 1.9); ctx.stroke();
+        });
+      }
+    });
 
     f = feature(body, 'clouds');
     if (f) {
@@ -179,13 +182,25 @@
     if (rings) { ringHalf(ctx, cx, cy, R, rings, false); }
   }
 
+  /* A feature's real shapes and spots as outlines, worked out once per body and kept. */
+  var mappedCache = {};
+  function mappedFor(body, index) {
+    var key = body.id + ':' + index;
+    if (!mappedCache[key]) { mappedCache[key] = Engine.mappedOutlines(body, body.look.features[index]); }
+    return mappedCache[key];
+  }
+  function hasMap(body) {
+    for (var i = 0; i < body.look.features.length; i++) { if (mappedFor(body, i).length) { return true; } }
+    return false;
+  }
+
   /* Real outlines (continents) on the turning globe: north is up and the surface moves west to east.
      A point round the back is slid to the edge of the disc, so an outline that wraps over the horizon
      still closes cleanly along the limb. rot turns the globe; tilt (optional) tips it towards us. */
-  function outlines(ctx, cx, cy, R, f, rot, tilt) {
+  function outlines(ctx, cx, cy, R, list, colour, rot, tilt, rim) {
     var RAD = Math.PI / 180, ct = Math.cos(tilt || 0), st = Math.sin(tilt || 0);
-    for (var s = 0; s < f.shapes.length; s++) {
-      var pts = f.shapes[s].points, any = false, prevBack = false, prevAngle = 0;
+    for (var s = 0; s < list.length; s++) {
+      var pts = list[s].points, any = false, prevBack = false, prevAngle = 0;
       ctx.beginPath();
       for (var k = 0; k < pts.length; k += 2) {
         var lon = pts[k] * RAD + rot, lat = pts[k + 1] * RAD;
@@ -209,8 +224,13 @@
       }
       if (!any) { continue; }
       ctx.closePath();
-      ctx.fillStyle = f.shapes[s].colour || f.colour;
+      ctx.fillStyle = list[s].colour || colour;
       ctx.fill();
+      if (rim) {                                  /* a crater wall catching the light */
+        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+        ctx.lineWidth = Math.max(0.8, R * 0.006);
+        ctx.stroke();
+      }
     }
   }
 
@@ -309,8 +329,7 @@
 
     /* the ground (or the deep haze of a world with no surface) curving below us */
     var horizonY = lerp(h * 0.8, h * 0.52, fall);
-    var land = feature(body, 'land');
-    var mapped = !!(body.solidSurface && land && land.shapes);
+    var mapped = body.solidSurface && hasMap(body);
     /* a world with real outlines stays a little further out at the end, so its coastlines do not turn into straight lines */
     var radius = lerp(w * 0.85, w * (mapped ? 6 : 14), fall * fall);
     var gx = w / 2, gy = horizonY + radius;
@@ -328,37 +347,41 @@
     if (body.solidSurface) {
       ctx.fillStyle = body.look.base;
       ctx.fillRect(0, horizonY - 2, w, h - horizonY + 2);
-      var craters = feature(body, 'craters');
       var zoom = lerp(1, 2.2, fall);
-      if (mapped) {
-        /* the same globe as in orbit, seen edge-on: the ground disc is the globe, tipped so that the spot we
-           are falling towards sits just this side of the horizon, with the real coastline stretching away */
-        var at = d.lookAt || { lon: 0, lat: 0 };
-        outlines(ctx, gx, gy, radius, land, -at.lon * Math.PI / 180, (at.lat - 78) * Math.PI / 180);
-      } else if (land) {
-        rand = rng(seedFrom(body.id + 'ground-land'));
-        ctx.fillStyle = land.colour;
-        for (i = 0; i < Math.round(8 + land.amount * 30); i++) {
-          var lx = (rand() - 0.5) * w * 1.6 * zoom + w / 2, ly = horizonY + rand() * rand() * (h - horizonY) * zoom;
-          var squash = clamp01((ly - horizonY) / (h - horizonY)) * 0.85 + 0.08;
-          ctx.beginPath();
-          ctx.ellipse(lx, ly, w * (0.05 + rand() * 0.16) * zoom, w * (0.03 + rand() * 0.07) * zoom * squash, 0, 0, TAU);
-          ctx.fill();
+      var at = d.lookAt || { lon: 0, lat: 0 };
+      body.look.features.forEach(function (ft, index) {
+        if (ft.kind !== 'land' && ft.kind !== 'craters') { return; }
+        var real = mappedFor(body, index);
+        if (real.length) {
+          /* the same globe as in orbit, seen edge-on: the ground disc is the globe, tipped so that the spot we
+             are falling towards sits just this side of the horizon, with the real map stretching away */
+          outlines(ctx, gx, gy, radius, real, ft.colour, -at.lon * Math.PI / 180, (at.lat - 78) * Math.PI / 180, ft.kind === 'craters');
+        } else if (ft.kind === 'land' && !mapped) {
+          rand = rng(seedFrom(body.id + 'ground-land' + index));
+          ctx.fillStyle = ft.colour;
+          for (i = 0; i < Math.round(8 + ft.amount * 30); i++) {
+            var lx = (rand() - 0.5) * w * 1.6 * zoom + w / 2, ly = horizonY + rand() * rand() * (h - horizonY) * zoom;
+            var squash = clamp01((ly - horizonY) / (h - horizonY)) * 0.85 + 0.08;
+            ctx.beginPath();
+            ctx.ellipse(lx, ly, w * (0.05 + rand() * 0.16) * zoom, w * (0.03 + rand() * 0.07) * zoom * squash, 0, 0, TAU);
+            ctx.fill();
+          }
+        } else if (ft.kind === 'craters') {
+          /* small unnamed craters: scattered texture on top of the real map */
+          rand = rng(seedFrom(body.id + 'ground-craters' + index));
+          var small = mapped ? 0.45 : 1;
+          for (i = 0; i < Math.round(14 + ft.amount * 40); i++) {
+            var kx = (rand() - 0.5) * w * 1.5 * zoom + w / 2, ky = horizonY + rand() * rand() * (h - horizonY) * zoom;
+            var ks = clamp01((ky - horizonY) / (h - horizonY)) * 0.85 + 0.08;
+            var kr = w * (0.012 + rand() * 0.06) * zoom * small;
+            ctx.fillStyle = rgba(ft.colour, 0.9);
+            ctx.beginPath(); ctx.ellipse(kx, ky, kr, kr * ks, 0, 0, TAU); ctx.fill();
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.lineWidth = Math.max(0.8, kr * 0.12);
+            ctx.beginPath(); ctx.ellipse(kx, ky, kr, kr * ks, 0, Math.PI, TAU); ctx.stroke();
+          }
         }
-      }
-      if (craters) {
-        rand = rng(seedFrom(body.id + 'ground-craters'));
-        for (i = 0; i < Math.round(14 + craters.amount * 40); i++) {
-          var kx = (rand() - 0.5) * w * 1.5 * zoom + w / 2, ky = horizonY + rand() * rand() * (h - horizonY) * zoom;
-          var ks = clamp01((ky - horizonY) / (h - horizonY)) * 0.85 + 0.08;
-          var kr = w * (0.012 + rand() * 0.06) * zoom;
-          ctx.fillStyle = rgba(craters.colour, 0.9);
-          ctx.beginPath(); ctx.ellipse(kx, ky, kr, kr * ks, 0, 0, TAU); ctx.fill();
-          ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-          ctx.lineWidth = Math.max(0.8, kr * 0.12);
-          ctx.beginPath(); ctx.ellipse(kx, ky, kr, kr * ks, 0, Math.PI, TAU); ctx.stroke();
-        }
-      }
+      });
       /* distance haze near the horizon, stronger the more air there is */
       var haze = ctx.createLinearGradient(0, horizonY, 0, horizonY + (h - horizonY) * 0.7);
       haze.addColorStop(0, rgba(mixHex(skyColour, '#FFFFFF', 0.4), 0.15 + depth * 0.6));

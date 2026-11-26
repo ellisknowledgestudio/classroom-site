@@ -46,7 +46,10 @@ No engine, drawing or UI code changes are needed to add a body. If one seems nee
 - British spelling. Fact text is written for ages 7 to 14.
 - No backticks (template literals) in any page or script.
 - No images and no libraries. A body's appearance comes only from its `look`.
-- A `land` feature can carry real outlines as `shapes` (longitude, latitude pairs). Earth's come from Natural Earth's public-domain 1:110m land data via `tools/space/make-earth-land.py`. Without `shapes`, land is drawn as random patches. During a dive the same outlines are drawn on the ground, looking towards `descent.lookAt` (longitude and latitude; Earth's is southern Britain).
+- **Every body with a solid surface is drawn from its real map.** This is enforced by a test. Give its features real `shapes` (outlines as longitude, latitude pairs) or real `spots` (`{name, lon, lat, diameterKm}` for seas, craters, volcanoes, basins), taken from the IAU Gazetteer of Planetary Nomenclature (planetarynames.wr.usgs.gov) or NASA. Earth uses `shapes` from Natural Earth via `tools/space/make-earth-land.py`; the Moon uses `spots` for its seas and 21 named craters. A feature with neither is scattered at random and should only be used as fine texture (small unnamed craters).
+- Every solid body also needs `descent.lookAt` (longitude, latitude): a real, named place the dive comes down over, preferably a landing site. The dive draws the same map on the ground. Name the place in `descent.endLabel`.
+- A long, thin spot can take `heightKm` (north-south size) as well as `diameterKm` (east-west). If a second dimension is your own estimate, say so in a comment, as `moon.js` does.
+- Worlds with no solid surface (gas giants, the Sun) have no map test, but use `spots` for real storms such as Jupiter's Great Red Spot. Real cloud belts at true latitudes are not supported yet: add that to the drawing code, with James's agreement, before Jupiter.
 
 ## Known gaps to improve when a NASA figure is found
 

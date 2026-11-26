@@ -109,3 +109,41 @@ test('a descent may name the spot it looks towards', () => {
   b.descent.lookAt = {lon: 200, lat: 51};
   assert.equal(E.validate(b).length, 1);
 });
+
+function apart(lon1, lat1, lon2, lat2) {   // angle between two points on a globe, in degrees
+  const r = Math.PI / 180;
+  return Math.acos(Math.sin(lat1 * r) * Math.sin(lat2 * r) + Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.cos((lon1 - lon2) * r)) / r;
+}
+
+test('a round spot becomes an outline the right distance from its centre', () => {
+  const p = E.spotOutline(30, 40, 10, 10, 24);
+  assert.equal(p.length, 48);
+  for (let i = 0; i < p.length; i += 2) assert.ok(Math.abs(apart(30, 40, p[i], p[i + 1]) - 10) < 1e-6);
+});
+
+test('a long spot is wider east to west than north to south, and wraps the date line', () => {
+  const p = E.spotOutline(0, 0, 20, 5, 4);            // north, east, south, west
+  assert.ok(Math.abs(p[1] - 5) < 1e-6 && Math.abs(p[2] - 20) < 1e-6);
+  const w = E.spotOutline(175, 0, 10, 10, 4);
+  assert.ok(Math.abs(w[2] - -175) < 1e-6);
+});
+
+test('a feature may carry real spots, sized in km', () => {
+  const b = planet('moon', 1);
+  b.look.features = [{kind:'craters', colour:'#777777', amount:0.5, spots:[{name:'Tycho', lon:-11.36, lat:-43.31, diameterKm:85}, {lon:10, lat:10, diameterKm:500, heightKm:100, colour:'#555555'}]}];
+  assert.deepEqual(E.validate(b), []);
+  b.look.features[0].spots = [{lon:-11.36, lat:-43.31}];
+  assert.equal(E.validate(b).length, 1, 'no size');
+  b.look.features[0].spots = [{lon:-211, lat:-43.31, diameterKm:85}];
+  assert.equal(E.validate(b).length, 1, 'off the globe');
+});
+
+test('mappedOutlines turns shapes and spots into outlines in degrees', () => {
+  const b = planet('moon', 1); b.facts.diameter = {value: 3474.8, unit: 'km', text: 'x'};
+  const f = {kind:'land', colour:'#777777', amount:0.5, shapes:[{points:[0,0, 10,0, 10,10]}], spots:[{lon:0, lat:0, diameterKm:3474.8 / 2 * Math.PI / 180 * 20}]};
+  const o = E.mappedOutlines(b, f);
+  assert.equal(o.length, 2);
+  assert.deepEqual(o[0].points, [0,0, 10,0, 10,10]);
+  assert.ok(Math.abs(apart(0, 0, o[1].points[0], o[1].points[1]) - 10) < 1e-6);   // 20 degrees across
+  assert.deepEqual(E.mappedOutlines(b, {kind:'land', colour:'#000000', amount:1}), []);
+});
