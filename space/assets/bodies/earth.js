@@ -106,7 +106,7 @@
           note: 'Auroras glow here. It can reach 2,000 °C, but there is too little air to feel hot.' }
       ]
     },
-    descent: { startKm: 700, endKm: 0, endLabel: 'Surface' },
+    descent: { startKm: 700, endKm: 0, endLabel: 'Surface', lookAt: { lon: -2, lat: 51 } },
     sources: [
       'https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html',
       'https://science.nasa.gov/earth/earth-atmosphere/earths-atmosphere-a-multi-layered-cake/',

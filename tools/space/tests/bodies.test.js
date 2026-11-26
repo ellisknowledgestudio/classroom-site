@@ -64,3 +64,7 @@ test('Earth is drawn with its real continents', () => {
 test('Earth body file stays small enough for school connections', () => {
   assert.ok(fs.statSync(path.join(dir, 'earth.js')).size < 40000);
 });
+
+test('Earth dive looks down on Britain', () => {
+  assert.deepEqual(E.get('earth').descent.lookAt, {lon: -2, lat: 51});
+});

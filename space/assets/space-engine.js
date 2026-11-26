@@ -52,6 +52,7 @@
  *       ]
  *     },
  *     descent: {startKm: 700, endKm: 0, endLabel: 'Surface'},
+ *       // optional: lookAt: {lon: -2, lat: 51}  the spot the dive comes down over, for a body whose land has shapes
  *     sources: ['https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html']  // at least one nasa.gov page
  *   }
  *
@@ -196,6 +197,9 @@
       p.push('descent must have startKm, endKm and endLabel');
     } else if (b.descent.startKm <= b.descent.endKm) {
       p.push('descent.startKm must be above descent.endKm');
+    } else if (b.descent.lookAt !== undefined && !(isObj(b.descent.lookAt) && isNum(b.descent.lookAt.lon) &&
+        isNum(b.descent.lookAt.lat) && Math.abs(b.descent.lookAt.lon) <= 180 && Math.abs(b.descent.lookAt.lat) <= 90)) {
+      p.push('descent.lookAt must be {lon, lat}');
     }
 
     if (!Array.isArray(b.sources) || !b.sources.some(nasaUrl)) {

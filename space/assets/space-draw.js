@@ -181,15 +181,17 @@
 
   /* Real outlines (continents) on the turning globe: north is up and the surface moves west to east.
      A point round the back is slid to the edge of the disc, so an outline that wraps over the horizon
-     still closes cleanly along the limb. */
-  function outlines(ctx, cx, cy, R, f, rot) {
-    var RAD = Math.PI / 180;
+     still closes cleanly along the limb. rot turns the globe; tilt (optional) tips it towards us. */
+  function outlines(ctx, cx, cy, R, f, rot, tilt) {
+    var RAD = Math.PI / 180, ct = Math.cos(tilt || 0), st = Math.sin(tilt || 0);
     for (var s = 0; s < f.shapes.length; s++) {
       var pts = f.shapes[s].points, any = false, prevBack = false, prevAngle = 0;
       ctx.beginPath();
       for (var k = 0; k < pts.length; k += 2) {
         var lon = pts[k] * RAD + rot, lat = pts[k + 1] * RAD;
-        var x = Math.cos(lat) * Math.sin(lon), y = -Math.sin(lat), z = Math.cos(lat) * Math.cos(lon);
+        var x = Math.cos(lat) * Math.sin(lon), z0 = Math.cos(lat) * Math.cos(lon);
+        /* tilt the globe so latitude tilt (radians) faces us, then flip y for the screen */
+        var y = -(Math.sin(lat) * ct - z0 * st), z = Math.sin(lat) * st + z0 * ct;
         var back = z <= 0, angle = Math.atan2(y, x);
         if (back) { x = Math.cos(angle); y = Math.sin(angle); } else { any = true; }
         if (k === 0) {
@@ -307,7 +309,10 @@
 
     /* the ground (or the deep haze of a world with no surface) curving below us */
     var horizonY = lerp(h * 0.8, h * 0.52, fall);
-    var radius = lerp(w * 0.85, w * 14, fall * fall);
+    var land = feature(body, 'land');
+    var mapped = !!(body.solidSurface && land && land.shapes);
+    /* a world with real outlines stays a little further out at the end, so its coastlines do not turn into straight lines */
+    var radius = lerp(w * 0.85, w * (mapped ? 6 : 14), fall * fall);
     var gx = w / 2, gy = horizonY + radius;
 
     if (depth > 0 || glowF) {                    /* thin bright line of air along the horizon */
@@ -323,9 +328,14 @@
     if (body.solidSurface) {
       ctx.fillStyle = body.look.base;
       ctx.fillRect(0, horizonY - 2, w, h - horizonY + 2);
-      var land = feature(body, 'land'), craters = feature(body, 'craters');
+      var craters = feature(body, 'craters');
       var zoom = lerp(1, 2.2, fall);
-      if (land) {
+      if (mapped) {
+        /* the same globe as in orbit, seen edge-on: the ground disc is the globe, tipped so that the spot we
+           are falling towards sits just this side of the horizon, with the real coastline stretching away */
+        var at = d.lookAt || { lon: 0, lat: 0 };
+        outlines(ctx, gx, gy, radius, land, -at.lon * Math.PI / 180, (at.lat - 78) * Math.PI / 180);
+      } else if (land) {
         rand = rng(seedFrom(body.id + 'ground-land'));
         ctx.fillStyle = land.colour;
         for (i = 0; i < Math.round(8 + land.amount * 30); i++) {

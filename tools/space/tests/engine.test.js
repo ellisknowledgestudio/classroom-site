@@ -101,3 +101,11 @@ test('a land feature may carry real outlines as longitude/latitude shapes', () =
   b.look.features[0].shapes = 'europe';
   assert.equal(E.validate(b).length, 1, 'not a list');
 });
+
+test('a descent may name the spot it looks towards', () => {
+  const b = planet('earth', 1);
+  b.descent.lookAt = {lon: -2, lat: 51};
+  assert.deepEqual(E.validate(b), []);
+  b.descent.lookAt = {lon: 200, lat: 51};
+  assert.equal(E.validate(b).length, 1);
+});
