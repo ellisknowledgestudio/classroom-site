@@ -27,7 +27,7 @@ Cockpit view with a shared engine: the visitor looks out of the ship's window at
 
 ## How it works
 
-Four states on one screen: orbit, zip, descent, fact file. The speed slider runs through real spacecraft and then fractions of light speed. Distances are averages and the screen says so. Airless bodies get a descent with no atmosphere layers.
+Four states on one screen: orbit, zip, descent, fact file. The speed slider runs through real spacecraft and then fractions of light speed. A moon-to-planet distance is the NASA average and the screen says so; a planet-to-planet figure is the distance between the two orbits and is labelled that way (corrected after review: the difference of two average Sun distances is not an average distance). Airless bodies get a descent with no atmosphere layers.
 
 ## Build order
 

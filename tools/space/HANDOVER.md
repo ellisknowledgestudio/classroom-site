@@ -42,7 +42,7 @@ No engine, drawing or UI code changes are needed to add a body. If one seems nee
 
 - Every number a visitor sees comes from a body file, and every number in a body file comes from a page in its `sources`. No NASA figure means `null`, never a guess. The dials leave out a reading that is `null`.
 - Figures that Planet Explorer (`space/solar-system/index.html`) also shows must match it: diameter, distance from the Sun, average temperature.
-- Distances are averages: `sunDistanceKm` for the Sun and planets, `orbitKm` for moons.
+- `sunDistanceKm` (Sun and planets) and `orbitKm` (moons) are NASA averages. The screen calls a moon-to-its-planet trip an "average distance" and any other trip the "distance between their orbits" (about the closest the two worlds get). Never label a planet-to-planet figure as an average.
 - British spelling. Fact text is written for ages 7 to 14.
 - No backticks (template literals) in any page or script.
 - No images and no libraries. A body's appearance comes only from its `look`.
@@ -51,3 +51,7 @@ No engine, drawing or UI code changes are needed to add a body. If one seems nee
 
 - Earth: temperature at the top of the stratosphere and inside the thermosphere, pressure above 50 km, and wind speeds by layer are `null`.
 - The speed slider's spacecraft and their sources are in `SPEEDS` at the top of `space-engine.js`.
+- Before the Sun is added: `space-draw.js` paints a night side on every globe, which is wrong for a star. Skip the shading when `type` is `star`.
+- Before stage 11: the asteroid belt, Kuiper belt, heliopause and Oort Cloud are regions, not bodies, and the body schema cannot describe them yet. Plan that with James first.
+- `validate` does not yet check that `look.features[].amount` is between 0 and 1 or that colours are hex. Keep amounts between 0 and 1 and colours as `#rrggbb`.
+- In reduced-motion mode the dive steps from layer floor to layer floor, so it never shows a reading part-way through a layer.

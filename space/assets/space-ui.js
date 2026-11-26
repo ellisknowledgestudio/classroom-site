@@ -27,7 +27,9 @@
 
   function startBodyId(search) {
     var m = /[?&]body=([a-z0-9-]+)/.exec(String(search || ''));
-    if (m && Engine.get(m[1])) { return m[1]; }
+    var asked = m ? Engine.get(m[1]) : null;
+    /* a moon whose planet failed to load has nowhere to fly back to, so it is not a starting point */
+    if (asked && (asked.parent === null || Engine.get(asked.parent))) { return asked.id; }
     if (Engine.get('earth')) { return 'earth'; }
     var r = Engine.route();
     return r.length ? r[0] : null;
@@ -68,6 +70,8 @@
     if (v >= 1e6) { return trim(v / 1e6, 1) + ' million km/h'; }
     return Math.round(v).toLocaleString('en-GB') + ' km/h';
   }
+  function hasSunward(body) { return body.parent === null && body.type !== 'star'; }
+  function distanceLabel(kind) { return kind === 'average' ? 'Average distance' : 'Distance between their orbits'; }
   function cap(text) { return text.charAt(0).toUpperCase() + text.slice(1); }
   function temp(v) { return (v === null || v === undefined) ? DASH : Math.round(v) + ' °C'; }
   function pressure(v) {
@@ -90,12 +94,13 @@
     var reduce = !!(win.matchMedia && win.matchMedia('(prefers-reduced-motion: reduce)').matches);
     var state = {
       mode: 'orbit', bodyId: startBodyId(win.location.search), speed: 0,
-      zipTo: null, zipKm: 0, zipStart: 0,
+      zipTo: null, zipKm: 0, zipKind: 'average', zipStart: 0,
       fallStart: 0, fallStep: 0, altitude: 0, lastLayer: null, wantFocus: false
     };
     if (!state.bodyId) { elStatus.textContent = 'Space Explorer could not load its worlds. Please refresh the page.'; return; }
 
     function body() { return Engine.get(state.bodyId); }
+    function parentName(b) { var p = Engine.get(b.parent); return p ? p.name : 'its planet'; }
     function speed() { return Engine.SPEEDS[state.speed]; }
     function journey(kmAway) { return Engine.formatDuration(Engine.travelSeconds(kmAway, speed().kmh)); }
 
@@ -132,7 +137,7 @@
       var b = body(), r;
       clear(elDials);
       if (state.mode === 'zip') {
-        elDials.appendChild(dial('Average distance', km(state.zipKm)));
+        elDials.appendChild(dial(distanceLabel(state.zipKind), km(state.zipKm)));
         elDials.appendChild(dial('Journey time at this speed', journey(state.zipKm), true));
         elDials.appendChild(dial('Ship speed', kmh(speed().kmh)));
       } else if (state.mode === 'descent') {
@@ -154,7 +159,7 @@
         elDials.appendChild(dial('You are at', cap(b.name)));
         elDials.appendChild(dial('Type', TYPE_LABEL[b.type]));
         if (b.parent !== null) {
-          elDials.appendChild(dial('Average distance from ' + Engine.get(b.parent).name, km(b.orbitKm), true));
+          elDials.appendChild(dial('Average distance from ' + parentName(b), km(b.orbitKm), true));
         } else if (b.sunDistanceKm > 0) {
           elDials.appendChild(dial('Average distance from the Sun', km(b.sunDistanceKm), true));
         }
@@ -179,11 +184,13 @@
         elRoute.appendChild(button('Back to orbit', null, toOrbit, atEnd ? 'main' : null));
       } else {
         if (b.parent !== null) {
-          elRoute.appendChild(button('Back to ' + Engine.get(b.parent).name, tripText(b.parent), function () { zipTo(b.parent); }, 'main'));
+          elRoute.appendChild((Engine.get(b.parent) ? button('Back to ' + parentName(b), tripText(b.parent), function () { zipTo(b.parent); }, 'main') : button('Back to ' + parentName(b), 'Coming soon', null)));
         } else {
-          elRoute.appendChild(n.sunward
-            ? button('Towards the Sun: ' + Engine.get(n.sunward).name, tripText(n.sunward), function () { zipTo(n.sunward); }, 'main')
-            : button('Towards the Sun', 'Coming soon', null));
+          if (hasSunward(b)) {
+            elRoute.appendChild(n.sunward
+              ? button('Towards the Sun: ' + Engine.get(n.sunward).name, tripText(n.sunward), function () { zipTo(n.sunward); }, 'main')
+              : button('Towards the Sun', 'Coming soon', null));
+          }
           n.moons.forEach(function (id) {
             elRoute.appendChild(button('Visit ' + Engine.get(id).name, tripText(id), function () { zipTo(id); }, 'main'));
           });
@@ -214,7 +221,7 @@
       var dl = el('dl', 'sx-facts-list');
       function row(label, value) { dl.appendChild(el('dt', null, label)); dl.appendChild(el('dd', null, value)); }
       row('Type', TYPE_LABEL[b.type]);
-      if (b.parent !== null) { row('Average distance from ' + Engine.get(b.parent).name, km(b.orbitKm)); }
+      if (b.parent !== null) { row('Average distance from ' + parentName(b), km(b.orbitKm)); }
       else if (b.sunDistanceKm > 0) { row('Average distance from the Sun', km(b.sunDistanceKm)); }
       row('How big', b.facts.diameter.text);
       row('Gravity', b.facts.gravity.text);
@@ -260,9 +267,10 @@
     function zipTo(id) {
       state.zipTo = id;
       state.zipKm = Engine.distanceKm(state.bodyId, id);
+      state.zipKind = Engine.distanceKind(state.bodyId, id);
       state.zipStart = now();
       state.mode = 'zip';
-      renderAll('Zipping to ' + Engine.get(id).name + '. Average distance ' + km(state.zipKm) + '. Journey time at this speed: ' + journey(state.zipKm) + '.');
+      renderAll('Zipping to ' + Engine.get(id).name + '. ' + distanceLabel(state.zipKind) + ': ' + km(state.zipKm) + '. Journey time at this speed: ' + journey(state.zipKm) + '.');
     }
     function arrive() {
       state.bodyId = state.zipTo; state.zipTo = null; state.mode = 'orbit';
@@ -347,6 +355,8 @@
     startBodyId: startBodyId,
     descentStops: descentStops,
     altitudeAt: altitudeAt,
+    hasSunward: hasSunward,
+    distanceLabel: distanceLabel,
     km: km, kmh: kmh, temp: temp, pressure: pressure
   };
 }));

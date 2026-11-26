@@ -63,7 +63,8 @@
  *   SpaceEngine.get(id) / all() / reset()
  *   SpaceEngine.route()                   -> ids of the Sun and planets, nearest the Sun first
  *   SpaceEngine.neighbours(id)            -> {sunward, outward, moons, parent}
- *   SpaceEngine.distanceKm(idA, idB)      -> average distance in km
+ *   SpaceEngine.distanceKm(idA, idB)      -> km between the two (see distanceKind)
+ *   SpaceEngine.distanceKind(idA, idB)    -> 'average' (moon and its planet) or 'orbit-gap'
  *   SpaceEngine.travelSeconds(km, kmh)    -> seconds
  *   SpaceEngine.formatDuration(seconds)   -> '3 days 2 hours'
  *   SpaceEngine.descentReadout(body, km)  -> readings for the dials at that altitude
@@ -252,14 +253,25 @@
       var t = Math.round(seconds * 10) / 10;
       return (t === Math.round(t) ? String(t) : t.toFixed(1)) + (t === 1 ? ' second' : ' seconds');
     }
-    var i = 0;
-    while (seconds < UNITS[i][1]) { i++; }
-    var big = Math.floor(seconds / UNITS[i][1]);
-    if (i === UNITS.length - 1) { return plural(Math.round(seconds), 'second'); }
-    var small = Math.round((seconds - big * UNITS[i][1]) / UNITS[i + 1][1]);
-    if (small * UNITS[i + 1][1] >= UNITS[i][1]) { big += 1; small = 0; }  /* e.g. 59.6 minutes -> 1 hour */
+    var total = Math.round(seconds), i = 0;
+    while (total < UNITS[i][1]) { i++; }
+    if (i === UNITS.length - 1) { return plural(total, 'second'); }
+    var big = Math.floor(total / UNITS[i][1]);
+    var small = Math.round((total - big * UNITS[i][1]) / UNITS[i + 1][1]);
+    if (small * UNITS[i + 1][1] >= UNITS[i][1]) { big += 1; small = 0; }
+    /* rounding can fill the unit: 23 hours 60 minutes is 1 day, not 24 hours */
+    if (small === 0 && i > 0 && big * UNITS[i][1] >= UNITS[i - 1][1]) { return formatDuration(big * UNITS[i][1]); }
     if (big >= 1000) { return big.toLocaleString('en-GB') + ' ' + UNITS[i][0] + 's'; }
     return plural(big, UNITS[i][0]) + (small ? ' ' + plural(small, UNITS[i + 1][0]) : '');
+  }
+
+  /* What distanceKm(a, b) means for this pair:
+       'average'    a moon and its own planet: the true average distance between them
+       'orbit-gap'  anything else: the gap between the two orbits, which is about as close as the two
+                    worlds ever get. Planets drift far further apart than this, so never call it an average. */
+  function distanceKind(idA, idB) {
+    var a = get(idA), b = get(idB);
+    return (a && b && (a.parent === idB || b.parent === idA)) ? 'average' : 'orbit-gap';
   }
 
   /* Readings for the dials at one altitude. Numbers are null when the body file has no figure. */
@@ -309,6 +321,7 @@
     route: route,
     neighbours: neighbours,
     distanceKm: distanceKm,
+    distanceKind: distanceKind,
     travelSeconds: travelSeconds,
     formatDuration: formatDuration
   };

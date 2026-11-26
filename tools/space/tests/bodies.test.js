@@ -36,3 +36,7 @@ test('Earth has air to fall through; the Moon does not', () => {
 test('no backticks in body files', () => {
   files.forEach(f => assert.ok(!fs.readFileSync(path.join(dir, f), 'utf8').includes('`'), f));
 });
+
+test('Earth text does not call the mesosphere the coldest place on Earth', () => {
+  assert.ok(!/coldest place on Earth/.test(JSON.stringify(E.get('earth'))));
+});

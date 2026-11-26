@@ -59,3 +59,24 @@ test('numbers are written the British classroom way', () => {
   assert.equal(UI.pressure(null), '—');
   assert.equal(UI.temp(-55.6), '-56 °C');
 });
+
+test('a moon whose planet failed to load is not a valid starting point', () => {
+  const UI = require('../../../space/assets/space-ui.js');
+  const E = require('../../../space/assets/space-engine.js');
+  const orphan = JSON.parse(JSON.stringify(E.get('earth')));
+  orphan.id = 'phobos'; orphan.type = 'moon'; orphan.parent = 'mars'; orphan.sunDistanceKm = null; orphan.orbitKm = 9376;
+  assert.equal(E.register(orphan), true);
+  assert.equal(UI.startBodyId('?body=phobos'), 'earth');
+});
+
+test('the Sun offers no way further towards the Sun', () => {
+  const UI = require('../../../space/assets/space-ui.js');
+  assert.equal(UI.hasSunward({ type: 'star', parent: null }), false);
+  assert.equal(UI.hasSunward({ type: 'planet', parent: null }), true);
+});
+
+test('distance labels say what the number really is', () => {
+  const UI = require('../../../space/assets/space-ui.js');
+  assert.equal(UI.distanceLabel('average'), 'Average distance');
+  assert.equal(UI.distanceLabel('orbit-gap'), 'Distance between their orbits');
+});

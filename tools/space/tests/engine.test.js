@@ -74,3 +74,18 @@ test('descent readings inside, above and without an atmosphere', () => {
   assert.equal(r.pressureBar, null);
   assert.equal(r.tempC, 1);
 });
+
+test('durations carry up to the next unit instead of reading 60 minutes or 24 hours', () => {
+  assert.equal(E.formatDuration(59.97), '1 minute');
+  assert.equal(E.formatDuration(3599.6), '1 hour');
+  assert.equal(E.formatDuration(86399), '1 day');
+  assert.equal(E.formatDuration(3600 * 23 + 60 * 29), '23 hours 29 minutes');
+});
+
+test('only a moon and its planet have a true average distance; planets are compared orbit to orbit', () => {
+  E.register(planet('earth', 149600000)); E.register(moon('moon', 'earth', 384400)); E.register(planet('venus', 108200000));
+  assert.equal(E.distanceKind('earth', 'moon'), 'average');
+  assert.equal(E.distanceKind('moon', 'earth'), 'average');
+  assert.equal(E.distanceKind('earth', 'venus'), 'orbit-gap');
+  assert.equal(E.distanceKind('moon', 'venus'), 'orbit-gap');
+});

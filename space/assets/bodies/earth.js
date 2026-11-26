@@ -41,7 +41,7 @@
         { name: 'Mesosphere', bottomKm: 50, topKm: 80,
           tempBottomC: null, tempTopC: -85, pressureBottomBar: null, pressureTopBar: null, windKmh: null,
           madeOf: 'Very thin air',
-          note: 'Most meteors burn up here. The top is the coldest place on Earth, about -85 °C.' },
+          note: 'Most meteors burn up here. The top is the coldest part of Earth\'s atmosphere, about -85 °C.' },
         { name: 'Thermosphere', bottomKm: 80, topKm: 700,
           tempBottomC: null, tempTopC: null, pressureBottomBar: null, pressureTopBar: null, windKmh: null,
           madeOf: 'Almost nothing: a few scattered gas particles',
