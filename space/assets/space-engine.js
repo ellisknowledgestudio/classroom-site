@@ -39,6 +39,10 @@
  *       // A 'land' feature may also carry real outlines, drawn in place of random patches:
  *       //   shapes: [ {points: [lon, lat, lon, lat, ...]}, {colour: '#EEF3F8', points: [...]} ]
  *       // Longitude -180..180 (east positive), latitude -90..90, at least three points per shape.
+ *       // Any feature may also carry real round features (seas, craters, storms) as spots:
+ *       //   spots: [ {name: 'Tycho', lon: -11.36, lat: -43.31, diameterKm: 85, colour: '#E4E3DC'} ]
+ *       // diameterKm is the size east-west; add heightKm (north-south) for a long, thin feature.
+ *       // EVERY body with a solid surface must have shapes or spots at real coordinates, plus descent.lookAt.
  *     },
  *     atmosphere: {
  *       summary: 'Mostly nitrogen and oxygen',
@@ -52,6 +56,7 @@
  *       ]
  *     },
  *     descent: {startKm: 700, endKm: 0, endLabel: 'Surface'},
+ *       // optional: lookAt: {lon: -2, lat: 51}  the spot the dive comes down over, for a body whose land has shapes
  *     sources: ['https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html']  // at least one nasa.gov page
  *   }
  *
@@ -71,6 +76,7 @@
  *   SpaceEngine.travelSeconds(km, kmh)    -> seconds
  *   SpaceEngine.formatDuration(seconds)   -> '3 days 2 hours'
  *   SpaceEngine.descentReadout(body, km)  -> readings for the dials at that altitude
+ *   SpaceEngine.mappedOutlines(body, feature) -> a feature's shapes and spots as outlines to draw
  *   SpaceEngine.SPEEDS, SpaceEngine.C_KMH
  */
 (function (root, factory) {
@@ -125,6 +131,49 @@
     });
   }
 
+  /* Real round (or oval) features for a feature: seas, craters, storms. Positions in degrees, sizes in km. */
+  function spotsOk(spots) {
+    if (!Array.isArray(spots)) { return false; }
+    return spots.every(function (sp) {
+      return isObj(sp) && isNum(sp.lon) && isNum(sp.lat) && Math.abs(sp.lon) <= 180 && Math.abs(sp.lat) <= 90 &&
+        isNum(sp.diameterKm) && sp.diameterKm > 0 &&
+        (sp.heightKm === undefined || (isNum(sp.heightKm) && sp.heightKm > 0)) &&
+        (sp.colour === undefined || isStr(sp.colour)) && (sp.name === undefined || isStr(sp.name));
+    });
+  }
+
+  /* The outline of a spot on a globe, as a flat list of longitude, latitude pairs (degrees), starting due
+     north of the centre and going clockwise. halfWidthDeg is its reach east-west, halfHeightDeg north-south. */
+  function spotOutline(lon, lat, halfWidthDeg, halfHeightDeg, n) {
+    var RAD = Math.PI / 180, out = [], lat0 = lat * RAD;
+    for (var i = 0; i < n; i++) {
+      var th = i / n * Math.PI * 2;
+      var e = Math.sin(th) / halfWidthDeg, nn = Math.cos(th) / halfHeightDeg;
+      var rho = 1 / Math.sqrt(e * e + nn * nn) * RAD;
+      var la = Math.asin(Math.sin(lat0) * Math.cos(rho) + Math.cos(lat0) * Math.sin(rho) * Math.cos(th));
+      var lo = lon + Math.atan2(Math.sin(th) * Math.sin(rho) * Math.cos(lat0), Math.cos(rho) - Math.sin(lat0) * Math.sin(la)) / RAD;
+      while (lo > 180) { lo -= 360; }
+      while (lo <= -180) { lo += 360; }
+      out.push(lo, la / RAD);
+    }
+    return out;
+  }
+
+  /* Everything in a feature that sits at a real place, as outlines ready to draw:
+     [{points: [lon, lat, ...], colour: string or undefined}]. Shapes first, then spots. [] if it has neither. */
+  function mappedOutlines(body, ft) {
+    var out = [], across = body.facts.diameter.value;
+    (ft.shapes || []).forEach(function (sh) { out.push({ points: sh.points, colour: sh.colour }); });
+    if (isNum(across) && across > 0) {
+      (ft.spots || []).forEach(function (sp) {
+        var half = sp.diameterKm / across * 180 / Math.PI;
+        var halfN = (sp.heightKm === undefined ? sp.diameterKm : sp.heightKm) / across * 180 / Math.PI;
+        out.push({ points: spotOutline(sp.lon, sp.lat, half, halfN, 28), colour: sp.colour });
+      });
+    }
+    return out;
+  }
+
   function sortedLayers(body) {
     return body.atmosphere.layers.slice().sort(function (a, b) { return a.bottomKm - b.bottomKm; });
   }
@@ -166,6 +215,9 @@
         } else if (ft.shapes !== undefined && !shapesOk(ft.shapes)) {
           p.push('look.features[' + i + '].shapes must be a list of {points: [lon, lat, lon, lat, ...]} with at least three points each');
         }
+        if (isObj(ft) && ft.spots !== undefined && !spotsOk(ft.spots)) {
+          p.push('look.features[' + i + '].spots must be a list of {lon, lat, diameterKm} on the globe');
+        }
       }
     }
 
@@ -196,6 +248,9 @@
       p.push('descent must have startKm, endKm and endLabel');
     } else if (b.descent.startKm <= b.descent.endKm) {
       p.push('descent.startKm must be above descent.endKm');
+    } else if (b.descent.lookAt !== undefined && !(isObj(b.descent.lookAt) && isNum(b.descent.lookAt.lon) &&
+        isNum(b.descent.lookAt.lat) && Math.abs(b.descent.lookAt.lon) <= 180 && Math.abs(b.descent.lookAt.lat) <= 90)) {
+      p.push('descent.lookAt must be {lon, lat}');
     }
 
     if (!Array.isArray(b.sources) || !b.sources.some(nasaUrl)) {
@@ -341,6 +396,8 @@
     neighbours: neighbours,
     distanceKm: distanceKm,
     distanceKind: distanceKind,
+    spotOutline: spotOutline,
+    mappedOutlines: mappedOutlines,
     travelSeconds: travelSeconds,
     formatDuration: formatDuration
   };

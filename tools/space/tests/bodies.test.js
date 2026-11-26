@@ -64,3 +64,24 @@ test('Earth is drawn with its real continents', () => {
 test('Earth body file stays small enough for school connections', () => {
   assert.ok(fs.statSync(path.join(dir, 'earth.js')).size < 40000);
 });
+
+test('Earth dive looks down on Britain', () => {
+  assert.deepEqual(E.get('earth').descent.lookAt, {lon: -2, lat: 51});
+});
+
+test('every world with a solid surface is drawn from its real map, and its dive aims at a real place', () => {
+  E.all().filter(b => b.solidSurface).forEach(b => {
+    assert.ok(b.look.features.some(f => (f.shapes && f.shapes.length) || (f.spots && f.spots.length)), b.id + ' needs shapes or spots at real coordinates');
+    assert.ok(b.descent.lookAt, b.id + ' needs descent.lookAt');
+  });
+});
+
+test('the Moon has its real seas and craters, and the dive comes down at the Apollo 11 site', () => {
+  const m = E.get('moon');
+  const spots = [].concat.apply([], m.look.features.map(f => f.spots || []));
+  const find = n => spots.find(s => s.name === n);
+  assert.deepEqual([find('Mare Tranquillitatis').lon, find('Mare Tranquillitatis').lat, find('Mare Tranquillitatis').diameterKm], [31.4, 8.5, 873]);
+  assert.deepEqual([find('Tycho').lon, find('Tycho').lat], [-11.36, -43.31]);
+  assert.ok(spots.length >= 25);
+  assert.deepEqual(m.descent.lookAt, {lon: 23.47, lat: 0.67});
+});
