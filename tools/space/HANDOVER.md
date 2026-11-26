@@ -46,6 +46,7 @@ No engine, drawing or UI code changes are needed to add a body. If one seems nee
 - British spelling. Fact text is written for ages 7 to 14.
 - No backticks (template literals) in any page or script.
 - No images and no libraries. A body's appearance comes only from its `look`.
+- A `land` feature can carry real outlines as `shapes` (longitude, latitude pairs). Earth's come from Natural Earth's public-domain 1:110m land data via `tools/space/make-earth-land.py`. Without `shapes`, land is drawn as random patches. The view during a dive still uses random patches.
 
 ## Known gaps to improve when a NASA figure is found
 

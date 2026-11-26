@@ -89,3 +89,15 @@ test('only a moon and its planet have a true average distance; planets are compa
   assert.equal(E.distanceKind('earth', 'venus'), 'orbit-gap');
   assert.equal(E.distanceKind('moon', 'venus'), 'orbit-gap');
 });
+
+test('a land feature may carry real outlines as longitude/latitude shapes', () => {
+  const b = planet('earth', 1);
+  b.look.features = [{kind:'land', colour:'#4CAF6A', amount:0.3, shapes:[{points:[0,0, 10,0, 10,10]}, {colour:'#FFFFFF', points:[-180,-90, 180,-90, 0,-70]}]}];
+  assert.deepEqual(E.validate(b), []);
+  b.look.features[0].shapes = [{points:[0,0, 10,0]}];
+  assert.equal(E.validate(b).length, 1, 'fewer than three points');
+  b.look.features[0].shapes = [{points:[0,0, 10,0, 200,95]}];
+  assert.equal(E.validate(b).length, 1, 'outside the globe');
+  b.look.features[0].shapes = 'europe';
+  assert.equal(E.validate(b).length, 1, 'not a list');
+});

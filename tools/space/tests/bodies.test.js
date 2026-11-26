@@ -40,3 +40,27 @@ test('no backticks in body files', () => {
 test('Earth text does not call the mesosphere the coldest place on Earth', () => {
   assert.ok(!/coldest place on Earth/.test(JSON.stringify(E.get('earth'))));
 });
+
+function onLand(body, lon, lat) {
+  const land = body.look.features.find(f => f.kind === 'land');
+  return (land.shapes || []).some(s => {
+    const p = s.points; let inside = false;
+    for (let i = 0, j = p.length - 2; i < p.length; j = i, i += 2) {
+      if ((p[i + 1] > lat) !== (p[j + 1] > lat) && lon < (p[j] - p[i]) * (lat - p[i + 1]) / (p[j + 1] - p[i + 1]) + p[i]) inside = !inside;
+    }
+    return inside;
+  });
+}
+
+test('Earth is drawn with its real continents', () => {
+  const e = E.get('earth');
+  const land = [['London', -0.1, 51.5], ['Sahara', 10, 22], ['Brazil', -55, -10], ['Kansas', -98, 38], ['Siberia', 100, 62],
+    ['India', 78, 22], ['central Australia', 134, -25], ['Greenland', -42, 72], ['Antarctica', 60, -80], ['Madagascar', 46.5, -19]];
+  const sea = [['mid Atlantic', -35, 30], ['central Pacific', -150, 0], ['Indian Ocean', 80, -30], ['Southern Ocean', 0, -55], ['Arctic Ocean', 0, 87]];
+  land.forEach(([name, lon, lat]) => assert.ok(onLand(e, lon, lat), name + ' should be land'));
+  sea.forEach(([name, lon, lat]) => assert.ok(!onLand(e, lon, lat), name + ' should be sea'));
+});
+
+test('Earth body file stays small enough for school connections', () => {
+  assert.ok(fs.statSync(path.join(dir, 'earth.js')).size < 40000);
+});
